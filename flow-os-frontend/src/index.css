@@ -1,0 +1,35 @@
+/* index.css — global baseline reset for Flow OS */
+/* All design tokens and component styles live in App.css */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: #050810;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100svh;
+  border: none;
+  text-align: left;
+  display: block;
+}
+
+/* Scrollbar global defaults */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #142834 transparent;
+}
+*::-webkit-scrollbar       { width: 4px; height: 4px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: #142834; border-radius: 2px; }
