@@ -31,7 +31,7 @@ export function extractDecisions(workspaceId, text, metadata, sender) {
     db.query('SELECT org_id FROM workspaces WHERE external_id = $1 LIMIT 1', [String(workspaceId)])
       .then(({ rows }) => {
         if (rows[0]) {
-          saveMemory(String(workspaceId), rows[0].org_id, 'DECISION', {
+          return saveMemory(String(workspaceId), rows[0].org_id, 'DECISION', {
             title: decisionObj.decision.substring(0, 100),
             body: text,
             author: sender,

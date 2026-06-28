@@ -8,8 +8,8 @@ export const incidentDatabase = [];
 export function detectIncidents(workspaceId, text, metadata) {
   const lowerText = (text || '').toLowerCase();
   
-  const outageTriggers = ['outage', 'crashed', 'sev1', 'sev 1', 'down', 'broken', 'p0', 'unresponsive', 'exhaustion', 'incident', 'failure', 'critical', 'emergency', 'blocker', '502', '500', '503', '504'];
-  const riskTriggers = ['bottleneck', 'risk', 'delay', 'blocked', 'escalation'];
+  const outageTriggers = ['outage', 'crashed', 'sev1', 'sev 1', 'down', 'broken', 'p0', 'unresponsive', 'exhaustion', 'incident', 'failure', 'critical', 'emergency'];
+  const riskTriggers = ['bottleneck', 'risk', 'delay', 'blocked', 'escalation', 'blocker'];
   
   const isOutage = outageTriggers.some(kw => lowerText.includes(kw));
   const isRisk = riskTriggers.some(kw => lowerText.includes(kw));
@@ -45,7 +45,7 @@ export function detectIncidents(workspaceId, text, metadata) {
     db.query('SELECT org_id FROM workspaces WHERE external_id = $1 LIMIT 1', [String(workspaceId)])
       .then(({ rows }) => {
         if (rows[0]) {
-          saveMemory(String(workspaceId), rows[0].org_id, 'INCIDENT', {
+          return saveMemory(String(workspaceId), rows[0].org_id, 'INCIDENT', {
             title: incident.title,
             body: JSON.stringify(incident),
             source: metadata?.platform || 'system',
