@@ -16,10 +16,16 @@ model Organization {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  workspaces Workspace[]
-  users      User[]
-  apiKeys    ApiKey[]
-  auditLogs  AuditLog[]
+  workspaces       Workspace[]
+  users            User[]
+  apiKeys          ApiKey[]
+  auditLogs        AuditLog[]
+  policies         Policy[]
+  pendingApprovals PendingApproval[]
+  orgMemory        OrgMemoryRecord[]
+  graphNodes       GraphNode[]
+  goals            Goal[]
+  automationRules  AutomationRule[]
 
   @@map("organizations")
 }
@@ -36,8 +42,9 @@ model Workspace {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  integrations Integration[]
-  agents       Agent[]
+  integrations     Integration[]
+  agents           Agent[]
+  members          WorkspaceMember[]
 
   @@map("workspaces")
 }
@@ -58,7 +65,10 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  auditLogs AuditLog[]
+  auditLogs         AuditLog[]
+  workspaceMemberships WorkspaceMember[]
+  approvalRequests  PendingApproval[] @relation("ApprovalRequester")
+  approvalDecisions PendingApproval[] @relation("ApprovalApprover")
 
   @@map("users")
 }
@@ -68,6 +78,27 @@ enum Role {
   ADMIN
   MEMBER
   VIEWER
+}
+
+// ─── Workspace Membership ─────────────────────────────────────────────────────
+// Separates workspace-level role from org-level role.
+// A user may eventually belong to multiple workspaces with different roles.
+// If no WorkspaceMember record exists, the org role is used as a fallback.
+
+model WorkspaceMember {
+  id          String    @id @default(cuid())
+  userId      String    @map("user_id")
+  workspaceId String    @map("workspace_id")
+  role        Role      @default(MEMBER)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, workspaceId])
+  @@index([workspaceId])
+  @@map("workspace_members")
 }
 
 model ApiKey {
@@ -83,6 +114,91 @@ model ApiKey {
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("api_keys")
+}
+
+// ─── Governance ───────────────────────────────────────────────────────────────
+// Policy rows replace hardcoded permission logic.
+// The evaluator checks DB policies first, falls back to DEFAULT_ROLE_PERMISSIONS.
+//
+// Future extensions via the `conditions` JSON field:
+//   requireMFA, timeWindow, ipRange, deviceType, policyVersion, delegatedTo
+
+model Policy {
+  id            String       @id @default(cuid())
+  orgId         String       @map("org_id")
+  workspaceId   String?      @map("workspace_id") // null = org-wide
+  connectorId   String?      @map("connector_id") // null = all connectors
+  capability    String?                            // null = all capabilities
+  actionType    String?      @map("action_type")  // null = all action types
+  subjectRole   Role?        @map("subject_role") // null = any role
+  subjectUserId String?      @map("subject_user_id") // null = any user
+  effect        PolicyEffect
+  conditions    Json         @default("{}") // { requireApproval, planTiers, timeWindow }
+  priority      Int          @default(100)  // higher = evaluated first; DENY beats ALLOW on tie
+  enabled       Boolean      @default(true)
+  description   String?
+  createdBy     String       @map("created_by")
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+
+  org Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@index([orgId, workspaceId, enabled])
+  @@index([orgId, priority])
+  @@map("policies")
+}
+
+enum PolicyEffect {
+  ALLOW
+  DENY
+  REQUIRE_APPROVAL
+}
+
+// ─── Approval Lifecycle ───────────────────────────────────────────────────────
+// Persists every REQUIRE_APPROVAL governance decision.
+//
+// Lifecycle: PENDING → APPROVED → EXECUTED
+//                    → REJECTED
+//                    → EXPIRED
+//
+// Future: approvalChain (Json) for multi-stage approvals, delegatedTo for delegated approvals.
+
+model PendingApproval {
+  id             String         @id @default(cuid())
+  orgId          String         @map("org_id")
+  workspaceId    String         @map("workspace_id")
+  requesterId    String         @map("requester_id")
+  connectorId    String         @map("connector_id")
+  capability     String
+  actionType     String         @map("action_type")
+  payloadRef     Json           @map("payload_ref")      // Sanitized payload — no secrets
+  policyId       String?        @map("policy_id")        // Policy that triggered this, if any
+  status         ApprovalStatus @default(PENDING)
+  approverId     String?        @map("approver_id")
+  approvedAt     DateTime?      @map("approved_at")
+  rejectedAt     DateTime?      @map("rejected_at")
+  rejectionNote  String?        @map("rejection_note")
+  auditLogId     String?        @map("audit_log_id")     // Links to AuditLog row after execution
+  expiresAt      DateTime?      @map("expires_at")       // null = no expiry
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
+
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  requester User         @relation("ApprovalRequester", fields: [requesterId], references: [id])
+  approver  User?        @relation("ApprovalApprover",  fields: [approverId],  references: [id])
+
+  @@index([orgId, status])
+  @@index([workspaceId, status])
+  @@index([requesterId])
+  @@map("pending_approvals")
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+  EXECUTED
 }
 
 // ─── Integration Hub ─────────────────────────────────────────────────────────
@@ -135,19 +251,188 @@ enum AgentType {
 // ─── Audit Trail ─────────────────────────────────────────────────────────────
 
 model AuditLog {
-  id        String   @id @default(cuid())
-  orgId     String   @map("org_id")
-  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  id          String   @id @default(cuid())
+  orgId       String   @map("org_id")
+  org         Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
 
-  userId    String?  @map("user_id")
-  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId      String?  @map("user_id")
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
 
-  action    String   // e.g. "user.login", "agent.created", "integration.connected"
-  resource  String?  // e.g. "agent:cuid123"
-  metadata  Json     @default("{}")
-  ip        String?
-  createdAt DateTime @default(now()) @map("created_at")
+  workspaceId String?  @map("workspace_id") // Sprint 5.3-B: dedicated indexed column
+  approvalId  String?  @map("approval_id")  // Links to PendingApproval when applicable
+  policyId    String?  @map("policy_id")    // Which Policy triggered the decision
+
+  action      String   // e.g. "connector.send", "user.login"
+  resource    String?  // e.g. "connector:gmail"
+  metadata    Json     @default("{}")
+  ip          String?
+  createdAt   DateTime @default(now()) @map("created_at")
 
   @@index([orgId, createdAt])
+  @@index([workspaceId, createdAt])
   @@map("audit_logs")
+}
+
+// ─── Organizational Memory (Phase 7.0) ───────────────────────────────────────
+// Durable store for decisions, incidents, and key project events.
+// Replaces the in-memory decisionDatabase[] and incidentDatabase[] arrays (TD-01).
+
+model OrgMemoryRecord {
+  id          String   @id @default(cuid())
+  workspaceId String   @map("workspace_id")
+  orgId       String   @map("org_id")
+  type        MemoryRecordType
+  title       String
+  body        String   @db.Text
+  author      String?
+  source      String?  // which capability/platform contributed this
+  tags        String[] @default([])
+  importance  Float    @default(0.5) @map("importance")
+  metadata    Json     @default("{}")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  org Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId, type, createdAt])
+  @@index([orgId, createdAt])
+  @@map("org_memory_records")
+}
+
+enum MemoryRecordType {
+  DECISION
+  INCIDENT
+  PROJECT_EVENT
+  CUSTOMER_EVENT
+  KNOWLEDGE_UPDATE
+}
+
+// ─── Persistent Operational Graph (Phase 7.0) ────────────────────────────────
+// Replaces the in-memory knowledgeGraphService.js nodes/adjacencyList Maps (TD-01).
+// Nodes represent entities; edges represent relationships between them.
+
+model GraphNode {
+  id          String   @id  // e.g. "user:github:davidO"
+  workspaceId String   @map("workspace_id")
+  orgId       String   @map("org_id")
+  type        String   // USER | INCIDENT | PROJECT | CUSTOMER | SYSTEM | EVENT | ISSUE | TEAM
+  name        String
+  metadata    Json     @default("{}")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  outEdges    GraphEdge[] @relation("EdgeSource")
+  inEdges     GraphEdge[] @relation("EdgeTarget")
+
+  org Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId, type])
+  @@index([orgId])
+  @@map("graph_nodes")
+}
+
+model GraphEdge {
+  id               String   @id @default(cuid())
+  sourceId         String   @map("source_id")
+  targetId         String   @map("target_id")
+  workspaceId      String   @map("workspace_id")
+  relationshipType String   @map("relationship_type")
+  weight           Float    @default(1.0)
+  metadata         Json     @default("{}")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  source GraphNode @relation("EdgeSource", fields: [sourceId], references: [id], onDelete: Cascade)
+  target GraphNode @relation("EdgeTarget", fields: [targetId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceId, targetId, relationshipType])
+  @@index([workspaceId])
+  @@index([sourceId])
+  @@index([targetId])
+  @@map("graph_edges")
+}
+
+// ─── Goal Tracking (Phase 7.0) ───────────────────────────────────────────────
+// OKR-style objectives with measurable milestones and automatic progress scoring.
+
+model Goal {
+  id          String     @id @default(cuid())
+  workspaceId String     @map("workspace_id")
+  orgId       String     @map("org_id")
+  title       String
+  description String?    @db.Text
+  status      GoalStatus @default(ON_TRACK)
+  progress    Int        @default(0)  // 0-100
+  targetDate  DateTime?  @map("target_date")
+  owner       String?
+  metadata    Json       @default("{}")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  milestones  GoalMilestone[]
+  org         Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId, status])
+  @@index([orgId])
+  @@map("goals")
+}
+
+model GoalMilestone {
+  id        String          @id @default(cuid())
+  goalId    String          @map("goal_id")
+  title     String
+  done      Boolean         @default(false)
+  dueDate   DateTime?       @map("due_date")
+  createdAt DateTime        @default(now()) @map("created_at")
+
+  goal Goal @relation(fields: [goalId], references: [id], onDelete: Cascade)
+
+  @@index([goalId])
+  @@map("goal_milestones")
+}
+
+enum GoalStatus {
+  ON_TRACK
+  AT_RISK
+  BLOCKED
+  COMPLETE
+  CANCELLED
+}
+
+// ─── Automation Engine (Phase 7.0) ───────────────────────────────────────────
+// Cross-capability workflow rules and execution audit trail.
+
+model AutomationRule {
+  id          String   @id @default(cuid())
+  workspaceId String   @map("workspace_id")
+  orgId       String   @map("org_id")
+  name        String
+  trigger     String   // EventBus event type, e.g. "INCIDENT_CREATED"
+  conditions  Json     @default("{}") // { severity: "CRITICAL", minScore: 0.8 }
+  actions     Json     // Array of { connector, actionType, payload }
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  runs AutomationRun[]
+  org  Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId, enabled])
+  @@index([trigger])
+  @@map("automation_rules")
+}
+
+model AutomationRun {
+  id             String    @id @default(cuid())
+  ruleId         String    @map("rule_id")
+  workspaceId    String    @map("workspace_id")
+  status         String    @default("PENDING") // PENDING | RUNNING | COMPLETED | FAILED | BLOCKED_BY_GOVERNANCE
+  triggerPayload Json      @default("{}") @map("trigger_payload")
+  results        Json      @default("[]") // per-action outcomes
+  startedAt      DateTime  @default(now()) @map("started_at")
+  finishedAt     DateTime? @map("finished_at")
+
+  rule AutomationRule @relation(fields: [ruleId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([ruleId])
+  @@map("automation_runs")
 }
