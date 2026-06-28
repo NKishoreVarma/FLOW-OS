@@ -8,26 +8,34 @@
 
 import { prisma } from '../core/config/prisma.js';
 
+function nodeKey(workspaceId, rawId) {
+  return `${String(workspaceId)}:${rawId}`;
+}
+
 export async function upsertNode(workspaceId, orgId, id, type, name, metadata = {}) {
+  const nid = nodeKey(workspaceId, id);
   return prisma.graphNode.upsert({
-    where: { id },
-    create: { id, workspaceId: String(workspaceId), orgId, type, name, metadata },
-    update: { name, metadata, updatedAt: new Date() }
+    where: { id: nid },
+    create: { id: nid, workspaceId: String(workspaceId), orgId, type, name, metadata },
+    update: { name, metadata }
   });
 }
 
 export async function upsertEdge(workspaceId, orgId, sourceId, targetId, relationshipType, weight = 1.0) {
+  const nsourceId = nodeKey(workspaceId, sourceId);
+  const ntargetId = nodeKey(workspaceId, targetId);
   return prisma.graphEdge.upsert({
-    where: { sourceId_targetId_relationshipType: { sourceId, targetId, relationshipType } },
-    create: { sourceId, targetId, workspaceId: String(workspaceId), orgId, relationshipType, weight },
+    where: { sourceId_targetId_relationshipType: { sourceId: nsourceId, targetId: ntargetId, relationshipType } },
+    create: { sourceId: nsourceId, targetId: ntargetId, workspaceId: String(workspaceId), orgId, relationshipType, weight },
     update: { weight }
   });
 }
 
 export async function getRelatedContext(workspaceId, entityId, hops = 2) {
-  const visited = new Set([entityId]);
+  const startId = nodeKey(workspaceId, entityId);
+  const visited = new Set([startId]);
   const contextStrings = [];
-  let frontier = [entityId];
+  let frontier = [startId];
 
   for (let hop = 0; hop < hops; hop++) {
     if (frontier.length === 0) break;
@@ -37,7 +45,8 @@ export async function getRelatedContext(workspaceId, entityId, hops = 2) {
         workspaceId: String(workspaceId),
         OR: [{ sourceId: { in: frontier } }, { targetId: { in: frontier } }]
       },
-      include: { source: true, target: true }
+      include: { source: true, target: true },
+      take: 500
     });
 
     const nextFrontier = [];
@@ -69,16 +78,17 @@ export async function getGraphStats(workspaceId) {
 }
 
 export async function getNeighbors(workspaceId, entityId) {
+  const nid = nodeKey(workspaceId, entityId);
   const edges = await prisma.graphEdge.findMany({
     where: {
       workspaceId: String(workspaceId),
-      OR: [{ sourceId: entityId }, { targetId: entityId }]
+      OR: [{ sourceId: nid }, { targetId: nid }]
     },
     include: { source: true, target: true }
   });
   return edges.map(e => ({
-    node: e.sourceId === entityId ? e.target : e.source,
+    node: e.sourceId === nid ? e.target : e.source,
     relation: e.relationshipType,
-    direction: e.sourceId === entityId ? 'OUT' : 'IN'
+    direction: e.sourceId === nid ? 'OUT' : 'IN'
   }));
 }
