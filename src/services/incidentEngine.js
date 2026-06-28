@@ -1,13 +1,15 @@
 import { broadcastToWorkspace } from './socketService.js';
 import crypto from 'crypto';
+import { saveMemory } from './orgMemoryService.js';
+import db from '../config/db.js';
 
 export const incidentDatabase = [];
 
 export function detectIncidents(workspaceId, text, metadata) {
   const lowerText = (text || '').toLowerCase();
   
-  const outageTriggers = ['outage', 'crashed', 'sev1', 'sev 1', 'down', 'broken', 'p0', 'unresponsive', 'exhaustion', 'incident', 'failure', 'critical', 'emergency'];
-  const riskTriggers = ['bottleneck', 'risk', 'delay', 'blocked', 'escalation', 'blocker'];
+  const outageTriggers = ['outage', 'crashed', 'sev1', 'sev 1', 'down', 'broken', 'p0', 'unresponsive', 'exhaustion', 'incident', 'failure', 'critical', 'emergency', 'blocker', '502', '500', '503', '504'];
+  const riskTriggers = ['bottleneck', 'risk', 'delay', 'blocked', 'escalation'];
   
   const isOutage = outageTriggers.some(kw => lowerText.includes(kw));
   const isRisk = riskTriggers.some(kw => lowerText.includes(kw));
@@ -39,6 +41,19 @@ export function detectIncidents(workspaceId, text, metadata) {
     };
     
     incidentDatabase.push(incident);
+    // Persist incident to durable store — fire and forget
+    db.query('SELECT org_id FROM workspaces WHERE external_id = $1 LIMIT 1', [String(workspaceId)])
+      .then(({ rows }) => {
+        if (rows[0]) {
+          saveMemory(String(workspaceId), rows[0].org_id, 'INCIDENT', {
+            title: incident.title,
+            body: JSON.stringify(incident),
+            source: metadata?.platform || 'system',
+            importance: incident.severity === 'CRITICAL' ? 0.95 : 0.8
+          });
+        }
+      })
+      .catch(() => {});
     const eventType = isOutage ? 'INCIDENT_CREATED' : 'RISK_DETECTED';
     // Broadcast with both underscore and camelCase keys for downstream compatibility
     broadcastToWorkspace(String(workspaceId), eventType, {

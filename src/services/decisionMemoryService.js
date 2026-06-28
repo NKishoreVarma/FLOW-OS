@@ -1,5 +1,7 @@
 import { broadcastToWorkspace } from './socketService.js';
 import crypto from 'crypto';
+import { saveMemory } from './orgMemoryService.js';
+import db from '../config/db.js';
 
 export const decisionDatabase = [];
 
@@ -25,6 +27,20 @@ export function extractDecisions(workspaceId, text, metadata, sender) {
     };
     
     decisionDatabase.push(decisionObj);
+    // Persist decision to durable store — fire and forget
+    db.query('SELECT org_id FROM workspaces WHERE external_id = $1 LIMIT 1', [String(workspaceId)])
+      .then(({ rows }) => {
+        if (rows[0]) {
+          saveMemory(String(workspaceId), rows[0].org_id, 'DECISION', {
+            title: decisionObj.decision.substring(0, 100),
+            body: text,
+            author: sender,
+            source: 'ingestion',
+            importance: 0.7
+          });
+        }
+      })
+      .catch(() => {});
     broadcastToWorkspace(String(workspaceId), 'DECISION_RECORDED', decisionObj);
     console.log(`📝 [Decision Memory] Decision Recorded: ${decision_id}`);
     
