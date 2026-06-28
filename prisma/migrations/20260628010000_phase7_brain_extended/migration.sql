@@ -35,7 +35,7 @@ CREATE TABLE "briefing_recommendations" (
     "evidence"               TEXT NOT NULL,
     "business_impact"        TEXT,
     "estimated_improvement"  TEXT,
-    "systems"                TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "systems"                TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
     "owner"                  TEXT,
     "status"                 "RecommendationStatus" NOT NULL DEFAULT 'PENDING',
     "user_feedback"          TEXT,
