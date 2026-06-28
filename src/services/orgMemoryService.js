@@ -1,4 +1,4 @@
-import prisma from '../core/config/prisma.js';
+import { prisma } from '../core/config/prisma.js';
 
 export async function saveMemory(workspaceId, orgId, type, { title, body, author, source, tags = [], importance = 0.5, metadata = {} }) {
   return prisma.orgMemoryRecord.create({
