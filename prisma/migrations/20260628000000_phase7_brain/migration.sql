@@ -90,6 +90,10 @@ ALTER TABLE "graph_edges" ADD CONSTRAINT "graph_edges_source_id_fkey" FOREIGN KE
 -- AddForeignKey
 ALTER TABLE "graph_edges" ADD CONSTRAINT "graph_edges_target_id_fkey" FOREIGN KEY ("target_id") REFERENCES "graph_nodes"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- AddColumn: org_id multi-tenant isolation for graph_edges
+ALTER TABLE "graph_edges" ADD COLUMN IF NOT EXISTS "org_id" TEXT NOT NULL DEFAULT '';
+ALTER TABLE "graph_edges" ADD CONSTRAINT "graph_edges_org_id_fkey" FOREIGN KEY ("org_id") REFERENCES "organizations"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
 -- CreateTable: goals
 CREATE TABLE "goals" (
     "id" TEXT NOT NULL,
@@ -182,3 +186,7 @@ CREATE INDEX "automation_runs_rule_id_idx" ON "automation_runs"("rule_id");
 
 -- AddForeignKey
 ALTER TABLE "automation_runs" ADD CONSTRAINT "automation_runs_rule_id_fkey" FOREIGN KEY ("rule_id") REFERENCES "automation_rules"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddColumn: org_id multi-tenant isolation for automation_runs
+ALTER TABLE "automation_runs" ADD COLUMN IF NOT EXISTS "org_id" TEXT NOT NULL DEFAULT '';
+ALTER TABLE "automation_runs" ADD CONSTRAINT "automation_runs_org_id_fkey" FOREIGN KEY ("org_id") REFERENCES "organizations"("id") ON DELETE CASCADE ON UPDATE CASCADE;

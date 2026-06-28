@@ -24,8 +24,10 @@ model Organization {
   pendingApprovals PendingApproval[]
   orgMemory        OrgMemoryRecord[]
   graphNodes       GraphNode[]
+  graphEdges       GraphEdge[]
   goals            Goal[]
   automationRules  AutomationRule[]
+  automationRuns   AutomationRun[]
 
   @@map("organizations")
 }
@@ -335,6 +337,8 @@ model GraphEdge {
   sourceId         String   @map("source_id")
   targetId         String   @map("target_id")
   workspaceId      String   @map("workspace_id")
+  orgId            String   @map("org_id")
+  org              Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
   relationshipType String   @map("relationship_type")
   weight           Float    @default(1.0)
   metadata         Json     @default("{}")
@@ -424,6 +428,8 @@ model AutomationRun {
   id             String    @id @default(cuid())
   ruleId         String    @map("rule_id")
   workspaceId    String    @map("workspace_id")
+  orgId          String    @map("org_id")
+  org            Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
   status         String    @default("PENDING") // PENDING | RUNNING | COMPLETED | FAILED | BLOCKED_BY_GOVERNANCE
   triggerPayload Json      @default("{}") @map("trigger_payload")
   results        Json      @default("[]") // per-action outcomes
