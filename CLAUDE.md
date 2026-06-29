@@ -82,11 +82,13 @@ flow-os-backend/
 82: │   │   └── users/                 # User CRUD
 83: │   ├── routes/                    # Legacy routes (Phase-2 migration target)
 84: │   │   ├── queryRoutes.js         # POST /api/query — full RAG pipeline
-85: │   │   ├── intelligenceRoutes.js  # GET health-score, daily-feed, rolling-summary, briefing, POST qa (Phase 6.1)
+85: │   │   ├── intelligenceRoutes.js  # GET health-score, briefing/:role, explainable-recommendations, POST qa, copilot (Phase 7.0/8.0)
 86: │   │   ├── integrationRoutes.js   # Composio OAuth connect/callback
 87: │   │   ├── crawlerRoutes.js       # SSRF-safe URL fetch
 88: │   │   ├── simulationRoutes.js    # End-to-end test simulation
-89: │   │   ├── communicationRoutes.js # Communication Capability REST API (Phase 5.4)
+89: │   │   ├── importRoutes.js        # POST /api/import — Universal Company Import Engine (Phase 10.0)
+90: │   │   ├── evaluationRoutes.js    # GET /api/evaluation — AI Evaluation & Explainability (Phase 12.0)
+91: │   │   ├── communicationRoutes.js # Communication Capability REST API (Phase 5.4)
 90: │   │   ├── meetingRoutes.js       # Meeting Capability REST API (Phase 5.5)
 91: │   │   ├── engineeringRoutes.js   # Engineering Capability REST API (Phase 5.6)
 92: │   │   ├── workRoutes.js          # Work Management Capability REST API (Phase 5.7)
@@ -102,6 +104,8 @@ flow-os-backend/
 │   │   ├── operationalScoringService.js # 8-dimension scoring (privacy, authority...)
 │   │   ├── operationalIntelligenceService.js # Predictions, stories, recommendations learning loop (Phase 6.2)
 │   │   ├── operationalBrainService.js  # Role briefing, copilot, and explainable recommendations (Phase 7.0)
+│   │   ├── importEngineService.js      # Ingest, validate, and bootstrap corporate twins (Phase 10.0)
+│   │   ├── aiEvaluationService.js      # AI explainability, feedback outcomes, and learning loops (Phase 12.0)
 │   │   ├── incidentEngine.js           # Keyword-based incident detection
 │   │   ├── decisionMemoryService.js    # Decision extraction
 │   │   ├── knowledgeGraphService.js    # In-memory adjacency graph
@@ -563,6 +567,7 @@ src/
 - **Communication Capability (Phase 5.4)** — `GmailAdapter` is the first production Communication provider. Full Gmail support: OAuth2 consent flow, inbox listing, thread reading, message fetch, label listing, search (Gmail query syntax), send, reply, reply-all, forward, draft creation, label modification, inbox sync to ingestion pipeline. All actions flow through `executeAction()` — governance, audit, timeline, WebSocket broadcast, Recommendation Engine integration. Provider-agnostic REST API at `/api/communication/*`; add Outlook/Exchange/Slack DM by adding a new adapter. `?provider=` query param selects the adapter.
 - **Meeting Capability (Phase 5.5)** — `GoogleCalendarAdapter` is the first production Meeting provider. Full Google Calendar support: OAuth2, upcoming/past event listing, single event detail, AI meeting prep context (RAG pipeline query on event title + attendees), event search, create, update, delete, live notes/action items/summary stored in `event.extendedProperties.private`, event sync to BullMQ ingestion pipeline (with KG node registration). Provider-agnostic REST API at `/api/meetings/*`; add Outlook Calendar, Zoom, Teams by adding a new adapter. Frontend meeting components (MeetingDashboard, MeetingPreparation, MeetingSummary, LiveMeeting) wired to real API with demo fallbacks so the UI works without a connected calendar.
 - **Engineering Capability (Phase 5.6)** — `GitHubAdapter` is the first production Engineering provider. Full GitHub support via native `fetch` against the GitHub REST API: PAT authentication, repositories (list/metadata/contributors), branches (list/compare), commits (history/single with file diffs), pull requests (list/detail with AI merge readiness score 0–100), code reviews (list/reviewer workload/suggested reviewers), deployments (list/detail with risk score 0–100), branch create, PR create/update/approve/merge, search (code/repos/commits), sync to BullMQ ingestion pipeline with KG `authored_by` edges. Provider-agnostic REST API at `/api/engineering/*`; add GitLab, Bitbucket, Azure DevOps by adding a new adapter. `ProjectIntelligence.jsx` wired to real API — fetches repos + PRs + commits, computes risk status, surfaces merge readiness scores and AI recommendations. Full demo fallback when GitHub is not connected.
+- **Workspace Lifecycle Engine (WLE)** — universal manifest-driven pipeline at `src/core/workspaceLifecycle/`. Replaces demo-specific import logic. Five operations: CREATE (10 stages), IMPORT (9), SYNC (7), REFRESH (4), VALIDATE (1, dry-run). Plugin registry of 23 built-in dataset types. Every operation creates a durable `ImportRecord` in PostgreSQL and streams 6 WebSocket event types. REST API at `/api/lifecycle/*` (7 routes). `ImportDashboard.jsx` provides a 5-tab UI. Full reference: `docs/WORKSPACE_LIFECYCLE_ENGINE.md`.
 
 ### What is stubbed / incomplete
 
@@ -599,7 +604,9 @@ src/
 
 ## 10. Current Sprint
 
-**Active: Phase 5.6 — Engineering Capability** (completed 2026-06-28)
+**Active: Workspace Lifecycle Engine (WLE)** (completed 2026-06-29)
+
+Previous: Phase 5.6 — Engineering Capability (completed 2026-06-28)
 
 ### What was delivered in Sprint 5.3-A
 
@@ -936,7 +943,7 @@ briefing · copilot · recommendations(+execute) · decisions · automations(ADM
 ### Frontend (`flow-os-frontend/src/`)
 - `lib/brainApi.js` — central brain API client (auth from localStorage).
 - `components/ui/AICopilot.jsx` — global floating, page + entity aware (mounted in LayoutShell).
-- `components/company/ExecutiveDashboard.jsx` (`/dashboard`), `components/workspace/DailyBriefing.jsx` (`/briefing`), `components/workspace/OperationalTimeline.jsx` (`/timeline`).
+- `components/company/ExecutiveDashboard.jsx` (`/dashboard`), `components/workspace/DailyBriefing.jsx` (`/briefing`), `components/workspace/OperationalTimeline.jsx` (`/timeline`), `components/platform/ImportDashboard.jsx` (`/platform/import`), `components/platform/OnboardingWizard.jsx` (`/platform/onboarding`), `components/platform/WorkspaceHealth.jsx` (`/platform/health`).
 - `components/ui/CommandPalette.jsx` — ⌘K, brain RAG + nav commands.
 - `components/workspace/EntityContextPanel.jsx` + `EntityWorkspace.jsx` (`/entity/:id`) + `lib/entityContext.js` — Cross-Capability Workspace.
 - `components/ui/ErrorBoundary.jsx` — top-level graceful degradation.
@@ -946,4 +953,75 @@ Automation never bypasses governance; automation actor role is fixed `MEMBER` (r
 
 ---
 
-*Last updated: 2026-06-29 by Claude (Phase 7.0 — Autonomous Operational Brain, Milestones 1–4)*
+## 14. Workspace Lifecycle Engine
+
+The Workspace Lifecycle Engine (WLE) is a manifest-driven, plugin-extensible pipeline that replaces the earlier demo-specific import logic. It bootstraps, imports, synchronizes, and refreshes FLOW OS workspaces through a configurable sequence of pipeline stages, persists durable `ImportRecord` rows in PostgreSQL, and streams progress over WebSocket.
+
+Full reference: [`docs/WORKSPACE_LIFECYCLE_ENGINE.md`](docs/WORKSPACE_LIFECYCLE_ENGINE.md)
+
+### File map
+
+| File | Description |
+|------|-------------|
+| `src/core/workspaceLifecycle/datasetRegistry.js` | Map-backed plugin registry: `registerDatasetType()`, `getDatasetHandler()`, `getSupportedTypes()`, `hasDatasetType()` |
+| `src/core/workspaceLifecycle/datasets/builtinTypes.js` | Registers all 23 built-in dataset types as a side-effect; exports factory helpers `makeValidator`, `makeVectorizer`, `makeResolver`, `identity`, `noGraph`, `noVector` |
+| `src/core/workspaceLifecycle/datasets/index.js` | Re-exports builtinTypes as a side-effect import; this is the file server.js imports to trigger registration |
+| `src/core/workspaceLifecycle/manifestParser.js` | `parseManifest(raw)`, `getCompatibilityStatus(schemaVersion)`; constants `ENGINE_VERSION = '2.0'`, `SCHEMA_VERSION_FLOOR = '1.0'` |
+| `src/core/workspaceLifecycle/pipelineStages.js` | 10 exported named async functions, one per pipeline stage |
+| `src/core/workspaceLifecycle/lifecycleEngine.js` | `runLifecycleOperation(operation, workspaceId, { manifest, datasets })`, `validateOnly(workspaceId, { manifest, datasets })`; OPERATION_STAGES map; FATAL_STAGES: stageValidate + stageBootstrapWorkspace |
+| `src/routes/lifecycleRoutes.js` | 7 routes at `/api/lifecycle/*` |
+
+### Operations
+
+| Operation | Stages | Notes |
+|-----------|--------|-------|
+| CREATE | 10 | Full bootstrap: org + workspace + users + graph + memory + vectors + copilot warmup |
+| IMPORT | 9 | Same as CREATE without copilot warmup |
+| SYNC | 7 | Incremental update; skips workspace bootstrap and briefings |
+| REFRESH | 4 | Re-derives intelligence from existing data; no manifest required |
+| VALIDATE | 1 | Dry-run only; no DB writes |
+
+### Dataset type registry — registering a new type
+
+Add one call to `src/core/workspaceLifecycle/datasets/builtinTypes.js`:
+
+```js
+registerDatasetType({
+  type: 'contracts',
+  validator: makeValidator(['id', 'title', 'value']),
+  normalizer: identity,
+  resolver: makeResolver('CONTRACT', [
+    rec => rec.customerId ? { sourceId: String(rec.id), targetId: String(rec.customerId), type: 'BELONGS_TO' } : null,
+  ]),
+  vectorizer: makeVectorizer('contracts', ['title', 'description']),
+  graphBuilder: makeResolver('CONTRACT', []),
+});
+```
+
+No other files need to change. The new type appears immediately in `GET /api/lifecycle/schema`.
+
+### 23 built-in dataset types
+
+`summary` · `company` · `employees` · `departments` · `projects` · `customers` · `vendors` · `repositories` · `commits` · `pull_requests` · `jira_issues` · `emails` · `slack_threads` · `calendar_events` · `meetings` · `meeting_transcripts` · `incidents` · `documents` · `timeline` · `memory` · `executive_reports` · `knowledgeGraph` · `permissions`
+
+### API endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/lifecycle/create` | Full workspace bootstrap (10 stages) |
+| POST | `/api/lifecycle/import` | Import into existing or new workspace (9 stages) |
+| POST | `/api/lifecycle/sync` | Incremental data update (7 stages) |
+| POST | `/api/lifecycle/refresh` | Re-derive intelligence, no manifest needed (4 stages) |
+| POST | `/api/lifecycle/validate` | Dry-run validation, no DB writes |
+| GET | `/api/lifecycle/history` | Last 50 ImportRecords for the workspace |
+| GET | `/api/lifecycle/schema` | Supported types, engine version, operations list |
+
+### WebSocket events
+
+`LIFECYCLE_STARTED` · `LIFECYCLE_STAGE_STARTED` · `LIFECYCLE_STAGE_COMPLETED` · `LIFECYCLE_STAGE_FAILED` · `LIFECYCLE_COMPLETED` · `LIFECYCLE_FAILED`
+
+All events carry `importId` and are broadcast to the workspace WebSocket channel.
+
+---
+
+*Last updated: 2026-06-29 by Claude (Workspace Lifecycle Engine — WLE complete)*

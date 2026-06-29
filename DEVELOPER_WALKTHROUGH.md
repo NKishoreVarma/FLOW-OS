@@ -1499,6 +1499,374 @@ Automation never bypasses Governance · automation actor role is a fixed `MEMBER
 | `flow-os-frontend/src/components/workspace/DailyBriefing.jsx`, `OperationalTimeline.jsx`, `EntityContextPanel.jsx`, `EntityWorkspace.jsx` | New — briefing, timeline, entity workspace |
 | `flow-os-frontend/src/components/ui/CommandPalette.jsx` | Updated — brain-routed nav commands |
 
+---
+
+## Phase 8.0 — Reality Sprint
+
+### Overview
+The Reality Sprint audits the platform, replaces mock assumptions with dynamic connection dashboards, validates end-to-end trace flows, and produces high-fidelity reports across 9 critical dimensions.
+
+### Deliverables & Reports Compiled
+
+1. **Reality Audit Report (`reality_audit_report.md`)**: Map of mock data, demo fallbacks, stubs, and static responses across all 7 capabilities.
+2. **Connector Readiness Report (`connector_readiness_report.md`)**: Map of authentication credentials, sync poller intervals, and known integration bottlenecks.
+3. **Workflow Validation Report (`workflow_validation_report.md`)**: Traces complete operational workflows (e.g. *Outage Latency & Remediation* and *Employee Overload & Burnout*) dynamically.
+4. **Performance Report (`performance_report.md`)**: Latency metrics of REST endpoints (~24ms), vector embeddings (~210ms), database queries (~8ms), and AI copilot JSON summaries (~1850ms).
+5. **Security Review (`security_review.md`)**: Evaluation of workspace isolation boundaries, PII drops, and encryption.
+6. **Technical Debt Report (`technical_debt_report.md`)**: List of codebase stubs, deprecated table relics, and in-memory mock configurations.
+7. **Production Readiness Score (`production_readiness_score.md`)**: Grade matrix evaluating FLOW OS across 9 dimensions, yielding an overall readiness score of **83.3%**.
+8. **Roadmap to FLOW Beta (`roadmap_to_beta.md`)**: Actionable engineering roadmap to target enterprise deployment.
+
+### Files Delivered in Phase 8.0
+
+| File | Change |
+|------|--------|
+| `flow-os-frontend/src/components/platform/IntegrationHub.jsx` | Updated — Overwritten to dynamically fetch and display connector health check status, authentication modes, and error logs |
+
+---
+
+## Phase 10.0 — Universal Company Import Engine
+
+### Overview
+Phase 10.0 implements the standardized import pipeline designed to bootstrap corporate twin organization structures, link departments, teams, users, and projects, resolve graph nodes and edges dynamically, and seed vector search databases.
+
+### Key Capabilities
+
+#### 1. Universal Import Pipeline
+Ingests JSON workspace bundles. Standardizes input fields, resolves duplicates, checks schema constraints, and executes database upserts.
+
+#### 2. Workspace Bootstrap Engine
+Prisma transactions create Organizations, Workspaces, Users, Memberships, Knowledge documents (OrgMemoryRecords), and Timeline events.
+
+#### 3. Relationship Resolver
+Scans hierarchies and relationship edges (e.g. Employee -> Manager, User -> Team, Project -> Team) and durably links them in the operational graph and knowledge graphs.
+
+#### 4. Import Dashboard
+Provides a React dashboard allowing file uploads, schema validation previews (dry-run checkups), broken references maps, duplicate lists, statistics cards, and historical import execution logs.
+
+### Files Delivered in Phase 10.0
+
+| File | Change |
+|------|--------|
+| `src/services/importEngineService.js` | New — Core import pipeline, schema validator, and bootstrapper |
+| `src/routes/importRoutes.js` | New — Registered `/api/import`, `/api/import/validate`, and `/api/import/history` routes |
+| `flow-os-frontend/src/components/platform/ImportDashboard.jsx` | New — React view delivering raw JSON editor, validations preview, and logs |
+| `flow-os-frontend/src/App.jsx` | Updated — Lazy loaded and registered route for `/platform/import` |
+| `flow-os-frontend/src/components/layout/Sidebar.jsx` | Updated — Added link to the Import Dashboard |
+
+---
+
+## Phase 11.0 — Enterprise Workspace Management Platform
+
+### Overview
+Phase 11.0 delivers the platform management layer enabling deployment to multiple organizations with secure isolation, workspace lifecycle management (create, delete, archive, clone), onboarding wizards, connector settings, RBAC enforcement, and workspace health dashboards.
+
+### Key Capabilities
+
+#### 1. Workspace Lifecycle Engine
+* **Create**: Integrated workspace bootstrapper initialization.
+* **Delete**: Asynchronous cascading purge of workspace members, databases, and configuration settings.
+* **Archive**: Flagging workspace operational availability using system-level events in memory logs.
+* **Clone**: Complete replica creation (nodes, edges, memories, integrations) for sandboxing.
+
+#### 2. Organization Onboarding Flow Wizard
+A multi-step onboarding wizard stepping organizations through Company configuration, Team invites, Connector authentications, Data imports, and AI Brain diagnostics initialization.
+
+#### 3. Workspace Health Scorecard
+Real-time dashboard rendering sync latencies, data freshness indicators, operational graph density, and connector metrics.
+
+### Files Delivered in Phase 11.0
+
+| File | Change |
+|------|--------|
+| `src/modules/organizations/org.service.js` | Updated — Implemented delete, archive, clone, and health aggregator methods |
+| `src/modules/organizations/org.routes.js` | Updated — Exposed CRUD endpoints for workspaces, cloning, archiving, and health checks |
+| `flow-os-frontend/src/components/platform/OnboardingWizard.jsx` | New — Onboarding wizard flow page component |
+| `flow-os-frontend/src/components/platform/WorkspaceHealth.jsx` | New — Health scorecard dashboard page component |
+| `flow-os-frontend/src/components/platform/WorkspaceManagement.jsx` | Updated — Fully dynamic dashboard integration with lifecycle actions and settings configuration |
+| `flow-os-frontend/src/App.jsx` | Updated — Registered routes for onboarding and health dashboards |
+| `flow-os-frontend/src/components/layout/Sidebar.jsx` | Updated — Embedded Workspace Health menu link |
+
+---
+
+## Workspace Lifecycle Engine (WLE)
+
+**Files:**
+- `src/core/workspaceLifecycle/` — engine, stages, registry, manifest parser
+- `src/routes/lifecycleRoutes.js` — 7 routes at `/api/lifecycle/*`
+- `flow-os-frontend/src/components/platform/ImportDashboard.jsx` — 5-tab UI (Import / Create / Sync / Refresh / Validate)
+
+### What it does
+
+The Workspace Lifecycle Engine bootstraps, imports, synchronizes, and refreshes FLOW OS workspaces from a manifest-driven JSON bundle. It replaces the earlier demo-specific import logic with a universal, operation-aware stage runner. Every operation writes a durable `ImportRecord` to PostgreSQL and streams per-stage progress over WebSocket.
+
+### Checking which dataset types are supported
+
+```bash
+curl http://localhost:5001/api/lifecycle/schema \
+  -H "Authorization: Bearer <jwt>" \
+  -H "workspace-id: workspace_corp_alpha"
+```
+
+Response includes `supportedTypes` (23 built-in types), `engineVersion` (`"2.0"`), and the list of valid operations.
+
+### Validating a manifest (dry-run)
+
+Use VALIDATE before committing any data. No database writes occur.
+
+```bash
+curl -X POST http://localhost:5001/api/lifecycle/validate \
+  -H "Authorization: Bearer <jwt>" \
+  -H "workspace-id: workspace_corp_alpha" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "manifest": {
+      "schemaVersion": "1.0",
+      "organization": { "name": "Acme Corp", "slug": "acme-corp" },
+      "datasets": [
+        { "type": "employees" },
+        { "type": "departments" },
+        { "type": "projects" }
+      ]
+    },
+    "datasets": {
+      "employees": [
+        { "id": "e1", "name": "Alice Chen", "email": "alice@acme.com", "departmentId": "d1" }
+      ],
+      "departments": [
+        { "id": "d1", "name": "Engineering" }
+      ],
+      "projects": [
+        { "id": "p1", "name": "Platform Rewrite", "ownerId": "e1", "departmentId": "d1" }
+      ]
+    }
+  }'
+```
+
+Response shape:
+```json
+{
+  "success": true,
+  "valid": true,
+  "manifestErrors": [],
+  "perType": {
+    "employees": { "valid": true, "errors": [], "warnings": [] },
+    "departments": { "valid": true, "errors": [], "warnings": [] },
+    "projects": { "valid": true, "errors": [], "warnings": [] }
+  },
+  "brokenReferences": [],
+  "warnings": []
+}
+```
+
+### Bootstrapping a new workspace (CREATE)
+
+CREATE runs all 10 pipeline stages: validate → normalize → resolve relationships → bootstrap workspace → generate graphs → ingest memory → vectorize → refresh recommendations → refresh briefings → warm copilot.
+
+```bash
+curl -X POST http://localhost:5001/api/lifecycle/create \
+  -H "Authorization: Bearer <jwt>" \
+  -H "workspace-id: workspace_corp_alpha" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "manifest": {
+      "schemaVersion": "1.0",
+      "organization": { "name": "Acme Corp", "slug": "acme-corp", "plan": "pro" },
+      "datasets": [
+        { "type": "employees" },
+        { "type": "departments" },
+        { "type": "projects" },
+        { "type": "incidents" }
+      ]
+    },
+    "datasets": {
+      "employees": [
+        { "id": "e1", "name": "Alice Chen", "email": "alice@acme.com", "role": "ADMIN", "departmentId": "d1" },
+        { "id": "e2", "name": "Bob Park", "email": "bob@acme.com", "departmentId": "d1" }
+      ],
+      "departments": [
+        { "id": "d1", "name": "Engineering" }
+      ],
+      "projects": [
+        { "id": "p1", "name": "Platform Rewrite", "ownerId": "e1", "departmentId": "d1", "status": "active" }
+      ],
+      "incidents": [
+        { "id": "inc1", "title": "DB migration failure", "description": "Migration script timed out on shard 3" }
+      ]
+    }
+  }'
+```
+
+Response:
+```json
+{
+  "success": true,
+  "importId": "IMP-3F2A1B9C",
+  "operation": "CREATE",
+  "status": "COMPLETED",
+  "graphMetrics": { "nodes": 4, "edges": 2 },
+  "statistics": {
+    "datasets": [
+      { "type": "employees", "count": 2 },
+      { "type": "departments", "count": 1 },
+      { "type": "projects", "count": 1 },
+      { "type": "incidents", "count": 1 }
+    ],
+    "memoryRecords": 2,
+    "vectorChunks": 2
+  },
+  "errors": null,
+  "warnings": []
+}
+```
+
+Employee records automatically provision `User` and `WorkspaceMember` rows. Default password is `changeme` — force-rotate on first login.
+
+### Triggering a REFRESH (re-derive intelligence)
+
+REFRESH does not require a manifest. It re-runs the graph generation, recommendations, briefings, and copilot warmup stages against whatever data is already in the workspace.
+
+```bash
+curl -X POST http://localhost:5001/api/lifecycle/refresh \
+  -H "Authorization: Bearer <jwt>" \
+  -H "workspace-id: workspace_corp_alpha"
+```
+
+Use REFRESH after:
+- Updating connector data (new GitHub PRs ingested)
+- Modifying governance policies that affect recommendations
+- Changing the Gemini API key (forces fresh LLM briefing generation)
+
+### Incremental update (SYNC)
+
+SYNC runs 7 stages — it skips workspace bootstrap and briefing refresh. Use it for routine dataset updates where the org/workspace/users are already set up.
+
+```bash
+curl -X POST http://localhost:5001/api/lifecycle/sync \
+  -H "Authorization: Bearer <jwt>" \
+  -H "workspace-id: workspace_corp_alpha" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "manifest": {
+      "schemaVersion": "1.0",
+      "organization": { "name": "Acme Corp", "slug": "acme-corp" },
+      "datasets": [{ "type": "incidents" }]
+    },
+    "datasets": {
+      "incidents": [
+        { "id": "inc2", "title": "API gateway timeout", "description": "P0 — all regions affected" }
+      ]
+    }
+  }'
+```
+
+### Viewing import history
+
+```bash
+curl http://localhost:5001/api/lifecycle/history \
+  -H "Authorization: Bearer <jwt>" \
+  -H "workspace-id: workspace_corp_alpha"
+```
+
+Returns the last 50 `ImportRecord` rows ordered most-recent-first. Records are durable — they survive server restarts.
+
+### Streaming progress with WebSocket
+
+Subscribe to the workspace WebSocket channel to receive per-stage progress in real time:
+
+```js
+const ws = new WebSocket('ws://localhost:5001?workspaceId=workspace_corp_alpha');
+
+ws.onmessage = (event) => {
+  const { type, payload } = JSON.parse(event.data);
+  switch (type) {
+    case 'LIFECYCLE_STARTED':
+      console.log('Operation started:', payload.importId, payload.operation);
+      break;
+    case 'LIFECYCLE_STAGE_STARTED':
+      console.log('Stage started:', payload.stage);
+      break;
+    case 'LIFECYCLE_STAGE_COMPLETED':
+      console.log('Stage done:', payload.stage, payload.message);
+      break;
+    case 'LIFECYCLE_STAGE_FAILED':
+      console.error('Stage failed:', payload.stage, payload.message);
+      break;
+    case 'LIFECYCLE_COMPLETED':
+      console.log('Done:', payload.graphMetrics, payload.statistics);
+      break;
+    case 'LIFECYCLE_FAILED':
+      console.error('Failed:', payload.errors);
+      break;
+  }
+};
+```
+
+The `ImportDashboard.jsx` frontend component handles this subscription automatically and renders a live progress panel.
+
+### Registering a new dataset type
+
+Add a single `registerDatasetType()` call to `src/core/workspaceLifecycle/datasets/builtinTypes.js`. No other files change.
+
+```js
+// At the bottom of builtinTypes.js
+const contractsResolver = makeResolver('CONTRACT', [
+  rec => rec.customerId ? { sourceId: String(rec.id), targetId: String(rec.customerId), type: 'BELONGS_TO' } : null,
+]);
+
+registerDatasetType({
+  type: 'contracts',
+  validator: makeValidator(['id', 'title', 'value']),
+  normalizer: identity,
+  resolver: contractsResolver,
+  vectorizer: makeVectorizer('contracts', ['title', 'description', 'terms']),
+  graphBuilder: contractsResolver,
+});
+```
+
+Verify it registered:
+```bash
+curl http://localhost:5001/api/lifecycle/schema \
+  -H "Authorization: Bearer <jwt>" \
+  -H "workspace-id: workspace_corp_alpha" | jq '.supportedTypes'
+# → [..., "contracts"]
+```
+
+---
+
+## Phase 12.0 — Observability & AI Evaluation Platform
+
+### Overview
+Phase 12.0 delivers the AI evaluation pipeline and explainability engine to continuously measure, evaluate, explain, and improve the Operational Brain. It tracks recommendation outcomes, calculates Copilot response metrics, visualizes evidence graph lineages, and adjusts recommendation ranks using an active Learning Loop feedback mechanism.
+
+### Key Capabilities
+
+#### 1. AI Evaluation & Telemetry Pipeline
+* Records recommendation feedback (Accept/Reject/Ignore) and estimates business impact and time saved.
+* Aggregates latency timings, prompt/completion token volumes, and API costs per LLM query.
+
+#### 2. AI Explainability Dashboard
+* **Evidence Graph**: Renders the document nodes (verified vault manuals, commit chains, slack comments) supporting any generated recommendation.
+* **Reasoning Chain**: Outlines step-by-step reasoning steps (signal ingestion, RAG context search, temporal checks, and executive synthesis).
+
+#### 3. Learning Loop Ranking Adapter
+* Dynamically increases confidence multipliers for category tags matching accepted actions, and degrades multipliers for rejected actions, adapting future recommendation rankings in real-time.
+
+### Files Delivered in Phase 12.0
+
+| File | Change |
+|------|--------|
+| `src/services/aiEvaluationService.js` | New — Core explainability service, metrics calculator, and learning loops rankings adjustments |
+| `src/routes/evaluationRoutes.js` | New — REST API router exposing statistics dashboards, feedback collectors, and explainability endpoints |
+| `src/server.js` | Updated — Mounted evaluation endpoints under `/api/evaluation` |
+| `flow-os-frontend/src/components/platform/EvaluationPlatform.jsx` | New — Observability and explainability dashboard page component |
+| `flow-os-frontend/src/App.jsx` | Updated — Lazy-imported and registered route `/platform/evaluation` |
+| `flow-os-frontend/src/components/layout/Sidebar.jsx` | Updated — Embedded AI Evaluation menu link |
+
+
+
+
+
 
 
 
