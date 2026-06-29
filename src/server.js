@@ -17,6 +17,7 @@ import Redis from 'ioredis';
 import { errorHandler } from './core/errors/index.js';
 import { tenantIsolation, authenticate, rateLimiter } from './core/middleware/index.js';
 import { governanceMiddleware, initGovernanceSubscribers } from './core/governance/index.js';
+import { initAutomationSubscribers } from './services/automationEngine.js';
 
 // ── New Modular Routes (Phase 1) ─────────────────────────────────────────────
 import authModule from './modules/auth/auth.routes.js';
@@ -205,6 +206,8 @@ app.use(governanceMiddleware);
 
 // Start governance event subscribers (analytics, notifications, memory)
 initGovernanceSubscribers();
+initAutomationSubscribers();
+console.log('🤖 Automation Engine subscribers wired to event bus');
 
 // Protected Modules (require JWT and tenant scope)
 const protectedModules = [orgModule, userModule];
