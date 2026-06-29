@@ -4,6 +4,7 @@ import { executeAction } from '../connectors/executionEngine.js';
 import { createDecision, updateDecision } from './decisionEngine.js';
 import { broadcastToWorkspace } from './socketService.js';
 import db from '../config/db.js';
+import { NotFoundError } from '../core/errors/index.js';
 
 const rulesCache = new Map();
 const cacheTimestamps = new Map();
@@ -100,7 +101,7 @@ async function runWorkflow(workspaceId, orgId, rule, triggerPayload) {
         connectorId: step.connector,
         actionType: step.actionType,
         payload: { ...(step.payload || {}), triggerContext: triggerPayload },
-        actor: { id: 'automation', role: step.actorRole || 'MEMBER', orgId },
+        actor: { id: 'automation', role: 'MEMBER', orgId },
         orgPlan: 'free'
       });
       results.push({ connector: step.connector, actionType: step.actionType, status: 'OK', result });
@@ -201,6 +202,10 @@ export async function listRuns(workspaceId, { limit = 20 } = {}) {
 }
 
 export async function toggleRule(workspaceId, ruleId, enabled) {
+  const existing = await prisma.automationRule.findFirst({
+    where: { id: ruleId, workspaceId: String(workspaceId) }
+  });
+  if (!existing) throw new NotFoundError('Automation rule');
   const rule = await prisma.automationRule.update({
     where: { id: ruleId },
     data: { enabled }
@@ -220,8 +225,7 @@ export async function deleteRule(workspaceId, ruleId) {
 export function initAutomationSubscribers() {
   const WATCHED_EVENTS = [
     'INCIDENT_CREATED', 'RISK_DETECTED',
-    'INTEL_STORED', 'MEMORY_ESCALATED',
-    'CONNECTOR_ACTION_EXECUTED'
+    'INTEL_STORED', 'MEMORY_ESCALATED'
   ];
   WATCHED_EVENTS.forEach(eventType => {
     eventBus.on(eventType, (payload = {}) => {

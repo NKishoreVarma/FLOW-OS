@@ -3,7 +3,7 @@ import { generateBriefing } from '../services/briefingEngine.js';
 import { answerCopilotQuery } from '../services/copilotService.js';
 import { queryAllMemory, getMemoryStats } from '../services/orgMemoryService.js';
 import { getGraphStats, getNeighbors } from '../services/operationalGraphService.js';
-import { ValidationError, NotFoundError } from '../core/errors/index.js';
+import { ValidationError, NotFoundError, AuthorizationError } from '../core/errors/index.js';
 import {
   createDecision, listDecisions, updateDecision, fromRecommendation
 } from '../services/decisionEngine.js';
@@ -175,6 +175,11 @@ router.post('/automations', async (req, res, next) => {
   const workspaceId = req.headers['workspace-id'];
   if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
 
+  const role = req.workspaceRole;
+  if (role !== 'ADMIN' && role !== 'OWNER') {
+    return next(new AuthorizationError('Automation management requires ADMIN or OWNER role'));
+  }
+
   const { name, trigger, conditions, actions } = req.body || {};
   if (!name || !trigger || !actions) return next(new ValidationError('name, trigger, and actions are required'));
 
@@ -190,6 +195,11 @@ router.patch('/automations/:id/toggle', async (req, res, next) => {
   const workspaceId = req.headers['workspace-id'];
   if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
 
+  const role = req.workspaceRole;
+  if (role !== 'ADMIN' && role !== 'OWNER') {
+    return next(new AuthorizationError('Automation management requires ADMIN or OWNER role'));
+  }
+
   const { enabled } = req.body || {};
   if (typeof enabled !== 'boolean') return next(new ValidationError('enabled must be a boolean'));
 
@@ -204,6 +214,11 @@ router.patch('/automations/:id/toggle', async (req, res, next) => {
 router.delete('/automations/:id', async (req, res, next) => {
   const workspaceId = req.headers['workspace-id'];
   if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
+
+  const role = req.workspaceRole;
+  if (role !== 'ADMIN' && role !== 'OWNER') {
+    return next(new AuthorizationError('Automation management requires ADMIN or OWNER role'));
+  }
 
   try {
     await deleteRule(workspaceId, req.params.id);
