@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import {
   Home, Search, Bot, Calendar, BookOpen, Briefcase,
   Inbox, Activity, Settings, HelpCircle, ShieldAlert,
-  Building, Lock, ChevronLeft, ChevronRight, Terminal, Server, Newspaper
+  Building, Lock, ChevronLeft, ChevronRight, Terminal, Server, Newspaper, LayoutDashboard
 } from "lucide-react";
 import { useWebSocket } from "../../hooks/useWebSocket";
 import GlassPanel from "../ui/GlassPanel";
@@ -27,6 +27,7 @@ export const Sidebar = ({ isCollapsed, onToggle, mobileOpen, onMobileClose }) =>
 
   const navigationItems = [
     { label: "Workfeed", path: "/workfeed", icon: Home },
+    { label: "Exec Dashboard", path: "/dashboard", icon: LayoutDashboard },
     { label: "Daily Briefing", path: "/briefing", icon: Newspaper },
     { label: "Search", path: "/search", icon: Search },
     { label: "AI Assistant", path: "/assistant", icon: Bot },

@@ -20,6 +20,7 @@ const TeamMemory = lazy(() => import('./components/team/TeamMemory'));
 const CollaborationHub = lazy(() => import('./components/team/CollaborationHub'));
 const ProjectIntelligence = lazy(() => import('./components/projects/ProjectIntelligence'));
 
+const ExecutiveDashboard = lazy(() => import('./components/company/ExecutiveDashboard'));
 const CompanyWorkspace = lazy(() => import('./components/company/CompanyWorkspace'));
 const DepartmentIntelligence = lazy(() => import('./components/company/DepartmentIntelligence'));
 const CompanyMemory = lazy(() => import('./components/company/CompanyMemory'));
@@ -63,6 +64,7 @@ function App() {
             <Route path="/search" element={<UniversalSearch />} />
             <Route path="/assistant" element={<WorkspaceIntelligence />} />
             <Route path="/briefing" element={<DailyBriefing />} />
+            <Route path="/dashboard" element={<ExecutiveDashboard />} />
             <Route path="/meetings" element={<MeetingDashboard />} />
             <Route path="/meetings/:id/prep" element={<MeetingPreparation />} />
             <Route path="/meetings/:id/live" element={<LiveMeeting />} />
