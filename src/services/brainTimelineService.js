@@ -123,7 +123,7 @@ export async function getEntityContext(workspaceId, entityId) {
   return {
     entityId,
     related,
-    decisions: decisions.map(d => ({ id: d.id, title: d.title, createdAt: d.createdAt })),
+    decisions: decisions.map(d => ({ id: d.id, title: d.title, createdAt: d.createdAt.toISOString() })),
     neighborCount: neighbors.length
   };
 }
