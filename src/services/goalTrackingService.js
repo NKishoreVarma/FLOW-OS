@@ -74,16 +74,21 @@ export async function addMilestone(workspaceId, goalId, { title, dueDate }) {
 }
 
 export async function completeMilestone(workspaceId, goalId, milestoneId) {
-  await assertGoal(workspaceId, goalId);
+  const goal = await assertGoal(workspaceId, goalId);
   const milestone = await prisma.goalMilestone.findFirst({ where: { id: milestoneId, goalId } });
   if (!milestone) throw new NotFoundError('Milestone');
 
   await prisma.goalMilestone.update({ where: { id: milestoneId }, data: { done: true } });
   const progress = await recomputeProgress(goalId);
-  const status = progress === 100 ? 'COMPLETE' : 'ON_TRACK';
+  // Only promote to COMPLETE at 100%; never override a CANCELLED goal or downgrade risk-derived status below 100%.
+  const data = goal.status === 'CANCELLED'
+    ? { progress }
+    : progress === 100
+      ? { progress, status: 'COMPLETE' }
+      : { progress };
   return prisma.goal.update({
     where: { id: goalId },
-    data: { progress, status },
+    data,
     include: { milestones: true }
   });
 }
@@ -104,6 +109,21 @@ export async function evaluateGoal(workspaceId, goalId) {
   const total = milestones.length;
   const done = milestones.filter(m => m.done).length;
   const progress = total > 0 ? Math.round((done / total) * 100) : goal.progress;
+
+  // A cancelled goal is terminal — never re-derive or persist a new status over it.
+  if (goal.status === 'CANCELLED') {
+    return {
+      goalId: goal.id,
+      title: goal.title,
+      progress: goal.progress,
+      status: 'CANCELLED',
+      risks: [],
+      blockers: [],
+      predictedCompletion: null,
+      recommendedInterventions: [],
+      milestoneSummary: { total, done, overdue: 0 }
+    };
+  }
 
   const overdue = milestones.filter(m => !m.done && m.dueDate && new Date(m.dueDate).getTime() < now);
   const pastTarget = goal.targetDate ? new Date(goal.targetDate).getTime() < now : false;
