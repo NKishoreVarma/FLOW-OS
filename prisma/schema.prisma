@@ -555,3 +555,26 @@ enum CopilotMessageRole {
   USER
   ASSISTANT
 }
+
+// ─── Workspace Lifecycle Engine ──────────────────────────────────────────────
+
+model ImportRecord {
+  id            String    @id @default(cuid())
+  importId      String    @unique @map("import_id")
+  workspaceId   String    @map("workspace_id")
+  orgId         String?   @map("org_id")
+  operation     String
+  status        String    @default("RUNNING")
+  schemaVersion String?   @map("schema_version")
+  engineVersion String    @default("2.0") @map("engine_version")
+  statistics    Json?
+  errors        Json?
+  warnings      Json?
+  graphMetrics  Json?     @map("graph_metrics")
+  startedAt     DateTime  @default(now()) @map("started_at")
+  completedAt   DateTime? @map("completed_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  @@index([workspaceId])
+  @@map("import_records")
+}
