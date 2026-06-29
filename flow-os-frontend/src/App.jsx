@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LayoutShell from "./components/layout/LayoutShell";
+import ErrorBoundary from "./components/ui/ErrorBoundary";
 
 // Lazy-loaded routes for code splitting
 const DailyWorkfeed = lazy(() => import('./components/workfeed/DailyWorkfeed'));
@@ -47,7 +48,8 @@ function App() {
   return (
     <BrowserRouter>
       <LayoutShell>
-        <Suspense 
+        <ErrorBoundary>
+        <Suspense
           fallback={
             <div className="flex h-[calc(100vh-4rem)] items-center justify-center bg-bg-primary">
               <div className="flex flex-col items-center space-y-4">
@@ -116,6 +118,7 @@ function App() {
             <Route path="*" element={<Navigate to="/workfeed" replace />} />
           </Routes>
         </Suspense>
+        </ErrorBoundary>
       </LayoutShell>
     </BrowserRouter>
   );

@@ -142,6 +142,14 @@ export default function AICopilot({ entityId = null }) {
     }
   }, [isOpen]);
 
+  // Escape key closes the panel (only while open)
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e) => { if (e.key === "Escape") setIsOpen(false); };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen]);
+
   const sendMessage = async (questionText) => {
     const question = (questionText ?? input).trim();
     if (!question || loading) return;
@@ -209,7 +217,7 @@ export default function AICopilot({ entityId = null }) {
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => setIsOpen(true)}
             className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-flow-purple shadow-lg flex items-center justify-center hover:opacity-90 transition-opacity cursor-pointer"
-            aria-label="Open AI Copilot"
+            aria-label="Open FLOW Copilot"
           >
             <Sparkles className="w-5 h-5 text-white" />
           </motion.button>
@@ -225,6 +233,9 @@ export default function AICopilot({ entityId = null }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.97 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            role="dialog"
+            aria-label="FLOW Copilot"
+            aria-modal="false"
             className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-3rem)] bg-bg-card border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
@@ -307,6 +318,7 @@ export default function AICopilot({ entityId = null }) {
                 onKeyDown={handleKeyDown}
                 disabled={loading}
                 placeholder="Ask about your workspace…"
+                aria-label="Ask the Copilot a question"
                 className="flex-1 bg-bg-hover border border-border-flow/70 focus:border-flow-purple/50 rounded-lg px-3 py-2 text-ui-xs text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-flow-purple/30 disabled:opacity-50 transition-colors"
               />
               <button

@@ -273,6 +273,14 @@ export default function EntityContextPanel() {
     emitActiveEntity(null);
   };
 
+  // Escape key closes the drawer (only while open)
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e) => { if (e.key === "Escape") handleClose(); };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   return (
     <AnimatePresence>
       {open && (
@@ -295,6 +303,9 @@ export default function EntityContextPanel() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            role="dialog"
+            aria-label="Cross-Capability Context"
+            aria-modal="true"
             className="fixed inset-y-0 right-0 z-50 w-[440px] max-w-[calc(100vw-2rem)] bg-bg-card border-l border-white/10 shadow-2xl flex flex-col"
           >
             {/* Header */}
@@ -312,7 +323,7 @@ export default function EntityContextPanel() {
               <button
                 onClick={handleClose}
                 className="p-1.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-bg-hover transition-colors cursor-pointer flex-shrink-0"
-                aria-label="Close entity context panel"
+                aria-label="Close context panel"
               >
                 <X className="w-4 h-4" />
               </button>
