@@ -8,6 +8,7 @@ const ComingSoon = lazy(() => import('./components/ui/ComingSoon'));
 const DeveloperConsole = lazy(() => import('./components/ui/DeveloperConsole'));
 const WorkspaceIntelligence = lazy(() => import('./components/workspace/WorkspaceIntelligence'));
 const DailyBriefing = lazy(() => import('./components/workspace/DailyBriefing'));
+const OperationalTimeline = lazy(() => import('./components/workspace/OperationalTimeline'));
 
 const MeetingDashboard = lazy(() => import('./components/meetings/MeetingDashboard'));
 const MeetingPreparation = lazy(() => import('./components/meetings/MeetingPreparation'));
@@ -64,6 +65,7 @@ function App() {
             <Route path="/search" element={<UniversalSearch />} />
             <Route path="/assistant" element={<WorkspaceIntelligence />} />
             <Route path="/briefing" element={<DailyBriefing />} />
+            <Route path="/timeline" element={<OperationalTimeline />} />
             <Route path="/dashboard" element={<ExecutiveDashboard />} />
             <Route path="/meetings" element={<MeetingDashboard />} />
             <Route path="/meetings/:id/prep" element={<MeetingPreparation />} />

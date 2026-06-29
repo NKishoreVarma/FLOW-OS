@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import {
   Home, Search, Bot, Calendar, BookOpen, Briefcase,
   Inbox, Activity, Settings, HelpCircle, ShieldAlert,
-  Building, Lock, ChevronLeft, ChevronRight, Terminal, Server, Newspaper, LayoutDashboard
+  Building, Lock, ChevronLeft, ChevronRight, Terminal, Server, Newspaper, LayoutDashboard, Clock
 } from "lucide-react";
 import { useWebSocket } from "../../hooks/useWebSocket";
 import GlassPanel from "../ui/GlassPanel";
@@ -34,6 +34,7 @@ export const Sidebar = ({ isCollapsed, onToggle, mobileOpen, onMobileClose }) =>
     { label: "Meetings", path: "/meetings", icon: Calendar },
     { label: "Knowledge", path: "/knowledge", icon: BookOpen },
     { label: "Projects", path: "/projects", icon: Briefcase },
+    { label: "Timeline", path: "/timeline", icon: Clock },
   ];
 
   const personalItems = [
