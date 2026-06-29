@@ -83,7 +83,7 @@ async function runWorkflow(workspaceId, orgId, rule, triggerPayload) {
       orgId,
       status: 'RUNNING',
       triggerPayload,
-      results: []
+      results: { explainability: explain, steps: [] }
     }
   });
 
@@ -91,6 +91,7 @@ async function runWorkflow(workspaceId, orgId, rule, triggerPayload) {
 
   const results = [];
   let blocked = false;
+  let denied = false;
 
   for (const step of actions) {
     try {
@@ -104,7 +105,7 @@ async function runWorkflow(workspaceId, orgId, rule, triggerPayload) {
       });
       results.push({ connector: step.connector, actionType: step.actionType, status: 'OK', result });
     } catch (err) {
-      if (err?.code === 'APPROVAL_REQUIRED' || err?.statusCode === 403) {
+      if (err?.code === 'APPROVAL_REQUIRED') {
         results.push({
           connector: step.connector,
           actionType: step.actionType,
@@ -115,12 +116,27 @@ async function runWorkflow(workspaceId, orgId, rule, triggerPayload) {
         blocked = true;
         break;
       }
+      // A hard governance DENY (AuthorizationError, 403) has no approval path — distinct from a pending gate.
+      if (err?.statusCode === 403) {
+        results.push({
+          connector: step.connector,
+          actionType: step.actionType,
+          status: 'DENIED',
+          reason: err.message,
+          approvalId: null
+        });
+        denied = true;
+        break;
+      }
       results.push({ connector: step.connector, actionType: step.actionType, status: 'ERROR', error: err.message });
     }
   }
 
   const allOk = results.length > 0 && results.every(r => r.status === 'OK');
-  const finalStatus = blocked ? 'BLOCKED_BY_GOVERNANCE' : allOk ? 'COMPLETED' : 'FAILED';
+  const finalStatus = blocked ? 'BLOCKED_BY_GOVERNANCE'
+    : denied ? 'DENIED_BY_GOVERNANCE'
+    : allOk ? 'COMPLETED'
+    : 'FAILED';
 
   await prisma.automationRun.update({
     where: { id: run.id },
@@ -128,7 +144,7 @@ async function runWorkflow(workspaceId, orgId, rule, triggerPayload) {
   });
 
   await updateDecision(wsId, decision.id, {
-    status: blocked ? 'AWAITING_APPROVAL' : allOk ? 'COMPLETED' : 'FAILED',
+    status: blocked ? 'AWAITING_APPROVAL' : denied ? 'REJECTED' : allOk ? 'COMPLETED' : 'FAILED',
     executionResult: { runId: run.id, status: finalStatus, steps: results }
   });
 
