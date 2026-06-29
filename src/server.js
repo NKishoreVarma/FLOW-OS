@@ -27,6 +27,8 @@ import userModule from './modules/users/user.routes.js';
 // ── Connector Framework (Phase 5) ────────────────────────────────────────────
 // Side-effect import: registers all adapters (GmailAdapter, …) into the registry.
 import './connectors/adapters/index.js';
+// Side-effect import: registers all 23 workspace lifecycle dataset types.
+import './core/workspaceLifecycle/datasets/index.js';
 
 import connectorsRoutes     from './routes/connectorsRoutes.js';
 import approvalRoutes       from './routes/approvalRoutes.js';
@@ -46,6 +48,9 @@ import queryRoutes from './routes/queryRoutes.js';
 import simulationRoutes from './routes/simulationRoutes.js';
 import intelligenceRoutes from './routes/intelligenceRoutes.js';
 import crawlerRoutes from './routes/crawlerRoutes.js';
+import importRoutes from './routes/importRoutes.js';
+import lifecycleRoutes from './routes/lifecycleRoutes.js';
+import evaluationRoutes from './routes/evaluationRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -281,6 +286,15 @@ console.log('🕷️ SSRF-Safe Crawler routes mounted successfully.');
 
 app.use('/api/test/simulate', simulationRoutes);
 console.log('🧪 End-to-End Simulation test routes mounted successfully.');
+
+app.use('/api/import', importRoutes);
+console.log('📥 Universal Import Engine routes mounted successfully.');
+
+app.use('/api/lifecycle', lifecycleRoutes);
+console.log('🔄 Workspace Lifecycle Engine routes mounted at /api/lifecycle');
+
+app.use('/api/evaluation', evaluationRoutes.routes);
+console.log('📊 AI Evaluation & Explainability routes mounted successfully.');
 
 app.use('/api/communication', communicationRoutes);
 console.log('📧 Communication Capability routes mounted at /api/communication');
