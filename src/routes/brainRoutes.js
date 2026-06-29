@@ -14,6 +14,7 @@ import {
   createGoal, listGoals, getGoal, updateGoal, addMilestone, completeMilestone, deleteGoal, evaluateGoal
 } from '../services/goalTrackingService.js';
 import { getProactiveRecommendations, recordRecommendationFeedback } from '../services/operationalIntelligenceService.js';
+import { getOperationalTimeline, getEntityContext } from '../services/brainTimelineService.js';
 
 const router = express.Router();
 
@@ -333,4 +334,35 @@ router.get('/goals/:id/evaluate', async (req, res, next) => {
   }
 });
 
+// ── Operational Timeline ─────────────────────────────────────────────────────
+
+router.get('/timeline', async (req, res, next) => {
+  const workspaceId = req.headers['workspace-id'];
+  if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
+
+  const hours = parseInt(req.query.hours) || 168;
+  const limit = parseInt(req.query.limit) || 50;
+  try {
+    const timeline = await getOperationalTimeline(workspaceId, { hours, limit });
+    res.json({ success: true, timeline });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ── Cross-Capability Entity Context ──────────────────────────────────────────
+
+router.get('/context/:entityId', async (req, res, next) => {
+  const workspaceId = req.headers['workspace-id'];
+  if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
+
+  try {
+    const context = await getEntityContext(workspaceId, req.params.entityId);
+    res.json({ success: true, context });
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;
+
