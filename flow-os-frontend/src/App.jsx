@@ -42,6 +42,7 @@ const Marketplace = lazy(() => import('./components/platform/Marketplace'));
 const UniversalSearch = lazy(() => import('./components/search/UniversalSearch'));
 const AIInbox = lazy(() => import('./components/inbox/AIInbox'));
 const KnowledgeExplorer = lazy(() => import('./components/knowledge/KnowledgeExplorer'));
+const EntityWorkspace = lazy(() => import('./components/workspace/EntityWorkspace'));
 function App() {
   return (
     <BrowserRouter>
@@ -104,6 +105,9 @@ function App() {
             <Route path="/inbox" element={<AIInbox />} />
             <Route path="/activity" element={<ComingSoon pageName="Recent Operations" />} />
             <Route path="/help" element={<ComingSoon pageName="System Help" />} />
+
+            {/* Cross-capability entity deep-link */}
+            <Route path="/entity/:entityId" element={<EntityWorkspace />} />
 
             {/* Developer testing sandbox console */}
             <Route path="/query" element={<DeveloperConsole />} />

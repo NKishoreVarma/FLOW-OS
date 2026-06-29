@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Sparkles, X, Send, ChevronDown, ChevronUp } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { brainApi } from "../../lib/brainApi";
+import { EVENT_ACTIVE_ENTITY } from "../../lib/entityContext";
 
 const PAGE_CONTEXT = {
   '/workfeed': 'Daily Workfeed',
@@ -110,12 +111,22 @@ export default function AICopilot({ entityId = null }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [activeEntityId, setActiveEntityId] = useState(null);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
   const pageContext = getPageContext(location.pathname);
+
+  // Track entity context opened in the EntityContextPanel drawer
+  useEffect(() => {
+    const handler = (e) => {
+      setActiveEntityId(e.detail?.entityId || null);
+    };
+    window.addEventListener(EVENT_ACTIVE_ENTITY, handler);
+    return () => window.removeEventListener(EVENT_ACTIVE_ENTITY, handler);
+  }, []);
 
   // Autoscroll to bottom on new messages
   useEffect(() => {
@@ -141,7 +152,7 @@ export default function AICopilot({ entityId = null }) {
     setLoading(true);
 
     try {
-      const data = await brainApi.copilot({ question, pageContext, entityId });
+      const data = await brainApi.copilot({ question, pageContext, entityId: entityId ?? activeEntityId });
       const assistantMsg = {
         id: Date.now() + 1,
         role: "assistant",
@@ -218,12 +229,19 @@ export default function AICopilot({ entityId = null }) {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-border-flow/70 flex-shrink-0">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-flow-purple" />
-                <span className="text-ui-sm font-semibold text-text-primary">FLOW Copilot</span>
-                <span className="text-[10px] text-text-muted bg-bg-hover px-1.5 py-0.5 rounded border border-border-flow/60">
-                  {pageContext}
-                </span>
+              <div className="flex flex-col gap-0.5">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-flow-purple" />
+                  <span className="text-ui-sm font-semibold text-text-primary">FLOW Copilot</span>
+                  <span className="text-[10px] text-text-muted bg-bg-hover px-1.5 py-0.5 rounded border border-border-flow/60">
+                    {pageContext}
+                  </span>
+                </div>
+                {(entityId ?? activeEntityId) && (
+                  <span className="text-[10px] text-flow-purple ml-6">
+                    in context: {entityId ?? activeEntityId}
+                  </span>
+                )}
               </div>
               <button
                 onClick={() => setIsOpen(false)}

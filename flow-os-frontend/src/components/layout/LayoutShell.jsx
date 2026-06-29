@@ -4,6 +4,7 @@ import Header from "./Header";
 import CommandPalette from "../ui/CommandPalette";
 import ShortcutModal from "../ui/ShortcutModal";
 import AICopilot from "../ui/AICopilot";
+import EntityContextPanel from "../workspace/EntityContextPanel";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import { WebSocketProvider, useWebSocket } from "../../hooks/useWebSocket";
@@ -138,6 +139,7 @@ const LayoutInner = ({ children }) => {
       <ShortcutModal isOpen={isShortcutOpen} onClose={() => setIsShortcutOpen(false)} />
 
       <AICopilot />
+      <EntityContextPanel />
 
       {/* modal: Create Note (⌘N) */}
       {isNoteOpen && (
