@@ -1,4 +1,5 @@
 import { broadcastToWorkspace } from './socketService.js';
+import { eventBus } from '../core/events/eventBus.js';
 import crypto from 'crypto';
 import { saveMemory } from './orgMemoryService.js';
 import db from '../config/db.js';
@@ -61,7 +62,8 @@ export function detectIncidents(workspaceId, text, metadata) {
       incidentId: incident.incident_id,
       incidentName: incident.title
     });
-    
+    eventBus.emit(eventType, { workspaceId: String(workspaceId), incidentId: incident.incident_id, severity: incident.severity, title: incident.title, platform: metadata?.platform || 'system' });
+
     console.log(`🔥 [Incident Engine] ${severity} Incident Detected: ${incident_id}`);
     return incident;
   }
