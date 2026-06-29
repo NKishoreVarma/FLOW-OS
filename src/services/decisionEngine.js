@@ -1,4 +1,5 @@
 import { prisma } from '../core/config/prisma.js';
+import { NotFoundError } from '../core/errors/index.js';
 
 function buildDecisionRecord(record) {
   const meta = record.metadata || {};
@@ -83,7 +84,7 @@ export async function updateDecision(workspaceId, decisionId, updates) {
   const existing = await prisma.orgMemoryRecord.findFirst({
     where: { id: decisionId, workspaceId: String(workspaceId), type: 'DECISION' }
   });
-  if (!existing) throw new Error(`Decision ${decisionId} not found`);
+  if (!existing) throw new NotFoundError('Decision');
 
   const mergedMeta = { ...(existing.metadata || {}), ...updates };
   const record = await prisma.orgMemoryRecord.update({
