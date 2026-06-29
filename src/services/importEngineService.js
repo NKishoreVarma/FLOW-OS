@@ -52,6 +52,7 @@ function buildDatasetsFromLegacyPayload(payload) {
  * Validates import payloads using the legacy field schema.
  * Retained for backward compatibility with POST /api/import/validate.
  */
+// Kept as standalone to avoid shape-translation overhead; /api/import/validate is a legacy compat path only.
 export function validateImportPayload(payload) {
   const errors = [];
   const brokenReferences = [];
