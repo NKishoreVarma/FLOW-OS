@@ -247,7 +247,7 @@ export default function OperationalTimeline() {
                   {Array.isArray(grouped[day]) &&
                     grouped[day].map((event) => {
                       const kindKey = String(event.kind || '').toUpperCase();
-                      const meta = KIND_META[kindKey] ?? { label: event.kind ?? 'Event', dot: 'bg-text-muted' };
+                      const meta = KIND_META[kindKey] ?? { label: event.kind ?? 'Event', dot: 'bg-border-flow' };
                       const chipCls = event.status ? statusChipClass(event.status) : null;
 
                       return (
