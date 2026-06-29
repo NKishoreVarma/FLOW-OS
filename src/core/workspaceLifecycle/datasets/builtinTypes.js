@@ -1,6 +1,6 @@
 import { registerDatasetType } from '../datasetRegistry.js';
 
-function makeValidator(requiredFields) {
+export function makeValidator(requiredFields) {
   return function validate(records) {
     const errors = [];
     const warnings = [];
@@ -19,11 +19,11 @@ function makeValidator(requiredFields) {
   };
 }
 
-function identity(records) { return records ?? []; }
-function noGraph(_records, _globalIdMap) { return { nodes: [], edges: [] }; }
-function noVector(_records) { return []; }
+export function identity(records) { return records ?? []; }
+export function noGraph(_records, _globalIdMap) { return { nodes: [], edges: [] }; }
+export function noVector(_records) { return []; }
 
-function makeVectorizer(type, vectorFields) {
+export function makeVectorizer(type, vectorFields) {
   return function vectorize(records) {
     return (records ?? []).flatMap(rec => {
       const text = vectorFields.map(f => rec[f] ?? '').filter(Boolean).join(' — ');
@@ -33,7 +33,7 @@ function makeVectorizer(type, vectorFields) {
   };
 }
 
-function makeResolver(entityType, edgeBuilders) {
+export function makeResolver(entityType, edgeBuilders) {
   return function resolve(records, _globalIdMap) {
     const nodes = [];
     const edges = [];

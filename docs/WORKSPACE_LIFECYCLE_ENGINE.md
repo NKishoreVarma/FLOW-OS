@@ -430,7 +430,7 @@ Returns the last 50 import records for the workspace, ordered most-recent first.
 
 ### GET /api/lifecycle/schema
 
-Returns engine metadata and the list of all registered dataset types. Does not require an authenticated session (no dataset writes possible).
+Returns engine metadata and the list of all registered dataset types. Requires JWT auth and a `workspace-id` header (same as all other lifecycle endpoints).
 
 **Response** `200`
 ```json
