@@ -45,6 +45,14 @@ const TAB_DESCRIPTIONS = {
   Validate: "Dry-run validation against your manifest and datasets. No data is written — returns per-type errors, broken references, and warnings.",
 };
 
+const TAB_ICONS = {
+  Import: Download,
+  Create: Database,
+  Sync: GitPullRequest,
+  Refresh: RefreshCw,
+  Validate: CheckCircle2,
+};
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 const StatusChip = ({ status }) => {
@@ -430,15 +438,6 @@ const ImportDashboard = () => {
     setExecuting(false);
   };
 
-  // ── Tab icons ──────────────────────────────────────────────────────────────
-  const TAB_ICONS = {
-    Import: Download,
-    Create: Database,
-    Sync: GitPullRequest,
-    Refresh: RefreshCw,
-    Validate: CheckCircle2,
-  };
-
   // ─────────────────────────────────────────────────────────────────────────
   return (
     <PageContainer className="space-y-8 select-none text-left">
@@ -540,20 +539,39 @@ const ImportDashboard = () => {
                       <><CheckCircle2 className="w-4 h-4 mr-2" />Validate</>
                     )}
                   </Button>
-                ) : (
+                ) : activeTab === "Refresh" ? (
                   <Button
                     variant="primary"
                     onClick={handleExecute}
-                    disabled={executing || (activeTab !== "Refresh" && !manifest.trim())}
+                    disabled={executing}
                   >
                     {executing ? (
                       <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Running…</>
-                    ) : activeTab === "Refresh" ? (
-                      <><RefreshCw className="w-4 h-4 mr-2" />Run Refresh</>
                     ) : (
-                      <><Upload className="w-4 h-4 mr-2" />Execute {activeTab}</>
+                      <><RefreshCw className="w-4 h-4 mr-2" />Run Refresh</>
                     )}
                   </Button>
+                ) : (
+                  <>
+                    <Button
+                      variant="secondary"
+                      onClick={handleValidate}
+                      disabled={executing || validating || !manifest.trim()}
+                    >
+                      <CheckCircle2 className="w-4 h-4 mr-2" />Validate
+                    </Button>
+                    <Button
+                      variant="primary"
+                      onClick={handleExecute}
+                      disabled={executing || validating || !manifest.trim()}
+                    >
+                      {executing ? (
+                        <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Running…</>
+                      ) : (
+                        <><Upload className="w-4 h-4 mr-2" />Execute {activeTab}</>
+                      )}
+                    </Button>
+                  </>
                 )}
               </div>
             </div>
