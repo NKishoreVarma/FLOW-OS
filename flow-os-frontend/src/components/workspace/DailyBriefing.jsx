@@ -16,6 +16,13 @@ import { brainApi } from "../../lib/brainApi";
 // Normalize evidence to an array (may arrive as string or string[])
 const toArray = (e) => (Array.isArray(e) ? e : e ? [e] : []);
 
+// True if any section value carries renderable data (non-empty array or a present number).
+const hasSectionContent = (sections) =>
+  !!sections &&
+  Object.values(sections).some(
+    (v) => (Array.isArray(v) && v.length > 0) || typeof v === "number" || (v && typeof v === "object" && Object.keys(v).length > 0)
+  );
+
 // Map severity/confidence strings to a CSS text-color token
 const severityColor = (level) => {
   if (!level) return "text-text-muted";
@@ -667,8 +674,8 @@ function DailyBriefing() {
         </div>
       )}
 
-      {/* Empty state when briefing loaded but no content */}
-      {!loading && !error && briefing && !briefing.aiNarrative && (
+      {/* Empty state only when briefing loaded but neither narrative nor section data exists */}
+      {!loading && !error && briefing && !briefing.aiNarrative && !hasSectionContent(briefing.sections) && (
         <Card className="p-8 text-center">
           <Sparkles className="w-8 h-8 text-text-muted mx-auto mb-3" />
           <p className="text-ui-sm text-text-secondary">No briefing content available for this role.</p>
