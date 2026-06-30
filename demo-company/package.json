@@ -1,0 +1,13 @@
+{
+  "name": "helios-demo-company",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Demo Company generator for FLOW OS validation. Produces a realistic enterprise dataset for Helios Software Inc.",
+  "scripts": {
+    "generate": "node src/generate.js",
+    "clean": "rm -rf exports/datasets && mkdir -p exports/datasets"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.0.0"
+  }
+}
