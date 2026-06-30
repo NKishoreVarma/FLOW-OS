@@ -1,0 +1,242 @@
+[
+  {
+    "id": "repo-platform-api",
+    "name": "helios-platform-api",
+    "productId": "prod-platform",
+    "description": "Helios Platform — api service",
+    "language": "TypeScript",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "workflow",
+      "automation",
+      "enterprise",
+      "saas"
+    ]
+  },
+  {
+    "id": "repo-platform-worker",
+    "name": "helios-platform-worker",
+    "productId": "prod-platform",
+    "description": "Helios Platform — worker service",
+    "language": "TypeScript",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "workflow",
+      "automation",
+      "enterprise",
+      "saas"
+    ]
+  },
+  {
+    "id": "repo-platform-sdk",
+    "name": "helios-platform-sdk",
+    "productId": "prod-platform",
+    "description": "Helios Platform — sdk service",
+    "language": "TypeScript",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "workflow",
+      "automation",
+      "enterprise",
+      "saas"
+    ]
+  },
+  {
+    "id": "repo-platform-ui",
+    "name": "helios-platform-ui",
+    "productId": "prod-platform",
+    "description": "Helios Platform — ui service",
+    "language": "TypeScript",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "workflow",
+      "automation",
+      "enterprise",
+      "saas"
+    ]
+  },
+  {
+    "id": "repo-platform-infra",
+    "name": "helios-platform-infra",
+    "productId": "prod-platform",
+    "description": "Helios Platform — infra service",
+    "language": "TypeScript",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "workflow",
+      "automation",
+      "enterprise",
+      "saas"
+    ]
+  },
+  {
+    "id": "repo-analytics-engine",
+    "name": "helios-analytics-engine",
+    "productId": "prod-analytics",
+    "description": "Helios Analytics — engine service",
+    "language": "Python",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "analytics",
+      "bi",
+      "reporting",
+      "data"
+    ]
+  },
+  {
+    "id": "repo-analytics-ui",
+    "name": "helios-analytics-ui",
+    "productId": "prod-analytics",
+    "description": "Helios Analytics — ui service",
+    "language": "Python",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "analytics",
+      "bi",
+      "reporting",
+      "data"
+    ]
+  },
+  {
+    "id": "repo-analytics-pipeline",
+    "name": "helios-analytics-pipeline",
+    "productId": "prod-analytics",
+    "description": "Helios Analytics — pipeline service",
+    "language": "Python",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "analytics",
+      "bi",
+      "reporting",
+      "data"
+    ]
+  },
+  {
+    "id": "repo-analytics-sdk",
+    "name": "helios-analytics-sdk",
+    "productId": "prod-analytics",
+    "description": "Helios Analytics — sdk service",
+    "language": "Python",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "analytics",
+      "bi",
+      "reporting",
+      "data"
+    ]
+  },
+  {
+    "id": "repo-connect-core",
+    "name": "helios-connect-core",
+    "productId": "prod-connect",
+    "description": "Helios Connect — core service",
+    "language": "Go",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "api",
+      "integration",
+      "connectors",
+      "marketplace"
+    ]
+  },
+  {
+    "id": "repo-connect-adapters",
+    "name": "helios-connect-adapters",
+    "productId": "prod-connect",
+    "description": "Helios Connect — adapters service",
+    "language": "Go",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "api",
+      "integration",
+      "connectors",
+      "marketplace"
+    ]
+  },
+  {
+    "id": "repo-connect-ui",
+    "name": "helios-connect-ui",
+    "productId": "prod-connect",
+    "description": "Helios Connect — ui service",
+    "language": "Go",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "api",
+      "integration",
+      "connectors",
+      "marketplace"
+    ]
+  },
+  {
+    "id": "repo-connect-marketplace",
+    "name": "helios-connect-marketplace",
+    "productId": "prod-connect",
+    "description": "Helios Connect — marketplace service",
+    "language": "Go",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "api",
+      "integration",
+      "connectors",
+      "marketplace"
+    ]
+  },
+  {
+    "id": "repo-guard-core",
+    "name": "helios-guard-core",
+    "productId": "prod-guard",
+    "description": "Helios Guard — core service",
+    "language": "Rust",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "security",
+      "compliance",
+      "access-control",
+      "zero-trust"
+    ]
+  },
+  {
+    "id": "repo-guard-policy-engine",
+    "name": "helios-guard-policy-engine",
+    "productId": "prod-guard",
+    "description": "Helios Guard — policy-engine service",
+    "language": "Rust",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "security",
+      "compliance",
+      "access-control",
+      "zero-trust"
+    ]
+  },
+  {
+    "id": "repo-guard-ui",
+    "name": "helios-guard-ui",
+    "productId": "prod-guard",
+    "description": "Helios Guard — ui service",
+    "language": "Rust",
+    "visibility": "private",
+    "defaultBranch": "main",
+    "topics": [
+      "security",
+      "compliance",
+      "access-control",
+      "zero-trust"
+    ]
+  }
+]

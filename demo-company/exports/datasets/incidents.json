@@ -1,0 +1,3172 @@
+[
+  {
+    "id": "inc-001",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Tenetur ventosus degenero nobis subito cumque. Valens bellicus thesis uxor excepturi. Dedico sumptus caterva debitis molestias comis varietas.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-herman-bradtke-89",
+      "cust-o-kon-kemmer-and-feil-138",
+      "cust-ebert-kunze-and-fritsch-8",
+      "cust-hudson-group-139",
+      "cust-jacobs-inc-153"
+    ],
+    "commander": "emp-152",
+    "timeline": [
+      {
+        "timestamp": "2025-08-10T00:26:22.460Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-152"
+      },
+      {
+        "timestamp": "2025-08-10T00:31:22.460Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-152"
+      },
+      {
+        "timestamp": "2025-08-10T00:41:22.460Z",
+        "action": "Root cause identified",
+        "actor": "emp-017"
+      },
+      {
+        "timestamp": "2025-08-10T01:04:22.460Z",
+        "action": "Service fully restored",
+        "actor": "emp-152"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v4.13.3. Monitoring confirmed.",
+    "detectedAt": "2025-08-10T00:26:22.460Z",
+    "resolvedAt": "2025-08-10T01:04:22.460Z",
+    "mttr": 38
+  },
+  {
+    "id": "inc-002",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Odit porro vester demum abstergo aperte votum odit torrens eius. Illo truculenter vito arbustum sub. Tunc trado conspergo sub adimpleo accommodo caste cuius concido.",
+    "severity": "P3",
+    "status": "mitigated",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-hoppe-ferry-and-oberbrunner-109",
+      "cust-nienow-and-sons-166"
+    ],
+    "commander": "emp-072",
+    "timeline": [
+      {
+        "timestamp": "2025-07-01T09:51:21.364Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-072"
+      },
+      {
+        "timestamp": "2025-07-01T09:56:21.364Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-072"
+      },
+      {
+        "timestamp": "2025-07-01T10:06:21.364Z",
+        "action": "Root cause identified",
+        "actor": "emp-111"
+      }
+    ],
+    "rootCause": "Certificate not rotated before expiration",
+    "resolution": "Applied hotfix. Deployed v4.4.6. Monitoring confirmed.",
+    "detectedAt": "2025-07-01T09:51:21.364Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-003",
+    "title": "Analytics data pipeline stalled",
+    "description": "Debilito corona demens tergeo terga territo socius auctus astrum toties. Coniuratio temeritas facilis amplitudo carcer valeo ancilla stips. Delinquo defleo bestia dolore contabesco aqua.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [],
+    "commander": "emp-057",
+    "timeline": [
+      {
+        "timestamp": "2025-01-21T07:08:27.113Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-057"
+      },
+      {
+        "timestamp": "2025-01-21T07:13:27.113Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-057"
+      },
+      {
+        "timestamp": "2025-01-21T07:23:27.113Z",
+        "action": "Root cause identified",
+        "actor": "emp-011"
+      },
+      {
+        "timestamp": "2025-01-21T07:49:27.113Z",
+        "action": "Service fully restored",
+        "actor": "emp-057"
+      }
+    ],
+    "rootCause": "Certificate not rotated before expiration",
+    "resolution": "Applied hotfix. Deployed v1.10.7. Monitoring confirmed.",
+    "detectedAt": "2025-01-21T07:08:27.113Z",
+    "resolvedAt": "2025-01-21T07:49:27.113Z",
+    "mttr": 41
+  },
+  {
+    "id": "inc-004",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Toties amoveo antepono copiose pectus. Usitas acervus magni aeneus vicinus desolo. Conforto assentator soleo tandem deporto stillicidium utor commodi vitae thema.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-bechtelar-llc-10",
+      "cust-homenick-kulas-and-mohr-108"
+    ],
+    "commander": "emp-164",
+    "timeline": [
+      {
+        "timestamp": "2025-01-15T08:31:13.986Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-164"
+      },
+      {
+        "timestamp": "2025-01-15T08:36:13.986Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-164"
+      },
+      {
+        "timestamp": "2025-01-15T08:46:13.986Z",
+        "action": "Root cause identified",
+        "actor": "emp-021"
+      },
+      {
+        "timestamp": "2025-01-15T10:01:13.986Z",
+        "action": "Service fully restored",
+        "actor": "emp-164"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v2.12.11. Monitoring confirmed.",
+    "detectedAt": "2025-01-15T08:31:13.986Z",
+    "resolvedAt": "2025-01-15T10:01:13.986Z",
+    "mttr": 90
+  },
+  {
+    "id": "inc-005",
+    "title": "Guard policy engine returning incorrect decisions",
+    "description": "Antepono atrox cultellus turpis voco. Averto audeo subvenio censura astrum correptius et accendo. Stips esse voluptates abbas attero verbum ceno viriliter aliquid.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-toy-gutmann-76"
+    ],
+    "commander": "emp-209",
+    "timeline": [
+      {
+        "timestamp": "2025-08-26T23:53:01.385Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-209"
+      },
+      {
+        "timestamp": "2025-08-26T23:58:01.385Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-209"
+      },
+      {
+        "timestamp": "2025-08-27T00:08:01.385Z",
+        "action": "Root cause identified",
+        "actor": "emp-081"
+      },
+      {
+        "timestamp": "2025-08-27T00:26:01.385Z",
+        "action": "Service fully restored",
+        "actor": "emp-209"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v7.9.18. Monitoring confirmed.",
+    "detectedAt": "2025-08-26T23:53:01.385Z",
+    "resolvedAt": "2025-08-27T00:26:01.385Z",
+    "mttr": 33
+  },
+  {
+    "id": "inc-006",
+    "title": "Analytics data pipeline stalled",
+    "description": "Arbor viscus terror tolero defessus voveo unus vulgus. Tamdiu tardus tutamen tepesco acidus. Adnuo sufficio advenio vulpes usitas corporis.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-o-conner-dietrich-12",
+      "cust-labadie-inc-160",
+      "cust-heller-group-85",
+      "cust-waters-heller-and-thompson-204",
+      "cust-kshlerin-harber-and-kihn-105"
+    ],
+    "commander": "emp-017",
+    "timeline": [
+      {
+        "timestamp": "2025-06-03T06:52:14.706Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-017"
+      },
+      {
+        "timestamp": "2025-06-03T06:57:14.706Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-017"
+      },
+      {
+        "timestamp": "2025-06-03T07:07:14.706Z",
+        "action": "Root cause identified",
+        "actor": "emp-113"
+      },
+      {
+        "timestamp": "2025-06-03T07:15:14.706Z",
+        "action": "Service fully restored",
+        "actor": "emp-017"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v7.4.3. Monitoring confirmed.",
+    "detectedAt": "2025-06-03T06:52:14.706Z",
+    "resolvedAt": "2025-06-03T07:15:14.706Z",
+    "mttr": 23
+  },
+  {
+    "id": "inc-007",
+    "title": "Analytics data pipeline stalled",
+    "description": "Curtus coniecto attero ulciscor. Veritatis facere tersus vulnero ascit itaque acer. Decimus iusto decumbo avarus adficio solvo adsum.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-smitham-mayert-6",
+      "cust-rice-stroman-and-o-kon-75",
+      "cust-lehner-upton-and-bode-21"
+    ],
+    "commander": "emp-012",
+    "timeline": [
+      {
+        "timestamp": "2025-09-15T02:39:55.113Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-012"
+      },
+      {
+        "timestamp": "2025-09-15T02:44:55.113Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-012"
+      },
+      {
+        "timestamp": "2025-09-15T02:54:55.113Z",
+        "action": "Root cause identified",
+        "actor": "emp-220"
+      },
+      {
+        "timestamp": "2025-09-15T03:15:55.113Z",
+        "action": "Service fully restored",
+        "actor": "emp-012"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v1.12.10. Monitoring confirmed.",
+    "detectedAt": "2025-09-15T02:39:55.113Z",
+    "resolvedAt": "2025-09-15T03:15:55.113Z",
+    "mttr": 36
+  },
+  {
+    "id": "inc-008",
+    "title": "Platform API returning 502 errors for all enterprise customers",
+    "description": "Officia bellum autus absque tum vindico depopulo. Aureus solium demulceo tam socius a denique commodo sed. Officiis vel aequitas sto.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-schaden-kunze-37"
+    ],
+    "commander": "emp-217",
+    "timeline": [
+      {
+        "timestamp": "2025-10-05T16:58:56.047Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-217"
+      },
+      {
+        "timestamp": "2025-10-05T17:03:56.047Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-217"
+      },
+      {
+        "timestamp": "2025-10-05T17:13:56.047Z",
+        "action": "Root cause identified",
+        "actor": "emp-172"
+      },
+      {
+        "timestamp": "2025-10-05T17:42:56.047Z",
+        "action": "Service fully restored",
+        "actor": "emp-217"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v1.14.5. Monitoring confirmed.",
+    "detectedAt": "2025-10-05T16:58:56.047Z",
+    "resolvedAt": "2025-10-05T17:42:56.047Z",
+    "mttr": 44
+  },
+  {
+    "id": "inc-009",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Alveus cognatus sollicito impedit repellat velut tamisium deficio quibusdam cohaero. Conventus totus callide voro decretum subvenio consuasor modi sonitus terror. Ciminatio caelum demens conturbo supplanto suffragium perferendis aggero suscipio astrum.",
+    "severity": "P3",
+    "status": "investigating",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-tromp-inc-100",
+      "cust-jacobs-inc-153",
+      "cust-donnelly-llc-133"
+    ],
+    "commander": "emp-174",
+    "timeline": [
+      {
+        "timestamp": "2025-05-02T08:01:12.162Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-174"
+      },
+      {
+        "timestamp": "2025-05-02T08:06:12.162Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-174"
+      },
+      {
+        "timestamp": "2025-05-02T08:16:12.162Z",
+        "action": "Root cause identified",
+        "actor": "emp-237"
+      }
+    ],
+    "rootCause": "Misconfigured load balancer after routine deployment",
+    "resolution": "Applied hotfix. Deployed v9.7.6. Monitoring confirmed.",
+    "detectedAt": "2025-05-02T08:01:12.162Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-010",
+    "title": "Analytics data pipeline stalled",
+    "description": "Vir carmen vivo. Tutis repudiandae spero angustus circumvenio clibanus apto calcar aestivus vinco. Tertius comes aequus apparatus arguo.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-reinger-inc-156",
+      "cust-bednar-inc-177",
+      "cust-hudson-group-139",
+      "cust-casper-bernhard-168",
+      "cust-jacobson-walter-141"
+    ],
+    "commander": "emp-332",
+    "timeline": [
+      {
+        "timestamp": "2025-07-28T04:17:01.380Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-332"
+      },
+      {
+        "timestamp": "2025-07-28T04:22:01.380Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-332"
+      },
+      {
+        "timestamp": "2025-07-28T04:32:01.380Z",
+        "action": "Root cause identified",
+        "actor": "emp-145"
+      },
+      {
+        "timestamp": "2025-07-28T04:24:01.380Z",
+        "action": "Service fully restored",
+        "actor": "emp-332"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v6.7.10. Monitoring confirmed.",
+    "detectedAt": "2025-07-28T04:17:01.380Z",
+    "resolvedAt": "2025-07-28T04:24:01.380Z",
+    "mttr": 7
+  },
+  {
+    "id": "inc-011",
+    "title": "Auth service timeout — users unable to log in",
+    "description": "Deporto tubineus deporto conservo sustineo amaritudo absque eveniet advoco. Tubineus sustineo vir stipes eveniet omnis demum terminatio cupiditate. Depraedor substantia derideo volaticus strues fugiat nostrum abbas.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-kovacek-group-123",
+      "cust-ebert-kunze-and-fritsch-8",
+      "cust-sipes-group-20",
+      "cust-krajcik-and-sons-124"
+    ],
+    "commander": "emp-153",
+    "timeline": [
+      {
+        "timestamp": "2025-08-08T00:50:16.726Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-153"
+      },
+      {
+        "timestamp": "2025-08-08T00:55:16.726Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-153"
+      },
+      {
+        "timestamp": "2025-08-08T01:05:16.726Z",
+        "action": "Root cause identified",
+        "actor": "emp-199"
+      },
+      {
+        "timestamp": "2025-08-08T01:01:16.726Z",
+        "action": "Service fully restored",
+        "actor": "emp-153"
+      }
+    ],
+    "rootCause": "Certificate not rotated before expiration",
+    "resolution": "Applied hotfix. Deployed v8.19.6. Monitoring confirmed.",
+    "detectedAt": "2025-08-08T00:50:16.726Z",
+    "resolvedAt": "2025-08-08T01:01:16.726Z",
+    "mttr": 11
+  },
+  {
+    "id": "inc-012",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Tabgo armarium statim ocer aeneus. Cura celer aeternus ante clarus. Spoliatio tabgo dolor calculus corpus sopor porro adamo depopulo.",
+    "severity": "P2",
+    "status": "investigating",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [],
+    "commander": "emp-043",
+    "timeline": [
+      {
+        "timestamp": "2025-06-04T16:33:50.959Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-043"
+      },
+      {
+        "timestamp": "2025-06-04T16:38:50.959Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-043"
+      },
+      {
+        "timestamp": "2025-06-04T16:48:50.959Z",
+        "action": "Root cause identified",
+        "actor": "emp-210"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v3.11.2. Monitoring confirmed.",
+    "detectedAt": "2025-06-04T16:33:50.959Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-013",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Termes valde suadeo trado caries surgo artificiose canis demoror. Tego solium stips. Cedo ademptio cuius corroboro abundans crebro.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-ledner-jast-208",
+      "cust-quigley-feeney-36"
+    ],
+    "commander": "emp-248",
+    "timeline": [
+      {
+        "timestamp": "2025-05-27T09:47:29.474Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-248"
+      },
+      {
+        "timestamp": "2025-05-27T09:52:29.474Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-248"
+      },
+      {
+        "timestamp": "2025-05-27T10:02:29.474Z",
+        "action": "Root cause identified",
+        "actor": "emp-046"
+      },
+      {
+        "timestamp": "2025-05-27T10:07:29.474Z",
+        "action": "Service fully restored",
+        "actor": "emp-248"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v8.5.5. Monitoring confirmed.",
+    "detectedAt": "2025-05-27T09:47:29.474Z",
+    "resolvedAt": "2025-05-27T10:07:29.474Z",
+    "mttr": 20
+  },
+  {
+    "id": "inc-014",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Quos altus accusator audax ver conservo tametsi reprehenderit cum. Capitulus super super architecto virgo quibusdam ea. Tempus atrox absum verbera bestia explicabo.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-prohaska-group-188"
+    ],
+    "commander": "emp-039",
+    "timeline": [
+      {
+        "timestamp": "2025-02-26T10:16:58.228Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-039"
+      },
+      {
+        "timestamp": "2025-02-26T10:21:58.228Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-039"
+      },
+      {
+        "timestamp": "2025-02-26T10:31:58.228Z",
+        "action": "Root cause identified",
+        "actor": "emp-188"
+      },
+      {
+        "timestamp": "2025-02-26T10:58:58.228Z",
+        "action": "Service fully restored",
+        "actor": "emp-039"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v7.15.6. Monitoring confirmed.",
+    "detectedAt": "2025-02-26T10:16:58.228Z",
+    "resolvedAt": "2025-02-26T10:58:58.228Z",
+    "mttr": 42
+  },
+  {
+    "id": "inc-015",
+    "title": "Guard policy engine returning incorrect decisions",
+    "description": "Quae repudiandae curto defetiscor conforto sub aeternus creator sequi tantillus. Derelinquo argumentum canto tener tabesco bene. Virtus copia coepi ara crepusculum aequitas alii.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-barrows-inc-34",
+      "cust-zieme-spinka-and-kohler-82",
+      "cust-donnelly-llc-133",
+      "cust-satterfield-konopelski-54",
+      "cust-franecki-roberts-and-koss-47"
+    ],
+    "commander": "emp-161",
+    "timeline": [
+      {
+        "timestamp": "2025-07-02T21:56:13.546Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-161"
+      },
+      {
+        "timestamp": "2025-07-02T22:01:13.546Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-161"
+      },
+      {
+        "timestamp": "2025-07-02T22:11:13.546Z",
+        "action": "Root cause identified",
+        "actor": "emp-322"
+      },
+      {
+        "timestamp": "2025-07-02T22:17:13.546Z",
+        "action": "Service fully restored",
+        "actor": "emp-161"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v0.0.7. Monitoring confirmed.",
+    "detectedAt": "2025-07-02T21:56:13.546Z",
+    "resolvedAt": "2025-07-02T22:17:13.546Z",
+    "mttr": 21
+  },
+  {
+    "id": "inc-016",
+    "title": "Guard policy engine returning incorrect decisions",
+    "description": "Viscus tempus arca aperio spiritus tremo culpo. Iusto vulariter cruciamentum ipsum vehemens exercitationem architecto sed sum. Theatrum voluptatem conqueror decerno confero cibus.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-robel-hickle-and-kertzmann-95",
+      "cust-jenkins-quitzon-and-hayes-42",
+      "cust-boehm-group-113",
+      "cust-lowe-corkery-and-gerlach-70"
+    ],
+    "commander": "emp-325",
+    "timeline": [
+      {
+        "timestamp": "2025-06-24T16:15:12.446Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-325"
+      },
+      {
+        "timestamp": "2025-06-24T16:20:12.446Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-325"
+      },
+      {
+        "timestamp": "2025-06-24T16:30:12.446Z",
+        "action": "Root cause identified",
+        "actor": "emp-248"
+      },
+      {
+        "timestamp": "2025-06-24T16:26:12.446Z",
+        "action": "Service fully restored",
+        "actor": "emp-325"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v4.5.9. Monitoring confirmed.",
+    "detectedAt": "2025-06-24T16:15:12.446Z",
+    "resolvedAt": "2025-06-24T16:26:12.446Z",
+    "mttr": 11
+  },
+  {
+    "id": "inc-017",
+    "title": "Memory leak in Platform worker",
+    "description": "Vergo depulso asporto undique dapifer thymbra cupio porro curtus conduco. Tollo pecco testimonium quod ciminatio temeritas tenus acidus. Combibo ulciscor reiciendis abeo casso.",
+    "severity": "P1",
+    "status": "investigating",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-fadel-o-keefe-and-conroy-111",
+      "cust-casper-bernhard-168",
+      "cust-schmitt-kertzmann-77",
+      "cust-sipes-group-20"
+    ],
+    "commander": "emp-040",
+    "timeline": [
+      {
+        "timestamp": "2025-03-11T23:21:23.840Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-040"
+      },
+      {
+        "timestamp": "2025-03-11T23:26:23.840Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-040"
+      },
+      {
+        "timestamp": "2025-03-11T23:36:23.840Z",
+        "action": "Root cause identified",
+        "actor": "emp-095"
+      }
+    ],
+    "rootCause": "Certificate not rotated before expiration",
+    "resolution": "Applied hotfix. Deployed v4.15.9. Monitoring confirmed.",
+    "detectedAt": "2025-03-11T23:21:23.840Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-018",
+    "title": "Auth service timeout — users unable to log in",
+    "description": "Quidem vesper adnuo error statim cruciamentum fuga tego adaugeo accusantium. Summa amplexus absconditus summisse adsum convoco. Ullam vinitor ipsum amicitia suppellex condico.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-ledner-jast-208"
+    ],
+    "commander": "emp-011",
+    "timeline": [
+      {
+        "timestamp": "2025-04-05T01:52:22.355Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-011"
+      },
+      {
+        "timestamp": "2025-04-05T01:57:22.355Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-011"
+      },
+      {
+        "timestamp": "2025-04-05T02:07:22.355Z",
+        "action": "Root cause identified",
+        "actor": "emp-329"
+      },
+      {
+        "timestamp": "2025-04-05T02:15:22.355Z",
+        "action": "Service fully restored",
+        "actor": "emp-011"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v1.7.15. Monitoring confirmed.",
+    "detectedAt": "2025-04-05T01:52:22.355Z",
+    "resolvedAt": "2025-04-05T02:15:22.355Z",
+    "mttr": 23
+  },
+  {
+    "id": "inc-019",
+    "title": "Data loss incident in analytics stream",
+    "description": "Creator clementia bis vetus tamdiu tam vapulus architecto. Calco vitium tepesco doloribus adulatio ultra acerbitas. Benevolentia auctor odit quibusdam.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-smitham-group-80",
+      "cust-stiedemann-llc-59"
+    ],
+    "commander": "emp-023",
+    "timeline": [
+      {
+        "timestamp": "2025-05-08T14:41:38.886Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-023"
+      },
+      {
+        "timestamp": "2025-05-08T14:46:38.886Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-023"
+      },
+      {
+        "timestamp": "2025-05-08T14:56:38.886Z",
+        "action": "Root cause identified",
+        "actor": "emp-221"
+      },
+      {
+        "timestamp": "2025-05-08T15:20:38.886Z",
+        "action": "Service fully restored",
+        "actor": "emp-023"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v6.11.4. Monitoring confirmed.",
+    "detectedAt": "2025-05-08T14:41:38.886Z",
+    "resolvedAt": "2025-05-08T15:20:38.886Z",
+    "mttr": 39
+  },
+  {
+    "id": "inc-020",
+    "title": "DDoS-like traffic spike on API gateway",
+    "description": "Patior cerno ad voveo vinculum autus textor canis sodalitas consequatur. Barba ager somnus defendo utor vulnero voluptatem sponte. Confugo advenio tam cruentus cito distinctio adfero vado aequitas.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-altenwerth-berge-38",
+      "cust-schowalter-mraz-and-steuber-98"
+    ],
+    "commander": "emp-150",
+    "timeline": [
+      {
+        "timestamp": "2025-10-11T15:34:24.151Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-150"
+      },
+      {
+        "timestamp": "2025-10-11T15:39:24.151Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-150"
+      },
+      {
+        "timestamp": "2025-10-11T15:49:24.151Z",
+        "action": "Root cause identified",
+        "actor": "emp-116"
+      },
+      {
+        "timestamp": "2025-10-11T15:39:24.151Z",
+        "action": "Service fully restored",
+        "actor": "emp-150"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v7.7.6. Monitoring confirmed.",
+    "detectedAt": "2025-10-11T15:34:24.151Z",
+    "resolvedAt": "2025-10-11T15:39:24.151Z",
+    "mttr": 5
+  },
+  {
+    "id": "inc-021",
+    "title": "Platform API returning 502 errors for all enterprise customers",
+    "description": "Cogo audacia occaecati allatus suscipio bibo. Nihil tolero vereor atavus accusator cum videlicet video vae sodalitas. Contabesco termes alveus esse.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-lehner-upton-and-bode-21"
+    ],
+    "commander": "emp-171",
+    "timeline": [
+      {
+        "timestamp": "2025-03-20T01:05:59.804Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-171"
+      },
+      {
+        "timestamp": "2025-03-20T01:10:59.804Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-171"
+      },
+      {
+        "timestamp": "2025-03-20T01:20:59.804Z",
+        "action": "Root cause identified",
+        "actor": "emp-224"
+      },
+      {
+        "timestamp": "2025-03-20T01:37:59.804Z",
+        "action": "Service fully restored",
+        "actor": "emp-171"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v8.13.0. Monitoring confirmed.",
+    "detectedAt": "2025-03-20T01:05:59.804Z",
+    "resolvedAt": "2025-03-20T01:37:59.804Z",
+    "mttr": 32
+  },
+  {
+    "id": "inc-022",
+    "title": "DDoS-like traffic spike on API gateway",
+    "description": "Cruciamentum amita umquam. Defessus tondeo vel ullus. Arcus comprehendo astrum et.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-fay-larson-and-greenfelder-167",
+      "cust-runolfsdottir-hansen-and-kirli-58"
+    ],
+    "commander": "emp-071",
+    "timeline": [
+      {
+        "timestamp": "2025-05-16T08:55:21.089Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-071"
+      },
+      {
+        "timestamp": "2025-05-16T09:00:21.089Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-071"
+      },
+      {
+        "timestamp": "2025-05-16T09:10:21.089Z",
+        "action": "Root cause identified",
+        "actor": "emp-195"
+      },
+      {
+        "timestamp": "2025-05-16T09:20:21.089Z",
+        "action": "Service fully restored",
+        "actor": "emp-071"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v1.8.1. Monitoring confirmed.",
+    "detectedAt": "2025-05-16T08:55:21.089Z",
+    "resolvedAt": "2025-05-16T09:20:21.089Z",
+    "mttr": 25
+  },
+  {
+    "id": "inc-023",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Sto cotidie thymum. Doloremque aeternus adopto cunabula reprehenderit. Magnam concido dedecor minus.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-donnelly-group-171"
+    ],
+    "commander": "emp-069",
+    "timeline": [
+      {
+        "timestamp": "2025-09-12T18:53:40.756Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-069"
+      },
+      {
+        "timestamp": "2025-09-12T18:58:40.756Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-069"
+      },
+      {
+        "timestamp": "2025-09-12T19:08:40.756Z",
+        "action": "Root cause identified",
+        "actor": "emp-227"
+      },
+      {
+        "timestamp": "2025-09-12T19:04:40.756Z",
+        "action": "Service fully restored",
+        "actor": "emp-069"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v4.0.17. Monitoring confirmed.",
+    "detectedAt": "2025-09-12T18:53:40.756Z",
+    "resolvedAt": "2025-09-12T19:04:40.756Z",
+    "mttr": 11
+  },
+  {
+    "id": "inc-024",
+    "title": "DDoS-like traffic spike on API gateway",
+    "description": "Reiciendis deduco bis cimentarius. Solus caelestis depraedor amet utilis reiciendis tendo testimonium cauda sufficio. Auditor advoco aureus aequitas certus.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-keeling-orn-and-koss-136",
+      "cust-tromp-inc-143",
+      "cust-maggio-zieme-134",
+      "cust-kunde-llc-33",
+      "cust-murphy-corkery-and-o-reilly-18"
+    ],
+    "commander": "emp-216",
+    "timeline": [
+      {
+        "timestamp": "2025-08-08T13:03:49.761Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-216"
+      },
+      {
+        "timestamp": "2025-08-08T13:08:49.761Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-216"
+      },
+      {
+        "timestamp": "2025-08-08T13:18:49.761Z",
+        "action": "Root cause identified",
+        "actor": "emp-154"
+      },
+      {
+        "timestamp": "2025-08-08T13:38:49.761Z",
+        "action": "Service fully restored",
+        "actor": "emp-216"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v3.5.7. Monitoring confirmed.",
+    "detectedAt": "2025-08-08T13:03:49.761Z",
+    "resolvedAt": "2025-08-08T13:38:49.761Z",
+    "mttr": 35
+  },
+  {
+    "id": "inc-025",
+    "title": "Analytics data pipeline stalled",
+    "description": "Commodi triduana dicta. Truculenter tot pecus ventito cado terreo sustineo laborum appositus. Apud celebrer animadverto versus curto alii virga.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-sipes-group-20",
+      "cust-bashirian-o-reilly-32"
+    ],
+    "commander": "emp-085",
+    "timeline": [
+      {
+        "timestamp": "2025-04-22T18:35:55.750Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-085"
+      },
+      {
+        "timestamp": "2025-04-22T18:40:55.750Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-085"
+      },
+      {
+        "timestamp": "2025-04-22T18:50:55.750Z",
+        "action": "Root cause identified",
+        "actor": "emp-126"
+      },
+      {
+        "timestamp": "2025-04-22T19:11:55.750Z",
+        "action": "Service fully restored",
+        "actor": "emp-085"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v8.4.4. Monitoring confirmed.",
+    "detectedAt": "2025-04-22T18:35:55.750Z",
+    "resolvedAt": "2025-04-22T19:11:55.750Z",
+    "mttr": 36
+  },
+  {
+    "id": "inc-026",
+    "title": "Guard policy engine returning incorrect decisions",
+    "description": "Cribro suadeo adsidue tui natus solitudo suppono eius quas somnus. Utrimque vinum voluptatibus adduco spectaculum corporis vulgaris custodia tabula. Sonitus cotidie arca abutor curiositas.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-trantow-cronin-200",
+      "cust-boyer-wilkinson-79",
+      "cust-maggio-zieme-134"
+    ],
+    "commander": "emp-170",
+    "timeline": [
+      {
+        "timestamp": "2025-04-19T17:39:18.373Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-170"
+      },
+      {
+        "timestamp": "2025-04-19T17:44:18.373Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-170"
+      },
+      {
+        "timestamp": "2025-04-19T17:54:18.373Z",
+        "action": "Root cause identified",
+        "actor": "emp-196"
+      },
+      {
+        "timestamp": "2025-04-19T18:19:18.373Z",
+        "action": "Service fully restored",
+        "actor": "emp-170"
+      }
+    ],
+    "rootCause": "Certificate not rotated before expiration",
+    "resolution": "Applied hotfix. Deployed v1.8.20. Monitoring confirmed.",
+    "detectedAt": "2025-04-19T17:39:18.373Z",
+    "resolvedAt": "2025-04-19T18:19:18.373Z",
+    "mttr": 40
+  },
+  {
+    "id": "inc-027",
+    "title": "Platform API returning 502 errors for all enterprise customers",
+    "description": "Aliquam bos quidem ut tripudio deserunt dicta. Vel stips centum tabella at velum corporis sonitus. Calcar blandior adeo valde spectaculum sol verecundia.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [],
+    "commander": "emp-119",
+    "timeline": [
+      {
+        "timestamp": "2025-09-07T09:24:03.139Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-119"
+      },
+      {
+        "timestamp": "2025-09-07T09:29:03.139Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-119"
+      },
+      {
+        "timestamp": "2025-09-07T09:39:03.139Z",
+        "action": "Root cause identified",
+        "actor": "emp-234"
+      },
+      {
+        "timestamp": "2025-09-07T10:07:03.139Z",
+        "action": "Service fully restored",
+        "actor": "emp-119"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v4.10.10. Monitoring confirmed.",
+    "detectedAt": "2025-09-07T09:24:03.139Z",
+    "resolvedAt": "2025-09-07T10:07:03.139Z",
+    "mttr": 43
+  },
+  {
+    "id": "inc-028",
+    "title": "Analytics data pipeline stalled",
+    "description": "Comprehendo enim neque eum cernuus virga corrupti. Caute solus labore velut talio suggero tibi verto absens. Spargo nemo amissio demitto abundans textilis angelus veritatis.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [],
+    "commander": "emp-010",
+    "timeline": [
+      {
+        "timestamp": "2025-02-21T23:28:52.687Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-010"
+      },
+      {
+        "timestamp": "2025-02-21T23:33:52.687Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-010"
+      },
+      {
+        "timestamp": "2025-02-21T23:43:52.687Z",
+        "action": "Root cause identified",
+        "actor": "emp-224"
+      },
+      {
+        "timestamp": "2025-02-21T23:55:52.687Z",
+        "action": "Service fully restored",
+        "actor": "emp-010"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v2.19.8. Monitoring confirmed.",
+    "detectedAt": "2025-02-21T23:28:52.687Z",
+    "resolvedAt": "2025-02-21T23:55:52.687Z",
+    "mttr": 27
+  },
+  {
+    "id": "inc-029",
+    "title": "Auth service timeout — users unable to log in",
+    "description": "Clementia tolero socius. Tui careo vester custodia ventosus praesentium animi. Error administratio volup consequuntur.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-prohaska-group-188",
+      "cust-kling-goyette-96",
+      "cust-kunde-shields-83",
+      "cust-cartwright-and-sons-84"
+    ],
+    "commander": "emp-033",
+    "timeline": [
+      {
+        "timestamp": "2025-10-04T08:55:31.771Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-033"
+      },
+      {
+        "timestamp": "2025-10-04T09:00:31.771Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-033"
+      },
+      {
+        "timestamp": "2025-10-04T09:10:31.771Z",
+        "action": "Root cause identified",
+        "actor": "emp-329"
+      },
+      {
+        "timestamp": "2025-10-04T09:25:31.771Z",
+        "action": "Service fully restored",
+        "actor": "emp-033"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v8.3.9. Monitoring confirmed.",
+    "detectedAt": "2025-10-04T08:55:31.771Z",
+    "resolvedAt": "2025-10-04T09:25:31.771Z",
+    "mttr": 30
+  },
+  {
+    "id": "inc-030",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Patrocinor veritas illo appono universe vitae substantia officiis compono. Inventore tricesimus vapulus decens clarus cresco. Magnam in bonus accusator eveniet deinde.",
+    "severity": "P2",
+    "status": "mitigated",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [],
+    "commander": "emp-125",
+    "timeline": [
+      {
+        "timestamp": "2025-05-28T10:03:43.779Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-125"
+      },
+      {
+        "timestamp": "2025-05-28T10:08:43.779Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-125"
+      },
+      {
+        "timestamp": "2025-05-28T10:18:43.779Z",
+        "action": "Root cause identified",
+        "actor": "emp-241"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v0.15.20. Monitoring confirmed.",
+    "detectedAt": "2025-05-28T10:03:43.779Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-031",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Paens collum repellat volo altus succurro corporis titulus. Illo unus vilis cogito venustas tergo uter argentum. Volaticus sint avaritia debitis.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-corkery-spencer-176",
+      "cust-donnelly-llc-133"
+    ],
+    "commander": "emp-042",
+    "timeline": [
+      {
+        "timestamp": "2025-10-05T14:37:18.600Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-042"
+      },
+      {
+        "timestamp": "2025-10-05T14:42:18.600Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-042"
+      },
+      {
+        "timestamp": "2025-10-05T14:52:18.600Z",
+        "action": "Root cause identified",
+        "actor": "emp-157"
+      },
+      {
+        "timestamp": "2025-10-05T15:08:18.600Z",
+        "action": "Service fully restored",
+        "actor": "emp-042"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v9.15.10. Monitoring confirmed.",
+    "detectedAt": "2025-10-05T14:37:18.600Z",
+    "resolvedAt": "2025-10-05T15:08:18.600Z",
+    "mttr": 31
+  },
+  {
+    "id": "inc-032",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Desino coerceo quasi aegrotatio minima abundans. Totidem adfero arbustum vetus consuasor velum incidunt. Sophismata certe atqui deprimo amaritudo validus unus.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-waters-heller-and-thompson-204",
+      "cust-streich-lynch-and-rowe-116"
+    ],
+    "commander": "emp-176",
+    "timeline": [
+      {
+        "timestamp": "2025-04-17T01:54:21.346Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-176"
+      },
+      {
+        "timestamp": "2025-04-17T01:59:21.346Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-176"
+      },
+      {
+        "timestamp": "2025-04-17T02:09:21.346Z",
+        "action": "Root cause identified",
+        "actor": "emp-068"
+      },
+      {
+        "timestamp": "2025-04-17T02:33:21.346Z",
+        "action": "Service fully restored",
+        "actor": "emp-176"
+      }
+    ],
+    "rootCause": "Misconfigured load balancer after routine deployment",
+    "resolution": "Applied hotfix. Deployed v1.8.0. Monitoring confirmed.",
+    "detectedAt": "2025-04-17T01:54:21.346Z",
+    "resolvedAt": "2025-04-17T02:33:21.346Z",
+    "mttr": 39
+  },
+  {
+    "id": "inc-033",
+    "title": "Data loss incident in analytics stream",
+    "description": "Bos charisma saepe. Assentator explicabo nemo caecus arguo vallum abeo alter tandem. Acquiro audacia saepe maiores cruciamentum coepi thymbra coepi.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-schumm-llc-195",
+      "cust-prohaska-and-sons-186",
+      "cust-zieme-spinka-and-kohler-82",
+      "cust-stark-d-amore-and-hilpert-196"
+    ],
+    "commander": "emp-112",
+    "timeline": [
+      {
+        "timestamp": "2025-01-09T14:14:39.375Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-112"
+      },
+      {
+        "timestamp": "2025-01-09T14:19:39.375Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-112"
+      },
+      {
+        "timestamp": "2025-01-09T14:29:39.375Z",
+        "action": "Root cause identified",
+        "actor": "emp-076"
+      },
+      {
+        "timestamp": "2025-01-09T14:56:39.375Z",
+        "action": "Service fully restored",
+        "actor": "emp-112"
+      }
+    ],
+    "rootCause": "Misconfigured load balancer after routine deployment",
+    "resolution": "Applied hotfix. Deployed v7.2.7. Monitoring confirmed.",
+    "detectedAt": "2025-01-09T14:14:39.375Z",
+    "resolvedAt": "2025-01-09T14:56:39.375Z",
+    "mttr": 42
+  },
+  {
+    "id": "inc-034",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Pecus terga textus decens suppellex contego. Cubitum cultura creta cornu modi. Cum angustus bos autus.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-pacocha-mante-7",
+      "cust-harris-and-sons-97",
+      "cust-hayes-group-112",
+      "cust-hodkiewicz-schmitt-and-miller-198"
+    ],
+    "commander": "emp-129",
+    "timeline": [
+      {
+        "timestamp": "2025-06-15T16:18:03.462Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-129"
+      },
+      {
+        "timestamp": "2025-06-15T16:23:03.462Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-129"
+      },
+      {
+        "timestamp": "2025-06-15T16:33:03.462Z",
+        "action": "Root cause identified",
+        "actor": "emp-105"
+      },
+      {
+        "timestamp": "2025-06-15T17:16:03.462Z",
+        "action": "Service fully restored",
+        "actor": "emp-129"
+      }
+    ],
+    "rootCause": "Misconfigured load balancer after routine deployment",
+    "resolution": "Applied hotfix. Deployed v5.2.10. Monitoring confirmed.",
+    "detectedAt": "2025-06-15T16:18:03.462Z",
+    "resolvedAt": "2025-06-15T17:16:03.462Z",
+    "mttr": 58
+  },
+  {
+    "id": "inc-035",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Denego ad deporto casso curatio cometes amplexus communis deorsum. Voluptate conatus turba voveo crudelis crustulum. Adeo bos chirographum aufero saepe.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-streich-lynch-and-rowe-116",
+      "cust-heller-group-85",
+      "cust-rath-schuster-and-metz-74"
+    ],
+    "commander": "emp-174",
+    "timeline": [
+      {
+        "timestamp": "2025-09-02T00:33:18.391Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-174"
+      },
+      {
+        "timestamp": "2025-09-02T00:38:18.391Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-174"
+      },
+      {
+        "timestamp": "2025-09-02T00:48:18.391Z",
+        "action": "Root cause identified",
+        "actor": "emp-031"
+      },
+      {
+        "timestamp": "2025-09-02T00:39:18.391Z",
+        "action": "Service fully restored",
+        "actor": "emp-174"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v6.8.20. Monitoring confirmed.",
+    "detectedAt": "2025-09-02T00:33:18.391Z",
+    "resolvedAt": "2025-09-02T00:39:18.391Z",
+    "mttr": 6
+  },
+  {
+    "id": "inc-036",
+    "title": "Memory leak in Platform worker",
+    "description": "Argentum deorsum amplus suggero tabernus. Adduco terra aptus triumphus. Sollers adsum tempora spiritus crur stips aequus tabula tibi nisi.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-kuphal-rice-and-breitenberg-173",
+      "cust-block-renner-46"
+    ],
+    "commander": "emp-051",
+    "timeline": [
+      {
+        "timestamp": "2025-06-03T01:04:40.575Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-051"
+      },
+      {
+        "timestamp": "2025-06-03T01:09:40.575Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-051"
+      },
+      {
+        "timestamp": "2025-06-03T01:19:40.575Z",
+        "action": "Root cause identified",
+        "actor": "emp-164"
+      },
+      {
+        "timestamp": "2025-06-03T01:18:40.575Z",
+        "action": "Service fully restored",
+        "actor": "emp-051"
+      }
+    ],
+    "rootCause": "Misconfigured load balancer after routine deployment",
+    "resolution": "Applied hotfix. Deployed v3.14.3. Monitoring confirmed.",
+    "detectedAt": "2025-06-03T01:04:40.575Z",
+    "resolvedAt": "2025-06-03T01:18:40.575Z",
+    "mttr": 14
+  },
+  {
+    "id": "inc-037",
+    "title": "Auth service timeout — users unable to log in",
+    "description": "Non brevis enim bellicus aestus. Aegre combibo pecco cibus. Dolore arbitro versus studio vinitor tempus contabesco ut.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-schuster-stroman-110",
+      "cust-tromp-inc-143",
+      "cust-schumm-llc-195"
+    ],
+    "commander": "emp-141",
+    "timeline": [
+      {
+        "timestamp": "2025-01-24T01:18:52.394Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-141"
+      },
+      {
+        "timestamp": "2025-01-24T01:23:52.394Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-141"
+      },
+      {
+        "timestamp": "2025-01-24T01:33:52.394Z",
+        "action": "Root cause identified",
+        "actor": "emp-103"
+      },
+      {
+        "timestamp": "2025-01-24T01:30:52.394Z",
+        "action": "Service fully restored",
+        "actor": "emp-141"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v8.11.2. Monitoring confirmed.",
+    "detectedAt": "2025-01-24T01:18:52.394Z",
+    "resolvedAt": "2025-01-24T01:30:52.394Z",
+    "mttr": 12
+  },
+  {
+    "id": "inc-038",
+    "title": "Auth service timeout — users unable to log in",
+    "description": "Armarium volutabrum solio conqueror cuppedia via. Amita adipisci quibusdam inflammatio comminor accusamus temptatio bardus. Ad sed cervus cubitum vitiosus colo pariatur verecundia voco trucido.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [],
+    "commander": "emp-027",
+    "timeline": [
+      {
+        "timestamp": "2025-05-01T07:57:19.894Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-027"
+      },
+      {
+        "timestamp": "2025-05-01T08:02:19.894Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-027"
+      },
+      {
+        "timestamp": "2025-05-01T08:12:19.894Z",
+        "action": "Root cause identified",
+        "actor": "emp-155"
+      },
+      {
+        "timestamp": "2025-05-01T08:06:19.894Z",
+        "action": "Service fully restored",
+        "actor": "emp-027"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v5.17.13. Monitoring confirmed.",
+    "detectedAt": "2025-05-01T07:57:19.894Z",
+    "resolvedAt": "2025-05-01T08:06:19.894Z",
+    "mttr": 9
+  },
+  {
+    "id": "inc-039",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Trans repudiandae sint molestiae cura certe sumptus possimus theca. Coepi coma sopor astrum sequi cur viduo. Concedo viridis studio.",
+    "severity": "P3",
+    "status": "mitigated",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-nienow-llc-154",
+      "cust-robel-hickle-and-kertzmann-95",
+      "cust-waters-heller-and-thompson-204",
+      "cust-jaskolski-boehm-and-harvey-1",
+      "cust-block-lemke-and-morissette-155"
+    ],
+    "commander": "emp-220",
+    "timeline": [
+      {
+        "timestamp": "2025-06-15T13:55:10.212Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-220"
+      },
+      {
+        "timestamp": "2025-06-15T14:00:10.212Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-220"
+      },
+      {
+        "timestamp": "2025-06-15T14:10:10.212Z",
+        "action": "Root cause identified",
+        "actor": "emp-073"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v6.14.12. Monitoring confirmed.",
+    "detectedAt": "2025-06-15T13:55:10.212Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-040",
+    "title": "Guard policy engine returning incorrect decisions",
+    "description": "Consequatur cogito aiunt stabilis delinquo advenio solitudo crustulum cado. Aegrotatio numquam ter contabesco ad circumvenio suffragium appono sum. Provident paulatim vitae claustrum confido demitto volup theca defaeco.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [],
+    "commander": "emp-047",
+    "timeline": [
+      {
+        "timestamp": "2025-01-24T20:14:15.112Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-047"
+      },
+      {
+        "timestamp": "2025-01-24T20:19:15.112Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-047"
+      },
+      {
+        "timestamp": "2025-01-24T20:29:15.112Z",
+        "action": "Root cause identified",
+        "actor": "emp-171"
+      },
+      {
+        "timestamp": "2025-01-24T20:43:15.112Z",
+        "action": "Service fully restored",
+        "actor": "emp-047"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v0.4.19. Monitoring confirmed.",
+    "detectedAt": "2025-01-24T20:14:15.112Z",
+    "resolvedAt": "2025-01-24T20:43:15.112Z",
+    "mttr": 29
+  },
+  {
+    "id": "inc-041",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Abstergo ab claro venio. Truculenter tonsor ipsam asperiores capio depraedor ambulo. Stultus turpis alienus circumvenio centum consequuntur nisi patior ater torrens.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-ratke-inc-126",
+      "cust-toy-and-sons-52",
+      "cust-price-hammes-25",
+      "cust-schmitt-kertzmann-77",
+      "cust-kreiger-inc-185"
+    ],
+    "commander": "emp-009",
+    "timeline": [
+      {
+        "timestamp": "2025-10-27T23:04:28.510Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-009"
+      },
+      {
+        "timestamp": "2025-10-27T23:09:28.510Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-009"
+      },
+      {
+        "timestamp": "2025-10-27T23:19:28.510Z",
+        "action": "Root cause identified",
+        "actor": "emp-177"
+      },
+      {
+        "timestamp": "2025-10-27T23:35:28.510Z",
+        "action": "Service fully restored",
+        "actor": "emp-009"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v6.0.13. Monitoring confirmed.",
+    "detectedAt": "2025-10-27T23:04:28.510Z",
+    "resolvedAt": "2025-10-27T23:35:28.510Z",
+    "mttr": 31
+  },
+  {
+    "id": "inc-042",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Convoco auditor valde. Vicinus amo denique inventore. Tot adeptio suppellex cribro crapula commemoro vilicus beneficium.",
+    "severity": "P2",
+    "status": "investigating",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-powlowski-cartwright-and-abern-64",
+      "cust-herman-bradtke-89"
+    ],
+    "commander": "emp-244",
+    "timeline": [
+      {
+        "timestamp": "2025-08-30T17:36:13.763Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-244"
+      },
+      {
+        "timestamp": "2025-08-30T17:41:13.763Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-244"
+      },
+      {
+        "timestamp": "2025-08-30T17:51:13.763Z",
+        "action": "Root cause identified",
+        "actor": "emp-215"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v3.12.20. Monitoring confirmed.",
+    "detectedAt": "2025-08-30T17:36:13.763Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-043",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Derideo aspicio ars vilis culpo attero arbitro. Pecco cupio adaugeo suppellex. Desolo titulus summisse paulatim arx caput.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-altenwerth-berge-38",
+      "cust-johnston-hettinger-174"
+    ],
+    "commander": "emp-074",
+    "timeline": [
+      {
+        "timestamp": "2025-07-01T14:19:05.414Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-074"
+      },
+      {
+        "timestamp": "2025-07-01T14:24:05.414Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-074"
+      },
+      {
+        "timestamp": "2025-07-01T14:34:05.414Z",
+        "action": "Root cause identified",
+        "actor": "emp-043"
+      },
+      {
+        "timestamp": "2025-07-01T15:01:05.414Z",
+        "action": "Service fully restored",
+        "actor": "emp-074"
+      }
+    ],
+    "rootCause": "Misconfigured load balancer after routine deployment",
+    "resolution": "Applied hotfix. Deployed v9.20.19. Monitoring confirmed.",
+    "detectedAt": "2025-07-01T14:19:05.414Z",
+    "resolvedAt": "2025-07-01T15:01:05.414Z",
+    "mttr": 42
+  },
+  {
+    "id": "inc-044",
+    "title": "Memory leak in Platform worker",
+    "description": "Tricesimus vestigium victus agnosco surculus charisma aestas. Capio conventus quibusdam timor undique vestrum corona vulgaris conservo. Sonitus desino celer at curia.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-heller-group-85",
+      "cust-erdman-gislason-49"
+    ],
+    "commander": "emp-103",
+    "timeline": [
+      {
+        "timestamp": "2025-10-17T02:39:38.817Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-103"
+      },
+      {
+        "timestamp": "2025-10-17T02:44:38.817Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-103"
+      },
+      {
+        "timestamp": "2025-10-17T02:54:38.817Z",
+        "action": "Root cause identified",
+        "actor": "emp-235"
+      },
+      {
+        "timestamp": "2025-10-17T03:06:38.817Z",
+        "action": "Service fully restored",
+        "actor": "emp-103"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v0.15.4. Monitoring confirmed.",
+    "detectedAt": "2025-10-17T02:39:38.817Z",
+    "resolvedAt": "2025-10-17T03:06:38.817Z",
+    "mttr": 27
+  },
+  {
+    "id": "inc-045",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Textus verbum voluptates utor dolore theatrum apostolus. Absque deleniti consectetur talis comes venio vigor. Despecto thymum validus ceno spiculum volo.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-runolfsdottir-harvey-and-lynch-48",
+      "cust-schuster-stroman-110"
+    ],
+    "commander": "emp-193",
+    "timeline": [
+      {
+        "timestamp": "2025-06-21T02:40:59.712Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-193"
+      },
+      {
+        "timestamp": "2025-06-21T02:45:59.712Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-193"
+      },
+      {
+        "timestamp": "2025-06-21T02:55:59.712Z",
+        "action": "Root cause identified",
+        "actor": "emp-175"
+      },
+      {
+        "timestamp": "2025-06-21T03:21:59.712Z",
+        "action": "Service fully restored",
+        "actor": "emp-193"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v0.19.1. Monitoring confirmed.",
+    "detectedAt": "2025-06-21T02:40:59.712Z",
+    "resolvedAt": "2025-06-21T03:21:59.712Z",
+    "mttr": 41
+  },
+  {
+    "id": "inc-046",
+    "title": "Memory leak in Platform worker",
+    "description": "Appello argentum crebro careo decor. Spoliatio copia commodi degero caritas omnis velociter suadeo. Caste vivo comprehendo ancilla bardus.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-dibbert-inc-150"
+    ],
+    "commander": "emp-028",
+    "timeline": [
+      {
+        "timestamp": "2025-09-04T00:35:50.685Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-028"
+      },
+      {
+        "timestamp": "2025-09-04T00:40:50.685Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-028"
+      },
+      {
+        "timestamp": "2025-09-04T00:50:50.685Z",
+        "action": "Root cause identified",
+        "actor": "emp-144"
+      },
+      {
+        "timestamp": "2025-09-04T01:19:50.685Z",
+        "action": "Service fully restored",
+        "actor": "emp-028"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v6.19.14. Monitoring confirmed.",
+    "detectedAt": "2025-09-04T00:35:50.685Z",
+    "resolvedAt": "2025-09-04T01:19:50.685Z",
+    "mttr": 44
+  },
+  {
+    "id": "inc-047",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Damnatio ventito tribuo umerus usque vehemens tergiversatio conspergo. Aegre curvo corporis vorago. Vociferor thesaurus creber tergiversatio corrigo praesentium sophismata demulceo corporis.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-keeling-orn-and-koss-136",
+      "cust-blanda-turner-142"
+    ],
+    "commander": "emp-321",
+    "timeline": [
+      {
+        "timestamp": "2025-10-15T01:15:48.048Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-321"
+      },
+      {
+        "timestamp": "2025-10-15T01:20:48.048Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-321"
+      },
+      {
+        "timestamp": "2025-10-15T01:30:48.048Z",
+        "action": "Root cause identified",
+        "actor": "emp-176"
+      },
+      {
+        "timestamp": "2025-10-15T01:50:48.048Z",
+        "action": "Service fully restored",
+        "actor": "emp-321"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v1.1.18. Monitoring confirmed.",
+    "detectedAt": "2025-10-15T01:15:48.048Z",
+    "resolvedAt": "2025-10-15T01:50:48.048Z",
+    "mttr": 35
+  },
+  {
+    "id": "inc-048",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Contego commodi statua caveo cognatus apparatus cognomen. Cohibeo reiciendis aegrus. Cervus bonus tubineus abduco succedo varius varius arbustum.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-lehner-upton-and-bode-21",
+      "cust-hahn-group-72",
+      "cust-smith-kunze-191",
+      "cust-vandervort-nikolaus-and-robel-107",
+      "cust-donnelly-group-171"
+    ],
+    "commander": "emp-103",
+    "timeline": [
+      {
+        "timestamp": "2025-04-21T16:02:31.558Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-103"
+      },
+      {
+        "timestamp": "2025-04-21T16:07:31.558Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-103"
+      },
+      {
+        "timestamp": "2025-04-21T16:17:31.558Z",
+        "action": "Root cause identified",
+        "actor": "emp-094"
+      },
+      {
+        "timestamp": "2025-04-21T16:35:31.558Z",
+        "action": "Service fully restored",
+        "actor": "emp-103"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v4.4.15. Monitoring confirmed.",
+    "detectedAt": "2025-04-21T16:02:31.558Z",
+    "resolvedAt": "2025-04-21T16:35:31.558Z",
+    "mttr": 33
+  },
+  {
+    "id": "inc-049",
+    "title": "Analytics data pipeline stalled",
+    "description": "Avarus neque abduco vinum cunctatio demergo. Arbustum suppono numquam audeo vociferor venio astrum. Caritas adhaero curso adnuo.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-keeling-orn-and-koss-136",
+      "cust-kerluke-inc-129",
+      "cust-kiehn-kuphal-40",
+      "cust-murazik-inc-3"
+    ],
+    "commander": "emp-112",
+    "timeline": [
+      {
+        "timestamp": "2025-04-28T02:29:43.145Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-112"
+      },
+      {
+        "timestamp": "2025-04-28T02:34:43.145Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-112"
+      },
+      {
+        "timestamp": "2025-04-28T02:44:43.145Z",
+        "action": "Root cause identified",
+        "actor": "emp-317"
+      },
+      {
+        "timestamp": "2025-04-28T03:14:43.145Z",
+        "action": "Service fully restored",
+        "actor": "emp-112"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v6.20.20. Monitoring confirmed.",
+    "detectedAt": "2025-04-28T02:29:43.145Z",
+    "resolvedAt": "2025-04-28T03:14:43.145Z",
+    "mttr": 45
+  },
+  {
+    "id": "inc-050",
+    "title": "Memory leak in Platform worker",
+    "description": "Ultio contabesco tum stipes annus peior aut apostolus. Decor calamitas colligo demulceo territo summa animi alo veniam. Colligo absque turbo vestrum claudeo sto suppellex.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-jakubowski-west-and-moen-149",
+      "cust-cole-bernier-and-ferry-39",
+      "cust-franecki-roberts-and-koss-47",
+      "cust-kunde-shields-83",
+      "cust-dibbert-inc-150"
+    ],
+    "commander": "emp-324",
+    "timeline": [
+      {
+        "timestamp": "2025-05-06T06:54:26.790Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-324"
+      },
+      {
+        "timestamp": "2025-05-06T06:59:26.790Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-324"
+      },
+      {
+        "timestamp": "2025-05-06T07:09:26.790Z",
+        "action": "Root cause identified",
+        "actor": "emp-032"
+      },
+      {
+        "timestamp": "2025-05-06T07:19:26.790Z",
+        "action": "Service fully restored",
+        "actor": "emp-324"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v7.14.19. Monitoring confirmed.",
+    "detectedAt": "2025-05-06T06:54:26.790Z",
+    "resolvedAt": "2025-05-06T07:19:26.790Z",
+    "mttr": 25
+  },
+  {
+    "id": "inc-051",
+    "title": "Memory leak in Platform worker",
+    "description": "Custodia uterque crustulum tepidus odio aliquam capto sordeo verecundia contabesco. Aspernatur somnus cruciamentum acer a statim suffoco amet clementia. Cribro utrimque arcus cupressus demo territo vado ver.",
+    "severity": "P3",
+    "status": "investigating",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-krajcik-and-sons-124",
+      "cust-d-amore-jerde-201"
+    ],
+    "commander": "emp-018",
+    "timeline": [
+      {
+        "timestamp": "2025-04-01T15:06:00.190Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-018"
+      },
+      {
+        "timestamp": "2025-04-01T15:11:00.190Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-018"
+      },
+      {
+        "timestamp": "2025-04-01T15:21:00.190Z",
+        "action": "Root cause identified",
+        "actor": "emp-221"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v9.2.15. Monitoring confirmed.",
+    "detectedAt": "2025-04-01T15:06:00.190Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-052",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Nisi tempus sum tertius taedium qui barba socius. Voluptatem tot sponte adiuvo deduco odio voluntarius. Pecto centum bardus clibanus odit concedo vere caries stultus congregatio.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-satterfield-konopelski-54",
+      "cust-sanford-inc-50",
+      "cust-kassulke-mann-169"
+    ],
+    "commander": "emp-160",
+    "timeline": [
+      {
+        "timestamp": "2025-07-07T04:08:25.136Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-160"
+      },
+      {
+        "timestamp": "2025-07-07T04:13:25.136Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-160"
+      },
+      {
+        "timestamp": "2025-07-07T04:23:25.136Z",
+        "action": "Root cause identified",
+        "actor": "emp-215"
+      },
+      {
+        "timestamp": "2025-07-07T05:13:25.136Z",
+        "action": "Service fully restored",
+        "actor": "emp-160"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v1.3.15. Monitoring confirmed.",
+    "detectedAt": "2025-07-07T04:08:25.136Z",
+    "resolvedAt": "2025-07-07T05:13:25.136Z",
+    "mttr": 65
+  },
+  {
+    "id": "inc-053",
+    "title": "Memory leak in Platform worker",
+    "description": "Valde id versus vehemens substantia argumentum. Teneo animadverto ascit tubineus demonstro. Cunae suggero adficio quae creber.",
+    "severity": "P2",
+    "status": "mitigated",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-kreiger-inc-185",
+      "cust-swift-schuppe-and-considine-91",
+      "cust-kiehn-kuphal-40",
+      "cust-grant-rolfson-and-fritsch-2"
+    ],
+    "commander": "emp-050",
+    "timeline": [
+      {
+        "timestamp": "2025-08-29T14:55:56.879Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-050"
+      },
+      {
+        "timestamp": "2025-08-29T15:00:56.879Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-050"
+      },
+      {
+        "timestamp": "2025-08-29T15:10:56.879Z",
+        "action": "Root cause identified",
+        "actor": "emp-335"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v7.9.11. Monitoring confirmed.",
+    "detectedAt": "2025-08-29T14:55:56.879Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-054",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Verecundia exercitationem adaugeo audio aggero alias theologus dolor demonstro. Summopere curso beatus aedificium conservo. Coerceo torrens aperte thermae.",
+    "severity": "P2",
+    "status": "mitigated",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-cole-bernier-and-ferry-39",
+      "cust-ebert-kunze-and-fritsch-8",
+      "cust-swift-schuppe-and-considine-91",
+      "cust-jakubowski-purdy-and-dietrich-162"
+    ],
+    "commander": "emp-218",
+    "timeline": [
+      {
+        "timestamp": "2025-04-07T20:44:33.416Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-218"
+      },
+      {
+        "timestamp": "2025-04-07T20:49:33.416Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-218"
+      },
+      {
+        "timestamp": "2025-04-07T20:59:33.416Z",
+        "action": "Root cause identified",
+        "actor": "emp-159"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v9.6.7. Monitoring confirmed.",
+    "detectedAt": "2025-04-07T20:44:33.416Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-055",
+    "title": "DDoS-like traffic spike on API gateway",
+    "description": "Stultus cado thesis adicio toties ultio deficio vorago. Suffragium defleo dapifer verumtamen aveho utor. Pectus vindico crinis verbum calcar cavus vilicus curto.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-smitham-mayert-6",
+      "cust-jast-murazik-206",
+      "cust-zieme-spinka-and-kohler-82",
+      "cust-dickinson-and-sons-9"
+    ],
+    "commander": "emp-219",
+    "timeline": [
+      {
+        "timestamp": "2025-06-17T05:58:03.226Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-219"
+      },
+      {
+        "timestamp": "2025-06-17T06:03:03.226Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-219"
+      },
+      {
+        "timestamp": "2025-06-17T06:13:03.226Z",
+        "action": "Root cause identified",
+        "actor": "emp-332"
+      },
+      {
+        "timestamp": "2025-06-17T06:36:03.226Z",
+        "action": "Service fully restored",
+        "actor": "emp-219"
+      }
+    ],
+    "rootCause": "Misconfigured load balancer after routine deployment",
+    "resolution": "Applied hotfix. Deployed v5.8.0. Monitoring confirmed.",
+    "detectedAt": "2025-06-17T05:58:03.226Z",
+    "resolvedAt": "2025-06-17T06:36:03.226Z",
+    "mttr": 38
+  },
+  {
+    "id": "inc-056",
+    "title": "Platform API returning 502 errors for all enterprise customers",
+    "description": "Despecto amplus animadverto curto pel fuga. Antea votum aegrotatio spargo tabella apud bibo vergo alias cinis. Cibus sui aurum averto illum xiphias cibo viscus culpa.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-schmitt-kertzmann-77",
+      "cust-boehm-group-113"
+    ],
+    "commander": "emp-167",
+    "timeline": [
+      {
+        "timestamp": "2025-02-03T18:08:43.522Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-167"
+      },
+      {
+        "timestamp": "2025-02-03T18:13:43.522Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-167"
+      },
+      {
+        "timestamp": "2025-02-03T18:23:43.522Z",
+        "action": "Root cause identified",
+        "actor": "emp-094"
+      },
+      {
+        "timestamp": "2025-02-03T18:43:43.522Z",
+        "action": "Service fully restored",
+        "actor": "emp-167"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v9.0.12. Monitoring confirmed.",
+    "detectedAt": "2025-02-03T18:08:43.522Z",
+    "resolvedAt": "2025-02-03T18:43:43.522Z",
+    "mttr": 35
+  },
+  {
+    "id": "inc-057",
+    "title": "Auth service timeout — users unable to log in",
+    "description": "Accommodo sollicito decipio templum rerum thymum. Urbanus ante cernuus tyrannus valens cedo adhaero verbum admoneo tumultus. Utilis adulescens possimus demum laudantium eveniet cursim debilito uterque tenus.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-hermiston-wuckert-and-yost-137"
+    ],
+    "commander": "emp-240",
+    "timeline": [
+      {
+        "timestamp": "2025-03-04T21:05:22.235Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-240"
+      },
+      {
+        "timestamp": "2025-03-04T21:10:22.235Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-240"
+      },
+      {
+        "timestamp": "2025-03-04T21:20:22.235Z",
+        "action": "Root cause identified",
+        "actor": "emp-105"
+      },
+      {
+        "timestamp": "2025-03-04T21:23:22.235Z",
+        "action": "Service fully restored",
+        "actor": "emp-240"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v9.16.9. Monitoring confirmed.",
+    "detectedAt": "2025-03-04T21:05:22.235Z",
+    "resolvedAt": "2025-03-04T21:23:22.235Z",
+    "mttr": 18
+  },
+  {
+    "id": "inc-058",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Compello cito cunctatio tego crastinus. Suffoco aliqua stipes patruus conitor. Tenus suadeo conservo taceo vel volutabrum.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-jakubowski-west-and-moen-149"
+    ],
+    "commander": "emp-096",
+    "timeline": [
+      {
+        "timestamp": "2025-06-10T04:22:49.939Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-096"
+      },
+      {
+        "timestamp": "2025-06-10T04:27:49.939Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-096"
+      },
+      {
+        "timestamp": "2025-06-10T04:37:49.939Z",
+        "action": "Root cause identified",
+        "actor": "emp-142"
+      },
+      {
+        "timestamp": "2025-06-10T04:36:49.939Z",
+        "action": "Service fully restored",
+        "actor": "emp-096"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v1.13.12. Monitoring confirmed.",
+    "detectedAt": "2025-06-10T04:22:49.939Z",
+    "resolvedAt": "2025-06-10T04:36:49.939Z",
+    "mttr": 14
+  },
+  {
+    "id": "inc-059",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Culpa absconditus vitae incidunt audio. Totam temporibus nesciunt aperio defessus quia aduro sublime ambulo. Bestia dolor adulescens absens clementia assentator.",
+    "severity": "P3",
+    "status": "mitigated",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-sanford-toy-125",
+      "cust-rice-stroman-and-o-kon-75"
+    ],
+    "commander": "emp-151",
+    "timeline": [
+      {
+        "timestamp": "2025-02-24T00:24:47.612Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-151"
+      },
+      {
+        "timestamp": "2025-02-24T00:29:47.612Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-151"
+      },
+      {
+        "timestamp": "2025-02-24T00:39:47.612Z",
+        "action": "Root cause identified",
+        "actor": "emp-171"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v8.2.5. Monitoring confirmed.",
+    "detectedAt": "2025-02-24T00:24:47.612Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-060",
+    "title": "Guard policy engine returning incorrect decisions",
+    "description": "Corona tabernus adiuvo. Dolor summopere speciosus abstergo ascisco. Solus admitto supra verecundia patria tempus ver comitatus utique curso.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-kutch-bruen-87",
+      "cust-rice-stroman-and-o-kon-75",
+      "cust-ledner-jast-208",
+      "cust-franecki-and-sons-179",
+      "cust-runte-o-reilly-78"
+    ],
+    "commander": "emp-142",
+    "timeline": [
+      {
+        "timestamp": "2025-02-19T13:38:54.865Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-142"
+      },
+      {
+        "timestamp": "2025-02-19T13:43:54.865Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-142"
+      },
+      {
+        "timestamp": "2025-02-19T13:53:54.865Z",
+        "action": "Root cause identified",
+        "actor": "emp-118"
+      },
+      {
+        "timestamp": "2025-02-19T14:12:54.865Z",
+        "action": "Service fully restored",
+        "actor": "emp-142"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v0.12.17. Monitoring confirmed.",
+    "detectedAt": "2025-02-19T13:38:54.865Z",
+    "resolvedAt": "2025-02-19T14:12:54.865Z",
+    "mttr": 34
+  },
+  {
+    "id": "inc-061",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Suus ustulo depono odio viscus considero sponte facere. Exercitationem depereo cuppedia. Tubineus ventosus carpo colo.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-donnelly-zulauf-102"
+    ],
+    "commander": "emp-237",
+    "timeline": [
+      {
+        "timestamp": "2025-08-26T18:02:17.206Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-237"
+      },
+      {
+        "timestamp": "2025-08-26T18:07:17.206Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-237"
+      },
+      {
+        "timestamp": "2025-08-26T18:17:17.206Z",
+        "action": "Root cause identified",
+        "actor": "emp-022"
+      },
+      {
+        "timestamp": "2025-08-26T18:16:17.206Z",
+        "action": "Service fully restored",
+        "actor": "emp-237"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v2.2.9. Monitoring confirmed.",
+    "detectedAt": "2025-08-26T18:02:17.206Z",
+    "resolvedAt": "2025-08-26T18:16:17.206Z",
+    "mttr": 14
+  },
+  {
+    "id": "inc-062",
+    "title": "Guard policy engine returning incorrect decisions",
+    "description": "Decens cohibeo utilis tenus sunt adsuesco dolor summopere. Iure contra cogo vero depopulo bis. Verecundia ventosus aperiam tristis corpus audeo candidus.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-ratke-group-19",
+      "cust-satterfield-konopelski-54",
+      "cust-kling-goyette-96"
+    ],
+    "commander": "emp-331",
+    "timeline": [
+      {
+        "timestamp": "2025-01-15T09:27:58.177Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-331"
+      },
+      {
+        "timestamp": "2025-01-15T09:32:58.177Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-331"
+      },
+      {
+        "timestamp": "2025-01-15T09:42:58.177Z",
+        "action": "Root cause identified",
+        "actor": "emp-109"
+      },
+      {
+        "timestamp": "2025-01-15T09:49:58.177Z",
+        "action": "Service fully restored",
+        "actor": "emp-331"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v7.12.10. Monitoring confirmed.",
+    "detectedAt": "2025-01-15T09:27:58.177Z",
+    "resolvedAt": "2025-01-15T09:49:58.177Z",
+    "mttr": 22
+  },
+  {
+    "id": "inc-063",
+    "title": "Analytics data pipeline stalled",
+    "description": "Sapiente antiquus cognatus celebrer vestigium trepide comis tumultus cubitum cena. Stillicidium at adipisci sub amplitudo cohors. Beneficium accusator arca una ademptio.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-koss-bergstrom-and-ondricka-69"
+    ],
+    "commander": "emp-211",
+    "timeline": [
+      {
+        "timestamp": "2025-07-29T17:16:10.152Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-211"
+      },
+      {
+        "timestamp": "2025-07-29T17:21:10.152Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-211"
+      },
+      {
+        "timestamp": "2025-07-29T17:31:10.152Z",
+        "action": "Root cause identified",
+        "actor": "emp-170"
+      },
+      {
+        "timestamp": "2025-07-29T17:55:10.152Z",
+        "action": "Service fully restored",
+        "actor": "emp-211"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v5.16.19. Monitoring confirmed.",
+    "detectedAt": "2025-07-29T17:16:10.152Z",
+    "resolvedAt": "2025-07-29T17:55:10.152Z",
+    "mttr": 39
+  },
+  {
+    "id": "inc-064",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Deputo suadeo sponte convoco curso tempora defaeco cado. Uberrime valde degusto suadeo acervus tertius eaque turbo balbus verbera. Deputo brevis viriliter sonitus arbustum thesaurus sponte tergo sordeo.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-wisoky-nolan-63",
+      "cust-satterfield-haley-and-romaguer-165"
+    ],
+    "commander": "emp-145",
+    "timeline": [
+      {
+        "timestamp": "2025-03-27T02:09:21.812Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-145"
+      },
+      {
+        "timestamp": "2025-03-27T02:14:21.812Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-145"
+      },
+      {
+        "timestamp": "2025-03-27T02:24:21.812Z",
+        "action": "Root cause identified",
+        "actor": "emp-207"
+      },
+      {
+        "timestamp": "2025-03-27T03:02:21.812Z",
+        "action": "Service fully restored",
+        "actor": "emp-145"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v8.6.16. Monitoring confirmed.",
+    "detectedAt": "2025-03-27T02:09:21.812Z",
+    "resolvedAt": "2025-03-27T03:02:21.812Z",
+    "mttr": 53
+  },
+  {
+    "id": "inc-065",
+    "title": "Data loss incident in analytics stream",
+    "description": "Sono voluptas auditor sono tum vociferor expedita. Abeo varietas abscido pauci. Tamisium summopere cimentarius supplanto sto id.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-jaskolski-boehm-and-harvey-1",
+      "cust-maggio-zieme-134"
+    ],
+    "commander": "emp-247",
+    "timeline": [
+      {
+        "timestamp": "2025-04-16T10:39:19.632Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-247"
+      },
+      {
+        "timestamp": "2025-04-16T10:44:19.632Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-247"
+      },
+      {
+        "timestamp": "2025-04-16T10:54:19.632Z",
+        "action": "Root cause identified",
+        "actor": "emp-157"
+      },
+      {
+        "timestamp": "2025-04-16T12:00:19.632Z",
+        "action": "Service fully restored",
+        "actor": "emp-247"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v1.0.5. Monitoring confirmed.",
+    "detectedAt": "2025-04-16T10:39:19.632Z",
+    "resolvedAt": "2025-04-16T12:00:19.632Z",
+    "mttr": 81
+  },
+  {
+    "id": "inc-066",
+    "title": "Auth service timeout — users unable to log in",
+    "description": "Vester crapula quas repudiandae aer. Adeptio vestigium animi subiungo cattus porro. Debeo paens consequatur cogito aestus candidus ager stipes virga.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-grant-rolfson-and-fritsch-2",
+      "cust-schumm-llc-195",
+      "cust-klein-gulgowski-and-volkman-175",
+      "cust-goldner-group-189",
+      "cust-hudson-group-139"
+    ],
+    "commander": "emp-027",
+    "timeline": [
+      {
+        "timestamp": "2025-03-10T04:36:16.918Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-027"
+      },
+      {
+        "timestamp": "2025-03-10T04:41:16.918Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-027"
+      },
+      {
+        "timestamp": "2025-03-10T04:51:16.918Z",
+        "action": "Root cause identified",
+        "actor": "emp-075"
+      },
+      {
+        "timestamp": "2025-03-10T05:44:16.918Z",
+        "action": "Service fully restored",
+        "actor": "emp-027"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v2.17.16. Monitoring confirmed.",
+    "detectedAt": "2025-03-10T04:36:16.918Z",
+    "resolvedAt": "2025-03-10T05:44:16.918Z",
+    "mttr": 68
+  },
+  {
+    "id": "inc-067",
+    "title": "DDoS-like traffic spike on API gateway",
+    "description": "Cilicium demoror vix thymbra suscipio venustas. Curvo caput enim veritas totam compello contabesco colo adulatio arbor. Administratio vobis vado clibanus iure animus eos.",
+    "severity": "P2",
+    "status": "mitigated",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-kunze-mclaughlin-and-rowe-207",
+      "cust-schowalter-mraz-and-steuber-98",
+      "cust-kuvalis-nitzsche-197",
+      "cust-mante-llc-11",
+      "cust-casper-bernhard-168"
+    ],
+    "commander": "emp-042",
+    "timeline": [
+      {
+        "timestamp": "2025-07-19T03:05:07.504Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-042"
+      },
+      {
+        "timestamp": "2025-07-19T03:10:07.504Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-042"
+      },
+      {
+        "timestamp": "2025-07-19T03:20:07.504Z",
+        "action": "Root cause identified",
+        "actor": "emp-171"
+      }
+    ],
+    "rootCause": "Misconfigured load balancer after routine deployment",
+    "resolution": "Applied hotfix. Deployed v4.12.0. Monitoring confirmed.",
+    "detectedAt": "2025-07-19T03:05:07.504Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-068",
+    "title": "Analytics data pipeline stalled",
+    "description": "Verecundia corrumpo aduro alter consuasor. Decet totus calamitas velociter causa cui itaque cetera comprehendo contigo. Abstergo tonsor consequuntur neque annus.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-quigley-hettinger-194",
+      "cust-morissette-pfeffer-99",
+      "cust-stiedemann-llc-59"
+    ],
+    "commander": "emp-231",
+    "timeline": [
+      {
+        "timestamp": "2025-06-27T19:29:27.611Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-231"
+      },
+      {
+        "timestamp": "2025-06-27T19:34:27.611Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-231"
+      },
+      {
+        "timestamp": "2025-06-27T19:44:27.611Z",
+        "action": "Root cause identified",
+        "actor": "emp-014"
+      },
+      {
+        "timestamp": "2025-06-27T20:14:27.611Z",
+        "action": "Service fully restored",
+        "actor": "emp-231"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v4.10.13. Monitoring confirmed.",
+    "detectedAt": "2025-06-27T19:29:27.611Z",
+    "resolvedAt": "2025-06-27T20:14:27.611Z",
+    "mttr": 45
+  },
+  {
+    "id": "inc-069",
+    "title": "DDoS-like traffic spike on API gateway",
+    "description": "Assentator quos volva cogo. Aegrotatio caecus alienus denuo doloremque volubilis absconditus desino. Tabgo vigor ter suus volo trepide curtus.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-boehm-greenfelder-94",
+      "cust-crist-llc-92"
+    ],
+    "commander": "emp-194",
+    "timeline": [
+      {
+        "timestamp": "2025-06-17T06:21:30.035Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-194"
+      },
+      {
+        "timestamp": "2025-06-17T06:26:30.035Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-194"
+      },
+      {
+        "timestamp": "2025-06-17T06:36:30.035Z",
+        "action": "Root cause identified",
+        "actor": "emp-013"
+      },
+      {
+        "timestamp": "2025-06-17T06:42:30.035Z",
+        "action": "Service fully restored",
+        "actor": "emp-194"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v0.9.7. Monitoring confirmed.",
+    "detectedAt": "2025-06-17T06:21:30.035Z",
+    "resolvedAt": "2025-06-17T06:42:30.035Z",
+    "mttr": 21
+  },
+  {
+    "id": "inc-070",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Dolorem corporis uredo numquam despecto. Caritas beneficium concedo coniecto delego comis tergeo cavus. Tumultus velit consuasor.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-gusikowski-inc-132",
+      "cust-nienow-and-sons-166",
+      "cust-wehner-blick-and-jacobs-24"
+    ],
+    "commander": "emp-030",
+    "timeline": [
+      {
+        "timestamp": "2025-01-04T09:38:00.207Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-030"
+      },
+      {
+        "timestamp": "2025-01-04T09:43:00.207Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-030"
+      },
+      {
+        "timestamp": "2025-01-04T09:53:00.207Z",
+        "action": "Root cause identified",
+        "actor": "emp-116"
+      },
+      {
+        "timestamp": "2025-01-04T10:04:00.207Z",
+        "action": "Service fully restored",
+        "actor": "emp-030"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v3.17.20. Monitoring confirmed.",
+    "detectedAt": "2025-01-04T09:38:00.207Z",
+    "resolvedAt": "2025-01-04T10:04:00.207Z",
+    "mttr": 26
+  },
+  {
+    "id": "inc-071",
+    "title": "Database replication lag exceeding 60 seconds",
+    "description": "Absque argentum facilis thermae accedo pecco. Appono suscipio provident benevolentia sodalitas aeger acidus doloremque claustrum. Praesentium ventito armarium.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [],
+    "commander": "emp-321",
+    "timeline": [
+      {
+        "timestamp": "2025-07-25T10:10:36.122Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-321"
+      },
+      {
+        "timestamp": "2025-07-25T10:15:36.122Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-321"
+      },
+      {
+        "timestamp": "2025-07-25T10:25:36.122Z",
+        "action": "Root cause identified",
+        "actor": "emp-324"
+      },
+      {
+        "timestamp": "2025-07-25T10:22:36.122Z",
+        "action": "Service fully restored",
+        "actor": "emp-321"
+      }
+    ],
+    "rootCause": "Certificate not rotated before expiration",
+    "resolution": "Applied hotfix. Deployed v1.15.1. Monitoring confirmed.",
+    "detectedAt": "2025-07-25T10:10:36.122Z",
+    "resolvedAt": "2025-07-25T10:22:36.122Z",
+    "mttr": 12
+  },
+  {
+    "id": "inc-072",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Thema dedico dignissimos. Cavus acerbitas veritas vester triduana. Beatae cauda colo omnis conspergo tenetur tollo tempus caste tametsi.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-sipes-group-20",
+      "cust-tromp-cassin-71",
+      "cust-frami-inc-120",
+      "cust-schneider-kozey-and-dare-199",
+      "cust-hermiston-wuckert-and-yost-137"
+    ],
+    "commander": "emp-134",
+    "timeline": [
+      {
+        "timestamp": "2025-08-05T20:47:10.347Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-134"
+      },
+      {
+        "timestamp": "2025-08-05T20:52:10.347Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-134"
+      },
+      {
+        "timestamp": "2025-08-05T21:02:10.347Z",
+        "action": "Root cause identified",
+        "actor": "emp-322"
+      },
+      {
+        "timestamp": "2025-08-05T21:25:10.347Z",
+        "action": "Service fully restored",
+        "actor": "emp-134"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v3.3.6. Monitoring confirmed.",
+    "detectedAt": "2025-08-05T20:47:10.347Z",
+    "resolvedAt": "2025-08-05T21:25:10.347Z",
+    "mttr": 38
+  },
+  {
+    "id": "inc-073",
+    "title": "Connect adapter outage — webhooks failing",
+    "description": "Approbo admiratio vapulus tunc. Beatae paens tepesco patior alii anser atque patior. Expedita sordeo thalassinus sto vaco adsum.",
+    "severity": "P1",
+    "status": "mitigated",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [],
+    "commander": "emp-196",
+    "timeline": [
+      {
+        "timestamp": "2025-05-12T02:03:15.215Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-196"
+      },
+      {
+        "timestamp": "2025-05-12T02:08:15.215Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-196"
+      },
+      {
+        "timestamp": "2025-05-12T02:18:15.215Z",
+        "action": "Root cause identified",
+        "actor": "emp-122"
+      }
+    ],
+    "rootCause": "Memory allocation bug in v2.14.0",
+    "resolution": "Applied hotfix. Deployed v8.9.17. Monitoring confirmed.",
+    "detectedAt": "2025-05-12T02:03:15.215Z",
+    "resolvedAt": null,
+    "mttr": null
+  },
+  {
+    "id": "inc-074",
+    "title": "Guard policy engine returning incorrect decisions",
+    "description": "Umquam asporto quod thermae vulgaris quae tepesco arcus. Supellex asperiores vorax molestias nostrum decerno subiungo suppellex teres thesaurus. Vinitor victoria defaeco cenaculum super.",
+    "severity": "P1",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-abbott-stanton-161",
+      "cust-labadie-inc-160"
+    ],
+    "commander": "emp-140",
+    "timeline": [
+      {
+        "timestamp": "2025-06-01T12:18:04.137Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-140"
+      },
+      {
+        "timestamp": "2025-06-01T12:23:04.137Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-140"
+      },
+      {
+        "timestamp": "2025-06-01T12:33:04.137Z",
+        "action": "Root cause identified",
+        "actor": "emp-189"
+      },
+      {
+        "timestamp": "2025-06-01T13:06:04.137Z",
+        "action": "Service fully restored",
+        "actor": "emp-140"
+      }
+    ],
+    "rootCause": "Third-party dependency rate limit exceeded",
+    "resolution": "Applied hotfix. Deployed v4.10.13. Monitoring confirmed.",
+    "detectedAt": "2025-06-01T12:18:04.137Z",
+    "resolvedAt": "2025-06-01T13:06:04.137Z",
+    "mttr": 48
+  },
+  {
+    "id": "inc-075",
+    "title": "Auth service timeout — users unable to log in",
+    "description": "Usque spectaculum id cervus suscipit. Agnosco synagoga vulpes deleniti. Viridis commemoro texo brevis ut clarus.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [],
+    "commander": "emp-106",
+    "timeline": [
+      {
+        "timestamp": "2025-07-07T05:23:48.080Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-106"
+      },
+      {
+        "timestamp": "2025-07-07T05:28:48.080Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-106"
+      },
+      {
+        "timestamp": "2025-07-07T05:38:48.080Z",
+        "action": "Root cause identified",
+        "actor": "emp-067"
+      },
+      {
+        "timestamp": "2025-07-07T05:50:48.080Z",
+        "action": "Service fully restored",
+        "actor": "emp-106"
+      }
+    ],
+    "rootCause": "Unindexed query causing full table scan",
+    "resolution": "Applied hotfix. Deployed v7.0.14. Monitoring confirmed.",
+    "detectedAt": "2025-07-07T05:23:48.080Z",
+    "resolvedAt": "2025-07-07T05:50:48.080Z",
+    "mttr": 27
+  },
+  {
+    "id": "inc-076",
+    "title": "Data loss incident in analytics stream",
+    "description": "Colligo crudelis quia accendo. Cicuta acidus quasi. Vulpes dicta sursum.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-analytics",
+    "affectedCustomers": [
+      "cust-wehner-haag-202",
+      "cust-boyer-wilkinson-79",
+      "cust-kunde-shields-83",
+      "cust-cronin-grimes-and-boyer-29",
+      "cust-kassulke-mann-169"
+    ],
+    "commander": "emp-118",
+    "timeline": [
+      {
+        "timestamp": "2025-09-01T08:00:03.847Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-118"
+      },
+      {
+        "timestamp": "2025-09-01T08:05:03.847Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-118"
+      },
+      {
+        "timestamp": "2025-09-01T08:15:03.847Z",
+        "action": "Root cause identified",
+        "actor": "emp-326"
+      },
+      {
+        "timestamp": "2025-09-01T08:21:03.847Z",
+        "action": "Service fully restored",
+        "actor": "emp-118"
+      }
+    ],
+    "rootCause": "Misconfigured load balancer after routine deployment",
+    "resolution": "Applied hotfix. Deployed v2.5.0. Monitoring confirmed.",
+    "detectedAt": "2025-09-01T08:00:03.847Z",
+    "resolvedAt": "2025-09-01T08:21:03.847Z",
+    "mttr": 21
+  },
+  {
+    "id": "inc-077",
+    "title": "Guard policy engine returning incorrect decisions",
+    "description": "Calamitas deleniti usus vestigium vigilo desparatus. Ver strenuus virtus sumo abundans. Optio ventito patrocinor utrum vos fugiat conicio corporis.",
+    "severity": "P2",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-hodkiewicz-schmitt-and-miller-198",
+      "cust-price-hammes-25",
+      "cust-donnelly-zulauf-102",
+      "cust-prohaska-group-90",
+      "cust-schowalter-mraz-and-steuber-98"
+    ],
+    "commander": "emp-013",
+    "timeline": [
+      {
+        "timestamp": "2025-07-30T22:39:13.589Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-013"
+      },
+      {
+        "timestamp": "2025-07-30T22:44:13.589Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-013"
+      },
+      {
+        "timestamp": "2025-07-30T22:54:13.589Z",
+        "action": "Root cause identified",
+        "actor": "emp-084"
+      },
+      {
+        "timestamp": "2025-07-30T23:22:13.589Z",
+        "action": "Service fully restored",
+        "actor": "emp-013"
+      }
+    ],
+    "rootCause": "Certificate not rotated before expiration",
+    "resolution": "Applied hotfix. Deployed v4.16.15. Monitoring confirmed.",
+    "detectedAt": "2025-07-30T22:39:13.589Z",
+    "resolvedAt": "2025-07-30T23:22:13.589Z",
+    "mttr": 43
+  },
+  {
+    "id": "inc-078",
+    "title": "Auth service timeout — users unable to log in",
+    "description": "Audax comptus vespillo consuasor atavus aeneus minus. Conitor admoveo vox. Denuo contego cupiditas.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-platform",
+    "affectedCustomers": [
+      "cust-hills-hilpert-130",
+      "cust-keebler-inc-101",
+      "cust-kunde-llc-33",
+      "cust-lowe-corkery-and-gerlach-70"
+    ],
+    "commander": "emp-061",
+    "timeline": [
+      {
+        "timestamp": "2025-09-11T09:07:32.201Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-061"
+      },
+      {
+        "timestamp": "2025-09-11T09:12:32.201Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-061"
+      },
+      {
+        "timestamp": "2025-09-11T09:22:32.201Z",
+        "action": "Root cause identified",
+        "actor": "emp-197"
+      },
+      {
+        "timestamp": "2025-09-11T09:37:32.201Z",
+        "action": "Service fully restored",
+        "actor": "emp-061"
+      }
+    ],
+    "rootCause": "Network partition between AZs",
+    "resolution": "Applied hotfix. Deployed v0.10.4. Monitoring confirmed.",
+    "detectedAt": "2025-09-11T09:07:32.201Z",
+    "resolvedAt": "2025-09-11T09:37:32.201Z",
+    "mttr": 30
+  },
+  {
+    "id": "inc-079",
+    "title": "Analytics data pipeline stalled",
+    "description": "Venia illum demergo conatus valens supra delibero cruciamentum truculenter magni. Vix arcus harum in statim amita acerbitas tergeo cado. Abbas cedo minima tamisium.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-guard",
+    "affectedCustomers": [
+      "cust-stroman-zboncak-and-goldner-192"
+    ],
+    "commander": "emp-186",
+    "timeline": [
+      {
+        "timestamp": "2025-04-07T12:13:02.819Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-186"
+      },
+      {
+        "timestamp": "2025-04-07T12:18:02.819Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-186"
+      },
+      {
+        "timestamp": "2025-04-07T12:28:02.819Z",
+        "action": "Root cause identified",
+        "actor": "emp-197"
+      },
+      {
+        "timestamp": "2025-04-07T12:30:02.819Z",
+        "action": "Service fully restored",
+        "actor": "emp-186"
+      }
+    ],
+    "rootCause": "Infrastructure autoscaling misconfigured",
+    "resolution": "Applied hotfix. Deployed v8.14.4. Monitoring confirmed.",
+    "detectedAt": "2025-04-07T12:13:02.819Z",
+    "resolvedAt": "2025-04-07T12:30:02.819Z",
+    "mttr": 17
+  },
+  {
+    "id": "inc-080",
+    "title": "SSL certificate expiration on Connect endpoints",
+    "description": "Urbs tempore comis necessitatibus adiuvo tracto. Spero talus demonstro molestiae averto audeo contabesco. Defleo paens vitae appositus tribuo sint summopere voluptates beatae.",
+    "severity": "P3",
+    "status": "resolved",
+    "affectedProduct": "prod-connect",
+    "affectedCustomers": [
+      "cust-koelpin-altenwerth-148",
+      "cust-shields-ankunding-158",
+      "cust-flatley-fritsch-and-klocko-122"
+    ],
+    "commander": "emp-117",
+    "timeline": [
+      {
+        "timestamp": "2025-04-12T20:22:38.861Z",
+        "action": "Incident detected via monitoring",
+        "actor": "emp-117"
+      },
+      {
+        "timestamp": "2025-04-12T20:27:38.861Z",
+        "action": "Incident channel created, team paged",
+        "actor": "emp-117"
+      },
+      {
+        "timestamp": "2025-04-12T20:37:38.861Z",
+        "action": "Root cause identified",
+        "actor": "emp-157"
+      },
+      {
+        "timestamp": "2025-04-12T20:59:38.861Z",
+        "action": "Service fully restored",
+        "actor": "emp-117"
+      }
+    ],
+    "rootCause": "Certificate not rotated before expiration",
+    "resolution": "Applied hotfix. Deployed v2.12.16. Monitoring confirmed.",
+    "detectedAt": "2025-04-12T20:22:38.861Z",
+    "resolvedAt": "2025-04-12T20:59:38.861Z",
+    "mttr": 37
+  }
+]

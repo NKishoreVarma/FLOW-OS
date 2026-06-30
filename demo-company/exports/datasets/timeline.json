@@ -1,0 +1,6502 @@
+[
+  {
+    "id": "tl-092",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Tamquam repellat suffoco voluptatibus viduo voluntarius.",
+    "timestamp": "2025-01-02T12:14:26.373Z",
+    "actors": [
+      "emp-007"
+    ],
+    "relatedId": "doc-019",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-133",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Sopor ascisco recusandae commemoro velum pel.",
+    "timestamp": "2025-01-04T00:34:08.815Z",
+    "actors": [
+      "emp-181"
+    ],
+    "relatedId": "HANA-16",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-223",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Vivo cognatus vito strues ducimus vigilo volubilis a vespillo.",
+    "timestamp": "2025-01-04T04:20:25.937Z",
+    "actors": [
+      "emp-061"
+    ],
+    "relatedId": "HCON-198",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-128",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Velit contra ter alii tollo balbus uxor.",
+    "timestamp": "2025-01-04T05:41:32.337Z",
+    "actors": [
+      "emp-397"
+    ],
+    "relatedId": "cal-284",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-330",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Stark, Bergnaum and Emmerich",
+    "description": "Apparatus centum aestivus adsum antiquus triduana angustus.",
+    "timestamp": "2025-01-04T12:59:00.676Z",
+    "actors": [
+      "emp-399"
+    ],
+    "relatedId": "cust-stark-bergnaum-and-emmerich-22",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-303",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Macejkovic - Kerluke",
+    "description": "Terror animadverto alias celo aegrotatio denique coniecto defendo.",
+    "timestamp": "2025-01-05T09:40:04.341Z",
+    "actors": [
+      "emp-084"
+    ],
+    "relatedId": "cust-macejkovic-kerluke-205",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-024",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Repellendus angustus circumvenio turpis apparatus atrocitas quibusdam.",
+    "timestamp": "2025-01-05T12:29:27.604Z",
+    "actors": [
+      "emp-281"
+    ],
+    "relatedId": "cal-118",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-402",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Cubitum comptus tyrannus campana ver tribuo decor.",
+    "timestamp": "2025-01-05T12:54:22.958Z",
+    "actors": [
+      "emp-361"
+    ],
+    "relatedId": "doc-307",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-435",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Chirographum adulatio basium aggero advoco vallum tribuo.",
+    "timestamp": "2025-01-05T21:06:36.017Z",
+    "actors": [
+      "emp-368"
+    ],
+    "relatedId": "HPLT-57",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-481",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Vespillo complectus laboriosam temeritas verumtamen deripio.",
+    "timestamp": "2025-01-06T20:00:31.141Z",
+    "actors": [
+      "emp-348"
+    ],
+    "relatedId": "cal-283",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-044",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Magnam communis temeritas ultio commemoro.",
+    "timestamp": "2025-01-08T05:00:22.153Z",
+    "actors": [
+      "emp-383"
+    ],
+    "relatedId": "HGRD-248",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-025",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Tamquam et degenero versus a quibusdam coaegresco vester.",
+    "timestamp": "2025-01-09T19:47:25.073Z",
+    "actors": [
+      "emp-398"
+    ],
+    "relatedId": "doc-223",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-005",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Bestia validus damnatio corrigo spargo.",
+    "timestamp": "2025-01-10T07:11:52.133Z",
+    "actors": [
+      "emp-297"
+    ],
+    "relatedId": "inc-058",
+    "relatedType": "incident",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-387",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Hayes Group",
+    "description": "Neque acer caries consectetur amplus subseco deputo desino appono auditor.",
+    "timestamp": "2025-01-10T10:20:46.089Z",
+    "actors": [
+      "emp-348"
+    ],
+    "relatedId": "cust-hayes-group-112",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-253",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Corrupti cognatus tantillus omnis a labore corrupti.",
+    "timestamp": "2025-01-11T00:43:55.436Z",
+    "actors": [
+      "emp-194"
+    ],
+    "relatedId": "HGRD-274",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-383",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Ventosus rem coma cohors deprimo synagoga vacuus deputo.",
+    "timestamp": "2025-01-11T10:35:36.232Z",
+    "actors": [
+      "emp-156"
+    ],
+    "relatedId": "emp-152",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-195",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Cicuta benevolentia nihil vulticulus damno terreo.",
+    "timestamp": "2025-01-12T14:42:34.213Z",
+    "actors": [
+      "emp-324"
+    ],
+    "relatedId": "HPLT-8",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-116",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Dedico trans tempora depopulo.",
+    "timestamp": "2025-01-13T19:08:42.617Z",
+    "actors": [
+      "emp-345"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-207",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Cauda vilis suscipit vaco repudiandae utique.",
+    "timestamp": "2025-01-14T00:24:18.323Z",
+    "actors": [
+      "emp-060"
+    ],
+    "relatedId": "emp-068",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-472",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Kunde - Shields",
+    "description": "Curto nemo apto reprehenderit stipes doloribus creo.",
+    "timestamp": "2025-01-15T10:47:36.125Z",
+    "actors": [
+      "emp-324"
+    ],
+    "relatedId": "cust-kunde-shields-83",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-401",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Deleniti virtus quis aurum cado sublime cimentarius adiuvo vado vel.",
+    "timestamp": "2025-01-17T10:06:38.717Z",
+    "actors": [
+      "emp-023"
+    ],
+    "relatedId": "inc-039",
+    "relatedType": "incident",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-456",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Delicate cognatus tricesimus tamdiu villa adipiscor omnis tero toties.",
+    "timestamp": "2025-01-17T20:31:32.758Z",
+    "actors": [
+      "emp-044"
+    ],
+    "relatedId": "inc-016",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-118",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Concedo adfectus repudiandae reprehenderit venio architecto vergo thymum.",
+    "timestamp": "2025-01-18T21:03:44.723Z",
+    "actors": [
+      "emp-183"
+    ],
+    "relatedId": "emp-409",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-298",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Cado aeternus voluptas.",
+    "timestamp": "2025-01-19T02:59:19.605Z",
+    "actors": [
+      "emp-367"
+    ],
+    "relatedId": "emp-385",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-180",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Tricesimus patria depopulo villa maiores testimonium dolore cenaculum crustulum pax.",
+    "timestamp": "2025-01-19T11:35:36.475Z",
+    "actors": [
+      "emp-383"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-027",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Spiculum titulus barba.",
+    "timestamp": "2025-01-19T14:35:24.668Z",
+    "actors": [
+      "emp-016"
+    ],
+    "relatedId": "HPLT-218",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-073",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Adeptio vix solvo vulticulus conturbo vesica bardus velociter suffoco.",
+    "timestamp": "2025-01-19T15:17:32.262Z",
+    "actors": [
+      "emp-105"
+    ],
+    "relatedId": "emp-429",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-305",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Ventus tristis sit altus capto volva adstringo cogito.",
+    "timestamp": "2025-01-19T16:55:09.855Z",
+    "actors": [
+      "emp-183"
+    ],
+    "relatedId": "doc-232",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-356",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Williamson, Wehner and Cummings",
+    "description": "Tui arguo error clementia careo.",
+    "timestamp": "2025-01-19T21:18:39.282Z",
+    "actors": [
+      "emp-065"
+    ],
+    "relatedId": "cust-williamson-wehner-and-cummings-28",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-135",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Comparo quod coniecto vox volaticus vulnus veritatis suadeo deserunt.",
+    "timestamp": "2025-01-20T08:34:47.998Z",
+    "actors": [
+      "emp-341"
+    ],
+    "relatedId": "HANA-255",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-436",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Tepesco corrumpo appono ad repellat cicuta delego conqueror spargo crux.",
+    "timestamp": "2025-01-20T15:31:26.472Z",
+    "actors": [
+      "emp-168"
+    ],
+    "relatedId": "doc-325",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-276",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Vinitor colo amicitia tabernus ocer molestias cupio demo sufficio.",
+    "timestamp": "2025-01-20T17:46:53.627Z",
+    "actors": [
+      "emp-220"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-359",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Cibo degenero aestas.",
+    "timestamp": "2025-01-21T09:41:55.864Z",
+    "actors": [
+      "emp-363"
+    ],
+    "relatedId": "inc-068",
+    "relatedType": "incident",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-069",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Videlicet calamitas vulpes repellendus saepe averto vae tribuo varietas crastinus.",
+    "timestamp": "2025-01-22T00:40:33.019Z",
+    "actors": [
+      "emp-111"
+    ],
+    "relatedId": "emp-436",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-063",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Ratke Inc",
+    "description": "Absens depraedor synagoga vinum dens adicio tergum non neque.",
+    "timestamp": "2025-01-22T18:17:55.225Z",
+    "actors": [
+      "emp-342"
+    ],
+    "relatedId": "cust-ratke-inc-126",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-470",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Altenwerth - Berge",
+    "description": "Tristis creta suffoco deorsum truculenter laudantium.",
+    "timestamp": "2025-01-22T22:26:11.799Z",
+    "actors": [
+      "emp-227"
+    ],
+    "relatedId": "cust-altenwerth-berge-38",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-333",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Tamen taedium minima autus cauda conitor cultura una.",
+    "timestamp": "2025-01-27T11:22:42.468Z",
+    "actors": [
+      "emp-285"
+    ],
+    "relatedId": "HPLT-95",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-494",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Illum vesper coepi deludo benigne decipio.",
+    "timestamp": "2025-01-28T17:01:05.635Z",
+    "actors": [
+      "emp-197"
+    ],
+    "relatedId": "cal-058",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-483",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Sum theca veritatis sum stabilis subnecto teres.",
+    "timestamp": "2025-01-28T19:07:55.690Z",
+    "actors": [
+      "emp-359"
+    ],
+    "relatedId": "cal-246",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-057",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Nisi amita thesis minus crudelis corrupti vulnero volva coruscus.",
+    "timestamp": "2025-01-30T00:59:51.805Z",
+    "actors": [
+      "emp-101"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-428",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Copiose expedita admoneo.",
+    "timestamp": "2025-01-30T07:43:49.777Z",
+    "actors": [
+      "emp-389"
+    ],
+    "relatedId": "inc-079",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-500",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Accusator denuncio vaco cenaculum tertius adamo tyrannus thymbra tempus.",
+    "timestamp": "2025-01-30T22:05:36.475Z",
+    "actors": [
+      "emp-089"
+    ],
+    "relatedId": "HPLT-282",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-455",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Vero cruentus accommodo.",
+    "timestamp": "2025-02-01T15:13:28.938Z",
+    "actors": [
+      "emp-445"
+    ],
+    "relatedId": "emp-066",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-021",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Timor aufero cimentarius argentum volubilis ager tamquam.",
+    "timestamp": "2025-02-01T16:50:45.052Z",
+    "actors": [
+      "emp-132"
+    ],
+    "relatedId": "inc-036",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-053",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Caries creptio sum asperiores succedo appositus.",
+    "timestamp": "2025-02-01T17:05:07.325Z",
+    "actors": [
+      "emp-385"
+    ],
+    "relatedId": "doc-191",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-066",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Libero magni sumptus debitis aeger.",
+    "timestamp": "2025-02-03T07:17:41.974Z",
+    "actors": [
+      "emp-280"
+    ],
+    "relatedId": "cal-065",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-094",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Thesis architecto demonstro curia ter tunc.",
+    "timestamp": "2025-02-04T06:00:21.050Z",
+    "actors": [
+      "emp-402"
+    ],
+    "relatedId": "HANA-95",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-121",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Cumque asporto cupressus termes succurro anser.",
+    "timestamp": "2025-02-05T02:53:38.680Z",
+    "actors": [
+      "emp-051"
+    ],
+    "relatedId": "doc-025",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-165",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Sustineo surculus inflammatio amplexus depono depopulo solus a thema.",
+    "timestamp": "2025-02-10T02:10:01.977Z",
+    "actors": [
+      "emp-351"
+    ],
+    "relatedId": "HPLT-182",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-183",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Comes caries termes speciosus earum adaugeo conculco rerum voluptatum.",
+    "timestamp": "2025-02-10T10:21:36.007Z",
+    "actors": [
+      "emp-091"
+    ],
+    "relatedId": "inc-055",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-272",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Mante LLC",
+    "description": "Conculco solium quae alienus cupiditas caveo.",
+    "timestamp": "2025-02-10T11:22:28.748Z",
+    "actors": [
+      "emp-211"
+    ],
+    "relatedId": "cust-mante-llc-11",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-013",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Platform new version released",
+    "description": "Consuasor autem agnosco.",
+    "timestamp": "2025-02-10T12:17:30.351Z",
+    "actors": [
+      "emp-441"
+    ],
+    "relatedId": "prod-platform",
+    "relatedType": "product",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-218",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Cursim sonitus dedico odit.",
+    "timestamp": "2025-02-10T23:54:42.737Z",
+    "actors": [
+      "emp-136"
+    ],
+    "relatedId": "inc-024",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-295",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Absorbeo autem cunae depereo coepi curis pauci.",
+    "timestamp": "2025-02-11T09:21:22.130Z",
+    "actors": [
+      "emp-269"
+    ],
+    "relatedId": "emp-020",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-451",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Capto autem alias tabella adsuesco.",
+    "timestamp": "2025-02-11T17:08:22.249Z",
+    "actors": [
+      "emp-031"
+    ],
+    "relatedId": "HCON-227",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-038",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Adipiscor corrumpo explicabo enim dignissimos tactus labore accusantium.",
+    "timestamp": "2025-02-11T23:08:53.598Z",
+    "actors": [
+      "emp-062"
+    ],
+    "relatedId": "cal-059",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-062",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Arx voluptas taceo terra perferendis.",
+    "timestamp": "2025-02-13T09:54:40.521Z",
+    "actors": [
+      "emp-126"
+    ],
+    "relatedId": "cal-298",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-078",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Praesentium balbus decens sapiente quae cupiditas audentia.",
+    "timestamp": "2025-02-13T10:44:34.157Z",
+    "actors": [
+      "emp-263"
+    ],
+    "relatedId": "cal-123",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-344",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Copia aegre annus decet baiulus concido capio quis.",
+    "timestamp": "2025-02-14T19:33:13.093Z",
+    "actors": [
+      "emp-131"
+    ],
+    "relatedId": "HANA-276",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-234",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Cole, Bernier and Ferry",
+    "description": "Sumo tumultus conturbo.",
+    "timestamp": "2025-02-14T20:16:53.216Z",
+    "actors": [
+      "emp-264"
+    ],
+    "relatedId": "cust-cole-bernier-and-ferry-39",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-158",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Utique vester dolorum annus.",
+    "timestamp": "2025-02-16T04:44:50.179Z",
+    "actors": [
+      "emp-201"
+    ],
+    "relatedId": "HANA-184",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-085",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Statim audeo tero vulticulus considero valetudo amplitudo comburo est exercitationem.",
+    "timestamp": "2025-02-17T20:16:42.147Z",
+    "actors": [
+      "emp-300"
+    ],
+    "relatedId": "HANA-69",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-495",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Arbustum veritas stillicidium coadunatio sunt thema.",
+    "timestamp": "2025-02-18T20:34:40.149Z",
+    "actors": [
+      "emp-086"
+    ],
+    "relatedId": "doc-115",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-264",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Ulterius ciminatio culpa spero degenero tabgo uberrime ipsa.",
+    "timestamp": "2025-02-18T23:24:29.174Z",
+    "actors": [
+      "emp-394"
+    ],
+    "relatedId": "HCON-98",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-164",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Terreo urbanus cogito terror pectus quidem.",
+    "timestamp": "2025-02-20T00:10:19.788Z",
+    "actors": [
+      "emp-121"
+    ],
+    "relatedId": "cal-243",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-138",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Capio culpo nam peccatus asper amor maxime arx.",
+    "timestamp": "2025-02-20T00:18:17.844Z",
+    "actors": [
+      "emp-231"
+    ],
+    "relatedId": "inc-026",
+    "relatedType": "incident",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-214",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Lowe, Corkery and Gerlach",
+    "description": "Velit patior nemo sperno contigo voco aetas sordeo nesciunt audax.",
+    "timestamp": "2025-02-22T00:56:56.632Z",
+    "actors": [
+      "emp-426"
+    ],
+    "relatedId": "cust-lowe-corkery-and-gerlach-70",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-310",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Sortitus timor amicitia reprehenderit aegrotatio.",
+    "timestamp": "2025-02-23T07:46:55.938Z",
+    "actors": [
+      "emp-435"
+    ],
+    "relatedId": "inc-056",
+    "relatedType": "incident",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-174",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Eaque desipio articulus excepturi tego.",
+    "timestamp": "2025-02-24T06:01:15.397Z",
+    "actors": [
+      "emp-024"
+    ],
+    "relatedId": "emp-106",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-175",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Cunae deporto sustineo.",
+    "timestamp": "2025-02-24T17:06:37.421Z",
+    "actors": [
+      "emp-391"
+    ],
+    "relatedId": "emp-238",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-007",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Tametsi sortitus deserunt amo cibus rerum degusto tempore templum carbo.",
+    "timestamp": "2025-02-24T21:12:57.140Z",
+    "actors": [
+      "emp-242"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-222",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Thema carbo currus conscendo maxime aestivus solvo aperte aeneus.",
+    "timestamp": "2025-02-25T21:23:23.676Z",
+    "actors": [
+      "emp-324"
+    ],
+    "relatedId": "cal-127",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-095",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Dapifer vilis adinventitias vesica trans cilicium tempore nobis tracto ipsam.",
+    "timestamp": "2025-02-27T06:10:42.068Z",
+    "actors": [
+      "emp-423"
+    ],
+    "relatedId": "doc-309",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-191",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Prohaska and Sons",
+    "description": "Conservo ustilo adimpleo talio tergo bardus.",
+    "timestamp": "2025-02-28T01:26:33.947Z",
+    "actors": [
+      "emp-090"
+    ],
+    "relatedId": "cust-prohaska-and-sons-186",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-060",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Abundans corona cupiditas valde ipsam demitto careo et possimus.",
+    "timestamp": "2025-02-28T16:28:36.040Z",
+    "actors": [
+      "emp-446"
+    ],
+    "relatedId": "doc-256",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-342",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Voluptas totam dens incidunt illo tertius sophismata ara taedium turbo.",
+    "timestamp": "2025-02-28T23:45:46.340Z",
+    "actors": [
+      "emp-147"
+    ],
+    "relatedId": "HGRD-26",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-458",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Laudantium tenus vigor.",
+    "timestamp": "2025-03-01T22:10:47.380Z",
+    "actors": [
+      "emp-278"
+    ],
+    "relatedId": "cal-094",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-393",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Asperiores thesaurus dedecor adfectus fugiat tibi.",
+    "timestamp": "2025-03-02T01:47:36.260Z",
+    "actors": [
+      "emp-328"
+    ],
+    "relatedId": "emp-061",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-265",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Kiehn - Kuphal",
+    "description": "Tepesco alius vobis solutio.",
+    "timestamp": "2025-03-02T04:13:22.647Z",
+    "actors": [
+      "emp-282"
+    ],
+    "relatedId": "cust-kiehn-kuphal-40",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-250",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Velum confugo correptius territo subseco tabernus aggredior.",
+    "timestamp": "2025-03-03T04:29:49.009Z",
+    "actors": [
+      "emp-065"
+    ],
+    "relatedId": "emp-173",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-089",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Deludo caecus succedo congregatio dolor.",
+    "timestamp": "2025-03-04T00:39:10.716Z",
+    "actors": [
+      "emp-238"
+    ],
+    "relatedId": "cal-205",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-431",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Franecki and Sons",
+    "description": "Voluptate bonus cibus crebro velut crur desolo currus claudeo.",
+    "timestamp": "2025-03-04T07:29:27.375Z",
+    "actors": [
+      "emp-401"
+    ],
+    "relatedId": "cust-franecki-and-sons-179",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-352",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Demonstro talus defero veritatis nemo aro vitium.",
+    "timestamp": "2025-03-04T16:07:22.764Z",
+    "actors": [
+      "emp-361"
+    ],
+    "relatedId": "emp-199",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-343",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Alius bardus verbum terebro sumo similique alias alveus solus.",
+    "timestamp": "2025-03-07T02:47:19.509Z",
+    "actors": [
+      "emp-367"
+    ],
+    "relatedId": "emp-128",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-140",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Acervus audacia optio cumque quod voluptas cupiditas vomica.",
+    "timestamp": "2025-03-07T07:36:17.594Z",
+    "actors": [
+      "emp-082"
+    ],
+    "relatedId": "cal-018",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-316",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Quis laudantium sui ea ascisco surgo.",
+    "timestamp": "2025-03-07T21:49:52.487Z",
+    "actors": [
+      "emp-219"
+    ],
+    "relatedId": "cal-196",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-145",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Vallum thesis statim dolor clibanus.",
+    "timestamp": "2025-03-08T20:38:11.021Z",
+    "actors": [
+      "emp-010"
+    ],
+    "relatedId": "doc-203",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-415",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Decretum causa catena summa.",
+    "timestamp": "2025-03-08T20:45:46.884Z",
+    "actors": [
+      "emp-311"
+    ],
+    "relatedId": "inc-062",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-036",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Smitham - Mayert",
+    "description": "Colligo valetudo inflammatio corona talis vitium tot succedo arbor esse.",
+    "timestamp": "2025-03-10T01:25:14.813Z",
+    "actors": [
+      "emp-065"
+    ],
+    "relatedId": "cust-smitham-mayert-6",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-345",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Tandem ara damnatio subseco assentator summa denique damnatio voco.",
+    "timestamp": "2025-03-10T18:41:03.475Z",
+    "actors": [
+      "emp-355"
+    ],
+    "relatedId": "HGRD-63",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-292",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Verumtamen pariatur audacia adipisci ambitus denego demulceo.",
+    "timestamp": "2025-03-12T08:23:07.849Z",
+    "actors": [
+      "emp-087"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-033",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Campana talio ventus trans certe.",
+    "timestamp": "2025-03-12T13:06:07.568Z",
+    "actors": [
+      "emp-403"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-367",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Vix adfectus veritas capitulus aegre vetus vel odit suspendo.",
+    "timestamp": "2025-03-13T04:52:47.443Z",
+    "actors": [
+      "emp-095"
+    ],
+    "relatedId": "HANA-46",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-106",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Boyer - Wilkinson",
+    "description": "Summa audeo vulgaris admitto asperiores cimentarius campana.",
+    "timestamp": "2025-03-13T12:38:29.032Z",
+    "actors": [
+      "emp-378"
+    ],
+    "relatedId": "cust-boyer-wilkinson-79",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-273",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Apparatus aeneus asporto complectus canto colligo spoliatio utilis terra.",
+    "timestamp": "2025-03-14T09:28:31.902Z",
+    "actors": [
+      "emp-125"
+    ],
+    "relatedId": "HGRD-20",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-369",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Illum hic usus.",
+    "timestamp": "2025-03-15T03:18:23.004Z",
+    "actors": [
+      "emp-243"
+    ],
+    "relatedId": "doc-152",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-312",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Cunctatio auditor velum subseco adsum adfectus dicta natus aqua.",
+    "timestamp": "2025-03-18T03:59:40.494Z",
+    "actors": [
+      "emp-411"
+    ],
+    "relatedId": "inc-068",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-017",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Textilis calco optio pauper aestivus demo vos nemo sortitus.",
+    "timestamp": "2025-03-19T21:18:10.554Z",
+    "actors": [
+      "emp-292"
+    ],
+    "relatedId": "doc-162",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-150",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Ciminatio clibanus aiunt demonstro suffoco validus volaticus.",
+    "timestamp": "2025-03-20T10:29:29.089Z",
+    "actors": [
+      "emp-180"
+    ],
+    "relatedId": "HCON-91",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-445",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Angelus allatus ambitus aurum sapiente.",
+    "timestamp": "2025-03-20T16:13:39.498Z",
+    "actors": [
+      "emp-266"
+    ],
+    "relatedId": "doc-181",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-065",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Peior conforto ultio degero veritas angelus curto vulgivagus venia circumvenio.",
+    "timestamp": "2025-03-21T08:06:40.180Z",
+    "actors": [
+      "emp-398"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-260",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Comburo commemoro reprehenderit crux doloremque nostrum cicuta animi.",
+    "timestamp": "2025-03-23T00:58:17.556Z",
+    "actors": [
+      "emp-356"
+    ],
+    "relatedId": "cal-047",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-267",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Talis non aedificium audio cornu.",
+    "timestamp": "2025-03-23T10:54:39.171Z",
+    "actors": [
+      "emp-446"
+    ],
+    "relatedId": "inc-008",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-254",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Adstringo demens colligo armarium contigo deputo deporto ager.",
+    "timestamp": "2025-03-24T20:20:38.408Z",
+    "actors": [
+      "emp-098"
+    ],
+    "relatedId": "emp-338",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-107",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Earum timidus autem abutor denego aveho tergiversatio abundans vespillo demum.",
+    "timestamp": "2025-03-25T04:37:58.521Z",
+    "actors": [
+      "emp-350"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-315",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Cresco sollers clementia.",
+    "timestamp": "2025-03-25T21:50:41.863Z",
+    "actors": [
+      "emp-077"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-351",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Altenwerth - Berge",
+    "description": "Tribuo mollitia nihil uberrime coruscus quasi subito.",
+    "timestamp": "2025-03-27T03:37:20.415Z",
+    "actors": [
+      "emp-429"
+    ],
+    "relatedId": "cust-altenwerth-berge-38",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-034",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Okuneva, Marquardt and Muller",
+    "description": "Omnis benevolentia auctor cimentarius adamo defleo enim numquam complectus succedo.",
+    "timestamp": "2025-03-27T11:51:56.362Z",
+    "actors": [
+      "emp-006"
+    ],
+    "relatedId": "cust-okuneva-marquardt-and-muller-45",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-498",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Armarium candidus copiose conitor thermae deleniti.",
+    "timestamp": "2025-03-27T21:04:34.363Z",
+    "actors": [
+      "emp-381"
+    ],
+    "relatedId": "cal-162",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-166",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Maxime contabesco cursus curriculum concido porro annus ventito.",
+    "timestamp": "2025-03-28T01:17:12.631Z",
+    "actors": [
+      "emp-195"
+    ],
+    "relatedId": "doc-291",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-293",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Molestias vetus desidero comparo terga caritas solium accendo.",
+    "timestamp": "2025-03-28T14:23:31.876Z",
+    "actors": [
+      "emp-337"
+    ],
+    "relatedId": "doc-366",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-082",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Nemo unus cunae error.",
+    "timestamp": "2025-03-30T12:51:45.113Z",
+    "actors": [
+      "emp-061"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-203",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Cras dens defero minus reprehenderit delinquo conforto aperte commemoro advenio.",
+    "timestamp": "2025-03-30T20:00:47.408Z",
+    "actors": [
+      "emp-340"
+    ],
+    "relatedId": "cal-107",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-112",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Magni curriculum corpus condico atavus campana spes ante defleo dolorum.",
+    "timestamp": "2025-03-31T11:47:19.121Z",
+    "actors": [
+      "emp-356"
+    ],
+    "relatedId": "HGRD-2",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-279",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Thesaurus delego contego harum altus socius volaticus nobis id ipsa.",
+    "timestamp": "2025-03-31T21:24:37.970Z",
+    "actors": [
+      "emp-420"
+    ],
+    "relatedId": "emp-048",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-308",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Stroman, Zboncak and Goldner",
+    "description": "Pecto degero umbra.",
+    "timestamp": "2025-04-03T13:27:10.119Z",
+    "actors": [
+      "emp-264"
+    ],
+    "relatedId": "cust-stroman-zboncak-and-goldner-192",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-482",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Audacia amiculum urbs balbus audentia impedit.",
+    "timestamp": "2025-04-04T00:02:41.774Z",
+    "actors": [
+      "emp-313"
+    ],
+    "relatedId": "inc-053",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-190",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Cena adopto acervus.",
+    "timestamp": "2025-04-04T20:56:48.168Z",
+    "actors": [
+      "emp-062"
+    ],
+    "relatedId": "cal-277",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-302",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Cerno solitudo cubo absum sequi adeo comparo complectus demens.",
+    "timestamp": "2025-04-05T01:39:50.387Z",
+    "actors": [
+      "emp-335"
+    ],
+    "relatedId": "doc-375",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-117",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Cunae deleniti similique.",
+    "timestamp": "2025-04-05T04:48:22.278Z",
+    "actors": [
+      "emp-049"
+    ],
+    "relatedId": "HPLT-124",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-059",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Cursim dolorum artificiose non expedita cursus.",
+    "timestamp": "2025-04-05T07:23:47.347Z",
+    "actors": [
+      "emp-400"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-159",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Nienow LLC",
+    "description": "Aestivus nobis cubo cura.",
+    "timestamp": "2025-04-06T14:40:01.671Z",
+    "actors": [
+      "emp-115"
+    ],
+    "relatedId": "cust-nienow-llc-154",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-170",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Canonicus verbum textor deduco socius adhaero commodi deludo.",
+    "timestamp": "2025-04-06T23:03:45.380Z",
+    "actors": [
+      "emp-336"
+    ],
+    "relatedId": "doc-201",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-490",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Voveo degenero alias cariosus cena atqui impedit aeger capto.",
+    "timestamp": "2025-04-07T23:00:33.431Z",
+    "actors": [
+      "emp-118"
+    ],
+    "relatedId": "doc-327",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-068",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Terminatio conventus sordeo anser vinculum audacia volup.",
+    "timestamp": "2025-04-08T02:12:49.828Z",
+    "actors": [
+      "emp-443"
+    ],
+    "relatedId": "doc-112",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-339",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Acquiro contego inflammatio celebrer supellex saepe quo avaritia.",
+    "timestamp": "2025-04-08T12:27:31.934Z",
+    "actors": [
+      "emp-346"
+    ],
+    "relatedId": "emp-090",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-434",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Textilis super cibus.",
+    "timestamp": "2025-04-08T15:11:02.676Z",
+    "actors": [
+      "emp-364"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-152",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Antea congregatio adstringo turbo.",
+    "timestamp": "2025-04-08T21:01:24.012Z",
+    "actors": [
+      "emp-386"
+    ],
+    "relatedId": "cal-067",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-453",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Tenuis amplitudo speculum timidus versus supplanto contra titulus vulgaris.",
+    "timestamp": "2025-04-09T05:15:54.788Z",
+    "actors": [
+      "emp-387"
+    ],
+    "relatedId": "inc-001",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-285",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Thema terebro corrumpo consequatur tertius.",
+    "timestamp": "2025-04-09T09:59:07.488Z",
+    "actors": [
+      "emp-283"
+    ],
+    "relatedId": "doc-115",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-173",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Nihil alias spoliatio.",
+    "timestamp": "2025-04-10T21:08:55.643Z",
+    "actors": [
+      "emp-196"
+    ],
+    "relatedId": "doc-013",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-341",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Aperiam adsum beatae deleo consuasor crustulum ascisco quibusdam depulso balbus.",
+    "timestamp": "2025-04-11T05:05:15.703Z",
+    "actors": [
+      "emp-134"
+    ],
+    "relatedId": "inc-012",
+    "relatedType": "incident",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-210",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Debilito accusamus natus verumtamen bonus eligendi commemoro.",
+    "timestamp": "2025-04-11T09:32:21.920Z",
+    "actors": [
+      "emp-094"
+    ],
+    "relatedId": "doc-351",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-390",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Consequuntur tersus amplitudo bos asporto.",
+    "timestamp": "2025-04-12T22:04:53.022Z",
+    "actors": [
+      "emp-021"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-486",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Tepidus amiculum sortitus.",
+    "timestamp": "2025-04-13T04:31:20.964Z",
+    "actors": [
+      "emp-360"
+    ],
+    "relatedId": "doc-202",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-258",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Suus vilis totam aranea quisquam solum tero stultus calco.",
+    "timestamp": "2025-04-13T05:02:15.480Z",
+    "actors": [
+      "emp-078"
+    ],
+    "relatedId": "emp-380",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-196",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Prohaska Group",
+    "description": "Cedo defluo pecco deporto adimpleo subnecto suggero centum.",
+    "timestamp": "2025-04-14T07:53:19.304Z",
+    "actors": [
+      "emp-166"
+    ],
+    "relatedId": "cust-prohaska-group-90",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-104",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Odio clementia arbor cupio.",
+    "timestamp": "2025-04-15T19:57:50.856Z",
+    "actors": [
+      "emp-321"
+    ],
+    "relatedId": "doc-386",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-409",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Kerluke Inc",
+    "description": "Deleo sufficio colo.",
+    "timestamp": "2025-04-16T20:48:47.317Z",
+    "actors": [
+      "emp-246"
+    ],
+    "relatedId": "cust-kerluke-inc-190",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-076",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Platform new version released",
+    "description": "In adficio aduro.",
+    "timestamp": "2025-04-17T07:29:29.103Z",
+    "actors": [
+      "emp-395"
+    ],
+    "relatedId": "prod-platform",
+    "relatedType": "product",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-182",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Comptus claro decens surgo adeo amitto.",
+    "timestamp": "2025-04-18T18:25:32.603Z",
+    "actors": [
+      "emp-391"
+    ],
+    "relatedId": "HPLT-266",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-040",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Cum utpote totidem summisse defleo cibus repellat.",
+    "timestamp": "2025-04-18T19:54:55.651Z",
+    "actors": [
+      "emp-378"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-039",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Incidunt animus altus tenus compello ventus textor.",
+    "timestamp": "2025-04-18T21:36:27.426Z",
+    "actors": [
+      "emp-070"
+    ],
+    "relatedId": "HPLT-27",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-424",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Cibus acidus torrens canto.",
+    "timestamp": "2025-04-19T00:56:29.759Z",
+    "actors": [
+      "emp-406"
+    ],
+    "relatedId": "cal-178",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-052",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Comedo subseco verus magnam.",
+    "timestamp": "2025-04-21T08:45:14.327Z",
+    "actors": [
+      "emp-275"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-488",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Corporis bonus tribuo statim officia adipiscor cerno.",
+    "timestamp": "2025-04-21T12:31:03.540Z",
+    "actors": [
+      "emp-286"
+    ],
+    "relatedId": "inc-067",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-049",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Utpote auctus apparatus.",
+    "timestamp": "2025-04-23T11:56:57.492Z",
+    "actors": [
+      "emp-119"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-212",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Cuppedia commodi artificiose vulnero itaque decet.",
+    "timestamp": "2025-04-24T09:52:41.482Z",
+    "actors": [
+      "emp-061"
+    ],
+    "relatedId": "inc-016",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-449",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Omnis deficio denego attollo fugit veritatis atque aedificium.",
+    "timestamp": "2025-04-26T22:42:05.306Z",
+    "actors": [
+      "emp-035"
+    ],
+    "relatedId": "HGRD-19",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-404",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Supra clibanus curatio alias subvenio viduo sum.",
+    "timestamp": "2025-04-28T00:42:04.663Z",
+    "actors": [
+      "emp-004"
+    ],
+    "relatedId": "emp-021",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-148",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Pecus volutabrum clibanus alius tabgo ab.",
+    "timestamp": "2025-04-28T13:53:36.282Z",
+    "actors": [
+      "emp-254"
+    ],
+    "relatedId": "cal-044",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-474",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Tibi confero ad umbra advoco combibo undique substantia aqua adflicto.",
+    "timestamp": "2025-04-30T02:53:39.063Z",
+    "actors": [
+      "emp-409"
+    ],
+    "relatedId": "cal-162",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-251",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Vestrum tamdiu nesciunt ante custodia occaecati vesica ars.",
+    "timestamp": "2025-04-30T15:02:11.755Z",
+    "actors": [
+      "emp-343"
+    ],
+    "relatedId": "doc-052",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-002",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Votum stillicidium adnuo demergo nemo.",
+    "timestamp": "2025-05-01T19:08:41.618Z",
+    "actors": [
+      "emp-146"
+    ],
+    "relatedId": "cal-085",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-278",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Succurro angulus commemoro ulterius.",
+    "timestamp": "2025-05-02T01:39:55.500Z",
+    "actors": [
+      "emp-253"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-146",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Boyer Inc",
+    "description": "Conatus conicio curriculum alius cruentus vivo vester vesica.",
+    "timestamp": "2025-05-02T19:58:29.652Z",
+    "actors": [
+      "emp-050"
+    ],
+    "relatedId": "cust-boyer-inc-57",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-394",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: O'Keefe LLC",
+    "description": "Theologus ventosus verbera soleo vetus.",
+    "timestamp": "2025-05-04T10:32:15.521Z",
+    "actors": [
+      "emp-188"
+    ],
+    "relatedId": "cust-o-keefe-llc-104",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-161",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Tergum voluptatibus adopto omnis.",
+    "timestamp": "2025-05-04T23:22:27.861Z",
+    "actors": [
+      "emp-086"
+    ],
+    "relatedId": "HGRD-205",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-432",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Deinde casso collum concido.",
+    "timestamp": "2025-05-06T18:18:40.595Z",
+    "actors": [
+      "emp-127"
+    ],
+    "relatedId": "cal-069",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-009",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Balistreri Inc",
+    "description": "Usus inflammatio tergum recusandae solum confero antiquus celo adaugeo aeneus.",
+    "timestamp": "2025-05-06T22:20:11.860Z",
+    "actors": [
+      "emp-243"
+    ],
+    "relatedId": "cust-balistreri-inc-172",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-411",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Esse ciminatio ulterius celebrer aliquid ea velum sordeo coerceo atrox.",
+    "timestamp": "2025-05-08T15:05:04.839Z",
+    "actors": [
+      "emp-414"
+    ],
+    "relatedId": "inc-067",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-384",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Franecki and Sons",
+    "description": "Audacia utrum desipio cura.",
+    "timestamp": "2025-05-08T18:25:22.616Z",
+    "actors": [
+      "emp-442"
+    ],
+    "relatedId": "cust-franecki-and-sons-179",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-256",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Clarus uxor taceo ascit inflammatio tabernus copiose.",
+    "timestamp": "2025-05-08T22:30:29.756Z",
+    "actors": [
+      "emp-122"
+    ],
+    "relatedId": "doc-044",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-227",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Kassulke - Mann",
+    "description": "Demonstro utroque tepidus vociferor bis crepusculum comis tabernus culpa templum.",
+    "timestamp": "2025-05-09T17:54:30.859Z",
+    "actors": [
+      "emp-051"
+    ],
+    "relatedId": "cust-kassulke-mann-169",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-232",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Terebro esse carcer civis.",
+    "timestamp": "2025-05-09T21:02:34.509Z",
+    "actors": [
+      "emp-077"
+    ],
+    "relatedId": "emp-325",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-464",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Tamisium accedo correptius claudeo bonus cito eligendi denuncio.",
+    "timestamp": "2025-05-10T00:07:49.545Z",
+    "actors": [
+      "emp-382"
+    ],
+    "relatedId": "doc-270",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-473",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Quos deripio paulatim patruus demum.",
+    "timestamp": "2025-05-10T03:09:08.292Z",
+    "actors": [
+      "emp-382"
+    ],
+    "relatedId": "inc-018",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-465",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Spiculum amicitia verumtamen abstergo valeo.",
+    "timestamp": "2025-05-10T11:15:12.881Z",
+    "actors": [
+      "emp-188"
+    ],
+    "relatedId": "HGRD-108",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-219",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Bibo cilicium convoco optio iure atqui vesco adduco compello.",
+    "timestamp": "2025-05-10T22:11:06.593Z",
+    "actors": [
+      "emp-089"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-370",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Dedecor delicate quas expedita patior claustrum cursim amplus.",
+    "timestamp": "2025-05-11T06:01:37.404Z",
+    "actors": [
+      "emp-390"
+    ],
+    "relatedId": "cal-163",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-198",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Victus vix convoco conscendo sol incidunt.",
+    "timestamp": "2025-05-12T09:34:49.455Z",
+    "actors": [
+      "emp-187"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-154",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Temperantia casus fuga aureus.",
+    "timestamp": "2025-05-12T19:46:46.208Z",
+    "actors": [
+      "emp-143"
+    ],
+    "relatedId": "doc-392",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-026",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Ara tonsor ultio.",
+    "timestamp": "2025-05-13T02:45:58.825Z",
+    "actors": [
+      "emp-129"
+    ],
+    "relatedId": "doc-029",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-199",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Amoveo aegrotatio validus deserunt vestrum deprimo colo avarus doloribus.",
+    "timestamp": "2025-05-15T09:33:41.953Z",
+    "actors": [
+      "emp-261"
+    ],
+    "relatedId": "doc-294",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-463",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Claustrum claro argentum enim.",
+    "timestamp": "2025-05-16T21:05:06.723Z",
+    "actors": [
+      "emp-430"
+    ],
+    "relatedId": "inc-021",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-235",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Deficio confero statim usus virgo sunt inflammatio cupiditate iure.",
+    "timestamp": "2025-05-16T23:03:36.539Z",
+    "actors": [
+      "emp-193"
+    ],
+    "relatedId": "doc-238",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-126",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Advenio tenetur rerum spiculum.",
+    "timestamp": "2025-05-17T07:45:55.513Z",
+    "actors": [
+      "emp-209"
+    ],
+    "relatedId": "cal-035",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-224",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Tempora absum derideo illum numquam magnam nam titulus agnosco.",
+    "timestamp": "2025-05-17T08:13:05.703Z",
+    "actors": [
+      "emp-136"
+    ],
+    "relatedId": "emp-412",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-321",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Platform new version released",
+    "description": "Demitto vix fugiat aetas.",
+    "timestamp": "2025-05-17T09:53:50.959Z",
+    "actors": [
+      "emp-046"
+    ],
+    "relatedId": "prod-platform",
+    "relatedType": "product",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-244",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Caute umbra solum possimus quibusdam aufero amet magnam appositus.",
+    "timestamp": "2025-05-17T21:15:00.636Z",
+    "actors": [
+      "emp-348"
+    ],
+    "relatedId": "emp-382",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-271",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Sumptus demulceo bis clarus ut curia cena cito talio.",
+    "timestamp": "2025-05-18T01:18:32.728Z",
+    "actors": [
+      "emp-117"
+    ],
+    "relatedId": "emp-280",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-217",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Angustus astrum defendo spargo.",
+    "timestamp": "2025-05-19T23:36:25.334Z",
+    "actors": [
+      "emp-316"
+    ],
+    "relatedId": "emp-235",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-208",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Socius barba ea cognomen totam sperno alter congregatio brevis.",
+    "timestamp": "2025-05-20T10:14:54.756Z",
+    "actors": [
+      "emp-172"
+    ],
+    "relatedId": "cal-055",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-325",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Repellendus conduco volaticus natus uterque spero aspicio vesco bis totidem.",
+    "timestamp": "2025-05-21T02:48:14.612Z",
+    "actors": [
+      "emp-136"
+    ],
+    "relatedId": "emp-175",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-301",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Cado abscido denuo cubitum neque soluta casus.",
+    "timestamp": "2025-05-22T01:17:26.432Z",
+    "actors": [
+      "emp-191"
+    ],
+    "relatedId": "doc-384",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-022",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Consequuntur natus aegre benevolentia temeritas.",
+    "timestamp": "2025-05-22T01:57:29.203Z",
+    "actors": [
+      "emp-208"
+    ],
+    "relatedId": "cal-068",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-425",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Eius aetas conculco rerum vilis totam cado beatae.",
+    "timestamp": "2025-05-22T15:15:55.208Z",
+    "actors": [
+      "emp-296"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-237",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Schuster - Stroman",
+    "description": "Vere ceno sulum angulus sumo.",
+    "timestamp": "2025-05-22T16:30:35.936Z",
+    "actors": [
+      "emp-047"
+    ],
+    "relatedId": "cust-schuster-stroman-110",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-018",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Mante LLC",
+    "description": "Tametsi tersus sollicito supra delibero vestigium doloremque nam adeo vilis.",
+    "timestamp": "2025-05-22T20:54:02.777Z",
+    "actors": [
+      "emp-151"
+    ],
+    "relatedId": "cust-mante-llc-11",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-372",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Desolo ultio bellum id turpis statim.",
+    "timestamp": "2025-05-23T10:08:09.065Z",
+    "actors": [
+      "emp-102"
+    ],
+    "relatedId": "inc-017",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-088",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Audentia vado turba earum patruus vociferor ea nulla vallum capitulus.",
+    "timestamp": "2025-05-23T21:02:59.572Z",
+    "actors": [
+      "emp-425"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-037",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Articulus cogo attero terra repellat undique creo tempus.",
+    "timestamp": "2025-05-24T01:19:26.997Z",
+    "actors": [
+      "emp-105"
+    ],
+    "relatedId": "HPLT-204",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-296",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Artificiose quae terminatio vociferor victoria.",
+    "timestamp": "2025-05-24T15:42:21.496Z",
+    "actors": [
+      "emp-038"
+    ],
+    "relatedId": "emp-223",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-047",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Victus alias corona perspiciatis benigne stillicidium temeritas curto triduana.",
+    "timestamp": "2025-05-25T11:04:41.205Z",
+    "actors": [
+      "emp-331"
+    ],
+    "relatedId": "inc-032",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-230",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Vetus addo decumbo cognomen earum creptio benevolentia tracto.",
+    "timestamp": "2025-05-26T06:39:14.708Z",
+    "actors": [
+      "emp-096"
+    ],
+    "relatedId": "inc-020",
+    "relatedType": "incident",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-155",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Teres canis tricesimus amet vigor acervus apparatus quibusdam teneo.",
+    "timestamp": "2025-05-26T17:33:31.981Z",
+    "actors": [
+      "emp-058"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-245",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Torqueo aspernatur tres.",
+    "timestamp": "2025-05-28T23:56:41.992Z",
+    "actors": [
+      "emp-339"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-491",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Depulso adfero color appositus deprecator sophismata.",
+    "timestamp": "2025-05-29T16:17:52.742Z",
+    "actors": [
+      "emp-198"
+    ],
+    "relatedId": "cal-085",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-077",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Bibo ago curvo cursus argentum ager dedico.",
+    "timestamp": "2025-05-30T04:01:46.377Z",
+    "actors": [
+      "emp-199"
+    ],
+    "relatedId": "HGRD-82",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-263",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Ager repellat subnecto balbus aureus deprimo aut conitor.",
+    "timestamp": "2025-05-31T02:42:02.389Z",
+    "actors": [
+      "emp-058"
+    ],
+    "relatedId": "emp-125",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-328",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Yundt, Gerhold and Quitzon",
+    "description": "Crebro decimus verbum molestias arbor nemo arbustum auditor.",
+    "timestamp": "2025-05-31T07:44:18.864Z",
+    "actors": [
+      "emp-100"
+    ],
+    "relatedId": "cust-yundt-gerhold-and-quitzon-30",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-142",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Votum depulso ad capillus sequi sursum stultus reiciendis sophismata.",
+    "timestamp": "2025-05-31T10:06:03.181Z",
+    "actors": [
+      "emp-062"
+    ],
+    "relatedId": "doc-242",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-204",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Ater taedium claustrum tabgo iusto cupio necessitatibus infit sint pectus.",
+    "timestamp": "2025-06-02T08:16:15.761Z",
+    "actors": [
+      "emp-352"
+    ],
+    "relatedId": "doc-241",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-414",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Curvo hic titulus tactus subnecto aveho convoco arcus suadeo.",
+    "timestamp": "2025-06-04T06:24:08.397Z",
+    "actors": [
+      "emp-281"
+    ],
+    "relatedId": "inc-040",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-240",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Vergo ara taceo tres arguo decipio claustrum denuo ex turpis.",
+    "timestamp": "2025-06-05T17:27:55.688Z",
+    "actors": [
+      "emp-382"
+    ],
+    "relatedId": "HPLT-30",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-205",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Pacocha - Mante",
+    "description": "Aegre antepono tendo angulus.",
+    "timestamp": "2025-06-08T01:11:52.410Z",
+    "actors": [
+      "emp-144"
+    ],
+    "relatedId": "cust-pacocha-mante-7",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-405",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Cupiditate adimpleo nihil caute.",
+    "timestamp": "2025-06-08T06:36:08.211Z",
+    "actors": [
+      "emp-116"
+    ],
+    "relatedId": "emp-296",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-396",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Vobis claro suscipit tamisium deporto.",
+    "timestamp": "2025-06-08T08:00:55.294Z",
+    "actors": [
+      "emp-077"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-163",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Beatae amo averto compono laudantium suppono defetiscor utique.",
+    "timestamp": "2025-06-08T12:59:23.915Z",
+    "actors": [
+      "emp-428"
+    ],
+    "relatedId": "emp-344",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-412",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Subnecto capto tricesimus pauper bellum dicta.",
+    "timestamp": "2025-06-10T10:00:07.515Z",
+    "actors": [
+      "emp-046"
+    ],
+    "relatedId": "doc-127",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-010",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Vesco substantia tergum aduro vomito.",
+    "timestamp": "2025-06-10T17:36:59.142Z",
+    "actors": [
+      "emp-351"
+    ],
+    "relatedId": "emp-026",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-326",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Conforto repellat concido.",
+    "timestamp": "2025-06-10T21:16:55.324Z",
+    "actors": [
+      "emp-166"
+    ],
+    "relatedId": "inc-063",
+    "relatedType": "incident",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-200",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Quia ullus odio patria eum cometes absorbeo sint pecto.",
+    "timestamp": "2025-06-11T15:44:37.771Z",
+    "actors": [
+      "emp-228"
+    ],
+    "relatedId": "emp-318",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-201",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Accusantium deporto incidunt stabilis.",
+    "timestamp": "2025-06-12T09:30:24.185Z",
+    "actors": [
+      "emp-360"
+    ],
+    "relatedId": "doc-181",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-408",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Vulgo suppono adfectus.",
+    "timestamp": "2025-06-12T09:43:19.633Z",
+    "actors": [
+      "emp-332"
+    ],
+    "relatedId": "cal-015",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-418",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Maxime amaritudo totus.",
+    "timestamp": "2025-06-12T10:30:14.732Z",
+    "actors": [
+      "emp-173"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-429",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Hills - Hilpert",
+    "description": "Demens vitium crur tergo adduco laborum aggredior.",
+    "timestamp": "2025-06-12T11:08:24.320Z",
+    "actors": [
+      "emp-400"
+    ],
+    "relatedId": "cust-hills-hilpert-130",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-137",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Crebro demulceo impedit torrens sint aetas debilito.",
+    "timestamp": "2025-06-13T11:10:00.938Z",
+    "actors": [
+      "emp-170"
+    ],
+    "relatedId": "emp-345",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-496",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Tamen error comitatus arbor beatae.",
+    "timestamp": "2025-06-14T05:35:13.218Z",
+    "actors": [
+      "emp-145"
+    ],
+    "relatedId": "doc-341",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-313",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Stehr - Schmidt",
+    "description": "Undique spiculum animus magni comminor apud voluntarius.",
+    "timestamp": "2025-06-14T21:21:07.143Z",
+    "actors": [
+      "emp-026"
+    ],
+    "relatedId": "cust-stehr-schmidt-31",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-192",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Toy - Gutmann",
+    "description": "Numquam cui quis cinis.",
+    "timestamp": "2025-06-15T07:16:54.314Z",
+    "actors": [
+      "emp-355"
+    ],
+    "relatedId": "cust-toy-gutmann-76",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-093",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Deprimo suspendo desipio deputo tergeo decipio desolo cinis.",
+    "timestamp": "2025-06-17T07:44:53.497Z",
+    "actors": [
+      "emp-253"
+    ],
+    "relatedId": "doc-203",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-448",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Socius possimus ea.",
+    "timestamp": "2025-06-17T20:23:51.184Z",
+    "actors": [
+      "emp-331"
+    ],
+    "relatedId": "inc-067",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-181",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Patria officiis tum aedificium alius cultura cohors deleniti.",
+    "timestamp": "2025-06-19T13:59:46.167Z",
+    "actors": [
+      "emp-028"
+    ],
+    "relatedId": "doc-268",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-031",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Amor aegre texo autus consuasor totidem accusator complectus theatrum adnuo.",
+    "timestamp": "2025-06-19T16:02:44.633Z",
+    "actors": [
+      "emp-163"
+    ],
+    "relatedId": "doc-302",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-124",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Solium odit corrigo.",
+    "timestamp": "2025-06-20T05:35:03.571Z",
+    "actors": [
+      "emp-069"
+    ],
+    "relatedId": "HANA-88",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-041",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Vaco comptus tibi patior.",
+    "timestamp": "2025-06-20T16:35:11.904Z",
+    "actors": [
+      "emp-271"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-143",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Cohaero est venio quod blanditiis necessitatibus centum.",
+    "timestamp": "2025-06-20T18:33:06.448Z",
+    "actors": [
+      "emp-009"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-460",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Triduana maxime sordeo.",
+    "timestamp": "2025-06-21T06:08:19.552Z",
+    "actors": [
+      "emp-085"
+    ],
+    "relatedId": "HGRD-300",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-055",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Lynch - Schmitt",
+    "description": "Itaque absque demens ullus baiulus adeo conservo bonus consectetur.",
+    "timestamp": "2025-06-22T00:32:41.103Z",
+    "actors": [
+      "emp-239"
+    ],
+    "relatedId": "cust-lynch-schmitt-187",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-262",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Deleniti ab ad paens bis cuius cupiditate socius.",
+    "timestamp": "2025-06-22T17:09:29.605Z",
+    "actors": [
+      "emp-086"
+    ],
+    "relatedId": "inc-022",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-467",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Jast - Murazik",
+    "description": "Celo conspergo quia stips.",
+    "timestamp": "2025-06-23T19:06:44.378Z",
+    "actors": [
+      "emp-337"
+    ],
+    "relatedId": "cust-jast-murazik-206",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-377",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Absconditus et harum assumenda carcer dens solum textilis esse.",
+    "timestamp": "2025-06-24T18:02:01.290Z",
+    "actors": [
+      "emp-236"
+    ],
+    "relatedId": "inc-026",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-236",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Clamo amaritudo rem adfectus thymum versus vaco clam spero.",
+    "timestamp": "2025-06-25T08:00:58.304Z",
+    "actors": [
+      "emp-092"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-270",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Uredo unde unus venustas spargo angelus.",
+    "timestamp": "2025-06-26T15:04:56.598Z",
+    "actors": [
+      "emp-078"
+    ],
+    "relatedId": "doc-101",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-016",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Tamen magni varius adipisci culpa amo ademptio voluptate thermae.",
+    "timestamp": "2025-06-26T15:39:20.957Z",
+    "actors": [
+      "emp-242"
+    ],
+    "relatedId": "doc-380",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-398",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Debilito studio adfero.",
+    "timestamp": "2025-06-26T23:42:48.832Z",
+    "actors": [
+      "emp-220"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-319",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Curis advenio blandior dolorem nulla amissio viduo delicate.",
+    "timestamp": "2025-06-27T04:08:37.414Z",
+    "actors": [
+      "emp-137"
+    ],
+    "relatedId": "doc-263",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-243",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Coruscus adsuesco usitas tui.",
+    "timestamp": "2025-06-28T07:20:02.327Z",
+    "actors": [
+      "emp-445"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-184",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Dignissimos accusator terminatio abundans vel.",
+    "timestamp": "2025-06-28T14:23:42.091Z",
+    "actors": [
+      "emp-291"
+    ],
+    "relatedId": "doc-127",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-416",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Stella placeat trucido asporto arbustum quis.",
+    "timestamp": "2025-06-29T12:40:20.848Z",
+    "actors": [
+      "emp-362"
+    ],
+    "relatedId": "emp-297",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-087",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Sol sub ventosus suasoria campana.",
+    "timestamp": "2025-06-29T17:29:34.040Z",
+    "actors": [
+      "emp-291"
+    ],
+    "relatedId": "cal-082",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-291",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Communis beneficium quisquam alius aegrotatio inflammatio vinculum.",
+    "timestamp": "2025-06-30T05:57:04.181Z",
+    "actors": [
+      "emp-135"
+    ],
+    "relatedId": "cal-114",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-261",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Temporibus administratio chirographum auctor.",
+    "timestamp": "2025-06-30T17:45:45.536Z",
+    "actors": [
+      "emp-147"
+    ],
+    "relatedId": "HGRD-122",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-197",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Adaugeo conculco thorax.",
+    "timestamp": "2025-07-01T04:54:27.914Z",
+    "actors": [
+      "emp-090"
+    ],
+    "relatedId": "HGRD-238",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-252",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Caries ventosus dolore coepi.",
+    "timestamp": "2025-07-02T07:06:19.889Z",
+    "actors": [
+      "emp-394"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-290",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Carcer conculco vestrum vacuus deprimo supellex cubicularis.",
+    "timestamp": "2025-07-02T10:52:11.451Z",
+    "actors": [
+      "emp-239"
+    ],
+    "relatedId": "inc-057",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-160",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Tergiversatio defero conforto ustulo ara crastinus coaegresco vetus depraedor attollo.",
+    "timestamp": "2025-07-02T22:11:38.412Z",
+    "actors": [
+      "emp-228"
+    ],
+    "relatedId": "doc-061",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-177",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Adsuesco tantillus altus aurum ultra.",
+    "timestamp": "2025-07-02T22:53:42.650Z",
+    "actors": [
+      "emp-100"
+    ],
+    "relatedId": "doc-379",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-029",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Varius tersus cupiditas paens clementia temperantia.",
+    "timestamp": "2025-07-05T13:24:21.890Z",
+    "actors": [
+      "emp-127"
+    ],
+    "relatedId": "cal-027",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-131",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Fay, Larson and Greenfelder",
+    "description": "Angustus ciminatio tripudio aetas catena usus depereo.",
+    "timestamp": "2025-07-07T03:04:31.853Z",
+    "actors": [
+      "emp-092"
+    ],
+    "relatedId": "cust-fay-larson-and-greenfelder-167",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-368",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Vester centum laudantium ultra apud.",
+    "timestamp": "2025-07-07T16:18:20.319Z",
+    "actors": [
+      "emp-299"
+    ],
+    "relatedId": "cal-009",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-373",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Ledner - Jast",
+    "description": "Sulum creta tollo vulgo articulus deduco ea absorbeo earum.",
+    "timestamp": "2025-07-09T09:33:43.673Z",
+    "actors": [
+      "emp-203"
+    ],
+    "relatedId": "cust-ledner-jast-208",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-489",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Eveniet surgo dapifer sponte repellendus tutamen bellum curtus eveniet iste.",
+    "timestamp": "2025-07-09T10:33:34.432Z",
+    "actors": [
+      "emp-110"
+    ],
+    "relatedId": "HANA-235",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-440",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Aliqua vigor conitor comburo volubilis spectaculum synagoga sub acer.",
+    "timestamp": "2025-07-09T10:53:40.885Z",
+    "actors": [
+      "emp-228"
+    ],
+    "relatedId": "inc-035",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-139",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Alo demergo inflammatio decimus thesis speculum.",
+    "timestamp": "2025-07-10T08:57:03.435Z",
+    "actors": [
+      "emp-144"
+    ],
+    "relatedId": "HGRD-114",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-045",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Nemo eum coniuratio substantia clibanus basium tertius.",
+    "timestamp": "2025-07-10T13:51:27.389Z",
+    "actors": [
+      "emp-123"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-127",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Depraedor dicta creator atrocitas urbanus thesis.",
+    "timestamp": "2025-07-11T03:27:13.190Z",
+    "actors": [
+      "emp-054"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-484",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Platform new version released",
+    "description": "Depopulo numquam allatus amor arguo ullam admiratio aro.",
+    "timestamp": "2025-07-11T13:05:29.385Z",
+    "actors": [
+      "emp-046"
+    ],
+    "relatedId": "prod-platform",
+    "relatedType": "product",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-413",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Succurro cohaero vitium spiculum suasoria subvenio perferendis.",
+    "timestamp": "2025-07-13T15:34:12.470Z",
+    "actors": [
+      "emp-028"
+    ],
+    "relatedId": "doc-290",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-211",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Demergo casso valetudo.",
+    "timestamp": "2025-07-14T17:50:47.870Z",
+    "actors": [
+      "emp-195"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-221",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Cervus bos pecto cribro clarus tactus approbo damno.",
+    "timestamp": "2025-07-15T06:32:31.339Z",
+    "actors": [
+      "emp-162"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-067",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Ago usitas angulus caelum caries arx ter utpote.",
+    "timestamp": "2025-07-15T19:12:07.996Z",
+    "actors": [
+      "emp-246"
+    ],
+    "relatedId": "emp-120",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-469",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Virga impedit temeritas amita curso.",
+    "timestamp": "2025-07-15T22:58:38.492Z",
+    "actors": [
+      "emp-119"
+    ],
+    "relatedId": "inc-022",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-193",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Calculus a coaegresco ea tonsor tot.",
+    "timestamp": "2025-07-16T17:59:27.753Z",
+    "actors": [
+      "emp-303"
+    ],
+    "relatedId": "doc-308",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-391",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Victus adeo thymum bestia adaugeo trado bellum spes argentum.",
+    "timestamp": "2025-07-17T17:19:25.064Z",
+    "actors": [
+      "emp-086"
+    ],
+    "relatedId": "doc-280",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-090",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Taedium utilis omnis solvo occaecati civis vere vesco vociferor.",
+    "timestamp": "2025-07-17T17:58:21.790Z",
+    "actors": [
+      "emp-254"
+    ],
+    "relatedId": "doc-254",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-226",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Defero debeo consectetur.",
+    "timestamp": "2025-07-18T10:40:52.958Z",
+    "actors": [
+      "emp-008"
+    ],
+    "relatedId": "HANA-145",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-332",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Laudantium sumptus contabesco explicabo ut cernuus acer chirographum capitulus contego.",
+    "timestamp": "2025-07-19T07:25:44.396Z",
+    "actors": [
+      "emp-157"
+    ],
+    "relatedId": "doc-082",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-215",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Vado autus subseco.",
+    "timestamp": "2025-07-19T11:22:52.396Z",
+    "actors": [
+      "emp-007"
+    ],
+    "relatedId": "doc-201",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-132",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Autem corporis cauda vulpes velit adnuo.",
+    "timestamp": "2025-07-19T17:09:34.445Z",
+    "actors": [
+      "emp-250"
+    ],
+    "relatedId": "HCON-228",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-001",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Velut corona bonus abeo admiratio correptius vinculum et cursim accusantium.",
+    "timestamp": "2025-07-19T18:13:40.293Z",
+    "actors": [
+      "emp-224"
+    ],
+    "relatedId": "doc-187",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-242",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Stehr - Schmidt",
+    "description": "Usque appositus aperte defero uredo vigor.",
+    "timestamp": "2025-07-20T04:14:53.766Z",
+    "actors": [
+      "emp-140"
+    ],
+    "relatedId": "cust-stehr-schmidt-31",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-248",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Pel delectus doloribus sufficio vero suppono aspicio tepidus.",
+    "timestamp": "2025-07-20T18:41:23.207Z",
+    "actors": [
+      "emp-042"
+    ],
+    "relatedId": "doc-393",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-337",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Decumbo debitis sulum pecus amplitudo acsi conforto canto possimus adficio.",
+    "timestamp": "2025-07-21T08:17:54.836Z",
+    "actors": [
+      "emp-102"
+    ],
+    "relatedId": "cal-051",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-403",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Runolfsdottir, Harvey and Lynch",
+    "description": "Ullam arcesso coma angustus distinctio at aqua volva.",
+    "timestamp": "2025-07-22T18:36:37.741Z",
+    "actors": [
+      "emp-076"
+    ],
+    "relatedId": "cust-runolfsdottir-harvey-and-lynch-48",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-188",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Constans calco patruus.",
+    "timestamp": "2025-07-22T22:34:39.329Z",
+    "actors": [
+      "emp-321"
+    ],
+    "relatedId": "emp-157",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-287",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Termes debitis celo volaticus.",
+    "timestamp": "2025-07-23T05:13:35.213Z",
+    "actors": [
+      "emp-393"
+    ],
+    "relatedId": "doc-049",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-422",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Tactus tardus cubicularis supellex cimentarius curatio summopere.",
+    "timestamp": "2025-07-24T17:13:46.703Z",
+    "actors": [
+      "emp-008"
+    ],
+    "relatedId": "doc-052",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-311",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Utique cuppedia suasoria vulgivagus deprimo adsidue.",
+    "timestamp": "2025-07-25T07:10:35.770Z",
+    "actors": [
+      "emp-377"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-249",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Ager pel curo tracto cognomen repudiandae viscus vitae casso deripio.",
+    "timestamp": "2025-07-26T20:31:17.115Z",
+    "actors": [
+      "emp-416"
+    ],
+    "relatedId": "cal-076",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-334",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Defungo clibanus abstergo cohors amplus cubo territo corrupti barba saepe.",
+    "timestamp": "2025-07-27T17:32:43.659Z",
+    "actors": [
+      "emp-107"
+    ],
+    "relatedId": "doc-251",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-119",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Voluptatem defero adeo ab vero amet urbanus totidem.",
+    "timestamp": "2025-07-27T23:55:06.778Z",
+    "actors": [
+      "emp-383"
+    ],
+    "relatedId": "inc-048",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-397",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Schumm - Collier",
+    "description": "Laudantium decet volaticus bonus thema beatus.",
+    "timestamp": "2025-07-28T02:36:11.786Z",
+    "actors": [
+      "emp-318"
+    ],
+    "relatedId": "cust-schumm-collier-17",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-157",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Terreo abundans clarus.",
+    "timestamp": "2025-07-28T15:47:43.728Z",
+    "actors": [
+      "emp-325"
+    ],
+    "relatedId": "HGRD-217",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-179",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Vesco verbum terror comminor deleniti contabesco ante corona adipiscor pecco.",
+    "timestamp": "2025-07-29T11:26:47.280Z",
+    "actors": [
+      "emp-187"
+    ],
+    "relatedId": "inc-044",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-122",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Ara bellum viridis synagoga talio.",
+    "timestamp": "2025-07-30T05:05:05.834Z",
+    "actors": [
+      "emp-286"
+    ],
+    "relatedId": "HPLT-27",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-123",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Aeternus eius demergo armarium assumenda consuasor aut.",
+    "timestamp": "2025-07-30T19:33:09.514Z",
+    "actors": [
+      "emp-181"
+    ],
+    "relatedId": "cal-069",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-348",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Coniecto celo suscipio correptius amoveo vestrum adicio texo casus.",
+    "timestamp": "2025-07-30T23:53:43.560Z",
+    "actors": [
+      "emp-251"
+    ],
+    "relatedId": "doc-202",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-186",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Tolero virga amplexus vapulus defungo cibo vox paulatim aegre agnitio.",
+    "timestamp": "2025-07-31T05:40:30.201Z",
+    "actors": [
+      "emp-047"
+    ],
+    "relatedId": "doc-360",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-374",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Adsidue patruus bonus desipio solus volva cupio argentum adipisci pectus.",
+    "timestamp": "2025-07-31T16:50:27.511Z",
+    "actors": [
+      "emp-387"
+    ],
+    "relatedId": "inc-021",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-444",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Aer varius adfero alveus torqueo speciosus sapiente.",
+    "timestamp": "2025-07-31T23:56:19.225Z",
+    "actors": [
+      "emp-134"
+    ],
+    "relatedId": "doc-353",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-353",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Vandervort, Nikolaus and Robel",
+    "description": "Nemo totam ea.",
+    "timestamp": "2025-08-01T00:20:04.904Z",
+    "actors": [
+      "emp-057"
+    ],
+    "relatedId": "cust-vandervort-nikolaus-and-robel-107",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-228",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Dolor demens certe coniuratio antiquus arbor vorax turbo tribuo.",
+    "timestamp": "2025-08-01T00:25:43.100Z",
+    "actors": [
+      "emp-032"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-074",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Caritas totam abundans vulgo eaque.",
+    "timestamp": "2025-08-01T12:10:27.795Z",
+    "actors": [
+      "emp-249"
+    ],
+    "relatedId": "doc-391",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-006",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Tempore adsuesco vilicus deputo.",
+    "timestamp": "2025-08-03T17:20:50.336Z",
+    "actors": [
+      "emp-296"
+    ],
+    "relatedId": "inc-054",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-433",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Omnis aequus abstergo vito victoria.",
+    "timestamp": "2025-08-03T19:57:08.304Z",
+    "actors": [
+      "emp-312"
+    ],
+    "relatedId": "doc-076",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-349",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Audacia derelinquo ut terra tardus.",
+    "timestamp": "2025-08-04T00:02:42.260Z",
+    "actors": [
+      "emp-317"
+    ],
+    "relatedId": "HGRD-297",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-366",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Thesaurus viduo amor audax.",
+    "timestamp": "2025-08-04T09:17:58.117Z",
+    "actors": [
+      "emp-390"
+    ],
+    "relatedId": "doc-386",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-286",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Baiulus depromo uredo tamisium.",
+    "timestamp": "2025-08-04T15:15:48.670Z",
+    "actors": [
+      "emp-080"
+    ],
+    "relatedId": "emp-426",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-450",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Tenetur crudelis tubineus spiritus optio spoliatio voveo cupio illo.",
+    "timestamp": "2025-08-04T15:48:12.694Z",
+    "actors": [
+      "emp-243"
+    ],
+    "relatedId": "inc-045",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-202",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Itaque tego victus comminor tutamen cognatus stabilis celebrer caries.",
+    "timestamp": "2025-08-06T17:26:39.503Z",
+    "actors": [
+      "emp-074"
+    ],
+    "relatedId": "doc-078",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-113",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Vulgo tego stipes averto cupiditate tres.",
+    "timestamp": "2025-08-06T18:25:39.031Z",
+    "actors": [
+      "emp-250"
+    ],
+    "relatedId": "doc-390",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-099",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Aestas celo tremo vulpes sint asperiores confero sperno damnatio.",
+    "timestamp": "2025-08-08T16:27:28.070Z",
+    "actors": [
+      "emp-247"
+    ],
+    "relatedId": "doc-205",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-318",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Amiculum stipes amplitudo desidero amor casus universe ipsum.",
+    "timestamp": "2025-08-08T23:18:46.411Z",
+    "actors": [
+      "emp-278"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-400",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Custodia claro conventus clementia pariatur balbus vespillo consectetur.",
+    "timestamp": "2025-08-09T07:49:20.804Z",
+    "actors": [
+      "emp-324"
+    ],
+    "relatedId": "doc-209",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-289",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Upton - Lubowitz",
+    "description": "Temporibus altus doloribus crastinus astrum tego comedo.",
+    "timestamp": "2025-08-09T12:49:25.803Z",
+    "actors": [
+      "emp-042"
+    ],
+    "relatedId": "cust-upton-lubowitz-170",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-056",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Umquam adicio provident accedo.",
+    "timestamp": "2025-08-10T16:24:34.176Z",
+    "actors": [
+      "emp-013"
+    ],
+    "relatedId": "inc-072",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-363",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Defetiscor antepono cavus adnuo ex maiores.",
+    "timestamp": "2025-08-11T09:38:55.284Z",
+    "actors": [
+      "emp-407"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-306",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Cresco vestrum cogito esse adipisci bellum claudeo attollo.",
+    "timestamp": "2025-08-11T17:28:54.711Z",
+    "actors": [
+      "emp-117"
+    ],
+    "relatedId": "HPLT-22",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-338",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Maiores vapulus tolero demoror ars cogo conscendo in varius charisma.",
+    "timestamp": "2025-08-12T05:14:15.229Z",
+    "actors": [
+      "emp-198"
+    ],
+    "relatedId": "doc-363",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-171",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Block - Streich",
+    "description": "Nulla expedita ad cursus tergum.",
+    "timestamp": "2025-08-12T12:01:29.870Z",
+    "actors": [
+      "emp-181"
+    ],
+    "relatedId": "cust-block-streich-121",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-478",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Commodo teneo debilito sumptus comparo ex carus usus adhaero.",
+    "timestamp": "2025-08-12T18:44:19.195Z",
+    "actors": [
+      "emp-410"
+    ],
+    "relatedId": "doc-156",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-381",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Acquiro decumbo amplus apparatus speculum virga.",
+    "timestamp": "2025-08-12T21:30:11.540Z",
+    "actors": [
+      "emp-449"
+    ],
+    "relatedId": "HPLT-118",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-233",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Cunae molestias vado usitas cilicium.",
+    "timestamp": "2025-08-13T01:34:41.764Z",
+    "actors": [
+      "emp-062"
+    ],
+    "relatedId": "doc-040",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-335",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Vestigium adulatio solus vado tui asporto ventito adulescens venustas.",
+    "timestamp": "2025-08-13T03:06:56.073Z",
+    "actors": [
+      "emp-231"
+    ],
+    "relatedId": "doc-284",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-441",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Cometes animus urbanus cubitum usque antiquus.",
+    "timestamp": "2025-08-15T10:30:38.057Z",
+    "actors": [
+      "emp-153"
+    ],
+    "relatedId": "doc-363",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-101",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Schumm LLC",
+    "description": "Bis curriculum substantia incidunt.",
+    "timestamp": "2025-08-15T15:14:45.109Z",
+    "actors": [
+      "emp-269"
+    ],
+    "relatedId": "cust-schumm-llc-195",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-153",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Adamo nemo cursim.",
+    "timestamp": "2025-08-15T16:04:19.553Z",
+    "actors": [
+      "emp-259"
+    ],
+    "relatedId": "emp-219",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-111",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Terga tubineus aiunt voveo certe solum.",
+    "timestamp": "2025-08-16T00:23:09.964Z",
+    "actors": [
+      "emp-094"
+    ],
+    "relatedId": "HCON-274",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-081",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Viriliter dolorem veniam error curo defaeco antea eveniet benevolentia.",
+    "timestamp": "2025-08-18T03:04:23.861Z",
+    "actors": [
+      "emp-190"
+    ],
+    "relatedId": "doc-295",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-454",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Aedificium administratio cogo accedo subiungo at censura sui culpa autus.",
+    "timestamp": "2025-08-18T18:12:04.690Z",
+    "actors": [
+      "emp-312"
+    ],
+    "relatedId": "doc-125",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-247",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Aeger collum careo sublime demitto vigor eaque delego arcesso vilitas.",
+    "timestamp": "2025-08-18T22:11:58.849Z",
+    "actors": [
+      "emp-408"
+    ],
+    "relatedId": "doc-324",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-407",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Utilis cilicium itaque alias auctus minima valens quidem.",
+    "timestamp": "2025-08-19T05:42:15.038Z",
+    "actors": [
+      "emp-090"
+    ],
+    "relatedId": "inc-077",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-149",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Defluo aveho ullam eligendi.",
+    "timestamp": "2025-08-19T14:05:16.385Z",
+    "actors": [
+      "emp-420"
+    ],
+    "relatedId": "doc-025",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-238",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Kerluke Inc",
+    "description": "Vix sapiente valens crux conculco ante.",
+    "timestamp": "2025-08-20T04:29:28.491Z",
+    "actors": [
+      "emp-121"
+    ],
+    "relatedId": "cust-kerluke-inc-129",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-288",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Debitis cresco veritatis.",
+    "timestamp": "2025-08-20T17:40:35.331Z",
+    "actors": [
+      "emp-284"
+    ],
+    "relatedId": "doc-165",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-386",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Copia caput abeo coerceo uter non.",
+    "timestamp": "2025-08-21T01:46:03.919Z",
+    "actors": [
+      "emp-304"
+    ],
+    "relatedId": "emp-226",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-185",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Okuneva, Marquardt and Muller",
+    "description": "Cupiditas cursus non numquam maxime viridis.",
+    "timestamp": "2025-08-21T03:59:09.145Z",
+    "actors": [
+      "emp-245"
+    ],
+    "relatedId": "cust-okuneva-marquardt-and-muller-45",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-134",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Doloremque perferendis arbor centum.",
+    "timestamp": "2025-08-21T06:11:26.646Z",
+    "actors": [
+      "emp-271"
+    ],
+    "relatedId": "doc-143",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-446",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Cenaculum clementia volo vitiosus consequatur una voluptas carpo.",
+    "timestamp": "2025-08-21T22:54:49.055Z",
+    "actors": [
+      "emp-402"
+    ],
+    "relatedId": "doc-296",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-314",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Arcus calculus curia complectus cunabula arceo sodalitas.",
+    "timestamp": "2025-08-24T09:25:47.029Z",
+    "actors": [
+      "emp-232"
+    ],
+    "relatedId": "emp-095",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-442",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Corrupti iste conatus defungo illo tripudio clam articulus conitor arca.",
+    "timestamp": "2025-08-24T12:06:46.545Z",
+    "actors": [
+      "emp-132"
+    ],
+    "relatedId": "inc-051",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-307",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Tardus vester tripudio amoveo cursim admoneo arguo utpote.",
+    "timestamp": "2025-08-24T13:51:12.348Z",
+    "actors": [
+      "emp-343"
+    ],
+    "relatedId": "HPLT-18",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-035",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Bis thermae delinquo stillicidium vacuus totus incidunt.",
+    "timestamp": "2025-08-26T10:34:31.532Z",
+    "actors": [
+      "emp-418"
+    ],
+    "relatedId": "emp-385",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-497",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Cattus depereo denuo.",
+    "timestamp": "2025-08-27T04:27:17.640Z",
+    "actors": [
+      "emp-123"
+    ],
+    "relatedId": "HPLT-121",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-274",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Turbo demoror labore demoror arguo vinco audacia armarium dens.",
+    "timestamp": "2025-08-27T16:29:38.882Z",
+    "actors": [
+      "emp-218"
+    ],
+    "relatedId": "doc-072",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-114",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Frami Inc",
+    "description": "Aliquam spero umerus dedico.",
+    "timestamp": "2025-08-28T11:15:38.766Z",
+    "actors": [
+      "emp-067"
+    ],
+    "relatedId": "cust-frami-inc-120",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-462",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Krajcik and Sons",
+    "description": "Crux somniculosus decet statim accendo appositus vestrum velit corporis conduco.",
+    "timestamp": "2025-08-29T01:15:31.227Z",
+    "actors": [
+      "emp-386"
+    ],
+    "relatedId": "cust-krajcik-and-sons-124",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-423",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Consuasor deinde adamo concedo casso causa utor defluo decor abscido.",
+    "timestamp": "2025-08-29T04:41:02.168Z",
+    "actors": [
+      "emp-343"
+    ],
+    "relatedId": "cal-066",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-209",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Beneficium adipiscor uter asporto.",
+    "timestamp": "2025-08-30T00:41:05.886Z",
+    "actors": [
+      "emp-200"
+    ],
+    "relatedId": "HCON-299",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-421",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Runolfsdottir, Harvey and Lynch",
+    "description": "Attollo tero strues.",
+    "timestamp": "2025-08-30T05:00:20.594Z",
+    "actors": [
+      "emp-228"
+    ],
+    "relatedId": "cust-runolfsdottir-harvey-and-lynch-48",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-350",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Tenax dignissimos conspergo tres colo.",
+    "timestamp": "2025-08-31T01:57:37.676Z",
+    "actors": [
+      "emp-261"
+    ],
+    "relatedId": "doc-186",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-388",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Vacuus ager tyrannus deinde termes deprecator pauci usitas.",
+    "timestamp": "2025-08-31T21:28:56.553Z",
+    "actors": [
+      "emp-097"
+    ],
+    "relatedId": "cal-085",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-417",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Sunt clarus neque ventosus demens deprecator pax despecto.",
+    "timestamp": "2025-09-01T10:53:51.195Z",
+    "actors": [
+      "emp-432"
+    ],
+    "relatedId": "emp-384",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-476",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Aduro vacuus soluta vulgo.",
+    "timestamp": "2025-09-02T06:58:27.557Z",
+    "actors": [
+      "emp-257"
+    ],
+    "relatedId": "doc-249",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-309",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Compono asperiores thymbra aeger.",
+    "timestamp": "2025-09-03T01:33:53.482Z",
+    "actors": [
+      "emp-358"
+    ],
+    "relatedId": "doc-233",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-443",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Tantum harum vae torqueo.",
+    "timestamp": "2025-09-07T19:48:01.537Z",
+    "actors": [
+      "emp-191"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-103",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Conservo degero tergo confero.",
+    "timestamp": "2025-09-08T05:17:03.922Z",
+    "actors": [
+      "emp-063"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-151",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Platform new version released",
+    "description": "Audeo ultra arca arbor id.",
+    "timestamp": "2025-09-08T14:22:53.154Z",
+    "actors": [
+      "emp-300"
+    ],
+    "relatedId": "prod-platform",
+    "relatedType": "product",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-419",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Stillicidium terror conculco acquiro communis minima compono alter iusto credo.",
+    "timestamp": "2025-09-09T15:43:53.931Z",
+    "actors": [
+      "emp-293"
+    ],
+    "relatedId": "doc-345",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-019",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Solitudo theca fuga est.",
+    "timestamp": "2025-09-09T16:54:23.253Z",
+    "actors": [
+      "emp-337"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-487",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Teres demo vulticulus.",
+    "timestamp": "2025-09-09T23:28:36.158Z",
+    "actors": [
+      "emp-442"
+    ],
+    "relatedId": "HCON-276",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-189",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Cibus decens audeo curiositas confugo in.",
+    "timestamp": "2025-09-11T13:08:26.223Z",
+    "actors": [
+      "emp-350"
+    ],
+    "relatedId": "cal-100",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-360",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Adfero coniuratio amoveo.",
+    "timestamp": "2025-09-11T21:39:26.728Z",
+    "actors": [
+      "emp-196"
+    ],
+    "relatedId": "doc-249",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-187",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Tempus arma tamen non decet ager ulterius adfectus suppellex sol.",
+    "timestamp": "2025-09-13T15:14:46.013Z",
+    "actors": [
+      "emp-057"
+    ],
+    "relatedId": "inc-017",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-438",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Deripio itaque adiuvo clarus perferendis colligo spectaculum error.",
+    "timestamp": "2025-09-16T18:40:36.446Z",
+    "actors": [
+      "emp-356"
+    ],
+    "relatedId": "HANA-268",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-499",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Vindico vivo animus.",
+    "timestamp": "2025-09-16T19:02:51.609Z",
+    "actors": [
+      "emp-011"
+    ],
+    "relatedId": "doc-124",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-439",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Denego absconditus sono complectus.",
+    "timestamp": "2025-09-17T00:36:20.567Z",
+    "actors": [
+      "emp-054"
+    ],
+    "relatedId": "doc-010",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-003",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Ducimus laboriosam ara culpa apostolus cupressus eveniet convoco auxilium combibo.",
+    "timestamp": "2025-09-17T22:25:33.328Z",
+    "actors": [
+      "emp-025"
+    ],
+    "relatedId": "emp-238",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-437",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Patior vulnus casso pariatur.",
+    "timestamp": "2025-09-18T12:13:49.848Z",
+    "actors": [
+      "emp-012"
+    ],
+    "relatedId": "inc-016",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-096",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Cogo atrocitas absens.",
+    "timestamp": "2025-09-19T10:28:50.136Z",
+    "actors": [
+      "emp-013"
+    ],
+    "relatedId": "doc-238",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-364",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Crepusculum depereo studio delectatio aliquid calcar decumbo advenio.",
+    "timestamp": "2025-09-20T01:42:49.519Z",
+    "actors": [
+      "emp-344"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-277",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Tollo abbas vallum temperantia.",
+    "timestamp": "2025-09-21T16:38:39.543Z",
+    "actors": [
+      "emp-078"
+    ],
+    "relatedId": "doc-350",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-426",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Libero distinctio abeo.",
+    "timestamp": "2025-09-24T13:53:52.036Z",
+    "actors": [
+      "emp-158"
+    ],
+    "relatedId": "doc-359",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-479",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Batz Inc",
+    "description": "Exercitationem tubineus totidem alias exercitationem coepi urbs.",
+    "timestamp": "2025-09-25T13:05:05.542Z",
+    "actors": [
+      "emp-122"
+    ],
+    "relatedId": "cust-batz-inc-4",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-098",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Adopto constans synagoga aperte pecco condico conservo vespillo.",
+    "timestamp": "2025-09-26T05:47:01.973Z",
+    "actors": [
+      "emp-421"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-269",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Cunabula absum comitatus.",
+    "timestamp": "2025-09-26T08:29:27.809Z",
+    "actors": [
+      "emp-417"
+    ],
+    "relatedId": "HCON-189",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-070",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Talis ustilo adicio.",
+    "timestamp": "2025-09-26T09:09:35.735Z",
+    "actors": [
+      "emp-215"
+    ],
+    "relatedId": "emp-211",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-072",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Alo arx reiciendis creo denique tot.",
+    "timestamp": "2025-09-26T19:20:31.954Z",
+    "actors": [
+      "emp-441"
+    ],
+    "relatedId": "inc-022",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-317",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Cura victoria corpus aegrotatio crux arcus similique.",
+    "timestamp": "2025-09-27T19:50:01.107Z",
+    "actors": [
+      "emp-305"
+    ],
+    "relatedId": "HGRD-161",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-284",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Platform new version released",
+    "description": "Caritas vox laboriosam curtus aufero decipio.",
+    "timestamp": "2025-09-27T20:35:59.607Z",
+    "actors": [
+      "emp-248"
+    ],
+    "relatedId": "prod-platform",
+    "relatedType": "product",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-042",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Defero uterque odio ceno urbanus amita thesaurus.",
+    "timestamp": "2025-09-28T02:48:48.168Z",
+    "actors": [
+      "emp-318"
+    ],
+    "relatedId": "inc-048",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-324",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Schumm LLC",
+    "description": "Itaque vita volup nemo consequuntur.",
+    "timestamp": "2025-09-28T08:20:38.340Z",
+    "actors": [
+      "emp-318"
+    ],
+    "relatedId": "cust-schumm-llc-195",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-466",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Curso asperiores curso villa.",
+    "timestamp": "2025-09-29T12:46:09.455Z",
+    "actors": [
+      "emp-252"
+    ],
+    "relatedId": "doc-083",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-382",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Tres cubitum cultellus coerceo tempus casso studio.",
+    "timestamp": "2025-09-30T02:08:59.031Z",
+    "actors": [
+      "emp-228"
+    ],
+    "relatedId": "doc-286",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-406",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Appello certe comis arcus adsidue cupiditate tolero capio depono utroque.",
+    "timestamp": "2025-09-30T23:01:22.532Z",
+    "actors": [
+      "emp-234"
+    ],
+    "relatedId": "inc-043",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-012",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Volubilis vos sit ventito decet cohibeo vitae sunt virga reprehenderit.",
+    "timestamp": "2025-10-01T04:40:53.453Z",
+    "actors": [
+      "emp-276"
+    ],
+    "relatedId": "inc-044",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-075",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Currus ventito deleo acceptus asporto arbitro vulgus apostolus sit theologus.",
+    "timestamp": "2025-10-01T05:19:27.274Z",
+    "actors": [
+      "emp-419"
+    ],
+    "relatedId": "cal-182",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-020",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Centum speculum verus curatio depulso provident.",
+    "timestamp": "2025-10-02T06:25:38.339Z",
+    "actors": [
+      "emp-022"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-206",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Kreiger Inc",
+    "description": "Asper dolore derelinquo cursim animadverto ait textus defleo adeptio.",
+    "timestamp": "2025-10-03T22:09:34.231Z",
+    "actors": [
+      "emp-221"
+    ],
+    "relatedId": "cust-kreiger-inc-185",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-457",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Nihil sophismata contabesco optio.",
+    "timestamp": "2025-10-03T23:17:47.101Z",
+    "actors": [
+      "emp-396"
+    ],
+    "relatedId": "cal-053",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-493",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Dapifer veniam thalassinus.",
+    "timestamp": "2025-10-06T02:46:34.176Z",
+    "actors": [
+      "emp-203"
+    ],
+    "relatedId": "inc-013",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-071",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Aranea utor thymum cohibeo allatus odio error.",
+    "timestamp": "2025-10-07T08:22:15.285Z",
+    "actors": [
+      "emp-269"
+    ],
+    "relatedId": "inc-023",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-147",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Audentia amor vitae illo sufficio.",
+    "timestamp": "2025-10-08T10:07:38.343Z",
+    "actors": [
+      "emp-009"
+    ],
+    "relatedId": "inc-074",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-399",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Morissette - Pfeffer",
+    "description": "Saepe desidero credo aurum subseco utrum tandem claudeo caelum.",
+    "timestamp": "2025-10-08T17:59:45.391Z",
+    "actors": [
+      "emp-429"
+    ],
+    "relatedId": "cust-morissette-pfeffer-99",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-216",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Acervus aestus concedo.",
+    "timestamp": "2025-10-10T03:15:07.502Z",
+    "actors": [
+      "emp-406"
+    ],
+    "relatedId": "inc-038",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-320",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Virtus talio adinventitias canis cibus cresco curto correptius talus chirographum.",
+    "timestamp": "2025-10-10T19:31:06.098Z",
+    "actors": [
+      "emp-200"
+    ],
+    "relatedId": "inc-026",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-336",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Derideo solus ullam aqua deputo tantillus cognatus decens.",
+    "timestamp": "2025-10-11T03:46:40.061Z",
+    "actors": [
+      "emp-025"
+    ],
+    "relatedId": "inc-042",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-471",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Alias taedium tametsi cur corrigo aeneus annus tametsi.",
+    "timestamp": "2025-10-12T01:55:37.812Z",
+    "actors": [
+      "emp-018"
+    ],
+    "relatedId": "HANA-51",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-051",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Corona triduana abeo.",
+    "timestamp": "2025-10-12T07:41:11.803Z",
+    "actors": [
+      "emp-394"
+    ],
+    "relatedId": "inc-069",
+    "relatedType": "incident",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-268",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Cunae aptus vis inventore cogito aduro deduco.",
+    "timestamp": "2025-10-12T12:39:25.129Z",
+    "actors": [
+      "emp-246"
+    ],
+    "relatedId": "HPLT-220",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-392",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Conculco utilis taedium corrumpo sunt.",
+    "timestamp": "2025-10-12T20:58:34.059Z",
+    "actors": [
+      "emp-292"
+    ],
+    "relatedId": "doc-139",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-378",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Aestivus cresco dedecor cras ulterius versus capillus.",
+    "timestamp": "2025-10-13T10:54:40.643Z",
+    "actors": [
+      "emp-350"
+    ],
+    "relatedId": "doc-382",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-169",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Via ventosus tenax.",
+    "timestamp": "2025-10-13T16:20:05.235Z",
+    "actors": [
+      "emp-024"
+    ],
+    "relatedId": "cal-189",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-064",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Maiores cupressus demens veniam clementia.",
+    "timestamp": "2025-10-15T18:00:02.054Z",
+    "actors": [
+      "emp-321"
+    ],
+    "relatedId": "cal-144",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-156",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Avaritia tener numquam aspernatur bibo coerceo consuasor aurum utroque theca.",
+    "timestamp": "2025-10-15T19:43:58.393Z",
+    "actors": [
+      "emp-194"
+    ],
+    "relatedId": "emp-440",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-241",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Crist LLC",
+    "description": "Casus doloribus cena appello teneo voluptates alveus demo venio.",
+    "timestamp": "2025-10-15T23:17:45.860Z",
+    "actors": [
+      "emp-222"
+    ],
+    "relatedId": "cust-crist-llc-92",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-105",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Decor temeritas defetiscor terror coniuratio uredo.",
+    "timestamp": "2025-10-16T01:47:31.442Z",
+    "actors": [
+      "emp-072"
+    ],
+    "relatedId": "cal-109",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-084",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Sordeo usus similique.",
+    "timestamp": "2025-10-16T04:22:04.046Z",
+    "actors": [
+      "emp-361"
+    ],
+    "relatedId": "doc-393",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-461",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Demens expedita uxor ulciscor quam.",
+    "timestamp": "2025-10-16T19:26:50.961Z",
+    "actors": [
+      "emp-215"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-194",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Vesica veritatis itaque quis surgo balbus terminatio cunctatio vorax.",
+    "timestamp": "2025-10-18T10:09:26.429Z",
+    "actors": [
+      "emp-219"
+    ],
+    "relatedId": "HCON-272",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-231",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Platform new version released",
+    "description": "Communis ara cum amplitudo.",
+    "timestamp": "2025-10-18T11:57:00.636Z",
+    "actors": [
+      "emp-328"
+    ],
+    "relatedId": "prod-platform",
+    "relatedType": "product",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-043",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Addo atrocitas demoror ultra nesciunt vulticulus tero surgo.",
+    "timestamp": "2025-10-19T12:29:10.742Z",
+    "actors": [
+      "emp-087"
+    ],
+    "relatedId": "doc-385",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-480",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Maiores incidunt civitas bardus.",
+    "timestamp": "2025-10-20T14:44:27.100Z",
+    "actors": [
+      "emp-249"
+    ],
+    "relatedId": "emp-054",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-371",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Platform new version released",
+    "description": "Adnuo vinum aliqua vorax alius blandior vomica.",
+    "timestamp": "2025-10-21T12:24:37.923Z",
+    "actors": [
+      "emp-405"
+    ],
+    "relatedId": "prod-platform",
+    "relatedType": "product",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-452",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Magnam accedo uterque triduana.",
+    "timestamp": "2025-10-24T01:17:24.147Z",
+    "actors": [
+      "emp-294"
+    ],
+    "relatedId": "HANA-71",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-028",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Usitas benevolentia congregatio ea xiphias impedit est peior contra.",
+    "timestamp": "2025-10-24T03:14:34.980Z",
+    "actors": [
+      "emp-307"
+    ],
+    "relatedId": "doc-207",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-080",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Tromp - Cassin",
+    "description": "Solvo perspiciatis clibanus virgo.",
+    "timestamp": "2025-10-26T05:41:32.941Z",
+    "actors": [
+      "emp-425"
+    ],
+    "relatedId": "cust-tromp-cassin-71",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-136",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Thymum umerus recusandae vero calco appositus tenuis.",
+    "timestamp": "2025-10-26T06:39:44.717Z",
+    "actors": [
+      "emp-179"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-266",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Ratke Inc",
+    "description": "Conspergo admoneo textilis avarus aequitas comitatus suspendo conor ocer dolorem.",
+    "timestamp": "2025-10-26T07:31:41.878Z",
+    "actors": [
+      "emp-265"
+    ],
+    "relatedId": "cust-ratke-inc-126",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-046",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Conturbo architecto statim conicio.",
+    "timestamp": "2025-10-26T16:12:29.444Z",
+    "actors": [
+      "emp-054"
+    ],
+    "relatedId": "HCON-258",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-115",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Debilito conqueror vehemens trepide.",
+    "timestamp": "2025-10-27T07:40:23.442Z",
+    "actors": [
+      "emp-358"
+    ],
+    "relatedId": "doc-061",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-323",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Cupiditate eos tonsor adduco curia deserunt.",
+    "timestamp": "2025-10-28T04:50:40.951Z",
+    "actors": [
+      "emp-106"
+    ],
+    "relatedId": "doc-180",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-355",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Deorsum in mollitia tenus aspernatur tandem ventosus canis reprehenderit sollers.",
+    "timestamp": "2025-10-28T07:08:58.878Z",
+    "actors": [
+      "emp-142"
+    ],
+    "relatedId": "emp-395",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-011",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Adulescens tergiversatio statua aduro sollicito derelinquo.",
+    "timestamp": "2025-10-29T02:10:52.481Z",
+    "actors": [
+      "emp-060"
+    ],
+    "relatedId": "doc-058",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-079",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Ascit eligendi succedo conspergo omnis avarus adeo vomica cruciamentum comprehendo.",
+    "timestamp": "2025-10-29T11:12:20.028Z",
+    "actors": [
+      "emp-101"
+    ],
+    "relatedId": "doc-100",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-375",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Ara torrens aegrus acidus viduo qui.",
+    "timestamp": "2025-10-29T17:58:10.892Z",
+    "actors": [
+      "emp-250"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-329",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Sipes Group",
+    "description": "Creta curto qui ab itaque.",
+    "timestamp": "2025-10-30T16:34:40.357Z",
+    "actors": [
+      "emp-212"
+    ],
+    "relatedId": "cust-sipes-group-20",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-110",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Quidem aureus solvo quasi ulterius temperantia.",
+    "timestamp": "2025-11-02T06:48:55.934Z",
+    "actors": [
+      "emp-426"
+    ],
+    "relatedId": "inc-077",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-346",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Venio tum careo sui.",
+    "timestamp": "2025-11-04T13:46:19.225Z",
+    "actors": [
+      "emp-259"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-091",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Odio accusamus canis optio volup virgo universe tener.",
+    "timestamp": "2025-11-05T14:37:37.052Z",
+    "actors": [
+      "emp-188"
+    ],
+    "relatedId": "doc-337",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-086",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "In veritas voluptatibus deinde atavus corroboro comminor amita doloremque.",
+    "timestamp": "2025-11-05T23:08:32.290Z",
+    "actors": [
+      "emp-217"
+    ],
+    "relatedId": "emp-436",
+    "relatedType": "employee",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-255",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Swaniawski, Schneider and Stiedemann",
+    "description": "Pauper auditor vulgus vito cupio aggredior harum pel.",
+    "timestamp": "2025-11-07T11:11:33.419Z",
+    "actors": [
+      "emp-405"
+    ],
+    "relatedId": "cust-swaniawski-schneider-and-stied-131",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-246",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Articulus decimus subseco textilis.",
+    "timestamp": "2025-11-08T17:11:42.553Z",
+    "actors": [
+      "emp-347"
+    ],
+    "relatedId": "cal-255",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-485",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Adfectus via coadunatio libero vita attonbitus.",
+    "timestamp": "2025-11-09T17:02:23.658Z",
+    "actors": [
+      "emp-377"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-008",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Aureus sulum vesica coruscus consectetur ventus corpus repellat.",
+    "timestamp": "2025-11-10T06:01:38.067Z",
+    "actors": [
+      "emp-059"
+    ],
+    "relatedId": "doc-096",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-239",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Hic delectatio solus territo alius sulum.",
+    "timestamp": "2025-11-10T08:56:13.696Z",
+    "actors": [
+      "emp-398"
+    ],
+    "relatedId": "emp-397",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-050",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Summa desolo pax.",
+    "timestamp": "2025-11-10T17:57:02.396Z",
+    "actors": [
+      "emp-151"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-257",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Stabilis debilito repudiandae pecto architecto aduro.",
+    "timestamp": "2025-11-11T14:55:54.216Z",
+    "actors": [
+      "emp-130"
+    ],
+    "relatedId": "inc-071",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-281",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Natus vita causa corrigo comminor allatus.",
+    "timestamp": "2025-11-11T18:31:26.428Z",
+    "actors": [
+      "emp-331"
+    ],
+    "relatedId": "doc-032",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-172",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Colo anser aureus adversus capitulus.",
+    "timestamp": "2025-11-12T02:00:53.171Z",
+    "actors": [
+      "emp-123"
+    ],
+    "relatedId": "doc-231",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-014",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Non suffragium beneficium comprehendo atque vigilo provident conturbo.",
+    "timestamp": "2025-11-13T17:42:31.935Z",
+    "actors": [
+      "emp-413"
+    ],
+    "relatedId": "inc-017",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-299",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Confido celer urbanus cum ventus.",
+    "timestamp": "2025-11-14T02:21:43.300Z",
+    "actors": [
+      "emp-132"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-083",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Anser pecco caelum debilito id patior cunae eveniet auxilium.",
+    "timestamp": "2025-11-14T12:45:32.286Z",
+    "actors": [
+      "emp-106"
+    ],
+    "relatedId": "doc-137",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-162",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Corona amplus consequatur.",
+    "timestamp": "2025-11-14T18:48:17.463Z",
+    "actors": [
+      "emp-067"
+    ],
+    "relatedId": "cal-182",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-395",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Victus voluptate statim ascit clarus annus audentia.",
+    "timestamp": "2025-11-14T20:12:22.835Z",
+    "actors": [
+      "emp-144"
+    ],
+    "relatedId": "doc-291",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-361",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Demum corona derideo temperantia velut adaugeo.",
+    "timestamp": "2025-11-14T22:18:07.238Z",
+    "actors": [
+      "emp-386"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-304",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Angulus amitto turba unus.",
+    "timestamp": "2025-11-15T10:00:11.929Z",
+    "actors": [
+      "emp-156"
+    ],
+    "relatedId": "emp-173",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-100",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Clam cohaero confido decretum.",
+    "timestamp": "2025-11-16T06:44:50.289Z",
+    "actors": [
+      "emp-038"
+    ],
+    "relatedId": "doc-182",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-058",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "In provident alii voluntarius adulescens thorax comminor avarus adimpleo cuius.",
+    "timestamp": "2025-11-16T12:13:42.057Z",
+    "actors": [
+      "emp-239"
+    ],
+    "relatedId": "doc-081",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-213",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Sum tepidus caste quia cultellus curis aedificium nobis tero.",
+    "timestamp": "2025-11-16T20:35:53.693Z",
+    "actors": [
+      "emp-082"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-176",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Eos confido curiositas.",
+    "timestamp": "2025-11-17T11:21:25.217Z",
+    "actors": [
+      "emp-013"
+    ],
+    "relatedId": "HGRD-205",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-362",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Supplanto adaugeo auxilium iusto repudiandae thalassinus.",
+    "timestamp": "2025-11-17T21:29:46.067Z",
+    "actors": [
+      "emp-023"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-004",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Connect new version released",
+    "description": "Cognatus turpis tolero optio animus spero.",
+    "timestamp": "2025-11-18T16:04:25.408Z",
+    "actors": [
+      "emp-028"
+    ],
+    "relatedId": "prod-connect",
+    "relatedType": "product",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-167",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Vir est demitto crur enim expedita arcesso currus.",
+    "timestamp": "2025-11-20T06:55:15.877Z",
+    "actors": [
+      "emp-117"
+    ],
+    "relatedId": "emp-344",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-120",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Substantia tyrannus vesco cavus aeternus decumbo carus cuppedia.",
+    "timestamp": "2025-11-20T13:38:40.562Z",
+    "actors": [
+      "emp-280"
+    ],
+    "relatedId": "HGRD-223",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-347",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Miller - Vandervort",
+    "description": "Crudelis thermae totus studio.",
+    "timestamp": "2025-11-21T21:43:13.628Z",
+    "actors": [
+      "emp-233"
+    ],
+    "relatedId": "cust-miller-vandervort-163",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-097",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Armarium pauci comitatus capitulus.",
+    "timestamp": "2025-11-22T04:14:38.292Z",
+    "actors": [
+      "emp-303"
+    ],
+    "relatedId": "cal-154",
+    "relatedType": "meeting",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-447",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Somnus occaecati audax thymbra dens cresco coniuratio dolor arbitro nisi.",
+    "timestamp": "2025-11-22T04:46:34.196Z",
+    "actors": [
+      "emp-408"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-379",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Totidem compono carcer sursum vulgo tantillus decimus angustus.",
+    "timestamp": "2025-11-22T05:12:26.189Z",
+    "actors": [
+      "emp-258"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-340",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Callide theatrum bellum allatus veritas veritas.",
+    "timestamp": "2025-11-22T07:44:01.289Z",
+    "actors": [
+      "emp-289"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-389",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Eius stillicidium cohibeo adulatio adhuc ustulo usitas verbera.",
+    "timestamp": "2025-11-22T14:36:51.571Z",
+    "actors": [
+      "emp-273"
+    ],
+    "relatedId": "cal-111",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-141",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Speculum celer tametsi territo.",
+    "timestamp": "2025-11-24T04:19:00.183Z",
+    "actors": [
+      "emp-265"
+    ],
+    "relatedId": "inc-062",
+    "relatedType": "incident",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-259",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Capto maiores aeneus aegrus denego.",
+    "timestamp": "2025-11-24T12:04:37.565Z",
+    "actors": [
+      "emp-218"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-144",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Distinctio asper denuo versus calco adstringo nisi corpus beatae sit.",
+    "timestamp": "2025-11-24T21:05:51.942Z",
+    "actors": [
+      "emp-241"
+    ],
+    "relatedId": "HPLT-225",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-102",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Decet ambitus aeneus tener vester tamquam.",
+    "timestamp": "2025-11-25T00:12:06.085Z",
+    "actors": [
+      "emp-231"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-048",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Sui altus eveniet subito aggredior viriliter tum.",
+    "timestamp": "2025-11-25T10:25:14.617Z",
+    "actors": [
+      "emp-235"
+    ],
+    "relatedId": "cal-226",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-030",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Dens ducimus assumenda vinculum consequuntur eaque non.",
+    "timestamp": "2025-11-27T07:35:48.051Z",
+    "actors": [
+      "emp-305"
+    ],
+    "relatedId": "doc-288",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-358",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Surculus sustineo ceno beatae laborum.",
+    "timestamp": "2025-11-27T10:35:49.486Z",
+    "actors": [
+      "emp-365"
+    ],
+    "relatedId": "HPLT-19",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-410",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Earum ulterius tergiversatio sperno theca ipsum temeritas decretum.",
+    "timestamp": "2025-11-28T20:51:30.227Z",
+    "actors": [
+      "emp-154"
+    ],
+    "relatedId": "doc-188",
+    "relatedType": "document",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-427",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Ademptio cura vespillo videlicet cetera subvenio conor dolorum celebrer.",
+    "timestamp": "2025-12-01T05:28:37.911Z",
+    "actors": [
+      "emp-108"
+    ],
+    "relatedId": "inc-034",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-125",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Uredo atque recusandae astrum sui suscipit alius debitis.",
+    "timestamp": "2025-12-01T11:33:40.415Z",
+    "actors": [
+      "emp-013"
+    ],
+    "relatedId": "doc-002",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-229",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "In talis audax advoco bonus cariosus.",
+    "timestamp": "2025-12-01T17:29:29.375Z",
+    "actors": [
+      "emp-125"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-475",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Thalassinus canis autus patria patria sollicito arx adiuvo patruus.",
+    "timestamp": "2025-12-01T23:30:41.254Z",
+    "actors": [
+      "emp-403"
+    ],
+    "relatedId": "doc-376",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-275",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Causa vita quibusdam adipisci fugiat vitiosus acceptus veniam tergeo.",
+    "timestamp": "2025-12-02T05:59:23.360Z",
+    "actors": [
+      "emp-364"
+    ],
+    "relatedId": "emp-001",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-015",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Amet vulgivagus volaticus conforto nostrum terminatio surculus credo suscipio.",
+    "timestamp": "2025-12-02T14:15:10.129Z",
+    "actors": [
+      "emp-138"
+    ],
+    "relatedId": "HPLT-293",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-468",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Communis acsi acer nihil adamo.",
+    "timestamp": "2025-12-03T07:33:21.626Z",
+    "actors": [
+      "emp-137"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-300",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Terminatio patior suggero bonus accusamus aperte nihil cognomen.",
+    "timestamp": "2025-12-03T14:39:10.643Z",
+    "actors": [
+      "emp-026"
+    ],
+    "relatedId": "doc-369",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-108",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Analytics new version released",
+    "description": "Convoco videlicet coma.",
+    "timestamp": "2025-12-03T21:06:28.198Z",
+    "actors": [
+      "emp-120"
+    ],
+    "relatedId": "prod-analytics",
+    "relatedType": "product",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-178",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Jakubowski, Purdy and Dietrich",
+    "description": "Blandior beatus amo valetudo venio aurum nobis astrum acceptus absum.",
+    "timestamp": "2025-12-04T21:44:08.003Z",
+    "actors": [
+      "emp-446"
+    ],
+    "relatedId": "cust-jakubowski-purdy-and-dietrich-162",
+    "relatedType": "customer",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-168",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Apud cur tenus.",
+    "timestamp": "2025-12-05T22:34:00.829Z",
+    "actors": [
+      "emp-239"
+    ],
+    "relatedId": "HPLT-183",
+    "relatedType": "jira",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-297",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Pecus ara virga cubitum caritas cito suggero tonsor uter carbo.",
+    "timestamp": "2025-12-06T21:42:14.863Z",
+    "actors": [
+      "emp-361"
+    ],
+    "relatedId": "cal-031",
+    "relatedType": "meeting",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-331",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Vulnero avaritia amplus trepide quisquam tersus desolo voluntarius reiciendis.",
+    "timestamp": "2025-12-07T15:02:53.501Z",
+    "actors": [
+      "emp-391"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-430",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: O'Keefe LLC",
+    "description": "Bardus repellat verumtamen bonus caries explicabo testimonium voluptates chirographum.",
+    "timestamp": "2025-12-07T20:30:42.509Z",
+    "actors": [
+      "emp-390"
+    ],
+    "relatedId": "cust-o-keefe-llc-104",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-294",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Balistreri Inc",
+    "description": "Ancilla defaeco vereor in candidus vaco bis aestus.",
+    "timestamp": "2025-12-09T11:18:06.514Z",
+    "actors": [
+      "emp-174"
+    ],
+    "relatedId": "cust-balistreri-inc-172",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-420",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Vehemens vetus usque vesica teneo.",
+    "timestamp": "2025-12-09T13:41:21.776Z",
+    "actors": [
+      "emp-258"
+    ],
+    "relatedId": "emp-293",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-061",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Reprehenderit eum adipiscor admoveo ad.",
+    "timestamp": "2025-12-11T00:53:17.378Z",
+    "actors": [
+      "emp-316"
+    ],
+    "relatedId": "emp-089",
+    "relatedType": "employee",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-282",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Cui vinum cogo adfectus comis laborum conventus.",
+    "timestamp": "2025-12-11T04:06:30.969Z",
+    "actors": [
+      "emp-069"
+    ],
+    "relatedId": "doc-303",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-283",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Vinco culpa nulla consuasor.",
+    "timestamp": "2025-12-11T11:47:40.441Z",
+    "actors": [
+      "emp-132"
+    ],
+    "relatedId": "doc-099",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-385",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Platform new version released",
+    "description": "Cursim conor vitium sophismata causa ver ocer.",
+    "timestamp": "2025-12-11T20:21:09.632Z",
+    "actors": [
+      "emp-340"
+    ],
+    "relatedId": "prod-platform",
+    "relatedType": "product",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-109",
+    "type": "PRODUCT_LAUNCH",
+    "title": "Helios Guard new version released",
+    "description": "Acies eum venustas claustrum stultus validus vomito bonus.",
+    "timestamp": "2025-12-13T05:37:29.164Z",
+    "actors": [
+      "emp-298"
+    ],
+    "relatedId": "prod-guard",
+    "relatedType": "product",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-054",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Cubo magnam commodi territo nulla cogito.",
+    "timestamp": "2025-12-13T10:29:53.432Z",
+    "actors": [
+      "emp-053"
+    ],
+    "relatedId": "doc-018",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-357",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Celo cito color calco subvenio volo.",
+    "timestamp": "2025-12-13T12:06:44.400Z",
+    "actors": [
+      "emp-180"
+    ],
+    "relatedId": "cal-085",
+    "relatedType": "meeting",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-225",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Grant, Rolfson and Fritsch",
+    "description": "Corroboro supplanto alo.",
+    "timestamp": "2025-12-13T13:39:12.576Z",
+    "actors": [
+      "emp-194"
+    ],
+    "relatedId": "cust-grant-rolfson-and-fritsch-2",
+    "relatedType": "customer",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-130",
+    "type": "DECISION",
+    "title": "Architecture decision recorded",
+    "description": "Utpote valde demens caste acquiro.",
+    "timestamp": "2025-12-14T14:01:10.897Z",
+    "actors": [
+      "emp-439"
+    ],
+    "relatedId": "doc-082",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-220",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Atrocitas cohors laudantium ut iste.",
+    "timestamp": "2025-12-14T23:46:59.140Z",
+    "actors": [
+      "emp-389"
+    ],
+    "relatedId": "doc-198",
+    "relatedType": "document",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-129",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Considero amicitia voro angulus congregatio utpote amet.",
+    "timestamp": "2025-12-17T03:45:33.778Z",
+    "actors": [
+      "emp-237"
+    ],
+    "relatedId": "HGRD-80",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-280",
+    "type": "ALL_HANDS",
+    "title": "Company all-hands held",
+    "description": "Arca antea tum sapiente aestus comprehendo appello impedit acquiro.",
+    "timestamp": "2025-12-19T13:07:05.250Z",
+    "actors": [
+      "emp-067"
+    ],
+    "relatedId": "cal-257",
+    "relatedType": "meeting",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-354",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Curis vita undique alveus tactus subiungo basium aeneus depopulo.",
+    "timestamp": "2025-12-19T15:05:11.087Z",
+    "actors": [
+      "emp-168"
+    ],
+    "relatedId": "doc-194",
+    "relatedType": "document",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-459",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Volaticus curriculum ducimus compono depulso patruus ea delinquo delego agnitio.",
+    "timestamp": "2025-12-20T02:15:08.626Z",
+    "actors": [
+      "emp-432"
+    ],
+    "relatedId": "emp-216",
+    "relatedType": "employee",
+    "productId": "prod-connect"
+  },
+  {
+    "id": "tl-477",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Culpo viscus auditor contigo.",
+    "timestamp": "2025-12-21T00:37:00.270Z",
+    "actors": [
+      "emp-378"
+    ],
+    "relatedId": "inc-030",
+    "relatedType": "incident",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-492",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Kunde LLC",
+    "description": "Stella vos alius votum tres altus calcar.",
+    "timestamp": "2025-12-22T20:07:50.710Z",
+    "actors": [
+      "emp-102"
+    ],
+    "relatedId": "cust-kunde-llc-33",
+    "relatedType": "customer",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-380",
+    "type": "CUSTOMER_WON",
+    "title": "New customer: Jacobi - Sauer",
+    "description": "Audeo territo circumvenio aperio vix.",
+    "timestamp": "2025-12-22T21:30:03.597Z",
+    "actors": [
+      "emp-374"
+    ],
+    "relatedId": "cust-jacobi-sauer-117",
+    "relatedType": "customer",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-023",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Venustas consuasor deduco coma.",
+    "timestamp": "2025-12-24T09:54:45.631Z",
+    "actors": [
+      "emp-127"
+    ],
+    "relatedId": "HCON-278",
+    "relatedType": "jira",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-376",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Armarium caterva cognatus delibero.",
+    "timestamp": "2025-12-25T16:39:02.201Z",
+    "actors": [
+      "emp-385"
+    ],
+    "relatedId": "HGRD-59",
+    "relatedType": "jira",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-032",
+    "type": "SECURITY_REVIEW",
+    "title": "Security audit completed",
+    "description": "Spoliatio curo conicio crudelis amaritudo.",
+    "timestamp": "2025-12-26T18:51:15.654Z",
+    "actors": [
+      "emp-029"
+    ],
+    "relatedId": "doc-080",
+    "relatedType": "document",
+    "productId": "prod-platform"
+  },
+  {
+    "id": "tl-327",
+    "type": "INCIDENT",
+    "title": "Production incident detected and resolved",
+    "description": "Stipes officia delectus.",
+    "timestamp": "2025-12-27T21:09:36.310Z",
+    "actors": [
+      "emp-134"
+    ],
+    "relatedId": "inc-015",
+    "relatedType": "incident",
+    "productId": "prod-guard"
+  },
+  {
+    "id": "tl-322",
+    "type": "HIRE",
+    "title": "New employee onboarded",
+    "description": "Carcer demum inventore alii.",
+    "timestamp": "2025-12-28T18:36:15.506Z",
+    "actors": [
+      "emp-127"
+    ],
+    "relatedId": "emp-362",
+    "relatedType": "employee",
+    "productId": "prod-analytics"
+  },
+  {
+    "id": "tl-365",
+    "type": "SPRINT_COMPLETED",
+    "title": "Sprint completed",
+    "description": "Attollo cupio usque aperio tactus ipsa.",
+    "timestamp": "2025-12-30T12:03:46.286Z",
+    "actors": [
+      "emp-292"
+    ],
+    "relatedId": "HANA-263",
+    "relatedType": "jira",
+    "productId": "prod-platform"
+  }
+]

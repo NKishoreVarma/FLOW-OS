@@ -1,0 +1,23 @@
+[
+  {
+    "id": "helios",
+    "name": "Helios Software Inc.",
+    "slug": "helios",
+    "legalName": "Helios Software, Inc.",
+    "founded": "2018-03-15",
+    "industry": "B2B Enterprise SaaS",
+    "website": "https://heliossoftware.com",
+    "hq": "San Francisco, CA",
+    "offices": [
+      "San Francisco",
+      "New York",
+      "London",
+      "Singapore",
+      "Austin"
+    ],
+    "headcount": 450,
+    "arr": "$48M",
+    "customers": 210,
+    "description": "Enterprise workflow automation and intelligence platform for modern operations teams."
+  }
+]

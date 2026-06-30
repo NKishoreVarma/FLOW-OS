@@ -1,0 +1,74 @@
+[
+  {
+    "id": "dept-executive",
+    "name": "Executive",
+    "slug": "executive",
+    "headcount": 8
+  },
+  {
+    "id": "dept-eng-platform",
+    "name": "Engineering — Platform",
+    "slug": "eng-platform",
+    "headcount": 85
+  },
+  {
+    "id": "dept-eng-analytics",
+    "name": "Engineering — Analytics",
+    "slug": "eng-analytics",
+    "headcount": 60
+  },
+  {
+    "id": "dept-eng-connect",
+    "name": "Engineering — Connect",
+    "slug": "eng-connect",
+    "headcount": 55
+  },
+  {
+    "id": "dept-eng-guard",
+    "name": "Engineering — Guard",
+    "slug": "eng-guard",
+    "headcount": 40
+  },
+  {
+    "id": "dept-product",
+    "name": "Product",
+    "slug": "product",
+    "headcount": 28
+  },
+  {
+    "id": "dept-design",
+    "name": "Design",
+    "slug": "design",
+    "headcount": 18
+  },
+  {
+    "id": "dept-qa",
+    "name": "Quality Assurance",
+    "slug": "qa",
+    "headcount": 22
+  },
+  {
+    "id": "dept-devops",
+    "name": "DevOps & Infrastructure",
+    "slug": "devops",
+    "headcount": 20
+  },
+  {
+    "id": "dept-customer-success",
+    "name": "Customer Success",
+    "slug": "customer-success",
+    "headcount": 45
+  },
+  {
+    "id": "dept-sales",
+    "name": "Sales",
+    "slug": "sales",
+    "headcount": 50
+  },
+  {
+    "id": "dept-gtm",
+    "name": "Marketing, Finance, HR, Legal, IT",
+    "slug": "gtm",
+    "headcount": 19
+  }
+]
