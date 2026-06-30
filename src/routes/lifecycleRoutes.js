@@ -16,7 +16,12 @@ router.use((req, res, next) => {
 });
 
 // POST /api/lifecycle/create
+// CREATE operates on an existing workspace (tenant-validated by tenantIsolation).
+// It does NOT provision a new org — use POST /api/auth/signup for that.
 router.post('/create', async (req, res) => {
+  if (!['OWNER', 'ADMIN'].includes(req.workspaceRole)) {
+    return res.status(403).json({ error: 'Lifecycle write operations require OWNER or ADMIN role' });
+  }
   const { manifest, datasets = {} } = req.body;
   const record = await runLifecycleOperation('CREATE', req.workspaceId, { manifest, datasets });
   res.json({ success: true, ...record });
@@ -24,6 +29,9 @@ router.post('/create', async (req, res) => {
 
 // POST /api/lifecycle/import
 router.post('/import', async (req, res) => {
+  if (!['OWNER', 'ADMIN'].includes(req.workspaceRole)) {
+    return res.status(403).json({ error: 'Lifecycle write operations require OWNER or ADMIN role' });
+  }
   const { manifest, datasets = {} } = req.body;
   const record = await runLifecycleOperation('IMPORT', req.workspaceId, { manifest, datasets });
   res.json({ success: true, ...record });
@@ -31,6 +39,9 @@ router.post('/import', async (req, res) => {
 
 // POST /api/lifecycle/sync
 router.post('/sync', async (req, res) => {
+  if (!['OWNER', 'ADMIN'].includes(req.workspaceRole)) {
+    return res.status(403).json({ error: 'Lifecycle write operations require OWNER or ADMIN role' });
+  }
   const { manifest, datasets = {} } = req.body;
   const record = await runLifecycleOperation('SYNC', req.workspaceId, { manifest, datasets });
   res.json({ success: true, ...record });
@@ -38,6 +49,9 @@ router.post('/sync', async (req, res) => {
 
 // POST /api/lifecycle/refresh
 router.post('/refresh', async (req, res) => {
+  if (!['OWNER', 'ADMIN'].includes(req.workspaceRole)) {
+    return res.status(403).json({ error: 'Lifecycle write operations require OWNER or ADMIN role' });
+  }
   const record = await runLifecycleOperation('REFRESH', req.workspaceId, {});
   res.json({ success: true, ...record });
 });

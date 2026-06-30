@@ -110,6 +110,7 @@ registerDatasetType({
   resolver: projectsResolver,
   vectorizer: makeVectorizer('projects', ['name', 'description', 'status']),
   graphBuilder: projectsResolver,
+  memoryMapper: (rec) => ({ memoryType: 'PROJECT_EVENT', content: rec.description || rec.name || String(rec.id) }),
 });
 
 // customers
@@ -121,6 +122,7 @@ registerDatasetType({
   resolver: customersResolver,
   vectorizer: makeVectorizer('customers', ['name', 'description', 'industry']),
   graphBuilder: customersResolver,
+  memoryMapper: (rec) => ({ memoryType: 'PROJECT_EVENT', content: rec.description || rec.name || String(rec.id) }),
 });
 
 // vendors
@@ -297,6 +299,7 @@ registerDatasetType({
   resolver: meetingsResolve,
   vectorizer: makeVectorizer('meetings', ['title', 'notes', 'summary']),
   graphBuilder: meetingsResolve,
+  memoryMapper: (rec) => ({ memoryType: 'MEETING_NOTE', content: rec.summary || rec.title || String(rec.id) }),
 });
 
 // meeting_transcripts
@@ -321,6 +324,7 @@ registerDatasetType({
   resolver: meetingTranscriptsResolve,
   vectorizer: makeVectorizer('meeting_transcripts', ['content']),
   graphBuilder: meetingTranscriptsResolve,
+  memoryMapper: (rec) => ({ memoryType: 'MEETING_NOTE', content: rec.transcript || rec.summary || String(rec.id) }),
 });
 
 // incidents
@@ -346,6 +350,7 @@ registerDatasetType({
   resolver: incidentsResolve,
   vectorizer: makeVectorizer('incidents', ['title', 'description', 'resolution']),
   graphBuilder: incidentsResolve,
+  memoryMapper: (rec) => ({ memoryType: 'INCIDENT', content: rec.description || rec.title || String(rec.id) }),
 });
 
 // documents
@@ -369,6 +374,7 @@ registerDatasetType({
   resolver: documentsResolve,
   vectorizer: makeVectorizer('documents', ['title', 'content']),
   graphBuilder: documentsResolve,
+  memoryMapper: (rec) => ({ memoryType: 'KNOWLEDGE_UPDATE', content: rec.content || rec.title || String(rec.id) }),
 });
 
 // timeline
@@ -426,6 +432,7 @@ registerDatasetType({
   resolver: executiveReportsResolve,
   vectorizer: makeVectorizer('executive_reports', ['title', 'content', 'summary']),
   graphBuilder: executiveReportsResolve,
+  memoryMapper: (rec) => ({ memoryType: 'EXECUTIVE_SUMMARY', content: rec.content || rec.summary || rec.title || String(rec.id) }),
 });
 
 // knowledgeGraph — dataset IS the graph; records[0] contains nodes + edges arrays

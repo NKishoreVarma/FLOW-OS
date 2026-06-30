@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import { prisma } from '../config/prisma.js';
 import { ValidationError } from '../errors/index.js';
@@ -10,19 +11,6 @@ import { generateBriefing } from '../../services/briefingEngine.js';
 import { answerCopilotQuery } from '../../services/copilotService.js';
 import { generateExplainableRecommendations } from '../../services/operationalBrainService.js';
 
-const MEMORY_TYPE_MAP = {
-  incidents:        { memType: 'INCIDENT',          titleFn: r => r.title,       bodyFn: r => r.description ?? r.title },
-  documents:        { memType: 'KNOWLEDGE_UPDATE',   titleFn: r => r.title,       bodyFn: r => r.content },
-  projects:         { memType: 'PROJECT_EVENT',      titleFn: r => r.name,        bodyFn: r => r.description ?? r.name },
-  timeline:         { memType: null,                 titleFn: r => r.title,       bodyFn: r => r.description ?? r.title },
-  memory:           { memType: null,                 titleFn: r => r.title ?? r.id, bodyFn: r => r.content },
-  executive_reports:{ memType: 'KNOWLEDGE_UPDATE',   titleFn: r => r.title,       bodyFn: r => r.content ?? r.summary },
-  customers:        { memType: 'PROJECT_EVENT',      titleFn: r => r.name,        bodyFn: r => r.description ?? r.name },
-};
-
-const VALID_MEMORY_TYPES = new Set([
-  'DECISION', 'INCIDENT', 'PROJECT_EVENT', 'CUSTOMER_EVENT', 'KNOWLEDGE_UPDATE',
-]);
 
 export async function stageValidate(ctx) {
   ctx.emit('stageValidate', 'started', 'Validating datasets against registered handlers');
@@ -116,18 +104,27 @@ export async function stageResolveRelationships(ctx) {
 export async function stageBootstrapWorkspace(ctx) {
   ctx.emit('stageBootstrapWorkspace', 'started', 'Upserting organization, workspace, and member accounts');
   try {
-    const { name, slug, plan = 'free' } = ctx.manifest.organization;
+    const { name: manifestName } = ctx.manifest.organization ?? {};
 
-    const org = await prisma.organization.upsert({
-      where: { slug },
-      create: { name, slug, plan },
-      update: { name, plan },
+    // Resolve org from the workspace's own authoritative orgId — do not trust manifest slug or plan
+    const existingWorkspace = await prisma.workspace.findUnique({
+      where: { externalId: ctx.workspaceId },
     });
+    if (!existingWorkspace) throw new Error(`Workspace "${ctx.workspaceId}" not found`);
+
+    const org = manifestName
+      ? await prisma.organization.update({
+          where: { id: existingWorkspace.orgId },
+          data: { name: manifestName },
+          // Never update plan from manifest — plan is platform-controlled
+        })
+      : await prisma.organization.findUnique({ where: { id: existingWorkspace.orgId } });
+    if (!org) throw new Error('Workspace organization not found');
 
     const workspace = await prisma.workspace.upsert({
       where: { externalId: ctx.workspaceId },
       create: { name: `${org.name} Workspace`, orgId: org.id, externalId: ctx.workspaceId },
-      update: { orgId: org.id },
+      update: {},
     });
 
     ctx.orgId = org.id;
@@ -136,21 +133,21 @@ export async function stageBootstrapWorkspace(ctx) {
     const employees = ctx.normalized.employees ?? [];
     for (const rec of employees) {
       const email = rec.email ?? `${rec.id}@import.local`;
-      const role = ['OWNER', 'ADMIN', 'MEMBER'].includes(rec.role?.toUpperCase())
-        ? rec.role.toUpperCase()
-        : 'MEMBER';
-      const passwordHash = await bcrypt.hash('changeme', 10);
+      // Clamp role — imported records cannot self-escalate to OWNER/ADMIN
+      const role = 'MEMBER';
+      const tempPassword = crypto.randomBytes(16).toString('hex');
+      const passwordHash = await bcrypt.hash(tempPassword, 10);
 
       const user = await prisma.user.upsert({
         where: { email },
         create: { email, fullName: rec.name, passwordHash, orgId: org.id, role },
-        update: { fullName: rec.name, role },
+        update: { fullName: rec.name },
       });
 
       await prisma.workspaceMember.upsert({
         where: { userId_workspaceId: { userId: user.id, workspaceId: workspace.id } },
-        create: { userId: user.id, workspaceId: workspace.id, role: user.role },
-        update: { role: user.role },
+        create: { userId: user.id, workspaceId: workspace.id, role },
+        update: {},
       });
     }
 
@@ -218,25 +215,23 @@ export async function stageGenerateGraphs(ctx) {
 export async function stageIngestMemory(ctx) {
   ctx.emit('stageIngestMemory', 'started', 'Persisting operational memory records');
   try {
-    for (const [datasetType, mapping] of Object.entries(MEMORY_TYPE_MAP)) {
-      const records = ctx.normalized[datasetType];
+    for (const type of Object.keys(ctx.normalized)) {
+      const handler = getDatasetHandler(type);
+      if (!handler?.memoryMapper) continue; // skip types without a memory mapper
+
+      const records = ctx.normalized[type];
       if (!records?.length) continue;
 
       for (const rec of records) {
-        let memType = mapping.memType;
-        if (!memType) {
-          // timeline and memory types carry their own classification; fall back when unknown
-          memType = VALID_MEMORY_TYPES.has(rec.type) ? rec.type : 'PROJECT_EVENT';
-        }
+        const mapped = handler.memoryMapper(rec);
+        if (!mapped) continue;
+        const { memoryType, content } = mapped;
+        if (!content) continue;
 
-        const title = mapping.titleFn(rec);
-        const body = mapping.bodyFn(rec);
-        if (!body) continue;
-
-        await saveMemory(ctx.workspaceId, ctx.orgId, memType, {
-          title,
-          body,
-          source: datasetType,
+        await saveMemory(ctx.workspaceId, ctx.orgId, memoryType, {
+          title: content.slice(0, 120),
+          body: content,
+          source: type,
         });
         ctx.memoryCount++;
       }
@@ -254,6 +249,9 @@ export async function stageIngestMemory(ctx) {
 export async function stageVectorize(ctx) {
   ctx.emit('stageVectorize', 'started', 'Vectorizing normalized records into pgvector store');
   try {
+    // Imported communication records (emails, slack_threads, meeting_transcripts) bypass the
+    // real-time privacy gate — they are treated as pre-classified operational intel from
+    // trusted export files. Do NOT use this stage for streaming/live input.
     for (const type of Object.keys(ctx.normalized)) {
       const handler = getDatasetHandler(type);
       if (!handler) continue;

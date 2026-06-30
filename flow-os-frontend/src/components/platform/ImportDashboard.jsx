@@ -190,16 +190,27 @@ const ProgressView = ({ stages, operationResult, operationError, onReset }) => (
 
 const ValidateResultPanel = ({ result }) => {
   if (!result) return null;
+  const perTypeEntries = Object.entries(result.perType || {});
   return (
     <div className="space-y-4 text-ui-xs">
+      {/* Manifest errors */}
+      {result.manifestErrors?.length > 0 && (
+        <div className="p-3 bg-error/5 border border-error/20 rounded-lg space-y-1">
+          <p className="font-bold text-error">Manifest Errors</p>
+          <ul className="list-disc pl-4 space-y-0.5 text-error">
+            {result.manifestErrors.map((e, i) => <li key={i}>{e}</li>)}
+          </ul>
+        </div>
+      )}
+
       {/* Per-type rows */}
-      {result.types?.length > 0 && (
+      {perTypeEntries.length > 0 && (
         <div className="space-y-2">
           <p className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Per-type results</p>
-          {result.types.map((t, i) => (
+          {perTypeEntries.map(([typeName, t], i) => (
             <div key={i} className="p-3 bg-bg-secondary border border-border-flow/50 rounded-lg space-y-1">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-text-primary">{t.type}</span>
+                <span className="font-bold text-text-primary">{typeName}</span>
                 {t.valid ? (
                   <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded border text-success bg-success/10 border-success/20">valid</span>
                 ) : (
@@ -236,8 +247,8 @@ const ValidateResultPanel = ({ result }) => {
         </div>
       )}
 
-      {/* All-clear */}
-      {!result.types?.length && !result.brokenReferences?.length && !result.warnings?.length && (
+      {/* All-clear — only when backend confirms valid: true */}
+      {result.valid === true && !result.manifestErrors?.length && !result.brokenReferences?.length && (
         <div className="flex items-center gap-2 text-success p-3 bg-success/5 border border-success/20 rounded-lg">
           <CheckCircle2 className="w-4 h-4" />
           <span>All datasets passed validation with no issues.</span>
