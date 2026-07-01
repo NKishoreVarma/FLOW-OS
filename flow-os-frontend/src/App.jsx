@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LayoutShell from "./components/layout/LayoutShell";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
+import PageSkeleton from "./components/ui/PageSkeleton";
 
 // Lazy-loaded routes for code splitting
 const DailyWorkfeed = lazy(() => import('./components/workfeed/DailyWorkfeed'));
@@ -53,18 +54,7 @@ function App() {
     <BrowserRouter>
       <LayoutShell>
         <ErrorBoundary>
-        <Suspense
-          fallback={
-            <div className="flex h-[calc(100vh-4rem)] items-center justify-center bg-bg-primary">
-              <div className="flex flex-col items-center space-y-4">
-                <div className="w-8 h-8 rounded-full border-4 border-flow-purple/20 border-t-flow-purple animate-spin" />
-                <span className="text-ui-xs font-semibold uppercase tracking-wider text-text-muted">
-                  Routing View Node...
-                </span>
-              </div>
-            </div>
-          }
-        >
+        <Suspense fallback={<PageSkeleton />}>
           <Routes>
             {/* Redirect root to /workfeed */}
             <Route path="/" element={<Navigate to="/workfeed" replace />} />
