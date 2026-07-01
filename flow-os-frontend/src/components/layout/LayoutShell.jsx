@@ -10,6 +10,7 @@ import Input from "../ui/Input";
 import { WebSocketProvider, useWebSocket } from "../../hooks/useWebSocket";
 import ToastProvider, { useToast } from "../ui/ToastProvider";
 import { WifiOff, FileText, Send } from "lucide-react";
+import GlobalStatusBar from "../ui/GlobalStatusBar";
 
 // Inner shell component to consume WebSocket and Toast contexts
 const LayoutInner = ({ children }) => {
@@ -131,6 +132,8 @@ const LayoutInner = ({ children }) => {
         <main className="flex-1 overflow-y-auto bg-bg-primary transition-all duration-300">
           {children}
         </main>
+
+        <GlobalStatusBar />
       </div>
 
       {/* 3. Global Modals and Sheets */}
