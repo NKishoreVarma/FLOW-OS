@@ -13,11 +13,11 @@
     "metrics": "node scripts/metrics.js",
     "brain": "node scripts/brain.js",
     "replay": "node scripts/replay.js",
-    "test":             "node --test 'tests/unit/**/*.test.js'",
-    "test:unit":        "node --test 'tests/unit/**/*.test.js'",
-    "test:integration": "node --test 'tests/integration/**/*.test.js'",
-    "test:validation":  "node --test 'tests/validation/**/*.test.js'",
-    "test:all":         "node --test 'tests/**/*.test.js'"
+    "test":             "node --test --test-force-exit 'tests/unit/**/*.test.js'",
+    "test:unit":        "node --test --test-force-exit 'tests/unit/**/*.test.js'",
+    "test:integration": "node --test --test-force-exit 'tests/integration/**/*.test.js'",
+    "test:validation":  "node --test --test-force-exit 'tests/validation/**/*.test.js'",
+    "test:all":         "node --test --test-force-exit 'tests/**/*.test.js'"
   },
   "keywords": [],
   "author": "",
