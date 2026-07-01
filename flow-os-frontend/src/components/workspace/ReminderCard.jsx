@@ -15,7 +15,7 @@ export function ReminderCard() {
 
   useEffect(() => {
     if (!token || !workspaceId) return;
-    fetch('http://localhost:5001/api/brain/goals', {
+    fetch('/api/brain/goals', {
       headers: { Authorization: `Bearer ${token}`, 'workspace-id': workspaceId },
     })
       .then(r => r.ok ? r.json() : null)

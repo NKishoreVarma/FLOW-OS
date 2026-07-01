@@ -94,7 +94,7 @@ export const Sidebar = ({ isCollapsed, onToggle, mobileOpen, onMobileClose }) =>
   const { connectionStatus, workspaceId } = useWebSocket();
 
   const displayWorkspace = workspaceId
-    ? workspaceId.replace("workspace_", "").replace("_", "-").toUpperCase()
+    ? workspaceId.replace("workspace_", "").replace(/_/g, "-").toUpperCase()
     : "NONE";
 
   const displayName =

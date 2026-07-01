@@ -77,7 +77,7 @@ const LayoutInner = ({ children }) => {
   const handleSaveNote = (e) => {
     e.preventDefault();
     if (!noteTitle.trim()) return;
-    showToast(`Note "${noteTitle}" synced to Obsidian Vault!`, "success");
+    showToast("Note draft saved. Connect Obsidian to sync automatically.", "info");
     setNoteTitle("");
     setNoteContent("");
     setIsNoteOpen(false);
@@ -86,7 +86,7 @@ const LayoutInner = ({ children }) => {
   const handleSendEmail = (e) => {
     e.preventDefault();
     if (!emailTo.trim() || !emailSubject.trim()) return;
-    showToast(`Outbound email staged to ${emailTo}!`, "success");
+    showToast("Email draft staged. Connect Gmail to send from your account.", "info");
     setEmailTo("");
     setEmailSubject("");
     setEmailBody("");
@@ -178,7 +178,7 @@ const LayoutInner = ({ children }) => {
                 Cancel
               </Button>
               <Button type="submit" variant="primary" size="sm">
-                Save Note
+                Save Draft
               </Button>
             </div>
           </form>
@@ -222,7 +222,7 @@ const LayoutInner = ({ children }) => {
                 Cancel
               </Button>
               <Button type="submit" variant="primary" size="sm">
-                Send Draft
+                Stage Draft
               </Button>
             </div>
           </form>

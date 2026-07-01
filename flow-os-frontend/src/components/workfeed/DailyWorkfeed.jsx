@@ -16,14 +16,14 @@ import {
 } from 'lucide-react';
 
 const SOURCE_CONFIG = {
-  slack:  { icon: MessageSquare, color: 'text-[#E01E5A]',  bg: 'bg-[#E01E5A]/10',  label: 'Slack'  },
-  gmail:  { icon: Mail,          color: 'text-[#EA4335]',  bg: 'bg-[#EA4335]/10',  label: 'Gmail'  },
-  github: { icon: GitBranch,     color: 'text-[#e6edf3]',  bg: 'bg-white/5',       label: 'GitHub' },
-  jira:   { icon: Briefcase,     color: 'text-[#0052CC]',  bg: 'bg-[#0052CC]/10',  label: 'Jira'   },
-  notion: { icon: FileText,      color: 'text-text-secondary', bg: 'bg-white/5',   label: 'Notion' },
-  vault:  { icon: Shield,        color: 'text-flow-purple', bg: 'bg-flow-purple/10', label: 'Vault'  },
-  calendar:{ icon: Calendar,     color: 'text-[#34A853]',  bg: 'bg-[#34A853]/10',  label: 'Calendar'},
-  default:{ icon: Activity,      color: 'text-text-muted', bg: 'bg-white/5',       label: 'System' },
+  slack:  { icon: MessageSquare, color: 'text-critical',        bg: 'bg-critical/10',      label: 'Slack'  },
+  gmail:  { icon: Mail,          color: 'text-critical',        bg: 'bg-critical/10',      label: 'Gmail'  },
+  github: { icon: GitBranch,     color: 'text-text-secondary',  bg: 'bg-white/5',          label: 'GitHub' },
+  jira:   { icon: Briefcase,     color: 'text-info',            bg: 'bg-info/10',          label: 'Jira'   },
+  notion: { icon: FileText,      color: 'text-text-secondary',  bg: 'bg-white/5',          label: 'Notion' },
+  vault:  { icon: Shield,        color: 'text-flow-purple',     bg: 'bg-flow-purple/10',   label: 'Vault'  },
+  calendar:{ icon: Calendar,     color: 'text-success',         bg: 'bg-success/10',       label: 'Calendar'},
+  default:{ icon: Activity,      color: 'text-text-muted',      bg: 'bg-white/5',          label: 'System' },
 };
 
 const PRIORITY_CONFIG = {
@@ -167,8 +167,8 @@ function MeetingCard({ item }) {
     <div className="group bg-bg-card border border-border-flow rounded-xl p-4 hover:border-white/15 transition-all duration-200 hover:-translate-y-px">
       <div className="flex items-start justify-between gap-3 mb-2">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-[#34A853]/10 border border-[#34A853]/20 flex items-center justify-center flex-shrink-0">
-            <Calendar className="w-3.5 h-3.5 text-[#34A853]" />
+          <div className="w-7 h-7 rounded-lg bg-success/10 border border-success/20 flex items-center justify-center flex-shrink-0">
+            <Calendar className="w-3.5 h-3.5 text-success" />
           </div>
           <span className={`text-[9px] font-bold uppercase px-2 py-0.5 rounded-full border ${typeColor}`}>{item.type}</span>
         </div>
@@ -184,7 +184,7 @@ function MeetingCard({ item }) {
           <span className="text-flow-purple font-medium">Prep: </span>{item.prepContext}
         </p>
       )}
-      <button className="text-[10px] font-semibold px-3 py-1.5 rounded-lg bg-[#34A853]/10 text-[#34A853] border border-[#34A853]/20 hover:bg-[#34A853]/20 transition-all w-full">
+      <button className="text-[10px] font-semibold px-3 py-1.5 rounded-lg bg-success/10 text-success border border-success/20 hover:bg-success/20 transition-all w-full">
         Join Meeting
       </button>
     </div>
@@ -359,7 +359,7 @@ function MorningBriefBanner({ token, workspaceId }) {
 
   useEffect(() => {
     if (!token || !workspaceId) { setLoading(false); return; }
-    fetch('http://localhost:5001/api/brain/briefing?role=EXECUTIVE', {
+    fetch('/api/brain/briefing?role=EXECUTIVE', {
       headers: { Authorization: `Bearer ${token}`, 'workspace-id': workspaceId },
     })
       .then(r => r.ok ? r.json() : null)

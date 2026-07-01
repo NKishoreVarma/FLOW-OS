@@ -121,10 +121,10 @@ export const NotificationDropdown = ({ isOpen, onClose }) => {
     let loadedAny = false;
 
     Promise.allSettled([
-      fetch("http://localhost:5001/api/brain/recommendations", { headers }).then((r) =>
+      fetch("/api/brain/recommendations", { headers }).then((r) =>
         r.ok ? r.json() : Promise.reject(r.status)
       ),
-      fetch("http://localhost:5001/api/approvals", { headers }).then((r) =>
+      fetch("/api/approvals", { headers }).then((r) =>
         r.ok ? r.json() : Promise.reject(r.status)
       ),
     ]).then(([recResult, appResult]) => {

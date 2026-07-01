@@ -46,6 +46,7 @@ export const Header = ({ onMobileOpen, onSearchOpen }) => {
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [hasUnread, setHasUnread] = useState(true);
   const userMenuRef = useRef(null);
 
   useEffect(() => {
@@ -169,7 +170,7 @@ export const Header = ({ onMobileOpen, onSearchOpen }) => {
         {/* Notification bell */}
         <div className="relative">
           <button
-            onClick={() => setIsNotifOpen((prev) => !prev)}
+            onClick={() => { setIsNotifOpen((prev) => !prev); setHasUnread(false); }}
             className={`p-2 rounded-lg transition-apple border cursor-pointer ${
               isNotifOpen
                 ? "bg-flow-purple/10 border-flow-purple/20 text-flow-purple"
@@ -177,7 +178,9 @@ export const Header = ({ onMobileOpen, onSearchOpen }) => {
             }`}
           >
             <Bell className="w-4 h-4" />
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-flow-purple animate-pulse" />
+            {hasUnread && (
+              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-flow-purple animate-pulse" />
+            )}
           </button>
           <NotificationDropdown isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />
         </div>

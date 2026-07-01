@@ -28,7 +28,7 @@ export function GlobalStatusBar() {
 
   useEffect(() => {
     if (!token || !workspaceId) return;
-    fetch('http://localhost:5001/api/connectors', {
+    fetch('/api/connectors', {
       headers: {
         Authorization: `Bearer ${token}`,
         'workspace-id': workspaceId,
