@@ -1,0 +1,30 @@
+/* Tailwind CSS Baseline */
+@import "tailwindcss";
+
+/* Custom Design System Tokens & Classes (Imports must appear first) */
+@import "./typography.css";
+@import "./colors.css";
+@import "./spacing.css";
+@import "./animations.css";
+@import "./tokens.css";
+
+/* Slim scrollbars */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Text selection */
+::selection { background: var(--color-flow-purple-mid); color: var(--text-primary); }
+
+/* Focus ring system */
+:focus-visible { outline: 2px solid var(--color-flow-purple); outline-offset: 2px; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin,
+  .animate-pulse,
+  .animate-shimmer,
+  .animate-float,
+  .animate-glow-pulse { animation: none !important; }
+}

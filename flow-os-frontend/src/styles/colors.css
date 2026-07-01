@@ -1,38 +1,68 @@
 :root {
-  /* Premium Apple Dark Theme Colors */
-  --bg-primary: #05070a;
-  --bg-secondary: #090d16;
-  --bg-card: #0d121f;
-  --bg-hover: #141b2d;
-  --border: rgba(255, 255, 255, 0.06);
+  /* ─── Structural surfaces ─────────────────────────────── */
+  --bg-primary:   #09090b;
+  --bg-rail:      #111113;
+  --bg-secondary: #0d0d0f;
+  --bg-card:      #141416;
+  --bg-hover:     #1a1a1d;
+  --bg-selected:  #1e1e26;
+  --bg-panel:     #0f0f12;
+  --bg-input:     #18181b;
 
-  /* Typography Colors */
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #475569;
+  /* ─── Borders ─────────────────────────────────────────── */
+  --border:        rgba(255, 255, 255, 0.055);
+  --border-focus:  rgba(139, 92, 246, 0.5);
+  --border-strong: rgba(255, 255, 255, 0.10);
 
-  /* Functional/Brand Colors */
-  --color-flow-purple: #8b5cf6;
+  /* ─── Typography ──────────────────────────────────────── */
+  --text-primary:   #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted:     #52525b;
+  --text-link:      #a78bfa;
+
+  /* ─── Brand / AI accent ───────────────────────────────── */
+  --color-flow-purple:     #8b5cf6;
+  --color-flow-purple-dim: rgba(139, 92, 246, 0.12);
+  --color-flow-purple-mid: rgba(139, 92, 246, 0.25);
+
+  /* ─── Semantic status ─────────────────────────────────── */
   --color-critical: #f43f5e;
-  --color-warning: #f59e0b;
-  --color-success: #10b981;
-  --color-info: #3b82f6;
+  --color-warning:  #f59e0b;
+  --color-success:  #10b981;
+  --color-info:     #3b82f6;
 
-  /* Ambient Glow Tokens */
-  --glow-purple: 0 0 16px rgba(139, 92, 246, 0.15);
-  --glow-critical: 0 0 12px rgba(244, 63, 94, 0.2);
-  --glow-success: 0 0 12px rgba(16, 185, 129, 0.2);
+  /* ─── Glow utilities ──────────────────────────────────── */
+  --glow-purple:   0 0 24px rgba(139, 92, 246, 0.18);
+  --glow-critical: 0 0 16px rgba(244, 63, 94, 0.2);
+  --glow-success:  0 0 16px rgba(16, 185, 129, 0.2);
+
+  /* ─── Source dot colors (live feed) ──────────────────── */
+  --source-github:   #a78bfa;
+  --source-gmail:    #f43f5e;
+  --source-calendar: #10b981;
+  --source-slack:    #f59e0b;
+  --source-jira:     #3b82f6;
+  --source-ai:       #8b5cf6;
+  --source-auto:     #06b6d4;
 }
 
-/* Light theme overrides — applied when <html class="light"> (no "dark" class) */
 :root.light {
-  --color-bg-primary:    #f8fafc;
-  --color-bg-secondary:  #f1f5f9;
-  --color-bg-card:       #ffffff;
-  --color-bg-hover:      #e2e8f0;
-  --color-border-flow:   rgba(0, 0, 0, 0.08);
-  --color-text-primary:  #0f172a;
-  --color-text-secondary:#475569;
-  --color-text-muted:    #94a3b8;
-  --color-flow-purple:   #7c3aed;
+  --bg-primary:    #fafafa;
+  --bg-rail:       #f4f4f5;
+  --bg-secondary:  #f1f1f3;
+  --bg-card:       #ffffff;
+  --bg-hover:      #e4e4e7;
+  --bg-selected:   #ede9fe;
+  --bg-panel:      #f8f8fa;
+  --bg-input:      #ffffff;
+  --border:        rgba(0, 0, 0, 0.08);
+  --border-focus:  rgba(124, 58, 237, 0.5);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --text-primary:  #09090b;
+  --text-secondary:#52525b;
+  --text-muted:    #a1a1aa;
+  --text-link:     #7c3aed;
+  --color-flow-purple:     #7c3aed;
+  --color-flow-purple-dim: rgba(124, 58, 237, 0.1);
+  --color-flow-purple-mid: rgba(124, 58, 237, 0.2);
 }
