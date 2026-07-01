@@ -1,0 +1,38 @@
+:root {
+  /* Premium Apple Dark Theme Colors */
+  --bg-primary: #05070a;
+  --bg-secondary: #090d16;
+  --bg-card: #0d121f;
+  --bg-hover: #141b2d;
+  --border: rgba(255, 255, 255, 0.06);
+
+  /* Typography Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+
+  /* Functional/Brand Colors */
+  --color-flow-purple: #8b5cf6;
+  --color-critical: #f43f5e;
+  --color-warning: #f59e0b;
+  --color-success: #10b981;
+  --color-info: #3b82f6;
+
+  /* Ambient Glow Tokens */
+  --glow-purple: 0 0 16px rgba(139, 92, 246, 0.15);
+  --glow-critical: 0 0 12px rgba(244, 63, 94, 0.2);
+  --glow-success: 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+/* Light theme overrides — applied when <html class="light"> (no "dark" class) */
+:root.light {
+  --color-bg-primary:    #f8fafc;
+  --color-bg-secondary:  #f1f5f9;
+  --color-bg-card:       #ffffff;
+  --color-bg-hover:      #e2e8f0;
+  --color-border-flow:   rgba(0, 0, 0, 0.08);
+  --color-text-primary:  #0f172a;
+  --color-text-secondary:#475569;
+  --color-text-muted:    #94a3b8;
+  --color-flow-purple:   #7c3aed;
+}
