@@ -94,7 +94,7 @@ const IntegrationHub = () => {
   } : {};
 
   const fetchStatus = useCallback(async () => {
-    if (!token || !workspaceId) return;
+    if (!token || !workspaceId) { setLoading(false); return; }
     try {
       const [connectorsRes, healthRes] = await Promise.allSettled([
         fetch("/api/connectors", { headers }),

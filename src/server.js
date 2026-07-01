@@ -1,11 +1,13 @@
 import express from 'express';
 import cors from 'cors';
+import crypto from 'crypto';
 import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { fileURLToPath } from 'url';
 dotenv.config();
 
 import { validateEnv } from './utils/envValidation.js';
+import { logger } from './utils/logger.js';
 validateEnv();
 
 // ── Core Infrastructure ──────────────────────────────────────────────────────
@@ -58,7 +60,28 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ── Global Middleware ────────────────────────────────────────────────────────
-app.use(cors({ origin: '*' }));
+
+// CORS — configurable via CORS_ORIGIN env var; defaults to '*' in dev only.
+// Set CORS_ORIGIN=https://app.flowos.io in production.
+const corsOrigin = process.env.CORS_ORIGIN || (process.env.NODE_ENV === 'production' ? false : '*');
+app.use(cors({ origin: corsOrigin, credentials: true }));
+
+// Security headers — no framework dependency, no heap overhead.
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '0'); // modern browsers ignore; CSP is the real guard
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  next();
+});
+
+// Request tracing — propagate caller's ID or generate one; visible in error logs.
+app.use((req, _res, next) => {
+  req.headers['x-request-id'] = req.headers['x-request-id'] || crypto.randomUUID();
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(rateLimiter({ max: 200, windowSec: 60 }));

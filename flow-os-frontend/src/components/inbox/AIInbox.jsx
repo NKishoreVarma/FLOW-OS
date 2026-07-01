@@ -142,8 +142,7 @@ export const AIInbox = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, workspaceId, isAuthLoading]);
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => { loadInbox(); }, [loadInbox]);
+  useEffect(() => { setTimeout(() => loadInbox(), 0); }, [loadInbox]);
 
   const handleSelectMessage = (msg) => {
     setSelectedMessage(msg);

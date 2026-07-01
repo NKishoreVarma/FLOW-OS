@@ -15,7 +15,7 @@ const WorkspaceHealth = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchHealth = async () => {
-    if (!token || !workspaceId) return;
+    if (!token || !workspaceId) { setLoading(false); return; }
     try {
       const res = await fetch(`/api/org/workspaces/${workspaceId}/health`, {
         headers: {

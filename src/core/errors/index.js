@@ -1,13 +1,18 @@
-/**
- * FLOW OS — Standardized API Error Classes
- */
+import { logger } from '../../utils/logger.js';
 
 export class AppError extends Error {
-  constructor(message, statusCode = 500, code = 'INTERNAL_ERROR') {
+  /**
+   * @param {string} message
+   * @param {number} statusCode
+   * @param {string} code
+   * @param {object|null} meta  — extra JSON included in the error response (e.g. { approvalId })
+   */
+  constructor(message, statusCode = 500, code = 'INTERNAL_ERROR', meta = null) {
     super(message);
     this.statusCode = statusCode;
-    this.code = code;
+    this.code       = code;
     this.isOperational = true;
+    if (meta) this.meta = meta;
   }
 }
 
@@ -47,17 +52,28 @@ export class RateLimitError extends AppError {
  */
 export function errorHandler(err, req, res, _next) {
   const statusCode = err.statusCode || 500;
-  const code = err.code || 'INTERNAL_ERROR';
+  const code       = err.code       || 'INTERNAL_ERROR';
+  const requestId  = req.headers['x-request-id'];
 
   if (!err.isOperational) {
-    console.error('❌ [Unhandled Error]', err);
+    logger.error(`Unhandled error on ${req.method} ${req.path}`, {
+      code,
+      statusCode,
+      requestId,
+      error: err.message,
+      stack: err.stack,
+    });
   }
+
+  const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
   res.status(statusCode).json({
     error: {
       code,
       message: err.message,
-      ...(process.env.NODE_ENV !== 'production' && { stack: err.stack })
-    }
+      ...(err.meta ? { meta: err.meta } : {}),
+      ...(requestId ? { requestId } : {}),
+      ...(!IS_PRODUCTION ? { stack: err.stack } : {}),
+    },
   });
 }

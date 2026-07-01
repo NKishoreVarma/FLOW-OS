@@ -37,7 +37,7 @@ const EvaluationPlatform = () => {
   };
 
   const fetchRecommendations = async () => {
-    if (!token || !workspaceId) return;
+    if (!token || !workspaceId) { setLoading(false); return; }
     try {
       const res = await fetch("/api/intelligence/explainable-recommendations", {
         headers: {
@@ -65,7 +65,8 @@ const EvaluationPlatform = () => {
     try {
       const res = await fetch(`/api/evaluation/explainability/${recId}`, {
         headers: {
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${token}`,
+          "workspace-id": workspaceId
         }
       });
       if (res.ok) {
@@ -86,7 +87,8 @@ const EvaluationPlatform = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${token}`,
+          "workspace-id": workspaceId
         },
         body: JSON.stringify({ feedback: outcome })
       });

@@ -68,8 +68,8 @@ function docToNode(doc, idx) {
     id: doc.id,
     label: doc.title?.slice(0, 25) || 'Document',
     type: 'DOCUMENT',
-    x: 600 + (idx % 3) * 120,
-    y: 80 + Math.floor(idx / 3) * 100,
+    x: 80 + (idx % 4) * 140,
+    y: 380 + Math.floor(idx / 4) * 80,
     importance: 0.7,
     meta: doc,
   };
@@ -434,7 +434,7 @@ export const KnowledgeExplorer = () => {
                       ))}
                     </div>
                   )}
-                  {docMeta.url && (
+                  {docMeta.url && /^https?:\/\//.test(docMeta.url) && (
                     <a
                       href={docMeta.url}
                       target="_blank"

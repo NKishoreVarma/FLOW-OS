@@ -27,7 +27,7 @@ const WorkspaceManagement = () => {
   const [briefingCadence, setBriefingCadence] = useState("daily");
 
   const fetchWorkspaces = async () => {
-    if (!token) return;
+    if (!token) { setLoading(false); return; }
     try {
       const res = await fetch("/api/org/workspaces", {
         headers: {
