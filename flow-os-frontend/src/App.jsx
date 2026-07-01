@@ -39,6 +39,10 @@ const AIGovernance = lazy(() => import('./components/platform/AIGovernance'));
 const IntegrationHub = lazy(() => import('./components/platform/IntegrationHub'));
 const AnalyticsBilling = lazy(() => import('./components/platform/AnalyticsBilling'));
 const Marketplace = lazy(() => import('./components/platform/Marketplace'));
+const ImportDashboard = lazy(() => import('./components/platform/ImportDashboard'));
+const OnboardingWizard = lazy(() => import('./components/platform/OnboardingWizard'));
+const WorkspaceHealth = lazy(() => import('./components/platform/WorkspaceHealth'));
+const EvaluationPlatform = lazy(() => import('./components/platform/EvaluationPlatform'));
 
 const UniversalSearch = lazy(() => import('./components/search/UniversalSearch'));
 const AIInbox = lazy(() => import('./components/inbox/AIInbox'));
@@ -88,6 +92,10 @@ function App() {
             <Route path="/platform/integrations" element={<IntegrationHub />} />
             <Route path="/platform/billing" element={<AnalyticsBilling />} />
             <Route path="/platform/marketplace" element={<Marketplace />} />
+            <Route path="/platform/import" element={<ImportDashboard />} />
+            <Route path="/platform/onboarding" element={<OnboardingWizard />} />
+            <Route path="/platform/health" element={<WorkspaceHealth />} />
+            <Route path="/platform/evaluation" element={<EvaluationPlatform />} />
             
             {/* Company Overview paths */}
             <Route path="/admin" element={<CompanyWorkspace />} />
@@ -105,7 +113,7 @@ function App() {
             
             {/* Personal paths */}
             <Route path="/inbox" element={<AIInbox />} />
-            <Route path="/activity" element={<ComingSoon pageName="Recent Operations" />} />
+            <Route path="/activity" element={<Navigate to="/timeline" replace />} />
             <Route path="/help" element={<ComingSoon pageName="System Help" />} />
 
             {/* Cross-capability entity deep-link */}
