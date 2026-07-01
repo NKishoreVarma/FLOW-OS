@@ -38,23 +38,27 @@ const LayoutInner = ({ children }) => {
     const handleKeyDown = (e) => {
       const isMeta = e.metaKey || e.ctrlKey;
       if (isMeta) {
-        if (e.key.toLowerCase() === "k") {
-          e.preventDefault();
-          setIsSearchOpen((prev) => !prev);
-        } else if (e.key.toLowerCase() === "n") {
-          e.preventDefault();
-          setIsNoteOpen(true);
-        } else if (e.key.toLowerCase() === "e") {
-          e.preventDefault();
-          setIsComposeOpen(true);
-        } else if (e.key === "/") {
-          e.preventDefault();
-          setIsShortcutOpen(true);
-        }
+        if (e.key.toLowerCase() === "k") { e.preventDefault(); setIsSearchOpen(prev => !prev); }
+        else if (e.key.toLowerCase() === "n") { e.preventDefault(); setIsNoteOpen(true); }
+        else if (e.key.toLowerCase() === "e") { e.preventDefault(); setIsComposeOpen(true); }
+        else if (e.key === "/") { e.preventDefault(); setIsShortcutOpen(true); }
       }
     };
+    const openSearch  = () => setIsSearchOpen(true);
+    const openCompose = () => setIsComposeOpen(true);
+    const openNote    = () => setIsNoteOpen(true);
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("flow:open-search",  openSearch);
+    window.addEventListener("flow:open-compose", openCompose);
+    window.addEventListener("flow:open-note",    openNote);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("flow:open-search",  openSearch);
+      window.removeEventListener("flow:open-compose", openCompose);
+      window.removeEventListener("flow:open-note",    openNote);
+    };
   }, []);
 
   // Listen for socket connections and trigger alerts
