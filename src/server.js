@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { createServer } from 'http';
+import { fileURLToPath } from 'url';
 dotenv.config();
 
 import { validateEnv } from './utils/envValidation.js';
@@ -311,13 +313,24 @@ console.log('🧠 Autonomous Brain routes mounted at /api/brain');
 // ── Error Handler (must be last) ────────────────────────────────────────────
 app.use(errorHandler);
 
-// ── Boot ─────────────────────────────────────────────────────────────────────
-const httpServer = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`\n=================================================`);
-  console.log(`⚡ FLOW OS Platform Engine v2.0`);
-  console.log(`⚡ Listening on http://127.0.0.1:${PORT}`);
-  console.log(`⚡ Modules: ${protectedModules.length + 1} loaded`);
-  console.log(`=================================================`);
+// ── HTTP Server ───────────────────────────────────────────────────────────────
+const httpServer = createServer(app);
 
-  initSocketServer(httpServer);
-});
+// Named export — used by integration tests to get the configured app without
+// starting the server (no .listen() call).
+export function createApp() {
+  return { app, httpServer };
+}
+
+// ── Boot (only when this file is run directly) ───────────────────────────────
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  httpServer.listen(PORT, '0.0.0.0', () => {
+    console.log(`\n=================================================`);
+    console.log(`⚡ FLOW OS Platform Engine v2.0`);
+    console.log(`⚡ Listening on http://127.0.0.1:${PORT}`);
+    console.log(`⚡ Modules: ${protectedModules.length + 1} loaded`);
+    console.log(`=================================================`);
+
+    initSocketServer(httpServer);
+  });
+}

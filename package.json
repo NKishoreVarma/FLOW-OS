@@ -5,7 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch src/server.js",
+    "worker": "echo \"[INFO] Workers are embedded inside the main server process. Running the server starts the workers. Run 'npm run start' or 'npm run dev' to start.\"",
+    "verify": "node scripts/verify.js",
+    "validate": "node scripts/validationSuite.js",
+    "trace": "node scripts/trace.js",
+    "metrics": "node scripts/metrics.js",
+    "brain": "node scripts/brain.js",
+    "replay": "node scripts/replay.js",
+    "test":             "node --test 'tests/unit/**/*.test.js'",
+    "test:unit":        "node --test 'tests/unit/**/*.test.js'",
+    "test:integration": "node --test 'tests/integration/**/*.test.js'",
+    "test:validation":  "node --test 'tests/validation/**/*.test.js'",
+    "test:all":         "node --test 'tests/**/*.test.js'"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +26,6 @@
   "dependencies": {
     "@composio/core": "^0.4.0",
     "@google/genai": "^2.7.0",
-    "@google/generative-ai": "^0.24.1",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "bcryptjs": "^3.0.3",
@@ -28,5 +39,8 @@
     "pg": "^8.21.0",
     "prisma": "^7.8.0",
     "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.2.2"
   }
 }
