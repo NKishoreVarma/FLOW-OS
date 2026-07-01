@@ -316,8 +316,9 @@ app.use(errorHandler);
 // ── HTTP Server ───────────────────────────────────────────────────────────────
 const httpServer = createServer(app);
 
-// Named export — used by integration tests to get the configured app without
-// starting the server (no .listen() call).
+// Exported for future in-process integration testing. Integration tests currently use
+// the connect-to-running-server pattern (tests/helpers/setup.js) which requires npm run dev.
+// Future: wire supertest directly to createApp() to make tests self-contained.
 export function createApp() {
   return { app, httpServer };
 }

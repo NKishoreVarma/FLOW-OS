@@ -74,17 +74,20 @@ describe('Intelligence — GET /api/intelligence/daily-feed', () => {
 describe('Intelligence — GET /health', () => {
   it('returns 200 on /health', async () => {
     const res = await srv.agent.get('/health');
-    assert.ok(res.status === 200);
+    assert.equal(res.status, 200); // exact status
+    assert.ok(res.body && typeof res.body === 'object', 'body must be JSON object');
   });
 
-  it('returns 200 on /api/health', async () => {
+  it('/api/health returns 200', async () => {
     const res = await srv.agent.get('/api/health');
-    assert.ok(res.status === 200);
+    assert.equal(res.status, 200);
   });
 
-  it('health response contains status field', async () => {
+  it('health response has status field', async () => {
     const res = await srv.agent.get('/health');
-    assert.ok(res.body.status || res.body.ok || res.status === 200);
+    assert.equal(res.status, 200);
+    assert.ok(res.body.status !== undefined || res.body.ok !== undefined || res.body.uptime !== undefined,
+      'health response must have status, ok, or uptime field');
   });
 });
 

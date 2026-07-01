@@ -29,8 +29,11 @@ describe('Auth — POST /api/auth/signup', () => {
       password: 'SecurePass123!',
       orgName: `Test Org ${unique}`,
     });
-    assert.ok(res.status === 200 || res.status === 201, `got ${res.status}: ${JSON.stringify(res.body)}`);
-    assert.ok(res.body.token || res.body.jwt || res.body.accessToken);
+    assert.ok([200, 201].includes(res.status), `expected 200/201 but got ${res.status}: ${JSON.stringify(res.body).slice(0,200)}`);
+    const token = res.body.token || res.body.jwt || res.body.accessToken;
+    assert.ok(token && typeof token === 'string' && token.length > 20, 'must return a JWT string');
+    // JWT has 3 parts
+    assert.equal(token.split('.').length, 3, 'token must be a valid JWT (3 dot-separated parts)');
   });
 
   it('rejects signup with duplicate email', async () => {
