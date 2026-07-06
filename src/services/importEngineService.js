@@ -6,8 +6,26 @@
  * New callers should use runLifecycleOperation() directly or POST /api/lifecycle/import.
  */
 
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { runLifecycleOperation } from '../core/workspaceLifecycle/lifecycleEngine.js';
 import { ValidationError } from '../core/errors/index.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DEMO_DIR = path.resolve(__dirname, '../../demo-company/exports');
+
+function loadDemoDatasets() {
+  const manifestPath = path.join(DEMO_DIR, 'manifest.json');
+  if (!fs.existsSync(manifestPath)) return null;
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const datasets = {};
+  for (const entry of manifest.datasets) {
+    const filePath = path.join(DEMO_DIR, entry.file);
+    if (fs.existsSync(filePath)) datasets[entry.type] = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  }
+  return { manifest, datasets };
+}
 
 // Process-level stub retained so existing /api/import/history route compiles.
 export const importHistory = [];
@@ -163,9 +181,25 @@ export function validateImportPayload(payload) {
 
 /**
  * Executes a workspace import by delegating to the Lifecycle Engine.
- * Accepts the legacy flat-payload shape from POST /api/import.
+ * Accepts the legacy flat-payload shape from POST /api/import, or the string "demo"
+ * to import the bundled Helios Software Inc. demo company.
  */
 export async function executeImport(workspaceId, rawPayload) {
+  // Demo shortcut: OnboardingWizard sends { payload: "demo" }
+  if (rawPayload === 'demo' || rawPayload?.demo === true) {
+    const demo = loadDemoDatasets();
+    if (!demo) throw new ValidationError('Demo company datasets not found. Run: cd demo-company && npm run generate');
+    return runLifecycleOperation('IMPORT', workspaceId, demo).then(record => ({
+      importId: record.importId,
+      workspaceId: record.workspaceId,
+      organization: demo.manifest.organization?.name ?? 'Helios Software Inc.',
+      timestamp: record.completedAt?.toISOString() ?? new Date().toISOString(),
+      statistics: record.statistics,
+      graphMetrics: record.graphMetrics,
+      validation: { valid: record.status === 'COMPLETED', errors: record.errors ?? [] },
+    }));
+  }
+
   const payload = rawPayload ?? {};
 
   const manifest = payload._manifest ?? buildManifestFromLegacyPayload(payload);

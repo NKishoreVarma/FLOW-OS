@@ -1,375 +1,436 @@
 import { useState, useEffect, useCallback } from "react";
-import { Mail, CornerUpLeft, CheckSquare, X, RefreshCw } from "lucide-react";
-import PageContainer from "../ui/PageContainer";
-import Card from "../ui/Card";
-import Button from "../ui/Button";
-import SourceBadge from "../workfeed/SourceBadge";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, CornerUpLeft, X, RefreshCw, Zap } from "lucide-react";
+import SourceBadge from "../ui/SourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
+// ─── Demo data ────────────────────────────────────────────────────────────────
+
 const DEMO_INBOX = [
-  {
-    id: 'e1',
-    from: 'Acme Corp (Client)',
-    subject: 'Escalation: Production API Latency',
-    priority: 'Critical',
-    snippet: 'We are seeing 500ms+ latency on the primary ingestion endpoints.',
-    timestamp: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
-    labels: ['inbox', 'important'],
-    threadId: 'thread-001',
-    aiSuggestion: 'Acknowledge immediately. Offer a 1-hour update. Reference the DB migration as likely cause.',
-  },
-  {
-    id: 'e2',
-    from: 'Sarah Chen',
-    subject: 'Re: Design Tokens',
-    priority: 'Action Needed',
-    snippet: "I've attached the missing Figma tokens. Can you integrate them today?",
-    timestamp: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
-    labels: ['inbox'],
-    threadId: 'thread-002',
-    aiSuggestion: 'Reply confirming timeline. Tokens are already integrated in this sprint.',
-  },
-  {
-    id: 'e3',
-    from: 'GitHub Notifications',
-    subject: 'Dependabot: Bump react-router-dom',
-    priority: 'FYI',
-    snippet: 'Bumps react-router-dom from 6.22 to 6.23.',
-    timestamp: new Date(Date.now() - 5 * 3600 * 1000).toISOString(),
-    labels: ['inbox'],
-    threadId: 'thread-003',
-    aiSuggestion: 'Low risk. Merge after quick review of changelog.',
-  },
-  {
-    id: 'e4',
-    from: 'James K. (CTO)',
-    subject: 'Q3 Architecture Review — Your Input Needed',
-    priority: 'Action Needed',
-    snippet: 'Please prepare a 2-slide summary of our current vector DB strategy for the board.',
-    timestamp: new Date(Date.now() - 8 * 3600 * 1000).toISOString(),
-    labels: ['inbox', 'important'],
-    threadId: 'thread-004',
-    aiSuggestion: 'High priority. Reference the pgvector migration doc and Synapse Engine design.',
-  },
-  {
-    id: 'e5',
-    from: 'TechStartup Inc.',
-    subject: 'Partnership Inquiry — AI Integration',
-    priority: 'FYI',
-    snippet: "We are building on top of FLOW's API and would love to discuss a partnership.",
-    timestamp: new Date(Date.now() - 24 * 3600 * 1000).toISOString(),
-    labels: ['inbox'],
-    threadId: 'thread-005',
-    aiSuggestion: 'Forward to business development. Promising enterprise lead.',
-  },
-  {
-    id: 'e6',
-    from: 'On-Call Alert',
-    subject: 'ALERT: CPU spike on prod-api-03',
-    priority: 'Critical',
-    snippet: 'CPU utilization at 94% for 5+ minutes. Auto-scaling triggered.',
-    timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
-    labels: ['inbox', 'important'],
-    threadId: 'thread-006',
-    aiSuggestion: 'Check ingestion queue backlog. Likely correlation with increased ingest volume.',
-  },
+  { id: "e1", from: "Acme Corp (Client)",   subject: "Escalation: Production API Latency",      priority: "critical",  snippet: "We are seeing 500ms+ latency on the primary ingestion endpoints.",                           timestamp: new Date(Date.now() - 10 * 60000).toISOString(),    aiSuggestion: "Acknowledge immediately. Offer a 1-hour update. Reference the DB migration as likely cause." },
+  { id: "e2", from: "Sarah Chen",           subject: "Re: Design Tokens",                        priority: "high",      snippet: "I've attached the missing Figma tokens. Can you integrate them today?",                      timestamp: new Date(Date.now() - 2 * 3600000).toISOString(),   aiSuggestion: "Reply confirming timeline. Tokens are already integrated in this sprint." },
+  { id: "e3", from: "GitHub Notifications", subject: "Dependabot: Bump react-router-dom",        priority: "low",       snippet: "Bumps react-router-dom from 6.22 to 6.23.",                                                  timestamp: new Date(Date.now() - 5 * 3600000).toISOString(),   aiSuggestion: "Low risk. Merge after quick review of changelog." },
+  { id: "e4", from: "James K. (CTO)",       subject: "Q3 Architecture Review — Your Input Needed", priority: "high",   snippet: "Please prepare a 2-slide summary of our current vector DB strategy for the board.",          timestamp: new Date(Date.now() - 8 * 3600000).toISOString(),   aiSuggestion: "High priority. Reference the pgvector migration doc and Synapse Engine design." },
+  { id: "e5", from: "TechStartup Inc.",     subject: "Partnership Inquiry — AI Integration",     priority: "low",       snippet: "We are building on top of FLOW's API and would love to discuss a partnership.",              timestamp: new Date(Date.now() - 24 * 3600000).toISOString(),  aiSuggestion: "Forward to business development. Promising enterprise lead." },
+  { id: "e6", from: "On-Call Alert",        subject: "ALERT: CPU spike on prod-api-03",           priority: "critical", snippet: "CPU utilization at 94% for 5+ minutes. Auto-scaling triggered.",                              timestamp: new Date(Date.now() - 15 * 60000).toISOString(),    aiSuggestion: "Check ingestion queue backlog. Likely correlation with increased ingest volume." },
 ];
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function normalizeMessage(msg) {
   return {
     id:           msg.id || msg.messageId,
-    from:         msg.from || msg.sender || 'Unknown',
-    subject:      msg.subject || '(no subject)',
-    snippet:      msg.snippet || (typeof msg.body === 'string' ? msg.body.slice(0, 100) : ''),
+    from:         msg.from || msg.sender || "Unknown",
+    subject:      msg.subject || "(no subject)",
+    snippet:      msg.snippet || (typeof msg.body === "string" ? msg.body.slice(0, 100) : ""),
     timestamp:    msg.timestamp || msg.date || new Date().toISOString(),
-    priority:     msg.labels?.includes?.('important') ? 'Action Needed' : 'FYI',
-    labels:       msg.labels || [],
-    threadId:     msg.threadId || msg.id,
+    priority:     msg.labels?.includes?.("important") ? "high" : "low",
     aiSuggestion: msg.aiSuggestion || null,
   };
 }
 
-function formatTimestamp(ts) {
+function timeAgo(ts) {
   try {
-    const diff = Date.now() - new Date(ts).getTime();
-    const minutes = Math.floor(diff / 60000);
-    if (minutes < 60) return `${minutes}m ago`;
-    const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours}h ago`;
-    return `${Math.floor(hours / 24)}d ago`;
-  } catch {
-    return '';
-  }
+    const d = Date.now() - new Date(ts).getTime();
+    const m = Math.floor(d / 60000);
+    if (m < 60)  return `${m}m ago`;
+    if (m < 1440) return `${Math.floor(m / 60)}h ago`;
+    return `${Math.floor(m / 1440)}d ago`;
+  } catch { return ""; }
 }
+
+const P_COLOR = {
+  critical: "var(--p-critical)",
+  high:     "var(--p-high)",
+  low:      "var(--t4)",
+};
+
+const P_LABEL = {
+  critical: "Critical",
+  high:     "Action Needed",
+  low:      "FYI",
+};
+
+const TABS = ["Critical", "Action Needed", "FYI", "All"];
+
+// ─── EmailRow ─────────────────────────────────────────────────────────────────
+
+function EmailRow({ email, selected, onClick }) {
+  const [h, setH] = useState(false);
+  const color = P_COLOR[email.priority] || P_COLOR.low;
+  const isActive = selected;
+
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setH(true)}
+      onMouseLeave={() => setH(false)}
+      style={{
+        position:     "relative",
+        background:   isActive ? "var(--bg-hover)" : h ? "var(--bg-card)" : "transparent",
+        border:       `1px solid ${isActive ? "rgba(124,110,255,0.35)" : h ? "var(--border-strong)" : "var(--border)"}`,
+        borderLeft:   `2px solid ${isActive ? "var(--brand)" : color}`,
+        borderRadius:  4,
+        padding:      "12px 14px",
+        marginBottom:  4,
+        cursor:       "pointer",
+        transition:   "background 100ms, border-color 100ms",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 5 }}>
+        <span style={{
+          fontFamily:   "'JetBrains Mono', monospace",
+          fontSize:      9,
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          color,
+        }}>
+          {P_LABEL[email.priority] || "FYI"}
+        </span>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "var(--t5)" }}>
+          {timeAgo(email.timestamp)}
+        </span>
+      </div>
+      <div style={{ fontSize: 13, fontWeight: 500, color: "var(--t1)", marginBottom: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        {email.subject}
+      </div>
+      <div style={{ fontSize: 12, color: "var(--t3)", marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        {email.from}
+      </div>
+      <div style={{ fontSize: 12, color: "var(--t3)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+        {email.snippet}
+      </div>
+      {email.aiSuggestion && (
+        <div style={{
+          marginTop: 8, display: "inline-flex", alignItems: "center", gap: 5,
+          fontSize: 10, color: "var(--brand-text)",
+          background: "var(--brand-dim)", border: "1px solid var(--brand-line)",
+          borderRadius: 3, padding: "3px 7px",
+          fontFamily: "'JetBrains Mono', monospace",
+        }}>
+          <Zap style={{ width: 9, height: 9 }} />
+          AI suggestion ready
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
 
 export const AIInbox = () => {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
-  const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [isDemo, setIsDemo] = useState(false);
-  const [selectedMessage, setSelectedMessage] = useState(null);
-  const [draftText, setDraftText] = useState('');
-  const [sending, setSending] = useState(false);
+  const [messages, setMessages]           = useState([]);
+  const [loading, setLoading]             = useState(true);
+  const [isDemo, setIsDemo]               = useState(false);
+  const [selected, setSelected]           = useState(null);
+  const [draftText, setDraftText]         = useState("");
+  const [sending, setSending]             = useState(false);
+  const [activeTab, setActiveTab]         = useState("All");
+  const [focusedInput, setFocusedInput]   = useState(false);
 
   const headers = {
     Authorization: `Bearer ${token}`,
-    'workspace-id': workspaceId || 'workspace_corp_alpha',
-    'Content-Type': 'application/json',
+    "workspace-id": workspaceId || "workspace_corp_alpha",
+    "Content-Type": "application/json",
   };
 
   const loadInbox = useCallback(async () => {
     if (isAuthLoading) return;
     setLoading(true);
     try {
-      const res = await fetch('/api/communication/inbox?limit=20&provider=gmail', { headers });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const res = await fetch("/api/communication/inbox?limit=20&provider=gmail", { headers });
+      if (!res.ok) throw new Error();
       const data = await res.json();
-      const raw = data.result?.messages || data.result || [];
+      const raw  = data.result?.messages || data.result || [];
       const msgs = Array.isArray(raw) ? raw.map(normalizeMessage) : [];
-      if (msgs.length > 0) {
-        setMessages(msgs);
-        setIsDemo(false);
-      } else {
-        setMessages(DEMO_INBOX);
-        setIsDemo(true);
-      }
+      if (msgs.length > 0) { setMessages(msgs); setIsDemo(false); }
+      else { setMessages(DEMO_INBOX); setIsDemo(true); }
     } catch {
       setMessages(DEMO_INBOX);
       setIsDemo(true);
     } finally {
       setLoading(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, workspaceId, isAuthLoading]);
 
   useEffect(() => { setTimeout(() => loadInbox(), 0); }, [loadInbox]);
 
-  const handleSelectMessage = (msg) => {
-    setSelectedMessage(msg);
-    setDraftText('');
-  };
-
   const handleSendReply = async () => {
-    if (!selectedMessage || !draftText.trim()) return;
-    if (isDemo) {
-      alert('Sent! (demo)');
-      setDraftText('');
-      return;
-    }
+    if (!selected || !draftText.trim()) return;
+    if (isDemo) { alert("Sent! (demo)"); setDraftText(""); return; }
     setSending(true);
     try {
-      const res = await fetch(
-        `/api/communication/reply/${selectedMessage.id}?provider=gmail`,
-        {
-          method: 'POST',
-          headers,
-          body: JSON.stringify({ body: draftText, provider: 'gmail' }),
-        }
-      );
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      alert('Reply sent!');
-      setDraftText('');
-    } catch {
-      alert('Failed to send reply. Please try again.');
-    } finally {
-      setSending(false);
-    }
+      const res = await fetch(`/api/communication/reply/${selected.id}?provider=gmail`, {
+        method: "POST", headers,
+        body: JSON.stringify({ body: draftText, provider: "gmail" }),
+      });
+      if (!res.ok) throw new Error();
+      setDraftText("");
+    } catch { alert("Failed to send reply."); } finally { setSending(false); }
   };
 
-  const priorityChip = (priority) => {
-    if (priority === 'Critical') return 'text-destructive bg-destructive/10 border-destructive/30';
-    if (priority === 'Action Needed') return 'text-warning bg-warning/10 border-warning/30';
-    return 'text-text-muted bg-bg-card border-border-flow';
-  };
+  const filteredMessages = messages.filter(m => {
+    if (activeTab === "All")           return true;
+    if (activeTab === "Critical")      return m.priority === "critical";
+    if (activeTab === "Action Needed") return m.priority === "high";
+    if (activeTab === "FYI")           return m.priority === "low";
+    return true;
+  });
 
   return (
-    <PageContainer className="space-y-8 select-none">
-
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="space-y-1">
-          <h1 className="text-ui-xl font-bold text-text-primary tracking-tight flex items-center space-x-3">
-            <Mail className="w-8 h-8 text-flow-purple" />
-            <span>AI Inbox</span>
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-base)" }}>
+      {/* Page header */}
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "20px 32px 0",
+        flexShrink: 0,
+      }}>
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+            <Mail style={{ width: 16, height: 16, color: "var(--brand)" }} />
+            <h1 style={{ fontSize: 16, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.3px" }}>
+              Inbox
+            </h1>
             {isDemo && (
-              <span className="text-xs text-text-muted bg-bg-card border border-border-flow px-2 py-0.5 rounded-full">
-                Demo mode
-              </span>
+              <span style={{
+                fontFamily: "'JetBrains Mono', monospace", fontSize: 9,
+                background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)",
+                borderRadius: 3, padding: "2px 6px", color: "var(--t5)",
+                textTransform: "uppercase", letterSpacing: "0.06em",
+              }}>Demo</span>
             )}
-          </h1>
-          <p className="text-ui-xs text-text-secondary">
-            Your communications, automatically prioritized and drafted by FLOW.
+          </div>
+          <p style={{ fontSize: 12, color: "var(--t4)" }}>
+            Communications prioritized and drafted by FLOW
           </p>
         </div>
 
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={loadInbox}
-            disabled={loading}
-            className="flex items-center space-x-1.5 text-text-muted hover:text-text-primary"
-          >
-            <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
-            <span>Refresh</span>
-          </Button>
-          {["Critical", "Action Needed", "Waiting", "FYI"].map((tab, i) => (
-            <button
-              key={i}
-              className={`px-4 py-2 rounded-xl text-ui-xs font-semibold transition-apple ${
-                i === 0
-                  ? "bg-bg-card border border-border-flow text-text-primary shadow-sm"
-                  : "text-text-muted hover:text-text-primary"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+        <button
+          onClick={loadInbox}
+          disabled={loading}
+          style={{
+            display: "flex", alignItems: "center", gap: 6,
+            padding: "6px 12px", fontSize: 12, fontWeight: 500,
+            color: "var(--t3)", background: "rgba(255,255,255,0.03)",
+            border: "1px solid var(--border)", borderRadius: 4,
+            cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.5 : 1,
+            transition: "all 100ms",
+          }}
+          onMouseEnter={e => e.currentTarget.style.color = "var(--t1)"}
+          onMouseLeave={e => e.currentTarget.style.color = "var(--t3)"}
+        >
+          <RefreshCw style={{ width: 11, height: 11, ...(loading ? { animation: "spin 1s linear infinite" } : {}) }} />
+          Refresh
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      {/* Tabs */}
+      <div style={{
+        display: "flex", borderBottom: "1px solid var(--border)",
+        padding: "0 32px", marginTop: 16, flexShrink: 0,
+      }}>
+        {TABS.map(tab => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            style={{
+              padding: "8px 14px", fontSize: 13,
+              fontWeight: activeTab === tab ? 500 : 400,
+              color: activeTab === tab ? "var(--t1)" : "var(--t4)",
+              borderBottom: `2px solid ${activeTab === tab ? "var(--brand)" : "transparent"}`,
+              background: "none", border: "none",
+              borderBottom: `2px solid ${activeTab === tab ? "var(--brand)" : "transparent"}`,
+              cursor: "pointer", transition: "color 100ms", whiteSpace: "nowrap",
+            }}
+            onMouseEnter={e => { if (activeTab !== tab) e.currentTarget.style.color = "var(--t2)"; }}
+            onMouseLeave={e => { if (activeTab !== tab) e.currentTarget.style.color = "var(--t4)"; }}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
 
-        {/* Left Column: Email List (5/12) */}
-        <div className="lg:col-span-5 space-y-3">
+      {/* Body */}
+      <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
+        {/* Email list */}
+        <div style={{
+          width: 380, flexShrink: 0,
+          borderRight: "1px solid var(--border)",
+          overflowY: "auto",
+          padding: "16px 16px",
+        }}>
           {loading ? (
-            Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="animate-pulse bg-bg-card rounded h-16 w-full" />
+            Array.from({ length: 5 }).map((_, i) => (
+              <div key={i} style={{ marginBottom: 4 }}>
+                <div style={{ height: 64, borderRadius: 4, background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
+                  </div>
+              </div>
             ))
+          ) : filteredMessages.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "48px 0", color: "var(--t4)", fontSize: 13 }}>
+              No messages in this folder.
+            </div>
           ) : (
-            messages.map((email) => (
-              <Card
+            filteredMessages.map(email => (
+              <EmailRow
                 key={email.id}
-                className={`p-4 cursor-pointer transition-apple ${
-                  selectedMessage?.id === email.id
-                    ? "border-flow-purple ring-1 ring-flow-purple/30 bg-bg-card"
-                    : "hover:border-border-flow/80 bg-bg-primary"
-                }`}
-                onClick={() => handleSelectMessage(email)}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <div className="flex items-center space-x-2">
-                    <span
-                      className={`text-[9px] font-bold px-1.5 py-0.5 rounded border uppercase tracking-wider ${priorityChip(email.priority)}`}
-                    >
-                      {email.priority}
-                    </span>
-                  </div>
-                  <span className="text-[10px] text-text-muted">{formatTimestamp(email.timestamp)}</span>
-                </div>
-                <h3 className="text-ui-sm font-semibold text-text-primary truncate">{email.subject}</h3>
-                <p className="text-[11px] text-text-secondary font-medium truncate mb-1">{email.from}</p>
-                <p className="text-ui-xs text-text-secondary font-light line-clamp-2">{email.snippet}</p>
-
-                {email.aiSuggestion && (
-                  <div className="mt-3 inline-flex items-center space-x-1.5 text-[10px] font-bold text-flow-purple bg-flow-purple/10 px-2 py-1 rounded border border-flow-purple/20">
-                    <CornerUpLeft className="w-3 h-3" />
-                    <span>AI Suggestion Ready</span>
-                  </div>
-                )}
-              </Card>
+                email={email}
+                selected={selected?.id === email.id}
+                onClick={() => { setSelected(email); setDraftText(""); }}
+              />
             ))
           )}
         </div>
 
-        {/* Right Column: Reader & Reply Sheet (7/12) */}
-        <div className="lg:col-span-7">
-          {selectedMessage ? (
-            <Card className="h-full flex flex-col min-h-[600px] select-text">
-              <div className="p-6 border-b border-border-flow/40 space-y-4">
-                <div className="flex justify-between items-start">
-                  <div className="space-y-1">
-                    <h2 className="text-ui-lg font-bold text-text-primary">
-                      {selectedMessage.subject}
-                    </h2>
-                    <div className="flex items-center space-x-2 text-ui-sm text-text-secondary">
-                      <span className="font-medium text-text-primary">{selectedMessage.from}</span>
-                      <span>•</span>
-                      <span>{formatTimestamp(selectedMessage.timestamp)}</span>
-                    </div>
-                  </div>
-                  <SourceBadge source="gmail" className="scale-90 origin-top-right" />
+        {/* Detail pane */}
+        <div style={{ flex: 1, overflowY: "auto", padding: "24px 32px" }}>
+          {selected ? (
+            <motion.div
+              key={selected.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            >
+              {/* Header */}
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 8 }}>
+                  <h2 style={{ fontSize: 18, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.4px", lineHeight: 1.3, flex: 1, paddingRight: 16 }}>
+                    {selected.subject}
+                  </h2>
+                  <SourceBadge source="gmail" />
                 </div>
-
-                <div className="bg-bg-primary/50 rounded-lg p-4 text-ui-sm text-text-secondary leading-relaxed font-light border border-border-flow/40">
-                  {selectedMessage.snippet}
-                  <br /><br />
-                  (Rest of email thread omitted for brevity)
+                <div style={{ display: "flex", gap: 8, alignItems: "center", fontSize: 12, color: "var(--t3)" }}>
+                  <span style={{ color: "var(--t2)", fontWeight: 500 }}>{selected.from}</span>
+                  <span style={{ color: "var(--t5)" }}>·</span>
+                  <span>{timeAgo(selected.timestamp)}</span>
                 </div>
-
-                {/* AI Suggestion panel */}
-                {selectedMessage.aiSuggestion && (
-                  <div className="bg-flow-purple/10 border border-flow-purple/30 rounded-lg p-3">
-                    <div className="flex items-center space-x-2 mb-1.5">
-                      <CornerUpLeft className="w-3.5 h-3.5 text-flow-purple" />
-                      <span className="text-[10px] font-bold text-flow-purple uppercase tracking-wider">
-                        AI Suggestion
-                      </span>
-                    </div>
-                    <p className="text-ui-xs text-text-secondary leading-relaxed">
-                      {selectedMessage.aiSuggestion}
-                    </p>
-                  </div>
-                )}
               </div>
 
-              {/* Reply panel */}
-              <div className="p-6 flex-1 flex flex-col bg-flow-purple/5 relative overflow-hidden">
-                <div className="absolute -right-24 -top-24 w-48 h-48 rounded-full bg-flow-purple/20 blur-3xl pointer-events-none" />
+              {/* Body */}
+              <div style={{
+                background: "var(--bg-card)", border: "1px solid var(--border)",
+                borderRadius: 4, padding: "16px 18px",
+                fontSize: 13, color: "var(--t2)", lineHeight: 1.7,
+                marginBottom: 20,
+              }}>
+                {selected.snippet}
+                <br /><br />
+                <span style={{ color: "var(--t4)" }}>(Full thread available when Gmail is connected.)</span>
+              </div>
 
-                <div className="flex items-center justify-between mb-4 select-none">
-                  <div className="flex items-center space-x-2 text-flow-purple">
-                    <CornerUpLeft className="w-4 h-4" />
-                    <h3 className="text-ui-sm font-semibold uppercase tracking-wider">Reply</h3>
-                  </div>
-                  {isDemo && (
-                    <span className="text-[10px] text-text-muted font-bold bg-bg-secondary px-2 py-0.5 rounded border border-border-flow">
-                      Demo Mode
+              {/* AI suggestion */}
+              {selected.aiSuggestion && (
+                <div style={{
+                  background: "rgba(124,110,255,0.06)", border: "1px solid var(--brand-line)",
+                  borderLeft: "2px solid var(--brand)",
+                  borderRadius: 4, padding: "12px 14px", marginBottom: 20,
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
+                    <Zap style={{ width: 11, height: 11, color: "var(--brand)" }} />
+                    <span style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 9, color: "var(--brand-text)",
+                      textTransform: "uppercase", letterSpacing: "0.08em",
+                    }}>
+                      AI Suggestion
                     </span>
-                  )}
+                  </div>
+                  <p style={{ fontSize: 13, color: "var(--t2)", lineHeight: 1.6 }}>
+                    {selected.aiSuggestion}
+                  </p>
                 </div>
+              )}
 
+              {/* Reply composer */}
+              <div style={{
+                background: "var(--bg-card)", border: "1px solid var(--border)",
+                borderRadius: 4, padding: "14px",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
+                  <CornerUpLeft style={{ width: 12, height: 12, color: "var(--brand)" }} />
+                  <span style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 9, textTransform: "uppercase",
+                    letterSpacing: "0.08em", color: "var(--t4)",
+                  }}>
+                    Reply
+                  </span>
+                </div>
                 <textarea
-                  className="flex-1 w-full bg-bg-card border border-border-flow/60 rounded-xl p-4 text-ui-sm text-text-primary focus:outline-none focus:border-flow-purple/50 focus:ring-1 focus:ring-flow-purple/50 resize-none font-light leading-relaxed min-h-[200px]"
-                  placeholder="Write your reply here…"
                   value={draftText}
-                  onChange={(e) => setDraftText(e.target.value)}
+                  onChange={e => setDraftText(e.target.value)}
+                  placeholder="Write your reply…"
+                  rows={5}
+                  onFocus={() => setFocusedInput(true)}
+                  onBlur={() => setFocusedInput(false)}
+                  style={{
+                    width: "100%",
+                    background: focusedInput ? "rgba(124,110,255,0.04)" : "rgba(255,255,255,0.02)",
+                    border: `1px solid ${focusedInput ? "rgba(124,110,255,0.35)" : "var(--border-strong)"}`,
+                    borderRadius: 4, padding: "10px 12px",
+                    fontSize: 13, color: "var(--t1)", lineHeight: 1.6,
+                    resize: "none", outline: "none", transition: "border-color 150ms, background 150ms",
+                    fontFamily: "'Inter', -apple-system, sans-serif",
+                    marginBottom: 10,
+                  }}
                 />
-
-                <div className="flex items-center justify-end mt-4 space-x-3 select-none">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-text-muted hover:text-critical space-x-1.5"
-                    onClick={() => { setSelectedMessage(null); setDraftText(''); }}
+                <style>{`textarea::placeholder { color: var(--t5); }`}</style>
+                <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
+                  <button
+                    onClick={() => { setSelected(null); setDraftText(""); }}
+                    style={{
+                      padding: "6px 12px", fontSize: 12, fontWeight: 500,
+                      background: "transparent", border: "1px solid var(--border-strong)",
+                      borderRadius: 4, color: "var(--t3)", cursor: "pointer", transition: "all 100ms",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.color = "var(--t1)"}
+                    onMouseLeave={e => e.currentTarget.style.color = "var(--t3)"}
                   >
-                    <X className="w-4 h-4" />
-                    <span>Discard</span>
-                  </Button>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    className="space-x-1.5"
-                    disabled={sending || !draftText.trim()}
+                    Discard
+                  </button>
+                  <button
                     onClick={handleSendReply}
+                    disabled={sending || !draftText.trim()}
+                    style={{
+                      padding: "6px 14px", fontSize: 12, fontWeight: 500,
+                      background: sending || !draftText.trim() ? "rgba(124,110,255,0.15)" : "var(--brand)",
+                      border: "1px solid rgba(124,110,255,0.40)",
+                      borderRadius: 4, color: "#fff",
+                      cursor: sending || !draftText.trim() ? "not-allowed" : "pointer",
+                      opacity: sending || !draftText.trim() ? 0.6 : 1,
+                      transition: "all 100ms",
+                      display: "flex", alignItems: "center", gap: 6,
+                    }}
                   >
-                    <CheckSquare className="w-4 h-4" />
-                    <span>{sending ? 'Sending…' : 'Send Reply'}</span>
-                  </Button>
+                    {sending && <span style={{ width: 10, height: 10, borderRadius: "50%", border: "1.5px solid #fff", borderTopColor: "transparent", animation: "spin 0.7s linear infinite" }} />}
+                    {sending ? "Sending…" : "Send reply"}
+                  </button>
                 </div>
               </div>
-            </Card>
+            </motion.div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center border-2 border-dashed border-border-flow/60 rounded-2xl bg-bg-primary/30 min-h-[600px]">
-              <Mail className="w-8 h-8 text-text-muted/50 mb-3" />
-              <p className="text-ui-sm text-text-muted font-medium">Select an email to review</p>
+            <div style={{
+              display: "flex", flexDirection: "column",
+              alignItems: "center", justifyContent: "center",
+              height: "100%", minHeight: 400,
+            }}>
+              <div style={{
+                width: 40, height: 40, borderRadius: 6,
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid var(--border)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginBottom: 12,
+              }}>
+                <Mail style={{ width: 16, height: 16, color: "var(--t5)" }} />
+              </div>
+              <p style={{ fontSize: 13, color: "var(--t4)" }}>Select an email to read</p>
             </div>
           )}
         </div>
-
       </div>
-
-    </PageContainer>
+    </div>
   );
 };
 

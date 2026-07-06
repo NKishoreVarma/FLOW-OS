@@ -5,8 +5,8 @@ export default function EntityWorkspace() {
   const { entityId } = useParams();
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-ui-xl font-bold text-text-primary tracking-tight mb-6">
+    <div style={{ padding: "24px", maxWidth: 900, margin: "0 auto" }}>
+      <h1 style={{ fontSize: 20, fontWeight: 700, color: "var(--t1)", letterSpacing: "-0.4px", marginBottom: 24 }}>
         Entity Workspace
       </h1>
       <EntityContextContent entityId={entityId} />

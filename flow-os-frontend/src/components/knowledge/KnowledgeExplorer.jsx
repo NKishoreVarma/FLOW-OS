@@ -228,48 +228,62 @@ export const KnowledgeExplorer = () => {
     : [];
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] overflow-hidden bg-bg-primary">
+    <div style={{ display: "flex", height: "calc(100vh - 4rem)", overflow: "hidden", background: "var(--bg-base)" }}>
       {/* Graph Canvas */}
-      <div className="flex-1 relative">
+      <div style={{ flex: 1, position: "relative" }}>
         {/* Controls */}
-        <div className="absolute top-4 left-4 right-4 z-10 flex items-center gap-3">
-          <div className="relative flex-1 max-w-xs">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-text-muted" />
+        <div style={{ position: "absolute", top: 14, left: 14, right: 14, zIndex: 10, display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+          <div style={{ position: "relative", flex: 1, maxWidth: 280 }}>
+            <Search style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", width: 13, height: 13, color: "var(--t5)" }} />
             <input
               type="text"
               placeholder="Search entities…"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full bg-bg-card border border-border-flow rounded-xl pl-9 pr-4 py-2 text-[12px] text-text-primary placeholder:text-text-muted focus:outline-none focus:border-flow-purple/40 focus:ring-2 focus:ring-flow-purple/10"
+              style={{
+                width: "100%", background: "var(--bg-card)", border: "1px solid var(--border-strong)",
+                borderRadius: 4, paddingLeft: 32, paddingRight: 12, paddingTop: 7, paddingBottom: 7,
+                fontSize: 12, color: "var(--t1)", outline: "none",
+              }}
             />
           </div>
 
           <button
             onClick={handleRefresh}
             disabled={refreshing}
-            className="p-2 rounded-xl bg-bg-card border border-border-flow text-text-muted hover:text-text-primary hover:border-flow-purple/40 transition-all"
+            style={{
+              width: 30, height: 30, borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center",
+              background: "var(--bg-card)", border: "1px solid var(--border-strong)", color: "var(--t4)", cursor: "pointer",
+            }}
             title="Refresh Notion documents"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw style={{ width: 13, height: 13, ...(refreshing ? { animation: "spin 1s linear infinite" } : {}) }} />
           </button>
 
           {isDemo && (
-            <span className="text-xs text-text-muted bg-bg-card border border-border-flow px-2 py-0.5 rounded-full whitespace-nowrap">
-              Demo mode
+            <span style={{
+              fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase",
+              letterSpacing: "0.06em", color: "var(--t5)", background: "rgba(255,255,255,0.04)",
+              border: "1px solid var(--border)", borderRadius: 3, padding: "2px 6px", whiteSpace: "nowrap",
+            }}>
+              Demo
             </span>
           )}
 
-          <div className="flex items-center gap-1.5 flex-wrap">
+          <div style={{ display: "flex", alignItems: "center", gap: 5, flexWrap: "wrap" }}>
             {Object.entries(TYPE_CONFIG).map(([type, cfg]) => (
               <button
                 key={type}
                 onClick={() => toggleType(type)}
-                className={`text-[9px] font-bold px-2 py-1 rounded-full border transition-all ${
-                  activeTypes.has(type)
-                    ? 'border-current opacity-100'
-                    : 'border-white/10 opacity-30'
-                }`}
-                style={activeTypes.has(type) ? { color: cfg.color, borderColor: cfg.color, background: cfg.bg } : {}}
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase",
+                  letterSpacing: "0.06em", padding: "3px 7px", borderRadius: 3,
+                  cursor: "pointer", transition: "opacity 150ms",
+                  border: `1px solid ${activeTypes.has(type) ? cfg.color : "var(--border)"}`,
+                  color: activeTypes.has(type) ? cfg.color : "var(--t5)",
+                  background: activeTypes.has(type) ? cfg.bg : "transparent",
+                  opacity: activeTypes.has(type) ? 1 : 0.5,
+                }}
               >
                 {cfg.label}
               </button>
@@ -280,7 +294,7 @@ export const KnowledgeExplorer = () => {
         {/* SVG Graph */}
         <svg
           ref={svgRef}
-          className="w-full h-full"
+          style={{ width: "100%", height: "100%" }}
           viewBox="0 0 700 520"
           preserveAspectRatio="xMidYMid meet"
         >
@@ -382,131 +396,149 @@ export const KnowledgeExplorer = () => {
         </svg>
 
         {/* Stats overlay */}
-        <div className="absolute bottom-4 left-4 flex items-center gap-4 text-[10px] text-text-muted">
-          <span className="flex items-center gap-1"><Network className="w-3 h-3" />{filteredNodes.length} nodes</span>
-          <span className="flex items-center gap-1"><Cpu className="w-3 h-3" />{filteredEdges.length} edges</span>
+        <div style={{ position: "absolute", bottom: 14, left: 14, display: "flex", alignItems: "center", gap: 16 }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10, color: "var(--t5)", fontFamily: "'JetBrains Mono', monospace" }}>
+            <Network style={{ width: 11, height: 11 }} />{filteredNodes.length} nodes
+          </span>
+          <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10, color: "var(--t5)", fontFamily: "'JetBrains Mono', monospace" }}>
+            <Cpu style={{ width: 11, height: 11 }} />{filteredEdges.length} edges
+          </span>
           {extraNodes.length > 0 && (
-            <span className="text-[9px] text-flow-purple">+{extraNodes.length} from Notion</span>
+            <span style={{ fontSize: 10, color: "var(--brand-text)", fontFamily: "'JetBrains Mono', monospace" }}>
+              +{extraNodes.length} from Notion
+            </span>
           )}
-          <span className="text-[9px]">Click any node to explore</span>
+          <span style={{ fontSize: 10, color: "var(--t5)" }}>Click any node to explore</span>
         </div>
       </div>
 
       {/* Side panel */}
-      <div className={`flex-shrink-0 border-l border-border-flow bg-bg-secondary/50 transition-all duration-300 ${selectedNode ? 'w-80' : 'w-0 overflow-hidden'}`}>
+      <div style={{
+        flexShrink: 0, width: selectedNode ? 300 : 0, overflow: "hidden",
+        borderLeft: "1px solid var(--border)",
+        background: "var(--bg-sidebar)",
+        transition: "width 250ms ease",
+      }}>
         {selectedNode && (() => {
           const cfg = TYPE_CONFIG[selectedNode.type] || TYPE_CONFIG.DOCUMENT;
           const Icon = cfg.icon;
           const docMeta = selectedNode.meta;
 
           return (
-            <div className="p-4 h-full overflow-y-auto space-y-4">
+            <div style={{ padding: 16, height: "100%", overflowY: "auto", display: "flex", flexDirection: "column", gap: 14 }}>
               {/* Header */}
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: cfg.bg, border: `1px solid ${cfg.color}40` }}>
-                    <Icon className="w-4 h-4" style={{ color: cfg.color }} />
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ width: 30, height: 30, borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: cfg.bg, border: `1px solid ${cfg.color}40` }}>
+                    <Icon style={{ width: 13, height: 13, color: cfg.color }} />
                   </div>
                   <div>
-                    <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: cfg.color }}>{selectedNode.type}</span>
-                    <h3 className="text-[13px] font-bold text-text-primary leading-tight">{selectedNode.label}</h3>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: cfg.color }}>{selectedNode.type}</span>
+                    <h3 style={{ fontSize: 13, fontWeight: 500, color: "var(--t1)", lineHeight: 1.35 }}>{selectedNode.label}</h3>
                   </div>
                 </div>
-                <button onClick={() => setSelectedNode(null)} className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-white/5">
-                  <X className="w-3.5 h-3.5" />
+                <button onClick={() => setSelectedNode(null)} style={{ padding: 4, borderRadius: 3, background: "transparent", border: "none", color: "var(--t4)", cursor: "pointer" }}>
+                  <X style={{ width: 13, height: 13 }} />
                 </button>
               </div>
 
-              {/* Notion doc metadata (only for real API nodes) */}
+              {/* Notion doc metadata */}
               {docMeta && (
-                <div className="bg-bg-card rounded-xl border border-border-flow p-3 space-y-2">
+                <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 4, padding: "10px 12px" }}>
                   {docMeta.content && (
-                    <p className="text-[11px] text-text-secondary leading-relaxed line-clamp-4">
-                      {docMeta.content.slice(0, 200)}{docMeta.content.length > 200 ? '…' : ''}
+                    <p style={{ fontSize: 11, color: "var(--t2)", lineHeight: 1.6, display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden", marginBottom: 8 }}>
+                      {docMeta.content.slice(0, 200)}{docMeta.content.length > 200 ? "…" : ""}
                     </p>
                   )}
                   {docMeta.tags?.length > 0 && (
-                    <div className="flex flex-wrap gap-1 pt-1">
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginBottom: 8 }}>
                       {docMeta.tags.slice(0, 5).map(tag => (
-                        <span key={tag} className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-flow-purple/10 text-flow-purple border border-flow-purple/20">
-                          {tag}
-                        </span>
+                        <span key={tag} style={{
+                          fontFamily: "'JetBrains Mono', monospace", fontSize: 9,
+                          padding: "2px 5px", borderRadius: 3,
+                          background: "rgba(124,110,255,0.08)", color: "var(--brand-text)",
+                          border: "1px solid var(--brand-line)",
+                        }}>{tag}</span>
                       ))}
                     </div>
                   )}
                   {docMeta.url && /^https?:\/\//.test(docMeta.url) && (
-                    <a
-                      href={docMeta.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-[10px] text-flow-purple hover:underline mt-1"
-                    >
-                      <ExternalLink className="w-3 h-3" /> View in Notion
+                    <a href={docMeta.url} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10, color: "var(--brand-text)", textDecoration: "none" }}>
+                      <ExternalLink style={{ width: 10, height: 10 }} /> View in Notion
                     </a>
                   )}
                   {docMeta.author && (
-                    <p className="text-[9px] text-text-muted">By {docMeta.author}</p>
+                    <p style={{ fontSize: 10, color: "var(--t5)", marginTop: 4, fontFamily: "'JetBrains Mono', monospace" }}>By {docMeta.author}</p>
                   )}
                 </div>
               )}
 
               {/* Connected entities */}
               {nodeRelations.length > 0 && (
-                <div className="space-y-1">
-                  <p className="text-[9px] font-bold text-text-muted uppercase tracking-wider mb-2 flex items-center gap-1">
-                    <Eye className="w-3 h-3" />Connected entities ({nodeRelations.length})
+                <div>
+                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)", display: "flex", alignItems: "center", gap: 5, marginBottom: 8 }}>
+                    <Eye style={{ width: 10, height: 10 }} />Connected ({nodeRelations.length})
                   </p>
-                  {nodeRelations.map((rel, i) => {
-                    if (!rel.node) return null;
-                    const relCfg = TYPE_CONFIG[rel.node.type] || TYPE_CONFIG.DOCUMENT;
-                    const RelIcon = relCfg.icon;
-                    return (
-                      <button
-                        key={i}
-                        onClick={() => setSelectedNode(rel.node)}
-                        className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-white/5 transition-colors text-left group"
-                      >
-                        <div className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0" style={{ background: relCfg.bg }}>
-                          <RelIcon className="w-3 h-3" style={{ color: relCfg.color }} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[11px] font-medium text-text-primary truncate group-hover:text-white">{rel.node.label}</p>
-                          <p className="text-[9px] text-text-muted">{rel.direction} {rel.label}</p>
-                        </div>
-                        <ChevronRight className="w-3 h-3 text-text-muted opacity-0 group-hover:opacity-100" />
-                      </button>
-                    );
-                  })}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                    {nodeRelations.map((rel, i) => {
+                      if (!rel.node) return null;
+                      const relCfg = TYPE_CONFIG[rel.node.type] || TYPE_CONFIG.DOCUMENT;
+                      const RelIcon = relCfg.icon;
+                      return (
+                        <button
+                          key={i}
+                          onClick={() => setSelectedNode(rel.node)}
+                          style={{
+                            width: "100%", display: "flex", alignItems: "center", gap: 10,
+                            padding: "7px 10px", borderRadius: 4, background: "transparent",
+                            border: "none", cursor: "pointer", textAlign: "left",
+                            transition: "background 100ms",
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.03)"}
+                          onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                        >
+                          <div style={{ width: 22, height: 22, borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: relCfg.bg }}>
+                            <RelIcon style={{ width: 11, height: 11, color: relCfg.color }} />
+                          </div>
+                          <div style={{ flex: 1, minWidth: 0 }}>
+                            <p style={{ fontSize: 12, fontWeight: 500, color: "var(--t1)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{rel.node.label}</p>
+                            <p style={{ fontSize: 10, color: "var(--t4)", fontFamily: "'JetBrains Mono', monospace" }}>{rel.direction} {rel.label}</p>
+                          </div>
+                          <ChevronRight style={{ width: 11, height: 11, color: "var(--t5)" }} />
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
 
               {/* Memory confidence */}
-              <div className="bg-bg-card rounded-xl p-3 border border-border-flow">
-                <p className="text-[9px] font-bold text-text-muted uppercase tracking-wider mb-2">Memory Confidence</p>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 h-1.5 bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full rounded-full bg-flow-purple" style={{ width: `${Math.round(selectedNode.importance * 100)}%` }} />
+              <div style={{ background: "var(--bg-card)", borderRadius: 4, padding: "10px 12px", border: "1px solid var(--border)" }}>
+                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)", marginBottom: 8 }}>Memory Confidence</p>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ flex: 1, height: 3, background: "rgba(255,255,255,0.06)", borderRadius: 2, overflow: "hidden" }}>
+                    <div style={{ height: "100%", borderRadius: 2, background: "var(--brand)", width: `${Math.round(selectedNode.importance * 100)}%` }} />
                   </div>
-                  <span className="text-[10px] font-bold text-flow-purple">{Math.round(selectedNode.importance * 100)}%</span>
+                  <span style={{ fontSize: 11, fontWeight: 500, color: "var(--brand-text)", fontFamily: "'JetBrains Mono', monospace" }}>{Math.round(selectedNode.importance * 100)}%</span>
                 </div>
               </div>
 
               {/* AI brief */}
-              <div className="bg-bg-card rounded-xl border border-border-flow p-3 space-y-2">
-                <p className="text-[9px] font-bold text-text-muted uppercase tracking-wider flex items-center gap-1">
-                  <Zap className="w-3 h-3 text-flow-purple" /> AI Brief
+              <div style={{ background: "var(--bg-card)", borderRadius: 4, padding: "10px 12px", border: "1px solid var(--border)" }}>
+                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)", marginBottom: 8, display: "flex", alignItems: "center", gap: 5 }}>
+                  <Zap style={{ width: 10, height: 10, color: "var(--brand)" }} /> AI Brief
                 </p>
                 {aiLoading ? (
-                  <div className="space-y-1.5">
-                    <div className="h-2 bg-white/5 rounded animate-pulse" />
-                    <div className="h-2 bg-white/5 rounded animate-pulse w-4/5" />
-                    <div className="h-2 bg-white/5 rounded animate-pulse w-3/5" />
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    {[100, 80, 60].map((w, i) => (
+                      <div key={i} style={{ height: 7, borderRadius: 2, width: `${w}%`, background: "linear-gradient(90deg, var(--bg-card) 25%, var(--bg-hover) 50%, var(--bg-card) 75%)", backgroundSize: "200% 100%", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
+                    ))}
                   </div>
                 ) : aiBrief ? (
-                  <p className="text-[11px] text-text-secondary leading-relaxed">{aiBrief}</p>
+                  <p style={{ fontSize: 12, color: "var(--t2)", lineHeight: 1.65 }}>{aiBrief}</p>
                 ) : (
-                  <p className="text-[10px] text-text-muted italic">
-                    {token ? 'No context available.' : 'Sign in to enable AI context.'}
+                  <p style={{ fontSize: 11, color: "var(--t5)", fontStyle: "italic" }}>
+                    {token ? "No context available." : "Sign in to enable AI context."}
                   </p>
                 )}
               </div>
