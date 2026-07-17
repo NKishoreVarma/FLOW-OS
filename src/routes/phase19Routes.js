@@ -13,6 +13,7 @@ import express from 'express';
 import { getChiefOfStaffBriefing } from '../autonomous/chiefOfStaffService.js';
 import { listTemplates }            from '../autonomous/workflowTemplates.js';
 import { getWeeklyReview }          from '../autonomous/weeklyReviewService.js';
+import { getEfficiencyMetrics }     from '../analytics/pilotMetrics.js';
 
 const router = express.Router();
 
@@ -53,6 +54,16 @@ router.get('/weekly-review', async (req, res, next) => {
   try {
     const days = Math.min(30, Math.max(1, Number(req.query.days) || 7));
     res.json(await getWeeklyReview(req.tenantId, { days }));
+  } catch (err) { next(err); }
+});
+
+// ── GET /api/autonomous/efficiency ────────────────────────────────────────────
+// Returns FLOW efficiency metrics: action acceptance rate, workflow completion,
+// and execution success rate over the requested window (default 7 days, max 30).
+router.get('/efficiency', async (req, res, next) => {
+  try {
+    const days = Math.min(30, Math.max(1, Number(req.query.days) || 7));
+    res.json(await getEfficiencyMetrics(req.tenantId, days));
   } catch (err) { next(err); }
 });
 
