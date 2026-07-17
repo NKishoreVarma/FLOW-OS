@@ -21,22 +21,22 @@ const IMPACT_COLOR = {
 };
 
 const RISK_BG = {
-  LOW:      "rgba(76,175,130,0.10)",
-  MEDIUM:   "rgba(91,158,255,0.10)",
-  HIGH:     "rgba(255,151,65,0.10)",
-  CRITICAL: "rgba(255,87,87,0.10)",
+  LOW:      "var(--risk-low-bg)",
+  MEDIUM:   "var(--risk-medium-bg)",
+  HIGH:     "var(--risk-high-bg)",
+  CRITICAL: "var(--risk-critical-bg)",
 };
 const RISK_BORDER = {
-  LOW:      "rgba(76,175,130,0.30)",
-  MEDIUM:   "rgba(91,158,255,0.30)",
-  HIGH:     "rgba(255,151,65,0.30)",
-  CRITICAL: "rgba(255,87,87,0.30)",
+  LOW:      "var(--risk-low-border)",
+  MEDIUM:   "var(--risk-medium-border)",
+  HIGH:     "var(--risk-high-border)",
+  CRITICAL: "var(--risk-critical-border)",
 };
 const RISK_COLOR = {
-  LOW:      "var(--p-normal-text)",
-  MEDIUM:   "rgba(91,158,255,0.90)",
-  HIGH:     "var(--p-high-text)",
-  CRITICAL: "var(--p-critical-text)",
+  LOW:      "var(--risk-low-text)",
+  MEDIUM:   "var(--risk-medium-text)",
+  HIGH:     "var(--risk-high-text)",
+  CRITICAL: "var(--risk-critical-text)",
 };
 
 function RiskChip({ risk }) {
@@ -58,7 +58,7 @@ export default function ActionCard({ card = {}, onExecute, onDismiss }) {
   const [state, setState] = useState("idle"); // idle|running|confirm|done|error|approval
   const [activeMsg, setActiveMsg] = useState(null);
   const [expanded, setExpanded] = useState(false);
-  const [doneId, setDoneId] = useState(null);
+  const [pendingAction, setPendingAction] = useState(null);
 
   const actions = card.actions || [];
   const primary = actions[0];
@@ -74,10 +74,10 @@ export default function ActionCard({ card = {}, onExecute, onDismiss }) {
       const step = out.results?.[0] || {};
       if (step.status === "EXECUTED" || out.completed) {
         setState("done");
-        setDoneId(action.workflowId);
         setActiveMsg("Done.");
         onExecute?.({ card, action, result: out });
       } else if (step.status === "CONFIRM_REQUIRED") {
+        setPendingAction(action);
         setState("confirm");
         setActiveMsg(step.reason || "Please confirm this action.");
       } else if (step.status === "APPROVAL_REQUIRED") {
@@ -99,9 +99,11 @@ export default function ActionCard({ card = {}, onExecute, onDismiss }) {
   async function handleConfirm() {
     setState("running");
     try {
-      const out = await executionApi.execute({ title: primary.label, steps: primary.steps }, { confirmed: true });
+      const action = pendingAction;
+      const out = await executionApi.execute({ title: action.label, steps: action.steps }, { confirmed: true });
       setState(out.completed ? "done" : "error");
       setActiveMsg(out.completed ? "Done." : "Could not complete.");
+      if (out.completed) onExecute?.({ card, action, result: out });
     } catch {
       setState("error");
       setActiveMsg("Something went wrong.");
