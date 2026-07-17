@@ -100,3 +100,24 @@ If FLOW is completely inaccessible:
 1. Check with your IT team that the server is running.
 2. If the server is running, the FLOW team can restart it remotely.
 3. Contact the FLOW team with the error shown at `/health`.
+
+---
+
+## Chief of Staff panel
+
+Available at `/chief`. Opens automatically in the sidebar under "Chief of Staff."
+
+The panel shows the most important items right now — approvals, conflicts, risks — with one-click action buttons. Click the primary button on each card to execute the action inside FLOW. A risk badge (LOW/MEDIUM/HIGH/CRITICAL) appears on each button so you know what you're approving before you click.
+
+For HIGH or CRITICAL actions: you will be prompted for approval from an admin. That person will get a notification automatically.
+
+## Weekly Review
+
+Available at `/review`. A structured weekly digest covering:
+- Time saved + tasks completed (measured from FLOW records)
+- Engineering velocity (PRs merged, deployments)
+- Execution success rate
+- Operational risks (from AI predictions)
+- Recommended priorities
+
+Review this every Monday morning. If "Execution Success Rate" drops below 80%, check the Admin panel for failed executions.

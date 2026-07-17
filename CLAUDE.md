@@ -384,6 +384,13 @@ Stage 6  Broadcast EXECUTIVE_SYNTHESIS_READY + return JSON response
 | PUT | `/api/policies/:id` | JWT + OWNER | Update a policy |
 | PATCH | `/api/policies/:id/toggle` | JWT + OWNER | Enable/disable a policy |
 | DELETE | `/api/policies/:id` | JWT + OWNER | Delete a policy |
+| GET | `/api/integration-permissions` | JWT + workspace-id | All connectors + allowed/hidden counts |
+| GET | `/api/integration-permissions/:connector` | JWT + workspace-id | Resource catalog (filters: q, status, type) |
+| POST | `/api/integration-permissions/:connector/discover` | JWT + ADMIN+ | Real provider API → catalog |
+| PUT | `/api/integration-permissions/:connector/resources` | JWT + ADMIN+ | Bulk allow/hide resources |
+| POST | `/api/integration-permissions/:connector/bulk` | JWT + ADMIN+ | Allow all / hide all |
+| PATCH | `/api/integration-permissions/:connector/settings` | JWT + ADMIN+ | autoAllowNew, dmPolicy |
+| GET | `/api/integration-permissions/:connector/audit` | JWT + ADMIN+ | Permission-change history |
 | GET | `/api/engineering/status` | JWT + workspace-id | GitHub connection status for workspace |
 | POST | `/api/engineering/auth` | JWT + workspace-id | Store GitHub PAT for workspace |
 | GET | `/api/engineering/repos` | JWT + workspace-id | List repos for authenticated user/org |
@@ -599,6 +606,7 @@ src/
 | TD-11 | `console.log` in `operationalScoringService.js` fires on every job | `operationalScoringService.js:13-14` | LOW — log noise in production |
 | TD-12 | Empty `tests/` directory | `tests/` | LOW — no automated safety net |
 | TD-13 | Mixed `.jsx` and `.tsx` in frontend components | `src/components/ui/button.tsx` | LOW — TypeScript not configured, file will not type-check |
+| TD-OG-01 | `testContext` helper inserts into `"Org"`/`"Workspace"` (PascalCase) but real tables are `organizations`/`workspaces` (snake_case); inserts silently no-op, so ephemeral test orgs are never created | `src/validation/helpers/testContext.js` | LOW — connector suites only need the workspace-id string; graph/org-FK tests must seed via Prisma instead |
 
 ---
 
@@ -1024,4 +1032,641 @@ All events carry `importId` and are broadcast to the workspace WebSocket channel
 
 ---
 
-*Last updated: 2026-06-29 by Claude (Workspace Lifecycle Engine — WLE complete)*
+## 15. Unified Event Platform (Phase 11.0)
+
+> Full reference: [`docs/UNIFIED_EVENT_PLATFORM.md`](docs/UNIFIED_EVENT_PLATFORM.md)
+
+The single canonical event pipeline for FLOW at `src/events/`. Every activity from
+every connector becomes one normalized **FLOW Event**; every intelligence module
+subscribes independently. Consolidates (not rewrites) the Phase 9.4 intelligence
+engines and Phase 10.3 webhook parsing — both are reused as internals.
+
+**Producers publish only via `src/events`:** `publish(source, rawType, payload, ctx)`,
+`publishFields(fields)`, `publishWebhook(whEvent)`. Migrated: ingestion worker,
+webhook worker, connector-action governance subscriber.
+
+**Consumers subscribe only via `src/events`:** `subscribe(name, filter, handler, opts)`.
+Built-ins (`builtinSubscribers.js`): timeline, feed, memory (durable), notify,
+brain (urgent → RAG ingestion), recommendation.
+
+**Pipeline (`EventBus.publish`):** validate → correlate → durable append → route → legacy mirror.
+- Durable store: PostgreSQL `flow_events` (+ `flow_event_deliveries`). Migration:
+  `scripts/migrate-event-platform-v11-0.sql`. Idempotent via `ON CONFLICT DO NOTHING`
+  on PK + `(workspace_id, connector, source_event_id)`.
+- `EventRouter` fan-out is fault-isolated with retry/backoff → dead-letter; every
+  outcome recorded per subscriber.
+- Replay (`EventReplay`), search (`EventSearch`), metrics (`EventMetrics`), retention
+  (`EventRetention`), schema/versioning (`EventSchemaRegistry`/`EventVersioning`).
+
+**Invariants (do not regress):** exactly-one bus, one normalizer, one router, one
+correlation path. Tenant isolation on every read (`workspace_id` mandatory). Brain
+subscriber never re-enqueues `metadata.origin === 'ingestion'` or `replayed` events
+(loop prevention). The bare `core/events/eventBus` EventEmitter is the internal
+in-process primitive only.
+
+**Adding a connector = OAuth → Sync → normalize (publish).** Nothing else.
+
+**REST:** `/api/events/*` (feed, timeline, stats, metrics, search, event/:id, replay [ADMIN+], ingest).
+**Admin:** Event Inspector at `/event-inspector` (dev only, 404 in prod; OWNER/ADMIN JWT + workspace-id).
+**Deprecated shims (one release):** `services/events/EventPipeline.js`,
+`services/webhooks/EventBroadcaster.js` forward into `src/events`.
+**Validation:** `scripts/validate-event-platform.js` (13/13), `scripts/loadtest-event-platform.js`
+(14/14 at 100k). Integration suite unchanged: 284 pass / 0 fail.
+
+---
+
+## 16. Operational Graph Engine — Digital Twin (Phase 11.1)
+
+> Full reference: [`docs/OPERATIONAL_GRAPH_ENGINE.md`](docs/OPERATIONAL_GRAPH_ENGINE.md)
+
+The company's Digital Twin at `src/graph/`. Every object is a node, every
+relationship an edge (21 node types, 19 edge types). Built on the existing Phase 7
+Postgres `graph_nodes`/`graph_edges` (extended in v11.1), populated in real time by
+a single `graph` subscriber on the Phase 11.0 event bus — never polled, never rebuilt.
+
+**Population:** the `graph` subscriber (durable) calls `GraphEngine.applyEvent` →
+`GraphSchema.deriveGraph(event)` → Node/Edge bulk upsert. Single writer (the old
+priority-gated graph writes in `EventMemoryService` were removed). Adding a
+connector needs zero graph code — publishing FLOW events is enough.
+
+**Node ids:** `${workspaceId}:type:connector:key`. People/customers use a shared
+`people`/`customer` namespace (one node across connectors); connector-native
+objects keep their connector.
+
+**Traversal:** bounded iterative BFS (NOT recursive CTE — that explodes on dense
+hubs: 38s → 30ms). Per-hop indexed query, frontier cap 400, node cap 1000.
+neighbors · k-hop · shortestPath · dependencyChain · impactPath · temporal.
+
+**Analysis:** ImpactAnalyzer (blast radius), DependencyAnalyzer (+orphans/stale),
+RelationshipScorer (strength = weight×ln(1+obs)×recency; whoKnows, topCollaborators).
+
+**REST:** `/api/graph/*` (JWT + workspace-id). **Admin viz:** `/graph-explorer`
+(dev-only 404 in prod, OWNER/ADMIN JWT + workspace-id; force-directed SVG, search,
+expand, path/impact/dependency highlight, temporal filter).
+
+**Migration:** `scripts/migrate-graph-engine-v11-1.sql` (additive: edge
+`observation_count`/`last_observed_at`, node `last_observed_at`, traversal indexes)
++ `prisma generate` (NOT migrate dev).
+
+**Invariants:** one graph, one writer; tenant isolation on every read
+(`workspace_id` mandatory); graph subscriber never publishes events (no loop).
+
+**Validation:** `scripts/validate-graph-engine.js` (16/16), `scripts/validate-demo-twin.js`
+(13/13 — Helios twin: 4,420 nodes / 26,636 edges, traversal <35ms). Integration
+suite unchanged (284/0). `--keep` leaves a `demo-twin` workspace for the Explorer.
+
+**Note:** graph edges need `gen_random_uuid()::text` id in raw inserts (Prisma
+`cuid()` is app-side only). See TD-OG-01 for the `testContext` helper bug.
+
+---
+
+## 17. Explainable Intelligence Engine — XAI (Phase 11.2)
+
+> Full reference: [`docs/EXPLAINABLE_INTELLIGENCE.md`](docs/EXPLAINABLE_INTELLIGENCE.md)
+
+`src/explainability/` wraps any AI output into a standard **explanation envelope**
+so every answer can be understood, verified, and challenged. Consolidates (does
+not duplicate) the Phase 9.1 reasoning pipeline, CriticAgent contradictions,
+Operational Graph (11.1), and Event Platform (11.0).
+
+**Envelope:** executive summary · evidence · reasoning trace + decision tree ·
+6-dim confidence · source attribution · missing information · contradictions ·
+alternatives · business impact (6 dims) · recommended actions · trust · graph.
+
+**Confidence (6 real-signal dims, never LLM self-report):** data freshness
+(evidence ts), evidence quality (rank×authority×diversity), relationship
+confidence (graph edge strength/11.1), reasoning confidence (9.1 ConfidenceScorer +
+verifier), connector health (Phase 10 `connector_credentials.health_status`), overall.
+
+**Trust ≠ confidence:** trust starts from confidence, rewards corroboration
+(diverse/fresh sources), penalizes contradictions/insufficiency/failed verification.
+Contradictions are surfaced (opposing-claims scan + pipeline flags), never hidden.
+Missing evidence is declared honestly ("There isn't enough evidence…").
+
+**API:** `explain(output, ctx)` · `explainQuestion(ws, question, opts)` (runs
+Operational Brain → explains) · `answerFollowUp(explanation, type)` for
+why/how/what_evidence/who_said/what_changed/why_now/what_missing/why_recommendation.
+`explain()` normalizes both the Brain shape (evidence is an OBJECT with `.primary`)
+and lighter shapes (evidence is an ARRAY) — the distinction gates normalization.
+
+**Validation:** `scripts/validate-explainability.js` (16/16 across 8 domains —
+meetings surfaces the deploy contradiction, knowledge declares insufficient
+evidence, graph domains carry relationship/impact). Integration suite unchanged (284/0).
+
+**M2 (done):** `/api/explain` (`POST /` explain output or reason+explain · `POST /followup`
+· `GET /types`) + opt-in `explain:true` pass-through on `/api/brain/reason` and
+`/api/brain/copilot` (off by default — explanation cost only when asked). Route
+wiring validated 8/8; integration suite unchanged (284/0).
+
+---
+
+## 18. Workspace Replay Engine — DVR (Phase 11.3)
+
+> Full reference: [`docs/WORKSPACE_REPLAY_ENGINE.md`](docs/WORKSPACE_REPLAY_ENGINE.md)
+
+`src/replay/` is a **read-only DVR** over the Unified Event Platform (11.0). Reads
+only `flow_events` (via `queryEvents`/`search`); computes snapshots on the fly —
+**no duplicate storage**. Distinct from the platform's `EventReplay` (which
+re-delivers events to subscribers); this engine replays history for humans.
+
+**10 modules:** ReplayFilters (scope→filter), ReplayBuilder (ordered stream,
+paginated at 1000/query — EventStore.query caps pages at 1000), ReplayTimeline
+(hour/day/week frames), ReplaySnapshots (state as-of-T via **SQL aggregates**,
+NOT the graph — graph only holds current last_observed_at), ReplayDiffEngine
+(added/removed/changed/resolved/escalated), ReplayNavigator (markers/seek/step),
+ReplayPlayer (stateless playback logic — frameAt/cursorView/playbackPlan),
+ReplayMetrics (velocity/MTTR/deploy freq), ReplayExport (JSON/markdown narrative),
+ReplayEngine (orchestrator).
+
+**7 modes:** TIMELINE · INCIDENT (correlation chain + MTTR) · CUSTOMER_JOURNEY
+(text focus) · ENGINEERING · MEETING · EXECUTIVE (importance≥0.6) · KNOWLEDGE.
+
+**Snapshots/diff:** `snapshotCompare(ws, t1, t2)` → before/after/diff (Monday vs
+Friday, before/after incident/deployment). Player: stateless windowed (client
+drives; step/jump = re-query; speed/pause client-side).
+
+**Validation:** `scripts/validate-replay-engine.js` 12/12 at **100k events** —
+full 30-day replay ~2.1s, snapshot ~120ms (flat vs scale), diff ~147ms, incident
+MTTR 48h. Integration suite unchanged (284/0).
+
+**M2 (done):** `/api/replay/*` REST (modes · replay · snapshot · compare · export
+json/markdown) + Replay Player admin page (`/replay-player`, prod-blocked, ADMIN+ —
+timeline density track, play/pause/step/jump-to-marker/speed, mode+filter controls,
+frame panel, metrics; client-driven playback, no server session). Wiring validated
+11/11; integration suite unchanged (284/0).
+
+---
+
+## 19. What-If Simulation Engine (Phase 11.4)
+
+> Full reference: [`docs/SIMULATION_ENGINE.md`](docs/SIMULATION_ENGINE.md)
+
+`src/simulation/` — a decision-support engine that simulates hypothetical changes
+before acting ("what if Rahul resigns / payments goes down / Acme churns / Release
+4.2 slips"). **Consumes, never mocks**: cascading impact from the Operational
+Graph (11.1), evidence from replayed history (11.0/11.3), analogues from memory,
+and the explanation from the XAI layer (11.2).
+
+**Pipeline:** ScenarioBuilder (11 types + heuristic NL classify + entity resolve
+via searchNodes) → Validator → Planner (per-type analysis plan) → Runner (REAL
+graph traversal `analyzeImpact`/`dependencyChain`/`neighbors`/bus-factor + replay +
+memory) → ImpactEstimator (6 impacts + knowledge loss + heuristic financial) →
+RiskCalculator (weighted × likelihood × criticality) → MitigationPlanner (grounded
+actions) → SimulationReporter (12-field output + `explain()` envelope) →
+SimulationMemory (persist as `MemoryRecordType.SIMULATION`).
+
+**11 scenario types:** EMPLOYEE_DEPARTURE, SERVICE_OUTAGE, REPOSITORY_LOSS,
+RELEASE_SLIP, DEPLOYMENT_POSTPONE, CUSTOMER_CHURN, PROJECT_CANCEL,
+INTEGRATION_OUTAGE, MEETING_CANCEL, TEAM_MERGE, HIRING(abstract).
+
+**API:** `simulate(ws, {type|question, targetEntityId|targetName, params})`,
+`compare(ws, a, b)`. Financial = explicitly heuristic (ARR / replacement cost /
+$/hr downtime / $/week delay) with stated basis + assumptions.
+
+**Migration:** `scripts/migrate-simulation-v11-4.sql` adds `SIMULATION` to the
+`MemoryRecordType` enum (+ `prisma generate`).
+
+**Validation:** `scripts/validate-simulation-engine.js` 14/14 — seeds a twin via
+events, runs all 7 scenarios (departure detects 8 owned assets / 8 bus-factor;
+outage cascade 10 nodes; churn $60k heuristic; comparison + memory reuse).
+Integration suite unchanged (284/0).
+
+**Gotcha:** calendar attendees must carry an email or be strings — an object
+`{name}` without email slugs to a bogus `object-object` employee node (9.4
+normalizer `id = a.email || a`).
+
+**M2 (done):** `/api/simulation/*` REST (types · run · compare — distinct from the
+legacy `/api/test/simulate`) + Simulation Workspace admin UI (`/simulation-workspace`,
+prod-blocked, ADMIN+ — scenario builder, risk gauge, impact bars, drivers, actions,
+A/B compare). Wiring validated 9/9 (incl. NL "what if Alice resigns?" → EMPLOYEE_DEPARTURE);
+integration suite unchanged (284/0).
+
+---
+
+## 20. Predictive Workspace Intelligence (Phase 11.5)
+
+> Full reference: [`docs/PREDICTIVE_WORKSPACE_INTELLIGENCE.md`](docs/PREDICTIVE_WORKSPACE_INTELLIGENCE.md)
+
+`src/predictions/` — "what is likely to happen next?" across engineering, people,
+customers, operations (~22 deterministic types). **No ML, no invented scores**:
+every probability is a bounded function of real signals from the Operational Graph,
+event/replay trends, patterns, simulations (11.4), memory, and workspace health.
+**Replaces** the former mock `operationalIntelligenceService.generatePredictions()`
+(now delegates to this engine, mapped to the legacy shape; callers must `await`).
+
+**Pipeline:** PredictionPipeline.buildContext (one shared 60d context) → PredictionModels
+(registry, each `run(ctx)→{probability,trend,drivers,evidence}`) → RiskScorer →
+ConfidenceEstimator → RecommendationGenerator → PredictionReporter (8-field + inline
+explanation) → PredictionEngine (sort, topRisks, persist history). Helpers:
+TrendAnalyzer (recent-vs-prior), PatternDetector (deploy→incident), AnomalyPredictor
+(z-score baseline), ForecastEngine (linear projection).
+
+**Output:** prediction · probability · confidence · time horizon · evidence · trend ·
+business impact · preventive actions · explanation (why/evidence/historical/confidence/
+missing/alternatives).
+
+**API:** `predict(ws, {domain?/types?})`, `predictOne(ws, type)`, `getHistory(ws)`.
+Persists runs as `MemoryRecordType.PREDICTION` (migration `scripts/migrate-predictions-v11-5.sql`
++ `prisma generate`).
+
+**Validation:** `scripts/validate-prediction-engine.js` 20/20 — seeds real trends,
+7 required predictions reflect the signal (sprint delay 83% falling, incidents 67%
+rising, knowledge loss 100% sim-backed, churn 87%, ownership 100%, meeting overload
+50%, deploy 48%); ~22 predictions in ~50ms; low-signal → honest low confidence.
+Integration suite unchanged (284/0).
+
+**Gotcha:** event platform dedups on `(workspace, connector, source_event_id)` — a
+source reusing one id for repeated updates collapses to one event (found via a
+customer-journey seed). Emit distinct event ids per state change.
+
+**M2 (done):** `/api/predictions/*` REST (types · run · history · :type) + Prediction
+Workspace UI (`/prediction-workspace`, prod-blocked, ADMIN+ — risk timeline, forecast
+cards, history) + **proactive worker** (`predictionWorker`, BullMQ cron `PREDICTION_CRON`
+default 6h → recompute active workspaces, push `PREDICTION_WARNING` over WebSocket for
+risk ≥ `PREDICTION_WARN_THRESHOLD` default 65). Wiring validated 9/9; integration 284/0.
+
+---
+
+## 21. Production Hardening (Phase 12)
+
+> Full reference: [`docs/DEPLOYMENT_GUIDE.md`](docs/DEPLOYMENT_GUIDE.md) (M1). No new AI/intelligence — reliability/perf/security/observability only. 3 milestones: M1 runtime & deployment, M2 security audit + observability, M3 perf/DR/code-quality/docs.
+
+### Milestone 1 — Runtime hardening & deployment (done, 2026-07-11)
+- **Docker:** multi-stage `Dockerfile` (node:20-slim, non-root, prisma generate in builder, HEALTHCHECK), `docker-compose.yml` (app + pgvector pg16 + redis7, healthchecks, depends_on service_healthy), `.dockerignore`.
+- **Probes:** `/health/live` (liveness), `/health/ready` (readiness — pg+redis, 503 during shutdown), `/metrics/infra` (pool/redis/queues/memory). Existing `/health` kept.
+- **Graceful shutdown:** `src/core/lifecycle/gracefulShutdown.js` — SIGTERM/SIGINT drains http → workers → pg pool → redis, 15s hard timeout; unhandledRejection/uncaughtException handlers. Wired in server boot.
+- **API middleware:** `compression` (gzip), request timeout (`REQUEST_TIMEOUT_MS`, SSE-excluded), enhanced correlation ID (`req.id` + echoed `x-request-id`). Security headers already present.
+- **DB:** `config/db.js` — timed query wrapper + slow-query log (`SLOW_QUERY_MS`), `poolStats()`; **removed `process.exit(-1)` on transient pool errors** (was a crash risk).
+- **Redis:** `config/redis.js` — unified on `REDIS_URL`, `retryStrategy` + `reconnectOnError`, `redisHealth()`.
+- **Queues:** `src/core/monitoring/queueMetrics.js` — job counts for all 6 BullMQ queues.
+- **CRITICAL BOOT FIX:** `BaseAdapter` unconditionally assigned `this.supportedActions`, which threw for `SlackAdapter` (read-only getter) → **server crashed at boot under strict ESM**. Fixed `BaseAdapter` to skip assignment when a subclass exposes a getter (`_hasGetterOnly`). This un-SKIP'd 23 connector tests (all pass) → integration suite **284→307 pass, 0 fail**. Also fixed 3 never-validated PermissionsSuite assertions (read `capability`/`supportedActions`, health vocab HEALTHY/DEGRADED/DOWN).
+- **Validation:** in-process probe 7/7 (boot, probes, correlation, infra metrics, headers, gzip). Integration **307 PASS / 0 FAIL**.
+
+### Milestone 2 — Security, Observability & Operations (done, 2026-07-11)
+- **Security audit** → `docs/SECURITY_AUDIT.md` (25 domains, scorecard, findings w/ risk/impact/files/mitigation/status). Overall STRONG. **HIGH-1 fixed:** WebSocket connections were unauthenticated (any client with `?workspaceId=` got that tenant's stream) → `socketService.authenticateSocket()` now verifies JWT + org-owns-workspace (query `?token=`/Bearer); enforced in prod / `WS_AUTH_REQUIRED=true`, dev warn-only. Others mitigated/accepted (rate-limit per-instance MED-1/TD-10, CORS dev-'*' MED-2/TD-04, vault workspaceId path LOW-1). Verified OK: parameterized SQL, no command-injection, SSRF-safe crawler, JWT-header (CSRF N/A), admin pages escape + prod-404.
+- **Observability:** `src/core/monitoring/metricsAggregator.js` (process/cpu/mem, db pool, redis, 6 queues, event platform, engines, connectors, websocket), `engineMetrics.js` (prediction/simulation run counters — instrumented in those engines), `alerts.js` (rule eval). `GET /api/metrics` + `/api/metrics/alerts` (self-guarded ADMIN JWT or `METRICS_TOKEN`, all envs). `GET /metrics/infra` (open, infra-only).
+- **Structured logging:** `logger` gained recursive **secret redaction** (`redact()` — token/password/secret/authorization/apikey/jwt/cookie/pii → `[REDACTED]`) + `channel`. `requestLogger` middleware logs each request (requestId/method/path/status/durationMs/workspaceId/userId; 5xx→error, 4xx/slow→warn). `LOG_FORMAT=json` for pipelines.
+- **Monitoring dashboard:** `/monitoring` (dev-only 404 in prod, ADMIN JWT in UI; auto-refresh; consumes `/api/metrics`).
+- **Docs:** `OPERATIONS_GUIDE.md`, `OBSERVABILITY_GUIDE.md`, `MONITORING_REFERENCE.md`, `SECURITY_AUDIT.md`.
+- **Validation:** observability probe 6/6 (redaction, metrics auth/aggregate/rbac, alerts, dashboard). Integration **307 PASS / 0 FAIL**.
+
+### Milestone 3 — Performance, DR & Code Quality (done, 2026-07-11)
+- **Performance:** `scripts/benchmark-suite.js` → `docs/PERFORMANCE_REPORT.md`. Engine reads single-digit ms (event publish 3ms, graph traverse/impact 2ms, neighbors 1ms, search 1ms, timeline 3ms); prediction full-run ~345ms; simulation ~11ms. Scale: 100k store ~22.8k/s, replay 100k ~2.1s, snapshot ~120ms. **Finding:** aggregate reads (`metrics()`=5 queries) pool-bound at 1000-concurrent (~12s) — mitigate via cache/read-replica/gateway. Slow-query logger fired during the run (observability validated).
+- **DR:** `docs/BACKUP_RECOVERY.md` (pg_dump + PITR, Redis AOF/rebuild, region-loss DR runbook w/ RPO/RTO, worker recovery, forward-only rollback, backup verification).
+- **Code quality:** large files mostly dev-only/cohesive; boot succeeds (no fatal cycles; lazy dynamic imports break cycles); **fixed** the one request-path blocking read (`lifecycleRoutes` → async `fs/promises`). Rest tracked (TD-01 in-memory growth, TD-07 dup embedding).
+- **Docs:** `PRODUCTION_HARDENING.md` (umbrella + readiness checklist + TD table), `PERFORMANCE_REPORT.md`, `BACKUP_RECOVERY.md`.
+- **Validation:** server boots clean; benchmark suite ran; integration **307 PASS / 0 FAIL**.
+
+**Phase 12 COMPLETE.** Set per-env before deploy: `WS_AUTH_REQUIRED=true`, `CORS_ORIGIN`, gateway rate limiting, backup schedule + PITR, log/metric shipping.
+
+---
+
+## 22. Integration Permissions (Phase 13.1)
+
+> Full reference: [`docs/INTEGRATION_PERMISSIONS.md`](docs/INTEGRATION_PERMISSIONS.md)
+
+**OAuth authenticates. Integration Permissions decide what FLOW is allowed to
+understand.** A resource that is not explicitly allowed is never ingested — not
+queued, not stored, not embedded, not graphed, not replayed, not predicted. It is
+refused at the door.
+
+`src/core/governance/integrationPermissions/`: `resourceTypes` (taxonomy) ·
+`resourceDiscovery` (real provider APIs) · `resourceKeyExtractor` (sync item /
+webhook payload → governing resource) · `permissionStore` (Prisma + 60s cache,
+same shape as `policyStore`) · `permissionGate` (the chokepoint) · `discoveryService`.
+
+**Governed connectors (6 — the ones with a sync adapter):** slack (channel /
+private_channel / group) · github (organization / repository) · gmail (label) ·
+google-calendar (calendar) · notion (page / database) · jira (project). Teams,
+SharePoint, OneDrive, Dropbox, Drive, Confluence render as disabled cards — **no
+fabricated resources.**
+
+**Enforcement — every door is gated (this is the invariant; do not regress):**
+| Door | Where | Note |
+|---|---|---|
+| Sync | `SyncEngine.runSync` | `filterItems()` runs **before dedup** — blocked items leave no trace anywhere |
+| Webhooks | `WebhookProcessor.processWebhookRequest` | gate runs **before persistence** — `webhook_events` stores raw payloads |
+| Capability sync routes | `GitHubAdapter` / `GmailAdapter` / `GoogleCalendarAdapter` | `403 RESOURCE_NOT_PERMITTED` |
+| Legacy Google | `gmailInboundService`, `calendarIntegration` | per message / per calendar |
+
+**Decision order:** not-governed → ALLOW · legacy-grandfathered → ALLOW ·
+unattributable → **DENY** (never fail open) · Slack DM → `dmPolicy` · any candidate
+allowed → ALLOW (any-of) · unknown → `autoAllowNew ? ALLOW : DENY` · else DENY.
+
+**Grandfathering (non-breaking deploy):** the migration flags every
+`(workspace, connector)` with existing sync history as `legacy_grandfathered`; the
+gate passes its traffic and the UI shows **Ungoverned**. The first discovery seeds
+that catalog as *allowed* (preserving existing access) and clears the flag — after
+which deny-by-default governs.
+
+**Adapter changes made to close attribution gaps:** Gmail threads now carry
+`labels` (union of message labelIds); Jira comments carry `project`;
+CalendarSyncAdapter fans out over **allowed calendars** (per-calendar sync-token
+map, back-compatible) instead of hardcoding `primary`.
+
+**Migration:** `scripts/migrate-integration-permissions-v13.sql` (idempotent;
+guarded on table existence) + `npx prisma generate` (NOT `prisma migrate dev`).
+
+**UI:** `/settings/permissions` — overview cards, per-connector search/filter/tree,
+bulk actions, Slack DM policy, auto-allow toggle, sticky save bar.
+
+**Validation:** `scripts/validate-integration-permissions.js` — **40/40** (deny-by-
+default, re-discovery preserves decisions, all 4 DM policies, per-connector
+attribution with real adapter item shapes, webhook door, capability door,
+grandfathering handoff).
+
+---
+
+## 22. Operational Execution Engine (Phase 14)
+
+> FLOW becomes an **AI Operations Platform**: it safely coordinates work, executes
+> approved actions, notifies the right people, and keeps a complete operational
+> history. Full refs: `docs/EXECUTION_ENGINE.md`, `docs/APPROVAL_ENGINE.md`,
+> `docs/MERGE_CONFLICT_INTELLIGENCE.md`, `docs/NOTIFICATION_ENGINE.md`. Design spec:
+> `docs/superpowers/specs/2026-07-14-operational-execution-engine-design.md`.
+
+Every layer **consumes** the one beneath — extends `executeAction()` (governed
+connector pipeline), governance, approvalStore, event platform, timeline, graph. No
+duplication. Governance is never bypassed; a governance `DENY` always wins.
+
+### Pipeline
+```
+Recommendation → Action Planner → Execution Planner → Approval Engine
+  → Governance (existing) → executeAction() (existing) → Connector
+  → Audit → Event Platform → Timeline → Graph → Notification Engine
+```
+
+### Risk-tiered approval (role-based)
+LOW → auto · MEDIUM → requester confirms in FLOW · HIGH → 1×ADMIN/OWNER · CRITICAL →
+2×**distinct** ADMIN/OWNER (two-person). `src/execution/riskClassifier.js` +
+`approvalEngine.js`; `pending_approvals` gained `risk_level`/`required_approvals`/
+`approval_votes` (distinct-approver + self-approval guards).
+
+### Modules
+- `src/execution/` — riskClassifier · approvalEngine · actionPlanner · executionPlanner
+  (dry-run) · executionCoordinator (orchestration heart) · executionHistory (durable
+  `ExecutionRecord`, honest `rollbackAvailable`). REST `/api/execution/*`.
+- `src/collaboration/` — mergeConflictDetector (poll-on-sync/on-view;
+  mergeable/mergeable_state/checks → events) · ownershipAnalyzer (owners / overlapping
+  files / **only the relevant people**) · collaborationDetector (blocked/>48h/stale/
+  changes-requested/large-PR/repeat-collision). REST `/api/collaboration/*`.
+- `src/notifications/` — notificationTargeting (priority, role recipients, `canSee`
+  permission) · notificationEngine (dedupe 6h, persist `notifications`, WS push,
+  `notifyMergeConflict`/`notifyApprovalRequired`, `handleEvent` bus glue registered as
+  the `flowNotify` builtin subscriber — consolidates Phase 9.4 RealtimeNotificationEngine).
+  REST `/api/notifications/*`.
+- Frontend: `lib/executionApi.js`; `components/execution/ExecutableActionCard.jsx`
+  (risk badge + governed plan→execute, honest CONFIRM/APPROVAL states),
+  `MergeConflictCard.jsx` (flagship: files + owners + Open Diff/PR/Message/Create
+  Meeting); wired into BrainMessage card types `execute`/`merge_conflict`;
+  NotificationDropdown reads `/api/notifications` + `NOTIFICATION_CREATED` WS.
+
+### Migration
+`scripts/migrate-execution-engine-v14.sql` (idempotent; adds `execution_records`,
+`notifications`, additive `pending_approvals` columns). Apply with `psql -f`, then
+`npx prisma generate` (NOT `prisma migrate dev`).
+
+### Invariants (do not regress)
+Nothing bypasses `executeAction` governance; risk tier may only be RAISED by policy;
+CRITICAL requires two distinct approvers; automation stays fixed-MEMBER; notification
+targeting is permission-aware (only relevant people); `rollbackAvailable` is honest.
+
+### Validation
+`scripts/validate-execution-engine.js` **26/26** · `validate-collaboration.js` **23/23**
+(flagship: Rahul+Kishore on `auth.js` → owners=[rahul,kishore], unrelated excluded) ·
+`validate-notification-engine.js` **19/19**. Integration regression steady at **66/74**
+(the 8 fails are pre-existing stale tests — signup posts `name` vs required `fullName`;
+lifecycle-schema asserts old fields — unrelated to Phase 14).
+
+> **Integration-suite gotcha:** `npm run test:integration` is an HTTP client against a
+> LIVE server on `:5001` (not in-process). Start `PORT=5001 node src/server.js` first,
+> else ECONNREFUSED → 0/74 (not a regression).
+
+---
+
+*Last updated: 2026-07-14 by Claude (Phase 14 Operational Execution Engine — COMPLETE, M1–M4)*
+
+---
+
+## 23. Multi-Agent Executive Council (Phase 15)
+
+> Six specialized AI executives assess the company, debate the big calls, and produce
+> one answer. **Orchestration, not duplication** — every agent's brain is the existing
+> Operational Brain (`explainQuestion`); routing reuses `CapabilityPlanner`; actions
+> run through the Phase-14 Execution Engine; health reuses health/prediction services.
+> Full refs: `docs/MULTI_AGENT_EXECUTIVE_COUNCIL.md`, `EXECUTIVE_ORCHESTRATOR.md`,
+> `EXECUTIVE_DASHBOARD.md`. Spec: `docs/superpowers/specs/2026-07-14-multi-agent-executive-council-design.md`.
+
+### Modules (`src/council/`)
+- `agents/registry.js` — 6 config-driven COOs (Engineering · Operations · Sales · HR ·
+  Security · Finance): `{ id, title, domainPrompt, capabilities, keywords, role }`.
+- `agents/ExecutiveAgent.js` — `analyze()` (frames domain question → `explainQuestion` →
+  normalized finding) + `healthReport()` (lighter pass for the dashboard). No agent
+  reimplements reasoning.
+- `router.js` — deterministic routing (keywords + CapabilityPlanner booster; full-council
+  fallback when ambiguous).
+- `executiveOrchestrator.js` — `askCouncil()`: route → `Promise.allSettled` (fault- AND
+  time-isolated via `withTimeout`, `COUNCIL_AGENT_TIMEOUT_MS` default 60 s) → debate →
+  synthesis. `askAgent()` for single agent.
+- `debateEngine.js` — deterministic disagreement (go/caution polarity by signal count,
+  confidence spread) + tradeoffs + **preserved minority opinions**; Security-defers rule.
+- `councilSynthesizer.js` — one answer: LLM via `BrainRouter.reason()` (guarded by
+  `COUNCIL_SYNTH_TIMEOUT_MS`) with a deterministic structured fallback (house rule 8).
+- `confidenceAggregate.js` — mean agent confidence (shared).
+- `executiveDashboard.js` — 6 `healthReport()`s in parallel, cached ~10 min → cards.
+- REST `src/routes/councilRoutes.js` @ `/api/council/*`: `/ask`, `/dashboard`, `/agents`,
+  `/agent/:id`. Council paths excluded from the 30 s request timeout
+  (`COUNCIL_REQUEST_TIMEOUT_MS` default 120 s).
+- Frontend: `lib/councilApi.js`, `components/council/ExecutiveCouncil.jsx` at `/council`
+  (6 health cards + Ask box + debate panel); ⌘K + route added.
+
+### Invariants
+No duplicated reasoning/retrieval/execution/health — the council orchestrates existing
+systems. Parallelism is fault- and time-isolated (always returns). Actions execute only
+through the governed Execution Engine.
+
+### Validation
+`scripts/validate-executive-council.js` **23/23** (routing, debate + minority
+preservation, synthesis, confidence aggregation, **no-duplication structural asserts**).
+Live `/ask` 200 with a real synthesized answer. Integration regression steady **66/74**.
+
+> **Perf (honest):** a single Brain call is ~28–30 s here (the existing
+> `/api/brain/copilot` is 28.4 s). The council reuses that Brain, so live throughput is
+> Brain-bound — fastest agents answer in-window, slower ones drop gracefully. Speeding up
+> the Brain is out of Phase-15 scope.
+
+---
+
+*Last updated: 2026-07-14 by Claude (Phase 15 Multi-Agent Executive Council — COMPLETE, M1–M3)*
+
+---
+
+## 24. Workspace Intelligence Cache (Phase 16.1)
+
+> The caching/serving layer that makes FLOW feel **instant**. Heavy reasoning runs in the
+> background; the UI reads one canonical snapshot. **Not a new AI engine** — it aggregates
+> existing fast sources. Full ref: `docs/WORKSPACE_INTELLIGENCE_CACHE.md`. Design spec:
+> `docs/superpowers/specs/2026-07-14-...` (Phase 16.1).
+
+**`src/workspaceCache/`** — `snapshotBuilder.js` (`buildSnapshot(ws)`: Prediction Engine
+11.5 + Health Score + Graph metrics + PG counts → one doc; **never** the Brain/Council;
+~140ms cold/13ms warm) · `snapshotStore.js` (in-memory Map sub-ms + Redis write-through
+`wic:snapshot:{ws}`) · `refreshCoordinator.js` (`wic` event subscriber → debounced
+rebuild; `ensureFresh` cold-read; `warmActiveWorkspaces`) · `index.js`
+(`startWorkspaceCache()` = subscriber + boot warm + 5-min cron). Started in server boot.
+
+**Snapshot:** `overall{health,priority,summary,topActions}` + 6 domain cards
+(engineering/operations/sales/hr/finance/security, each `{status,score,topRisks,
+recommendedActions}`) + `counts`. Domains derived from domain-tagged predictions.
+
+**API `/api/workspace/*`** (instant, never reasons): `/snapshot` (`?force=true`), `/health`,
+`/summary`, `/actions`. Cold miss → `{status:'building'}` + async build (never blocks).
+
+**Consumers:** Morning Briefing Executive Summary now reads `/api/workspace/snapshot`
+(was the ~90s Executive Council dashboard). Council stays for deep interactive reasoning.
+
+**Perf (measured):** build 140ms/13ms; HTTP read ~5ms warm / 27ms cold (<<100ms target).
+**Invariants:** no duplicated logic; reads never build synchronously; tenant-isolated.
+**Validation:** `scripts/validate-workspace-cache.js` **14/14**; regression **66/74**.
+Env: `WIC_CRON_MS`(300000) · `WIC_DEBOUNCE_MS`(10000) · `WIC_TTL_SECONDS`(3600).
+
+---
+
+## 25. Living Workspace Simulator (Sprint 5)
+
+> Full reference: [`docs/LIVING_WORKSPACE_SIMULATOR.md`](docs/LIVING_WORKSPACE_SIMULATOR.md)
+
+Makes a workspace feel **alive** so FLOW always has coherent, connected work to reason
+about (an investor/CTO/pilot forgets it's simulated). **Not random records; not a new
+backend** — a *driver* that feeds causal chains into the existing Event Platform (11.0),
+Governance approvals (14.0), and Notification Engine (14.3); everything downstream
+(graph/memory/timeline/feed/brain/WIC/workday) lights up because it all subscribes to the
+one bus. **Dev-only** (404 in prod; OWNER/ADMIN JWT).
+
+`src/simulator/`: `personas.js` (Rahul CTO + 6 colleagues w/ ownership), `scenarios.js`
+(5 causal chains — featureShip email→slack→jira→PR→CI→deploy, incident
+deploy→incident→postmortem, mergeConflict, customerEscalation, reviewNeeded — each
+`publishFields`-emits linked events w/ shared correlationId + plants live approvals/
+notifications), `simulatorEngine.js` (`seedHistory(ctx,{days=180})` 6-mo backfill + plant
+current work · `tick` · `start/stop` heartbeat gated by `SIMULATOR_ENABLED` +
+`SIM_WORKSPACE_ID`, never prod, `SIM_TICK_MS` default 5min).
+
+Coarse event `type` = canonical Event enum; granular kind in `metadata.kind` (else event
+validation drops it). Live CTO work attributes to the caller identity so it surfaces to
+**NOW** in their workday. **Gotcha: the workspace-id header must be `workspace.externalId`
+(what `tenantIsolation` resolves + what every app surface keys by), NOT the Prisma cuid.**
+
+**REST:** `/api/simulator/{seed,tick,status,reset}` (dev-only). **Validation:**
+`scripts/validate-simulator.js` **18/18** (DB-backed causal integrity: no orphans,
+email→PR + deploy→incident chains, 6-mo spread, targeted notifs, tick adds, reset clean).
+Verified live: empty "all clear" morning → **critical** WIC snapshot + NOW workday item
+("Merge conflict in flow-backend — Blocking 2 people"). Regression **66/74**.
+
+---
+
+## 26. Pilot Experience Platform (Phase 17)
+
+> Full refs: [`docs/PILOT_EXPERIENCE.md`](docs/PILOT_EXPERIENCE.md),
+> [`docs/ONBOARDING_ARCHITECTURE.md`](docs/ONBOARDING_ARCHITECTURE.md),
+> [`docs/SUCCESS_METRICS.md`](docs/SUCCESS_METRICS.md)
+
+**Stop building platforms — build a product.** Phase 17 is a *product layer* for the first
+paying customer (Rahul, CTO). **Reuse everything** — no new AI/DB/event/reasoning/graph/
+execution layer. Onboarding flow: Welcome → Discover → Permissions → Build → Ready (Morning
+Brief), each step backed by something that already exists (Integration-Permissions
+discovery, deny-by-default gate 13.1, Lifecycle Engine build, WIC + Workday, Simulator demo).
+
+### M1 — Onboarding backend (DONE, 2026-07-16)
+- `src/onboarding/onboardingState.js` — per-workspace setup progress in **shared Redis**
+  (`onboarding:state:{ws}`, no migration); drives the first-run gate (`completed:false` →
+  `/welcome`). Steps: welcome·discover·permissions·build·ready.
+- `src/onboarding/discoveryOrchestrator.js` — one call → per-connector discovery. `live`
+  reuses `runDiscovery` (unconnected → honest `not_connected`, never fabricated); `demo`
+  = deterministic Acme catalog (6 repos/14 channels/2 calendars/Notion/Jira/42 employees).
+  Only the 6 governed connectors are discoverable.
+- `src/success/{valueModel,successMetrics}.js` — **hybrid** ROI: measured counts from real
+  records (execution_records EXECUTED, pending_approvals, notifications, flow_events) +
+  transparently **labeled estimates** (Time Saved from conservative minute weights,
+  Context Switches = notifs+approvals+tasks). Empty workspace shows zeros (no magical
+  numbers); model discloses the estimate basis.
+- Routes `/api/onboarding/*` + `/api/success/*` (JWT + workspace-id, tenant-scoped).
+- **Validation:** `scripts/validate-pilot-experience.js` **23/23**; regression **66/74**.
+
+### M2 — First-run flow frontend (DONE, 2026-07-16)
+- `flow-os-frontend/src/components/onboarding/FirstRunFlow.jsx` — full-screen (overlays
+  the shell, `position:fixed inset:0 z-index:4000`), one decision per step:
+  Welcome → Discovery (progressive checklist) → Permissions (per-resource toggles) →
+  Build (narrated stages, never a spinner) → Ready → Morning Brief. Demo co-primary with
+  real connect; demo Build seeds the Living Workspace Simulator.
+- `FirstRunGate.jsx` — routes to `/welcome` when onboarding incomplete; **fails open**
+  (never traps a session; localStorage `flow_onboarding_complete`/`_dismissed` + "Skip for
+  now"). Wired into App.jsx (`/welcome` route + gate inside the shell).
+- `lib/onboardingApi.js` — client for `/api/onboarding/*` + `/api/success/*` + demo seed.
+- Verified: state machine end-to-end (reset→discover 6/34→permissions→complete→persists);
+  frontend build clean (2410 modules); regression **66/74**. Ref `FIRST_TIME_SETUP.md`.
+
+### M3 — Value + Trust + Team (DONE, 2026-07-16)
+- `components/success/SuccessDashboard.jsx` (`/success`, sidebar "Value") — hybrid ROI from
+  `/api/success/summary`: headline + detail cards each with a measured/estimated **basis
+  badge** + "How Time Saved is estimated" disclosure (model transparency). Standalone
+  **Load Demo Company** (seeds Simulator).
+- `components/ui/TrustBar.jsx` — reusable Track-8 trust strip (connected systems + health
+  via `/api/connectors` + `/health`, permissions link, honest "nothing connected" empty).
+- `components/onboarding/TeamInvite.jsx` (`/settings/team`) — reuses `POST /api/users/invite`
+  + `GET /api/users`; per-role why/what-they-gain; surfaces a generated temp password
+  (no email infra — honest). `lib/trustApi.js` client. Routes + sidebar wired.
+- Verified: connectors(12)/users(1)/success endpoints return real data; build clean (2414
+  modules); regression **66/74**.
+
+### M4 — Polish + measure-success + validation (DONE, 2026-07-16)
+- Polish (Track 9): removed dead `ComingSoon` import; normalized "Demo mode" banners →
+  honest "Showing sample data — connect X to go live" (CustomerIntelligence,
+  WorkforceIntelligence); pilot surfaces use tokens (no raw hex).
+- Measure-success (Track 10): `src/onboarding/adoptionMetrics.js` → `GET /api/onboarding/
+  metrics` — onboarding timing (time-to-value), connectors/resources discovered, work
+  completed inside FLOW (tasks+approvals), time saved. Read-only over onboarding state +
+  success summary; no new store.
+- **Validation:** `scripts/validate-pilot-experience.js` **28/28** (state machine + gate,
+  demo discovery, hybrid + honest-empty success, adoption metrics); frontend build clean
+  (2413 modules); regression **66/74**.
+
+**Phase 17 COMPLETE (M1–M4).** A CTO installs FLOW → premium welcome → discovery →
+governed permissions → narrated build → live Morning Brief → a **Value** page proving ROI
+(honest measured/estimated) → invite team → trust surfaces everywhere.
+
+---
+
+*Last updated: 2026-07-16 by Claude (Phase 17 Pilot Experience — COMPLETE M1–M4, 28/28, 66/74)*
+
+---
+
+## 27. Autonomous Operations (Phase 19)
+
+> Full reference: [`docs/AUTONOMOUS_OPERATIONS.md`](docs/AUTONOMOUS_OPERATIONS.md)
+
+**Mission:** FLOW should help people finish work, not just tell them what's happening.
+
+`src/autonomous/` — thin orchestration layer, no new AI:
+- `workflowTemplates.js` — named multi-step workflow registry (6 templates; add by extending TEMPLATES)
+- `actionCardService.js` — `buildActionCard(item)` / `buildActionCards(items)` — WorkItem → ActionCard
+- `memoryPersonalizer.js` — `getPreferences(workspaceId)` — reads execution_records for preferences
+- `chiefOfStaffService.js` — `getChiefOfStaffBriefing(workspaceId, user)` — top-5 NOW items + greeting
+- `weeklyReviewService.js` — `getWeeklyReview(workspaceId, {days})` — engineering velocity + execution success + risks
+
+**Signal sources (Workday Engine enhanced):** pending approvals · notifications · predictions · failed executions · connector warnings · incidents
+
+**Frontend:** `ActionCard.jsx` (multi-option, inline execution, risk badges) · `ChiefOfStaff.jsx` (`/chief`) · `WeeklyReview.jsx` (`/review`)
+
+**Routes (`src/routes/phase19Routes.js` mounted at `/api/autonomous`):** `/api/autonomous/chief-of-staff` · `/api/autonomous/weekly-review` · `/api/autonomous/templates` · `/api/autonomous/efficiency`
+
+**NL bridge:** `/api/brain/copilot` detects actionable intent → adds `plan` to response → `BrainMessage.jsx` renders `ExecutableActionCard`
+
+**FLOW Efficiency Metrics:** `getEfficiencyMetrics(wsId, days)` in `pilotMetrics.js` — tracks action.accepted, action.dismissed, workflow.started, workflow.completed
+
+**Invariants:** all actions flow through `executeAction()` (governance never bypassed); signal sources are best-effort (inbox never breaks); NL bridge is best-effort (copilot always returns response)
+
+**Validation:** `scripts/validate-phase19.js` (50 assertions, no live server needed)
+
+---
+
+*Last updated: 2026-07-17 by Claude (Phase 19 Autonomous Operations — COMPLETE, 50/50)*
