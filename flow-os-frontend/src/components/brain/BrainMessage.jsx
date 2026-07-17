@@ -20,6 +20,7 @@ function renderCard(card, i, onAction) {
     case "approval": return <InlineApprovalCard key={i} approval={card.data} />;
     case "metric":   return <InlineMetricCard   key={i} {...card.data} />;
     case "execute":  return <ExecutableActionCard key={i} card={card.data} />;
+    case "plan":     return <ExecutableActionCard key={i} card={{ title: card.data?.title || "Execute this", recommendation: card.data, summary: "FLOW detected an action. Click to execute it." }} />;
     case "merge_conflict": return <MergeConflictCard key={i} conflict={card.data} />;
     default:         return null;
   }
