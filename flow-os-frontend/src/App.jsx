@@ -54,6 +54,8 @@ const ExecutiveCouncil = lazy(() => import('./components/council/ExecutiveCounci
 const MorningBriefing  = lazy(() => import('./components/morning/MorningBriefing'));
 const SuccessDashboard = lazy(() => import('./components/success/SuccessDashboard'));
 const TeamInvite       = lazy(() => import('./components/onboarding/TeamInvite'));
+const ChiefOfStaff     = lazy(() => import('./components/autonomous/ChiefOfStaff'));
+const WeeklyReview     = lazy(() => import('./components/autonomous/WeeklyReview'));
 
 function App() {
   return (
@@ -94,6 +96,10 @@ function App() {
               <Route path="/success"       element={<SuccessDashboard />} />
               <Route path="/settings/team" element={<TeamInvite />} />
               <Route path="/admin/ops"     element={<AdminOps />} />
+
+              {/* ── Autonomous Operations (Phase 19) ─────────────────────── */}
+              <Route path="/chief"  element={<ChiefOfStaff />} />
+              <Route path="/review" element={<WeeklyReview />} />
 
               {/* ── Entity deep-links (from AI responses) ─────────────────── */}
               <Route path="/entity/:entityId" element={<EntityWorkspace />} />
