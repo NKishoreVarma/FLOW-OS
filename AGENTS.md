@@ -1,23 +1,51 @@
-# FLOW OS // Core Agentic Integration Instructions
+# AGENTS.md
 
-You are executing modifications inside the `flow-os-backend` core architecture repository. Always adhere to these structural alignment rules when writing or refactoring system logic.
+This file defines guidance for contributors and coding agents working in the FLOW-OS repository.
 
-## 👥 System Integration Directives
-- This is a multi-tenant corporate intelligence platform. Every document, chat string, and database record MUST be isolated using a strict `workspace_id` header check.
-- High-volume background ingestion events are driven via BullMQ and Redis (`src/workers/queue.js`).
-- Clean text chunking, social data filtering, and formatting configurations live within `src/services/parserService.js`.
+## Repository scope
 
-## 🧠 Upcoming Engineering Targets
-1. **The Cognitive Privacy Gate (`src/services/cognitiveBrainService.js`)**:
-   Classify text chunks into:
-   - `OPERATIONAL_INTEL` -> Stitch, format to standard Markdown, generate embeddings, and upsert to pgvector.
-   - `SOCIAL_COORDINATION` -> Route to short-lived temporary Redis cache loops.
-   - `PRIVATE_PERSONAL` -> Execute a hard data drop instantly.
-2. **The Obsidian Sync Layer (`src/services/vaultService.js`)**:
-   Save filtered Markdown text files straight into local directory structures sandboxed by corporate workspace keys (`/vaults/workspace_{id}/`).
-3. **The Composio SDK Hookup (`src/controllers/integrationController.js`)**:
-   Integrate cloud-brokered OAuth tool handshakes for seamless one-click user token connections (Gmail, Slack, GitHub).
-   ## 🚀 Advanced Cognitive Features (Adapted from OpenHuman)
-- **Source Authority Indexing**: When calculating context weights for RAG, apply an authority matrix where verified files (Obsidian Vault, GitHub commits) carry a higher coefficient ($1.5$) than chat messaging strings ($0.8$).
-- **Hierarchical Summary Tree Pipelines**: Every 24 hours, group individual operational chunks by `workspace_id` and channel to generate an updated rolling executive summary markdown file.
-- **Contradiction Revision Checks**: Before completing lookups, verify temporal overrides. If a newer operational chunk explicitly contradicts past state flags, flag the old record's metadata state as `DEPRECATED` to prevent the agent from serving stale documentation.
+- Backend: Node.js + Express service in `src/`
+- Frontend: React/Vite app in `flow-os-frontend/`
+- Data: Prisma schema/migrations in `prisma/`, SQL bootstrap in `database/`
+
+## Core architectural guardrails
+
+1. **Tenant isolation is mandatory**
+   - Treat FLOW-OS as a strict multi-tenant platform.
+   - Enforce `workspace_id` boundaries across API handlers, ingestion, retrieval, caching, and persistence.
+   - Do not mix cross-workspace data in memory, Redis, vector storage, or filesystem writes.
+
+2. **Ingestion and queue processing**
+   - High-volume ingestion is queue-driven (BullMQ + Redis).
+   - Keep queue/job changes aligned with worker and queue modules under `src/workers/` and related queue configuration.
+
+3. **Privacy classification pipeline**
+   - The cognitive privacy flow centers on `src/services/cognitiveBrainService.js`.
+   - Respect classification outcomes:
+     - `OPERATIONAL_INTEL`: normalize and persist to long-term intelligence stores.
+     - `SOCIAL_COORDINATION`: route to short-lived cache paths.
+     - `PRIVATE_PERSONAL`: hard drop; no persistent storage.
+
+4. **Parsing and chunk formatting**
+   - Keep text chunking/filtering logic consistent with `src/services/parserService.js`.
+   - Preserve clean markdown-oriented output for downstream retrieval/synthesis.
+
+5. **Vault synchronization**
+   - `src/services/vaultService.js` should write workspace-scoped Markdown artifacts under vault paths segmented by workspace (for example, `/vaults/workspace_{id}/`).
+
+6. **Integration/OAuth handling**
+   - Integration orchestration belongs in `src/controllers/integrationController.js`.
+   - Keep OAuth/tool-connection flows modular and provider-safe (Gmail, Slack, GitHub and future providers).
+
+## Intelligence behavior constraints
+
+- **Source authority weighting**: prioritize verified operational sources (vault/github artifacts) above chat/social text when ranking context.
+- **Temporal correctness**: when newer operational intelligence contradicts older state, mark outdated records as deprecated to avoid stale synthesis.
+- **Rolling summaries**: support periodic (24h) workspace-level synthesis for executive intelligence outputs.
+
+## Change expectations
+
+- Make focused, minimal changes tied to the requested task.
+- Preserve existing module boundaries and naming style.
+- Update related docs when behavior or contracts change.
+- Validate changes with repository-supported scripts before finalizing.
