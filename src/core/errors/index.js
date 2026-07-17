@@ -1,4 +1,5 @@
 import { logger } from '../../utils/logger.js';
+import { getRecovery } from './recoveryMap.js';
 
 export class AppError extends Error {
   /**
@@ -67,10 +68,17 @@ export function errorHandler(err, req, res, _next) {
 
   const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
+  const recovery = getRecovery(code);
+
   res.status(statusCode).json({
     error: {
       code,
       message: err.message,
+      ...(recovery ? {
+        userMessage: recovery.userMessage,
+        recoverySteps: recovery.recoverySteps,
+        ...(recovery.selfServeAction ? { selfServeAction: recovery.selfServeAction } : {}),
+      } : {}),
       ...(err.meta ? { meta: err.meta } : {}),
       ...(requestId ? { requestId } : {}),
       ...(!IS_PRODUCTION ? { stack: err.stack } : {}),
