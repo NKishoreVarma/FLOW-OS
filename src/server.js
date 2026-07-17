@@ -58,6 +58,7 @@ import engineeringRoutes    from './routes/engineeringRoutes.js';
 import brainRoutes from './routes/brainRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
 import autonomousRoutes from './routes/autonomousRoutes.js';
+import phase19Routes from './routes/phase19Routes.js';
 import { startAutonomousScheduler } from './services/autonomous/BackgroundAnalysisScheduler.js';
 import eventRoutes             from './routes/eventRoutes.js';
 import googleRoutes            from './routes/googleRoutes.js';
@@ -524,6 +525,9 @@ console.log('🤖 AI Provider Layer routes mounted at /api/ai');
 
 app.use('/api/workspace', autonomousRoutes);
 console.log('🔮 Autonomous Workspace Engine routes mounted at /api/workspace');
+
+app.use('/api/autonomous', phase19Routes);
+console.log('🤖 Phase 19 Autonomous Operations routes mounted at /api/autonomous');
 
 app.use('/api/events', eventRoutes);
 console.log('⚡ Real-Time Event Intelligence routes mounted at /api/events');
