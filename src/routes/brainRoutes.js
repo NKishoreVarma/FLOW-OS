@@ -1,4 +1,6 @@
 import express from 'express';
+import { runReasoning }     from '../ai/reasoning/OperationalBrain.js';
+import { explain }          from '../explainability/index.js';
 import { generateBriefing } from '../services/briefingEngine.js';
 import { answerCopilotQuery } from '../services/copilotService.js';
 import { queryAllMemory, getMemoryStats } from '../services/orgMemoryService.js';
@@ -15,6 +17,10 @@ import {
 } from '../services/goalTrackingService.js';
 import { getProactiveRecommendations, recordRecommendationFeedback } from '../services/operationalIntelligenceService.js';
 import { getOperationalTimeline, getEntityContext } from '../services/brainTimelineService.js';
+import { getGreeting }    from '../services/conversation/GreetingEngine.js';
+import { quickClean }     from '../services/conversation/ConversationExperienceEngine.js';
+import { getJoke }        from '../services/conversation/JokeService.js';
+import { getLastContext }  from '../services/conversation/ConversationMemory.js';
 
 const router = express.Router();
 
@@ -39,12 +45,206 @@ router.post('/copilot', async (req, res, next) => {
   const workspaceId = req.headers['workspace-id'];
   if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
 
-  const { question, pageContext, entityId } = req.body;
+  const {
+    question, pageContext, entityId,
+    healthScore, hasIncidents, isInboxZero,
+    taskJustDone, deploymentSuccess, sprintCompleted,
+  } = req.body;
   if (!question) return next(new ValidationError('question is required'));
 
   try {
-    const result = await answerCopilotQuery(workspaceId, { question, pageContext, entityId });
-    res.json({ success: true, ...result });
+    const result = await answerCopilotQuery(workspaceId, {
+      question,
+      pageContext,
+      entityId,
+      role:              req.user?.role || 'EMPLOYEE',
+      healthScore,
+      hasIncidents:      hasIncidents     ?? false,
+      isInboxZero:       isInboxZero      ?? false,
+      taskJustDone:      taskJustDone     ?? false,
+      deploymentSuccess: deploymentSuccess ?? false,
+      sprintCompleted:   sprintCompleted  ?? false,
+      userName:          req.user?.fullName || req.user?.name || null,
+    });
+    const payload = { success: true, ...result };
+    if (req.body.explain === true) {
+      payload.explanation = await explain(result, { workspaceId, entityId, question });
+    }
+    // Natural Language Operations: if the response is actionable, include a plan.
+    if (!payload.plan) {
+      try {
+        const { buildPlan } = await import('../execution/actionPlanner.js');
+        const text = String(result.response || result.message || '').toLowerCase();
+        const ACTIONABLE_PATTERNS = [
+          /assign\s+\w+/i, /merge\s+(pr|pull request)/i, /approve\s+\w+/i,
+          /create\s+(issue|ticket|pr)/i, /notify\s+\w+/i, /deploy\s+\w+/i,
+          /reschedule\s+\w+/i, /review\s+(pr|pull request)/i,
+        ];
+        const isActionable = ACTIONABLE_PATTERNS.some((p) => p.test(text));
+        if (isActionable && result.actions?.length) {
+          const steps = result.actions
+            .filter((a) => a.connector && a.actionType)
+            .map((a) => ({ connector: a.connector, actionType: a.actionType, payload: a.payload || {}, title: a.label || a.title || a.actionType }))
+            .slice(0, 3);
+          if (steps.length) {
+            payload.plan = buildPlan({ title: question, steps });
+          }
+        }
+      } catch { /* NL bridge is best-effort — never breaks the copilot */ }
+    }
+    res.json(payload);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ── Copilot — token-streamed (perceived speed; "the Brain feels alive") ────────
+// SSE. Emits: status (progressive reasoning stages) → actions (ready before the
+// prose) → token (true synthesis token stream) → done (full assembled answer +
+// explanation). Excluded from the request timeout via the '/stream' suffix.
+router.post('/copilot/stream', async (req, res, next) => {
+  const workspaceId = req.headers['workspace-id'];
+  if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
+  const { question, pageContext, entityId } = req.body;
+  if (!question) return next(new ValidationError('question is required'));
+
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  if (typeof res.flushHeaders === 'function') res.flushHeaders();
+
+  let closed = false;
+  req.on('close', () => { closed = true; });
+  const send = (obj) => { if (!closed) res.write(`data: ${JSON.stringify(obj)}\n\n`); };
+
+  send({ type: 'status', stage: 'start', message: 'Thinking…' });
+
+  try {
+    const brain = await runReasoning(
+      workspaceId,
+      { question, pageContext, entityId, role: req.user?.role || 'EMPLOYEE' },
+      {
+        onStatus:  (stage, message) => send({ type: 'status', stage, message }),
+        onPartial: (kind, data) => {
+          if (kind === 'actions')  send({ type: 'actions', actions: data?.recommended || data?.actions || [] });
+          if (kind === 'evidence') send({ type: 'evidence', evidence: data || [] });
+        },
+        onToken:   (delta) => send({ type: 'token', delta }),
+      },
+    );
+
+    let explanation = null;
+    try { explanation = await explain(brain, { workspaceId, entityId, question }); } catch { /* explanation is optional */ }
+
+    send({
+      type: 'done',
+      answer: brain.answer || brain.summary || '',
+      confidence: brain.confidence?.score ?? brain.confidence ?? null,
+      actions: brain.actionPlan?.recommended || brain.recommendedActions || [],
+      explanation,
+    });
+    res.end();
+  } catch (err) {
+    send({ type: 'error', error: err.message });
+    res.end();
+  }
+});
+
+// ── Greeting (Phase 9.6) ─────────────────────────────────────────────────────
+// Returns a personalized greeting for the current user session.
+// Deduplicated per 6 hours via Redis. force=true bypasses dedup.
+
+router.get('/greeting', async (req, res, next) => {
+  const workspaceId = req.headers['workspace-id'];
+  if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
+
+  try {
+    const greeting = await getGreeting({
+      workspaceId,
+      userId:        req.user?.id,
+      userName:      req.user?.fullName || req.user?.name,
+      healthScore:   req.query.healthScore ? Number(req.query.healthScore) : undefined,
+      forceGenerate: req.query.force === 'true',
+    });
+    res.json({ success: true, greeting });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ── Continue (Phase 9.7) ─────────────────────────────────────────────────────
+// Resolve last conversation context — used when user says "continue" or "keep going".
+
+router.get('/continue', async (req, res, next) => {
+  const workspaceId = req.headers['workspace-id'];
+  if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
+
+  try {
+    const lastCtx = await getLastContext(workspaceId);
+    if (!lastCtx) {
+      return res.json({
+        success: true,
+        hasContext: false,
+        answer: "I don't have any recent context to continue from. What would you like to explore?",
+      });
+    }
+
+    const continueAnswer = `Picking up where we left off.\n\n${lastCtx.summary}\n\nWant me to go deeper on this?`;
+    return res.json({
+      success:         true,
+      hasContext:      true,
+      answer:          continueAnswer,
+      followUps:       lastCtx.followUps || [],
+      followUpQuestion: 'Want me to go deeper on this?',
+      domain:          lastCtx.domain || 'general',
+      lastQuestion:    lastCtx.question || null,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ── Joke (Phase 9.6) ──────────────────────────────────────────────────────────
+// Explicit joke request endpoint. Still blocked during incidents/critical contexts.
+
+router.get('/joke', async (req, res, next) => {
+  const workspaceId = req.headers['workspace-id'];
+  if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
+
+  try {
+    const joke = await getJoke(workspaceId, {
+      hasIncidents: req.query.hasIncidents === 'true',
+    });
+    res.json({ success: true, joke });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ── Operational Reasoning (Phase 9.1) ────────────────────────────────────────
+
+router.post('/reason', async (req, res, next) => {
+  const workspaceId = req.headers['workspace-id'];
+  if (!workspaceId) return next(new ValidationError('Missing workspace-id header'));
+
+  const { question, pageContext, entityId, role } = req.body;
+  if (!question?.trim()) return next(new ValidationError('question is required'));
+
+  try {
+    const result = await runReasoning(workspaceId, {
+      question: question.trim(),
+      pageContext,
+      entityId,
+      role: role || req.user?.role || 'EMPLOYEE',
+    });
+    const payload = { success: true, ...result };
+    // Opt-in explanation envelope (adds latency, so off by default).
+    if (req.body.explain === true || req.query.explain === 'true') {
+      payload.explanation = await explain(result, {
+        workspaceId, entityId, domain: result.reasoning?.domain, question: question.trim(),
+      });
+    }
+    res.json(payload);
   } catch (err) {
     next(err);
   }
