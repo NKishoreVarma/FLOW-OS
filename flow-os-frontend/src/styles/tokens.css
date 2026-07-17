@@ -85,6 +85,14 @@
   --radius-lg:   var(--radius-lg);
   --radius-xl:   var(--radius-xl);
 
+  /* ─── Surface utility tokens ────────────────────────────────────────── */
+  --surface-subtle: rgba(255,255,255,0.03);  /* button/chip background — barely visible tint */
+  --surface-ghost:  rgba(255,255,255,0.02);  /* skeleton placeholder background */
+  --surface-shine:  rgba(255,255,255,0.04);  /* shimmer sweep highlight */
+
+  /* ─── Brand tint variants ────────────────────────────────────────────── */
+  --brand-subtle:  rgba(124,110,255,0.12);   /* badge/pill background — between dim and glow */
+
   /* ─── Risk chip tokens (ActionCard RiskChip) ───────────────────────── */
   --risk-low-bg:       var(--p-normal-dim);
   --risk-low-border:   var(--p-normal-line);

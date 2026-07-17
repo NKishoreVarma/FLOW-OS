@@ -2,11 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Inbox as InboxIcon, RefreshCw, GitMerge, ShieldAlert, Lightbulb, Calendar, Bell,
-  CheckCircle2, Check, X, FileDiff, MessageSquare, CalendarPlus, CheckSquare, Sparkles,
-  ExternalLink, AlertTriangle, Loader2,
+  CheckCircle2,
 } from "lucide-react";
 import DataSourceBadge from "../ui/DataSourceBadge";
-import SourceBadge from "../ui/SourceBadge";
 import { EmptyState } from "../ui/EmptyState";
 import InlineDiffModal from "./InlineDiffModal";
 import InlineMeetingPrep from "./InlineMeetingPrep";
@@ -206,12 +204,12 @@ export default function OperationalInbox() {
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
             <InboxIcon style={{ width: 16, height: 16, color: "var(--brand)" }} />
             <h1 style={{ fontSize: 16, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.3px" }}>Inbox</h1>
-            {openCount > 0 && <span style={{ fontSize: 10, fontWeight: 700, color: "var(--brand-text)", background: "rgba(124,110,255,0.12)", border: "1px solid var(--brand-line)", borderRadius: 10, padding: "1px 8px" }}>{openCount}</span>}
+            {openCount > 0 && <span style={{ fontSize: 10, fontWeight: 700, color: "var(--brand-text)", background: "var(--brand-subtle)", border: "1px solid var(--brand-line)", borderRadius: 10, padding: "1px 8px" }}>{openCount}</span>}
             <DataSourceBadge mode={demo ? "demo" : "live"} />
           </div>
           <p style={{ fontSize: 12, color: "var(--t4)" }}>Every signal, in one place — as work you can act on.</p>
         </div>
-        <button onClick={load} style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", fontSize: 12, color: "var(--t3)", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)", borderRadius: 4, cursor: "pointer" }}>
+        <button onClick={load} style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", fontSize: 12, color: "var(--t3)", background: "var(--surface-subtle)", border: "1px solid var(--border)", borderRadius: 4, cursor: "pointer" }}>
           <RefreshCw style={{ width: 11, height: 11 }} /> Refresh
         </button>
       </div>
@@ -225,7 +223,7 @@ export default function OperationalInbox() {
           return (
             <button key={f.id} onClick={() => setFilter(f.id)}
               style={{ padding: "4px 12px", fontSize: 12, borderRadius: 4, cursor: "pointer",
-                background: active ? "rgba(124,110,255,0.08)" : "transparent",
+                background: active ? "var(--brand-dim)" : "transparent",
                 border: `1px solid ${active ? "var(--brand-line)" : "var(--border)"}`,
                 color: active ? "var(--brand-text)" : "var(--t4)" }}>
               {f.label}{n > 0 && <span style={{ marginLeft: 5, opacity: 0.6 }}>{n}</span>}
@@ -238,8 +236,8 @@ export default function OperationalInbox() {
       {loading ? (
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {[0, 1, 2, 3].map((i) => (
-            <div key={i} style={{ height: 78, borderRadius: 8, background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.04) 50%, transparent)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
+            <div key={i} style={{ height: 78, borderRadius: 8, background: "var(--surface-ghost)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent, var(--surface-shine) 50%, transparent)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
             </div>
           ))}
         </div>
@@ -265,97 +263,3 @@ export default function OperationalInbox() {
   );
 }
 
-function InboxRow({ item, busy, doneText, onApprove, onReject, onCreateJira, onAsk, onDismiss, navigate, onOpenDiff, onOpenSlack, onOpenPrep }) {
-  const meta = TYPE_META[item.type] || TYPE_META.notification;
-  const Icon = meta.icon;
-  const band = priorityBand(item.priority);
-  const accent = band === "critical" ? "var(--p-critical)" : band === "high" ? "var(--p-high)" : "var(--border-strong)";
-
-  const rel = (() => {
-    const m = Math.round((Date.now() - new Date(item.time).getTime()) / 60000);
-    if (m < 1) return "now"; if (m < 60) return `${m}m`; const h = Math.round(m / 60); if (h < 24) return `${h}h`; return `${Math.round(h / 24)}d`;
-  })();
-
-  return (
-    <div style={{ display: "flex", gap: 12, padding: "13px 14px", background: "var(--bg-card)", border: "1px solid var(--border)", borderLeft: `2px solid ${accent}`, borderRadius: 8, opacity: doneText ? 0.6 : 1, transition: "opacity 150ms" }}>
-      <Icon style={{ width: 15, height: 15, color: meta.color, marginTop: 2, flexShrink: 0 }} />
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3 }}>
-          <span style={{ fontSize: 13, fontWeight: 500, color: "var(--t1)" }}>{item.title}</span>
-          <SourceBadge source={item.source} />
-          <span style={{ fontSize: 10, color: "var(--t5)", marginLeft: "auto", fontVariantNumeric: "tabular-nums" }}>{rel}</span>
-        </div>
-        {item.body && <p style={{ fontSize: 12, color: "var(--t3)", lineHeight: 1.5, margin: "0 0 9px" }}>{item.body}</p>}
-
-        {doneText ? (
-          <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "var(--p-normal-text)" }}>
-            <Check style={{ width: 12, height: 12 }} /> {doneText}
-          </div>
-        ) : (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-            {actionsFor(item, { onApprove, onReject, onCreateJira, onAsk, onDismiss, navigate, onOpenDiff, onOpenSlack, onOpenPrep, busy })}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function Btn({ icon: Icon, label, onClick, primary, danger, busy }) {
-  return (
-    <button onClick={onClick} disabled={busy}
-      style={{
-        display: "inline-flex", alignItems: "center", gap: 5, padding: "4px 11px", borderRadius: 4, fontSize: 11, fontWeight: 500, cursor: busy ? "wait" : "pointer",
-        background: primary ? "var(--brand)" : "rgba(255,255,255,0.03)",
-        border: `1px solid ${primary ? "var(--brand)" : danger ? "rgba(255,87,87,0.3)" : "var(--border-strong)"}`,
-        color: primary ? "#fff" : danger ? "var(--p-critical-text)" : "var(--t3)",
-      }}>
-      {busy ? <Loader2 style={{ width: 10, height: 10, animation: "spin 1s linear infinite" }} /> : Icon && <Icon style={{ width: 10, height: 10 }} />}
-      {label}
-    </button>
-  );
-}
-
-function actionsFor(item, h) {
-  switch (item.type) {
-    case "approval":
-      return [
-        <Btn key="a" icon={Check} label="Approve" primary busy={h.busy} onClick={() => h.onApprove(item)} />,
-        <Btn key="r" icon={X} label="Reject" danger busy={h.busy} onClick={() => h.onReject(item)} />,
-        (item.raw?.connectorId === "github" && item.raw?.payloadRef?.number)
-          ? <Btn key="v" icon={FileDiff} label="Review diff" onClick={() => h.onOpenDiff({ raw: { ownership: { repo: item.raw.payloadRef.repo || item.raw.payloadRef.owner, number: item.raw.payloadRef.number } } })} />
-          : <Btn key="v" icon={FileDiff} label="Review" onClick={() => h.navigate("/projects")} />,
-      ];
-    case "conflict":
-      return [
-        <Btn key="d" icon={FileDiff} label="Open Diff" onClick={() => h.onOpenDiff(item)} />,
-        <Btn key="m" icon={MessageSquare} label="Message" onClick={() => h.onOpenSlack(item)} />,
-        <Btn key="s" icon={CalendarPlus} label="Create Meeting" onClick={() => h.navigate("/meetings")} />,
-        <Btn key="j" icon={CheckSquare} label="Create Jira" onClick={() => h.onCreateJira(item)} />,
-      ];
-    case "recommendation":
-      return [
-        <Btn key="j" icon={CheckSquare} label="Create Jira" onClick={() => h.onCreateJira(item)} />,
-        <Btn key="ask" icon={Sparkles} label="Ask FLOW" onClick={() => h.onAsk(item)} />,
-        <Btn key="x" label="Dismiss" onClick={() => h.onDismiss(item.id, "Dismissed")} />,
-      ];
-    case "meeting":
-      return [
-        <Btn key="prep" icon={Sparkles} label="Prep with FLOW" primary onClick={() => h.onOpenPrep(item)} />,
-        item.raw?.videoUrl
-          ? <Btn key="join" icon={ExternalLink} label="Join" onClick={() => window.open(item.raw.videoUrl, "_blank")} />
-          : <Btn key="open" icon={Calendar} label="Open" onClick={() => h.navigate("/meetings")} />,
-      ];
-    case "incident":
-      return [
-        <Btn key="ask" icon={Sparkles} label="Ask FLOW" onClick={() => h.onAsk(item)} />,
-        <Btn key="t" icon={ExternalLink} label="Timeline" onClick={() => h.navigate("/activity")} />,
-        <Btn key="x" label="Dismiss" onClick={() => h.onDismiss(item.id, "Acknowledged")} />,
-      ];
-    default:
-      return [
-        <Btn key="ask" icon={Sparkles} label="Ask FLOW" onClick={() => h.onAsk(item)} />,
-        <Btn key="x" label="Dismiss" onClick={() => h.onDismiss(item.id, "Read")} />,
-      ];
-  }
-}
