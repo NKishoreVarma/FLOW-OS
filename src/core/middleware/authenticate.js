@@ -5,12 +5,12 @@
 import jwt from 'jsonwebtoken';
 import { AuthenticationError } from '../errors/index.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'flow-os-dev-secret-change-in-production';
+// validateEnv() guarantees JWT_SECRET is present and meets length requirements before this module loads.
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export function authenticate(req, res, next) {
-  // Skip for public routes
-  const publicPaths = ['/api/health', '/api/auth/signup', '/api/auth/login', '/api/auth/refresh'];
-  if (publicPaths.some(path => req.path.startsWith(path))) {
+  const publicPaths = ['/api/health', '/api/auth/signup', '/api/auth/login', '/api/auth/refresh', '/api/analytics/live'];
+  if (publicPaths.some(p => req.path.startsWith(p))) {
     return next();
   }
 

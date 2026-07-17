@@ -65,7 +65,7 @@ export class ErrorBoundary extends Component {
               Try Again
             </button>
             <button onClick={() => window.location.assign("/")} style={{ padding: "7px 16px", borderRadius: 8, border: "1px solid var(--border)", background: "transparent", color: "var(--t3)", fontSize: 13, fontWeight: 500, cursor: "pointer" }}>
-              Go to Workfeed
+              Go Home
             </button>
             <button onClick={reported ? undefined : this.handleReport} style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "7px 12px", borderRadius: 8, border: "1px solid var(--border)", background: "transparent", color: reported ? "var(--p-normal-text)" : "var(--t5)", fontSize: 12, fontWeight: 500, cursor: reported ? "default" : "pointer" }}>
               {reported ? <><CheckCircle2 style={{ width: 12, height: 12 }} /> Reported</> : <><Flag style={{ width: 12, height: 12 }} /> Report this</>}
