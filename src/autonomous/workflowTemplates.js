@@ -117,4 +117,3 @@ export function listTemplates() {
   return Object.values(TEMPLATES).map(({ id, label, description, risk }) => ({ id, label, description, risk }));
 }
 
-export default { getTemplate, listTemplates, TEMPLATE_IDS };
