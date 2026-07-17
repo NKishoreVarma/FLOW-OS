@@ -107,7 +107,7 @@ export async function collect(workspaceId, { extraItems = [] } = {}) {
       items.push({
         id: `fe-${e.id}`, type: 'execution_failed', source: e.connector || 'system',
         title: `Failed: ${e.summary || e.actionType || 'execution'}`,
-        subtitle: `${e.connector} · ${e.riskLevel || 'MEDIUM'} risk · retry available`,
+        subtitle: `${e.connector || 'system'} · ${e.riskLevel || 'MEDIUM'} risk · retry available`,
         owners: [], participants: [], blocking: 1,
         businessImpact: 'high', department: deptOfConnector(e.connector),
         actionRoute: '/inbox', actionLabel: 'Retry',
@@ -168,4 +168,3 @@ export async function collect(workspaceId, { extraItems = [] } = {}) {
   return [...items, ...extraItems];
 }
 
-export default { collect };
