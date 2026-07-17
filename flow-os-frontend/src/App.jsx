@@ -74,7 +74,9 @@ function App() {
               }))
             }
           }
-        } catch (_) { /* non-JSON frame — ignore */ }
+        } catch {
+          return
+        }
       }
 
       ws.onclose = () => {
@@ -159,8 +161,37 @@ function App() {
   async function handleSeedData() {
     try {
       await fetch(`${API_URL}/integrations/test-trigger`)
-    } catch (_) {}
+    } catch (error) {
+      console.error('Seed trigger failed:', error)
+    }
   }
+
+  useEffect(() => {
+    const forceQueryDispatch = async (forcedText) => {
+      console.log("💥 [FORCE PROTOCOL] Intercepted text directly from window:", forcedText);
+      try {
+        const res = await fetch(`${API_URL}/integrations/query`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: forcedText })
+        });
+        const data = await res.json();
+        console.log("📦 [FORCE PROTOCOL] Raw JSON arrived:", data);
+        
+        if (data.chunks) {
+          const textDump = data.chunks.map(r => r.text || '').join("\n\n");
+          alert("🎯 PIPELINE CONNECTED!\n\n" + textDump);
+        }
+      } catch(e) {
+        console.error(e);
+      }
+    };
+
+    window.forceQueryDispatch = forceQueryDispatch
+    return () => {
+      delete window.forceQueryDispatch
+    }
+  }, [])
 
   // ── Helpers ──────────────────────────────────────────────────────────────
   function wsStatusBadge() {
@@ -187,26 +218,6 @@ function App() {
     if (type.includes('CONNECTION'))                  return '#00b4a8'  // --accent-teal  · ws handshake
     return '#7c8ca0'                                                     // dim-grey       · unknown events
   }
-
-  window.forceQueryDispatch = async (forcedText) => {
-    console.log("💥 [FORCE PROTOCOL] Intercepted text directly from window:", forcedText);
-    try {
-      const res = await fetch(`${API_URL}/integrations/query`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: forcedText })
-      });
-      const data = await res.json();
-      console.log("📦 [FORCE PROTOCOL] Raw JSON arrived:", data);
-      
-      if (data.chunks) {
-        const textDump = data.chunks.map(r => r.text || '').join("\n\n");
-        alert("🎯 PIPELINE CONNECTED!\n\n" + textDump);
-      }
-    } catch(e) {
-      console.error(e);
-    }
-  };
 
   return (
     <div className="os-shell">
