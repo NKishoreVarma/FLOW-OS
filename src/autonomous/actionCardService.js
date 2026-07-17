@@ -83,4 +83,3 @@ export function buildActionCards(items = []) {
   return items.map(buildActionCard);
 }
 
-export default { buildActionCard, buildActionCards };
