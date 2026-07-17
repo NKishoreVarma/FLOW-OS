@@ -12,6 +12,7 @@
 import express from 'express';
 import { getChiefOfStaffBriefing } from '../autonomous/chiefOfStaffService.js';
 import { listTemplates }            from '../autonomous/workflowTemplates.js';
+import { getWeeklyReview }          from '../autonomous/weeklyReviewService.js';
 
 const router = express.Router();
 
@@ -44,6 +45,15 @@ router.get('/chief-of-staff', async (req, res, next) => {
 // Returns the list of available workflow templates for the client to render.
 router.get('/templates', (req, res) => {
   res.json({ templates: listTemplates() });
+});
+
+// ── GET /api/autonomous/weekly-review ─────────────────────────────────────────
+// Returns the weekly executive review: velocity, execution success, risks, priorities.
+router.get('/weekly-review', async (req, res, next) => {
+  try {
+    const days = Math.min(30, Math.max(1, Number(req.query.days) || 7));
+    res.json(await getWeeklyReview(req.tenantId, { days }));
+  } catch (err) { next(err); }
 });
 
 export default router;
