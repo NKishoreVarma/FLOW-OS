@@ -65,8 +65,8 @@ export default function RecoveryToast({ error = {}, onDismiss }) {
             {selfServeAction && (
               <button onClick={handleSelfServe} style={{
                 display: "inline-flex", alignItems: "center", gap: 4,
-                padding: "5px 10px", background: "var(--flow-purple)",
-                color: "#fff", border: "none", borderRadius: 6,
+                padding: "5px 10px", background: "var(--brand)",
+                color: "var(--t1)", border: "none", borderRadius: 6,
                 fontSize: 12, fontWeight: 500, cursor: "pointer",
               }}>
                 <ExternalLink style={{ width: 12, height: 12 }} />
@@ -77,7 +77,7 @@ export default function RecoveryToast({ error = {}, onDismiss }) {
               display: "inline-flex", alignItems: "center", gap: 4,
               padding: "5px 10px", background: "transparent",
               color: reported ? "var(--p-normal-text)" : "var(--t3)",
-              border: "1px solid var(--border-flow)", borderRadius: 6,
+              border: "1px solid var(--border)", borderRadius: 6,
               fontSize: 12, fontWeight: 500,
               cursor: reported ? "default" : "pointer",
             }}>
