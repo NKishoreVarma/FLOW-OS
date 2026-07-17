@@ -28,21 +28,21 @@ function renderCard(card, i, onAction) {
 
 // Tone-aware avatar accent colors
 const TONE_ACCENT = {
-  celebratory: "rgba(34, 197, 94, 0.18)",
-  serious:     "rgba(239, 68, 68, 0.12)",
-  relaxed:     "rgba(124, 110, 255, 0.10)",
-  energetic:   "rgba(245, 158, 11, 0.12)",
-  calm:        "rgba(99, 102, 241, 0.08)",
-  normal:      "rgba(124, 110, 255, 0.10)",
+  celebratory: "var(--tone-celebratory-bg)",
+  serious:     "var(--tone-serious-bg)",
+  relaxed:     "var(--tone-relaxed-bg)",
+  energetic:   "var(--tone-energetic-bg)",
+  calm:        "var(--tone-calm-bg)",
+  normal:      "var(--tone-normal-bg)",
 };
 
 const TONE_BORDER = {
-  celebratory: "rgba(34, 197, 94, 0.30)",
-  serious:     "rgba(239, 68, 68, 0.25)",
-  relaxed:     "rgba(124, 110, 255, 0.22)",
-  energetic:   "rgba(245, 158, 11, 0.28)",
-  calm:        "rgba(99, 102, 241, 0.18)",
-  normal:      "rgba(124, 110, 255, 0.22)",
+  celebratory: "var(--tone-celebratory-border)",
+  serious:     "var(--tone-serious-border)",
+  relaxed:     "var(--tone-relaxed-border)",
+  energetic:   "var(--tone-energetic-border)",
+  calm:        "var(--tone-calm-border)",
+  normal:      "var(--tone-normal-border)",
 };
 
 function FollowUpChip({ label, onClick }) {
@@ -55,8 +55,8 @@ function FollowUpChip({ label, onClick }) {
       style={{
         padding:      "5px 12px",
         borderRadius:  5,
-        border:       `1px solid ${hovered ? "rgba(124,110,255,0.35)" : "var(--border-strong)"}`,
-        background:    hovered ? "rgba(124,110,255,0.06)" : "rgba(255,255,255,0.02)",
+        border:       `1px solid ${hovered ? "var(--brand-hover-border)" : "var(--border-strong)"}`,
+        background:    hovered ? "var(--brand-hover-bg)" : "var(--surface-ghost-2)",
         fontSize:      12,
         fontWeight:    400,
         color:         hovered ? "var(--t2)" : "var(--t3)",
@@ -98,8 +98,8 @@ export default function BrainMessage({ message, isLatest, onAction, onFollowUp, 
         <div style={{
           maxWidth:   520,
           padding:    "10px 16px",
-          background: "rgba(124,110,255,0.08)",
-          border:     "1px solid rgba(124,110,255,0.20)",
+          background: "var(--brand-glass)",
+          border:     "1px solid var(--brand-glass-border)",
           borderRadius: "6px 6px 2px 6px",
         }}>
           <p style={{ fontSize: 14, color: "var(--t1)", lineHeight: 1.65, whiteSpace: "pre-wrap", margin: 0 }}>
@@ -131,9 +131,9 @@ export default function BrainMessage({ message, isLatest, onAction, onFollowUp, 
             gap:         5,
             marginBottom: 8,
             padding:    "4px 10px",
-            background: "rgba(124,110,255,0.04)",
+            background: "var(--brand-muted)",
             borderRadius: 4,
-            borderLeft: "2px solid rgba(124,110,255,0.20)",
+            borderLeft: "2px solid var(--brand-glass-border)",
           }}>
             <Sparkles style={{ width: 10, height: 10, color: "var(--t5)", flexShrink: 0 }} />
             <span style={{ fontSize: 11, color: "var(--t4)", fontStyle: "italic", lineHeight: 1.5 }}>
@@ -169,9 +169,9 @@ export default function BrainMessage({ message, isLatest, onAction, onFollowUp, 
                 strong:     ({ children }) => <strong style={{ fontWeight: 600, color: "var(--t1)" }}>{children}</strong>,
                 em:         ({ children }) => <em style={{ color: "var(--t2)", fontStyle: "italic" }}>{children}</em>,
                 code:       ({ inline, children }) => inline
-                  ? <code style={{ fontSize: 12, background: "rgba(124,110,255,0.08)", padding: "1px 5px", borderRadius: 3, fontFamily: "monospace", color: "var(--t2)" }}>{children}</code>
-                  : <pre style={{ background: "rgba(0,0,0,0.18)", borderRadius: 5, padding: "10px 14px", overflowX: "auto", margin: "8px 0" }}><code style={{ fontSize: 12, fontFamily: "monospace", color: "var(--t2)", lineHeight: 1.55 }}>{children}</code></pre>,
-                blockquote: ({ children }) => <blockquote style={{ borderLeft: "2px solid rgba(124,110,255,0.30)", margin: "8px 0", paddingLeft: 12, color: "var(--t3)", fontStyle: "italic" }}>{children}</blockquote>,
+                  ? <code style={{ fontSize: 12, background: "var(--brand-glass)", padding: "1px 5px", borderRadius: 3, fontFamily: "monospace", color: "var(--t2)" }}>{children}</code>
+                  : <pre style={{ background: "var(--surface-code)", borderRadius: 5, padding: "10px 14px", overflowX: "auto", margin: "8px 0" }}><code style={{ fontSize: 12, fontFamily: "monospace", color: "var(--t2)", lineHeight: 1.55 }}>{children}</code></pre>,
+                blockquote: ({ children }) => <blockquote style={{ borderLeft: "2px solid var(--brand-line)", margin: "8px 0", paddingLeft: 12, color: "var(--t3)", fontStyle: "italic" }}>{children}</blockquote>,
                 a:          ({ href, children }) => <a href={href} target="_blank" rel="noreferrer" style={{ color: "var(--brand)", textDecoration: "none" }}>{children}</a>,
                 hr:         () => <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "12px 0" }} />,
               }}
@@ -228,7 +228,7 @@ export default function BrainMessage({ message, isLatest, onAction, onFollowUp, 
                   textDecoration: "none",
                   transition:  "all 100ms",
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(124,110,255,0.35)"; e.currentTarget.style.color = "var(--t1)"; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--brand-hover-border)"; e.currentTarget.style.color = "var(--t1)"; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border-strong)"; e.currentTarget.style.color = "var(--t3)"; }}
               >
                 {action.label}
@@ -250,7 +250,7 @@ export default function BrainMessage({ message, isLatest, onAction, onFollowUp, 
         {isStreaming && !explanation && evidence.length > 0 && (
           <button
             onClick={() => setEvidenceOpen((o) => !o)}
-            style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 10, padding: "3px 9px", borderRadius: 4, fontSize: 11, fontWeight: 500, cursor: "pointer", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)", color: "var(--t4)" }}
+            style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 10, padding: "3px 9px", borderRadius: 4, fontSize: 11, fontWeight: 500, cursor: "pointer", background: "var(--surface-ghost-3)", border: "1px solid var(--border)", color: "var(--t4)" }}
           >
             <FileSearch style={{ width: 11, height: 11 }} /> {evidence.length} source{evidence.length !== 1 ? "s" : ""} {evidenceOpen ? "▲" : "▾"}
           </button>
@@ -290,9 +290,9 @@ export default function BrainMessage({ message, isLatest, onAction, onFollowUp, 
           <div style={{
             marginTop:  12,
             padding:    "8px 12px",
-            background: "rgba(124,110,255,0.04)",
+            background: "var(--brand-muted)",
             borderRadius: 4,
-            border:     "1px solid rgba(124,110,255,0.12)",
+            border:     "1px solid var(--brand-muted-border)",
           }}>
             <span style={{ fontSize: 12, color: "var(--t3)", fontStyle: "italic" }}>
               {message.joke}
