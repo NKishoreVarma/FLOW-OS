@@ -5,7 +5,7 @@ export async function submitFeedback(workspaceId, userId, { thumbs, text, contex
   const { rows } = await query(
     `INSERT INTO pilot_feedback (workspace_id, user_id, thumbs, text, context, reported_at)
      VALUES ($1, $2, $3, $4, $5, NOW())
-     RETURNING id, workspace_id, user_id, thumbs, context, reported_at`,
+     RETURNING id::int AS id, workspace_id, user_id, thumbs, context, reported_at`,
     [workspaceId, userId ?? null, thumbs, text ?? null, context ?? null]
   );
   eventBus.emit('PILOT_FEEDBACK_SUBMITTED', { workspaceId, ...rows[0] });
