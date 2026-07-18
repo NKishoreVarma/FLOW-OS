@@ -246,18 +246,22 @@ export async function stageIngestMemory(ctx) {
   }
 }
 
+// Max records vectorized per dataset type per import run.
+// Prevents runaway sequential Gemini API calls on large imports (e.g. 1,957 emails × 300ms = 10min).
+const MAX_VECTORS_PER_TYPE = 100;
+
 export async function stageVectorize(ctx) {
   ctx.emit('stageVectorize', 'started', 'Vectorizing normalized records into pgvector store');
   try {
-    // Imported communication records (emails, slack_threads, meeting_transcripts) bypass the
-    // real-time privacy gate — they are treated as pre-classified operational intel from
-    // trusted export files. Do NOT use this stage for streaming/live input.
+    // Imported records bypass the real-time privacy gate — they are pre-classified operational
+    // intel from trusted export files. Do NOT use this stage for streaming/live input.
     for (const type of Object.keys(ctx.normalized)) {
       const handler = getDatasetHandler(type);
       if (!handler) continue;
 
       const vectorItems = handler.vectorizer(ctx.normalized[type] ?? []);
-      for (const { text, channel, metadata } of vectorItems) {
+      const capped = vectorItems.slice(0, MAX_VECTORS_PER_TYPE);
+      for (const { text, channel, metadata } of capped) {
         if (!text?.trim()) continue;
         await upsertVector(ctx.workspaceId, text, channel ?? type, metadata ?? {});
         ctx.vectorCount++;

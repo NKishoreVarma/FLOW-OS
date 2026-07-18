@@ -1,5 +1,5 @@
 import express from 'express';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { runLifecycleOperation, validateOnly } from '../core/workspaceLifecycle/lifecycleEngine.js';
@@ -11,19 +11,22 @@ import { ValidationError } from '../core/errors/index.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DEMO_DIR = path.resolve(__dirname, '../../demo-company/exports');
 
-function loadDemoPayload() {
+// Async so a large demo import never blocks the event loop (request path).
+async function loadDemoPayload() {
   const manifestPath = path.join(DEMO_DIR, 'manifest.json');
-  if (!fs.existsSync(manifestPath)) {
+  let manifestRaw;
+  try {
+    manifestRaw = await fs.readFile(manifestPath, 'utf8');
+  } catch {
     throw new ValidationError('Demo company manifest not found. Run: cd demo-company && npm run generate');
   }
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const manifest = JSON.parse(manifestRaw);
   const datasets = {};
-  for (const entry of manifest.datasets) {
-    const filePath = path.join(DEMO_DIR, entry.file);
-    if (fs.existsSync(filePath)) {
-      datasets[entry.type] = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    }
-  }
+  await Promise.all(manifest.datasets.map(async (entry) => {
+    try {
+      datasets[entry.type] = JSON.parse(await fs.readFile(path.join(DEMO_DIR, entry.file), 'utf8'));
+    } catch { /* missing dataset file — skip */ }
+  }));
   return { manifest, datasets };
 }
 
@@ -96,9 +99,9 @@ router.get('/history', async (req, res) => {
 });
 
 // GET /api/lifecycle/demo/manifest — returns the demo company manifest + dataset record counts (no auth needed for preview)
-router.get('/demo/manifest', (_req, res) => {
+router.get('/demo/manifest', async (_req, res) => {
   try {
-    const { manifest, datasets } = loadDemoPayload();
+    const { manifest, datasets } = await loadDemoPayload();
     const datasetSizes = Object.entries(datasets).map(([type, records]) => ({
       type,
       count: Array.isArray(records) ? records.length : 0,
@@ -110,13 +113,27 @@ router.get('/demo/manifest', (_req, res) => {
 });
 
 // POST /api/lifecycle/demo — import the bundled Helios Software Inc. demo company into a workspace
+// Returns immediately with importId; vectorization runs in background (9k records can take 20-60 min).
 router.post('/demo', async (req, res) => {
   if (!['OWNER', 'ADMIN'].includes(req.workspaceRole)) {
     return res.status(403).json({ error: 'Demo import requires OWNER or ADMIN role' });
   }
-  const { manifest, datasets } = loadDemoPayload();
-  const record = await runLifecycleOperation('IMPORT', req.workspaceId, { manifest, datasets });
-  res.json({ success: true, ...record });
+  const { manifest, datasets } = await loadDemoPayload();
+
+  // Kick off the operation without awaiting — it streams WS events and updates ImportRecord in DB.
+  // Clients poll GET /api/lifecycle/history to check status.
+  const importId = `IMP-${Math.random().toString(16).slice(2, 10).toUpperCase()}`;
+  runLifecycleOperation('IMPORT', req.workspaceId, { manifest, datasets }).catch(err =>
+    console.error('[lifecycle/demo] background import failed:', err.message)
+  );
+
+  res.status(202).json({
+    success: true,
+    importId,
+    workspaceId: req.workspaceId,
+    status: 'RUNNING',
+    message: 'Demo import started. Poll GET /api/lifecycle/history for progress. Vectorization of 9k records may take 20-60 minutes.',
+  });
 });
 
 // GET /api/lifecycle/schema

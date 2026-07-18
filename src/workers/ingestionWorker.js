@@ -5,24 +5,94 @@ import { processIncomingIntel } from '../services/cognitiveBrainService.js';
 import { evaluateScores } from '../services/operationalScoringService.js';
 import { detectIncidents } from '../services/incidentEngine.js';
 import { extractDecisions } from '../services/decisionMemoryService.js';
+import { normalizeFormatting, extractTaskAndDeadline } from '../services/parserService.js';
 import dotenv from 'dotenv';
+import { logger } from '../utils/logger.js';
 dotenv.config();
 
 const connection = new Redis(process.env.REDIS_URL || 'redis://127.0.0.1:6379', {
   maxRetriesPerRequest: null,
 });
 
+import { 
+  generateTraceId, 
+  startIngestionTrace, 
+  updateIngestionTrace,
+  liveMetrics
+} from '../services/observabilityService.js';
+
 export const ingestionWorker = new Worker('ingestion-queue', async (job) => {
+  const traceId = job.data.traceId || generateTraceId();
+  const { workspaceId, sender, channel: ch, channelId, text, platform } = job.data;
+  const channel = ch || channelId || 'general';
+  const plat = platform || 'slack';
+
+  // Initialize pipeline trace
+  startIngestionTrace(traceId, {
+    workspaceId,
+    platform: plat,
+    sender,
+    channel,
+    text
+  });
+
   try {
-    const { workspaceId, sender, channel: ch, channelId, text } = job.data;
-    const channel = ch || channelId || 'general';
+    // 1. Parser Stage
+    updateIngestionTrace(traceId, 'Parser', 'START', { input: text });
+    const parsedText = normalizeFormatting(text);
     
-    // 1. Operational Scoring Layer
-    const scores = evaluateScores(sender, channel, text);
-    
-    // 2. Cognitive Privacy Shield Enforcement
+    if (parsedText.includes('[STRIPPED INJECTION]')) {
+      logger.security(`Prompt injection detected. Job aborted.`);
+      updateIngestionTrace(traceId, 'Parser', 'FAILED', {
+        input: text,
+        error: 'Prompt Injection detected and stripped'
+      });
+      updateIngestionTrace(traceId, 'Complete', 'FAILED', {
+        error: 'Prompt Injection blocked'
+      });
+      return { status: 'DISCARDED', reason: 'PROMPT_INJECTION_BLOCKED' };
+    }
+
+    const taskExtraction = extractTaskAndDeadline(parsedText);
+    job.data.metadata = {
+      ...(job.data.metadata || {}),
+      task: taskExtraction.task,
+      deadline: taskExtraction.deadline
+    };
+
+    updateIngestionTrace(traceId, 'Parser', 'SUCCESS', {
+      input: text,
+      output: parsedText,
+      metadata: taskExtraction
+    });
+
+    // 2. Operational Scoring / Importance Stage
+    updateIngestionTrace(traceId, 'Importance', 'START', { input: parsedText });
+    const scores = evaluateScores(sender, channel, parsedText);
+    updateIngestionTrace(traceId, 'Importance', 'SUCCESS', {
+      input: parsedText,
+      output: scores,
+      metadata: { 
+        importance_score: scores.importance_score, 
+        authority_score: scores.authority_score,
+        urgency_score: scores.urgency_score
+      }
+    });
+
+    // 3. Privacy Gate Stage
+    updateIngestionTrace(traceId, 'Privacy Gate', 'START', { input: parsedText });
     if (scores.privacy_score > 0.85) {
-      console.log(`🚨 [Privacy Brain] PII detected (score: ${scores.privacy_score.toFixed(2)}). Job discarded.`);
+      logger.security(`PII detected (score: ${scores.privacy_score.toFixed(2)}). Job discarded.`);
+      
+      updateIngestionTrace(traceId, 'Privacy Gate', 'FAILED', {
+        input: parsedText,
+        error: 'Privacy threshold exceeded (PII Blocked)',
+        metadata: { privacy_score: scores.privacy_score }
+      });
+      updateIngestionTrace(traceId, 'Complete', 'FAILED', {
+        error: 'PII block'
+      });
+
       broadcastToWorkspace(String(workspaceId), 'PRIVACY_SHIELD_TRIGGERED', {
         workspaceId,
         channelName: channel,
@@ -33,60 +103,124 @@ export const ingestionWorker = new Worker('ingestion-queue', async (job) => {
       return { status: 'DISCARDED', reason: 'PRIVACY_SHIELD_TRIGGERED' };
     }
     
-    // 3. Operational Intelligence Engines (Parallel processing)
-    detectIncidents(workspaceId, text, job.data.metadata);
-    extractDecisions(workspaceId, text, job.data.metadata, sender);
-    
-    // 4. Memory Brain Scoring Pass & Retention Policy
+    updateIngestionTrace(traceId, 'Privacy Gate', 'SUCCESS', {
+      input: parsedText,
+      output: 'CLEARED',
+      metadata: { privacy_score: scores.privacy_score }
+    });
+
+    // 4. Incident Engine Stage
+    updateIngestionTrace(traceId, 'Incident Engine', 'START', { input: parsedText });
+    const incident = detectIncidents(workspaceId, parsedText, job.data.metadata);
+    if (incident) liveMetrics.totalIncidents++;
+    updateIngestionTrace(traceId, 'Incident Engine', 'SUCCESS', {
+      input: parsedText,
+      output: incident ? incident : 'No incident detected',
+      metadata: { detected: !!incident }
+    });
+
+    // 5. Decision Engine Stage
+    updateIngestionTrace(traceId, 'Decision Engine', 'START', { input: parsedText });
+    const decision = extractDecisions(workspaceId, parsedText, job.data.metadata, sender);
+    if (decision) liveMetrics.totalDecisions++;
+    updateIngestionTrace(traceId, 'Decision Engine', 'SUCCESS', {
+      input: parsedText,
+      output: decision ? decision : 'No decision detected',
+      metadata: { detected: !!decision }
+    });
+
+    // 6. Memory Stage
+    updateIngestionTrace(traceId, 'Memory', 'START', { input: scores });
     let retention_policy = '24_HOURS';
     if (scores.importance_score > 0.8 && scores.authority_score > 0.8) {
       retention_policy = 'PERMANENT';
     } else if (scores.importance_score > 0.5 || scores.authority_score > 0.5) {
       retention_policy = '30_DAYS';
     }
-
-    const memoryMetadata = {
-      ...scores,
-      retention_policy
-    };
-
-    // Append to job data metadata before processing
-    job.data.metadata = { ...(job.data.metadata || {}), ...memoryMetadata };
-
-    console.log(`🧠 [Memory Brain] Scored chunk. Retention: ${retention_policy}`);
+    const memoryMetadata = { ...scores, retention_policy };
+    job.data.metadata = { ...(job.data.metadata || {}), ...memoryMetadata, traceId };
     
-    // Broadcast Memory event to dashboard
-    broadcastToWorkspace(String(workspaceId), 'MEMORY_RETENTION_ASSIGNED', {
-      workspaceId,
-      channelName: channel,
-      importance_score: scores.importance_score,
-      authority_score: scores.authority_score,
-      urgency_score: scores.urgency_score,
-      retention_policy
+    updateIngestionTrace(traceId, 'Memory', 'SUCCESS', {
+      input: scores,
+      output: retention_policy,
+      metadata: { retention_policy }
     });
 
-    // 5. The Intent Classification Pass (Vectorization & Storage)
-    console.log(`🧠 [Intent Classification] Chunk is safe. Routing to Brain Service.`);
-    const result = await processIncomingIntel(workspaceId, channel, `[${sender}] ${text}`, job.data.metadata);
-    
+    // 7. Entity Extractor
+    updateIngestionTrace(traceId, 'Entity Extractor', 'START', { input: parsedText });
+    let entities = [];
+    try {
+      const { extractEntitiesFromText } = await import('../services/knowledgeGraphService.js');
+      entities = extractEntitiesFromText(parsedText);
+    } catch (e) {
+      console.warn('Entity extraction failed:', e.message);
+    }
+    updateIngestionTrace(traceId, 'Entity Extractor', 'SUCCESS', {
+      input: parsedText,
+      output: entities
+    });
+
+    // 8. Knowledge Graph Node Sync
+    updateIngestionTrace(traceId, 'Knowledge Graph', 'START', { input: entities });
+    try {
+      const { registerEntity } = await import('../services/knowledgeGraphService.js');
+      for (const ent of entities) {
+        registerEntity(ent, 'CONCEPT', ent);
+        liveMetrics.totalNodes++;
+      }
+    } catch (e) {
+      console.warn('Knowledge graph update failed:', e.message);
+    }
+    updateIngestionTrace(traceId, 'Knowledge Graph', 'SUCCESS', {
+      input: entities,
+      output: `Sync completed. Integrated ${entities.length} concepts.`
+    });
+
+    // 9. Process and Vectorize
+    logger.memory(`Intent Classification: Chunk is safe. Routing to Brain Service.`);
+    const result = await processIncomingIntel(workspaceId, channel, `[${sender}] ${parsedText}`, job.data.metadata);
+
+    updateIngestionTrace(traceId, 'Complete', 'SUCCESS', {
+      output: result
+    });
+
+    // 10. Publish to the unified Event Platform (non-blocking side-effect).
+    // origin:'ingestion' prevents the brain subscriber from re-enqueuing this
+    // event back into ingestion (loop-prevention invariant).
+    if (result?.status !== 'DISCARDED') {
+      import('../events/index.js')
+        .then(({ publish }) => {
+          const { workspaceId, platform, sender, channel, text } = job.data;
+          const isIncident = /incident|outage|down|sev[0-2]|p[01]/i.test(text || '');
+          return publish(platform || 'ingestion_worker', isIncident ? 'incident' : 'message', {
+            text, sender, channel, platform,
+            traceId: job.data.metadata?.traceId, ...job.data.metadata,
+          }, { workspaceId, metadata: { origin: 'ingestion' } });
+        })
+        .catch(() => {});
+    }
+
     broadcastToWorkspace(String(workspaceId), 'INGESTION_COMPLETE', {
       workspaceId,
-      sourcesProcessed: ['slack'], // simplified for simulation
+      sourcesProcessed: [plat],
       status: result.status,
       scope: result.scope
     });
-    
+
     return result;
   } catch (error) {
+    updateIngestionTrace(traceId, 'Complete', 'FAILED', {
+      error: error.message
+    });
     console.error("Memory Brain Processing Error:", error);
     throw error;
   }
 }, { connection });
 
 ingestionWorker.on('completed', (job) => {
-  console.log(`✅ [Ingestion Worker] Job ${job.id} completed successfully.`);
+  logger.queue(`Job ${job.id} completed successfully.`);
 });
 
 ingestionWorker.on('failed', (job, err) => {
-  console.error(`❌ [Ingestion Worker] Job ${job.id} failed:`, err.message);
+  logger.error(`Job ${job.id} failed: ${err.message}`);
 });

@@ -1,89 +1,97 @@
-import { GoogleGenAI } from '@google/genai';
-import { retrieveContext } from './retrievalService.js';
-import { getRelatedContext } from './operationalGraphService.js';
+/**
+ * copilotService — routes every conversation turn through the ConversationManager.
+ *
+ * The ConversationManager decides:
+ *   - What kind of message this is (intent classification)
+ *   - Whether the Operational Brain is needed at all
+ *   - How to structure and tone the response
+ *
+ * This service wraps the existing capability-aware brain pipeline as a lazy
+ * `brainQuery` function. ConversationManager calls it only when the plan requires it.
+ */
 
-export async function answerCopilotQuery(workspaceId, { pageContext = '', question, entityId = null }) {
-  const wsIdStr = String(workspaceId);
+import { ask }                                            from '../ai/BrainRouter.js';
+import { assembleContext, buildEvidence }                 from '../ai/ContextAssembler.js';
+import { buildCopilotPrompt }                             from '../ai/PromptBuilder.js';
+import { formatCopilotResponse }                          from '../ai/ResponseFormatter.js';
+import { TaskType }                                       from '../ai/types.js';
+import { planCapabilities }                               from '../ai/reasoning/CapabilityPlanner.js';
+import { dispatchCapabilities }                           from '../ai/reasoning/CapabilityDispatcher.js';
+import { buildContext, formatContextForPrompt }           from '../ai/reasoning/ContextBuilder.js';
+import { analyzeIntent }                                  from '../ai/reasoning/IntentAnalyzer.js';
+import { processConversationTurn }                        from '../ai/conversation/ConversationManager.js';
 
-  const enrichedQuery = pageContext ? `[Context: ${pageContext}] ${question}` : question;
-  const queryTraceId = `cop-${Date.now()}`;
+export async function answerCopilotQuery(workspaceId, {
+  pageContext        = '',
+  question,
+  entityId           = null,
+  role               = 'EMPLOYEE',
+  healthScore,
+  hasIncidents       = false,
+  isInboxZero        = false,
+  taskJustDone       = false,
+  deploymentSuccess  = false,
+  sprintCompleted    = false,
+  userName           = null,
+}) {
+  const wsId = String(workspaceId);
 
-  let chunks = [];
-  try {
-    const result = await retrieveContext(wsIdStr, enrichedQuery, queryTraceId);
-    chunks = Array.isArray(result) ? result : [];
-  } catch {
-    chunks = [];
-  }
+  /**
+   * brainQuery — the Operational Brain pipeline.
+   * ConversationManager calls this only when the conversation plan requires it.
+   * For greetings, small talk, thanks, jokes, etc. it is never called.
+   */
+  const brainQuery = async (queryText) => {
+    console.log(`[Copilot] ▶ Operational Brain — "${queryText.slice(0, 60)}"`);
 
-  let graphContext = [];
-  if (entityId) {
-    try {
-      graphContext = await getRelatedContext(wsIdStr, entityId, 1);
-    } catch {
-      graphContext = [];
-    }
-  }
+    const intent = await analyzeIntent(queryText, { pageContext, entityId });
+    const plan   = planCapabilities(queryText, intent);
 
-  const contextText = [
-    ...chunks.map(c => c.text || c.content || ''),
-    ...graphContext
-  ].filter(Boolean).slice(0, 10).join('\n---\n');
+    const [capabilityResults, ctx] = await Promise.all([
+      dispatchCapabilities(wsId, plan, intent),
+      assembleContext({ workspaceId: wsId, query: queryText, entityId, maxChunks: 6 }),
+    ]);
 
-  const evidence = chunks.slice(0, 5).map(c => ({
-    text: (c.text || c.content || '').substring(0, 120),
-    source: c.source || c.metadata?.source || 'workspace',
-    score: c.finalScore || c.score || 0
-  }));
+    const builtContext  = buildContext(capabilityResults, intent);
+    const contextBlock  = formatContextForPrompt(builtContext, intent);
+    const augmentedCtx  = {
+      ...ctx,
+      knowledge: contextBlock + (ctx.knowledge ? '\n\n' + ctx.knowledge : ''),
+    };
 
-  if (process.env.GEMINI_API_KEY && contextText) {
-    try {
-      const aiOptions = { apiKey: process.env.GEMINI_API_KEY };
-      if (process.env.GEMINI_BASE_URL) {
-        aiOptions.httpOptions = { baseUrl: process.env.GEMINI_BASE_URL };
-      }
-      const ai = new GoogleGenAI(aiOptions);
-      const prompt = `You are FLOW OS Copilot — a context-aware assistant. Answer the following question concisely based only on the provided workspace context. If the answer is not in the context, say so directly.\n\nQuestion: ${question}\n\nContext:\n${contextText}\n\nProvide a direct answer in 1-3 sentences. Do not say "based on the context". Speak as a knowledgeable assistant.`;
-      const result = await ai.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt });
-      return {
-        answer: result.text,
-        evidence,
-        confidence: Math.min(95, 60 + chunks.length * 5),
-        suggestedActions: buildSuggestedActions(question, chunks),
-        sources: [...new Set(chunks.map(c => c.source || c.metadata?.source || 'workspace'))].slice(0, 5)
-      };
-    } catch {
-      // fall through to heuristic
-    }
-  }
+    const { messages } = buildCopilotPrompt({ question: queryText, context: augmentedCtx, pageContext, role });
 
-  const fallbackAnswer = chunks.length > 0
-    ? `Based on your workspace data: ${(chunks[0].text || chunks[0].content || '').substring(0, 200)}`
-    : 'No matching information found in your workspace. Try refining the question or ingesting more data.';
+    const aiResponse = await ask({
+      taskType:    TaskType.CHAT,
+      messages,
+      maxTokens:   512,
+      temperature: 0.3,
+    });
 
-  return {
-    answer: fallbackAnswer,
-    evidence,
-    confidence: chunks.length > 0 ? 45 : 10,
-    suggestedActions: buildSuggestedActions(question, chunks),
-    sources: [...new Set(chunks.map(c => c.source || c.metadata?.source || 'workspace'))].slice(0, 5)
+    const evidence  = buildEvidence(ctx.rawChunks ?? [], 5);
+    const formatted = formatCopilotResponse({ aiResponse, evidence, chunks: ctx.rawChunks ?? [] });
+    console.log(`[Copilot] ✓ Brain done — ${formatted.answer?.length || 0} chars`);
+
+    return {
+      answer:  formatted.answer,
+      sources: formatted.sources,
+      cards:   formatted.cards   || [],
+      actions: formatted.actions || [],
+    };
   };
-}
 
-function buildSuggestedActions(question, chunks) {
-  const q = question.toLowerCase();
-  const actions = [];
-  if (q.includes('pr') || q.includes('pull request') || q.includes('review')) {
-    actions.push({ label: 'View PRs', route: '/projects' });
-  }
-  if (q.includes('meeting') || q.includes('calendar')) {
-    actions.push({ label: 'View Meetings', route: '/meetings' });
-  }
-  if (q.includes('incident') || q.includes('outage') || q.includes('issue')) {
-    actions.push({ label: 'View Briefing', route: '/briefing' });
-  }
-  if (chunks.length === 0) {
-    actions.push({ label: 'Search Workspace', route: '/search' });
-  }
-  return actions.slice(0, 3);
+  // Route through ConversationManager — intent detection, planning, composition
+  return processConversationTurn({
+    workspaceId:    wsId,
+    query:          question,
+    brainQuery,
+    pageContext,
+    userName,
+    healthScore,
+    hasIncidents,
+    isInboxZero,
+    taskJustDone,
+    deploymentSuccess,
+    sprintCompleted,
+  });
 }

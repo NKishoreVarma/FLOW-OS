@@ -17,7 +17,32 @@
 
 import { WebSocketServer, WebSocket } from 'ws';
 import { parse as parseUrl } from 'url';
+import jwt from 'jsonwebtoken';
 import { evaluateActionTriggers } from './actionOrchestrator.js';
+
+// Verify a WebSocket upgrade: the caller must present a JWT (query ?token= or
+// Authorization: Bearer) whose org owns the requested workspace. Enforced in
+// production (or WS_AUTH_REQUIRED=true); dev allows unauthenticated with a warning
+// so local/frontend clients keep working until they pass a token.
+async function authenticateSocket(request, workspaceId) {
+  const enforce = process.env.WS_AUTH_REQUIRED === 'true' || process.env.NODE_ENV === 'production';
+  const { query } = parseUrl(request.url, true);
+  const bearer = request.headers?.authorization?.startsWith('Bearer ') ? request.headers.authorization.slice(7) : null;
+  const token = query.token || bearer;
+
+  if (!token) return enforce ? { ok: false, reason: 'missing token' } : { ok: true, user: null, unauthenticated: true };
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const { prisma } = await import('../core/config/prisma.js');
+    const ws = await prisma.workspace.findFirst({ where: { externalId: String(workspaceId) }, select: { orgId: true } }).catch(() => null);
+    if (ws && ws.orgId !== decoded.orgId) return { ok: false, reason: 'workspace not in token org' };
+    if (!ws && enforce) return { ok: false, reason: 'unknown workspace' };
+    return { ok: true, user: { id: decoded.userId, orgId: decoded.orgId, role: decoded.role } };
+  } catch {
+    return { ok: false, reason: 'invalid token' };
+  }
+}
 
 // ── Workspace-isolated client registry ────────────────────────────────────────
 // Key  : workspaceId (always stored as string for consistent lookup)
@@ -52,15 +77,27 @@ function initSocketServer(httpServer) {
 
   wss = new WebSocketServer({ server: httpServer });
 
-  wss.on('connection', (socket, request) => {
+  wss.on('connection', async (socket, request) => {
     // Parse workspaceId from the connection URL query string
-    // e.g.  ws://localhost:5000?workspaceId=123
+    // e.g.  ws://localhost:5000?workspaceId=123&token=<jwt>
     const { query } = parseUrl(request.url, true);
     const workspaceId = query.workspaceId ? String(query.workspaceId) : null;
 
     if (!workspaceId) {
       socket.close(1008, 'Missing workspaceId — connection rejected.');
       return;
+    }
+
+    // Authenticate: the JWT's org must own this workspace (prevents any client
+    // from subscribing to another tenant's real-time stream).
+    const auth = await authenticateSocket(request, workspaceId);
+    if (!auth.ok) {
+      console.warn(`🔒 [Socket] Rejected connection to Workspace ${workspaceId}: ${auth.reason}`);
+      socket.close(1008, `Unauthorized: ${auth.reason}`);
+      return;
+    }
+    if (auth.unauthenticated) {
+      console.warn(`⚠️  [Socket] UNAUTHENTICATED connection to Workspace ${workspaceId} — allowed in dev only. Set WS_AUTH_REQUIRED=true to enforce.`);
     }
 
     // Register socket in the workspace slot
@@ -146,4 +183,16 @@ function broadcastToWorkspace(workspaceId, eventType, dataPayload) {
   }
 }
 
-export { initSocketServer, broadcastToWorkspace };
+function getSocketStatus() {
+  let clientCount = 0;
+  for (const set of workspaceClients.values()) {
+    clientCount += set.size;
+  }
+  return {
+    active: wss !== null,
+    workspaces: workspaceClients.size,
+    clients: clientCount
+  };
+}
+
+export { initSocketServer, broadcastToWorkspace, getSocketStatus };

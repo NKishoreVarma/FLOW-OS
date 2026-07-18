@@ -1,10 +1,15 @@
-import { GoogleGenAI } from '@google/genai';
+import { ask } from '../ai/BrainRouter.js';
+import { buildClassifyPrompt } from '../ai/PromptBuilder.js';
+import { formatClassification } from '../ai/ResponseFormatter.js';
+import { TaskType } from '../ai/types.js';
 import redisConnection from '../config/redis.js';
 import { saveToVault } from './vaultService.js';
 import vectorService from './vectorService.js';
 import { broadcastToWorkspace } from './socketService.js';
 import * as vectorStoreService from './vectorStoreService.js';
 import { evaluateChunk } from './memoryBrain.js';
+import { isSocialChatter } from './parserService.js';
+import { updateIngestionTrace } from './observabilityService.js';
 
 // ── Per-workspace ingestion cycle counter (module-scoped, lives for process lifetime) ─
 // Incremented on every successful processStream run. Gives the dashboard
@@ -44,6 +49,9 @@ export async function processIncomingIntel(workspaceId, channelName, rawInputTex
     ];
     if (privateSignals.some(kw => t.includes(kw))) return 'PRIVATE_PERSONAL';
 
+    // Check for social chatter patterns
+    if (isSocialChatter(text)) return 'SOCIAL_COORDINATION';
+
     // OPERATIONAL_INTEL signals: engineering, code, infrastructure updates
     const intelSignals = [
       'git', 'schema', 'database', 'function', 'code', 'migrate', 'migration',
@@ -57,65 +65,45 @@ export async function processIncomingIntel(workspaceId, channelName, rawInputTex
     return 'SOCIAL_COORDINATION';
   }
 
-  // ── Classification gate ───────────────────────────────────────
-  if (!process.env.GEMINI_API_KEY) {
-    // Key absent — skip remote call entirely, go straight to heuristic
-    console.log(`💻 [Cognitive Brain] GEMINI_API_KEY not set — using local heuristic classifier.`);
-    classification = applyHeuristicParser(rawInputText);
-  } else {
-    // Key present — attempt live LLM classification, fall back to heuristic on failure
-    try {
-      const aiOptions = { apiKey: process.env.GEMINI_API_KEY };
-      if (process.env.GEMINI_BASE_URL) {
-        aiOptions.httpOptions = { baseUrl: process.env.GEMINI_BASE_URL };
-      }
-      const ai = new GoogleGenAI(aiOptions);
-
-      const classificationPrompt = `
-You are an advanced corporate intelligence privacy filter. Your task is to evaluate the following message from a multi-tenant business environment and classify it into exactly one of three scopes:
-
-1. OPERATIONAL_INTEL: Code base adjustments, database schema changes, engineering configurations, operational updates, task checklists, system updates.
-2. SOCIAL_COORDINATION: Team lunch updates, badminton smash meetups, informal office discussions, social events, jokes, greeting messages.
-3. PRIVATE_PERSONAL: Highly sensitive private user conversations, personal financial data, personal health information, credentials/passwords/API keys, PII (personally identifiable information).
-
-You MUST respond with a JSON object containing exactly one key "scope" with the value being one of the exact strings: "OPERATIONAL_INTEL", "SOCIAL_COORDINATION", or "PRIVATE_PERSONAL".
-Do not include any explanation, backticks, or extra characters.
-
-Content to analyze:
-"${rawInputText.replace(/"/g, '\\"')}"
-`;
-
-      // Hook up LLM completion block using Gemini 2.5 Flash
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: classificationPrompt,
-        config: { responseMimeType: 'application/json' }
-      });
-
-      let rawResponse = response.text;
-      if (!rawResponse) {
-        rawResponse = response.data?.embedding || response.choices?.[0]?.message?.content;
-      }
-      const sanitizedText = (rawResponse || "").trim();
-      const parsed = JSON.parse(sanitizedText);
-      if (parsed.scope && ['OPERATIONAL_INTEL', 'SOCIAL_COORDINATION', 'PRIVATE_PERSONAL'].includes(parsed.scope)) {
-        classification = parsed.scope;
-      }
-    } catch (error) {
-      console.warn('⚠️ [Cognitive Brain] Gemini call failed — falling back to heuristic parser:', error.message);
+  // ── Classification gate — routes through AI Provider Layer ──────
+  try {
+    const { messages } = buildClassifyPrompt({ text: rawInputText });
+    const result = await ask({ taskType: TaskType.CLASSIFY, messages, maxTokens: 80, temperature: 0.1 });
+    const parsed  = formatClassification(result, 'SOCIAL_COORDINATION');
+    const VALID   = ['OPERATIONAL_INTEL', 'SOCIAL_COORDINATION', 'PRIVATE_PERSONAL'];
+    if (VALID.includes(parsed.category)) {
+      classification = parsed.category;
+    } else {
       classification = applyHeuristicParser(rawInputText);
     }
+  } catch (error) {
+    console.warn('⚠️ [Cognitive Brain] AI classification failed — using heuristic:', error.message);
+    classification = applyHeuristicParser(rawInputText);
   }
-
-  // --- Routing Infrastructure ---
+// --- Routing Infrastructure ---
   switch (classification) {
-    case 'OPERATIONAL_INTEL':
+    case 'OPERATIONAL_INTEL': {
       console.log(`🧠 [Cognitive Brain] [OPERATIONAL_INTEL] routing path triggered for Workspace ${workspaceId}`);
-      // 1. Save Markdown file directly to Desktop vaults and capture the generated path
+      const traceId = metadata.traceId;
+
+      // 1. Save Markdown file directly to Desktop vaults
+      if (traceId) {
+        updateIngestionTrace(traceId, 'Summary', 'START', { input: rawInputText });
+      }
       const filePath = await saveToVault(workspaceId, channelName, rawInputText, metadata);
+      if (traceId) {
+        updateIngestionTrace(traceId, 'Summary', 'SUCCESS', {
+          input: rawInputText,
+          output: filePath,
+          metadata: { filePath }
+        });
+      }
 
       // 2. Pass chunk payload straight to pgvector relational index
       if (vectorService && typeof vectorService.upsertVector === 'function') {
+        if (traceId) {
+          updateIngestionTrace(traceId, 'Vector Store', 'START', { input: rawInputText });
+        }
         await vectorService.upsertVector(workspaceId, rawInputText, channelName, metadata);
       }
 
@@ -127,13 +115,26 @@ Content to analyze:
       });
 
       return { status: 'PROCESSED', scope: 'OPERATIONAL_INTEL' };
+    }
 
-    case 'SOCIAL_COORDINATION':
+    case 'SOCIAL_COORDINATION': {
       console.log(`🧠 [Cognitive Brain] [SOCIAL_COORDINATION] routing path triggered for Workspace ${workspaceId}`);
+      const traceId = metadata.traceId;
+      if (traceId) {
+        updateIngestionTrace(traceId, 'Summary', 'START', { input: rawInputText });
+      }
       // Temporarily store strictly inside Redis cache expiration block (3600 seconds)
       const redisKey = `social_cache:workspace_${workspaceId}:${channelName}:${Date.now()}`;
       await redisConnection.set(redisKey, rawInputText, 'EX', 3600);
+      if (traceId) {
+        updateIngestionTrace(traceId, 'Summary', 'SUCCESS', {
+          input: rawInputText,
+          output: `Cached in Redis with key: ${redisKey}`,
+          metadata: { redisKey, ttl: 3600 }
+        });
+      }
       return { status: 'CACHED', scope: 'SOCIAL_COORDINATION' };
+    }
 
     case 'PRIVATE_PERSONAL':
       // Broadcast shield event BEFORE the drop — payload contains NO raw text

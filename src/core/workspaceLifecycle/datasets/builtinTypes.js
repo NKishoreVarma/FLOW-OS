@@ -120,7 +120,18 @@ registerDatasetType({
   validator: makeValidator(['id', 'name']),
   normalizer: identity,
   resolver: customersResolver,
-  vectorizer: makeVectorizer('customers', ['name', 'description', 'industry']),
+  vectorizer: (records) => (records ?? []).flatMap(rec => {
+    const parts = [
+      rec.name,
+      rec.industry,
+      rec.tier ? `tier:${rec.tier}` : null,
+      rec.health ? `health:${rec.health}` : null,
+      rec.arr ? `arr:$${rec.arr}` : null,
+      rec.description,
+    ].filter(Boolean);
+    const text = `Customer: ${parts.join(' — ')}`;
+    return [{ text, channel: 'customers', metadata: { id: rec.id, type: 'customers' } }];
+  }),
   graphBuilder: customersResolver,
   memoryMapper: (rec) => ({ memoryType: 'PROJECT_EVENT', content: rec.description || rec.name || String(rec.id) }),
 });
@@ -159,7 +170,11 @@ registerDatasetType({
   validator: makeValidator(['id', 'message']),
   normalizer: identity,
   resolver: commitsResolver,
-  vectorizer: makeVectorizer('commits', ['message']),
+  vectorizer: (records) => (records ?? []).flatMap(rec => {
+    const parts = [rec.message, rec.author, rec.repository].filter(Boolean);
+    const text = `Commit: ${parts.join(' — ')}`;
+    return [{ text, channel: 'commits', metadata: { id: rec.id, type: 'commits' } }];
+  }),
   graphBuilder: commitsResolver,
 });
 
@@ -299,7 +314,7 @@ registerDatasetType({
   resolver: meetingsResolve,
   vectorizer: makeVectorizer('meetings', ['title', 'notes', 'summary']),
   graphBuilder: meetingsResolve,
-  memoryMapper: (rec) => ({ memoryType: 'MEETING_NOTE', content: rec.summary || rec.title || String(rec.id) }),
+  memoryMapper: (rec) => ({ memoryType: 'KNOWLEDGE_UPDATE', content: rec.summary || rec.title || String(rec.id) }),
 });
 
 // meeting_transcripts
@@ -324,7 +339,7 @@ registerDatasetType({
   resolver: meetingTranscriptsResolve,
   vectorizer: makeVectorizer('meeting_transcripts', ['content']),
   graphBuilder: meetingTranscriptsResolve,
-  memoryMapper: (rec) => ({ memoryType: 'MEETING_NOTE', content: rec.transcript || rec.summary || String(rec.id) }),
+  memoryMapper: (rec) => ({ memoryType: 'KNOWLEDGE_UPDATE', content: rec.transcript || rec.summary || String(rec.id) }),
 });
 
 // incidents
@@ -432,7 +447,7 @@ registerDatasetType({
   resolver: executiveReportsResolve,
   vectorizer: makeVectorizer('executive_reports', ['title', 'content', 'summary']),
   graphBuilder: executiveReportsResolve,
-  memoryMapper: (rec) => ({ memoryType: 'EXECUTIVE_SUMMARY', content: rec.content || rec.summary || rec.title || String(rec.id) }),
+  memoryMapper: (rec) => ({ memoryType: 'KNOWLEDGE_UPDATE', content: rec.content || rec.summary || rec.title || String(rec.id) }),
 });
 
 // knowledgeGraph — dataset IS the graph; records[0] contains nodes + edges arrays

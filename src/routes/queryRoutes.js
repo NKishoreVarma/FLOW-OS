@@ -3,6 +3,13 @@ import { retrieveContext } from '../services/retrievalService.js';
 import { evaluateContext } from '../services/agents/CriticAgent.js';
 import { synthesize } from '../services/agents/ExecutiveSynthesisAgent.js';
 import { broadcastToWorkspace } from '../services/socketService.js';
+import { 
+  generateQueryTraceId, 
+  startQueryTrace, 
+  updateQueryTrace, 
+  liveMetrics 
+} from '../services/observabilityService.js';
+import { routeQuery } from '../services/agents/RouterAgent.js';
 
 const router = express.Router();
 
@@ -21,8 +28,9 @@ const router = express.Router();
  *   { query: string, results: Array<ContextBlock>, synthesisBrief: string }
  */
 router.post('/', async (req, res) => {
-  const workspaceId = req.headers['workspace-id'];
+  const workspaceId = req.headers['workspace-id'] || req.headers['x-workspace-id'];
   const { queryText } = req.body;
+  const queryTraceId = generateQueryTraceId();
 
   if (!workspaceId) {
     return res.status(400).json({
@@ -36,9 +44,21 @@ router.post('/', async (req, res) => {
     });
   }
 
+  // Initialize Query trace
+  startQueryTrace(queryTraceId, workspaceId, queryText);
+
   try {
-    // 1. Retrieve hybrid fused context nodes
-    const results = await retrieveContext(workspaceId, queryText);
+    // 1. Router Agent Stage
+    updateQueryTrace(queryTraceId, 'Router Agent', 'START', { input: queryText });
+    const routerResult = routeQuery(queryText);
+    updateQueryTrace(queryTraceId, 'Router Agent', 'SUCCESS', {
+      input: queryText,
+      output: routerResult,
+      metadata: { primaryDomain: routerResult.primaryDomain }
+    });
+
+    // 2. Retrieval Context (Traces Embedding Query, Vector Search, Reranker, and KG Expansion internally)
+    const results = await retrieveContext(workspaceId, queryText, queryTraceId);
 
     // Normalize results for CriticAgent (expects .text property)
     const normalizedContext = results.map(r => ({
@@ -47,37 +67,72 @@ router.post('/', async (req, res) => {
       source: r.source || r.platform
     }));
 
-    // 2. Pass through CriticAgent
+    // 3. Critic Agent Stage
+    updateQueryTrace(queryTraceId, 'Critic Agent', 'START', { input: normalizedContext });
     const { validatedChunks, contradictions, criticSummary } = evaluateContext(normalizedContext, queryText);
+    
+    // Memory Boost calculations (Simulated increase in score for high authority/importance chunks)
+    updateQueryTrace(queryTraceId, 'Memory Boost', 'START', { input: validatedChunks });
+    const boostedChunks = validatedChunks.map(c => {
+      const boost = (c.authorityCoeff >= 1.5) ? 0.15 : 0;
+      return {
+        ...c,
+        boostVal: boost,
+        finalScore: (c.weightedScore || c.score) + boost
+      };
+    });
+    updateQueryTrace(queryTraceId, 'Memory Boost', 'SUCCESS', {
+      input: validatedChunks,
+      output: boostedChunks
+    });
 
-    // Mock a basic routerResult since RouterAgent isn't wired directly in this endpoint yet
-    const mockRouterResult = {
-      primaryDomain: 'corporate_intelligence',
-      intentFlags: { isUrgent: false, isComparison: false, isTimeBound: false }
-    };
+    updateQueryTrace(queryTraceId, 'Critic Agent', 'SUCCESS', {
+      input: normalizedContext,
+      output: { validatedChunks: boostedChunks, contradictions, criticSummary },
+      metadata: { contradictionsCount: contradictions.length, deprecatedCount: normalizedContext.length - validatedChunks.filter(c => !c.deprecated).length }
+    });
 
-    // 3. Pass through ExecutiveSynthesisAgent
-    const synthesisResult = await synthesize(queryText, validatedChunks, mockRouterResult, criticSummary);
+    // 4. LLM synthesis & Executive Synthesis Agent Stage
+    updateQueryTrace(queryTraceId, 'Executive Synthesis', 'START', { input: { queryText, boostedChunks, routerResult, criticSummary } });
+    const synthesisResult = await synthesize(queryText, boostedChunks, routerResult, criticSummary);
+    updateQueryTrace(queryTraceId, 'Executive Synthesis', 'SUCCESS', {
+      input: { queryText, boostedChunks, routerResult, criticSummary },
+      output: synthesisResult,
+      metadata: { modelUsed: synthesisResult.modelUsed, tokensConsumed: synthesisResult.tokensConsumed }
+    });
 
-    // 4. Broadcast the final synthesis brief via WebSocket
+    // 5. Final Answer & Validation
+    updateQueryTrace(queryTraceId, 'Final Answer', 'START', { input: synthesisResult.answer });
+    updateQueryTrace(queryTraceId, 'Final Answer', 'SUCCESS', {
+      input: synthesisResult.answer,
+      output: synthesisResult.answer
+    });
+
+    // Broadcast the final synthesis brief via WebSocket
     broadcastToWorkspace(String(workspaceId), 'EXECUTIVE_SYNTHESIS_READY', {
       workspaceId,
       modelUsed: synthesisResult.modelUsed,
-      brief: synthesisResult.answer
+      brief: synthesisResult.answer,
+      queryTraceId
     });
 
     return res.status(200).json({
       query:          queryText,
       workspaceId:    workspaceId,
+      queryTraceId:   queryTraceId,
       totalResults:   results.length,
-      results:        normalizedContext,
+      results:        boostedChunks,
       synthesisBrief: synthesisResult.answer
     });
   } catch (error) {
+    updateQueryTrace(queryTraceId, 'Final Answer', 'FAILED', {
+      error: error.message
+    });
     console.error(`[Query Route] Retrieval failure for Workspace ${workspaceId}:`, error);
     return res.status(500).json({
       error:   'Context retrieval failed.',
-      details: error.message
+      details: error.message,
+      queryTraceId
     });
   }
 });

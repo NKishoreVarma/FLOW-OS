@@ -187,6 +187,10 @@ model PendingApproval {
   rejectionNote  String?        @map("rejection_note")
   auditLogId     String?        @map("audit_log_id")     // Links to AuditLog row after execution
   expiresAt      DateTime?      @map("expires_at")       // null = no expiry
+  // Phase 14 — risk-tiered approval (additive)
+  riskLevel        String?      @map("risk_level")       // LOW | MEDIUM | HIGH | CRITICAL
+  requiredApprovals Int         @default(1) @map("required_approvals") // CRITICAL = 2
+  approvalVotes    Json         @default("[]") @map("approval_votes")  // [{ approverId, at }]
   createdAt      DateTime       @default(now()) @map("created_at")
   updatedAt      DateTime       @updatedAt @map("updated_at")
 
@@ -206,6 +210,59 @@ enum ApprovalStatus {
   REJECTED
   EXPIRED
   EXECUTED
+}
+
+// ─── Phase 14 — Operational Execution Engine ─────────────────────────────────
+
+// One durable record per executed (or attempted) operational action.
+// Plain scalar FKs (no Prisma relations) so User/Organization need no back-relations.
+model ExecutionRecord {
+  id               String   @id @default(cuid())
+  orgId            String   @map("org_id")
+  workspaceId      String   @map("workspace_id")
+  planId           String?  @map("plan_id")
+  requestedById    String?  @map("requested_by_id")
+  executedById     String?  @map("executed_by_id")
+  approverIds      Json     @default("[]") @map("approver_ids")   // [userId]
+  connector        String
+  actionType       String   @map("action_type")
+  riskLevel        String   @map("risk_level")
+  status           String   @default("PENDING")                  // PENDING|APPROVED|EXECUTED|FAILED|DENIED|ROLLED_BACK
+  summary          String?
+  result           Json     @default("{}")
+  durationMs       Int?     @map("duration_ms")
+  rollbackAvailable Boolean @default(false) @map("rollback_available")
+  rolledBack       Boolean  @default(false) @map("rolled_back")
+  approvalId       String?  @map("approval_id")
+  timelineEventId  String?  @map("timeline_event_id")
+  auditLogId       String?  @map("audit_log_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@index([workspaceId, createdAt])
+  @@index([orgId, status])
+  @@map("execution_records")
+}
+
+// Centralized, deduplicated, permission-aware workspace notification.
+model Notification {
+  id            String   @id @default(cuid())
+  orgId         String   @map("org_id")
+  workspaceId   String   @map("workspace_id")
+  type          String                                            // e.g. MERGE_CONFLICT, APPROVAL_REQUIRED, EXECUTION_DONE
+  priority      Int      @default(50)                             // 0..100
+  title         String
+  body          String?
+  actions       Json     @default("[]")                          // [{ label, kind, payload }]
+  dedupeKey     String?  @map("dedupe_key")
+  recipients    Json     @default("[]")                          // [userId] — only relevant people
+  readBy        Json     @default("[]") @map("read_by")           // [userId]
+  sourceEventId String?  @map("source_event_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@index([workspaceId, createdAt])
+  @@index([workspaceId, dedupeKey])
+  @@map("notifications")
 }
 
 // ─── Integration Hub ─────────────────────────────────────────────────────────
@@ -311,6 +368,8 @@ enum MemoryRecordType {
   PROJECT_EVENT
   CUSTOMER_EVENT
   KNOWLEDGE_UPDATE
+  SIMULATION
+  PREDICTION
 }
 
 // ─── Persistent Operational Graph (Phase 7.0) ────────────────────────────────
@@ -318,14 +377,15 @@ enum MemoryRecordType {
 // Nodes represent entities; edges represent relationships between them.
 
 model GraphNode {
-  id          String   @id  // e.g. "user:github:davidO"
-  workspaceId String   @map("workspace_id")
-  orgId       String   @map("org_id")
-  type        String   // USER | INCIDENT | PROJECT | CUSTOMER | SYSTEM | EVENT | ISSUE | TEAM
-  name        String
-  metadata    Json     @default("{}")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id             String   @id  // e.g. "user:github:davidO"
+  workspaceId    String   @map("workspace_id")
+  orgId          String   @map("org_id")
+  type           String   // Operational Graph node taxonomy (see src/graph/nodeTypes.js)
+  name           String
+  metadata       Json     @default("{}")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  lastObservedAt DateTime @default(now()) @map("last_observed_at")
 
   outEdges    GraphEdge[] @relation("EdgeSource")
   inEdges     GraphEdge[] @relation("EdgeTarget")
@@ -334,6 +394,7 @@ model GraphNode {
 
   @@index([workspaceId, type])
   @@index([orgId])
+  @@index([workspaceId, lastObservedAt])
   @@map("graph_nodes")
 }
 
@@ -346,8 +407,10 @@ model GraphEdge {
   org              Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
   relationshipType String   @map("relationship_type")
   weight           Float    @default(1.0)
+  observationCount Int      @default(1) @map("observation_count")
   metadata         Json     @default("{}")
   createdAt        DateTime @default(now()) @map("created_at")
+  lastObservedAt   DateTime @default(now()) @map("last_observed_at")
 
   source GraphNode @relation("EdgeSource", fields: [sourceId], references: [id], onDelete: Cascade)
   target GraphNode @relation("EdgeTarget", fields: [targetId], references: [id], onDelete: Cascade)
@@ -356,6 +419,9 @@ model GraphEdge {
   @@index([workspaceId])
   @@index([sourceId])
   @@index([targetId])
+  @@index([workspaceId, sourceId])
+  @@index([workspaceId, targetId])
+  @@index([workspaceId, relationshipType])
   @@map("graph_edges")
 }
 
@@ -577,4 +643,54 @@ model ImportRecord {
 
   @@index([workspaceId])
   @@map("import_records")
+}
+
+// ─── Integration Permissions (Phase 13.1) ────────────────────────────────────
+// OAuth authenticates; these rows decide what FLOW is allowed to understand.
+// A resource with no row (or allowed = false) never enters the ingestion pipeline.
+// workspaceId is the raw workspace-id header value, matching sync_state /
+// connector_credentials — not the Workspace cuid.
+
+model IntegrationPermission {
+  id           String    @id @default(cuid())
+  workspaceId  String    @map("workspace_id")
+  connector    String
+  resourceType String    @map("resource_type")
+  resourceId   String    @map("resource_id")
+  resourceName String    @map("resource_name")
+  parentId     String?   @map("parent_id")
+  allowed      Boolean   @default(false)
+  metadata     Json      @default("{}")
+  discoveredAt DateTime  @default(now()) @map("discovered_at")
+  lastSyncedAt DateTime? @map("last_synced_at")
+  updatedBy    String?   @map("updated_by")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, connector, resourceType, resourceId])
+  @@index([workspaceId, connector])
+  @@index([workspaceId, connector, allowed])
+  @@map("integration_permissions")
+}
+
+model IntegrationPermissionSetting {
+  id                 String    @id @default(cuid())
+  workspaceId        String    @map("workspace_id")
+  connector          String
+  autoAllowNew       Boolean   @default(false) @map("auto_allow_new")
+  dmPolicy           DmPolicy  @default(NEVER) @map("dm_policy")
+  legacyGrandfathered Boolean  @default(false) @map("legacy_grandfathered")
+  lastDiscoveredAt   DateTime? @map("last_discovered_at")
+  createdAt          DateTime  @default(now()) @map("created_at")
+  updatedAt          DateTime  @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, connector])
+  @@map("integration_permission_settings")
+}
+
+enum DmPolicy {
+  NEVER
+  BOT_ONLY
+  SELECTED
+  ALL
 }

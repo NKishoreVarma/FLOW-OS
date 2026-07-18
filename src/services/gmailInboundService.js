@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import { ingestionQueue } from '../config/queue.js';
+import { isResourceIdAllowed } from '../core/governance/integrationPermissions/index.js';
 
 // In-memory token store mapped by workspaceId
 // Format: workspaceId -> tokens object
@@ -68,7 +69,13 @@ export const syncGmailInbox = async (workspaceId) => {
         id: msg.id,
         format: 'full'
       });
-      
+
+      // Integration Permissions: only ingest mail carrying an authorized label.
+      const verdict = await isResourceIdAllowed(
+        workspaceId, 'gmail', 'label', msgData.data.labelIds || [],
+      );
+      if (!verdict.allowed) continue;
+
       const payload = msgData.data.payload;
       const headers = payload.headers;
       

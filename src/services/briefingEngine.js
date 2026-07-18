@@ -1,4 +1,7 @@
-import { GoogleGenAI } from '@google/genai';
+import { ask } from '../ai/BrainRouter.js';
+import { buildBriefingPrompt } from '../ai/PromptBuilder.js';
+import { formatNarrative } from '../ai/ResponseFormatter.js';
+import { TaskType } from '../ai/types.js';
 import { queryMemory } from './orgMemoryService.js';
 import { calculateWorkspaceHealth } from './healthScoreService.js';
 import { getRecentIncidents } from './incidentEngine.js';
@@ -6,19 +9,13 @@ import { getProactiveRecommendations } from './operationalIntelligenceService.js
 
 const ROLES = { EMPLOYEE: 'EMPLOYEE', MANAGER: 'MANAGER', EXECUTIVE: 'EXECUTIVE' };
 
-async function callGemini(prompt) {
-  if (!process.env.GEMINI_API_KEY) return null;
+async function callAI(role, health, incidents, recs) {
+  const { messages } = buildBriefingPrompt({
+    role, health, incidents, recommendations: recs
+  });
   try {
-    const aiOptions = { apiKey: process.env.GEMINI_API_KEY };
-    if (process.env.GEMINI_BASE_URL) {
-      aiOptions.httpOptions = { baseUrl: process.env.GEMINI_BASE_URL };
-    }
-    const ai = new GoogleGenAI(aiOptions);
-    const result = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt
-    });
-    return result.text;
+    const result = await ask({ taskType: TaskType.BRIEF, messages, maxTokens: 150, temperature: 0.4 });
+    return formatNarrative(result);
   } catch {
     return null;
   }
@@ -130,10 +127,7 @@ export async function generateBriefing(workspaceId, orgId, role = ROLES.EMPLOYEE
     sections = buildEmployeeBrief(incidents, decisions, health, recs);
   }
 
-  const contextSummary = `Role: ${validRole}\nHealth: ${health.company_health}/100\nOpen incidents: ${incidents.filter(i => i.status === 'OPEN').length}\nTop recommendation: ${recs[0]?.title || 'None'}`;
-  const aiNarrative = await callGemini(
-    `You are FLOW OS Chief of Staff. Generate a 2-sentence executive morning brief for a ${validRole.toLowerCase()} based on this context:\n${contextSummary}\nBe direct, factual, and action-oriented. No filler.`
-  );
+  const aiNarrative = await callAI(validRole, health, incidents, recs);
 
   return {
     role: validRole,

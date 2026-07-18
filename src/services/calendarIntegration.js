@@ -2,6 +2,7 @@ import { google } from 'googleapis';
 import { tokenStore } from './gmailInboundService.js';
 import { ingestionQueue } from '../config/queue.js';
 import { EntityTypes, registerEntity, linkEntities } from './knowledgeGraphService.js';
+import { isResourceIdAllowed } from '../core/governance/integrationPermissions/index.js';
 
 export const syncWorkspaceCalendar = async (workspaceId) => {
   console.log(`📅 [Calendar Service] Starting sync for Workspace: ${workspaceId}`);
@@ -10,6 +11,12 @@ export const syncWorkspaceCalendar = async (workspaceId) => {
   if (!tokens) {
     console.warn(`⚠️ [Calendar Service] No tokens found for Workspace: ${workspaceId}. Cannot sync.`);
     return { status: 'NO_TOKENS', ingested: 0 };
+  }
+
+  // Integration Permissions: this path reads the primary calendar only.
+  const verdict = await isResourceIdAllowed(workspaceId, 'google-calendar', 'calendar', 'primary');
+  if (!verdict.allowed) {
+    return { status: 'NOT_PERMITTED', ingested: 0 };
   }
 
   const oauth2Client = new google.auth.OAuth2(
