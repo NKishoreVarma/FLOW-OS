@@ -8,11 +8,7 @@ import FirstRunGate from "./components/onboarding/FirstRunGate";
 // ─── First-time experience (Phase 17) ─────────────────────────────────────────
 const FirstRunFlow = lazy(() => import('./components/onboarding/FirstRunFlow'));
 
-// ─── Core product ─────────────────────────────────────────────────────────────
-const BrainHome          = lazy(() => import('./components/brain/BrainHome'));
-
 // ─── Daily workflow ───────────────────────────────────────────────────────────
-const AIInbox            = lazy(() => import('./components/inbox/AIInbox'));
 const OperationalInbox   = lazy(() => import('./components/inbox/OperationalInbox'));
 const MeetingDashboard   = lazy(() => import('./components/meetings/MeetingDashboard'));
 const MeetingPreparation = lazy(() => import('./components/meetings/MeetingPreparation'));
@@ -69,28 +65,26 @@ function App() {
               <Route path="/welcome" element={<FirstRunFlow />} />
 
               {/* ── OS home — Morning Briefing is the landing page (Phase 16) ── */}
-              <Route path="/"        element={<MorningBriefing />} />
-              <Route path="/morning" element={<MorningBriefing />} />
-              {/* ── Operational Brain — the conversation surface ──────────── */}
-              <Route path="/brain"   element={<BrainHome />} />
+              <Route path="/" element={<MorningBriefing />} />
 
               {/* ── Daily workflow ────────────────────────────────────────── */}
               <Route path="/inbox"   element={<OperationalInbox />} />
-              <Route path="/mail"    element={<AIInbox />} />
               <Route path="/meetings"             element={<MeetingDashboard />} />
               <Route path="/meetings/:id/prep"    element={<MeetingPreparation />} />
               <Route path="/meetings/:id/live"    element={<LiveMeeting />} />
               <Route path="/meetings/:id/summary" element={<MeetingSummary />} />
 
               {/* ── Intelligence surfaces ─────────────────────────────────── */}
-              <Route path="/projects"     element={<ProjectIntelligence />} />
-              <Route path="/engineering"  element={<ProjectIntelligence />} />
-              <Route path="/knowledge"    element={<KnowledgeExplorer />} />
-              <Route path="/people"       element={<WorkforceIntelligence />} />
-              <Route path="/customers"    element={<CustomerIntelligence />} />
+              <Route path="/projects"  element={<ProjectIntelligence />} />
+              <Route path="/knowledge" element={<KnowledgeExplorer />} />
+              <Route path="/people"    element={<WorkforceIntelligence />} />
+              <Route path="/customers" element={<CustomerIntelligence />} />
 
               {/* ── Executive Council ─────────────────────────────────────── */}
               <Route path="/council" element={<ExecutiveCouncil />} />
+
+              {/* ── Trust Center — deny-by-default integration permissions ── */}
+              <Route path="/integrations" element={<IntegrationPermissions />} />
 
               {/* ── Pilot Experience (Phase 17) — value + team ────────────── */}
               <Route path="/success"       element={<SuccessDashboard />} />
@@ -140,15 +134,21 @@ function App() {
               <Route path="/query" element={<DeveloperConsole />} />
               <Route path="/help"  element={<HelpCenter />} />
 
-              {/* ── Removed routes → conversation home ───────────────────── */}
+              {/* ── Activity ─────────────────────────────────────────────── */}
+              <Route path="/activity" element={<ActivityFeed />} />
+
+              {/* ── Legacy redirects ──────────────────────────────────────── */}
+              <Route path="/morning"   element={<Navigate to="/" replace />} />
+              <Route path="/brain"     element={<Navigate to="/" replace />} />
+              <Route path="/mail"      element={<Navigate to="/inbox" replace />} />
               <Route path="/workfeed"  element={<Navigate to="/" replace />} />
               <Route path="/assistant" element={<Navigate to="/" replace />} />
               <Route path="/briefing"  element={<Navigate to="/" replace />} />
               <Route path="/dashboard" element={<Navigate to="/" replace />} />
-              <Route path="/timeline"  element={<Navigate to="/" replace />} />
+              <Route path="/timeline"  element={<Navigate to="/activity" replace />} />
               <Route path="/search"    element={<Navigate to="/" replace />} />
-              <Route path="/activity"  element={<ActivityFeed />} />
               <Route path="/security"  element={<Navigate to="/settings/security" replace />} />
+              <Route path="/engineering" element={<Navigate to="/projects" replace />} />
               <Route path="/company/*" element={<Navigate to="/" replace />} />
               <Route path="/admin/*"   element={<Navigate to="/" replace />} />
 

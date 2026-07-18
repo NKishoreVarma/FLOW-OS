@@ -8,26 +8,33 @@ import SourceBadge from "../ui/SourceBadge";
 import Skeleton from "./Skeleton";
 import EmptyState from "./EmptyState";
 
+// Navigation commands — mirrors exact sidebar architecture (BP-11)
 const NAV_COMMANDS = [
-  { label: "Open Executive Dashboard", route: "/dashboard", keywords: ["dashboard", "exec", "executive", "overview", "health"] },
-  { label: "Open Daily Briefing", route: "/briefing", keywords: ["briefing", "brief", "daily", "priorities", "today"] },
-  { label: "Open Operational Timeline", route: "/timeline", keywords: ["timeline", "history", "activity", "events", "story"] },
-  { label: "Open Home — Morning Briefing", route: "/", keywords: ["home", "briefing", "morning", "workfeed", "start", "today"] },
-  { label: "Open Operational Brain", route: "/brain", keywords: ["brain", "ask", "chat", "assistant", "question", "copilot"] },
-  { label: "Open Meetings", route: "/meetings", keywords: ["meeting", "meetings", "calendar"] },
-  { label: "Open Projects", route: "/projects", keywords: ["project", "projects", "engineering", "repo", "pr"] },
-  { label: "Open Knowledge", route: "/knowledge", keywords: ["knowledge", "docs", "document", "wiki"] },
-  { label: "Open Operational Inbox", route: "/inbox", keywords: ["inbox", "work", "approvals", "conflicts", "alerts", "tasks", "notifications"] },
-  { label: "Open Email", route: "/mail", keywords: ["email", "mail", "gmail", "messages", "compose"] },
-  { label: "Open Universal Search", route: "/search", keywords: ["search", "find", "lookup"] },
-  { label: "Open Team Dashboard", route: "/company", keywords: ["team", "company", "collaboration"] },
-  { label: "Open Company Overview", route: "/admin", keywords: ["admin", "company overview", "departments"] },
-  { label: "Open Platform Console", route: "/platform", keywords: ["platform", "enterprise", "governance", "iam"] },
-  { label: "Open Morning Briefing", route: "/morning", keywords: ["morning", "briefing", "today", "good morning", "focus", "summary", "start"] },
-  { label: "Open Executive Council", route: "/council", keywords: ["council", "executive", "agents", "coo", "debate", "leadership", "advisors"] },
-  { label: "Open Activity", route: "/activity", keywords: ["activity", "recent", "history", "audit", "events", "feed"] },
-  { label: "Open Security Center", route: "/settings/security", keywords: ["security", "governance", "audit", "denied", "approvals"] },
-  { label: "Open Help & Shortcuts", route: "/help", keywords: ["help", "shortcuts", "keyboard", "getting started", "guide", "support"] }
+  // PRIMARY
+  { label: "Home",             route: "/",           keywords: ["home", "morning", "briefing", "workfeed", "start", "today", "priorities"] },
+  { label: "Inbox",            route: "/inbox",      keywords: ["inbox", "approvals", "conflicts", "alerts", "tasks", "notifications", "work"] },
+  { label: "Engineering",      route: "/projects",   keywords: ["engineering", "projects", "repo", "pr", "pull request", "github", "code", "branches", "commits"] },
+  { label: "Meetings",         route: "/meetings",   keywords: ["meeting", "meetings", "calendar", "schedule", "events"] },
+  { label: "Knowledge",        route: "/knowledge",  keywords: ["knowledge", "docs", "document", "wiki", "graph", "entities", "notes"] },
+  // INTELLIGENCE
+  { label: "Chief of Staff",   route: "/chief",      keywords: ["chief", "staff", "priorities", "now", "actions", "today", "coo"] },
+  { label: "Weekly Review",    route: "/review",     keywords: ["weekly", "review", "week", "retrospective", "velocity", "summary"] },
+  { label: "People",           route: "/people",     keywords: ["people", "team", "employees", "workforce", "workload", "hr", "headcount"] },
+  { label: "Customers",        route: "/customers",  keywords: ["customers", "crm", "accounts", "churn", "renewal", "sales", "health"] },
+  { label: "Executive Council",route: "/council",    keywords: ["council", "executive", "agents", "coo", "debate", "leadership", "advisors"] },
+  // PLATFORM
+  { label: "Integrations",     route: "/integrations", keywords: ["integrations", "trust", "permissions", "connectors", "allow", "deny", "slack", "gmail", "github"] },
+  { label: "Activity",         route: "/activity",   keywords: ["activity", "recent", "history", "events", "feed", "timeline", "replay", "audit"] },
+  { label: "Value",            route: "/success",    keywords: ["value", "success", "roi", "metrics", "time saved", "impact"] },
+  // SETTINGS
+  { label: "IAM",              route: "/settings/iam",        keywords: ["iam", "identity", "users", "roles", "access", "members"] },
+  { label: "Governance",       route: "/settings/governance", keywords: ["governance", "policies", "rules", "ai governance", "approvals"] },
+  { label: "Audit Log",        route: "/settings/audit",      keywords: ["audit", "log", "compliance", "history", "records"] },
+  { label: "Security",         route: "/settings/security",   keywords: ["security", "threats", "vulnerabilities", "risk"] },
+  { label: "Health",           route: "/settings/health",     keywords: ["health", "workspace health", "status", "connector health"] },
+  { label: "Billing",          route: "/settings/billing",    keywords: ["billing", "subscription", "plan", "usage", "cost"] },
+  { label: "Team",             route: "/settings/team",       keywords: ["team", "invite", "members", "colleagues"] },
+  { label: "Help & Shortcuts", route: "/help",                keywords: ["help", "shortcuts", "keyboard", "getting started", "guide", "support"] },
 ];
 
 /**

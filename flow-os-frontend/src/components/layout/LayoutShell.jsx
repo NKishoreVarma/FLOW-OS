@@ -9,6 +9,7 @@ import { WebSocketProvider, useWebSocket } from "../../hooks/useWebSocket";
 import ToastProvider, { useToast } from "../ui/ToastProvider";
 import { ToastContainer, useFlowToasts } from "../ui/FlowToast";
 import { WifiOff, FileText, Send } from "lucide-react";
+import Breadcrumb from "../ui/Breadcrumb";
 import { isIntegrationEvent, eventSource, eventTitle, isCriticalEvent } from "../../lib/liveEvents";
 
 const LayoutInner = ({ children }) => {
@@ -145,6 +146,7 @@ const LayoutInner = ({ children }) => {
             <span style={{ color: "var(--t4)" }}>Viewing cached intelligence.</span>
           </div>
         )}
+        <Breadcrumb />
         <main style={{ flex: 1, overflowY: "auto", background: "var(--bg-base)" }}>
           {children}
         </main>
