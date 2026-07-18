@@ -47,7 +47,7 @@ export function generateEmployees(departments) {
     const deptEmps = employees.slice(offset, offset + dept.headcount);
     if (deptEmps[0].id !== 'emp-001') deptEmps[0].manager = 'emp-001';
     for (let i = 1; i < deptEmps.length; i++) {
-      const managerIdx = i <= 3 ? 0 : Math.floor(Math.random() * Math.min(i, 3));
+      const managerIdx = i <= 3 ? 0 : faker.number.int({ min: 0, max: Math.min(i, 3) - 1 });
       deptEmps[i].manager = deptEmps[managerIdx].id;
     }
     offset += dept.headcount;

@@ -27,8 +27,8 @@ export function generateJiraIssues(engineers, customers) {
         sprint: faker.helpers.arrayElement(SPRINTS),
         storyPoints: faker.helpers.arrayElement([1,2,3,5,8,13]),
         labels: faker.helpers.arrayElements(['backend','frontend','performance','security','ux','api','infra'], faker.number.int({min:0,max:3})),
-        customerId: Math.random()<0.2 && customers.length ? faker.helpers.arrayElement(customers).id : null,
-        epicId: type!=='epic' && i>10 && Math.random()<0.3 ? `${product.jiraKey}-${faker.number.int({min:1,max:10})}` : null,
+        customerId: faker.datatype.boolean(0.2) && customers.length ? faker.helpers.arrayElement(customers).id : null,
+        epicId: type!=='epic' && i>10 && faker.datatype.boolean(0.3) ? `${product.jiraKey}-${faker.number.int({min:1,max:10})}` : null,
         createdAt,
         resolvedAt: status==='done' ? faker.date.between({from:createdAt,to:'2025-12-31'}).toISOString() : null,
       });

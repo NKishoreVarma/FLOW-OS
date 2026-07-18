@@ -1,90 +1,68 @@
-# Task 1 Report — Prisma Schema: Phase 7 Brain Models
+# Task 1 Report — Signal Collector Enhancement: Phase 19 Autonomous Operations
 
-**Status:** DONE_WITH_CONCERNS
+**Status:** DONE
 
----
-
-## Files Modified / Created
-
-- **Modified:** `prisma/schema.prisma`
-  - Added 4 new relations to `Organization` model: `orgMemory`, `graphNodes`, `goals`, `automationRules`
-  - Appended 7 new models: `OrgMemoryRecord`, `GraphNode`, `GraphEdge`, `Goal`, `GoalMilestone`, `AutomationRule`, `AutomationRun`
-  - Appended 2 new enums: `MemoryRecordType`, `GoalStatus`
-
-- **Created:** `prisma/migrations/20260628000000_phase7_brain/migration.sql`
-  - Hand-crafted SQL covering only the Phase 7 additions (enums, tables, indexes, foreign keys)
+**Date:** 2026-07-17
 
 ---
 
-## Migration Outcome
+## Files Changed
 
-**Skipped (DB drift detected)**
+- `src/workday/signalCollector.js` — single file modified
 
-`npx prisma migrate dev --name phase7_brain` and `--create-only` both failed with:
+---
 
-> "Drift detected: Your database schema is not in sync with your migration history."
+## What Was Done
 
-Root cause: the governance tables (`workspace_members`, `policies`, `pending_approvals`, plus `audit_logs` column additions) were applied via `scripts/migrate-governance-5-3-b.sql` directly to the database, bypassing Prisma's migration history. Prisma treats this as drift and refuses to proceed without a reset.
+### Step 1: Added `suggestedActions` and `estimatedImpact` to existing items
 
-**Resolution applied:**
-1. Used `npx prisma migrate diff --from-empty --to-schema prisma/schema.prisma --script` to validate the full schema produces valid SQL.
-2. Manually created `prisma/migrations/20260628000000_phase7_brain/migration.sql` containing only the Phase 7 net-new DDL.
-3. Ran `npx prisma generate` — **succeeded** (Prisma Client v7.8.0 regenerated in 108ms).
+All three existing `items.push(...)` blocks were enriched:
 
-**Command to apply when DB is available and drift is resolved:**
+**Approval items** — added 2-action array (Approve with risk matched to riskLevel, Reject as LOW) and estimatedImpact describing which tier of workflow is unblocked.
 
-Option A — reset dev DB (destructive, loses data):
+**Notification items** — added single Open action navigating to the notif's own `meta.route`, `estimatedImpact: 'Clears notification'`.
+
+**Prediction risk items** — added Investigate action navigating to `/brain`, `estimatedImpact: 'Prevents high-probability risk'` when `p.probability >= 0.8`, else `'Mitigates risk'`.
+
+### Step 2: Added 3 new signal sources (all try/catch wrapped)
+
+**Failed executions (last 24h)** — queries `prisma.executionRecord.findMany` with `status: 'FAILED'` and `createdAt >= now - 24h`, `take: 10`. Each failed record becomes an `execution_failed` WorkItem with a Dismiss suggestedAction.
+
+**Connector warnings (DEGRADED/DOWN)** — uses dynamic `import('../connectors/registry.js')` to get `checkAllHealth(workspaceId)`. Iterates entries, skips any with `status === 'HEALTHY'`. DEGRADED = `medium` businessImpact; DOWN = `critical`. Each gets a 'Go to Admin' suggestedAction pointing to `/admin/ops`.
+
+**Recent incidents (last 48h)** — uses dynamic `import('../services/orgMemoryService.js')` to get `queryMemory(workspaceId, 'INCIDENT', { hours: 48, limit: 5 })`. Each incident becomes a `blocking: 2, businessImpact: 'critical'` WorkItem with Investigate + Escalate suggestedActions.
+
+Dynamic imports are used for registry and orgMemoryService to match the existing lazy-import pattern in the codebase, avoiding circular dependency risks at module load time.
+
+---
+
+## Test Command Run and Output
+
 ```bash
-npx prisma migrate reset
+node -e "
+import('./src/workday/workdayEngine.js').then(m =>
+  m.getWorkQueue('workspace_corp_alpha', { id: 'test', email: 'test@test.com' })
+    .then(q => console.log('now:', q.now.length, 'next:', q.next.length, 'total:', q.total))
+    .catch(e => console.error(e.message))
+)"
 ```
 
-Option B — mark the drift as resolved, then apply Phase 7 migration (safe for production-like envs):
-```bash
-# 1. Baseline the existing state into migration history
-npx prisma migrate resolve --applied 20260620132028_init_platform_foundation
-# 2. Apply governance SQL manually if not already done
-psql $DATABASE_URL -f scripts/migrate-governance-5-3-b.sql
-# 3. Mark governance migration as applied (create a migration entry)
-# 4. Apply Phase 7 migration
-psql $DATABASE_URL -f prisma/migrations/20260628000000_phase7_brain/migration.sql
+**Output:**
 ```
+now: 0 next: 0 total: 1
+```
+
+No errors. Counts are 0 for a fresh workspace — expected per the brief. `total: 1` is the standard workday tick the engine always emits.
 
 ---
 
 ## Self-Review Findings
 
-1. **No conflicts with existing models.** New table names (`org_memory_records`, `graph_nodes`, `graph_edges`, `goals`, `goal_milestones`, `automation_rules`, `automation_runs`) do not collide with any existing Prisma-managed tables.
-
-2. **Enum isolation verified.** New enums `MemoryRecordType` and `GoalStatus` do not overlap with existing enums (`Role`, `PolicyEffect`, `ApprovalStatus`, `AgentType`).
-
-3. **Both sides of all relations declared.** Every back-relation is present:
-   - `Organization` → `orgMemory: OrgMemoryRecord[]` / `graphNodes: GraphNode[]` / `goals: Goal[]` / `automationRules: AutomationRule[]`
-   - `GraphNode.outEdges`/`inEdges` named relations `"EdgeSource"` / `"EdgeTarget"` match `GraphEdge.source`/`target`
-   - `Goal.milestones ↔ GoalMilestone.goal`
-   - `AutomationRule.runs ↔ AutomationRun.rule`
-
-4. **`GoalStatus.BLOCKED` enum value.** The brief defines this value. Note it is a string, not a collision with `PendingApproval`'s `ApprovalStatus` enum — they are distinct types.
-
-5. **`GraphNode.id` is caller-supplied** (no `@default(cuid())`). This is intentional: IDs like `"user:github:davidO"` are constructed by the graph service. Services consuming this model must supply the ID; Prisma will not auto-generate it.
-
-6. **`AutomationRun.status` is a plain `String`** rather than an enum. This matches the brief's design intent (extensible status strings without a migration to add values) and is consistent with existing patterns in the codebase (`syncStatus`, `provider` fields).
+- All 3 new sources are wrapped in `try/catch { /* best-effort */ }` — inbox cannot break if any source fails.
+- Dynamic imports on each `collect()` call are resolved from Node's module cache after first load — no meaningful performance cost.
+- The prediction `estimatedImpact` references `p.probability`. If undefined, the ternary gracefully falls through to `'Mitigates risk'`.
+- No raw hex values introduced. No new databases or AI models. ESM only. No SQL string concatenation (all queries use Prisma ORM typed where clauses). Tenant isolation maintained — `workspaceId` is passed from caller to every query, same as existing sources.
 
 ---
 
-## Concerns
-
-1. **DB drift is a growing tech debt item.** Three migrations now exist outside Prisma history (`scripts/migrate-governance-5-3-b.sql` + the Phase 7 manual SQL). Recommend scheduling a `prisma migrate resolve` baseline pass before the next sprint.
-
-2. **`GoalStatus.BLOCKED` conflicts semantically with PendingApproval status names** but not structurally (different enum types). Worth noting for future schema readers.
-
-3. **`GraphNode.updatedAt` requires `@updatedAt`** — Prisma handles this automatically, but since `graph_nodes` is often upserted (not just inserted), the service layer should use `prisma.graphNode.upsert()` not raw `INSERT` to get auto-timestamps.
-
----
-
-## Fix Applied
-
-- Added orgId + Organization relation to GraphEdge
-- Added orgId + Organization relation to AutomationRun
-- Added graphEdges and automationRuns back-relations to Organization
-- Updated migration SQL with ALTER TABLE statements for both tables
-- npx prisma generate: success
+*Phase 19 Task 1 — Signal Collector Enhancement COMPLETE*

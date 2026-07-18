@@ -2,832 +2,832 @@
   {
     "id": "mem-001",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Unindexed query causing full table scan",
+    "content": "Memory leak in Platform worker: Unindexed query causing full table scan",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-08-10T00:26:22.460Z",
+    "timestamp": "2025-01-26T19:06:52.023Z",
     "relatedId": "inc-001"
   },
   {
     "id": "mem-002",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Certificate not rotated before expiration",
+    "content": "SSL certificate expiration on Connect endpoints: Unindexed query causing full table scan",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-07-01T09:51:21.364Z",
+    "timestamp": "2025-02-23T13:16:35.792Z",
     "relatedId": "inc-002"
   },
   {
     "id": "mem-003",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Certificate not rotated before expiration",
+    "content": "SSL certificate expiration on Connect endpoints: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-01-21T07:08:27.113Z",
+    "timestamp": "2025-04-11T08:21:12.329Z",
     "relatedId": "inc-003"
   },
   {
     "id": "mem-004",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Memory allocation bug in v2.14.0",
+    "content": "Database replication lag exceeding 60 seconds: Unindexed query causing full table scan",
     "source": "incident-engine",
-    "importance": 0.8,
+    "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-01-15T08:31:13.986Z",
+    "timestamp": "2025-06-12T06:31:25.487Z",
     "relatedId": "inc-004"
   },
   {
     "id": "mem-005",
     "type": "INCIDENT",
-    "content": "Guard policy engine returning incorrect decisions: Unindexed query causing full table scan",
+    "content": "SSL certificate expiration on Connect endpoints: Network partition between AZs",
     "source": "incident-engine",
-    "importance": 0.8,
+    "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-08-26T23:53:01.385Z",
+    "timestamp": "2025-09-05T04:40:02.815Z",
     "relatedId": "inc-005"
   },
   {
     "id": "mem-006",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Infrastructure autoscaling misconfigured",
+    "content": "Platform API returning 502 errors for all enterprise customers: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-03T06:52:14.706Z",
+    "timestamp": "2025-04-30T21:43:21.316Z",
     "relatedId": "inc-006"
   },
   {
     "id": "mem-007",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Infrastructure autoscaling misconfigured",
+    "content": "Connect adapter outage — webhooks failing: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-09-15T02:39:55.113Z",
+    "timestamp": "2025-10-27T04:59:57.229Z",
     "relatedId": "inc-007"
   },
   {
     "id": "mem-008",
     "type": "INCIDENT",
-    "content": "Platform API returning 502 errors for all enterprise customers: Network partition between AZs",
+    "content": "Platform API returning 502 errors for all enterprise customers: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-10-05T16:58:56.047Z",
+    "timestamp": "2025-09-19T11:34:09.509Z",
     "relatedId": "inc-008"
   },
   {
     "id": "mem-009",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Misconfigured load balancer after routine deployment",
+    "content": "Memory leak in Platform worker: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-05-02T08:01:12.162Z",
+    "timestamp": "2025-04-21T00:37:45.902Z",
     "relatedId": "inc-009"
   },
   {
     "id": "mem-010",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Memory allocation bug in v2.14.0",
+    "content": "Platform API returning 502 errors for all enterprise customers: Unindexed query causing full table scan",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-07-28T04:17:01.380Z",
+    "timestamp": "2025-03-24T12:30:35.022Z",
     "relatedId": "inc-010"
   },
   {
     "id": "mem-011",
     "type": "INCIDENT",
-    "content": "Auth service timeout — users unable to log in: Certificate not rotated before expiration",
+    "content": "Database replication lag exceeding 60 seconds: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-08-08T00:50:16.726Z",
+    "timestamp": "2025-07-27T17:14:24.193Z",
     "relatedId": "inc-011"
   },
   {
     "id": "mem-012",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Memory allocation bug in v2.14.0",
+    "content": "Auth service timeout — users unable to log in: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-06-04T16:33:50.959Z",
+    "timestamp": "2025-09-21T06:32:46.895Z",
     "relatedId": "inc-012"
   },
   {
     "id": "mem-013",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Network partition between AZs",
+    "content": "Auth service timeout — users unable to log in: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-05-27T09:47:29.474Z",
+    "timestamp": "2025-04-28T23:35:11.778Z",
     "relatedId": "inc-013"
   },
   {
     "id": "mem-014",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Unindexed query causing full table scan",
+    "content": "Guard policy engine returning incorrect decisions: Certificate not rotated before expiration",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-02-26T10:16:58.228Z",
+    "timestamp": "2025-08-10T08:11:39.092Z",
     "relatedId": "inc-014"
   },
   {
     "id": "mem-015",
     "type": "INCIDENT",
-    "content": "Guard policy engine returning incorrect decisions: Infrastructure autoscaling misconfigured",
+    "content": "DDoS-like traffic spike on API gateway: Network partition between AZs",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-07-02T21:56:13.546Z",
+    "timestamp": "2025-03-28T16:55:02.958Z",
     "relatedId": "inc-015"
   },
   {
     "id": "mem-016",
     "type": "INCIDENT",
-    "content": "Guard policy engine returning incorrect decisions: Memory allocation bug in v2.14.0",
+    "content": "DDoS-like traffic spike on API gateway: Network partition between AZs",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-06-24T16:15:12.446Z",
+    "timestamp": "2025-05-23T03:42:50.234Z",
     "relatedId": "inc-016"
   },
   {
     "id": "mem-017",
     "type": "INCIDENT",
-    "content": "Memory leak in Platform worker: Certificate not rotated before expiration",
+    "content": "DDoS-like traffic spike on API gateway: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
-    "importance": 0.8,
+    "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-03-11T23:21:23.840Z",
+    "timestamp": "2025-05-26T00:58:52.746Z",
     "relatedId": "inc-017"
   },
   {
     "id": "mem-018",
     "type": "INCIDENT",
-    "content": "Auth service timeout — users unable to log in: Unindexed query causing full table scan",
+    "content": "Connect adapter outage — webhooks failing: Certificate not rotated before expiration",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-04-05T01:52:22.355Z",
+    "timestamp": "2025-04-29T15:57:20.655Z",
     "relatedId": "inc-018"
   },
   {
     "id": "mem-019",
     "type": "INCIDENT",
-    "content": "Data loss incident in analytics stream: Memory allocation bug in v2.14.0",
+    "content": "Data loss incident in analytics stream: Network partition between AZs",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.95,
     "authority": 0.9,
-    "timestamp": "2025-05-08T14:41:38.886Z",
+    "timestamp": "2025-06-13T04:46:56.110Z",
     "relatedId": "inc-019"
   },
   {
     "id": "mem-020",
     "type": "INCIDENT",
-    "content": "DDoS-like traffic spike on API gateway: Third-party dependency rate limit exceeded",
+    "content": "Platform API returning 502 errors for all enterprise customers: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-10-11T15:34:24.151Z",
+    "timestamp": "2025-05-04T22:22:58.299Z",
     "relatedId": "inc-020"
   },
   {
     "id": "mem-021",
     "type": "INCIDENT",
-    "content": "Platform API returning 502 errors for all enterprise customers: Network partition between AZs",
+    "content": "Memory leak in Platform worker: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-03-20T01:05:59.804Z",
+    "timestamp": "2025-01-05T14:09:54.247Z",
     "relatedId": "inc-021"
   },
   {
     "id": "mem-022",
     "type": "INCIDENT",
-    "content": "DDoS-like traffic spike on API gateway: Unindexed query causing full table scan",
+    "content": "Guard policy engine returning incorrect decisions: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-05-16T08:55:21.089Z",
+    "timestamp": "2025-03-30T06:45:02.177Z",
     "relatedId": "inc-022"
   },
   {
     "id": "mem-023",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Infrastructure autoscaling misconfigured",
+    "content": "DDoS-like traffic spike on API gateway: Network partition between AZs",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-09-12T18:53:40.756Z",
+    "timestamp": "2025-03-24T15:30:59.149Z",
     "relatedId": "inc-023"
   },
   {
     "id": "mem-024",
     "type": "INCIDENT",
-    "content": "DDoS-like traffic spike on API gateway: Infrastructure autoscaling misconfigured",
+    "content": "SSL certificate expiration on Connect endpoints: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-08-08T13:03:49.761Z",
+    "timestamp": "2025-05-11T08:39:26.006Z",
     "relatedId": "inc-024"
   },
   {
     "id": "mem-025",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Third-party dependency rate limit exceeded",
+    "content": "Platform API returning 502 errors for all enterprise customers: Certificate not rotated before expiration",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-04-22T18:35:55.750Z",
+    "timestamp": "2025-06-27T06:50:03.768Z",
     "relatedId": "inc-025"
   },
   {
     "id": "mem-026",
     "type": "INCIDENT",
-    "content": "Guard policy engine returning incorrect decisions: Certificate not rotated before expiration",
+    "content": "Guard policy engine returning incorrect decisions: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-04-19T17:39:18.373Z",
+    "timestamp": "2025-04-10T16:29:50.952Z",
     "relatedId": "inc-026"
   },
   {
     "id": "mem-027",
     "type": "INCIDENT",
-    "content": "Platform API returning 502 errors for all enterprise customers: Third-party dependency rate limit exceeded",
+    "content": "Data loss incident in analytics stream: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
-    "importance": 0.8,
+    "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-09-07T09:24:03.139Z",
+    "timestamp": "2025-10-29T19:41:53.386Z",
     "relatedId": "inc-027"
   },
   {
     "id": "mem-028",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Network partition between AZs",
+    "content": "Memory leak in Platform worker: Network partition between AZs",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-02-21T23:28:52.687Z",
+    "timestamp": "2025-06-09T03:35:23.801Z",
     "relatedId": "inc-028"
   },
   {
     "id": "mem-029",
     "type": "INCIDENT",
-    "content": "Auth service timeout — users unable to log in: Network partition between AZs",
+    "content": "Data loss incident in analytics stream: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-10-04T08:55:31.771Z",
+    "timestamp": "2025-08-16T18:18:44.153Z",
     "relatedId": "inc-029"
   },
   {
     "id": "mem-030",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Network partition between AZs",
+    "content": "Connect adapter outage — webhooks failing: Network partition between AZs",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-05-28T10:03:43.779Z",
+    "timestamp": "2025-03-07T17:52:50.751Z",
     "relatedId": "inc-030"
   },
   {
     "id": "mem-031",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Unindexed query causing full table scan",
+    "content": "Memory leak in Platform worker: Network partition between AZs",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-10-05T14:37:18.600Z",
+    "timestamp": "2025-02-24T20:13:00.227Z",
     "relatedId": "inc-031"
   },
   {
     "id": "mem-032",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Misconfigured load balancer after routine deployment",
+    "content": "DDoS-like traffic spike on API gateway: Certificate not rotated before expiration",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-04-17T01:54:21.346Z",
+    "timestamp": "2025-05-05T19:48:51.413Z",
     "relatedId": "inc-032"
   },
   {
     "id": "mem-033",
     "type": "INCIDENT",
-    "content": "Data loss incident in analytics stream: Misconfigured load balancer after routine deployment",
+    "content": "Connect adapter outage — webhooks failing: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-01-09T14:14:39.375Z",
+    "timestamp": "2025-09-30T17:11:43.125Z",
     "relatedId": "inc-033"
   },
   {
     "id": "mem-034",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Misconfigured load balancer after routine deployment",
+    "content": "Memory leak in Platform worker: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
-    "importance": 0.8,
+    "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-15T16:18:03.462Z",
+    "timestamp": "2025-01-13T06:36:28.828Z",
     "relatedId": "inc-034"
   },
   {
     "id": "mem-035",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Unindexed query causing full table scan",
+    "content": "DDoS-like traffic spike on API gateway: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-09-02T00:33:18.391Z",
+    "timestamp": "2025-05-07T10:03:23.903Z",
     "relatedId": "inc-035"
   },
   {
     "id": "mem-036",
     "type": "INCIDENT",
-    "content": "Memory leak in Platform worker: Misconfigured load balancer after routine deployment",
+    "content": "Guard policy engine returning incorrect decisions: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-03T01:04:40.575Z",
+    "timestamp": "2025-04-16T12:59:07.331Z",
     "relatedId": "inc-036"
   },
   {
     "id": "mem-037",
     "type": "INCIDENT",
-    "content": "Auth service timeout — users unable to log in: Network partition between AZs",
+    "content": "Auth service timeout — users unable to log in: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-01-24T01:18:52.394Z",
+    "timestamp": "2025-06-09T20:24:33.826Z",
     "relatedId": "inc-037"
   },
   {
     "id": "mem-038",
     "type": "INCIDENT",
-    "content": "Auth service timeout — users unable to log in: Infrastructure autoscaling misconfigured",
+    "content": "Auth service timeout — users unable to log in: Certificate not rotated before expiration",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-05-01T07:57:19.894Z",
+    "timestamp": "2025-07-05T08:20:49.379Z",
     "relatedId": "inc-038"
   },
   {
     "id": "mem-039",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Third-party dependency rate limit exceeded",
+    "content": "Memory leak in Platform worker: Network partition between AZs",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-15T13:55:10.212Z",
+    "timestamp": "2025-10-16T14:21:44.368Z",
     "relatedId": "inc-039"
   },
   {
     "id": "mem-040",
     "type": "INCIDENT",
-    "content": "Guard policy engine returning incorrect decisions: Infrastructure autoscaling misconfigured",
+    "content": "Auth service timeout — users unable to log in: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-01-24T20:14:15.112Z",
+    "timestamp": "2025-08-03T23:50:34.611Z",
     "relatedId": "inc-040"
   },
   {
     "id": "mem-041",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Infrastructure autoscaling misconfigured",
+    "content": "DDoS-like traffic spike on API gateway: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-10-27T23:04:28.510Z",
+    "timestamp": "2025-08-01T11:24:40.185Z",
     "relatedId": "inc-041"
   },
   {
     "id": "mem-042",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Network partition between AZs",
+    "content": "SSL certificate expiration on Connect endpoints: Certificate not rotated before expiration",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-08-30T17:36:13.763Z",
+    "timestamp": "2025-09-02T05:08:04.279Z",
     "relatedId": "inc-042"
   },
   {
     "id": "mem-043",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Misconfigured load balancer after routine deployment",
+    "content": "Memory leak in Platform worker: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
     "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-07-01T14:19:05.414Z",
+    "timestamp": "2025-09-30T22:09:01.280Z",
     "relatedId": "inc-043"
   },
   {
     "id": "mem-044",
     "type": "INCIDENT",
-    "content": "Memory leak in Platform worker: Unindexed query causing full table scan",
+    "content": "Memory leak in Platform worker: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-10-17T02:39:38.817Z",
+    "timestamp": "2025-06-28T02:34:16.596Z",
     "relatedId": "inc-044"
   },
   {
     "id": "mem-045",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Third-party dependency rate limit exceeded",
+    "content": "Guard policy engine returning incorrect decisions: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-21T02:40:59.712Z",
+    "timestamp": "2025-09-26T16:29:09.947Z",
     "relatedId": "inc-045"
   },
   {
     "id": "mem-046",
     "type": "INCIDENT",
-    "content": "Memory leak in Platform worker: Network partition between AZs",
+    "content": "SSL certificate expiration on Connect endpoints: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-09-04T00:35:50.685Z",
+    "timestamp": "2025-01-03T15:21:36.819Z",
     "relatedId": "inc-046"
   },
   {
     "id": "mem-047",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Infrastructure autoscaling misconfigured",
+    "content": "Platform API returning 502 errors for all enterprise customers: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-10-15T01:15:48.048Z",
+    "timestamp": "2025-01-20T18:05:29.245Z",
     "relatedId": "inc-047"
   },
   {
     "id": "mem-048",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Third-party dependency rate limit exceeded",
+    "content": "SSL certificate expiration on Connect endpoints: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-04-21T16:02:31.558Z",
+    "timestamp": "2025-04-09T15:50:15.561Z",
     "relatedId": "inc-048"
   },
   {
     "id": "mem-049",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Infrastructure autoscaling misconfigured",
+    "content": "Connect adapter outage — webhooks failing: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-04-28T02:29:43.145Z",
+    "timestamp": "2025-10-03T15:46:20.368Z",
     "relatedId": "inc-049"
   },
   {
     "id": "mem-050",
     "type": "INCIDENT",
-    "content": "Memory leak in Platform worker: Unindexed query causing full table scan",
+    "content": "Data loss incident in analytics stream: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-05-06T06:54:26.790Z",
+    "timestamp": "2025-02-28T20:48:42.738Z",
     "relatedId": "inc-050"
   },
   {
     "id": "mem-051",
     "type": "INCIDENT",
-    "content": "Memory leak in Platform worker: Memory allocation bug in v2.14.0",
+    "content": "Memory leak in Platform worker: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-04-01T15:06:00.190Z",
+    "timestamp": "2025-08-30T01:13:34.398Z",
     "relatedId": "inc-051"
   },
   {
     "id": "mem-052",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Network partition between AZs",
+    "content": "DDoS-like traffic spike on API gateway: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
-    "importance": 0.8,
+    "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-07-07T04:08:25.136Z",
+    "timestamp": "2025-05-11T06:59:56.569Z",
     "relatedId": "inc-052"
   },
   {
     "id": "mem-053",
     "type": "INCIDENT",
-    "content": "Memory leak in Platform worker: Memory allocation bug in v2.14.0",
+    "content": "Connect adapter outage — webhooks failing: Network partition between AZs",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-08-29T14:55:56.879Z",
+    "timestamp": "2025-03-15T04:29:04.194Z",
     "relatedId": "inc-053"
   },
   {
     "id": "mem-054",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Unindexed query causing full table scan",
+    "content": "Database replication lag exceeding 60 seconds: Certificate not rotated before expiration",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-04-07T20:44:33.416Z",
+    "timestamp": "2025-09-08T15:26:14.139Z",
     "relatedId": "inc-054"
   },
   {
     "id": "mem-055",
     "type": "INCIDENT",
-    "content": "DDoS-like traffic spike on API gateway: Misconfigured load balancer after routine deployment",
+    "content": "Auth service timeout — users unable to log in: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-17T05:58:03.226Z",
+    "timestamp": "2025-04-19T18:21:32.898Z",
     "relatedId": "inc-055"
   },
   {
     "id": "mem-056",
     "type": "INCIDENT",
-    "content": "Platform API returning 502 errors for all enterprise customers: Third-party dependency rate limit exceeded",
+    "content": "Memory leak in Platform worker: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-02-03T18:08:43.522Z",
+    "timestamp": "2025-04-08T06:56:03.694Z",
     "relatedId": "inc-056"
   },
   {
     "id": "mem-057",
     "type": "INCIDENT",
-    "content": "Auth service timeout — users unable to log in: Network partition between AZs",
+    "content": "SSL certificate expiration on Connect endpoints: Unindexed query causing full table scan",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-03-04T21:05:22.235Z",
+    "timestamp": "2025-10-07T18:07:47.408Z",
     "relatedId": "inc-057"
   },
   {
     "id": "mem-058",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Third-party dependency rate limit exceeded",
+    "content": "Auth service timeout — users unable to log in: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-10T04:22:49.939Z",
+    "timestamp": "2025-05-17T20:03:14.575Z",
     "relatedId": "inc-058"
   },
   {
     "id": "mem-059",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Unindexed query causing full table scan",
+    "content": "Auth service timeout — users unable to log in: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-02-24T00:24:47.612Z",
+    "timestamp": "2025-04-15T23:08:11.531Z",
     "relatedId": "inc-059"
   },
   {
     "id": "mem-060",
     "type": "INCIDENT",
-    "content": "Guard policy engine returning incorrect decisions: Memory allocation bug in v2.14.0",
+    "content": "SSL certificate expiration on Connect endpoints: Certificate not rotated before expiration",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-02-19T13:38:54.865Z",
+    "timestamp": "2025-06-24T01:38:23.148Z",
     "relatedId": "inc-060"
   },
   {
     "id": "mem-061",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Infrastructure autoscaling misconfigured",
+    "content": "Platform API returning 502 errors for all enterprise customers: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-08-26T18:02:17.206Z",
+    "timestamp": "2025-07-09T20:26:12.860Z",
     "relatedId": "inc-061"
   },
   {
     "id": "mem-062",
     "type": "INCIDENT",
-    "content": "Guard policy engine returning incorrect decisions: Memory allocation bug in v2.14.0",
+    "content": "Analytics data pipeline stalled: Certificate not rotated before expiration",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.95,
     "authority": 0.9,
-    "timestamp": "2025-01-15T09:27:58.177Z",
+    "timestamp": "2025-09-01T04:25:27.833Z",
     "relatedId": "inc-062"
   },
   {
     "id": "mem-063",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Memory allocation bug in v2.14.0",
+    "content": "DDoS-like traffic spike on API gateway: Certificate not rotated before expiration",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-07-29T17:16:10.152Z",
+    "timestamp": "2025-02-09T22:08:08.118Z",
     "relatedId": "inc-063"
   },
   {
     "id": "mem-064",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Unindexed query causing full table scan",
+    "content": "Connect adapter outage — webhooks failing: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
     "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-03-27T02:09:21.812Z",
+    "timestamp": "2025-08-29T13:54:19.883Z",
     "relatedId": "inc-064"
   },
   {
     "id": "mem-065",
     "type": "INCIDENT",
-    "content": "Data loss incident in analytics stream: Infrastructure autoscaling misconfigured",
+    "content": "Database replication lag exceeding 60 seconds: Network partition between AZs",
     "source": "incident-engine",
-    "importance": 0.8,
+    "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-04-16T10:39:19.632Z",
+    "timestamp": "2025-04-18T11:01:30.659Z",
     "relatedId": "inc-065"
   },
   {
     "id": "mem-066",
     "type": "INCIDENT",
-    "content": "Auth service timeout — users unable to log in: Infrastructure autoscaling misconfigured",
+    "content": "Memory leak in Platform worker: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
     "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-03-10T04:36:16.918Z",
+    "timestamp": "2025-01-20T03:50:59.624Z",
     "relatedId": "inc-066"
   },
   {
     "id": "mem-067",
     "type": "INCIDENT",
-    "content": "DDoS-like traffic spike on API gateway: Misconfigured load balancer after routine deployment",
+    "content": "Guard policy engine returning incorrect decisions: Network partition between AZs",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-07-19T03:05:07.504Z",
+    "timestamp": "2025-05-15T18:44:27.439Z",
     "relatedId": "inc-067"
   },
   {
     "id": "mem-068",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Unindexed query causing full table scan",
+    "content": "Platform API returning 502 errors for all enterprise customers: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-27T19:29:27.611Z",
+    "timestamp": "2025-04-07T15:58:38.186Z",
     "relatedId": "inc-068"
   },
   {
     "id": "mem-069",
     "type": "INCIDENT",
-    "content": "DDoS-like traffic spike on API gateway: Third-party dependency rate limit exceeded",
+    "content": "Auth service timeout — users unable to log in: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-17T06:21:30.035Z",
+    "timestamp": "2025-05-28T14:38:13.950Z",
     "relatedId": "inc-069"
   },
   {
     "id": "mem-070",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Infrastructure autoscaling misconfigured",
+    "content": "Guard policy engine returning incorrect decisions: Certificate not rotated before expiration",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-01-04T09:38:00.207Z",
+    "timestamp": "2025-05-09T14:41:09.819Z",
     "relatedId": "inc-070"
   },
   {
     "id": "mem-071",
     "type": "INCIDENT",
-    "content": "Database replication lag exceeding 60 seconds: Certificate not rotated before expiration",
+    "content": "Platform API returning 502 errors for all enterprise customers: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-07-25T10:10:36.122Z",
+    "timestamp": "2025-06-24T01:44:19.869Z",
     "relatedId": "inc-071"
   },
   {
     "id": "mem-072",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Infrastructure autoscaling misconfigured",
+    "content": "Analytics data pipeline stalled: Unindexed query causing full table scan",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-08-05T20:47:10.347Z",
+    "timestamp": "2025-05-03T15:53:04.590Z",
     "relatedId": "inc-072"
   },
   {
     "id": "mem-073",
     "type": "INCIDENT",
-    "content": "Connect adapter outage — webhooks failing: Memory allocation bug in v2.14.0",
+    "content": "Analytics data pipeline stalled: Unindexed query causing full table scan",
     "source": "incident-engine",
-    "importance": 0.8,
+    "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-05-12T02:03:15.215Z",
+    "timestamp": "2025-10-28T17:20:10.876Z",
     "relatedId": "inc-073"
   },
   {
     "id": "mem-074",
     "type": "INCIDENT",
-    "content": "Guard policy engine returning incorrect decisions: Third-party dependency rate limit exceeded",
+    "content": "SSL certificate expiration on Connect endpoints: Certificate not rotated before expiration",
     "source": "incident-engine",
-    "importance": 0.8,
+    "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-06-01T12:18:04.137Z",
+    "timestamp": "2025-05-12T09:30:38.669Z",
     "relatedId": "inc-074"
   },
   {
     "id": "mem-075",
     "type": "INCIDENT",
-    "content": "Auth service timeout — users unable to log in: Unindexed query causing full table scan",
+    "content": "Platform API returning 502 errors for all enterprise customers: Misconfigured load balancer after routine deployment",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-07-07T05:23:48.080Z",
+    "timestamp": "2025-02-14T22:41:16.240Z",
     "relatedId": "inc-075"
   },
   {
     "id": "mem-076",
     "type": "INCIDENT",
-    "content": "Data loss incident in analytics stream: Misconfigured load balancer after routine deployment",
+    "content": "Guard policy engine returning incorrect decisions: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-09-01T08:00:03.847Z",
+    "timestamp": "2025-08-30T16:16:28.476Z",
     "relatedId": "inc-076"
   },
   {
     "id": "mem-077",
     "type": "INCIDENT",
-    "content": "Guard policy engine returning incorrect decisions: Certificate not rotated before expiration",
+    "content": "Guard policy engine returning incorrect decisions: Infrastructure autoscaling misconfigured",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-07-30T22:39:13.589Z",
+    "timestamp": "2025-10-08T13:28:28.845Z",
     "relatedId": "inc-077"
   },
   {
     "id": "mem-078",
     "type": "INCIDENT",
-    "content": "Auth service timeout — users unable to log in: Network partition between AZs",
+    "content": "Auth service timeout — users unable to log in: Memory allocation bug in v2.14.0",
     "source": "incident-engine",
-    "importance": 0.6,
+    "importance": 0.8,
     "authority": 0.9,
-    "timestamp": "2025-09-11T09:07:32.201Z",
+    "timestamp": "2025-08-31T14:20:44.091Z",
     "relatedId": "inc-078"
   },
   {
     "id": "mem-079",
     "type": "INCIDENT",
-    "content": "Analytics data pipeline stalled: Infrastructure autoscaling misconfigured",
+    "content": "SSL certificate expiration on Connect endpoints: Unindexed query causing full table scan",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-04-07T12:13:02.819Z",
+    "timestamp": "2025-07-31T20:54:22.988Z",
     "relatedId": "inc-079"
   },
   {
     "id": "mem-080",
     "type": "INCIDENT",
-    "content": "SSL certificate expiration on Connect endpoints: Certificate not rotated before expiration",
+    "content": "Memory leak in Platform worker: Third-party dependency rate limit exceeded",
     "source": "incident-engine",
     "importance": 0.6,
     "authority": 0.9,
-    "timestamp": "2025-04-12T20:22:38.861Z",
+    "timestamp": "2025-07-07T21:30:30.381Z",
     "relatedId": "inc-080"
   },
   {
     "id": "mem-081",
     "type": "DECISION",
-    "content": "Implement webhook notifications",
+    "content": "Build audit log viewer",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-01-15T12:31:40.596Z",
-    "relatedId": "HPLT-8"
+    "timestamp": "2025-07-10T15:49:42.485Z",
+    "relatedId": "HPLT-3"
   },
   {
     "id": "mem-082",
     "type": "DECISION",
-    "content": "Implement SSO with SAML 2.0",
+    "content": "Build audit log viewer",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-01-05T23:16:36.080Z",
-    "relatedId": "HPLT-16"
+    "timestamp": "2025-06-16T04:33:16.104Z",
+    "relatedId": "HPLT-10"
   },
   {
     "id": "mem-083",
     "type": "DECISION",
-    "content": "Add export to CSV",
+    "content": "Add custom field support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-03-18T09:53:31.730Z",
-    "relatedId": "HPLT-24"
+    "timestamp": "2025-04-05T00:10:38.704Z",
+    "relatedId": "HPLT-23"
   },
   {
     "id": "mem-084",
@@ -836,48 +836,48 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-07-22T10:09:01.610Z",
-    "relatedId": "HPLT-27"
+    "timestamp": "2025-04-01T05:33:56.040Z",
+    "relatedId": "HPLT-30"
   },
   {
     "id": "mem-085",
     "type": "DECISION",
-    "content": "Optimize dashboard load time",
+    "content": "Implement SSO with SAML 2.0",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-11-21T22:43:56.993Z",
-    "relatedId": "HPLT-30"
+    "timestamp": "2025-06-01T03:09:03.589Z",
+    "relatedId": "HPLT-33"
   },
   {
     "id": "mem-086",
     "type": "DECISION",
-    "content": "Optimize dashboard load time",
+    "content": "Implement data retention policies",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-05-18T19:27:43.920Z",
-    "relatedId": "HPLT-44"
+    "timestamp": "2025-08-25T06:35:04.881Z",
+    "relatedId": "HPLT-75"
   },
   {
     "id": "mem-087",
     "type": "DECISION",
-    "content": "Build advanced search",
+    "content": "Implement SSO with SAML 2.0",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-10-25T15:25:54.410Z",
-    "relatedId": "HPLT-69"
+    "timestamp": "2025-01-29T20:47:56.095Z",
+    "relatedId": "HPLT-76"
   },
   {
     "id": "mem-088",
     "type": "DECISION",
-    "content": "Optimize dashboard load time",
+    "content": "Implement data retention policies",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-11-15T19:42:57.611Z",
-    "relatedId": "HPLT-108"
+    "timestamp": "2025-08-28T04:48:25.221Z",
+    "relatedId": "HPLT-80"
   },
   {
     "id": "mem-089",
@@ -886,88 +886,88 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-03-13T13:15:40.000Z",
-    "relatedId": "HPLT-111"
+    "timestamp": "2025-02-06T22:41:54.197Z",
+    "relatedId": "HPLT-102"
   },
   {
     "id": "mem-090",
     "type": "DECISION",
-    "content": "Implement data retention policies",
+    "content": "Optimize dashboard load time",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-05-26T20:38:59.210Z",
-    "relatedId": "HPLT-112"
+    "timestamp": "2025-05-02T17:03:57.487Z",
+    "relatedId": "HPLT-120"
   },
   {
     "id": "mem-091",
+    "type": "DECISION",
+    "content": "Build audit log viewer",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-06-26T16:43:57.687Z",
+    "relatedId": "HPLT-125"
+  },
+  {
+    "id": "mem-092",
     "type": "DECISION",
     "content": "Add custom field support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-06-06T18:00:20.186Z",
-    "relatedId": "HPLT-122"
-  },
-  {
-    "id": "mem-092",
-    "type": "DECISION",
-    "content": "Add export to CSV",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-11-07T20:16:45.175Z",
-    "relatedId": "HPLT-127"
+    "timestamp": "2025-11-13T11:51:50.281Z",
+    "relatedId": "HPLT-132"
   },
   {
     "id": "mem-093",
-    "type": "DECISION",
-    "content": "Add dark mode support",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-10-21T17:58:56.974Z",
-    "relatedId": "HPLT-128"
-  },
-  {
-    "id": "mem-094",
-    "type": "DECISION",
-    "content": "Add export to CSV",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-06-12T00:19:03.336Z",
-    "relatedId": "HPLT-129"
-  },
-  {
-    "id": "mem-095",
-    "type": "DECISION",
-    "content": "Implement webhook notifications",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-10-11T10:48:02.534Z",
-    "relatedId": "HPLT-137"
-  },
-  {
-    "id": "mem-096",
     "type": "DECISION",
     "content": "Add two-factor auth",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-10-26T17:13:55.222Z",
-    "relatedId": "HPLT-153"
+    "timestamp": "2025-09-29T14:19:45.887Z",
+    "relatedId": "HPLT-135"
+  },
+  {
+    "id": "mem-094",
+    "type": "DECISION",
+    "content": "Implement webhook notifications",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-11-23T20:47:33.957Z",
+    "relatedId": "HPLT-165"
+  },
+  {
+    "id": "mem-095",
+    "type": "DECISION",
+    "content": "Add two-factor auth",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-10-06T21:02:38.684Z",
+    "relatedId": "HPLT-166"
+  },
+  {
+    "id": "mem-096",
+    "type": "DECISION",
+    "content": "Implement data retention policies",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-07-08T04:03:00.143Z",
+    "relatedId": "HPLT-174"
   },
   {
     "id": "mem-097",
     "type": "DECISION",
-    "content": "Add dark mode support",
+    "content": "Implement webhook notifications",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-09-25T03:36:08.889Z",
-    "relatedId": "HPLT-165"
+    "timestamp": "2025-10-15T10:30:00.049Z",
+    "relatedId": "HPLT-177"
   },
   {
     "id": "mem-098",
@@ -976,78 +976,78 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-02-22T14:31:56.423Z",
-    "relatedId": "HPLT-168"
+    "timestamp": "2025-07-05T04:08:04.217Z",
+    "relatedId": "HPLT-185"
   },
   {
     "id": "mem-099",
     "type": "DECISION",
-    "content": "Add custom field support",
+    "content": "Implement data retention policies",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-10-11T19:16:58.175Z",
-    "relatedId": "HPLT-176"
+    "timestamp": "2025-03-24T05:12:43.936Z",
+    "relatedId": "HPLT-193"
   },
   {
     "id": "mem-100",
     "type": "DECISION",
-    "content": "Build audit log viewer",
+    "content": "Add dark mode support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-05-22T23:52:17.747Z",
-    "relatedId": "HPLT-185"
+    "timestamp": "2025-11-25T23:44:05.374Z",
+    "relatedId": "HPLT-217"
   },
   {
     "id": "mem-101",
     "type": "DECISION",
-    "content": "Implement webhook notifications",
+    "content": "Add two-factor auth",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-02-13T13:26:50.906Z",
-    "relatedId": "HPLT-188"
+    "timestamp": "2025-04-26T02:10:50.035Z",
+    "relatedId": "HPLT-219"
   },
   {
     "id": "mem-102",
     "type": "DECISION",
-    "content": "Implement SSO with SAML 2.0",
+    "content": "Implement data retention policies",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-01-08T09:51:48.085Z",
-    "relatedId": "HPLT-195"
+    "timestamp": "2025-04-05T00:29:07.107Z",
+    "relatedId": "HPLT-228"
   },
   {
     "id": "mem-103",
     "type": "DECISION",
-    "content": "Add export to CSV",
+    "content": "Optimize dashboard load time",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-08-07T18:24:04.668Z",
-    "relatedId": "HPLT-196"
+    "timestamp": "2025-07-16T09:28:01.556Z",
+    "relatedId": "HPLT-236"
   },
   {
     "id": "mem-104",
     "type": "DECISION",
-    "content": "Build advanced search",
+    "content": "Add dark mode support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-11-10T09:34:22.391Z",
-    "relatedId": "HPLT-215"
+    "timestamp": "2025-11-23T18:39:18.179Z",
+    "relatedId": "HPLT-243"
   },
   {
     "id": "mem-105",
     "type": "DECISION",
-    "content": "Build advanced search",
+    "content": "Add two-factor auth",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-03-10T15:04:42.681Z",
-    "relatedId": "HPLT-220"
+    "timestamp": "2025-08-25T12:59:06.350Z",
+    "relatedId": "HPLT-247"
   },
   {
     "id": "mem-106",
@@ -1056,18 +1056,18 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-09-02T08:28:29.955Z",
-    "relatedId": "HPLT-228"
+    "timestamp": "2025-01-31T01:13:38.117Z",
+    "relatedId": "HPLT-257"
   },
   {
     "id": "mem-107",
     "type": "DECISION",
-    "content": "Implement webhook notifications",
+    "content": "Implement data retention policies",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-08-05T20:11:58.360Z",
-    "relatedId": "HPLT-230"
+    "timestamp": "2025-10-30T00:45:00.865Z",
+    "relatedId": "HPLT-267"
   },
   {
     "id": "mem-108",
@@ -1076,48 +1076,48 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-07-15T15:46:08.755Z",
-    "relatedId": "HPLT-246"
+    "timestamp": "2025-09-10T11:15:52.855Z",
+    "relatedId": "HPLT-277"
   },
   {
     "id": "mem-109",
     "type": "DECISION",
-    "content": "Add export to CSV",
+    "content": "Implement SSO with SAML 2.0",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-11-17T09:04:59.109Z",
-    "relatedId": "HPLT-288"
+    "timestamp": "2025-05-14T14:22:04.544Z",
+    "relatedId": "HPLT-286"
   },
   {
     "id": "mem-110",
-    "type": "DECISION",
-    "content": "Implement webhook notifications",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-04-08T09:14:02.759Z",
-    "relatedId": "HPLT-294"
-  },
-  {
-    "id": "mem-111",
     "type": "DECISION",
     "content": "Add two-factor auth",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-10-19T02:20:20.298Z",
-    "relatedId": "HANA-1"
+    "timestamp": "2025-04-08T02:57:49.636Z",
+    "relatedId": "HPLT-288"
+  },
+  {
+    "id": "mem-111",
+    "type": "DECISION",
+    "content": "Add dark mode support",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-01-03T04:37:29.517Z",
+    "relatedId": "HPLT-297"
   },
   {
     "id": "mem-112",
     "type": "DECISION",
-    "content": "Add custom field support",
+    "content": "Implement data retention policies",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-08-11T18:49:44.625Z",
-    "relatedId": "HANA-19"
+    "timestamp": "2025-10-25T20:37:13.656Z",
+    "relatedId": "HANA-12"
   },
   {
     "id": "mem-113",
@@ -1126,108 +1126,108 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-10-21T10:34:36.686Z",
-    "relatedId": "HANA-28"
+    "timestamp": "2025-08-17T07:43:59.142Z",
+    "relatedId": "HANA-25"
   },
   {
     "id": "mem-114",
     "type": "DECISION",
-    "content": "Build audit log viewer",
+    "content": "Optimize dashboard load time",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-05-24T11:20:29.903Z",
-    "relatedId": "HANA-45"
+    "timestamp": "2025-07-14T02:16:52.491Z",
+    "relatedId": "HANA-30"
   },
   {
     "id": "mem-115",
     "type": "DECISION",
-    "content": "Implement SSO with SAML 2.0",
+    "content": "Build advanced search",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-11-18T20:44:12.593Z",
-    "relatedId": "HANA-50"
+    "timestamp": "2025-01-31T00:22:20.063Z",
+    "relatedId": "HANA-32"
   },
   {
     "id": "mem-116",
-    "type": "DECISION",
-    "content": "Add dark mode support",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-11-02T11:33:42.628Z",
-    "relatedId": "HANA-58"
-  },
-  {
-    "id": "mem-117",
-    "type": "DECISION",
-    "content": "Add two-factor auth",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-02-12T04:29:26.045Z",
-    "relatedId": "HANA-79"
-  },
-  {
-    "id": "mem-118",
-    "type": "DECISION",
-    "content": "Add two-factor auth",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-10-26T16:26:04.551Z",
-    "relatedId": "HANA-89"
-  },
-  {
-    "id": "mem-119",
-    "type": "DECISION",
-    "content": "Add custom field support",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-04-28T22:44:55.011Z",
-    "relatedId": "HANA-98"
-  },
-  {
-    "id": "mem-120",
-    "type": "DECISION",
-    "content": "Add custom field support",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-07-16T20:35:56.785Z",
-    "relatedId": "HANA-103"
-  },
-  {
-    "id": "mem-121",
-    "type": "DECISION",
-    "content": "Add custom field support",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-01-18T05:27:55.165Z",
-    "relatedId": "HANA-122"
-  },
-  {
-    "id": "mem-122",
-    "type": "DECISION",
-    "content": "Build audit log viewer",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-07-20T18:46:36.836Z",
-    "relatedId": "HANA-127"
-  },
-  {
-    "id": "mem-123",
     "type": "DECISION",
     "content": "Implement webhook notifications",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-07-17T06:47:14.284Z",
-    "relatedId": "HANA-128"
+    "timestamp": "2025-05-26T23:22:19.585Z",
+    "relatedId": "HANA-46"
+  },
+  {
+    "id": "mem-117",
+    "type": "DECISION",
+    "content": "Build advanced search",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-09-27T09:36:46.524Z",
+    "relatedId": "HANA-53"
+  },
+  {
+    "id": "mem-118",
+    "type": "DECISION",
+    "content": "Build advanced search",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-02-06T08:06:02.095Z",
+    "relatedId": "HANA-76"
+  },
+  {
+    "id": "mem-119",
+    "type": "DECISION",
+    "content": "Implement SSO with SAML 2.0",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-07-31T18:37:20.873Z",
+    "relatedId": "HANA-79"
+  },
+  {
+    "id": "mem-120",
+    "type": "DECISION",
+    "content": "Optimize dashboard load time",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-10-27T14:26:59.943Z",
+    "relatedId": "HANA-83"
+  },
+  {
+    "id": "mem-121",
+    "type": "DECISION",
+    "content": "Optimize dashboard load time",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-06-17T06:51:57.391Z",
+    "relatedId": "HANA-99"
+  },
+  {
+    "id": "mem-122",
+    "type": "DECISION",
+    "content": "Implement data retention policies",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-01-17T05:46:23.446Z",
+    "relatedId": "HANA-100"
+  },
+  {
+    "id": "mem-123",
+    "type": "DECISION",
+    "content": "Add dark mode support",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-05-11T09:59:14.841Z",
+    "relatedId": "HANA-103"
   },
   {
     "id": "mem-124",
@@ -1236,68 +1236,68 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-09-15T11:18:53.881Z",
-    "relatedId": "HANA-131"
+    "timestamp": "2025-06-29T04:49:50.991Z",
+    "relatedId": "HANA-109"
   },
   {
     "id": "mem-125",
     "type": "DECISION",
-    "content": "Add two-factor auth",
+    "content": "Implement SSO with SAML 2.0",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-05-31T16:18:31.836Z",
-    "relatedId": "HANA-150"
+    "timestamp": "2025-05-29T12:47:50.865Z",
+    "relatedId": "HANA-119"
   },
   {
     "id": "mem-126",
     "type": "DECISION",
-    "content": "Add export to CSV",
+    "content": "Add custom field support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-07-23T01:50:22.667Z",
-    "relatedId": "HANA-170"
+    "timestamp": "2025-04-09T20:14:45.142Z",
+    "relatedId": "HANA-131"
   },
   {
     "id": "mem-127",
     "type": "DECISION",
-    "content": "Build advanced search",
+    "content": "Implement SSO with SAML 2.0",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-09-27T17:27:02.842Z",
-    "relatedId": "HANA-171"
+    "timestamp": "2025-10-17T20:22:59.681Z",
+    "relatedId": "HANA-183"
   },
   {
     "id": "mem-128",
     "type": "DECISION",
-    "content": "Build advanced search",
+    "content": "Implement webhook notifications",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-04-13T03:52:13.665Z",
-    "relatedId": "HANA-202"
+    "timestamp": "2025-05-31T11:58:40.423Z",
+    "relatedId": "HANA-189"
   },
   {
     "id": "mem-129",
     "type": "DECISION",
-    "content": "Add two-factor auth",
+    "content": "Build advanced search",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-04-21T11:47:32.424Z",
-    "relatedId": "HANA-204"
+    "timestamp": "2025-06-27T14:22:08.658Z",
+    "relatedId": "HANA-190"
   },
   {
     "id": "mem-130",
     "type": "DECISION",
-    "content": "Add two-factor auth",
+    "content": "Implement webhook notifications",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-10-08T03:58:54.913Z",
-    "relatedId": "HANA-213"
+    "timestamp": "2025-02-12T19:54:24.192Z",
+    "relatedId": "HANA-197"
   },
   {
     "id": "mem-131",
@@ -1306,68 +1306,68 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-11-03T16:22:20.610Z",
-    "relatedId": "HANA-215"
+    "timestamp": "2025-08-17T03:31:01.061Z",
+    "relatedId": "HANA-218"
   },
   {
     "id": "mem-132",
     "type": "DECISION",
-    "content": "Implement SSO with SAML 2.0",
+    "content": "Add two-factor auth",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-10-17T20:22:59.681Z",
-    "relatedId": "HANA-221"
+    "timestamp": "2025-01-08T22:48:22.590Z",
+    "relatedId": "HANA-220"
   },
   {
     "id": "mem-133",
     "type": "DECISION",
-    "content": "Implement SSO with SAML 2.0",
+    "content": "Add dark mode support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-01-28T18:48:37.562Z",
-    "relatedId": "HANA-228"
+    "timestamp": "2025-04-29T20:35:05.084Z",
+    "relatedId": "HANA-233"
   },
   {
     "id": "mem-134",
     "type": "DECISION",
-    "content": "Add export to CSV",
+    "content": "Add custom field support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-08-17T05:03:29.425Z",
-    "relatedId": "HANA-246"
+    "timestamp": "2025-05-09T07:17:45.454Z",
+    "relatedId": "HANA-238"
   },
   {
     "id": "mem-135",
     "type": "DECISION",
-    "content": "Add dark mode support",
+    "content": "Build audit log viewer",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-06-07T21:15:59.928Z",
-    "relatedId": "HANA-271"
+    "timestamp": "2025-04-13T15:20:10.422Z",
+    "relatedId": "HANA-244"
   },
   {
     "id": "mem-136",
     "type": "DECISION",
-    "content": "Add dark mode support",
+    "content": "Implement webhook notifications",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-03-06T22:56:21.858Z",
-    "relatedId": "HANA-273"
+    "timestamp": "2025-02-07T14:05:49.970Z",
+    "relatedId": "HANA-246"
   },
   {
     "id": "mem-137",
     "type": "DECISION",
-    "content": "Optimize dashboard load time",
+    "content": "Add custom field support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-06-21T17:35:00.953Z",
-    "relatedId": "HANA-297"
+    "timestamp": "2025-07-26T05:32:32.532Z",
+    "relatedId": "HANA-249"
   },
   {
     "id": "mem-138",
@@ -1376,48 +1376,48 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-01-17T07:07:42.443Z",
-    "relatedId": "HANA-300"
+    "timestamp": "2025-01-11T21:36:01.404Z",
+    "relatedId": "HANA-266"
   },
   {
     "id": "mem-139",
-    "type": "DECISION",
-    "content": "Implement data retention policies",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-09-20T11:25:30.044Z",
-    "relatedId": "HCON-15"
-  },
-  {
-    "id": "mem-140",
-    "type": "DECISION",
-    "content": "Add custom field support",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-09-13T12:12:09.010Z",
-    "relatedId": "HCON-19"
-  },
-  {
-    "id": "mem-141",
     "type": "DECISION",
     "content": "Build audit log viewer",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-05-26T11:28:18.388Z",
-    "relatedId": "HCON-24"
+    "timestamp": "2025-05-27T09:01:47.383Z",
+    "relatedId": "HANA-273"
+  },
+  {
+    "id": "mem-140",
+    "type": "DECISION",
+    "content": "Implement data retention policies",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-04-18T08:06:14.690Z",
+    "relatedId": "HANA-276"
+  },
+  {
+    "id": "mem-141",
+    "type": "DECISION",
+    "content": "Optimize dashboard load time",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-01-24T18:14:39.963Z",
+    "relatedId": "HANA-280"
   },
   {
     "id": "mem-142",
     "type": "DECISION",
-    "content": "Add two-factor auth",
+    "content": "Implement webhook notifications",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-10-13T03:56:04.571Z",
-    "relatedId": "HCON-25"
+    "timestamp": "2025-11-14T15:08:38.326Z",
+    "relatedId": "HANA-285"
   },
   {
     "id": "mem-143",
@@ -1426,28 +1426,28 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-11-10T15:09:09.017Z",
-    "relatedId": "HCON-43"
+    "timestamp": "2025-10-25T02:37:16.473Z",
+    "relatedId": "HANA-286"
   },
   {
     "id": "mem-144",
     "type": "DECISION",
-    "content": "Add custom field support",
+    "content": "Optimize dashboard load time",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-07-11T22:50:10.455Z",
-    "relatedId": "HCON-53"
+    "timestamp": "2025-03-09T22:55:04.554Z",
+    "relatedId": "HANA-288"
   },
   {
     "id": "mem-145",
     "type": "DECISION",
-    "content": "Add dark mode support",
+    "content": "Add two-factor auth",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-08-20T12:37:35.336Z",
-    "relatedId": "HCON-62"
+    "timestamp": "2025-05-24T00:55:08.185Z",
+    "relatedId": "HCON-7"
   },
   {
     "id": "mem-146",
@@ -1456,28 +1456,28 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-07-08T10:20:04.159Z",
-    "relatedId": "HCON-84"
+    "timestamp": "2025-04-28T12:40:20.890Z",
+    "relatedId": "HCON-9"
   },
   {
     "id": "mem-147",
+    "type": "DECISION",
+    "content": "Implement data retention policies",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-07-10T09:19:12.289Z",
+    "relatedId": "HCON-14"
+  },
+  {
+    "id": "mem-148",
     "type": "DECISION",
     "content": "Add dark mode support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-11-16T01:01:19.321Z",
-    "relatedId": "HCON-86"
-  },
-  {
-    "id": "mem-148",
-    "type": "DECISION",
-    "content": "Implement SSO with SAML 2.0",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-04-20T15:59:55.648Z",
-    "relatedId": "HCON-100"
+    "timestamp": "2025-08-20T12:37:35.336Z",
+    "relatedId": "HCON-18"
   },
   {
     "id": "mem-149",
@@ -1486,18 +1486,18 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-10-12T21:25:36.512Z",
-    "relatedId": "HCON-106"
+    "timestamp": "2025-08-26T14:28:50.336Z",
+    "relatedId": "HCON-42"
   },
   {
     "id": "mem-150",
     "type": "DECISION",
-    "content": "Add two-factor auth",
+    "content": "Build advanced search",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-06-25T15:25:45.386Z",
-    "relatedId": "HCON-108"
+    "timestamp": "2025-08-03T19:05:39.509Z",
+    "relatedId": "HCON-50"
   },
   {
     "id": "mem-151",
@@ -1506,278 +1506,278 @@
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-07-07T03:53:53.154Z",
-    "relatedId": "HCON-111"
+    "timestamp": "2025-07-27T08:51:43.736Z",
+    "relatedId": "HCON-52"
   },
   {
     "id": "mem-152",
-    "type": "DECISION",
-    "content": "Add dark mode support",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-05-28T23:01:40.935Z",
-    "relatedId": "HCON-118"
-  },
-  {
-    "id": "mem-153",
     "type": "DECISION",
     "content": "Build audit log viewer",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-02-01T23:24:41.022Z",
-    "relatedId": "HCON-127"
+    "timestamp": "2025-05-22T02:50:06.313Z",
+    "relatedId": "HCON-62"
+  },
+  {
+    "id": "mem-153",
+    "type": "DECISION",
+    "content": "Implement data retention policies",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-09-09T10:07:06.611Z",
+    "relatedId": "HCON-75"
   },
   {
     "id": "mem-154",
-    "type": "DECISION",
-    "content": "Optimize dashboard load time",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-03-20T06:28:51.379Z",
-    "relatedId": "HCON-129"
-  },
-  {
-    "id": "mem-155",
-    "type": "DECISION",
-    "content": "Add dark mode support",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-07-26T08:24:44.301Z",
-    "relatedId": "HCON-133"
-  },
-  {
-    "id": "mem-156",
-    "type": "DECISION",
-    "content": "Build advanced search",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-07-18T07:22:25.217Z",
-    "relatedId": "HCON-151"
-  },
-  {
-    "id": "mem-157",
     "type": "DECISION",
     "content": "Add custom field support",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-03-27T18:30:21.742Z",
-    "relatedId": "HCON-160"
+    "timestamp": "2025-05-31T18:28:34.570Z",
+    "relatedId": "HCON-86"
+  },
+  {
+    "id": "mem-155",
+    "type": "DECISION",
+    "content": "Add export to CSV",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-02-02T12:54:10.993Z",
+    "relatedId": "HCON-90"
+  },
+  {
+    "id": "mem-156",
+    "type": "DECISION",
+    "content": "Add export to CSV",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-04-07T17:14:37.712Z",
+    "relatedId": "HCON-103"
+  },
+  {
+    "id": "mem-157",
+    "type": "DECISION",
+    "content": "Add export to CSV",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-05-25T04:18:59.489Z",
+    "relatedId": "HCON-117"
   },
   {
     "id": "mem-158",
-    "type": "DECISION",
-    "content": "Add dark mode support",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-05-05T11:56:51.067Z",
-    "relatedId": "HCON-163"
-  },
-  {
-    "id": "mem-159",
-    "type": "DECISION",
-    "content": "Build advanced search",
-    "source": "decision-engine",
-    "importance": 0.75,
-    "authority": 0.85,
-    "timestamp": "2025-01-22T10:11:50.056Z",
-    "relatedId": "HCON-168"
-  },
-  {
-    "id": "mem-160",
     "type": "DECISION",
     "content": "Implement webhook notifications",
     "source": "decision-engine",
     "importance": 0.75,
     "authority": 0.85,
-    "timestamp": "2025-09-15T02:48:59.428Z",
-    "relatedId": "HCON-183"
+    "timestamp": "2025-04-11T23:46:46.674Z",
+    "relatedId": "HCON-128"
+  },
+  {
+    "id": "mem-159",
+    "type": "DECISION",
+    "content": "Implement webhook notifications",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-09-25T11:19:15.356Z",
+    "relatedId": "HCON-136"
+  },
+  {
+    "id": "mem-160",
+    "type": "DECISION",
+    "content": "Implement data retention policies",
+    "source": "decision-engine",
+    "importance": 0.75,
+    "authority": 0.85,
+    "timestamp": "2025-02-03T18:29:42.993Z",
+    "relatedId": "HCON-138"
   },
   {
     "id": "mem-161",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Data Pipeline Stall",
+    "content": "RFC: Adopt GraphQL for Platform API",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-11-27T10:57:32.371Z",
-    "relatedId": "doc-002"
+    "timestamp": "2024-11-11T21:44:40.475Z",
+    "relatedId": "doc-001"
   },
   {
     "id": "mem-162",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Event sourcing for audit log v2",
+    "content": "Post-Mortem: Auth Service Failure",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2025-03-11T17:47:29.108Z",
-    "relatedId": "doc-006"
+    "timestamp": "2025-03-18T04:17:39.213Z",
+    "relatedId": "doc-002"
   },
   {
     "id": "mem-163",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v4",
+    "content": "RFC: Migrate to Kubernetes v3",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-11-27T17:59:32.513Z",
-    "relatedId": "doc-009"
+    "timestamp": "2024-09-29T03:12:33.396Z",
+    "relatedId": "doc-007"
   },
   {
     "id": "mem-164",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Event sourcing for audit log v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-08-18T04:07:56.901Z",
-    "relatedId": "doc-011"
-  },
-  {
-    "id": "mem-165",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-11-19T10:29:30.973Z",
-    "relatedId": "doc-017"
-  },
-  {
-    "id": "mem-166",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-03-23T20:22:24.348Z",
-    "relatedId": "doc-020"
-  },
-  {
-    "id": "mem-167",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Event sourcing for audit log v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-06-05T12:51:44.897Z",
-    "relatedId": "doc-035"
-  },
-  {
-    "id": "mem-168",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt GraphQL for Platform API v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-01-15T00:10:51.067Z",
-    "relatedId": "doc-040"
-  },
-  {
-    "id": "mem-169",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-09-10T07:21:14.997Z",
-    "relatedId": "doc-045"
-  },
-  {
-    "id": "mem-170",
     "type": "EXECUTIVE_SUMMARY",
     "content": "Post-Mortem: Auth Service Failure v2",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-06-16T19:51:33.360Z",
-    "relatedId": "doc-054"
+    "timestamp": "2024-11-13T13:20:09.232Z",
+    "relatedId": "doc-009"
+  },
+  {
+    "id": "mem-165",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt OpenTelemetry v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-09-03T23:39:44.978Z",
+    "relatedId": "doc-010"
+  },
+  {
+    "id": "mem-166",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt GraphQL for Platform API v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-11-23T17:56:08.733Z",
+    "relatedId": "doc-018"
+  },
+  {
+    "id": "mem-167",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-10-28T21:10:50.736Z",
+    "relatedId": "doc-020"
+  },
+  {
+    "id": "mem-168",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Event sourcing for audit log v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-06-21T04:06:32.746Z",
+    "relatedId": "doc-023"
+  },
+  {
+    "id": "mem-169",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt OpenTelemetry v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-09-06T02:20:55.613Z",
+    "relatedId": "doc-025"
+  },
+  {
+    "id": "mem-170",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt OpenTelemetry v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-01-03T08:55:19.788Z",
+    "relatedId": "doc-032"
   },
   {
     "id": "mem-171",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt GraphQL for Platform API v4",
+    "content": "RFC: Adopt GraphQL for Platform API v2",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-10-02T07:27:59.659Z",
-    "relatedId": "doc-060"
+    "timestamp": "2024-10-20T22:47:13.514Z",
+    "relatedId": "doc-033"
   },
   {
     "id": "mem-172",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Event sourcing for audit log v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-09-04T06:30:39.398Z",
-    "relatedId": "doc-064"
-  },
-  {
-    "id": "mem-173",
     "type": "EXECUTIVE_SUMMARY",
     "content": "Post-Mortem: Data Pipeline Stall v2",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-08-12T02:08:49.542Z",
-    "relatedId": "doc-069"
+    "timestamp": "2025-01-23T21:56:42.201Z",
+    "relatedId": "doc-037"
+  },
+  {
+    "id": "mem-173",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Blameless Post-Mortem: API Gateway Issue v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-09-25T03:27:12.110Z",
+    "relatedId": "doc-040"
   },
   {
     "id": "mem-174",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Auth Service Failure v5",
+    "content": "RFC: Migrate to Kubernetes v5",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-11-12T07:12:02.877Z",
-    "relatedId": "doc-073"
+    "timestamp": "2025-03-08T14:35:26.810Z",
+    "relatedId": "doc-043"
   },
   {
     "id": "mem-175",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v3",
+    "content": "Post-Mortem: Auth Service Failure v3",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-08-09T20:18:53.382Z",
-    "relatedId": "doc-083"
+    "timestamp": "2024-06-23T06:31:43.132Z",
+    "relatedId": "doc-045"
   },
   {
     "id": "mem-176",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Event sourcing for audit log v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-07-08T06:58:11.731Z",
-    "relatedId": "doc-086"
-  },
-  {
-    "id": "mem-177",
     "type": "EXECUTIVE_SUMMARY",
     "content": "Post-Mortem: Data Pipeline Stall v4",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-08-31T23:32:20.108Z",
-    "relatedId": "doc-089"
+    "timestamp": "2024-10-22T19:37:19.174Z",
+    "relatedId": "doc-049"
+  },
+  {
+    "id": "mem-177",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Blameless Post-Mortem: API Gateway Issue v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-05-15T01:12:59.891Z",
+    "relatedId": "doc-051"
   },
   {
     "id": "mem-178",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Data Pipeline Stall v3",
+    "content": "Post-Mortem: P0 Database Outage v2",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2025-03-06T01:52:12.143Z",
-    "relatedId": "doc-099"
+    "timestamp": "2024-10-15T15:26:17.983Z",
+    "relatedId": "doc-056"
   },
   {
     "id": "mem-179",
@@ -1786,418 +1786,418 @@
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-08-31T06:25:44.615Z",
-    "relatedId": "doc-100"
+    "timestamp": "2024-08-21T12:03:08.646Z",
+    "relatedId": "doc-057"
   },
   {
     "id": "mem-180",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-06-14T01:36:33.571Z",
-    "relatedId": "doc-103"
-  },
-  {
-    "id": "mem-181",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-09-17T14:27:31.575Z",
-    "relatedId": "doc-112"
-  },
-  {
-    "id": "mem-182",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-06-29T20:10:52.374Z",
-    "relatedId": "doc-113"
-  },
-  {
-    "id": "mem-183",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Data Pipeline Stall v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-01-22T23:13:00.307Z",
-    "relatedId": "doc-115"
-  },
-  {
-    "id": "mem-184",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-03-01T15:30:50.031Z",
-    "relatedId": "doc-117"
-  },
-  {
-    "id": "mem-185",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt GraphQL for Platform API v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-06-18T22:50:33.844Z",
-    "relatedId": "doc-120"
-  },
-  {
-    "id": "mem-186",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-09-23T19:04:25.114Z",
-    "relatedId": "doc-122"
-  },
-  {
-    "id": "mem-187",
     "type": "EXECUTIVE_SUMMARY",
     "content": "RFC: Adopt GraphQL for Platform API v4",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-12-06T09:36:02.807Z",
-    "relatedId": "doc-126"
+    "timestamp": "2025-01-20T18:08:20.693Z",
+    "relatedId": "doc-062"
   },
   {
-    "id": "mem-188",
+    "id": "mem-181",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Data Pipeline Stall v2",
+    "content": "RFC: Adopt OpenTelemetry v2",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2025-03-07T12:42:23.513Z",
-    "relatedId": "doc-127"
+    "timestamp": "2024-06-09T12:05:31.426Z",
+    "relatedId": "doc-064"
   },
   {
-    "id": "mem-189",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Auth Service Failure v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-11-19T22:16:01.862Z",
-    "relatedId": "doc-132"
-  },
-  {
-    "id": "mem-190",
+    "id": "mem-182",
     "type": "EXECUTIVE_SUMMARY",
     "content": "RFC: Event sourcing for audit log v2",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-09-28T02:07:15.711Z",
-    "relatedId": "doc-133"
+    "timestamp": "2024-11-03T11:16:29.255Z",
+    "relatedId": "doc-065"
   },
   {
-    "id": "mem-191",
+    "id": "mem-183",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Migrate to Kubernetes v4",
+    "content": "RFC: Adopt GraphQL for Platform API v4",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2025-05-14T02:08:03.429Z",
-    "relatedId": "doc-136"
+    "timestamp": "2025-05-24T06:50:08.719Z",
+    "relatedId": "doc-069"
   },
   {
-    "id": "mem-192",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-09-21T18:59:06.942Z",
-    "relatedId": "doc-137"
-  },
-  {
-    "id": "mem-193",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Auth Service Failure v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-11-14T12:46:25.502Z",
-    "relatedId": "doc-148"
-  },
-  {
-    "id": "mem-194",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-03-21T09:01:56.398Z",
-    "relatedId": "doc-150"
-  },
-  {
-    "id": "mem-195",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-12-17T07:30:22.697Z",
-    "relatedId": "doc-151"
-  },
-  {
-    "id": "mem-196",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt GraphQL for Platform API v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-07-10T00:24:50.859Z",
-    "relatedId": "doc-166"
-  },
-  {
-    "id": "mem-197",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-12-30T04:14:11.114Z",
-    "relatedId": "doc-167"
-  },
-  {
-    "id": "mem-198",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Auth Service Failure v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-02-17T18:14:11.950Z",
-    "relatedId": "doc-172"
-  },
-  {
-    "id": "mem-199",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt GraphQL for Platform API v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-09-30T01:17:24.285Z",
-    "relatedId": "doc-176"
-  },
-  {
-    "id": "mem-200",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-06-29T15:45:00.466Z",
-    "relatedId": "doc-177"
-  },
-  {
-    "id": "mem-201",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt GraphQL for Platform API v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-03-31T04:18:44.495Z",
-    "relatedId": "doc-178"
-  },
-  {
-    "id": "mem-202",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Auth Service Failure v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-01-05T00:23:22.369Z",
-    "relatedId": "doc-181"
-  },
-  {
-    "id": "mem-203",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Auth Service Failure v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-10-03T23:38:48.548Z",
-    "relatedId": "doc-183"
-  },
-  {
-    "id": "mem-204",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-06-19T20:00:13.128Z",
-    "relatedId": "doc-185"
-  },
-  {
-    "id": "mem-205",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Migrate to Kubernetes v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-06-26T15:10:18.421Z",
-    "relatedId": "doc-186"
-  },
-  {
-    "id": "mem-206",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Data Pipeline Stall v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-01-31T16:40:24.358Z",
-    "relatedId": "doc-188"
-  },
-  {
-    "id": "mem-207",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-03-06T17:28:58.731Z",
-    "relatedId": "doc-194"
-  },
-  {
-    "id": "mem-208",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Event sourcing for audit log v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-07-22T15:37:58.659Z",
-    "relatedId": "doc-196"
-  },
-  {
-    "id": "mem-209",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Auth Service Failure v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-09-02T07:48:32.770Z",
-    "relatedId": "doc-199"
-  },
-  {
-    "id": "mem-210",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Data Pipeline Stall v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-03-17T20:58:20.810Z",
-    "relatedId": "doc-205"
-  },
-  {
-    "id": "mem-211",
+    "id": "mem-184",
     "type": "EXECUTIVE_SUMMARY",
     "content": "RFC: Event sourcing for audit log v4",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-09-02T04:39:52.068Z",
-    "relatedId": "doc-209"
+    "timestamp": "2025-01-23T19:00:25.382Z",
+    "relatedId": "doc-072"
   },
   {
-    "id": "mem-212",
+    "id": "mem-185",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Data Pipeline Stall v5",
+    "content": "RFC: Adopt OpenTelemetry v2",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-09-26T04:16:38.191Z",
-    "relatedId": "doc-212"
+    "timestamp": "2024-06-07T07:10:58.808Z",
+    "relatedId": "doc-078"
   },
   {
-    "id": "mem-213",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Auth Service Failure v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-01-21T04:17:53.785Z",
-    "relatedId": "doc-215"
-  },
-  {
-    "id": "mem-214",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-03-28T17:28:03.667Z",
-    "relatedId": "doc-216"
-  },
-  {
-    "id": "mem-215",
+    "id": "mem-186",
     "type": "EXECUTIVE_SUMMARY",
     "content": "Blameless Post-Mortem: API Gateway Issue v5",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-09-01T15:23:22.897Z",
-    "relatedId": "doc-217"
+    "timestamp": "2025-03-23T08:57:41.693Z",
+    "relatedId": "doc-079"
   },
   {
-    "id": "mem-216",
+    "id": "mem-187",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Migrate to Kubernetes v3",
+    "content": "RFC: Adopt GraphQL for Platform API v2",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2025-02-28T21:22:53.750Z",
-    "relatedId": "doc-220"
+    "timestamp": "2025-04-29T23:43:26.763Z",
+    "relatedId": "doc-082"
   },
   {
-    "id": "mem-217",
+    "id": "mem-188",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt OpenTelemetry v3",
+    "content": "Blameless Post-Mortem: API Gateway Issue v4",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-10-21T12:41:12.868Z",
-    "relatedId": "doc-225"
+    "timestamp": "2024-08-14T13:04:47.086Z",
+    "relatedId": "doc-090"
   },
   {
-    "id": "mem-218",
+    "id": "mem-189",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt OpenTelemetry v3",
+    "content": "Post-Mortem: Data Pipeline Stall v5",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-09-05T01:03:16.293Z",
-    "relatedId": "doc-227"
+    "timestamp": "2025-01-30T14:32:33.024Z",
+    "relatedId": "doc-100"
   },
   {
-    "id": "mem-219",
+    "id": "mem-190",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Migrate to Kubernetes v3",
+    "content": "Post-Mortem: P0 Database Outage v5",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-10-08T05:07:47.589Z",
-    "relatedId": "doc-230"
+    "timestamp": "2024-09-12T01:05:10.861Z",
+    "relatedId": "doc-107"
   },
   {
-    "id": "mem-220",
+    "id": "mem-191",
     "type": "EXECUTIVE_SUMMARY",
     "content": "Post-Mortem: Auth Service Failure v3",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-07-08T07:06:03.092Z",
-    "relatedId": "doc-233"
+    "timestamp": "2025-02-17T21:34:35.259Z",
+    "relatedId": "doc-110"
+  },
+  {
+    "id": "mem-192",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt OpenTelemetry v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-04-23T04:48:08.517Z",
+    "relatedId": "doc-114"
+  },
+  {
+    "id": "mem-193",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt GraphQL for Platform API v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-08-30T04:33:34.337Z",
+    "relatedId": "doc-120"
+  },
+  {
+    "id": "mem-194",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-07-13T19:33:15.982Z",
+    "relatedId": "doc-121"
+  },
+  {
+    "id": "mem-195",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-11-12T12:02:09.690Z",
+    "relatedId": "doc-134"
+  },
+  {
+    "id": "mem-196",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-12-12T01:42:46.581Z",
+    "relatedId": "doc-136"
+  },
+  {
+    "id": "mem-197",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Blameless Post-Mortem: API Gateway Issue v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-04-13T08:05:03.310Z",
+    "relatedId": "doc-144"
+  },
+  {
+    "id": "mem-198",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Event sourcing for audit log v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-10-12T10:55:43.542Z",
+    "relatedId": "doc-145"
+  },
+  {
+    "id": "mem-199",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Event sourcing for audit log v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-04-27T12:43:55.969Z",
+    "relatedId": "doc-146"
+  },
+  {
+    "id": "mem-200",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: P0 Database Outage v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-10-26T08:28:05.359Z",
+    "relatedId": "doc-147"
+  },
+  {
+    "id": "mem-201",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-12-04T05:20:51.617Z",
+    "relatedId": "doc-149"
+  },
+  {
+    "id": "mem-202",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt OpenTelemetry v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-10-09T19:38:41.153Z",
+    "relatedId": "doc-154"
+  },
+  {
+    "id": "mem-203",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-02-05T17:40:18.641Z",
+    "relatedId": "doc-156"
+  },
+  {
+    "id": "mem-204",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt OpenTelemetry v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-02-21T02:42:35.263Z",
+    "relatedId": "doc-157"
+  },
+  {
+    "id": "mem-205",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Data Pipeline Stall v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-02-14T06:27:47.708Z",
+    "relatedId": "doc-158"
+  },
+  {
+    "id": "mem-206",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt OpenTelemetry v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-07-03T15:21:26.250Z",
+    "relatedId": "doc-169"
+  },
+  {
+    "id": "mem-207",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Event sourcing for audit log v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-01-06T06:35:57.942Z",
+    "relatedId": "doc-171"
+  },
+  {
+    "id": "mem-208",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: P0 Database Outage v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-05-29T09:20:40.210Z",
+    "relatedId": "doc-177"
+  },
+  {
+    "id": "mem-209",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Migrate to Kubernetes v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-07-16T06:30:14.939Z",
+    "relatedId": "doc-179"
+  },
+  {
+    "id": "mem-210",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Data Pipeline Stall v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-04-25T12:44:36.959Z",
+    "relatedId": "doc-180"
+  },
+  {
+    "id": "mem-211",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt GraphQL for Platform API v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-09-07T18:13:10.818Z",
+    "relatedId": "doc-181"
+  },
+  {
+    "id": "mem-212",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-10-30T09:22:30.801Z",
+    "relatedId": "doc-183"
+  },
+  {
+    "id": "mem-213",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt GraphQL for Platform API v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-07-08T06:53:18.429Z",
+    "relatedId": "doc-184"
+  },
+  {
+    "id": "mem-214",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Data Pipeline Stall v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-05-27T19:09:18.649Z",
+    "relatedId": "doc-187"
+  },
+  {
+    "id": "mem-215",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt GraphQL for Platform API v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-04-21T16:17:46.568Z",
+    "relatedId": "doc-188"
+  },
+  {
+    "id": "mem-216",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Data Pipeline Stall v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-10-07T12:21:12.411Z",
+    "relatedId": "doc-190"
+  },
+  {
+    "id": "mem-217",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Event sourcing for audit log v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-02-25T12:58:56.973Z",
+    "relatedId": "doc-191"
+  },
+  {
+    "id": "mem-218",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Migrate to Kubernetes v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-12-08T00:03:56.182Z",
+    "relatedId": "doc-197"
+  },
+  {
+    "id": "mem-219",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Data Pipeline Stall v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-12-04T15:02:21.977Z",
+    "relatedId": "doc-201"
+  },
+  {
+    "id": "mem-220",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-06-17T18:19:09.371Z",
+    "relatedId": "doc-204"
   },
   {
     "id": "mem-221",
@@ -2206,198 +2206,198 @@
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-11-04T16:24:08.914Z",
-    "relatedId": "doc-236"
+    "timestamp": "2024-07-18T18:48:46.386Z",
+    "relatedId": "doc-205"
   },
   {
     "id": "mem-222",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Data Pipeline Stall v5",
+    "content": "Post-Mortem: Auth Service Failure v5",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-07-31T18:30:58.439Z",
-    "relatedId": "doc-240"
+    "timestamp": "2025-03-29T22:32:30.637Z",
+    "relatedId": "doc-207"
   },
   {
     "id": "mem-223",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Migrate to Kubernetes v3",
+    "content": "RFC: Migrate to Kubernetes v2",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2025-03-26T23:42:44.125Z",
-    "relatedId": "doc-246"
+    "timestamp": "2025-05-26T05:50:10.327Z",
+    "relatedId": "doc-217"
   },
   {
     "id": "mem-224",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Event sourcing for audit log v5",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-11-09T11:15:32.941Z",
+    "relatedId": "doc-219"
+  },
+  {
+    "id": "mem-225",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Blameless Post-Mortem: API Gateway Issue v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-11-21T00:55:35.641Z",
+    "relatedId": "doc-224"
+  },
+  {
+    "id": "mem-226",
     "type": "EXECUTIVE_SUMMARY",
     "content": "Post-Mortem: Auth Service Failure v3",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-11-27T09:33:39.548Z",
-    "relatedId": "doc-249"
-  },
-  {
-    "id": "mem-225",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Migrate to Kubernetes v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-01-15T23:18:34.938Z",
-    "relatedId": "doc-250"
-  },
-  {
-    "id": "mem-226",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-05-02T17:28:02.194Z",
-    "relatedId": "doc-253"
+    "timestamp": "2025-04-03T22:30:55.408Z",
+    "relatedId": "doc-244"
   },
   {
     "id": "mem-227",
     "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt OpenTelemetry v2",
+    "content": "RFC: Adopt OpenTelemetry v5",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-12-19T18:28:17.515Z",
-    "relatedId": "doc-258"
+    "timestamp": "2024-08-19T14:37:16.480Z",
+    "relatedId": "doc-246"
   },
   {
     "id": "mem-228",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt GraphQL for Platform API v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-05-30T07:21:25.658Z",
-    "relatedId": "doc-259"
-  },
-  {
-    "id": "mem-229",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-05-05T04:18:27.806Z",
-    "relatedId": "doc-260"
-  },
-  {
-    "id": "mem-230",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt OpenTelemetry v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-01-14T08:20:59.594Z",
-    "relatedId": "doc-263"
-  },
-  {
-    "id": "mem-231",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-06-27T19:35:44.214Z",
-    "relatedId": "doc-264"
-  },
-  {
-    "id": "mem-232",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: Data Pipeline Stall v5",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-05-06T21:27:38.409Z",
-    "relatedId": "doc-267"
-  },
-  {
-    "id": "mem-233",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-09-16T21:52:08.856Z",
-    "relatedId": "doc-273"
-  },
-  {
-    "id": "mem-234",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-03-10T16:44:32.505Z",
-    "relatedId": "doc-277"
-  },
-  {
-    "id": "mem-235",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Event sourcing for audit log v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-04-11T15:01:49.457Z",
-    "relatedId": "doc-281"
-  },
-  {
-    "id": "mem-236",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-11-14T06:26:27.373Z",
-    "relatedId": "doc-288"
-  },
-  {
-    "id": "mem-237",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "RFC: Adopt OpenTelemetry v2",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-06-30T10:41:49.508Z",
-    "relatedId": "doc-289"
-  },
-  {
-    "id": "mem-238",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Post-Mortem: P0 Database Outage v4",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2025-02-01T03:29:31.127Z",
-    "relatedId": "doc-291"
-  },
-  {
-    "id": "mem-239",
-    "type": "EXECUTIVE_SUMMARY",
-    "content": "Blameless Post-Mortem: API Gateway Issue v3",
-    "source": "knowledge-base",
-    "importance": 0.7,
-    "authority": 0.8,
-    "timestamp": "2024-10-11T23:21:30.841Z",
-    "relatedId": "doc-299"
-  },
-  {
-    "id": "mem-240",
     "type": "EXECUTIVE_SUMMARY",
     "content": "RFC: Adopt OpenTelemetry v3",
     "source": "knowledge-base",
     "importance": 0.7,
     "authority": 0.8,
-    "timestamp": "2024-11-18T13:59:45.420Z",
-    "relatedId": "doc-301"
+    "timestamp": "2024-11-26T04:30:05.279Z",
+    "relatedId": "doc-255"
+  },
+  {
+    "id": "mem-229",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Adopt OpenTelemetry v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-12-26T02:48:29.943Z",
+    "relatedId": "doc-257"
+  },
+  {
+    "id": "mem-230",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-03-25T08:53:17.851Z",
+    "relatedId": "doc-263"
+  },
+  {
+    "id": "mem-231",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Migrate to Kubernetes v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-09-19T11:49:12.406Z",
+    "relatedId": "doc-264"
+  },
+  {
+    "id": "mem-232",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-12-08T04:04:31.674Z",
+    "relatedId": "doc-269"
+  },
+  {
+    "id": "mem-233",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Blameless Post-Mortem: API Gateway Issue v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-08-20T06:44:37.158Z",
+    "relatedId": "doc-272"
+  },
+  {
+    "id": "mem-234",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-08-17T20:23:33.397Z",
+    "relatedId": "doc-273"
+  },
+  {
+    "id": "mem-235",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: P0 Database Outage v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-09-08T10:33:11.957Z",
+    "relatedId": "doc-280"
+  },
+  {
+    "id": "mem-236",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Data Pipeline Stall v4",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-08-20T14:18:53.267Z",
+    "relatedId": "doc-282"
+  },
+  {
+    "id": "mem-237",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Auth Service Failure v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-06-16T06:57:33.347Z",
+    "relatedId": "doc-283"
+  },
+  {
+    "id": "mem-238",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Blameless Post-Mortem: API Gateway Issue v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-12-12T01:01:38.309Z",
+    "relatedId": "doc-284"
+  },
+  {
+    "id": "mem-239",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "RFC: Migrate to Kubernetes v3",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2024-10-12T00:02:18.010Z",
+    "relatedId": "doc-285"
+  },
+  {
+    "id": "mem-240",
+    "type": "EXECUTIVE_SUMMARY",
+    "content": "Post-Mortem: Data Pipeline Stall v2",
+    "source": "knowledge-base",
+    "importance": 0.7,
+    "authority": 0.8,
+    "timestamp": "2025-02-21T13:29:29.399Z",
+    "relatedId": "doc-287"
   },
   {
     "id": "mem-241",
@@ -2406,28 +2406,28 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-08-26T07:32:46.993Z",
+    "timestamp": "2025-05-06T06:13:56.361Z",
     "relatedId": "cal-003"
   },
   {
     "id": "mem-242",
     "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
+    "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-01-07T07:35:39.423Z",
+    "timestamp": "2025-02-01T14:02:34.723Z",
     "relatedId": "cal-004"
   },
   {
     "id": "mem-243",
     "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
+    "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-07-22T01:55:53.310Z",
-    "relatedId": "cal-010"
+    "timestamp": "2025-01-02T18:05:54.666Z",
+    "relatedId": "cal-005"
   },
   {
     "id": "mem-244",
@@ -2436,28 +2436,28 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-03-04T15:44:17.943Z",
-    "relatedId": "cal-015"
+    "timestamp": "2025-03-01T04:51:51.574Z",
+    "relatedId": "cal-016"
   },
   {
     "id": "mem-245",
-    "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
-    "source": "calendar",
-    "importance": 0.65,
-    "authority": 0.75,
-    "timestamp": "2025-01-10T02:56:10.525Z",
-    "relatedId": "cal-019"
-  },
-  {
-    "id": "mem-246",
     "type": "MEETING_NOTE",
     "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-03-11T16:25:46.824Z",
-    "relatedId": "cal-043"
+    "timestamp": "2025-07-30T10:31:16.626Z",
+    "relatedId": "cal-017"
+  },
+  {
+    "id": "mem-246",
+    "type": "MEETING_NOTE",
+    "content": "Helios All-Hands Meeting",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-07-01T06:59:37.688Z",
+    "relatedId": "cal-030"
   },
   {
     "id": "mem-247",
@@ -2466,48 +2466,48 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-01-20T05:50:19.609Z",
-    "relatedId": "cal-045"
+    "timestamp": "2025-10-26T17:44:03.660Z",
+    "relatedId": "cal-031"
   },
   {
     "id": "mem-248",
-    "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
-    "source": "calendar",
-    "importance": 0.65,
-    "authority": 0.75,
-    "timestamp": "2025-10-15T17:43:18.286Z",
-    "relatedId": "cal-054"
-  },
-  {
-    "id": "mem-249",
     "type": "MEETING_NOTE",
     "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-07-06T05:03:10.063Z",
-    "relatedId": "cal-056"
+    "timestamp": "2025-02-09T10:17:38.037Z",
+    "relatedId": "cal-033"
+  },
+  {
+    "id": "mem-249",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-03-31T04:48:08.578Z",
+    "relatedId": "cal-041"
   },
   {
     "id": "mem-250",
     "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
+    "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-07-21T07:29:31.302Z",
-    "relatedId": "cal-062"
+    "timestamp": "2025-07-06T13:01:35.805Z",
+    "relatedId": "cal-043"
   },
   {
     "id": "mem-251",
     "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
+    "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-03-01T04:51:51.574Z",
-    "relatedId": "cal-084"
+    "timestamp": "2025-02-27T19:54:47.076Z",
+    "relatedId": "cal-046"
   },
   {
     "id": "mem-252",
@@ -2516,8 +2516,8 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-07-30T10:31:16.626Z",
-    "relatedId": "cal-085"
+    "timestamp": "2025-03-28T07:35:19.971Z",
+    "relatedId": "cal-053"
   },
   {
     "id": "mem-253",
@@ -2526,28 +2526,28 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-07-01T06:59:37.688Z",
-    "relatedId": "cal-098"
+    "timestamp": "2025-04-15T13:54:57.721Z",
+    "relatedId": "cal-055"
   },
   {
     "id": "mem-254",
     "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
+    "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-10-26T17:44:03.660Z",
-    "relatedId": "cal-099"
+    "timestamp": "2025-01-26T17:16:54.513Z",
+    "relatedId": "cal-071"
   },
   {
     "id": "mem-255",
     "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
+    "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-02-09T10:17:38.037Z",
-    "relatedId": "cal-101"
+    "timestamp": "2025-10-21T00:15:55.382Z",
+    "relatedId": "cal-073"
   },
   {
     "id": "mem-256",
@@ -2556,18 +2556,18 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-03-31T04:48:08.578Z",
-    "relatedId": "cal-109"
+    "timestamp": "2025-07-31T03:50:13.124Z",
+    "relatedId": "cal-078"
   },
   {
     "id": "mem-257",
     "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
+    "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-07-06T13:01:35.805Z",
-    "relatedId": "cal-111"
+    "timestamp": "2025-10-15T07:10:25.243Z",
+    "relatedId": "cal-093"
   },
   {
     "id": "mem-258",
@@ -2576,8 +2576,8 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-02-27T19:54:47.076Z",
-    "relatedId": "cal-114"
+    "timestamp": "2025-06-25T04:49:02.532Z",
+    "relatedId": "cal-109"
   },
   {
     "id": "mem-259",
@@ -2586,28 +2586,28 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-03-28T07:35:19.971Z",
-    "relatedId": "cal-121"
+    "timestamp": "2025-07-06T04:37:38.193Z",
+    "relatedId": "cal-114"
   },
   {
     "id": "mem-260",
-    "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
-    "source": "calendar",
-    "importance": 0.65,
-    "authority": 0.75,
-    "timestamp": "2025-04-15T13:54:57.721Z",
-    "relatedId": "cal-123"
-  },
-  {
-    "id": "mem-261",
     "type": "MEETING_NOTE",
     "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-01-26T17:16:54.513Z",
-    "relatedId": "cal-139"
+    "timestamp": "2025-04-10T19:44:55.970Z",
+    "relatedId": "cal-138"
+  },
+  {
+    "id": "mem-261",
+    "type": "MEETING_NOTE",
+    "content": "Helios All-Hands Meeting",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-08-27T15:08:00.839Z",
+    "relatedId": "cal-142"
   },
   {
     "id": "mem-262",
@@ -2616,8 +2616,8 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-10-21T00:15:55.382Z",
-    "relatedId": "cal-141"
+    "timestamp": "2025-12-22T18:05:13.576Z",
+    "relatedId": "cal-148"
   },
   {
     "id": "mem-263",
@@ -2626,8 +2626,8 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-07-31T03:50:13.124Z",
-    "relatedId": "cal-146"
+    "timestamp": "2025-04-14T03:52:22.020Z",
+    "relatedId": "cal-157"
   },
   {
     "id": "mem-264",
@@ -2636,78 +2636,78 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-10-15T07:10:25.243Z",
-    "relatedId": "cal-161"
+    "timestamp": "2025-10-01T08:18:38.487Z",
+    "relatedId": "cal-178"
   },
   {
     "id": "mem-265",
     "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
+    "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-06-25T04:49:02.532Z",
-    "relatedId": "cal-177"
+    "timestamp": "2025-11-01T15:49:21.969Z",
+    "relatedId": "cal-185"
   },
   {
     "id": "mem-266",
     "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
+    "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-07-06T04:37:38.193Z",
-    "relatedId": "cal-182"
+    "timestamp": "2025-12-14T05:12:18.424Z",
+    "relatedId": "cal-186"
   },
   {
     "id": "mem-267",
-    "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
-    "source": "calendar",
-    "importance": 0.65,
-    "authority": 0.75,
-    "timestamp": "2025-04-10T19:44:55.970Z",
-    "relatedId": "cal-206"
-  },
-  {
-    "id": "mem-268",
     "type": "MEETING_NOTE",
     "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-08-27T15:08:00.839Z",
-    "relatedId": "cal-210"
+    "timestamp": "2025-09-24T23:40:52.936Z",
+    "relatedId": "cal-187"
+  },
+  {
+    "id": "mem-268",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-04-15T05:54:50.360Z",
+    "relatedId": "cal-193"
   },
   {
     "id": "mem-269",
     "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
+    "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-12-22T18:05:13.576Z",
-    "relatedId": "cal-216"
+    "timestamp": "2025-07-09T11:37:48.262Z",
+    "relatedId": "cal-198"
   },
   {
     "id": "mem-270",
     "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
+    "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-04-14T03:52:22.020Z",
-    "relatedId": "cal-225"
+    "timestamp": "2025-03-31T23:15:22.458Z",
+    "relatedId": "cal-199"
   },
   {
     "id": "mem-271",
     "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
+    "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-10-01T08:18:38.487Z",
-    "relatedId": "cal-246"
+    "timestamp": "2025-12-18T07:48:53.256Z",
+    "relatedId": "cal-206"
   },
   {
     "id": "mem-272",
@@ -2716,78 +2716,78 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-11-01T15:49:21.969Z",
-    "relatedId": "cal-253"
+    "timestamp": "2025-08-10T04:51:38.878Z",
+    "relatedId": "cal-210"
   },
   {
     "id": "mem-273",
     "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
+    "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-12-14T05:12:18.424Z",
-    "relatedId": "cal-254"
+    "timestamp": "2025-10-02T02:44:49.027Z",
+    "relatedId": "cal-219"
   },
   {
     "id": "mem-274",
     "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
+    "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-09-24T23:40:52.936Z",
-    "relatedId": "cal-255"
+    "timestamp": "2025-07-28T23:07:19.953Z",
+    "relatedId": "cal-224"
   },
   {
     "id": "mem-275",
     "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
+    "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-04-15T05:54:50.360Z",
-    "relatedId": "cal-261"
+    "timestamp": "2025-02-21T05:53:33.593Z",
+    "relatedId": "cal-227"
   },
   {
     "id": "mem-276",
     "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
+    "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-07-09T11:37:48.262Z",
-    "relatedId": "cal-266"
+    "timestamp": "2025-02-09T06:18:46.492Z",
+    "relatedId": "cal-228"
   },
   {
     "id": "mem-277",
-    "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
-    "source": "calendar",
-    "importance": 0.65,
-    "authority": 0.75,
-    "timestamp": "2025-03-31T23:15:22.458Z",
-    "relatedId": "cal-267"
-  },
-  {
-    "id": "mem-278",
-    "type": "MEETING_NOTE",
-    "content": "Helios All-Hands Meeting",
-    "source": "calendar",
-    "importance": 0.65,
-    "authority": 0.75,
-    "timestamp": "2025-12-18T07:48:53.256Z",
-    "relatedId": "cal-274"
-  },
-  {
-    "id": "mem-279",
     "type": "MEETING_NOTE",
     "content": "Executive Leadership Team Sync",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-08-10T04:51:38.878Z",
-    "relatedId": "cal-278"
+    "timestamp": "2025-04-14T23:24:32.673Z",
+    "relatedId": "cal-246"
+  },
+  {
+    "id": "mem-278",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-01-24T15:46:47.909Z",
+    "relatedId": "cal-247"
+  },
+  {
+    "id": "mem-279",
+    "type": "MEETING_NOTE",
+    "content": "Helios All-Hands Meeting",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-10-27T18:21:47.105Z",
+    "relatedId": "cal-248"
   },
   {
     "id": "mem-280",
@@ -2796,28 +2796,28 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-10-02T02:44:49.027Z",
-    "relatedId": "cal-287"
+    "timestamp": "2025-09-27T15:10:05.019Z",
+    "relatedId": "cal-250"
   },
   {
     "id": "mem-281",
-    "type": "MEETING_NOTE",
-    "content": "Executive Leadership Team Sync",
-    "source": "calendar",
-    "importance": 0.65,
-    "authority": 0.75,
-    "timestamp": "2025-07-28T23:07:19.953Z",
-    "relatedId": "cal-292"
-  },
-  {
-    "id": "mem-282",
     "type": "MEETING_NOTE",
     "content": "Helios All-Hands Meeting",
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-02-21T05:53:33.593Z",
-    "relatedId": "cal-295"
+    "timestamp": "2025-04-30T14:06:51.729Z",
+    "relatedId": "cal-251"
+  },
+  {
+    "id": "mem-282",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-08-06T02:12:49.154Z",
+    "relatedId": "cal-255"
   },
   {
     "id": "mem-283",
@@ -2826,7 +2826,107 @@
     "source": "calendar",
     "importance": 0.65,
     "authority": 0.75,
-    "timestamp": "2025-02-09T06:18:46.492Z",
+    "timestamp": "2025-08-16T13:47:35.935Z",
+    "relatedId": "cal-256"
+  },
+  {
+    "id": "mem-284",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-12-16T13:41:19.040Z",
+    "relatedId": "cal-263"
+  },
+  {
+    "id": "mem-285",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-09-16T08:38:08.575Z",
+    "relatedId": "cal-264"
+  },
+  {
+    "id": "mem-286",
+    "type": "MEETING_NOTE",
+    "content": "Helios All-Hands Meeting",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-12-25T18:50:02.349Z",
+    "relatedId": "cal-266"
+  },
+  {
+    "id": "mem-287",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-06-12T16:50:13.778Z",
+    "relatedId": "cal-275"
+  },
+  {
+    "id": "mem-288",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-08-25T02:40:15.837Z",
+    "relatedId": "cal-277"
+  },
+  {
+    "id": "mem-289",
+    "type": "MEETING_NOTE",
+    "content": "Helios All-Hands Meeting",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-04-23T11:51:24.087Z",
+    "relatedId": "cal-280"
+  },
+  {
+    "id": "mem-290",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-06-02T20:15:34.035Z",
+    "relatedId": "cal-284"
+  },
+  {
+    "id": "mem-291",
+    "type": "MEETING_NOTE",
+    "content": "Executive Leadership Team Sync",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-06-30T00:52:23.044Z",
+    "relatedId": "cal-291"
+  },
+  {
+    "id": "mem-292",
+    "type": "MEETING_NOTE",
+    "content": "Helios All-Hands Meeting",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-05-07T20:07:20.903Z",
     "relatedId": "cal-296"
+  },
+  {
+    "id": "mem-293",
+    "type": "MEETING_NOTE",
+    "content": "Helios All-Hands Meeting",
+    "source": "calendar",
+    "importance": 0.65,
+    "authority": 0.75,
+    "timestamp": "2025-08-29T07:16:58.981Z",
+    "relatedId": "cal-300"
   }
 ]

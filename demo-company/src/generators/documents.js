@@ -17,7 +17,7 @@ export function generateDocuments(employees) {
     const i=idx+1;
     const type=faker.helpers.weightedArrayElement(DOC_TYPES);
     const ts=TITLES[type]||['Internal Document'];
-    const product=Math.random()<0.7?faker.helpers.arrayElement(PRODUCTS):null;
+    const product=faker.datatype.boolean(0.7)?faker.helpers.arrayElement(PRODUCTS):null;
     const author=faker.helpers.arrayElement(employees);
     const createdAt=faker.date.between({from:'2024-06-01',to:'2025-06-01'}).toISOString();
     return {

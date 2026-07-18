@@ -14,10 +14,10 @@ export function generateMeetingTranscripts(calendarEvents, employees) {
       text:faker.helpers.arrayElement(['Update runbook with new procedure','Schedule follow-up with customer','Create Jira epic for sprint','Draft architecture RFC','Share post-mortem with leadership','Prepare metrics dashboard']),
       dueDate:faker.date.soon({days:14}).toISOString().split('T')[0],
     }));
-    const lines=parts.flatMap(pId=>{
+    const lines=faker.helpers.shuffle(parts.flatMap(pId=>{
       const emp=employees.find(e=>e.id===pId);
       return Array.from({length:faker.number.int({min:3,max:8})},()=>`${emp?.name||'Participant'}: ${faker.lorem.sentence()}`);
-    }).sort(()=>Math.random()-0.5);
+    }));
     return {
       id:`transcript-${event.id}`,eventId:event.id,
       content:lines.join('\n'),participants:parts,

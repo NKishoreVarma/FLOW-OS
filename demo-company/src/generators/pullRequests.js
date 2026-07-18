@@ -23,7 +23,7 @@ export function generatePullRequests(repos, engineers, jiraIssues) {
         headBranch: `feature/${faker.helpers.slugify(title).slice(0,25)}`,
         mergedAt: status==='merged' ? faker.date.between({from:createdAt,to:'2025-12-31'}).toISOString() : null,
         createdAt,
-        jiraIssueId: Math.random()<0.5 && jiraIssues.length ? faker.helpers.arrayElement(jiraIssues).id : null,
+        jiraIssueId: faker.datatype.boolean(0.5) && jiraIssues.length ? faker.helpers.arrayElement(jiraIssues).id : null,
       });
     }
   }
