@@ -47,8 +47,8 @@ export default function RecoveryToast({ error = {}, onDismiss }) {
       maxWidth: 380, width: "calc(100vw - 48px)",
       background: "var(--bg-secondary)",
       border: "1px solid var(--border-strong)",
-      borderRadius: 12, padding: "16px 18px",
-      boxShadow: "0 8px 32px rgba(0,0,0,0.32)",
+      borderRadius: 10, padding: "16px 18px",
+      boxShadow: "0 8px 32px rgba(31,27,22,0.12)",
     }}>
       <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
         <AlertTriangle style={{ width: 18, height: 18, color: "var(--p-critical-text)", flexShrink: 0, marginTop: 1 }} />

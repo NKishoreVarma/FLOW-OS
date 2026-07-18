@@ -1,22 +1,50 @@
+import { useState } from "react";
+
 export function Tabs({ tabs, activeTab, onTabChange, className = "" }) {
   return (
-    <div className={`flex border-b border-border-flow/40 ${className}`}>
+    <div
+      className={className}
+      style={{ display: "flex", borderBottom: "1px solid var(--border)", gap: 0 }}
+    >
       {tabs.map(tab => {
-        const label = typeof tab === 'string' ? tab : tab.label;
-        const count = typeof tab === 'object' ? tab.count : undefined;
+        const label = typeof tab === "string" ? tab : tab.label;
+        const count = typeof tab === "object" ? tab.count : undefined;
+        const isActive = activeTab === label;
         return (
           <button
             key={label}
             onClick={() => onTabChange(label)}
-            className={`px-4 py-2.5 text-ui-sm font-medium border-b-2 transition-colors cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
-              activeTab === label
-                ? 'border-flow-purple text-flow-purple'
-                : 'border-transparent text-text-muted hover:text-text-secondary'
-            }`}
+            style={{
+              padding:       "8px 14px",
+              fontSize:       13,
+              fontWeight:     isActive ? 500 : 400,
+              color:          isActive ? "var(--t1)" : "var(--t4)",
+              borderBottom:   `2px solid ${isActive ? "var(--brand)" : "transparent"}`,
+              background:     "none",
+              border:         "none",
+              borderBottom:   `2px solid ${isActive ? "var(--brand)" : "transparent"}`,
+              cursor:         "pointer",
+              display:        "flex",
+              alignItems:     "center",
+              gap:             6,
+              transition:     "color 100ms",
+              whiteSpace:     "nowrap",
+              userSelect:     "none",
+            }}
+            onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = "var(--t2)"; }}
+            onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = "var(--t4)"; }}
           >
             {label}
             {count !== undefined && count > 0 && (
-              <span className="text-[10px] bg-flow-purple/10 text-flow-purple px-1.5 py-0.5 rounded-full font-semibold">
+              <span style={{
+                fontSize:       10,
+                fontWeight:     600,
+                background:    "rgba(232,103,43,0.12)",
+                color:         "var(--brand-text)",
+                padding:        "1px 6px",
+                borderRadius:   4,
+                fontVariantNumeric: "tabular-nums",
+              }}>
                 {count}
               </span>
             )}

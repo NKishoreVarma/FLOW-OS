@@ -1,0 +1,20 @@
+:root {
+  /* 8px Spacing System */
+  --space-xxs: 4px;
+  --space-xs:  8px;
+  --space-sm:  12px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-xxl: 48px;
+  --space-xxxl:64px;
+
+  /* Radius — BOXY first */
+  --radius-none: 0px;
+  --radius-xs:   3px;   /* badge, tiny chip */
+  --radius-sm:   5px;   /* cards, buttons — the FLOW default */
+  --radius-md:   7px;   /* inputs */
+  --radius-lg:   10px;  /* modals */
+  --radius-xl:   14px;  /* large surfaces */
+  --radius-pill: 99px;  /* tags only */
+}

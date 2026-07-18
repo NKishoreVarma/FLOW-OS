@@ -51,40 +51,40 @@ function statusStyle(s) {
   switch (s?.toLowerCase()) {
     case "completed": return { color: "var(--p-normal-text)", background: "rgba(76,175,130,0.08)", border: "1px solid rgba(76,175,130,0.22)" };
     case "failed":    return { color: "var(--p-critical-text)", background: "rgba(255,87,87,0.08)", border: "1px solid rgba(255,87,87,0.22)" };
-    case "running":   return { color: "var(--brand-text)", background: "rgba(124,110,255,0.08)", border: "1px solid rgba(124,110,255,0.22)" };
-    default:          return { color: "var(--t4)", background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)" };
+    case "running":   return { color: "var(--brand-text)", background: "rgba(232,103,43,0.08)", border: "1px solid rgba(232,103,43,0.22)" };
+    default:          return { color: "var(--t4)", background: "rgba(31,27,22,0.05)", border: "1px solid var(--border)" };
   }
 }
 
 const StatusChip = ({ status }) => (
-  <span style={{ ...statusStyle(status), fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.10em", fontFamily: "'JetBrains Mono', monospace", padding: "2px 8px", borderRadius: 3 }}>
+  <span style={{ ...statusStyle(status), fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.10em", padding: "2px 8px", borderRadius: 3 }}>
     {status ?? "unknown"}
   </span>
 );
 
 const textareaStyle = {
-  width: "100%", background: "rgba(0,0,0,0.25)", border: "1px solid var(--border-strong)",
+  width: "100%", background: "rgba(31,27,22,0.08)", border: "1px solid var(--border-strong)",
   borderRadius: 4, padding: "12px 14px", fontSize: 11, color: "var(--t1)", outline: "none",
-  resize: "vertical", fontFamily: "'JetBrains Mono', monospace", boxSizing: "border-box", lineHeight: 1.6,
+  resize: "vertical", boxSizing: "border-box", lineHeight: 1.6,
 };
 
 const labelStyle = {
-  display: "block", fontSize: 8, fontWeight: 700, color: "var(--t5)",
-  textTransform: "uppercase", letterSpacing: "0.10em", fontFamily: "'JetBrains Mono', monospace", marginBottom: 6,
+  display: "block", fontSize: 8, fontWeight: 500, color: "var(--t5)",
+  textTransform: "uppercase", letterSpacing: "0.10em", marginBottom: 6,
 };
 
 const ManifestInputs = ({ manifest, setManifest, datasets, setDatasets, parseError, onLoadDemo, loadingDemo }) => (
   <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
     {/* Demo shortcut */}
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", background: "rgba(124,110,255,0.04)", border: "1px solid rgba(124,110,255,0.22)", borderRadius: 4 }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 14px", background: "rgba(232,103,43,0.04)", border: "1px solid rgba(232,103,43,0.22)", borderRadius: 4 }}>
       <div>
-        <span style={{ display: "block", fontSize: 12, fontWeight: 700, color: "var(--brand-text)", marginBottom: 2 }}>Helios Software Inc. — Demo Company</span>
+        <span style={{ display: "block", fontSize: 12, fontWeight: 500, color: "var(--brand-text)", marginBottom: 2 }}>Helios Software Inc. — Demo Company</span>
         <span style={{ fontSize: 10, color: "var(--t4)" }}>450 employees · 16 repos · 210 customers · 21 dataset types</span>
       </div>
       <button
         onClick={onLoadDemo}
         disabled={loadingDemo}
-        style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 14px", background: loadingDemo ? "rgba(124,110,255,0.10)" : "var(--brand)", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 600, color: "#fff", cursor: loadingDemo ? "not-allowed" : "pointer", opacity: loadingDemo ? 0.6 : 1 }}
+        style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 14px", background: loadingDemo ? "rgba(232,103,43,0.10)" : "var(--brand)", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 500, color: "#fff", cursor: loadingDemo ? "not-allowed" : "pointer", opacity: loadingDemo ? 0.6 : 1 }}
       >
         {loadingDemo ? <Loader2 style={{ width: 12, height: 12, animation: "spin 0.8s linear infinite" }} /> : <Sparkles style={{ width: 12, height: 12 }} />}
         {loadingDemo ? "Loading…" : "Load Demo"}
@@ -127,7 +127,7 @@ const ProgressView = ({ stages, operationResult, operationError, onReset }) => (
         const stage = stages[key];
         if (!stage) return null;
         return (
-          <div key={key} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", borderRadius: 4 }}>
+          <div key={key} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", borderRadius: 4 }}>
             {stage.status === "running"   && <Loader2 style={{ width: 14, height: 14, color: "var(--brand)", animation: "spin 0.8s linear infinite", flexShrink: 0 }} />}
             {stage.status === "completed" && <CheckCircle2 style={{ width: 14, height: 14, color: "var(--p-normal)", flexShrink: 0 }} />}
             {stage.status === "failed"    && <XCircle style={{ width: 14, height: 14, color: "var(--p-critical)", flexShrink: 0 }} />}
@@ -143,7 +143,7 @@ const ProgressView = ({ stages, operationResult, operationError, onReset }) => (
       <div style={{ padding: "16px", background: "rgba(76,175,130,0.05)", border: "1px solid rgba(76,175,130,0.22)", borderRadius: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
           <CheckCircle2 style={{ width: 16, height: 16, color: "var(--p-normal)" }} />
-          <span style={{ fontSize: 12, fontWeight: 700, color: "var(--p-normal-text)" }}>Operation completed successfully</span>
+          <span style={{ fontSize: 12, fontWeight: 500, color: "var(--p-normal-text)" }}>Operation completed successfully</span>
         </div>
         {operationResult.statistics && (
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, fontSize: 10, color: "var(--t4)" }}>
@@ -180,7 +180,7 @@ const ProgressView = ({ stages, operationResult, operationError, onReset }) => (
       <div style={{ padding: "16px", background: "rgba(255,87,87,0.05)", border: "1px solid rgba(255,87,87,0.22)", borderRadius: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
           <XCircle style={{ width: 16, height: 16, color: "var(--p-critical)" }} />
-          <span style={{ fontSize: 12, fontWeight: 700, color: "var(--p-critical-text)" }}>Operation failed</span>
+          <span style={{ fontSize: 12, fontWeight: 500, color: "var(--p-critical-text)" }}>Operation failed</span>
         </div>
         {operationError.errors?.length > 0 && (
           <ul style={{ paddingLeft: 18, margin: 0, fontSize: 10, color: "var(--p-critical-text)" }}>
@@ -192,7 +192,7 @@ const ProgressView = ({ stages, operationResult, operationError, onReset }) => (
     )}
 
     {(operationResult || operationError) && (
-      <button onClick={onReset} style={{ alignSelf: "flex-start", display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, color: "var(--t3)", cursor: "pointer" }}>
+      <button onClick={onReset} style={{ alignSelf: "flex-start", display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", background: "rgba(31,27,22,0.05)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, color: "var(--t3)", cursor: "pointer" }}>
         <RefreshCw style={{ width: 12, height: 12 }} /> Start new operation
       </button>
     )}
@@ -206,7 +206,7 @@ const ValidateResultPanel = ({ result }) => {
     <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 11 }}>
       {result.manifestErrors?.length > 0 && (
         <div style={{ padding: "10px 12px", background: "rgba(255,87,87,0.05)", border: "1px solid rgba(255,87,87,0.22)", borderRadius: 4 }}>
-          <p style={{ fontWeight: 700, color: "var(--p-critical-text)", marginBottom: 6 }}>Manifest Errors</p>
+          <p style={{ fontWeight: 500, color: "var(--p-critical-text)", marginBottom: 6 }}>Manifest Errors</p>
           <ul style={{ paddingLeft: 16, margin: 0, color: "var(--p-critical-text)" }}>
             {result.manifestErrors.map((e, i) => <li key={i}>{e}</li>)}
           </ul>
@@ -214,12 +214,12 @@ const ValidateResultPanel = ({ result }) => {
       )}
       {perTypeEntries.length > 0 && (
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <span style={{ fontSize: 8, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.10em", color: "var(--t5)", fontFamily: "'JetBrains Mono', monospace" }}>Per-type results</span>
+          <span style={{ fontSize: 8, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.10em", color: "var(--t5)" }}>Per-type results</span>
           {perTypeEntries.map(([typeName, t], i) => (
-            <div key={i} style={{ padding: "10px 12px", background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", borderRadius: 4 }}>
+            <div key={i} style={{ padding: "10px 12px", background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", borderRadius: 4 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: t.errors?.length ? 6 : 0 }}>
-                <span style={{ fontWeight: 700, color: "var(--t1)" }}>{typeName}</span>
-                <span style={{ ...(t.valid ? { color: "var(--p-normal-text)", background: "rgba(76,175,130,0.08)", border: "1px solid rgba(76,175,130,0.22)" } : { color: "var(--p-critical-text)", background: "rgba(255,87,87,0.08)", border: "1px solid rgba(255,87,87,0.22)" }), fontSize: 8, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'JetBrains Mono', monospace", padding: "2px 7px", borderRadius: 3 }}>
+                <span style={{ fontWeight: 500, color: "var(--t1)" }}>{typeName}</span>
+                <span style={{ ...(t.valid ? { color: "var(--p-normal-text)", background: "rgba(76,175,130,0.08)", border: "1px solid rgba(76,175,130,0.22)" } : { color: "var(--p-critical-text)", background: "rgba(255,87,87,0.08)", border: "1px solid rgba(255,87,87,0.22)" }), fontSize: 8, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.08em", padding: "2px 7px", borderRadius: 3 }}>
                   {t.valid ? "valid" : "invalid"}
                 </span>
               </div>
@@ -234,7 +234,7 @@ const ValidateResultPanel = ({ result }) => {
       )}
       {result.brokenReferences?.length > 0 && (
         <div style={{ padding: "10px 12px", background: "rgba(255,87,87,0.05)", border: "1px solid rgba(255,87,87,0.22)", borderRadius: 4 }}>
-          <p style={{ fontWeight: 700, color: "var(--p-critical-text)", marginBottom: 6 }}>Broken References</p>
+          <p style={{ fontWeight: 500, color: "var(--p-critical-text)", marginBottom: 6 }}>Broken References</p>
           <ul style={{ paddingLeft: 16, margin: 0, color: "var(--p-critical-text)" }}>
             {result.brokenReferences.map((r, i) => <li key={i}>{r}</li>)}
           </ul>
@@ -242,7 +242,7 @@ const ValidateResultPanel = ({ result }) => {
       )}
       {result.warnings?.length > 0 && (
         <div style={{ padding: "10px 12px", background: "rgba(255,151,65,0.05)", border: "1px solid rgba(255,151,65,0.22)", borderRadius: 4 }}>
-          <p style={{ fontWeight: 700, color: "var(--p-high-text)", marginBottom: 6 }}>Warnings</p>
+          <p style={{ fontWeight: 500, color: "var(--p-high-text)", marginBottom: 6 }}>Warnings</p>
           <ul style={{ paddingLeft: 16, margin: 0, color: "var(--p-high-text)" }}>
             {result.warnings.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
@@ -426,7 +426,7 @@ const ImportDashboard = () => {
       {/* Header */}
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
         <div>
-          <h1 style={{ fontSize: 20, fontWeight: 700, color: "var(--t1)", letterSpacing: "-0.4px", display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+          <h1 style={{ fontSize: 20, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.4px", display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
             <FileJson style={{ width: 22, height: 22, color: "var(--brand)" }} />
             Workspace Lifecycle Engine
           </h1>
@@ -438,7 +438,7 @@ const ImportDashboard = () => {
         <button
           onClick={handleDemoImport}
           disabled={executing}
-          style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "rgba(124,110,255,0.10)", border: "1px solid rgba(124,110,255,0.35)", borderRadius: 4, fontSize: 11, fontWeight: 600, color: "var(--brand-text)", cursor: executing ? "not-allowed" : "pointer", flexShrink: 0 }}
+          style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "rgba(232,103,43,0.10)", border: "1px solid rgba(232,103,43,0.35)", borderRadius: 4, fontSize: 11, fontWeight: 500, color: "var(--brand-text)", cursor: executing ? "not-allowed" : "pointer", flexShrink: 0 }}
         >
           <Sparkles style={{ width: 13, height: 13 }} />
           Import Helios Demo
@@ -459,7 +459,7 @@ const ImportDashboard = () => {
                 onMouseEnter={() => setHTab(tab)}
                 onMouseLeave={() => setHTab(null)}
                 style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 14px", fontSize: 11, fontWeight: 500, cursor: "pointer", borderRadius: "4px 4px 0 0", border: "1px solid transparent", borderBottom: "none", marginBottom: -1, transition: "all 80ms",
-                  background: isActive ? "var(--bg-card)" : hTab === tab ? "rgba(255,255,255,0.02)" : "transparent",
+                  background: isActive ? "var(--bg-card)" : hTab === tab ? "rgba(31,27,22,0.04)" : "transparent",
                   borderColor: isActive ? "var(--border-strong)" : "transparent",
                   color: isActive ? "var(--t1)" : "var(--t4)",
                 }}
@@ -479,7 +479,7 @@ const ImportDashboard = () => {
           ) : (
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
               {activeTab === "Refresh" ? (
-                <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "14px", background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, color: "var(--t4)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "14px", background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, color: "var(--t4)" }}>
                   <RefreshCw style={{ width: 14, height: 14, color: "var(--brand)", flexShrink: 0 }} />
                   Clicking <strong style={{ color: "var(--t1)", margin: "0 4px" }}>Run Refresh</strong> will rebuild recommendation scores, briefings, and copilot context across this workspace. No data is required.
                 </div>
@@ -495,7 +495,7 @@ const ImportDashboard = () => {
 
               {activeTab === "Validate" && validateResult && (
                 <div style={{ borderTop: "1px solid var(--border)", paddingTop: 16 }}>
-                  <span style={{ display: "block", fontSize: 8, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.10em", color: "var(--t5)", fontFamily: "'JetBrains Mono', monospace", marginBottom: 12 }}>Validation Results</span>
+                  <span style={{ display: "block", fontSize: 8, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.10em", color: "var(--t5)", marginBottom: 12 }}>Validation Results</span>
                   <ValidateResultPanel result={validateResult} />
                 </div>
               )}
@@ -504,24 +504,24 @@ const ImportDashboard = () => {
               <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 10, borderTop: "1px solid var(--border)", paddingTop: 16 }}>
                 {activeTab === "Validate" ? (
                   <button onClick={handleValidate} disabled={validating || !manifest.trim()}
-                    style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 16px", background: "var(--brand)", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 600, color: "#fff", cursor: (validating || !manifest.trim()) ? "not-allowed" : "pointer", opacity: (validating || !manifest.trim()) ? 0.5 : 1 }}>
+                    style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 16px", background: "var(--brand)", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 500, color: "#fff", cursor: (validating || !manifest.trim()) ? "not-allowed" : "pointer", opacity: (validating || !manifest.trim()) ? 0.5 : 1 }}>
                     {validating ? <Loader2 style={{ width: 13, height: 13, animation: "spin 0.8s linear infinite" }} /> : <CheckCircle2 style={{ width: 13, height: 13 }} />}
                     {validating ? "Validating…" : "Validate"}
                   </button>
                 ) : activeTab === "Refresh" ? (
                   <button onClick={handleExecute} disabled={executing}
-                    style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 16px", background: "var(--brand)", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 600, color: "#fff", cursor: executing ? "not-allowed" : "pointer", opacity: executing ? 0.5 : 1 }}>
+                    style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 16px", background: "var(--brand)", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 500, color: "#fff", cursor: executing ? "not-allowed" : "pointer", opacity: executing ? 0.5 : 1 }}>
                     {executing ? <Loader2 style={{ width: 13, height: 13, animation: "spin 0.8s linear infinite" }} /> : <RefreshCw style={{ width: 13, height: 13 }} />}
                     {executing ? "Running…" : "Run Refresh"}
                   </button>
                 ) : (
                   <>
                     <button onClick={handleValidate} disabled={executing || validating || !manifest.trim()}
-                      style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, color: "var(--t3)", cursor: (executing || validating || !manifest.trim()) ? "not-allowed" : "pointer", opacity: (executing || validating || !manifest.trim()) ? 0.5 : 1 }}>
+                      style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "rgba(31,27,22,0.05)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, color: "var(--t3)", cursor: (executing || validating || !manifest.trim()) ? "not-allowed" : "pointer", opacity: (executing || validating || !manifest.trim()) ? 0.5 : 1 }}>
                       <CheckCircle2 style={{ width: 12, height: 12 }} /> Validate
                     </button>
                     <button onClick={handleExecute} disabled={executing || validating || !manifest.trim()}
-                      style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 16px", background: "var(--brand)", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 600, color: "#fff", cursor: (executing || validating || !manifest.trim()) ? "not-allowed" : "pointer", opacity: (executing || validating || !manifest.trim()) ? 0.5 : 1 }}>
+                      style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 16px", background: "var(--brand)", border: "none", borderRadius: 4, fontSize: 11, fontWeight: 500, color: "#fff", cursor: (executing || validating || !manifest.trim()) ? "not-allowed" : "pointer", opacity: (executing || validating || !manifest.trim()) ? 0.5 : 1 }}>
                       {executing ? <Loader2 style={{ width: 13, height: 13, animation: "spin 0.8s linear infinite" }} /> : <Upload style={{ width: 13, height: 13 }} />}
                       {executing ? "Running…" : `Execute ${activeTab}`}
                     </button>
@@ -537,32 +537,32 @@ const ImportDashboard = () => {
       <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-strong)", borderRadius: 4, padding: "20px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid var(--border)", paddingBottom: 12, marginBottom: 16 }}>
           <Clock style={{ width: 13, height: 13, color: "var(--brand)" }} />
-          <h2 style={{ fontSize: 9, fontWeight: 700, color: "var(--t1)", textTransform: "uppercase", letterSpacing: "0.10em", fontFamily: "'JetBrains Mono', monospace" }}>Execution History</h2>
+          <h2 style={{ fontSize: 9, fontWeight: 500, color: "var(--t1)", textTransform: "uppercase", letterSpacing: "0.10em" }}>Execution History</h2>
         </div>
 
         {historyLoading ? (
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {[1, 2].map(i => (
-              <div key={i} style={{ height: 60, borderRadius: 4, background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
+              <div key={i} style={{ height: 60, borderRadius: 4, background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(31,27,22,0.05) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
               </div>
             ))}
           </div>
         ) : history.length > 0 ? (
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {history.map((h, i) => (
-              <div key={h.importId ?? i} style={{ padding: "12px 14px", background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", borderRadius: 4 }}>
+              <div key={h.importId ?? i} style={{ padding: "12px 14px", background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", borderRadius: 4 }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 6 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <FileText style={{ width: 13, height: 13, color: "var(--brand)", flexShrink: 0 }} />
                     <div>
-                      <span style={{ display: "block", fontSize: 11, fontWeight: 700, color: "var(--t1)", fontFamily: "'JetBrains Mono', monospace" }}>{h.importId ?? "—"}</span>
-                      <span style={{ fontSize: 9, color: "var(--t5)", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'JetBrains Mono', monospace" }}>{h.operation ?? "import"}</span>
+                      <span style={{ display: "block", fontSize: 11, fontWeight: 500, color: "var(--t1)" }}>{h.importId ?? "—"}</span>
+                      <span style={{ fontSize: 9, color: "var(--t5)", textTransform: "uppercase", letterSpacing: "0.08em" }}>{h.operation ?? "import"}</span>
                     </div>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <StatusChip status={h.status} />
-                    <span style={{ fontSize: 9, color: "var(--t5)", whiteSpace: "nowrap", fontFamily: "'JetBrains Mono', monospace" }}>
+                    <span style={{ fontSize: 9, color: "var(--t5)", whiteSpace: "nowrap" }}>
                       {h.completedAt ? new Date(h.completedAt).toLocaleString() : "—"}
                     </span>
                   </div>
@@ -577,7 +577,7 @@ const ImportDashboard = () => {
                     ))}
                     {h.graphMetrics && Object.entries(h.graphMetrics).slice(0, 2).map(([k, v]) => (
                       <span key={k} style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                        <Activity style={{ width: 9, height: 9, color: "rgba(124,110,255,0.6)" }} />
+                        <Activity style={{ width: 9, height: 9, color: "rgba(232,103,43,0.6)" }} />
                         {k}: <strong style={{ color: "var(--t2)", marginLeft: 2 }}>{String(v)}</strong>
                       </span>
                     ))}

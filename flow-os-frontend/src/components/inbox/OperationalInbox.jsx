@@ -204,7 +204,7 @@ export default function OperationalInbox() {
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
             <InboxIcon style={{ width: 16, height: 16, color: "var(--brand)" }} />
             <h1 style={{ fontSize: 16, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.3px" }}>Inbox</h1>
-            {openCount > 0 && <span style={{ fontSize: 10, fontWeight: 700, color: "var(--brand-text)", background: "var(--brand-subtle)", border: "1px solid var(--brand-line)", borderRadius: 10, padding: "1px 8px" }}>{openCount}</span>}
+            {openCount > 0 && <span style={{ fontSize: 10, fontWeight: 500, color: "var(--brand-text)", background: "var(--brand-subtle)", border: "1px solid var(--brand-line)", borderRadius: 10, padding: "1px 8px" }}>{openCount}</span>}
             <DataSourceBadge mode={demo ? "demo" : "live"} />
           </div>
           <p style={{ fontSize: 12, color: "var(--t4)" }}>Every signal, in one place — as work you can act on.</p>

@@ -9,12 +9,12 @@ import { useWebSocket } from "../../hooks/useWebSocket";
 const SOURCE_CFG = {
   slack:    { icon: MessageSquare, color: "#E01E5A",           bg: "rgba(224,30,90,0.10)",   label: "Slack"    },
   gmail:    { icon: Mail,          color: "#EA4335",           bg: "rgba(234,67,53,0.10)",   label: "Gmail"    },
-  github:   { icon: GitCommit,     color: "var(--t4)",         bg: "rgba(255,255,255,0.06)", label: "GitHub"   },
+  github:   { icon: GitCommit,     color: "var(--t4)",         bg: "rgba(31,27,22,0.06)", label: "GitHub"   },
   jira:     { icon: CheckSquare,   color: "#2684FF",           bg: "rgba(38,132,255,0.10)",  label: "Jira"     },
-  notion:   { icon: FileText,      color: "var(--t4)",         bg: "rgba(255,255,255,0.06)", label: "Notion"   },
-  vault:    { icon: Shield,        color: "var(--brand-text)", bg: "rgba(124,110,255,0.10)", label: "Vault"    },
+  notion:   { icon: FileText,      color: "var(--t4)",         bg: "rgba(31,27,22,0.06)", label: "Notion"   },
+  vault:    { icon: Shield,        color: "var(--brand-text)", bg: "rgba(232,103,43,0.10)", label: "Vault"    },
   calendar: { icon: Calendar,      color: "#34A853",           bg: "rgba(52,168,83,0.10)",   label: "Calendar" },
-  default:  { icon: FileText,      color: "var(--t5)",         bg: "rgba(255,255,255,0.04)", label: "Source"   },
+  default:  { icon: FileText,      color: "var(--t5)",         bg: "rgba(31,27,22,0.05)", label: "Source"   },
 };
 
 const SUGGESTED_QUERIES = [
@@ -32,7 +32,7 @@ function SourceBadge({ source }) {
   const cfg = SOURCE_CFG[source?.toLowerCase()] ?? SOURCE_CFG.default;
   const Icon = cfg.icon;
   return (
-    <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "2px 8px", borderRadius: 20, background: cfg.bg, border: `1px solid ${cfg.color}22`, fontSize: 8, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.10em", fontFamily: "'JetBrains Mono', monospace", color: cfg.color }}>
+    <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "2px 8px", borderRadius: 10, background: cfg.bg, border: `1px solid ${cfg.color}22`, fontSize: 8, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.10em", color: cfg.color }}>
       <Icon style={{ width: 9, height: 9 }} />
       {cfg.label}
     </span>
@@ -47,7 +47,7 @@ function ResultCard({ result, index }) {
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      style={{ background: hov ? "var(--bg-hover)" : "var(--bg-card)", border: `1px solid ${hov ? "rgba(255,255,255,0.10)" : "var(--border-strong)"}`, borderRadius: 4, padding: "14px 16px", cursor: "default", transition: "background 80ms, border-color 80ms", animationDelay: `${index * 50}ms` }}
+      style={{ background: hov ? "var(--bg-hover)" : "var(--bg-card)", border: `1px solid ${hov ? "rgba(31,27,22,0.10)" : "var(--border-strong)"}`, borderRadius: 4, padding: "14px 16px", cursor: "default", transition: "background 80ms, border-color 80ms", animationDelay: `${index * 50}ms` }}
     >
       <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
         <div style={{ flexShrink: 0, width: 30, height: 30, borderRadius: 5, background: cfg.bg, border: `1px solid ${cfg.color}22`, display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
@@ -57,12 +57,12 @@ function ResultCard({ result, index }) {
           <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 6, marginBottom: 6 }}>
             <SourceBadge source={result.source} />
             {result.authorityCoeff >= 1.5 && (
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 8, fontWeight: 700, padding: "2px 7px", borderRadius: 20, background: "rgba(124,110,255,0.08)", border: "1px solid rgba(124,110,255,0.22)", color: "var(--brand-text)", fontFamily: "'JetBrains Mono', monospace" }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 8, fontWeight: 500, padding: "2px 7px", borderRadius: 10, background: "rgba(232,103,43,0.08)", border: "1px solid rgba(232,103,43,0.22)", color: "var(--brand-text)" }}>
                 <Shield style={{ width: 9, height: 9 }} /> HIGH AUTH
               </span>
             )}
             {result.score && (
-              <span style={{ marginLeft: "auto", fontSize: 9, color: "var(--t5)", fontFamily: "'JetBrains Mono', monospace" }}>
+              <span style={{ marginLeft: "auto", fontSize: 9, color: "var(--t5)" }}>
                 relevance {Math.round((result.finalScore || result.score || 0) * 100)}%
               </span>
             )}
@@ -85,13 +85,13 @@ function ResultCard({ result, index }) {
 function SynthesisBrief({ brief }) {
   if (!brief) return null;
   return (
-    <div style={{ background: "rgba(124,110,255,0.06)", border: "1px solid var(--brand-line)", borderLeft: "2px solid var(--brand)", borderRadius: 4, padding: "14px 16px" }}>
+    <div style={{ background: "rgba(232,103,43,0.06)", border: "1px solid var(--brand-line)", borderLeft: "2px solid var(--brand)", borderRadius: 4, padding: "14px 16px" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-        <div style={{ width: 26, height: 26, borderRadius: 5, background: "rgba(124,110,255,0.10)", border: "1px solid var(--brand-line)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 26, height: 26, borderRadius: 5, background: "rgba(232,103,43,0.10)", border: "1px solid var(--brand-line)", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Brain style={{ width: 12, height: 12, color: "var(--brand)" }} />
         </div>
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--brand-text)" }}>AI Synthesis</span>
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: "var(--t5)", marginLeft: "auto" }}>Executive brief</span>
+        <span style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--brand-text)" }}>AI Synthesis</span>
+        <span style={{ fontSize: 9, color: "var(--t5)", marginLeft: "auto" }}>Executive brief</span>
       </div>
       <div style={{ fontSize: 13, color: "var(--t1)", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{brief}</div>
     </div>
@@ -171,10 +171,10 @@ export const UniversalSearch = () => {
       {/* Header — shown when no results */}
       {!hasResults && (
         <div style={{ textAlign: "center", paddingTop: 24 }}>
-          <div style={{ width: 52, height: 52, borderRadius: 12, background: "rgba(124,110,255,0.10)", border: "1px solid rgba(124,110,255,0.22)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+          <div style={{ width: 52, height: 52, borderRadius: 10, background: "rgba(232,103,43,0.10)", border: "1px solid rgba(232,103,43,0.22)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
             <Sparkles style={{ width: 24, height: 24, color: "var(--brand)" }} />
           </div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, color: "var(--t1)", letterSpacing: "-0.4px", marginBottom: 6 }}>Universal Search</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.4px", marginBottom: 6 }}>Universal Search</h1>
           <p style={{ fontSize: 12, color: "var(--t4)" }}>Ask anything across Slack, Gmail, Notion, Jira, and GitHub.</p>
         </div>
       )}
@@ -183,7 +183,7 @@ export const UniversalSearch = () => {
       <form onSubmit={handleSubmit} style={{ position: "relative" }}>
         <div style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", pointerEvents: "none", zIndex: 1 }}>
           {isSearching
-            ? <div style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid rgba(124,110,255,0.20)", borderTopColor: "var(--brand)", animation: "spin 0.7s linear infinite" }} />
+            ? <div style={{ width: 16, height: 16, borderRadius: "50%", border: "2px solid rgba(232,103,43,0.20)", borderTopColor: "var(--brand)", animation: "spin 0.7s linear infinite" }} />
             : <SearchIcon style={{ width: 16, height: 16, color: "var(--t4)" }} />
           }
         </div>
@@ -193,7 +193,7 @@ export const UniversalSearch = () => {
           placeholder='"What did we decide about the Postgres migration?"'
           value={query}
           onChange={e => setQuery(e.target.value)}
-          onFocus={e => { e.target.style.borderColor = "rgba(124,110,255,0.40)"; e.target.style.background = "rgba(124,110,255,0.04)"; }}
+          onFocus={e => { e.target.style.borderColor = "rgba(232,103,43,0.40)"; e.target.style.background = "rgba(232,103,43,0.04)"; }}
           onBlur={e => { e.target.style.borderColor = "var(--border-strong)"; e.target.style.background = "var(--bg-card)"; }}
           style={{ width: "100%", background: "var(--bg-card)", border: "1px solid var(--border-strong)", borderRadius: 5, paddingLeft: 42, paddingRight: 110, paddingTop: 14, paddingBottom: 14, fontSize: 13, color: "var(--t1)", outline: "none", transition: "border-color 150ms, background 150ms", boxSizing: "border-box" }}
         />
@@ -204,7 +204,7 @@ export const UniversalSearch = () => {
             </button>
           )}
           <button type="submit" disabled={!query.trim() || isSearching}
-            style={{ display: "flex", alignItems: "center", gap: 5, padding: "6px 14px", borderRadius: 4, fontSize: 11, fontWeight: 600, background: !query.trim() || isSearching ? "rgba(124,110,255,0.25)" : "var(--brand)", color: "#fff", border: "none", cursor: !query.trim() || isSearching ? "not-allowed" : "pointer", opacity: !query.trim() || isSearching ? 0.6 : 1 }}>
+            style={{ display: "flex", alignItems: "center", gap: 5, padding: "6px 14px", borderRadius: 4, fontSize: 11, fontWeight: 500, background: !query.trim() || isSearching ? "rgba(232,103,43,0.25)" : "var(--brand)", color: "#fff", border: "none", cursor: !query.trim() || isSearching ? "not-allowed" : "pointer", opacity: !query.trim() || isSearching ? 0.6 : 1 }}>
             <Zap style={{ width: 11, height: 11 }} /> Search
           </button>
         </div>
@@ -216,9 +216,9 @@ export const UniversalSearch = () => {
           {FILTER_OPTIONS.map(f => (
             <button key={f} onClick={() => { setActiveFilter(f); handleSearch(); }}
               onMouseEnter={() => setHFilter(f)} onMouseLeave={() => setHFilter(null)}
-              style={{ fontSize: 10, fontWeight: 600, padding: "4px 12px", borderRadius: 20, cursor: "pointer", transition: "all 80ms",
-                background: activeFilter === f ? "rgba(124,110,255,0.10)" : "transparent",
-                border: activeFilter === f ? "1px solid rgba(124,110,255,0.30)" : `1px solid ${hFilter === f ? "rgba(255,255,255,0.15)" : "var(--border)"}`,
+              style={{ fontSize: 10, fontWeight: 500, padding: "4px 12px", borderRadius: 10, cursor: "pointer", transition: "all 80ms",
+                background: activeFilter === f ? "rgba(232,103,43,0.10)" : "transparent",
+                border: activeFilter === f ? "1px solid rgba(232,103,43,0.30)" : `1px solid ${hFilter === f ? "rgba(31,27,22,0.15)" : "var(--border)"}`,
                 color: activeFilter === f ? "var(--brand-text)" : hFilter === f ? "var(--t2)" : "var(--t5)",
               }}>
               {f}
@@ -232,7 +232,7 @@ export const UniversalSearch = () => {
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           {recentSearches.length > 0 && (
             <div>
-              <p style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 8, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.10em", color: "var(--t5)", fontFamily: "'JetBrains Mono', monospace", marginBottom: 10 }}>
+              <p style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 8, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.10em", color: "var(--t5)", marginBottom: 10 }}>
                 <Clock style={{ width: 10, height: 10 }} /> Recent searches
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -252,14 +252,14 @@ export const UniversalSearch = () => {
           )}
 
           <div>
-            <p style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 8, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.10em", color: "var(--t5)", fontFamily: "'JetBrains Mono', monospace", marginBottom: 10 }}>
+            <p style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 8, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.10em", color: "var(--t5)", marginBottom: 10 }}>
               <Brain style={{ width: 10, height: 10 }} /> Try asking
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
               {SUGGESTED_QUERIES.map((q, i) => (
                 <button key={i} onClick={() => handleSuggest(q)}
                   onMouseEnter={() => setHSuggest(i)} onMouseLeave={() => setHSuggest(null)}
-                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "12px 14px", borderRadius: 4, textAlign: "left", cursor: "pointer", background: hSuggest === i ? "rgba(124,110,255,0.06)" : "var(--bg-card)", border: `1px solid ${hSuggest === i ? "rgba(124,110,255,0.25)" : "var(--border-strong)"}`, transition: "all 80ms" }}>
+                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "12px 14px", borderRadius: 4, textAlign: "left", cursor: "pointer", background: hSuggest === i ? "rgba(232,103,43,0.06)" : "var(--bg-card)", border: `1px solid ${hSuggest === i ? "rgba(232,103,43,0.25)" : "var(--border-strong)"}`, transition: "all 80ms" }}>
                   <span style={{ fontSize: 11, color: hSuggest === i ? "var(--t1)" : "var(--t3)", lineHeight: 1.5 }}>{q}</span>
                   <ArrowRight style={{ width: 11, height: 11, color: hSuggest === i ? "var(--brand)" : "var(--t5)", flexShrink: 0, opacity: hSuggest === i ? 1 : 0, transition: "all 80ms" }} />
                 </button>
@@ -273,12 +273,12 @@ export const UniversalSearch = () => {
       {isSearching && (
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: "var(--t4)" }}>
-            <div style={{ width: 12, height: 12, borderRadius: "50%", border: "2px solid rgba(124,110,255,0.20)", borderTopColor: "var(--brand)", animation: "spin 0.8s linear infinite", flexShrink: 0 }} />
+            <div style={{ width: 12, height: 12, borderRadius: "50%", border: "2px solid rgba(232,103,43,0.20)", borderTopColor: "var(--brand)", animation: "spin 0.8s linear infinite", flexShrink: 0 }} />
             Searching across Slack, Gmail, GitHub, Jira, Vault…
           </div>
           {[100, 80, 80, 80].map((h, i) => (
             <div key={i} style={{ height: h, borderRadius: 4, background: "var(--bg-card)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(31,27,22,0.05) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
             </div>
           ))}
         </div>

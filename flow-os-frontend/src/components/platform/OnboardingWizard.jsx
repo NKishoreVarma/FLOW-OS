@@ -22,13 +22,13 @@ const CONNECTORS = [
 ];
 
 const inputStyle = {
-  width: "100%", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-strong)",
+  width: "100%", background: "rgba(31,27,22,0.045)", border: "1px solid var(--border-strong)",
   borderRadius: 4, padding: "7px 10px", fontSize: 12, color: "var(--t1)", outline: "none", boxSizing: "border-box",
 };
 
 const labelStyle = {
-  display: "block", fontSize: 8, fontWeight: 700, color: "var(--t5)",
-  textTransform: "uppercase", letterSpacing: "0.10em", fontFamily: "'JetBrains Mono', monospace", marginBottom: 5,
+  display: "block", fontSize: 8, fontWeight: 500, color: "var(--t5)",
+  textTransform: "uppercase", letterSpacing: "0.10em", marginBottom: 5,
 };
 
 const OnboardingWizard = () => {
@@ -91,12 +91,12 @@ const OnboardingWizard = () => {
             <div key={item.step} style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{
                 padding: 8, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center",
-                background: isActive ? "rgba(124,110,255,0.18)" : isCompleted ? "rgba(76,175,130,0.12)" : "rgba(255,255,255,0.03)",
-                border: `1px solid ${isActive ? "rgba(124,110,255,0.50)" : isCompleted ? "rgba(76,175,130,0.30)" : "var(--border)"}`,
+                background: isActive ? "rgba(232,103,43,0.18)" : isCompleted ? "rgba(76,175,130,0.12)" : "rgba(31,27,22,0.045)",
+                border: `1px solid ${isActive ? "rgba(232,103,43,0.50)" : isCompleted ? "rgba(76,175,130,0.30)" : "var(--border)"}`,
               }}>
                 <Icon style={{ width: 15, height: 15, color: isActive ? "var(--brand-text)" : isCompleted ? "var(--p-normal-text)" : "var(--t5)" }} />
               </div>
-              <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'JetBrains Mono', monospace", color: isActive ? "var(--t1)" : "var(--t5)" }}>{item.label}</span>
+              <span style={{ fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.08em", color: isActive ? "var(--t1)" : "var(--t5)" }}>{item.label}</span>
             </div>
           );
         })}
@@ -111,7 +111,7 @@ const OnboardingWizard = () => {
           {/* Step 1: Company */}
           {step === 1 && (
             <div>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: "var(--t1)", marginBottom: 4 }}>Step 1: Define Organization Details</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 500, color: "var(--t1)", marginBottom: 4 }}>Step 1: Define Organization Details</h2>
               <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 20 }}>Enter your core business profile parameters to sandbox datasets.</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 <div><label style={labelStyle}>Organization Name</label>
@@ -119,7 +119,7 @@ const OnboardingWizard = () => {
                     onChange={e => { setCompanyName(e.target.value); setWorkspaceSlug(e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")); }} />
                 </div>
                 <div><label style={labelStyle}>Workspace Slug</label>
-                  <input type="text" value={workspaceSlug} placeholder="initech-corp" style={{ ...inputStyle, fontFamily: "'JetBrains Mono', monospace" }}
+                  <input type="text" value={workspaceSlug} placeholder="initech-corp" style={{ ...inputStyle }}
                     onChange={e => setWorkspaceSlug(e.target.value)} />
                 </div>
                 <div><label style={labelStyle}>Industry Sector</label>
@@ -134,7 +134,7 @@ const OnboardingWizard = () => {
           {/* Step 2: Team */}
           {step === 2 && (
             <div>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: "var(--t1)", marginBottom: 4 }}>Step 2: Invite Core Members</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 500, color: "var(--t1)", marginBottom: 4 }}>Step 2: Invite Core Members</h2>
               <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 20 }}>Delegate workspace scopes and define roles permission layers.</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, maxHeight: 240, overflowY: "auto" }}>
                 {invites.map((invite, idx) => (
@@ -148,7 +148,7 @@ const OnboardingWizard = () => {
                     </select>
                   </div>
                 ))}
-                <button onClick={addInvite} style={{ alignSelf: "flex-start", padding: "5px 12px", background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, color: "var(--t3)", cursor: "pointer" }}>
+                <button onClick={addInvite} style={{ alignSelf: "flex-start", padding: "5px 12px", background: "rgba(31,27,22,0.05)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 11, color: "var(--t3)", cursor: "pointer" }}>
                   + Add Invite
                 </button>
               </div>
@@ -158,16 +158,16 @@ const OnboardingWizard = () => {
           {/* Step 3: Connectors */}
           {step === 3 && (
             <div>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: "var(--t1)", marginBottom: 4 }}>Step 3: Connect Operational Systems</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 500, color: "var(--t1)", marginBottom: 4 }}>Step 3: Connect Operational Systems</h2>
               <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 20 }}>Toggle connector APIs to ingest realtime corporate chatter.</p>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 {CONNECTORS.map(conn => {
                   const on = selectedConnectors[conn.key];
                   return (
                     <div key={conn.key} onClick={() => toggleConnector(conn.key)}
-                      style={{ padding: 16, borderRadius: 4, border: `1px solid ${on ? "rgba(124,110,255,0.45)" : "var(--border)"}`, background: on ? "rgba(124,110,255,0.10)" : "rgba(255,255,255,0.02)", cursor: "pointer", minHeight: 90, display: "flex", flexDirection: "column", justifyContent: "space-between", transition: "all 100ms" }}
+                      style={{ padding: 16, borderRadius: 4, border: `1px solid ${on ? "rgba(232,103,43,0.45)" : "var(--border)"}`, background: on ? "rgba(232,103,43,0.10)" : "rgba(31,27,22,0.04)", cursor: "pointer", minHeight: 90, display: "flex", flexDirection: "column", justifyContent: "space-between", transition: "all 100ms" }}
                     >
-                      <span style={{ fontSize: 13, fontWeight: 700, color: on ? "var(--brand-text)" : "var(--t2)" }}>{conn.name}</span>
+                      <span style={{ fontSize: 13, fontWeight: 500, color: on ? "var(--brand-text)" : "var(--t2)" }}>{conn.name}</span>
                       <span style={{ fontSize: 10, color: "var(--t5)" }}>{conn.desc}</span>
                     </div>
                   );
@@ -179,11 +179,11 @@ const OnboardingWizard = () => {
           {/* Step 4: Import */}
           {step === 4 && (
             <div>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: "var(--t1)", marginBottom: 4 }}>Step 4: Seed Workspace Template</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 500, color: "var(--t1)", marginBottom: 4 }}>Step 4: Seed Workspace Template</h2>
               <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 20 }}>Generate standard operational telemetry twin records immediately.</p>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px", background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", borderRadius: 4, gap: 16 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px", background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", borderRadius: 4, gap: 16 }}>
                 <div>
-                  <span style={{ display: "block", fontSize: 13, fontWeight: 700, color: "var(--t1)", marginBottom: 4 }}>Seed High-Fidelity Demo Company Data</span>
+                  <span style={{ display: "block", fontSize: 13, fontWeight: 500, color: "var(--t1)", marginBottom: 4 }}>Seed High-Fidelity Demo Company Data</span>
                   <span style={{ fontSize: 11, color: "var(--t4)", lineHeight: 1.5 }}>Highly recommended. Populates user graphs, databases, decisions, and RAG search logs.</span>
                 </div>
                 <input type="checkbox" checked={importDemo} onChange={e => setImportDemo(e.target.checked)}
@@ -195,19 +195,19 @@ const OnboardingWizard = () => {
           {/* Step 5: Analysis */}
           {step === 5 && (
             <div>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: "var(--t1)", marginBottom: 4 }}>Step 5: Initialize Operational Brain</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 500, color: "var(--t1)", marginBottom: 4 }}>Step 5: Initialize Operational Brain</h2>
               <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 20 }}>Wait while parser services index data blocks and align graph matrices.</p>
               {analyzing ? (
                 <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 12, color: "var(--t4)", marginBottom: 14 }}>
-                  <div style={{ width: 18, height: 18, borderRadius: "50%", border: "2px solid rgba(124,110,255,0.20)", borderTopColor: "var(--brand)", animation: "spin 0.8s linear infinite", flexShrink: 0 }} />
+                  <div style={{ width: 18, height: 18, borderRadius: "50%", border: "2px solid rgba(232,103,43,0.20)", borderTopColor: "var(--brand)", animation: "spin 0.8s linear infinite", flexShrink: 0 }} />
                   Processing operational twin structures...
                 </div>
               ) : (
-                <button onClick={runAiAnalysis} style={{ width: "100%", padding: "9px", background: "var(--brand)", border: "none", borderRadius: 4, color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer", marginBottom: 14 }}>
+                <button onClick={runAiAnalysis} style={{ width: "100%", padding: "9px", background: "var(--brand)", border: "none", borderRadius: 4, color: "#fff", fontSize: 13, fontWeight: 500, cursor: "pointer", marginBottom: 14 }}>
                   Run AI Setup Diagnostics
                 </button>
               )}
-              <div style={{ background: "rgba(0,0,0,0.30)", border: "1px solid var(--border)", borderRadius: 4, padding: "12px 14px", height: 160, overflowY: "auto", fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "var(--t5)", lineHeight: 1.8 }}>
+              <div style={{ background: "rgba(31,27,22,0.12)", border: "1px solid var(--border)", borderRadius: 4, padding: "12px 14px", height: 160, overflowY: "auto", fontSize: 10, color: "var(--t5)", lineHeight: 1.8 }}>
                 {analysisLogs.map((log, idx) => <div key={idx}>{log}</div>)}
               </div>
             </div>
@@ -219,7 +219,7 @@ const OnboardingWizard = () => {
               <div style={{ width: 64, height: 64, borderRadius: "50%", background: "rgba(76,175,130,0.18)", border: "1px solid rgba(76,175,130,0.35)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
                 <CheckCircle2 style={{ width: 36, height: 36, color: "var(--p-normal)" }} />
               </div>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: "var(--t1)", marginBottom: 8 }}>Workspace Onboarding Successful!</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 500, color: "var(--t1)", marginBottom: 8 }}>Workspace Onboarding Successful!</h2>
               <p style={{ fontSize: 12, color: "var(--t4)", maxWidth: 400, margin: "0 auto" }}>
                 {companyName || "Your"} workspace is fully active. The Operational Brain and briefings have been successfully configured.
               </p>
@@ -231,7 +231,7 @@ const OnboardingWizard = () => {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid var(--border)", paddingTop: 20 }}>
           <div>
             {step > 1 && step < 6 && (
-              <button onClick={prevStep} style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 12, color: "var(--t3)", cursor: "pointer" }}>
+              <button onClick={prevStep} style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "rgba(31,27,22,0.05)", border: "1px solid var(--border)", borderRadius: 4, fontSize: 12, color: "var(--t3)", cursor: "pointer" }}>
                 <ChevronLeft style={{ width: 14, height: 14 }} /> Back
               </button>
             )}
@@ -239,13 +239,13 @@ const OnboardingWizard = () => {
           <div>
             {step < 5 && (
               <button onClick={nextStep} disabled={step === 1 && !companyName}
-                style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "var(--brand)", border: "none", borderRadius: 4, fontSize: 12, fontWeight: 600, color: "#fff", cursor: (step === 1 && !companyName) ? "not-allowed" : "pointer", opacity: (step === 1 && !companyName) ? 0.5 : 1 }}>
+                style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "var(--brand)", border: "none", borderRadius: 4, fontSize: 12, fontWeight: 500, color: "#fff", cursor: (step === 1 && !companyName) ? "not-allowed" : "pointer", opacity: (step === 1 && !companyName) ? 0.5 : 1 }}>
                 Continue <ChevronRight style={{ width: 14, height: 14 }} />
               </button>
             )}
             {step === 6 && (
               <button onClick={handleFinish}
-                style={{ padding: "7px 20px", background: "var(--p-normal)", border: "none", borderRadius: 4, fontSize: 12, fontWeight: 700, color: "#fff", cursor: "pointer" }}>
+                style={{ padding: "7px 20px", background: "var(--p-normal)", border: "none", borderRadius: 4, fontSize: 12, fontWeight: 500, color: "#fff", cursor: "pointer" }}>
                 Launch Workspace
               </button>
             )}

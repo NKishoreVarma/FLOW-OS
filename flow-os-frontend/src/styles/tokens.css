@@ -86,36 +86,36 @@
   --radius-xl:   var(--radius-xl);
 
   /* ─── Surface utility tokens ────────────────────────────────────────── */
-  --surface-subtle:   rgba(255,255,255,0.03);  /* button/chip background — barely visible tint */
-  --surface-ghost:    rgba(255,255,255,0.02);  /* skeleton placeholder background */
-  --surface-shine:    rgba(255,255,255,0.04);  /* shimmer sweep highlight */
-  --surface-ghost-2:  rgba(255,255,255,0.02);  /* alias for surface-ghost */
-  --surface-ghost-3:  rgba(255,255,255,0.03);  /* alias for surface-subtle */
-  --surface-code:     rgba(0,0,0,0.18);        /* pre/code block background */
+  --surface-subtle:   rgba(31,27,22,0.04);   /* button/chip background — barely visible tint */
+  --surface-ghost:    rgba(31,27,22,0.03);   /* skeleton placeholder background */
+  --surface-shine:    rgba(255,255,255,0.55);/* shimmer sweep highlight */
+  --surface-ghost-2:  rgba(31,27,22,0.03);   /* alias for surface-ghost */
+  --surface-ghost-3:  rgba(31,27,22,0.04);   /* alias for surface-subtle */
+  --surface-code:     rgba(31,27,22,0.05);   /* pre/code block background */
 
-  /* ─── Brand tint variants ────────────────────────────────────────────── */
-  --brand-subtle:       rgba(124,110,255,0.12);  /* badge/pill background — between dim and glow */
-  --brand-glass:        rgba(124,110,255,0.08);  /* subtle brand-tinted surface */
-  --brand-glass-border: rgba(124,110,255,0.20);  /* border for brand glass surfaces */
-  --brand-line:         rgba(124,110,255,0.30);  /* brand accent divider / blockquote border */
-  --brand-hover-bg:     rgba(124,110,255,0.06);  /* chip / link hover background */
-  --brand-hover-border: rgba(124,110,255,0.35);  /* chip / link hover border */
-  --brand-muted:        rgba(124,110,255,0.04);  /* micro-delight / joke tinted bg */
-  --brand-muted-border: rgba(124,110,255,0.12);  /* muted brand border */
+  /* ─── Brand tint variants — burnt orange tints ───────────────────────── */
+  --brand-subtle:       rgba(232,103,43,0.10);  /* badge/pill background — between dim and glow */
+  --brand-glass:        rgba(232,103,43,0.06);  /* subtle accent-tinted surface */
+  --brand-glass-border: rgba(232,103,43,0.20);  /* border for accent glass surfaces */
+  --brand-line:         rgba(232,103,43,0.28);  /* accent divider / blockquote border */
+  --brand-hover-bg:     rgba(232,103,43,0.06);  /* chip / link hover background */
+  --brand-hover-border: rgba(232,103,43,0.35);  /* chip / link hover border */
+  --brand-muted:        rgba(232,103,43,0.04);  /* micro-delight / joke tinted bg */
+  --brand-muted-border: rgba(232,103,43,0.14);  /* muted accent border */
 
   /* ─── Tone-aware avatar system ───────────────────────────────────────── */
-  --tone-celebratory-bg:     rgba(34, 197, 94, 0.18);
-  --tone-celebratory-border: rgba(34, 197, 94, 0.30);
-  --tone-serious-bg:         rgba(239, 68, 68, 0.12);
-  --tone-serious-border:     rgba(239, 68, 68, 0.25);
-  --tone-relaxed-bg:         rgba(124, 110, 255, 0.10);
-  --tone-relaxed-border:     rgba(124, 110, 255, 0.22);
-  --tone-energetic-bg:       rgba(245, 158, 11, 0.12);
-  --tone-energetic-border:   rgba(245, 158, 11, 0.28);
-  --tone-calm-bg:            rgba(99, 102, 241, 0.08);
-  --tone-calm-border:        rgba(99, 102, 241, 0.18);
-  --tone-normal-bg:          rgba(124, 110, 255, 0.10);
-  --tone-normal-border:      rgba(124, 110, 255, 0.22);
+  --tone-celebratory-bg:     rgba(30, 127, 79, 0.10);
+  --tone-celebratory-border: rgba(30, 127, 79, 0.25);
+  --tone-serious-bg:         rgba(194, 58, 38, 0.08);
+  --tone-serious-border:     rgba(194, 58, 38, 0.22);
+  --tone-relaxed-bg:         rgba(232, 103, 43, 0.08);
+  --tone-relaxed-border:     rgba(232, 103, 43, 0.22);
+  --tone-energetic-bg:       rgba(169, 106, 11, 0.10);
+  --tone-energetic-border:   rgba(169, 106, 11, 0.25);
+  --tone-calm-bg:            rgba(42, 95, 168, 0.07);
+  --tone-calm-border:        rgba(42, 95, 168, 0.18);
+  --tone-normal-bg:          rgba(232, 103, 43, 0.08);
+  --tone-normal-border:      rgba(232, 103, 43, 0.22);
 
   /* ─── Risk chip tokens (ActionCard RiskChip) ───────────────────────── */
   --risk-low-bg:       var(--p-normal-dim);

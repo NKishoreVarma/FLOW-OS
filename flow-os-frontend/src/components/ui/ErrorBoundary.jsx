@@ -58,7 +58,7 @@ export class ErrorBoundary extends Component {
           <div style={{ margin: "0 auto", width: 48, height: 48, borderRadius: "50%", background: "rgba(255,87,87,0.08)", border: "1px solid rgba(255,87,87,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <AlertTriangle style={{ width: 24, height: 24, color: "var(--p-critical-text)" }} />
           </div>
-          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: "var(--t1)" }}>{ctx.title}</h2>
+          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 500, color: "var(--t1)" }}>{ctx.title}</h2>
           <p style={{ margin: 0, fontSize: 13, color: "var(--t3)", lineHeight: 1.6 }}>{ctx.hint}</p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, flexWrap: "wrap" }}>
             <button onClick={this.handleReset} style={{ padding: "7px 16px", borderRadius: 8, background: "var(--brand)", color: "var(--t1)", border: "none", fontSize: 13, fontWeight: 500, cursor: "pointer" }}>

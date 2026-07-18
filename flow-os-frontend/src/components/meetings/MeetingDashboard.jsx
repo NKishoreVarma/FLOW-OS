@@ -5,6 +5,7 @@ import {
   ChevronRight, AlertTriangle, Star, RefreshCw, Zap
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
 // ── Demo data ─────────────────────────────────────────────────────────────────
@@ -44,13 +45,13 @@ function formatEventTime(startTime, endTime) {
 function typeCfgFor(type) {
   const MAP = {
     Planning:      { color: "var(--p-high)",     bg: "rgba(255,151,65,0.06)",  border: "rgba(255,151,65,0.18)" },
-    Retrospective: { color: "var(--brand)",       bg: "rgba(124,110,255,0.06)", border: "rgba(124,110,255,0.18)" },
+    Retrospective: { color: "var(--brand)",       bg: "rgba(232,103,43,0.06)", border: "rgba(232,103,43,0.18)" },
     Postmortem:    { color: "var(--p-critical)",  bg: "rgba(255,87,87,0.06)",   border: "rgba(255,87,87,0.18)" },
     Review:        { color: "var(--p-info)",      bg: "rgba(91,158,255,0.06)",  border: "rgba(91,158,255,0.18)" },
     Recurring:     { color: "var(--p-info)",      bg: "rgba(91,158,255,0.06)",  border: "rgba(91,158,255,0.18)" },
     "Quick Sync":  { color: "var(--p-normal)",    bg: "rgba(76,175,130,0.06)",  border: "rgba(76,175,130,0.18)" },
   };
-  return MAP[type] || { color: "var(--t4)", bg: "rgba(255,255,255,0.03)", border: "var(--border)" };
+  return MAP[type] || { color: "var(--t4)", bg: "rgba(31,27,22,0.045)", border: "var(--border)" };
 }
 
 function normalizeUpcomingEvent(event) {
@@ -87,7 +88,7 @@ function UpcomingCard({ meeting, onPrepare }) {
         background:   "var(--bg-card)",
         border:       `1px solid ${meeting.urgency === "high" ? "rgba(255,87,87,0.20)" : h ? "var(--border-strong)" : "var(--border)"}`,
         borderLeft:   `2px solid ${meeting.urgency === "high" ? "var(--p-critical)" : color}`,
-        borderRadius:  4,
+        borderRadius:  6,
         padding:       "14px",
         transition:   "border-color 150ms",
       }}
@@ -96,20 +97,20 @@ function UpcomingCard({ meeting, onPrepare }) {
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <span style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em",
-            padding: "2px 6px", borderRadius: 3,
+            fontSize: 10, fontWeight: 500,
+            textTransform: "uppercase", letterSpacing: "0.07em",
+            padding: "2px 7px", borderRadius: 4,
             color, background: bg, border: `1px solid ${border}`,
           }}>
             {meeting.type}
           </span>
-          <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 10, color: "var(--t4)", fontFamily: "'JetBrains Mono', monospace" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: "var(--t4)" }}>
             <Clock style={{ width: 9, height: 9 }} />
             {meeting.date} · {meeting.time}
           </span>
         </div>
         {meeting.urgency === "high" && (
-          <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 9, color: "var(--p-critical)", fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 10, fontWeight: 500, color: "var(--p-critical)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
             <AlertTriangle style={{ width: 9, height: 9 }} />URGENT
           </span>
         )}
@@ -125,9 +126,10 @@ function UpcomingCard({ meeting, onPrepare }) {
         <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginBottom: 10 }}>
           {meeting.attendees.map((a, i) => (
             <span key={i} style={{
-              fontSize: 10, padding: "2px 6px", borderRadius: 3,
-              background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-strong)",
-              color: "var(--t3)", fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 11, fontWeight: 400,
+              padding: "2px 7px", borderRadius: 4,
+              background: "rgba(31,27,22,0.05)", border: "1px solid var(--border-strong)",
+              color: "var(--t3)", letterSpacing: "-0.05px",
             }}>
               {a}
             </span>
@@ -138,7 +140,7 @@ function UpcomingCard({ meeting, onPrepare }) {
       {/* AI prep */}
       {meeting.aiPrep && (
         <div style={{
-          background: "rgba(124,110,255,0.06)", border: "1px solid var(--brand-line)",
+          background: "rgba(232,103,43,0.06)", border: "1px solid var(--brand-line)",
           borderLeft: "2px solid var(--brand)",
           borderRadius: 4, padding: "8px 10px", marginBottom: 10,
           display: "flex", alignItems: "flex-start", gap: 8,
@@ -157,10 +159,10 @@ function UpcomingCard({ meeting, onPrepare }) {
           {meeting.relatedItems.map((item, i) => (
             <span key={i} style={{
               display: "inline-flex", alignItems: "center", gap: 4,
-              fontSize: 10, color: "var(--t4)",
-              background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)",
-              borderRadius: 3, padding: "2px 7px",
-              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 10, fontWeight: 400, color: "var(--t4)",
+              background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)",
+              borderRadius: 4, padding: "2px 7px",
+              letterSpacing: "-0.05px",
             }}>
               <FileText style={{ width: 8, height: 8 }} />{item}
             </span>
@@ -176,7 +178,7 @@ function UpcomingCard({ meeting, onPrepare }) {
             flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
             fontSize: 12, fontWeight: 500, padding: "7px 14px", borderRadius: 4,
             background: "var(--brand)", color: "#fff",
-            border: "1px solid rgba(124,110,255,0.40)", cursor: "pointer",
+            border: "1px solid rgba(232,103,43,0.40)", cursor: "pointer",
             transition: "background 100ms",
           }}
           onMouseEnter={e => e.currentTarget.style.background = "#8C7EFF"}
@@ -220,7 +222,7 @@ function PastCard({ meeting, onView }) {
         width: "100%", textAlign: "left",
         background: h ? "var(--bg-card)" : "transparent",
         border: `1px solid ${h ? "var(--border-strong)" : "var(--border)"}`,
-        borderRadius: 4, padding: "12px 14px",
+        borderRadius: 6, padding: "12px 14px",
         cursor: "pointer", transition: "all 100ms",
         display: "block",
       }}
@@ -231,16 +233,16 @@ function PastCard({ meeting, onView }) {
         </h3>
         <span style={{
           display: "flex", alignItems: "center", gap: 4, flexShrink: 0,
-          fontSize: 9, fontFamily: "'JetBrains Mono', monospace",
+          fontSize: 10, fontWeight: 500,
           color: "var(--p-normal)", background: "rgba(76,175,130,0.08)",
-          border: "1px solid rgba(76,175,130,0.20)", borderRadius: 3,
-          padding: "2px 6px",
+          border: "1px solid rgba(76,175,130,0.20)", borderRadius: 4,
+          padding: "2px 7px",
         }}>
           <Star style={{ width: 8, height: 8 }} />{meeting.aiScore}%
         </span>
       </div>
 
-      <p style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 10, color: "var(--t4)", marginBottom: 6, fontFamily: "'JetBrains Mono', monospace" }}>
+      <p style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: "var(--t4)", marginBottom: 6 }}>
         <Clock style={{ width: 9, height: 9 }} />{meeting.time}
       </p>
 
@@ -273,7 +275,7 @@ function StatPill({ label, value }) {
   return (
     <div style={{ textAlign: "right" }}>
       <div style={{ fontSize: 15, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.3px" }}>{value}</div>
-      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--t5)" }}>{label}</div>
+      <div style={{ fontSize: 10, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--t5)" }}>{label}</div>
     </div>
   );
 }
@@ -340,14 +342,7 @@ export const MeetingDashboard = () => {
             <h1 style={{ fontSize: 16, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.3px" }}>
               Meeting Intelligence
             </h1>
-            {isDemo && (
-              <span style={{
-                fontFamily: "'JetBrains Mono', monospace", fontSize: 9,
-                background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)",
-                borderRadius: 3, padding: "2px 6px", color: "var(--t5)",
-                textTransform: "uppercase", letterSpacing: "0.06em",
-              }}>Demo</span>
-            )}
+            <DataSourceBadge mode={isDemo ? "demo" : "live"} />
           </div>
           <p style={{ fontSize: 12, color: "var(--t4)" }}>
             Permanent memory · AI summaries · Action tracking
@@ -364,7 +359,7 @@ export const MeetingDashboard = () => {
             style={{
               display: "flex", alignItems: "center", justifyContent: "center",
               width: 30, height: 30, borderRadius: 4,
-              background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)",
+              background: "rgba(31,27,22,0.045)", border: "1px solid var(--border)",
               color: "var(--t4)", cursor: loading ? "not-allowed" : "pointer",
               opacity: loading ? 0.5 : 1, transition: "all 100ms",
             }}
@@ -391,13 +386,13 @@ export const MeetingDashboard = () => {
           onBlur={() => setFocusedSearch(false)}
           style={{
             width: "100%",
-            background: focusedSearch ? "rgba(124,110,255,0.04)" : "var(--bg-card)",
-            border: `1px solid ${focusedSearch ? "rgba(124,110,255,0.35)" : "var(--border-strong)"}`,
+            background: focusedSearch ? "rgba(232,103,43,0.04)" : "var(--bg-card)",
+            border: `1px solid ${focusedSearch ? "rgba(232,103,43,0.35)" : "var(--border-strong)"}`,
             borderRadius: 4, paddingLeft: 36, paddingRight: 14,
             paddingTop: 10, paddingBottom: 10,
             fontSize: 13, color: "var(--t1)",
             outline: "none", transition: "border-color 150ms, background 150ms",
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Instrument Sans', sans-serif",
           }}
         />
       </div>
@@ -409,8 +404,8 @@ export const MeetingDashboard = () => {
         {/* Upcoming */}
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)" }}>Upcoming</span>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: "var(--t5)", background: "rgba(255,255,255,0.04)", padding: "1px 5px", borderRadius: 2 }}>
+            <span style={{ fontSize: 10, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.07em", color: "var(--t4)" }}>Upcoming</span>
+            <span style={{ fontSize: 10, fontWeight: 500, color: "var(--t5)", background: "rgba(31,27,22,0.05)", padding: "1px 6px", borderRadius: 3 }}>
               {upcoming.length}
             </span>
             <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
@@ -425,8 +420,8 @@ export const MeetingDashboard = () => {
         {/* Past */}
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)" }}>Past Meetings</span>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: "var(--t5)", background: "rgba(255,255,255,0.04)", padding: "1px 5px", borderRadius: 2 }}>
+            <span style={{ fontSize: 10, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.07em", color: "var(--t4)" }}>Past Meetings</span>
+            <span style={{ fontSize: 10, fontWeight: 500, color: "var(--t5)", background: "rgba(31,27,22,0.05)", padding: "1px 6px", borderRadius: 3 }}>
               {filteredPast.length}
             </span>
             <div style={{ flex: 1, height: 1, background: "var(--border)" }} />

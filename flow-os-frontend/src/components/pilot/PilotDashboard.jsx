@@ -13,8 +13,8 @@ async function getJSON(path) {
   return r.json();
 }
 
-const SECTION = { background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: 12, padding: "18px 20px" };
-const LABEL = { fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--t4)", marginBottom: 12 };
+const SECTION = { background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: 10, padding: "18px 20px" };
+const LABEL = { fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--t4)", marginBottom: 12 };
 
 export default function PilotDashboard() {
   const [summary, setSummary]     = useState(null);
@@ -64,8 +64,8 @@ export default function PilotDashboard() {
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <Activity style={{ width: 20, height: 20, color: "var(--brand)" }} />
-          <h1 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: "var(--t1)" }}>Pilot Dashboard</h1>
-          <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "2px 8px", borderRadius: 20, background: connected ? "rgba(76,175,130,0.1)" : "rgba(255,87,87,0.08)", border: `1px solid ${connected ? "rgba(76,175,130,0.3)" : "rgba(255,87,87,0.2)"}` }}>
+          <h1 style={{ margin: 0, fontSize: 18, fontWeight: 500, color: "var(--t1)" }}>Pilot Dashboard</h1>
+          <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "2px 8px", borderRadius: 10, background: connected ? "rgba(76,175,130,0.1)" : "rgba(255,87,87,0.08)", border: `1px solid ${connected ? "rgba(76,175,130,0.3)" : "rgba(255,87,87,0.2)"}` }}>
             <Radio style={{ width: 10, height: 10, color: connected ? "var(--p-normal-text)" : "var(--p-critical-text)" }} />
             <span style={{ fontSize: 11, color: connected ? "var(--p-normal-text)" : "var(--p-critical-text)" }}>{connected ? "Live" : "Offline"}</span>
           </div>
@@ -84,7 +84,7 @@ export default function PilotDashboard() {
             { label: "Feedback Today", value: digest.feedback?.total ?? 0 },
           ].map(c => (
             <div key={c.label} style={{ ...SECTION, textAlign: "center" }}>
-              <div style={{ fontSize: 28, fontWeight: 700, color: "var(--t1)" }}>{c.value}</div>
+              <div style={{ fontSize: 28, fontWeight: 500, color: "var(--t1)" }}>{c.value}</div>
               <div style={{ fontSize: 11, color: "var(--t4)", marginTop: 4 }}>{c.label}</div>
             </div>
           ))}

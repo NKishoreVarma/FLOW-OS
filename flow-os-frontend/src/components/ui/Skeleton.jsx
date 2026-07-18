@@ -1,23 +1,23 @@
-export function Skeleton({ className = "", width, height }) {
-  const style = {};
-  if (width) style.width = width;
-  if (height) style.height = height;
+const shimmerStyle = {
+  background: "linear-gradient(90deg, var(--bg-card) 25%, var(--bg-hover) 50%, var(--bg-card) 75%)",
+  backgroundSize: "200% 100%",
+  animation: "shimmer-sweep 1.6s ease-in-out infinite",
+};
+
+export function Skeleton({ className = "", width, height, style = {} }) {
   return (
     <div
-      className={`bg-bg-hover rounded animate-pulse ${className}`}
-      style={style}
+      className={className}
+      style={{ borderRadius: 3, height: height || 12, width: width || "100%", ...shimmerStyle, ...style }}
     />
   );
 }
 
 Skeleton.Text = function SkeletonText({ lines = 3, className = "" }) {
   return (
-    <div className={`space-y-2 ${className}`}>
+    <div className={className} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
       {Array.from({ length: lines }).map((_, i) => (
-        <Skeleton
-          key={i}
-          className={`h-3 rounded ${i === lines - 1 ? 'w-2/3' : 'w-full'}`}
-        />
+        <Skeleton key={i} style={{ width: i === lines - 1 ? "66%" : "100%", height: 11 }} />
       ))}
     </div>
   );
@@ -25,12 +25,23 @@ Skeleton.Text = function SkeletonText({ lines = 3, className = "" }) {
 
 Skeleton.Card = function SkeletonCard({ className = "" }) {
   return (
-    <div className={`bg-bg-card border border-border-flow rounded-xl p-4 space-y-3 ${className}`}>
-      <div className="flex items-center space-x-3">
-        <Skeleton className="w-8 h-8 rounded-lg flex-shrink-0" />
-        <div className="flex-1 space-y-1.5">
-          <Skeleton className="h-3 w-1/2" />
-          <Skeleton className="h-2.5 w-1/3" />
+    <div
+      className={className}
+      style={{
+        background:   "var(--bg-card)",
+        border:       "1px solid var(--border)",
+        borderRadius:  4,
+        padding:       16,
+        display:      "flex",
+        flexDirection: "column",
+        gap:           12,
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <Skeleton style={{ width: 32, height: 32, borderRadius: 4, flexShrink: 0 }} />
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 5 }}>
+          <Skeleton style={{ width: "50%", height: 11 }} />
+          <Skeleton style={{ width: "35%", height: 10 }} />
         </div>
       </div>
       <Skeleton.Text lines={2} />
@@ -40,12 +51,15 @@ Skeleton.Card = function SkeletonCard({ className = "" }) {
 
 Skeleton.Header = function SkeletonHeader() {
   return (
-    <div className="h-16 border-b border-border-flow/80 px-6 flex items-center justify-between bg-bg-primary/60">
-      <Skeleton className="h-4 w-32" />
-      <Skeleton className="h-8 w-48 rounded-lg" />
-      <div className="flex items-center space-x-3">
-        <Skeleton className="h-6 w-24 rounded-full" />
-        <Skeleton className="h-8 w-8 rounded-full" />
+    <div style={{
+      height: 48, borderBottom: "1px solid var(--border)",
+      padding: "0 20px", display: "flex", alignItems: "center", justifyContent: "space-between",
+      background: "var(--bg-sidebar)",
+    }}>
+      <Skeleton style={{ width: 120, height: 13 }} />
+      <div style={{ display: "flex", gap: 8 }}>
+        <Skeleton style={{ width: 80, height: 28, borderRadius: 4 }} />
+        <Skeleton style={{ width: 28, height: 28, borderRadius: 4 }} />
       </div>
     </div>
   );

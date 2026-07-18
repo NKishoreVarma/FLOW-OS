@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, CornerUpLeft, X, RefreshCw, Zap } from "lucide-react";
 import SourceBadge from "../ui/SourceBadge";
+import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
 // ─── Demo data ────────────────────────────────────────────────────────────────
@@ -68,26 +69,26 @@ function EmailRow({ email, selected, onClick }) {
       style={{
         position:     "relative",
         background:   isActive ? "var(--bg-hover)" : h ? "var(--bg-card)" : "transparent",
-        border:       `1px solid ${isActive ? "rgba(124,110,255,0.35)" : h ? "var(--border-strong)" : "var(--border)"}`,
+        border:       `1px solid ${isActive ? "rgba(232,103,43,0.35)" : h ? "var(--border-strong)" : "var(--border)"}`,
         borderLeft:   `2px solid ${isActive ? "var(--brand)" : color}`,
-        borderRadius:  4,
+        borderRadius:  6,
         padding:      "12px 14px",
-        marginBottom:  4,
+        marginBottom:  5,
         cursor:       "pointer",
         transition:   "background 100ms, border-color 100ms",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 5 }}>
         <span style={{
-          fontFamily:   "'JetBrains Mono', monospace",
-          fontSize:      9,
+          fontSize:      10,
+          fontWeight:    600,
           textTransform: "uppercase",
-          letterSpacing: "0.08em",
+          letterSpacing: "0.07em",
           color,
         }}>
           {P_LABEL[email.priority] || "FYI"}
         </span>
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "var(--t5)" }}>
+        <span style={{ fontSize: 10, color: "var(--t5)", fontVariantNumeric: "tabular-nums" }}>
           {timeAgo(email.timestamp)}
         </span>
       </div>
@@ -103,10 +104,9 @@ function EmailRow({ email, selected, onClick }) {
       {email.aiSuggestion && (
         <div style={{
           marginTop: 8, display: "inline-flex", alignItems: "center", gap: 5,
-          fontSize: 10, color: "var(--brand-text)",
+          fontSize: 10, fontWeight: 500, color: "var(--brand-text)",
           background: "var(--brand-dim)", border: "1px solid var(--brand-line)",
-          borderRadius: 3, padding: "3px 7px",
-          fontFamily: "'JetBrains Mono', monospace",
+          borderRadius: 4, padding: "3px 8px",
         }}>
           <Zap style={{ width: 9, height: 9 }} />
           AI suggestion ready
@@ -192,14 +192,7 @@ export const AIInbox = () => {
             <h1 style={{ fontSize: 16, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.3px" }}>
               Inbox
             </h1>
-            {isDemo && (
-              <span style={{
-                fontFamily: "'JetBrains Mono', monospace", fontSize: 9,
-                background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)",
-                borderRadius: 3, padding: "2px 6px", color: "var(--t5)",
-                textTransform: "uppercase", letterSpacing: "0.06em",
-              }}>Demo</span>
-            )}
+            <DataSourceBadge mode={isDemo ? "demo" : "live"} />
           </div>
           <p style={{ fontSize: 12, color: "var(--t4)" }}>
             Communications prioritized and drafted by FLOW
@@ -212,7 +205,7 @@ export const AIInbox = () => {
           style={{
             display: "flex", alignItems: "center", gap: 6,
             padding: "6px 12px", fontSize: 12, fontWeight: 500,
-            color: "var(--t3)", background: "rgba(255,255,255,0.03)",
+            color: "var(--t3)", background: "rgba(31,27,22,0.045)",
             border: "1px solid var(--border)", borderRadius: 4,
             cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.5 : 1,
             transition: "all 100ms",
@@ -263,8 +256,8 @@ export const AIInbox = () => {
           {loading ? (
             Array.from({ length: 5 }).map((_, i) => (
               <div key={i} style={{ marginBottom: 4 }}>
-                <div style={{ height: 64, borderRadius: 4, background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
-                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
+                <div style={{ height: 64, borderRadius: 4, background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(31,27,22,0.05) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
                   </div>
               </div>
             ))
@@ -311,8 +304,8 @@ export const AIInbox = () => {
               {/* Body */}
               <div style={{
                 background: "var(--bg-card)", border: "1px solid var(--border)",
-                borderRadius: 4, padding: "16px 18px",
-                fontSize: 13, color: "var(--t2)", lineHeight: 1.7,
+                borderRadius: 6, padding: "16px 18px",
+                fontSize: 13, color: "var(--t2)", lineHeight: 1.75,
                 marginBottom: 20,
               }}>
                 {selected.snippet}
@@ -323,16 +316,15 @@ export const AIInbox = () => {
               {/* AI suggestion */}
               {selected.aiSuggestion && (
                 <div style={{
-                  background: "rgba(124,110,255,0.06)", border: "1px solid var(--brand-line)",
+                  background: "rgba(232,103,43,0.06)", border: "1px solid var(--brand-line)",
                   borderLeft: "2px solid var(--brand)",
-                  borderRadius: 4, padding: "12px 14px", marginBottom: 20,
+                  borderRadius: 6, padding: "12px 14px", marginBottom: 20,
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                     <Zap style={{ width: 11, height: 11, color: "var(--brand)" }} />
                     <span style={{
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: 9, color: "var(--brand-text)",
-                      textTransform: "uppercase", letterSpacing: "0.08em",
+                      fontSize: 10, fontWeight: 500, color: "var(--brand-text)",
+                      textTransform: "uppercase", letterSpacing: "0.07em",
                     }}>
                       AI Suggestion
                     </span>
@@ -351,9 +343,9 @@ export const AIInbox = () => {
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
                   <CornerUpLeft style={{ width: 12, height: 12, color: "var(--brand)" }} />
                   <span style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: 9, textTransform: "uppercase",
-                    letterSpacing: "0.08em", color: "var(--t4)",
+                    fontSize: 11, fontWeight: 500,
+                    textTransform: "uppercase", letterSpacing: "0.07em",
+                    color: "var(--t3)",
                   }}>
                     Reply
                   </span>
@@ -367,12 +359,12 @@ export const AIInbox = () => {
                   onBlur={() => setFocusedInput(false)}
                   style={{
                     width: "100%",
-                    background: focusedInput ? "rgba(124,110,255,0.04)" : "rgba(255,255,255,0.02)",
-                    border: `1px solid ${focusedInput ? "rgba(124,110,255,0.35)" : "var(--border-strong)"}`,
+                    background: focusedInput ? "rgba(232,103,43,0.04)" : "rgba(31,27,22,0.04)",
+                    border: `1px solid ${focusedInput ? "rgba(232,103,43,0.35)" : "var(--border-strong)"}`,
                     borderRadius: 4, padding: "10px 12px",
                     fontSize: 13, color: "var(--t1)", lineHeight: 1.6,
                     resize: "none", outline: "none", transition: "border-color 150ms, background 150ms",
-                    fontFamily: "'Inter', -apple-system, sans-serif",
+                    fontFamily: "'Instrument Sans', -apple-system, sans-serif",
                     marginBottom: 10,
                   }}
                 />
@@ -395,9 +387,9 @@ export const AIInbox = () => {
                     disabled={sending || !draftText.trim()}
                     style={{
                       padding: "6px 14px", fontSize: 12, fontWeight: 500,
-                      background: sending || !draftText.trim() ? "rgba(124,110,255,0.15)" : "var(--brand)",
-                      border: "1px solid rgba(124,110,255,0.40)",
-                      borderRadius: 4, color: "#fff",
+                      background: sending || !draftText.trim() ? "rgba(232,103,43,0.15)" : "var(--brand)",
+                      border: "1px solid rgba(232,103,43,0.40)",
+                      borderRadius: 4, color: sending || !draftText.trim() ? "var(--t4)" : "#fff",
                       cursor: sending || !draftText.trim() ? "not-allowed" : "pointer",
                       opacity: sending || !draftText.trim() ? 0.6 : 1,
                       transition: "all 100ms",
@@ -418,7 +410,7 @@ export const AIInbox = () => {
             }}>
               <div style={{
                 width: 40, height: 40, borderRadius: 6,
-                background: "rgba(255,255,255,0.03)",
+                background: "rgba(31,27,22,0.045)",
                 border: "1px solid var(--border)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 marginBottom: 12,

@@ -3,10 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { X, Bell, Zap, AlertTriangle, CheckCircle, Info, Plug, Brain } from "lucide-react";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
-// ---------------------------------------------------------------------------
-// Static config
-// ---------------------------------------------------------------------------
-
 const TABS = ["All", "Action Required", "Incidents", "AI Insights"];
 
 const TAB_FILTER = {
@@ -17,64 +13,20 @@ const TAB_FILTER = {
 };
 
 const TYPE_META = {
-  recommendation: { icon: Brain,         color: "text-flow-purple", bg: "bg-flow-purple/10" },
-  approval:       { icon: CheckCircle,   color: "text-warning",     bg: "bg-warning/10"     },
-  incident:       { icon: AlertTriangle, color: "text-critical",    bg: "bg-critical/10"    },
-  connector:      { icon: Plug,          color: "text-info",        bg: "bg-info/10"        },
-  ai_insight:     { icon: Zap,           color: "text-success",     bg: "bg-success/10"     },
+  recommendation: { icon: Brain,         color: "var(--brand-text)",      bg: "rgba(232,103,43,0.10)" },
+  approval:       { icon: CheckCircle,   color: "var(--p-high-text)",     bg: "rgba(255,151,65,0.10)"  },
+  incident:       { icon: AlertTriangle, color: "var(--p-critical-text)", bg: "rgba(255,87,87,0.10)"   },
+  connector:      { icon: Plug,          color: "var(--p-info-text)",     bg: "rgba(96,165,250,0.10)"  },
+  ai_insight:     { icon: Zap,           color: "var(--p-normal-text)",   bg: "rgba(76,175,130,0.10)"  },
 };
 
 const DEMO_NOTIFICATIONS = [
-  {
-    id: "demo-1",
-    type: "recommendation",
-    title: "Deploy Review Needed",
-    body: "3 PRs are ready for merge but awaiting final review.",
-    href: "/projects",
-    time: new Date(Date.now() - 5 * 60000),
-    priority: "high",
-  },
-  {
-    id: "demo-2",
-    type: "incident",
-    title: "Database Latency Spike",
-    body: "pgvector queries exceeding 500ms threshold.",
-    href: "/platform/health",
-    time: new Date(Date.now() - 12 * 60000),
-    priority: "critical",
-  },
-  {
-    id: "demo-3",
-    type: "ai_insight",
-    title: "Weekly Intelligence Ready",
-    body: "Your AI briefing for this week is ready.",
-    href: "/briefing",
-    time: new Date(Date.now() - 30 * 60000),
-    priority: "medium",
-  },
-  {
-    id: "demo-4",
-    type: "connector",
-    title: "GitHub Sync Complete",
-    body: "Synced 24 commits and 6 PRs to FLOW intelligence.",
-    href: "/projects",
-    time: new Date(Date.now() - 60 * 60000),
-    priority: "low",
-  },
-  {
-    id: "demo-5",
-    type: "approval",
-    title: "Approval Required",
-    body: 'Action "send_email" to sales@acme.com requires your approval.',
-    href: "/workfeed",
-    time: new Date(Date.now() - 3 * 60000),
-    priority: "high",
-  },
+  { id: "demo-1", type: "recommendation", title: "Deploy Review Needed",      body: "3 PRs are ready for merge but awaiting final review.",       href: "/projects",        time: new Date(Date.now() - 5 * 60000),  priority: "high"     },
+  { id: "demo-2", type: "incident",       title: "Database Latency Spike",    body: "pgvector queries exceeding 500ms threshold.",                  href: "/platform/health", time: new Date(Date.now() - 12 * 60000), priority: "critical" },
+  { id: "demo-3", type: "ai_insight",    title: "Weekly Intelligence Ready", body: "Your AI briefing for this week is ready.",                    href: "/briefing",        time: new Date(Date.now() - 30 * 60000), priority: "medium"   },
+  { id: "demo-4", type: "connector",     title: "GitHub Sync Complete",      body: "Synced 24 commits and 6 PRs to FLOW intelligence.",           href: "/projects",        time: new Date(Date.now() - 60 * 60000), priority: "low"      },
+  { id: "demo-5", type: "approval",      title: "Approval Required",         body: 'Action "send_email" to sales@acme.com requires your approval.',href: "/",                time: new Date(Date.now() - 3 * 60000),  priority: "high"     },
 ];
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
 
 function relativeTime(date) {
   const diff = Math.floor((Date.now() - new Date(date).getTime()) / 1000);
@@ -84,22 +36,15 @@ function relativeTime(date) {
   return `${Math.floor(diff / 86400)}d ago`;
 }
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
-
 export const NotificationDropdown = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const { token, workspaceId, events } = useWebSocket();
 
   const [notifications, setNotifications] = useState([]);
-  const [readIds, setReadIds] = useState(new Set());
-  const [activeTab, setActiveTab] = useState("All");
-
-  // Only fetch once per session (panel may open/close many times)
+  const [readIds, setReadIds]             = useState(new Set());
+  const [activeTab, setActiveTab]         = useState("All");
   const fetchedRef = useRef(false);
 
-  // Stable addNotification: deduplicates by id
   const addNotification = useCallback((n) => {
     setNotifications((prev) => {
       if (prev.some((x) => x.id === n.id)) return prev;
@@ -107,7 +52,6 @@ export const NotificationDropdown = ({ isOpen, onClose }) => {
     });
   }, []);
 
-  // Fetch API data once
   useEffect(() => {
     if (fetchedRef.current) return;
     fetchedRef.current = true;
@@ -120,238 +64,138 @@ export const NotificationDropdown = ({ isOpen, onClose }) => {
 
     let loadedAny = false;
 
+    const numToLabel = (p) => (p >= 80 ? "critical" : p >= 65 ? "high" : p >= 45 ? "medium" : "low");
+    const hrefForNotif = (t) => (/MERGE_CONFLICT|CI_FAILED/i.test(t) ? "/projects" : /APPROVAL/i.test(t) ? "/" : "/activity");
+    const typeForNotif = (t) => (/MERGE_CONFLICT|CI_FAILED|INCIDENT/i.test(t) ? "incident" : /APPROVAL/i.test(t) ? "approval" : "ai_insight");
+
     Promise.allSettled([
-      fetch("/api/brain/recommendations", { headers }).then((r) =>
-        r.ok ? r.json() : Promise.reject(r.status)
-      ),
-      fetch("/api/approvals", { headers }).then((r) =>
-        r.ok ? r.json() : Promise.reject(r.status)
-      ),
-    ]).then(([recResult, appResult]) => {
+      fetch("/api/brain/recommendations", { headers }).then(r => r.ok ? r.json() : Promise.reject(r.status)),
+      fetch("/api/approvals",             { headers }).then(r => r.ok ? r.json() : Promise.reject(r.status)),
+      fetch("/api/notifications?limit=20", { headers }).then(r => r.ok ? r.json() : Promise.reject(r.status)),
+    ]).then(([recResult, appResult, notifResult]) => {
+      if (notifResult?.status === "fulfilled") {
+        const notifs = Array.isArray(notifResult.value?.notifications) ? notifResult.value.notifications : [];
+        notifs.slice(0, 20).forEach(n => {
+          addNotification({ id: `nf-${n.id}`, type: typeForNotif(n.type), title: n.title, body: n.body || "", href: hrefForNotif(n.type), time: new Date(n.createdAt || Date.now()), priority: numToLabel(n.priority || 50) });
+          loadedAny = true;
+        });
+      }
       if (recResult.status === "fulfilled") {
-        const recs = Array.isArray(recResult.value?.recommendations)
-          ? recResult.value.recommendations
-          : Array.isArray(recResult.value)
-          ? recResult.value
-          : [];
-        recs.slice(0, 10).forEach((rec) => {
-          addNotification({
-            id: `rec-${rec.id || rec.recommendationId || Math.random()}`,
-            type: "recommendation",
-            title: rec.title || rec.action || "AI Recommendation",
-            body: rec.description || rec.reasoning || rec.body || "",
-            href: "/workfeed",
-            time: new Date(rec.createdAt || rec.timestamp || Date.now()),
-            priority: rec.priority || "medium",
-          });
+        const recs = Array.isArray(recResult.value?.recommendations) ? recResult.value.recommendations : Array.isArray(recResult.value) ? recResult.value : [];
+        recs.slice(0, 10).forEach(rec => {
+          addNotification({ id: `rec-${rec.id || rec.recommendationId || Math.random()}`, type: "recommendation", title: rec.title || rec.action || "AI Recommendation", body: rec.description || rec.reasoning || rec.body || "", href: "/", time: new Date(rec.createdAt || rec.timestamp || Date.now()), priority: rec.priority || "medium" });
           loadedAny = true;
         });
       }
-
       if (appResult.status === "fulfilled") {
-        const apps = Array.isArray(appResult.value?.approvals)
-          ? appResult.value.approvals
-          : Array.isArray(appResult.value)
-          ? appResult.value
-          : [];
-        apps.slice(0, 10).forEach((ap) => {
-          addNotification({
-            id: `ap-${ap.id || ap.approvalId || Math.random()}`,
-            type: "approval",
-            title: "Approval Required",
-            body: ap.description || ap.reason || `Action "${ap.action || ap.actionType}" requires your approval.`,
-            href: "/workfeed",
-            time: new Date(ap.createdAt || ap.requestedAt || Date.now()),
-            priority: "high",
-          });
+        const apps = Array.isArray(appResult.value?.approvals) ? appResult.value.approvals : Array.isArray(appResult.value) ? appResult.value : [];
+        apps.slice(0, 10).forEach(ap => {
+          addNotification({ id: `ap-${ap.id || ap.approvalId || Math.random()}`, type: "approval", title: "Approval Required", body: ap.description || ap.reason || `Action "${ap.action || ap.actionType}" requires your approval.`, href: "/", time: new Date(ap.createdAt || ap.requestedAt || Date.now()), priority: "high" });
           loadedAny = true;
         });
       }
-
-      // Fall back to demo data if both APIs failed or returned nothing
-      if (!loadedAny) {
-        DEMO_NOTIFICATIONS.forEach((n) => addNotification(n));
-      }
+      if (!loadedAny) DEMO_NOTIFICATIONS.forEach(n => addNotification(n));
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addNotification]);
 
-  // Process incoming WebSocket events
   useEffect(() => {
     if (!events) return;
     const recent = events.slice(-5);
     for (const ev of recent) {
       if (ev.type === "INCIDENT_CREATED") {
-        addNotification({
-          id: `ws-incident-${ev.id || Date.now()}`,
-          type: "incident",
-          title: "Incident Detected",
-          body: ev.data?.description || ev.data?.text || "A new incident was detected.",
-          href: "/timeline",
-          time: new Date(),
-          priority: "critical",
-        });
+        addNotification({ id: `ws-incident-${ev.id || Date.now()}`, type: "incident", title: "Incident Detected", body: ev.data?.description || ev.data?.text || "A new incident was detected.", href: "/timeline", time: new Date(), priority: "critical" });
       } else if (ev.type === "RISK_DETECTED") {
-        addNotification({
-          id: `ws-risk-${ev.id || Date.now()}`,
-          type: "incident",
-          title: "Risk Signal",
-          body: ev.data?.text || "A risk signal was detected.",
-          href: "/timeline",
-          time: new Date(),
-          priority: "high",
-        });
+        addNotification({ id: `ws-risk-${ev.id || Date.now()}`, type: "incident", title: "Risk Signal", body: ev.data?.text || "A risk signal was detected.", href: "/timeline", time: new Date(), priority: "high" });
       } else if (ev.type === "INTEL_STORED") {
-        addNotification({
-          id: `ws-intel-${ev.id || Date.now()}`,
-          type: "ai_insight",
-          title: "Intelligence Captured",
-          body: ev.data?.channel
-            ? `New intel from ${ev.data.channel}`
-            : "New operational intelligence captured.",
-          href: "/workfeed",
-          time: new Date(),
-          priority: "medium",
-        });
+        addNotification({ id: `ws-intel-${ev.id || Date.now()}`, type: "ai_insight", title: "Intelligence Captured", body: ev.data?.channel ? `New intel from ${ev.data.channel}` : "New operational intelligence captured.", href: "/", time: new Date(), priority: "medium" });
+      } else if (ev.type === "NOTIFICATION_CREATED") {
+        const d = ev.payload || ev.data || {};
+        const isConflict = /MERGE_CONFLICT|CI_FAILED/i.test(d.type || "");
+        addNotification({ id: `ws-nf-${d.id || ev.id || Date.now()}`, type: isConflict ? "incident" : /APPROVAL/i.test(d.type || "") ? "approval" : "ai_insight", title: d.title || "Notification", body: d.body || "", href: isConflict ? "/projects" : "/activity", time: new Date(), priority: (d.priority || 50) >= 80 ? "critical" : (d.priority || 50) >= 65 ? "high" : "medium" });
       }
     }
   }, [events, addNotification]);
 
-  // Derived values
-  const filtered = notifications.filter(TAB_FILTER[activeTab] || (() => true));
-  const unreadCount = notifications.filter((n) => !readIds.has(n.id)).length;
+  const filtered    = notifications.filter(TAB_FILTER[activeTab] || (() => true));
+  const unreadCount = notifications.filter(n => !readIds.has(n.id)).length;
+  const markRead    = (id) => setReadIds(prev => new Set([...prev, id]));
+  const markAllRead = () => setReadIds(new Set(notifications.map(n => n.id)));
 
-  const markRead = (id) => setReadIds((prev) => new Set([...prev, id]));
-  const markAllRead = () =>
-    setReadIds(new Set(notifications.map((n) => n.id)));
-
-  const handleClick = (n) => {
-    markRead(n.id);
-    navigate(n.href);
-    onClose();
-  };
+  const handleClick = (n) => { markRead(n.id); navigate(n.href); onClose(); };
 
   if (!isOpen) return null;
 
   return (
     <>
-      {/* Backdrop */}
-      <div className="fixed inset-0 z-40" onClick={onClose} />
+      <div style={{ position: "fixed", inset: 0, zIndex: 40 }} onClick={onClose} />
 
-      {/* Panel */}
-      <div className="absolute right-0 top-full mt-2 w-96 bg-bg-card border border-border-flow rounded-xl shadow-2xl z-50 overflow-hidden animate-fade-in max-h-[80vh] flex flex-col">
+      <div style={{ position: "absolute", right: 0, top: "100%", marginTop: 8, width: 360, background: "var(--bg-sidebar)", border: "1px solid var(--border-strong)", borderRadius: 6, boxShadow: "0 20px 60px rgba(31,27,22,0.12)", zIndex: 50, overflow: "hidden", maxHeight: "80vh", display: "flex", flexDirection: "column" }}>
 
         {/* Header */}
-        <div className="px-4 py-3 border-b border-border-flow/80 flex items-center justify-between bg-bg-secondary/40 select-none shrink-0">
-          <div className="flex items-center gap-2">
-            <Bell className="w-3.5 h-3.5 text-text-secondary" />
-            <span className="text-ui-sm font-semibold text-text-primary">Notifications</span>
+        <div style={{ padding: "10px 14px", borderBottom: "1px solid var(--border)", background: "rgba(31,27,22,0.01)", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <Bell style={{ width: 12, height: 12, color: "var(--t4)" }} />
+            <span style={{ fontSize: 12, fontWeight: 500, color: "var(--t1)" }}>Notifications</span>
             {unreadCount > 0 && (
-              <span className="text-[10px] font-bold text-flow-purple bg-flow-purple/10 px-1.5 py-0.5 rounded border border-flow-purple/25">
+              <span style={{ fontSize: 9, fontWeight: 500, color: "var(--brand-text)", background: "rgba(232,103,43,0.10)", border: "1px solid rgba(232,103,43,0.22)", padding: "2px 6px", borderRadius: 3 }}>
                 {unreadCount} New
               </span>
             )}
           </div>
-          <div className="flex items-center gap-3">
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             {unreadCount > 0 && (
-              <button
-                onClick={markAllRead}
-                className="text-[10px] font-semibold text-flow-purple hover:underline cursor-pointer"
-              >
+              <button onClick={markAllRead} style={{ fontSize: 10, fontWeight: 500, color: "var(--brand-text)", background: "none", border: "none", cursor: "pointer" }}>
                 Mark all read
               </button>
             )}
-            <button
-              onClick={onClose}
-              className="p-0.5 rounded text-text-muted hover:text-text-primary hover:bg-bg-hover transition-colors cursor-pointer"
-            >
-              <X className="w-3.5 h-3.5" />
+            <button onClick={onClose} style={{ padding: "3px", borderRadius: 3, background: "none", border: "none", color: "var(--t5)", cursor: "pointer", display: "flex" }}>
+              <X style={{ width: 12, height: 12 }} />
             </button>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="px-2 py-1.5 border-b border-border-flow/60 bg-bg-secondary/20 flex gap-1 overflow-x-auto select-none shrink-0">
-          {TABS.map((tab) => (
+        <div style={{ padding: "6px 8px", borderBottom: "1px solid var(--border)", background: "rgba(31,27,22,0.005)", display: "flex", gap: 4, overflowX: "auto", flexShrink: 0 }}>
+          {TABS.map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-2.5 py-0.5 rounded text-[10px] font-semibold transition-colors cursor-pointer whitespace-nowrap flex-shrink-0 ${
-                activeTab === tab
-                  ? "bg-flow-purple/10 text-flow-purple border border-flow-purple/20"
-                  : "text-text-secondary hover:bg-bg-hover hover:text-text-primary border border-transparent"
-              }`}
+              style={{ padding: "3px 8px", borderRadius: 3, fontSize: 10, fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0, transition: "all 80ms",
+                background: activeTab === tab ? "rgba(232,103,43,0.10)" : "transparent",
+                color:      activeTab === tab ? "var(--brand-text)" : "var(--t4)",
+                border:     activeTab === tab ? "1px solid rgba(232,103,43,0.22)" : "1px solid transparent",
+              }}
             >
               {tab}
             </button>
           ))}
         </div>
 
-        {/* Notification list */}
-        <div className="overflow-y-auto divide-y divide-border-flow/40 flex-1 min-h-0">
+        {/* List */}
+        <div style={{ overflowY: "auto", flex: 1, minHeight: 0 }}>
           {filtered.length === 0 ? (
-            <div className="p-8 flex flex-col items-center justify-center text-center gap-2 text-text-muted select-none">
-              <Bell className="w-8 h-8 text-text-muted/50" />
-              <span className="text-ui-xs">Nothing here — you're all caught up.</span>
+            <div style={{ padding: 32, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, color: "var(--t5)", textAlign: "center" }}>
+              <Bell style={{ width: 28, height: 28, opacity: 0.3 }} />
+              <span style={{ fontSize: 12, fontWeight: 300 }}>Nothing here — you're all caught up.</span>
             </div>
           ) : (
             filtered.map((n) => {
               const isUnread = !readIds.has(n.id);
-              const meta = TYPE_META[n.type] || TYPE_META.connector;
-              const Icon = meta.icon;
-
+              const meta  = TYPE_META[n.type] || TYPE_META.connector;
+              const Icon  = meta.icon;
               return (
-                <div
-                  key={n.id}
-                  onClick={() => handleClick(n)}
-                  className={`px-4 py-3 flex gap-3 items-start cursor-pointer transition-colors hover:bg-bg-hover group ${
-                    isUnread ? "bg-bg-secondary/30" : ""
-                  }`}
-                >
-                  {/* Icon */}
-                  <div className={`mt-0.5 p-1.5 rounded-lg shrink-0 ${meta.bg}`}>
-                    <Icon className={`w-3.5 h-3.5 ${meta.color}`} />
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0 space-y-0.5">
-                    <div className="flex items-center justify-between gap-2">
-                      <span
-                        className={`text-ui-sm truncate ${
-                          isUnread ? "font-bold text-text-primary" : "font-medium text-text-secondary"
-                        }`}
-                      >
-                        {n.title}
-                      </span>
-                      <span className="text-[9px] text-text-muted shrink-0">
-                        {relativeTime(n.time)}
-                      </span>
-                    </div>
-                    <p className="text-ui-xs text-text-secondary leading-snug line-clamp-2">
-                      {n.body}
-                    </p>
-                    {n.priority === "critical" && (
-                      <span className="inline-block text-[9px] font-semibold text-critical bg-critical/10 px-1.5 py-0.5 rounded mt-0.5">
-                        CRITICAL
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Unread dot */}
-                  {isUnread && (
-                    <span className="mt-1.5 w-2 h-2 rounded-full bg-flow-purple shrink-0" />
-                  )}
-                </div>
+                <NotifRow key={n.id} n={n} isUnread={isUnread} meta={meta} Icon={Icon} onClick={() => handleClick(n)} />
               );
             })
           )}
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-2.5 border-t border-border-flow/40 bg-bg-secondary/40 shrink-0">
+        <div style={{ padding: "8px 14px", borderTop: "1px solid var(--border)", background: "rgba(31,27,22,0.01)", textAlign: "center", flexShrink: 0 }}>
           <button
             onClick={() => { navigate("/timeline"); onClose(); }}
-            className="text-[10px] font-semibold text-flow-purple hover:underline cursor-pointer w-full text-center"
+            style={{ fontSize: 10, fontWeight: 500, color: "var(--brand-text)", background: "none", border: "none", cursor: "pointer" }}
           >
             View full AI Activity Timeline →
           </button>
@@ -360,5 +204,34 @@ export const NotificationDropdown = ({ isOpen, onClose }) => {
     </>
   );
 };
+
+function NotifRow({ n, isUnread, meta, Icon, onClick }) {
+  const [h, setH] = useState(false);
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setH(true)}
+      onMouseLeave={() => setH(false)}
+      style={{ padding: "10px 14px", display: "flex", gap: 10, alignItems: "flex-start", cursor: "pointer", background: h ? "var(--bg-hover)" : isUnread ? "rgba(31,27,22,0.015)" : "transparent", borderBottom: "1px solid var(--border)", transition: "background 80ms" }}
+    >
+      <div style={{ marginTop: 2, padding: 6, borderRadius: 5, flexShrink: 0, background: meta.bg }}>
+        <Icon style={{ width: 12, height: 12, color: meta.color }} />
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 2 }}>
+          <span style={{ fontSize: 12, color: "var(--t1)", fontWeight: isUnread ? 600 : 400, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{n.title}</span>
+          <span style={{ fontSize: 9, color: "var(--t5)", flexShrink: 0 }}>{relativeTime(n.time)}</span>
+        </div>
+        <p style={{ fontSize: 11, color: "var(--t4)", lineHeight: 1.4, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>{n.body}</p>
+        {n.priority === "critical" && (
+          <span style={{ display: "inline-block", marginTop: 3, fontSize: 9, fontWeight: 500, color: "var(--p-critical-text)", background: "rgba(255,87,87,0.08)", border: "1px solid rgba(255,87,87,0.22)", padding: "1px 5px", borderRadius: 3 }}>CRITICAL</span>
+        )}
+      </div>
+      {isUnread && (
+        <span style={{ marginTop: 6, width: 6, height: 6, borderRadius: "50%", background: "var(--brand)", flexShrink: 0 }} />
+      )}
+    </div>
+  );
+}
 
 export default NotificationDropdown;

@@ -3,81 +3,50 @@ import {
   BarChart3, RefreshCw, Cpu, Brain, Network, CheckCircle2,
   DollarSign, Clock, ListCollapse, ShieldCheck
 } from "lucide-react";
-import PageContainer from "../ui/PageContainer";
-import Card from "../ui/Card";
-import Button from "../ui/Button";
-import Skeleton from "../ui/Skeleton";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
 const EvaluationPlatform = () => {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
-  const [metrics, setMetrics] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [metrics, setMetrics]               = useState(null);
+  const [loading, setLoading]               = useState(true);
   const [recommendations, setRecommendations] = useState([]);
-  const [selectedRecId, setSelectedRecId] = useState("");
+  const [selectedRecId, setSelectedRecId]   = useState("");
   const [explainability, setExplainability] = useState(null);
   const [explainabilityLoading, setExplainabilityLoading] = useState(false);
+  const [hRec, setHRec]                     = useState(null);
+  const [hFb, setHFb]                       = useState(null);
+
+  const authHeaders = token ? { Authorization: `Bearer ${token}`, "workspace-id": workspaceId } : {};
 
   const fetchMetrics = async () => {
     if (!token || !workspaceId) return;
     try {
-      const res = await fetch("/api/evaluation/metrics", {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "workspace-id": workspaceId
-        }
-      });
-      if (res.ok) {
-        const body = await res.json();
-        setMetrics(body);
-      }
-    } catch (err) {
-      console.error("Failed to fetch evaluation metrics:", err);
-    }
+      const res = await fetch("/api/evaluation/metrics", { headers: authHeaders });
+      if (res.ok) { setMetrics(await res.json()); }
+    } catch {}
   };
 
   const fetchRecommendations = async () => {
     if (!token || !workspaceId) { setLoading(false); return; }
     try {
-      const res = await fetch("/api/intelligence/explainable-recommendations", {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "workspace-id": workspaceId
-        }
-      });
+      const res = await fetch("/api/intelligence/explainable-recommendations", { headers: authHeaders });
       if (res.ok) {
         const body = await res.json();
         setRecommendations(body || []);
-        if (body.length > 0 && !selectedRecId) {
-          setSelectedRecId(body[0].id);
-        }
+        if (body.length > 0 && !selectedRecId) setSelectedRecId(body[0].id);
       }
-    } catch (err) {
-      console.error("Failed to fetch recommendations:", err);
-    } finally {
-      setLoading(false);
-    }
+    } catch {}
+    finally { setLoading(false); }
   };
 
   const fetchExplainability = async (recId) => {
     if (!token || !recId) return;
     setExplainabilityLoading(true);
     try {
-      const res = await fetch(`/api/evaluation/explainability/${recId}`, {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "workspace-id": workspaceId
-        }
-      });
-      if (res.ok) {
-        const body = await res.json();
-        setExplainability(body);
-      }
-    } catch (err) {
-      console.error("Failed to fetch explainability details:", err);
-    } finally {
-      setExplainabilityLoading(false);
-    }
+      const res = await fetch(`/api/evaluation/explainability/${recId}`, { headers: authHeaders });
+      if (res.ok) { setExplainability(await res.json()); }
+    } catch {}
+    finally { setExplainabilityLoading(false); }
   };
 
   const handleFeedback = async (recId, outcome) => {
@@ -85,249 +54,222 @@ const EvaluationPlatform = () => {
     try {
       const res = await fetch(`/api/evaluation/feedback/${recId}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-          "workspace-id": workspaceId
-        },
+        headers: { "Content-Type": "application/json", ...authHeaders },
         body: JSON.stringify({ feedback: outcome })
       });
       if (res.ok) {
-        // Refresh metrics and explainability
         await fetchMetrics();
         await fetchRecommendations();
-        if (recId === selectedRecId) {
-          await fetchExplainability(recId);
-        }
+        if (recId === selectedRecId) { await fetchExplainability(recId); }
       }
-    } catch (err) {
-      console.error("Failed to submit feedback:", err);
-    }
+    } catch {}
   };
 
   useEffect(() => {
-    if (!isAuthLoading) {
-      setTimeout(() => { fetchMetrics(); fetchRecommendations(); }, 0);
-    }
+    if (!isAuthLoading) { setTimeout(() => { fetchMetrics(); fetchRecommendations(); }, 0); }
   }, [isAuthLoading, token, workspaceId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (selectedRecId) {
-      setTimeout(() => fetchExplainability(selectedRecId), 0);
-    }
+    if (selectedRecId) { setTimeout(() => fetchExplainability(selectedRecId), 0); }
   }, [selectedRecId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return (
-      <PageContainer className="space-y-6">
-        <Skeleton className="h-16" />
-        <Skeleton className="h-[400px]" />
-      </PageContainer>
+      <div style={{ padding: "32px 24px" }}>
+        {[64, 400].map((h, i) => (
+          <div key={i} style={{ height: h, borderRadius: 4, background: "var(--bg-card)", border: "1px solid var(--border)", marginBottom: 16, position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(31,27,22,0.05) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
+          </div>
+        ))}
+      </div>
     );
   }
 
+  const statLabel = (text) => (
+    <span style={{ display: "block", fontSize: 9, fontWeight: 500, color: "var(--t5)", textTransform: "uppercase", letterSpacing: "0.10em", marginBottom: 6 }}>{text}</span>
+  );
+
+  const statusStyle = (status) => {
+    if (status === "ACCEPTED") return { color: "var(--p-normal-text)", bg: "rgba(76,175,130,0.10)"  };
+    if (status === "REJECTED") return { color: "var(--p-critical-text)", bg: "rgba(255,87,87,0.10)"  };
+    return                           { color: "var(--t5)",               bg: "rgba(31,27,22,0.05)" };
+  };
+
   return (
-    <PageContainer className="space-y-8 select-none text-left">
-      
-      {/* Title */}
-      <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-        <div className="space-y-1">
-          <h1 className="text-ui-xl font-bold text-text-primary tracking-tight flex items-center space-x-3">
-            <BarChart3 className="w-8 h-8 text-flow-purple" />
-            <span>AI Evaluation & Explainability</span>
+    <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: 24 }}>
+
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
+        <div>
+          <h1 style={{ fontSize: 20, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.4px", display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+            <BarChart3 style={{ width: 22, height: 22, color: "var(--brand)" }} />
+            AI Evaluation & Explainability
           </h1>
-          <p className="text-ui-sm text-text-secondary leading-relaxed max-w-2xl">
+          <p style={{ fontSize: 12, color: "var(--t4)", maxWidth: 520 }}>
             Audit evidence graphs, query reasoning lineages, authority weights, and user-action learning loops.
           </p>
         </div>
-        <Button variant="secondary" onClick={() => { fetchMetrics(); fetchRecommendations(); }} className="space-x-1.5">
-          <RefreshCw className="w-3.5 h-3.5" />
-          <span>Refresh Analytics</span>
-        </Button>
+        <button
+          onClick={() => { fetchMetrics(); fetchRecommendations(); }}
+          style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--t3)", background: "rgba(31,27,22,0.05)", border: "1px solid var(--border)", borderRadius: 4, padding: "6px 12px", cursor: "pointer", flexShrink: 0 }}
+        >
+          <RefreshCw style={{ width: 12, height: 12 }} /> Refresh Analytics
+        </button>
       </div>
 
+      {/* Metrics cards */}
       {metrics && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Acceptance */}
-          <Card className="p-6 space-y-2">
-            <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest block">Acceptance Rate</span>
-            <span className="text-ui-lg font-bold text-text-primary flex items-center space-x-2">
-              <CheckCircle2 className="w-5 h-5 text-success" />
-              <span>{metrics.recommendations.rates.acceptanceRate}%</span>
-            </span>
-          </Card>
-
-          {/* Time Saved */}
-          <Card className="p-6 space-y-2">
-            <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest block">Productivity Saved</span>
-            <span className="text-ui-lg font-bold text-text-primary flex items-center space-x-2">
-              <Clock className="w-5 h-5 text-flow-purple" />
-              <span>{metrics.recommendations.productivity.timeSavedHours} hrs</span>
-            </span>
-          </Card>
-
-          {/* Value Saved */}
-          <Card className="p-6 space-y-2">
-            <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest block">Estimated Cost Saved</span>
-            <span className="text-ui-lg font-bold text-text-primary flex items-center space-x-2">
-              <DollarSign className="w-5 h-5 text-flow-purple" />
-              <span>${metrics.recommendations.productivity.estimatedSavingsUSD}</span>
-            </span>
-          </Card>
-
-          {/* Copilot latency */}
-          <Card className="p-6 space-y-2">
-            <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest block">Reasoning Latency</span>
-            <span className="text-ui-lg font-bold text-text-primary flex items-center space-x-2">
-              <Cpu className="w-5 h-5 text-flow-purple animate-spin" />
-              <span>{metrics.copilot.averageLatencyMs} ms</span>
-            </span>
-          </Card>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+          {[
+            { icon: CheckCircle2, iconColor: "var(--p-normal)", label: "Acceptance Rate",     value: `${metrics.recommendations.rates.acceptanceRate}%` },
+            { icon: Clock,        iconColor: "var(--brand)",    label: "Productivity Saved",   value: `${metrics.recommendations.productivity.timeSavedHours} hrs` },
+            { icon: DollarSign,   iconColor: "var(--brand)",    label: "Estimated Cost Saved", value: `$${metrics.recommendations.productivity.estimatedSavingsUSD}` },
+            { icon: Cpu,          iconColor: "var(--brand)",    label: "Reasoning Latency",    value: `${metrics.copilot.averageLatencyMs} ms`, spin: true },
+          ].map(({ icon: Icon, iconColor, label, value, spin }) => (
+            <div key={label} style={{ background: "var(--bg-card)", border: "1px solid var(--border-strong)", borderRadius: 4, padding: "18px" }}>
+              {statLabel(label)}
+              <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 18, fontWeight: 500, color: "var(--t1)" }}>
+                <Icon style={{ width: 18, height: 18, color: iconColor, animation: spin ? "spin 1.2s linear infinite" : "none" }} />
+                {value}
+              </span>
+            </div>
+          ))}
         </div>
       )}
 
-      {/* Grid Dashboard */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        {/* Left Column: Recommendations selector list */}
-        <Card className="p-6 space-y-4">
-          <h2 className="text-ui-sm font-bold uppercase tracking-wider text-text-primary border-b border-border-flow/40 pb-2">
-            Briefing Recommendations
-          </h2>
+      {/* Main grid */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 14 }}>
 
-          {recommendations.length > 0 ? (
-            <div className="space-y-2 overflow-y-auto max-h-[500px] pr-1">
-              {recommendations.map((rec) => {
+        {/* Recommendation list */}
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-strong)", borderRadius: 4, padding: "20px" }}>
+          <h2 style={{ fontSize: 9, fontWeight: 500, color: "var(--t1)", textTransform: "uppercase", letterSpacing: "0.10em", borderBottom: "1px solid var(--border)", paddingBottom: 10, marginBottom: 14 }}>Briefing Recommendations</h2>
+          {recommendations.length === 0 ? (
+            <p style={{ fontSize: 12, color: "var(--t5)", textAlign: "center", padding: "40px 0" }}>No recent recommendations generated.</p>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, maxHeight: 480, overflowY: "auto" }}>
+              {recommendations.map(rec => {
                 const isActive = selectedRecId === rec.id;
+                const ss = statusStyle(rec.status);
                 return (
                   <div
                     key={rec.id}
                     onClick={() => setSelectedRecId(rec.id)}
-                    className={`p-4 rounded-xl border text-left cursor-pointer transition-apple ${
-                      isActive 
-                        ? "bg-flow-purple/10 border-flow-purple text-white" 
-                        : "bg-bg-secondary border-border-flow/40 text-text-secondary hover:border-border-flow"
-                    }`}
+                    onMouseEnter={() => setHRec(rec.id)}
+                    onMouseLeave={() => setHRec(null)}
+                    style={{ padding: "10px 12px", borderRadius: 4, border: `1px solid ${isActive ? "rgba(232,103,43,0.40)" : "var(--border)"}`, background: isActive ? "rgba(232,103,43,0.08)" : hRec === rec.id ? "var(--bg-hover)" : "rgba(31,27,22,0.04)", cursor: "pointer", transition: "all 80ms" }}
                   >
-                    <span className="text-ui-xs font-bold block mb-1">{rec.title}</span>
-                    <div className="flex justify-between items-center text-[10px] font-bold text-text-muted uppercase tracking-widest">
-                      <span>Conf: {rec.confidence}%</span>
-                      <span className={`px-1.5 py-0.5 rounded ${
-                        rec.status === 'ACCEPTED' ? 'bg-success/15 text-success' :
-                        rec.status === 'REJECTED' ? 'bg-critical/15 text-critical' :
-                        'bg-bg-primary text-text-muted'
-                      }`}>{rec.status}</span>
+                    <span style={{ display: "block", fontSize: 12, fontWeight: 500, color: isActive ? "var(--brand-text)" : "var(--t1)", marginBottom: 4 }}>{rec.title}</span>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: 9, fontWeight: 500, color: "var(--t5)" }}>Conf: {rec.confidence}%</span>
+                      <span style={{ fontSize: 9, fontWeight: 500, color: ss.color, background: ss.bg, padding: "1px 6px", borderRadius: 3 }}>{rec.status}</span>
                     </div>
                   </div>
                 );
               })}
             </div>
-          ) : (
-            <p className="text-ui-xs text-text-muted text-center py-12">No recent recommendations generated.</p>
           )}
-        </Card>
+        </div>
 
-        {/* Right Column: Explainability trace */}
-        <Card className="p-6 space-y-6 lg:col-span-2">
-          <h2 className="text-ui-sm font-bold uppercase tracking-wider text-text-primary border-b border-border-flow/40 pb-2 flex items-center justify-between">
-            <span>Explainability trace</span>
+        {/* Explainability trace */}
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-strong)", borderRadius: 4, padding: "20px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--border)", paddingBottom: 10, marginBottom: 18 }}>
+            <h2 style={{ fontSize: 9, fontWeight: 500, color: "var(--t1)", textTransform: "uppercase", letterSpacing: "0.10em" }}>Explainability Trace</h2>
             {explainability && (
-              <span className="text-[10px] font-bold text-text-muted bg-flow-purple/10 px-2.5 py-1 rounded-full border border-flow-purple/20 flex items-center">
-                <Brain className="w-3 h-3 mr-1 text-flow-purple" /> Confidence: {explainability.confidence}%
+              <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 9, fontWeight: 500, color: "var(--brand-text)", background: "rgba(232,103,43,0.08)", border: "1px solid rgba(232,103,43,0.22)", padding: "3px 8px", borderRadius: 10 }}>
+                <Brain style={{ width: 11, height: 11 }} /> Confidence: {explainability.confidence}%
               </span>
             )}
-          </h2>
+          </div>
 
           {explainabilityLoading ? (
-            <div className="space-y-4 py-12">
-              <Skeleton className="h-8" />
-              <Skeleton className="h-24" />
-              <Skeleton className="h-32" />
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, padding: "32px 0" }}>
+              {[32, 96, 128].map((h, i) => (
+                <div key={i} style={{ height: h, borderRadius: 4, background: "rgba(31,27,22,0.045)", position: "relative", overflow: "hidden" }}>
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(31,27,22,0.05) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
+                </div>
+              ))}
             </div>
           ) : explainability ? (
-            <div className="space-y-6">
-              
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+
               {/* Evidence nodes */}
-              <div className="space-y-3">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest block flex items-center"><Network className="w-3.5 h-3.5 mr-1 text-flow-purple" /> Evidence Graph References</span>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {explainability.graph.nodes.filter(n => n.type !== 'RECOMMENDATION').map((node) => (
-                    <div key={node.id} className="p-3 bg-bg-secondary border border-border-flow rounded-xl flex items-center justify-between">
-                      <div className="space-y-0.5">
-                        <span className="text-ui-xs font-bold text-text-primary block">{node.label}</span>
-                        <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">{node.type}</span>
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
+                  <Network style={{ width: 12, height: 12, color: "var(--brand)" }} />
+                  <span style={{ fontSize: 9, fontWeight: 500, color: "var(--t5)", textTransform: "uppercase", letterSpacing: "0.10em" }}>Evidence Graph References</span>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                  {explainability.graph.nodes.filter(n => n.type !== "RECOMMENDATION").map(node => (
+                    <div key={node.id} style={{ background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", borderRadius: 4, padding: "10px 12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <div>
+                        <span style={{ display: "block", fontSize: 12, fontWeight: 500, color: "var(--t1)" }}>{node.label}</span>
+                        <span style={{ fontSize: 9, fontWeight: 500, color: "var(--t5)", textTransform: "uppercase" }}>{node.type}</span>
                       </div>
-                      <span className="text-[9px] font-bold text-flow-purple bg-flow-purple/10 px-1.5 py-0.5 rounded border border-flow-purple/25">Authority: {node.authority || 1.0}</span>
+                      <span style={{ fontSize: 9, fontWeight: 500, color: "var(--brand-text)", background: "rgba(232,103,43,0.08)", border: "1px solid rgba(232,103,43,0.22)", padding: "2px 6px", borderRadius: 3 }}>Auth: {node.authority || 1.0}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Reasoning Chain */}
-              <div className="space-y-3 border-t border-border-flow/35 pt-4">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest block flex items-center"><ListCollapse className="w-3.5 h-3.5 mr-1 text-flow-purple" /> Reasoning Chain Lineage</span>
-                <div className="space-y-3">
-                  {explainability.reasoningChain.map((step) => (
-                    <div key={step.step} className="flex space-x-3 text-ui-xs">
-                      <div className="w-5 h-5 rounded-full bg-flow-purple/10 border border-flow-purple/35 text-flow-purple flex items-center justify-center font-mono font-bold shrink-0">
-                        {step.step}
-                      </div>
-                      <div className="space-y-0.5">
-                        <span className="font-bold text-text-primary block">{step.title}</span>
-                        <span className="text-text-secondary leading-relaxed">{step.desc}</span>
+              {/* Reasoning chain */}
+              <div style={{ borderTop: "1px solid var(--border)", paddingTop: 16 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
+                  <ListCollapse style={{ width: 12, height: 12, color: "var(--brand)" }} />
+                  <span style={{ fontSize: 9, fontWeight: 500, color: "var(--t5)", textTransform: "uppercase", letterSpacing: "0.10em" }}>Reasoning Chain Lineage</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {explainability.reasoningChain.map(step => (
+                    <div key={step.step} style={{ display: "flex", gap: 12 }}>
+                      <div style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(232,103,43,0.10)", border: "1px solid rgba(232,103,43,0.28)", color: "var(--brand-text)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 500, flexShrink: 0 }}>{step.step}</div>
+                      <div>
+                        <span style={{ display: "block", fontSize: 12, fontWeight: 500, color: "var(--t1)", marginBottom: 2 }}>{step.title}</span>
+                        <span style={{ fontSize: 11, color: "var(--t4)", lineHeight: 1.5 }}>{step.desc}</span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex justify-end space-x-2 border-t border-border-flow/30 pt-4">
-                <Button 
-                  variant="secondary" 
-                  size="sm" 
+              {/* Feedback buttons */}
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, borderTop: "1px solid var(--border)", paddingTop: 14 }}>
+                <button
                   onClick={() => handleFeedback(explainability.recommendationId, "reject")}
-                  className="text-critical hover:bg-critical/10"
-                >
-                  Reject Recommendation
-                </Button>
-                <Button 
-                  variant="primary" 
-                  size="sm" 
+                  onMouseEnter={() => setHFb("reject")}
+                  onMouseLeave={() => setHFb(null)}
+                  style={{ padding: "6px 14px", borderRadius: 4, background: hFb === "reject" ? "rgba(255,87,87,0.10)" : "rgba(31,27,22,0.05)", border: "1px solid var(--border)", color: "var(--p-critical-text)", fontSize: 11, cursor: "pointer" }}
+                >Reject Recommendation</button>
+                <button
                   onClick={() => handleFeedback(explainability.recommendationId, "accept")}
-                  className="bg-success hover:bg-success/90"
-                >
-                  Accept & Execute
-                </Button>
+                  onMouseEnter={() => setHFb("accept")}
+                  onMouseLeave={() => setHFb(null)}
+                  style={{ padding: "6px 14px", borderRadius: 4, background: hFb === "accept" ? "rgba(76,175,130,0.85)" : "var(--p-normal)", border: "none", color: "#fff", fontSize: 11, fontWeight: 500, cursor: "pointer" }}
+                >Accept & Execute</button>
               </div>
-
             </div>
           ) : (
-            <p className="text-ui-xs text-text-muted text-center py-12">Select a recommendation to inspect reasoning.</p>
+            <p style={{ fontSize: 12, color: "var(--t5)", textAlign: "center", padding: "48px 0" }}>Select a recommendation to inspect reasoning.</p>
           )}
-        </Card>
-
+        </div>
       </div>
 
       {/* Learning loop weights */}
-      {metrics && metrics.recommendations.rankingWeights && Object.keys(metrics.recommendations.rankingWeights).length > 0 && (
-        <Card className="p-6 space-y-4">
-          <h2 className="text-ui-sm font-bold uppercase tracking-wider text-text-primary border-b border-border-flow/40 pb-2 flex items-center space-x-2">
-            <ShieldCheck className="w-4 h-4 text-flow-purple" />
-            <span>Learning Loop Adaptive Ranking Weights</span>
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-ui-xs text-text-secondary">
+      {metrics?.recommendations?.rankingWeights && Object.keys(metrics.recommendations.rankingWeights).length > 0 && (
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-strong)", borderRadius: 4, padding: "20px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid var(--border)", paddingBottom: 10, marginBottom: 16 }}>
+            <ShieldCheck style={{ width: 14, height: 14, color: "var(--brand)" }} />
+            <h2 style={{ fontSize: 9, fontWeight: 500, color: "var(--t1)", textTransform: "uppercase", letterSpacing: "0.10em" }}>Learning Loop Adaptive Ranking Weights</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 }}>
             {Object.entries(metrics.recommendations.rankingWeights).map(([tag, w]) => (
-              <div key={tag} className="p-3 bg-bg-secondary border border-border-flow rounded-xl flex justify-between items-center">
-                <span className="font-bold">{tag}</span>
-                <span className="font-mono text-flow-purple font-bold">x{parseFloat(w).toFixed(2)}</span>
+              <div key={tag} style={{ background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", borderRadius: 4, padding: "8px 12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontSize: 12, fontWeight: 500, color: "var(--t2)" }}>{tag}</span>
+                <span style={{ fontSize: 12, fontWeight: 500, color: "var(--brand-text)" }}>x{parseFloat(w).toFixed(2)}</span>
               </div>
             ))}
           </div>
-        </Card>
+        </div>
       )}
-
-    </PageContainer>
+    </div>
   );
 };
 

@@ -42,7 +42,7 @@ const RISK_COLOR = {
 function RiskChip({ risk }) {
   return (
     <span style={{
-      fontSize: 9, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase",
+      fontSize: 9, fontWeight: 500, letterSpacing: "0.07em", textTransform: "uppercase",
       padding: "2px 6px", borderRadius: 3,
       color: RISK_COLOR[risk] || RISK_COLOR.LOW,
       background: RISK_BG[risk] || RISK_BG.LOW,
@@ -124,11 +124,11 @@ export default function ActionCard({ card = {}, onExecute, onDismiss }) {
       <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "12px 14px 10px" }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-            <span style={{ fontSize: 11, fontWeight: 600, color: IMPACT_COLOR[card.impact] || "var(--t4)", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            <span style={{ fontSize: 11, fontWeight: 500, color: IMPACT_COLOR[card.impact] || "var(--t4)", letterSpacing: "0.06em", textTransform: "uppercase" }}>
               {card.impactLabel || "Impact"}
             </span>
           </div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--t1)", lineHeight: 1.4, marginBottom: 4 }}>{card.title}</div>
+          <div style={{ fontSize: 13, fontWeight: 500, color: "var(--t1)", lineHeight: 1.4, marginBottom: 4 }}>{card.title}</div>
           {card.subtitle && <div style={{ fontSize: 12, color: "var(--t3)", lineHeight: 1.4 }}>{card.subtitle}</div>}
         </div>
         <button onClick={handleDismiss} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--t5)", padding: 2, lineHeight: 1 }} aria-label="Dismiss">✕</button>
@@ -151,7 +151,7 @@ export default function ActionCard({ card = {}, onExecute, onDismiss }) {
           {state === "error" && <AlertTriangle style={{ width: 13, height: 13, color: "var(--p-critical-text)", flexShrink: 0 }} />}
           <span style={{ fontSize: 12, color: state === "done" ? "var(--p-normal-text)" : state === "error" ? "var(--p-critical-text)" : "var(--t2)" }}>{activeMsg}</span>
           {state === "confirm" && (
-            <button onClick={handleConfirm} style={{ marginLeft: "auto", padding: "3px 10px", borderRadius: 5, background: "var(--brand)", color: "var(--t1)", border: "none", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+            <button onClick={handleConfirm} style={{ marginLeft: "auto", padding: "3px 10px", borderRadius: 5, background: "var(--brand)", color: "var(--t1)", border: "none", fontSize: 11, fontWeight: 500, cursor: "pointer" }}>
               Confirm
             </button>
           )}
@@ -169,7 +169,7 @@ export default function ActionCard({ card = {}, onExecute, onDismiss }) {
                 display: "flex", alignItems: "center", gap: 6,
                 padding: "6px 14px", borderRadius: 6,
                 background: "var(--brand)", color: "var(--t1)",
-                border: "none", fontSize: 12, fontWeight: 600, cursor: state === "running" ? "default" : "pointer",
+                border: "none", fontSize: 12, fontWeight: 500, cursor: state === "running" ? "default" : "pointer",
                 opacity: state === "running" ? 0.7 : 1,
               }}
             >

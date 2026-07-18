@@ -4,6 +4,7 @@ import {
   ShoppingCart, CheckCircle, Search, Network,
   Cpu, Zap, X, ChevronRight, Eye, RefreshCw, ExternalLink
 } from "lucide-react";
+import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
 const NODES = [
@@ -260,15 +261,7 @@ export const KnowledgeExplorer = () => {
             <RefreshCw style={{ width: 13, height: 13, ...(refreshing ? { animation: "spin 1s linear infinite" } : {}) }} />
           </button>
 
-          {isDemo && (
-            <span style={{
-              fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase",
-              letterSpacing: "0.06em", color: "var(--t5)", background: "rgba(255,255,255,0.04)",
-              border: "1px solid var(--border)", borderRadius: 3, padding: "2px 6px", whiteSpace: "nowrap",
-            }}>
-              Demo
-            </span>
-          )}
+          <DataSourceBadge mode={isDemo ? "demo" : "live"} />
 
           <div style={{ display: "flex", alignItems: "center", gap: 5, flexWrap: "wrap" }}>
             {Object.entries(TYPE_CONFIG).map(([type, cfg]) => (
@@ -276,7 +269,7 @@ export const KnowledgeExplorer = () => {
                 key={type}
                 onClick={() => toggleType(type)}
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase",
+                  fontSize: 9, fontWeight: 500, textTransform: "uppercase",
                   letterSpacing: "0.06em", padding: "3px 7px", borderRadius: 3,
                   cursor: "pointer", transition: "opacity 150ms",
                   border: `1px solid ${activeTypes.has(type) ? cfg.color : "var(--border)"}`,
@@ -306,7 +299,7 @@ export const KnowledgeExplorer = () => {
               </radialGradient>
             ))}
             <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,0.12)" />
+              <path d="M0,0 L0,6 L6,3 z" fill="rgba(31,27,22,0.12)" />
             </marker>
           </defs>
 
@@ -332,7 +325,7 @@ export const KnowledgeExplorer = () => {
               <g key={i} opacity={connectedIds ? (isHighlighted ? 1 : 0.08) : 0.25}>
                 <line
                   x1={x1} y1={y1} x2={x2} y2={y2}
-                  stroke={isHighlighted ? 'rgba(139,92,246,0.6)' : 'rgba(255,255,255,0.1)'}
+                  stroke={isHighlighted ? 'rgba(139,92,246,0.6)' : 'rgba(31,27,22,0.1)'}
                   strokeWidth={isHighlighted ? 1.5 : 0.8}
                   markerEnd="url(#arrow)"
                   strokeDasharray={isHighlighted ? 'none' : '4 4'}
@@ -397,14 +390,14 @@ export const KnowledgeExplorer = () => {
 
         {/* Stats overlay */}
         <div style={{ position: "absolute", bottom: 14, left: 14, display: "flex", alignItems: "center", gap: 16 }}>
-          <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10, color: "var(--t5)", fontFamily: "'JetBrains Mono', monospace" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10, color: "var(--t5)", fontVariantNumeric: "tabular-nums" }}>
             <Network style={{ width: 11, height: 11 }} />{filteredNodes.length} nodes
           </span>
-          <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10, color: "var(--t5)", fontFamily: "'JetBrains Mono', monospace" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10, color: "var(--t5)", fontVariantNumeric: "tabular-nums" }}>
             <Cpu style={{ width: 11, height: 11 }} />{filteredEdges.length} edges
           </span>
           {extraNodes.length > 0 && (
-            <span style={{ fontSize: 10, color: "var(--brand-text)", fontFamily: "'JetBrains Mono', monospace" }}>
+            <span style={{ fontSize: 10, color: "var(--brand-text)" }}>
               +{extraNodes.length} from Notion
             </span>
           )}
@@ -433,7 +426,7 @@ export const KnowledgeExplorer = () => {
                     <Icon style={{ width: 13, height: 13, color: cfg.color }} />
                   </div>
                   <div>
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: cfg.color }}>{selectedNode.type}</span>
+                    <span style={{ fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.08em", color: cfg.color }}>{selectedNode.type}</span>
                     <h3 style={{ fontSize: 13, fontWeight: 500, color: "var(--t1)", lineHeight: 1.35 }}>{selectedNode.label}</h3>
                   </div>
                 </div>
@@ -454,9 +447,9 @@ export const KnowledgeExplorer = () => {
                     <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginBottom: 8 }}>
                       {docMeta.tags.slice(0, 5).map(tag => (
                         <span key={tag} style={{
-                          fontFamily: "'JetBrains Mono', monospace", fontSize: 9,
+                          fontSize: 9, fontWeight: 500,
                           padding: "2px 5px", borderRadius: 3,
-                          background: "rgba(124,110,255,0.08)", color: "var(--brand-text)",
+                          background: "rgba(232,103,43,0.08)", color: "var(--brand-text)",
                           border: "1px solid var(--brand-line)",
                         }}>{tag}</span>
                       ))}
@@ -468,7 +461,7 @@ export const KnowledgeExplorer = () => {
                     </a>
                   )}
                   {docMeta.author && (
-                    <p style={{ fontSize: 10, color: "var(--t5)", marginTop: 4, fontFamily: "'JetBrains Mono', monospace" }}>By {docMeta.author}</p>
+                    <p style={{ fontSize: 10, color: "var(--t5)", marginTop: 4 }}>By {docMeta.author}</p>
                   )}
                 </div>
               )}
@@ -476,7 +469,7 @@ export const KnowledgeExplorer = () => {
               {/* Connected entities */}
               {nodeRelations.length > 0 && (
                 <div>
-                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)", display: "flex", alignItems: "center", gap: 5, marginBottom: 8 }}>
+                  <p style={{ fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)", display: "flex", alignItems: "center", gap: 5, marginBottom: 8 }}>
                     <Eye style={{ width: 10, height: 10 }} />Connected ({nodeRelations.length})
                   </p>
                   <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -494,7 +487,7 @@ export const KnowledgeExplorer = () => {
                             border: "none", cursor: "pointer", textAlign: "left",
                             transition: "background 100ms",
                           }}
-                          onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.03)"}
+                          onMouseEnter={e => e.currentTarget.style.background = "rgba(31,27,22,0.045)"}
                           onMouseLeave={e => e.currentTarget.style.background = "transparent"}
                         >
                           <div style={{ width: 22, height: 22, borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: relCfg.bg }}>
@@ -502,7 +495,7 @@ export const KnowledgeExplorer = () => {
                           </div>
                           <div style={{ flex: 1, minWidth: 0 }}>
                             <p style={{ fontSize: 12, fontWeight: 500, color: "var(--t1)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{rel.node.label}</p>
-                            <p style={{ fontSize: 10, color: "var(--t4)", fontFamily: "'JetBrains Mono', monospace" }}>{rel.direction} {rel.label}</p>
+                            <p style={{ fontSize: 10, color: "var(--t4)" }}>{rel.direction} {rel.label}</p>
                           </div>
                           <ChevronRight style={{ width: 11, height: 11, color: "var(--t5)" }} />
                         </button>
@@ -514,18 +507,18 @@ export const KnowledgeExplorer = () => {
 
               {/* Memory confidence */}
               <div style={{ background: "var(--bg-card)", borderRadius: 4, padding: "10px 12px", border: "1px solid var(--border)" }}>
-                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)", marginBottom: 8 }}>Memory Confidence</p>
+                <p style={{ fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)", marginBottom: 8 }}>Memory Confidence</p>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div style={{ flex: 1, height: 3, background: "rgba(255,255,255,0.06)", borderRadius: 2, overflow: "hidden" }}>
+                  <div style={{ flex: 1, height: 3, background: "rgba(31,27,22,0.06)", borderRadius: 2, overflow: "hidden" }}>
                     <div style={{ height: "100%", borderRadius: 2, background: "var(--brand)", width: `${Math.round(selectedNode.importance * 100)}%` }} />
                   </div>
-                  <span style={{ fontSize: 11, fontWeight: 500, color: "var(--brand-text)", fontFamily: "'JetBrains Mono', monospace" }}>{Math.round(selectedNode.importance * 100)}%</span>
+                  <span style={{ fontSize: 11, fontWeight: 500, fontVariantNumeric: "tabular-nums", color: "var(--brand-text)" }}>{Math.round(selectedNode.importance * 100)}%</span>
                 </div>
               </div>
 
               {/* AI brief */}
               <div style={{ background: "var(--bg-card)", borderRadius: 4, padding: "10px 12px", border: "1px solid var(--border)" }}>
-                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)", marginBottom: 8, display: "flex", alignItems: "center", gap: 5 }}>
+                <p style={{ fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--t5)", marginBottom: 8, display: "flex", alignItems: "center", gap: 5 }}>
                   <Zap style={{ width: 10, height: 10, color: "var(--brand)" }} /> AI Brief
                 </p>
                 {aiLoading ? (

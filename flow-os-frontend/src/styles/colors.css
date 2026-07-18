@@ -1,68 +1,156 @@
 :root {
-  /* ─── Structural surfaces ─────────────────────────────── */
-  --bg-primary:   #09090b;
-  --bg-rail:      #111113;
-  --bg-secondary: #0d0d0f;
-  --bg-card:      #141416;
-  --bg-hover:     #1a1a1d;
-  --bg-selected:  #1e1e26;
-  --bg-panel:     #0f0f12;
-  --bg-input:     #18181b;
+  /* ═══ FLOW OS design language — Hermès light: ivory, ink, burnt orange ═══ */
 
-  /* ─── Borders ─────────────────────────────────────────── */
-  --border:        rgba(255, 255, 255, 0.055);
-  --border-focus:  rgba(139, 92, 246, 0.5);
-  --border-strong: rgba(255, 255, 255, 0.10);
+  /* ─── SURFACES — warm ivory, not clinical white ───────────────────────── */
+  --surface-0: #F7F2E9;   /* page background — ivory */
+  --surface-1: #F2ECDF;   /* sidebar — deeper cream */
+  --surface-2: #FDFBF6;   /* cards — warm near-white */
+  --surface-3: #F0E9DA;   /* hover / pressed */
+  --surface-4: #FFFFFF;   /* input fields */
 
-  /* ─── Typography ──────────────────────────────────────── */
-  --text-primary:   #f4f4f5;
-  --text-secondary: #a1a1aa;
-  --text-muted:     #52525b;
-  --text-link:      #a78bfa;
+  /* Legacy surface names → new values (every component recolors through these) */
+  --bg-base:    var(--surface-0);
+  --bg-sidebar: var(--surface-1);
+  --bg-card:    var(--surface-2);
+  --bg-hover:   var(--surface-3);
+  --bg-input:   var(--surface-4);
+  --bg-elevated:var(--surface-4);
 
-  /* ─── Brand / AI accent ───────────────────────────────── */
-  --color-flow-purple:     #8b5cf6;
-  --color-flow-purple-dim: rgba(139, 92, 246, 0.12);
-  --color-flow-purple-mid: rgba(139, 92, 246, 0.25);
+  --bg-0: var(--surface-0);
+  --bg-1: var(--surface-1);
+  --bg-2: var(--surface-2);
+  --bg-3: var(--surface-3);
+  --bg-4: var(--surface-4);
 
-  /* ─── Semantic status ─────────────────────────────────── */
-  --color-critical: #f43f5e;
-  --color-warning:  #f59e0b;
-  --color-success:  #10b981;
-  --color-info:     #3b82f6;
+  --bg-primary:   var(--surface-0);
+  --bg-rail:      var(--surface-1);
+  --bg-secondary: var(--surface-1);
+  --bg-panel:     var(--surface-1);
+  --bg-selected:  var(--surface-3);
 
-  /* ─── Glow utilities ──────────────────────────────────── */
-  --glow-purple:   0 0 24px rgba(139, 92, 246, 0.18);
-  --glow-critical: 0 0 16px rgba(244, 63, 94, 0.2);
-  --glow-success:  0 0 16px rgba(16, 185, 129, 0.2);
+  /* ─── BORDERS — ink hairlines ─────────────────────────────────────────── */
+  --line-0: rgba(31,27,22,0.06);   /* subtlest — section dividers */
+  --line-1: rgba(31,27,22,0.10);   /* cards */
+  --line-2: rgba(31,27,22,0.16);   /* emphasis borders */
+  --line-3: rgba(31,27,22,0.28);   /* focused inputs */
 
-  /* ─── Source dot colors (live feed) ──────────────────── */
-  --source-github:   #a78bfa;
-  --source-gmail:    #f43f5e;
-  --source-calendar: #10b981;
-  --source-slack:    #f59e0b;
-  --source-jira:     #3b82f6;
-  --source-ai:       #8b5cf6;
-  --source-auto:     #06b6d4;
-}
+  --border:        var(--line-1);
+  --border-strong: var(--line-2);
+  --border-focus:  var(--line-3);
+  --line:          var(--line-1);
+  --line-strong:   var(--line-2);
+  --line-accent:   var(--accent-line);
 
-:root.light {
-  --bg-primary:    #fafafa;
-  --bg-rail:       #f4f4f5;
-  --bg-secondary:  #f1f1f3;
-  --bg-card:       #ffffff;
-  --bg-hover:      #e4e4e7;
-  --bg-selected:   #ede9fe;
-  --bg-panel:      #f8f8fa;
-  --bg-input:      #ffffff;
-  --border:        rgba(0, 0, 0, 0.08);
-  --border-focus:  rgba(124, 58, 237, 0.5);
-  --border-strong: rgba(0, 0, 0, 0.14);
-  --text-primary:  #09090b;
-  --text-secondary:#52525b;
-  --text-muted:    #a1a1aa;
-  --text-link:     #7c3aed;
-  --color-flow-purple:     #7c3aed;
-  --color-flow-purple-dim: rgba(124, 58, 237, 0.1);
-  --color-flow-purple-mid: rgba(124, 58, 237, 0.2);
+  /* ─── TEXT — warm ink, opacity hierarchy ──────────────────────────────── */
+  --t1: rgba(31,27,22,0.92);  /* primary — titles, active nav */
+  --t2: rgba(31,27,22,0.64);  /* secondary — body text */
+  --t3: rgba(31,27,22,0.44);  /* tertiary — labels, meta */
+  --t4: rgba(31,27,22,0.30);  /* quaternary — timestamps */
+  --t5: rgba(31,27,22,0.16);  /* ghost — placeholder */
+
+  --text-primary:   var(--t1);
+  --text-secondary: var(--t2);
+  --text-muted:     var(--t3);
+  --text-link:      var(--accent-text);
+
+  /* ─── ACCENT — Hermès burnt orange ────────────────────────────────────── */
+  --accent:       #E8672B;
+  --accent-dim:   rgba(232,103,43,0.08);
+  --accent-line:  rgba(232,103,43,0.28);
+  --accent-text:  #C2551B;   /* darker orange — readable on ivory */
+
+  /* Legacy brand names → accent */
+  --brand:        var(--accent);
+  --brand-2:      var(--accent-text);
+  --brand-dim:    var(--accent-dim);
+  --brand-line:   var(--accent-line);
+  --brand-text:   var(--accent-text);
+  --brand-glow:   rgba(232,103,43,0.14);
+
+  --color-flow-purple:     var(--accent);
+  --color-flow-purple-dim: var(--accent-dim);
+  --color-flow-purple-mid: var(--accent-line);
+
+  /* ─── STATUS — deepened for light ground ──────────────────────────────── */
+  --ok:      #1E7F4F;
+  --ok-bg:   rgba(30,127,79,0.08);
+  --warn:    #A96A0B;
+  --warn-bg: rgba(169,106,11,0.08);
+  --crit:    #C23A26;
+  --crit-bg: rgba(194,58,38,0.07);
+  --info:    #2A5FA8;
+  --info-bg: rgba(42,95,168,0.07);
+
+  /* Priority system → status colors */
+  --p-critical: var(--crit);
+  --p-high:     var(--warn);
+  --p-normal:   var(--ok);
+  --p-info:     var(--info);
+
+  --p-critical-text: var(--crit);
+  --p-high-text:     var(--warn);
+  --p-normal-text:   var(--ok);
+  --p-info-text:     var(--info);
+
+  --p-critical-dim:  var(--crit-bg);
+  --p-high-dim:      var(--warn-bg);
+  --p-normal-dim:    var(--ok-bg);
+  --p-info-dim:      var(--info-bg);
+
+  --p-critical-line: rgba(194,58,38,0.25);
+  --p-high-line:     rgba(169,106,11,0.25);
+  --p-normal-line:   rgba(30,127,79,0.25);
+  --p-info-line:     rgba(42,95,168,0.25);
+
+  --color-critical: var(--p-critical);
+  --color-warning:  var(--p-high);
+  --color-success:  var(--p-normal);
+  --color-info:     var(--p-info);
+
+  /* Shadows — soft warm depth */
+  --glow-purple:   0 8px 24px rgba(31,27,22,0.08);
+  --glow-critical: 0 4px 16px rgba(194,58,38,0.12);
+  --glow-success:  0 4px 16px rgba(30,127,79,0.12);
+
+  /* ─── Source dot colors — integration identity on ivory ───────────────── */
+  --source-github:   rgba(31,27,22,0.55);
+  --source-gmail:    #2A5FA8;
+  --source-calendar: #1E7F4F;
+  --source-slack:    #1E7F4F;
+  --source-jira:     var(--accent);
+  --source-ai:       var(--accent);
+  --source-auto:     rgba(31,27,22,0.30);
+
+  /* ─── TYPE SYSTEM — serif display, refined sans, warm mono ───────────── */
+  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-ui:      'Instrument Sans', system-ui, sans-serif;
+  --font-data:    'IBM Plex Mono', monospace;
+
+  --weight-thin:    300;
+  --weight-light:   400;
+  --weight-regular: 400;
+  --weight-medium:  500;
+
+  --text-2xs: 10px;
+  --text-xs:  11px;
+  --text-sm:  13px;
+  --text-base:14px;
+  --text-md:  16px;
+  --text-lg:  20px;
+  --text-xl:  28px;
+  --text-2xl: 40px;
+
+  --track-wide:   0.08em;
+  --track-normal: 0;
+  --track-tight:  -0.01em;
+
+  /* ─── SPACING — strict 4px grid ───────────────────────────────────────── */
+  --s1: 4px;  --s2: 8px;  --s3: 12px;  --s4: 16px;
+  --s5: 20px; --s6: 24px; --s8: 32px;  --s10: 40px; --s12: 48px;
+
+  /* ─── RADIUS — minimal, intentional ───────────────────────────────────── */
+  --r-none: 0;
+  --r-xs:   3px;
+  --r-sm:   6px;
+  --r-md:   10px;
 }

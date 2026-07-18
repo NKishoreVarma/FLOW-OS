@@ -14,8 +14,8 @@ async function getJSON(path) {
   return r.json();
 }
 
-const SECTION = { background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: 12, padding: "20px 22px", marginBottom: 20 };
-const LABEL = { fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--t4)", marginBottom: 14 };
+const SECTION = { background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: 10, padding: "20px 22px", marginBottom: 20 };
+const LABEL = { fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--t4)", marginBottom: 14 };
 
 function StatusDot({ status }) {
   const color = status === "HEALTHY" ? "var(--p-normal-text)" : status === "DEGRADED" ? "var(--p-high-text)" : "var(--p-critical-text)";
@@ -86,7 +86,7 @@ export default function AdminOps() {
   return (
     <div style={{ padding: "28px 24px 48px", maxWidth: 820, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
-        <h1 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: "var(--t1)" }}>Workspace Admin</h1>
+        <h1 style={{ margin: 0, fontSize: 18, fontWeight: 500, color: "var(--t1)" }}>Workspace Admin</h1>
         <button onClick={load} style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 8, border: "1px solid var(--border)", background: "transparent", color: "var(--t3)", fontSize: 12, cursor: "pointer" }}>
           <RefreshCw style={{ width: 13, height: 13 }} /> Refresh
         </button>
@@ -147,7 +147,7 @@ export default function AdminOps() {
                 <span style={{ color: "var(--t1)", fontWeight: 500 }}>{u.fullName || u.email}</span>
                 {u.fullName && <span style={{ color: "var(--t4)", marginLeft: 6 }}>{u.email}</span>}
               </div>
-              <span style={{ fontSize: 11, color: "var(--t4)", background: "var(--bg-primary)", padding: "2px 8px", borderRadius: 12 }}>{u.role}</span>
+              <span style={{ fontSize: 11, color: "var(--t4)", background: "var(--bg-primary)", padding: "2px 8px", borderRadius: 10 }}>{u.role}</span>
             </div>
           ))}
         </div>

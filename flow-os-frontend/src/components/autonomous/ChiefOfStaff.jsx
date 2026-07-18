@@ -85,7 +85,7 @@ export default function ChiefOfStaff() {
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <Star style={{ width: 18, height: 18, color: "var(--brand)" }} />
-          <h1 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: "var(--t1)" }}>Chief of Staff</h1>
+          <h1 style={{ margin: 0, fontSize: 18, fontWeight: 500, color: "var(--t1)" }}>Chief of Staff</h1>
           {demo && (
             <span style={{
               fontSize: 11,
@@ -124,7 +124,7 @@ export default function ChiefOfStaff() {
         <>
           {data?.greeting && (
             <div style={{ marginBottom: 6 }}>
-              <p style={{ margin: 0, fontSize: 20, fontWeight: 700, color: "var(--t1)" }}>
+              <p style={{ margin: 0, fontSize: 20, fontWeight: 500, color: "var(--t1)" }}>
                 {data.greeting}
               </p>
               <p style={{ margin: "6px 0 20px", fontSize: 14, color: "var(--t3)" }}>
@@ -139,11 +139,11 @@ export default function ChiefOfStaff() {
               textAlign: "center",
               color: "var(--t4)",
               background: "var(--bg-secondary)",
-              borderRadius: 12,
+              borderRadius: 10,
               border: "1px solid var(--border)",
             }}>
               <Zap style={{ width: 24, height: 24, marginBottom: 8, opacity: 0.4 }} />
-              <p style={{ margin: 0, fontSize: 14 }}>All clear — no urgent items.</p>
+              <p style={{ margin: 0, fontSize: 14 }}>Nothing urgent — FLOW is watching your connected tools.</p>
             </div>
           ) : (
             <div>

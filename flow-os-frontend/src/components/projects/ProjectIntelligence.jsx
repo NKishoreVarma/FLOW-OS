@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Folder, Search, Activity, Box, RefreshCw, BarChart2, CheckSquare } from "lucide-react";
 import ProjectOverview from "./ProjectOverview";
+import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
 // ── Demo data (shown when API unavailable) ────────────────────────────────────
@@ -161,6 +162,7 @@ function normalizeRepoToProject(repo, prs, commits) {
 
   const normalizedCommits = commits.slice(0, 3).map(c => ({
     hash: (c.metadata?.shortSha || c.id?.slice(0, 7) || "unknown"),
+    sha:  c.metadata?.sha || c.id || null,
     msg:  c.title || "",
   }));
 
@@ -339,8 +341,8 @@ export const ProjectIntelligence = () => {
     return (
       <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: 16 }}>
           {[80, 200, 200].map((h, i) => (
-            <div key={i} style={{ height: h, borderRadius: 4, background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
+            <div key={i} style={{ height: h, borderRadius: 4, background: "rgba(31,27,22,0.04)", border: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, transparent 0%, rgba(31,27,22,0.05) 50%, transparent 100%)", animation: "shimmer-sweep 1.6s ease-in-out infinite" }} />
             </div>
           ))}
         </div>
@@ -354,8 +356,8 @@ export const ProjectIntelligence = () => {
         display: "flex", alignItems: "center", gap: 7,
         padding: "7px 14px", fontSize: 12, fontWeight: 500,
         borderRadius: 4, cursor: "pointer",
-        background: activeTab === id ? "rgba(124,110,255,0.08)" : "transparent",
-        border: `1px solid ${activeTab === id ? "rgba(124,110,255,0.30)" : "transparent"}`,
+        background: activeTab === id ? "rgba(232,103,43,0.08)" : "transparent",
+        border: `1px solid ${activeTab === id ? "rgba(232,103,43,0.30)" : "transparent"}`,
         color: activeTab === id ? "var(--brand-text)" : "var(--t4)",
         transition: "all 100ms",
       }}
@@ -377,14 +379,7 @@ export const ProjectIntelligence = () => {
             <h1 style={{ fontSize: 16, fontWeight: 500, color: "var(--t1)", letterSpacing: "-0.3px" }}>
               Project Intelligence
             </h1>
-            {isDemo && (
-              <span style={{
-                fontFamily: "'JetBrains Mono', monospace", fontSize: 9,
-                background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)",
-                borderRadius: 3, padding: "2px 6px", color: "var(--t5)",
-                textTransform: "uppercase", letterSpacing: "0.06em",
-              }}>Demo</span>
-            )}
+            <DataSourceBadge mode={isDemo ? "demo" : "live"} />
           </div>
           <p style={{ fontSize: 12, color: "var(--t4)" }}>
             {isDemo
@@ -397,7 +392,7 @@ export const ProjectIntelligence = () => {
           style={{
             display: "flex", alignItems: "center", gap: 6,
             padding: "6px 12px", fontSize: 12, fontWeight: 500,
-            color: "var(--t3)", background: "rgba(255,255,255,0.03)",
+            color: "var(--t3)", background: "rgba(31,27,22,0.045)",
             border: "1px solid var(--border)", borderRadius: 4,
             cursor: "pointer", transition: "color 100ms",
           }}
@@ -416,12 +411,12 @@ export const ProjectIntelligence = () => {
           <TabBtn id="github" icon={BarChart2}   label="Code Repos (GitHub)" />
           <div style={{ flex: 1 }} />
           {atRiskCount > 0 && (
-            <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "var(--p-high)", fontFamily: "'JetBrains Mono', monospace" }}>
+            <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "var(--p-high)", fontWeight: 500 }}>
               <Activity style={{ width: 11, height: 11 }} />{atRiskCount} at risk
             </span>
           )}
           {onTrackCount > 0 && (
-            <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "var(--p-normal)", fontFamily: "'JetBrains Mono', monospace" }}>
+            <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "var(--p-normal)", fontWeight: 500 }}>
               <Box style={{ width: 11, height: 11 }} />{onTrackCount} on track
             </span>
           )}
@@ -441,7 +436,7 @@ export const ProjectIntelligence = () => {
           }}
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
-          onFocus={e => { e.target.style.border = "1px solid rgba(124,110,255,0.35)"; e.target.style.background = "rgba(124,110,255,0.04)"; }}
+          onFocus={e => { e.target.style.border = "1px solid rgba(232,103,43,0.35)"; e.target.style.background = "rgba(232,103,43,0.04)"; }}
           onBlur={e => { e.target.style.border = "1px solid var(--border-strong)"; e.target.style.background = "var(--bg-card)"; }}
         />
       </div>

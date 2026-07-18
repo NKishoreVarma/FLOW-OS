@@ -14,7 +14,7 @@ async function getJSON(p) {
 }
 
 const SECTION = { background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: 10, padding: "16px 18px", marginBottom: 14 };
-const LABEL = { fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "var(--t4)", marginBottom: 12, display: "flex", alignItems: "center", gap: 6 };
+const LABEL = { fontSize: 10, fontWeight: 500, letterSpacing: "0.09em", textTransform: "uppercase", color: "var(--t4)", marginBottom: 12, display: "flex", alignItems: "center", gap: 6 };
 
 export default function WeeklyReview() {
   const [data, setData] = useState(null);
@@ -57,7 +57,7 @@ export default function WeeklyReview() {
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <TrendingUp style={{ width: 18, height: 18, color: "var(--brand)" }} />
-          <h1 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: "var(--t1)" }}>Weekly Review</h1>
+          <h1 style={{ margin: 0, fontSize: 18, fontWeight: 500, color: "var(--t1)" }}>Weekly Review</h1>
           {demo && <span style={{ fontSize: 11, color: "var(--t4)", background: "var(--bg-secondary)", padding: "2px 8px", borderRadius: 10, border: "1px solid var(--border)" }}>Sample data</span>}
         </div>
         <button onClick={load} style={{ display: "flex", alignItems: "center", gap: 5, padding: "6px 12px", borderRadius: 7, border: "1px solid var(--border)", background: "transparent", color: "var(--t3)", fontSize: 12, cursor: "pointer" }}>
@@ -71,7 +71,7 @@ export default function WeeklyReview() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px,1fr))", gap: 10, marginBottom: 14 }}>
             {(r.summary?.headline || []).map((m) => (
               <div key={m.key} style={{ ...SECTION, marginBottom: 0, textAlign: "center" }}>
-                <div style={{ fontSize: 26, fontWeight: 700, color: "var(--t1)" }}>{m.value}{m.unit ? ` ${m.unit}` : ""}</div>
+                <div style={{ fontSize: 26, fontWeight: 500, color: "var(--t1)" }}>{m.value}{m.unit ? ` ${m.unit}` : ""}</div>
                 <div style={{ fontSize: 11, color: "var(--t4)", marginTop: 3 }}>{m.label}</div>
                 <div style={{ fontSize: 10, color: "var(--t5)", marginTop: 2 }}>{m.basis}</div>
               </div>
@@ -82,10 +82,10 @@ export default function WeeklyReview() {
           <div style={SECTION}>
             <div style={LABEL}><Zap style={{ width: 11, height: 11 }} /> Engineering Velocity</div>
             <div style={{ display: "flex", gap: 24 }}>
-              <div><div style={{ fontSize: 22, fontWeight: 700, color: "var(--t1)" }}>{r.engineeringVelocity?.prsMerged ?? "—"}</div><div style={{ fontSize: 11, color: "var(--t4)" }}>PRs Merged</div></div>
-              <div><div style={{ fontSize: 22, fontWeight: 700, color: "var(--t1)" }}>{r.engineeringVelocity?.deploymentsCompleted ?? "—"}</div><div style={{ fontSize: 11, color: "var(--t4)" }}>Deployments</div></div>
+              <div><div style={{ fontSize: 22, fontWeight: 500, color: "var(--t1)" }}>{r.engineeringVelocity?.prsMerged ?? "—"}</div><div style={{ fontSize: 11, color: "var(--t4)" }}>PRs Merged</div></div>
+              <div><div style={{ fontSize: 22, fontWeight: 500, color: "var(--t1)" }}>{r.engineeringVelocity?.deploymentsCompleted ?? "—"}</div><div style={{ fontSize: 11, color: "var(--t4)" }}>Deployments</div></div>
               {r.executionSuccessRate?.rate != null && (
-                <div><div style={{ fontSize: 22, fontWeight: 700, color: "var(--p-normal-text)" }}>{r.executionSuccessRate.rate}%</div><div style={{ fontSize: 11, color: "var(--t4)" }}>Execution Success</div></div>
+                <div><div style={{ fontSize: 22, fontWeight: 500, color: "var(--p-normal-text)" }}>{r.executionSuccessRate.rate}%</div><div style={{ fontSize: 11, color: "var(--t4)" }}>Execution Success</div></div>
               )}
             </div>
           </div>
@@ -97,7 +97,7 @@ export default function WeeklyReview() {
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {r.operationalRisks.map((risk, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: risk.probability >= 75 ? "var(--p-critical-text)" : "var(--p-high-text)", flexShrink: 0 }}>{risk.probability}%</div>
+                    <div style={{ fontSize: 13, fontWeight: 500, color: risk.probability >= 75 ? "var(--p-critical-text)" : "var(--p-high-text)", flexShrink: 0 }}>{risk.probability}%</div>
                     <div>
                       <div style={{ fontSize: 13, color: "var(--t1)" }}>{risk.prediction}</div>
                       {risk.timeHorizon && <div style={{ fontSize: 11, color: "var(--t4)" }}>{risk.timeHorizon} · {risk.trend}</div>}
