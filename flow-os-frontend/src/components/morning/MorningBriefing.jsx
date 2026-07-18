@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { RefreshCw, ArrowRight } from "lucide-react";
 import DataSourceBadge from "../ui/DataSourceBadge";
-import ConversationInput from "../brain/ConversationInput";
 import { useWebSocket } from "../../hooks/useWebSocket";
 import { isIntegrationEvent, eventSource, eventTitle, sourceDotColor, isCriticalEvent } from "../../lib/liveEvents";
 
@@ -130,8 +129,11 @@ export default function MorningBriefing() {
   // priority-ordered (NOW/NEXT/LATER), not a list of everything that happened.
   const loadFocus = useCallback(async () => {
     try {
-      const q = await getJSON("/api/workday/queue");
-      const ordered = [...(q.now || []), ...(q.next || []), ...(q.later || [])];
+      const q = await getJSON("/api/autonomous/chief-of-staff");
+      const now    = q.now    || q.items?.filter((i) => i.priority === "now")  || [];
+      const next   = q.next   || q.items?.filter((i) => i.priority === "next") || [];
+      const later  = q.later  || q.items?.filter((i) => i.priority === "later")|| [];
+      const ordered = [...now, ...next, ...later];
       if (!ordered.length) { setFocus({ loading: false, items: DEMO_FOCUS, demo: true, ignored: 0 }); return; }
       const items = ordered.slice(0, 5).map((c) => ({
         text: sentence(c.title).replace(/\.$/, ""),
@@ -151,7 +153,7 @@ export default function MorningBriefing() {
     }
   }, [isAuthLoading, loadSnap, loadFocus]);
 
-  const askBrain = (q) => { sessionStorage.setItem("flow_pending_ask", q); navigate("/brain"); };
+  const askBrain = (q) => { window.dispatchEvent(new CustomEvent("flow:ask-brain", { detail: { question: q } })); };
   const doFocus = (item) => {
     if (item.route) navigate(item.route);
     else if (/reply|email|draft/i.test(item.text)) window.dispatchEvent(new CustomEvent("flow:open-compose"));
@@ -235,7 +237,7 @@ export default function MorningBriefing() {
         </button>
 
         {/* Live Workspace — real integration messages only */}
-        <div style={{ background: "var(--surface-2)", border: "1px solid var(--line-1)", borderRadius: 6, padding: "16px 20px" }}>
+        <section aria-label="Live Workspace Activity" style={{ background: "var(--surface-2)", border: "1px solid var(--line-1)", borderRadius: 6, padding: "16px 20px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 12 }}>
             <span style={LABEL_STYLE}>Live</span>
             <span style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--ok)", animation: "pulse-dot 2.5s ease-in-out infinite" }} />
@@ -261,11 +263,11 @@ export default function MorningBriefing() {
               ))}
             </div>
           )}
-        </div>
+        </section>
       </div>
 
-      {/* Today's Focus */}
-      <div>
+      {/* Today's Focus — NOW/NEXT/LATER priority items */}
+      <section aria-label="Now — Priority Actions">
         <div style={{ ...LABEL_STYLE, marginBottom: 12 }}>Today's Focus</div>
         {focus.loading ? <CardSkeleton h={56} /> : (
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -277,13 +279,8 @@ export default function MorningBriefing() {
             )}
           </div>
         )}
-      </div>
+      </section>
 
-      {/* Ask FLOW */}
-      <div style={{ marginTop: 4 }}>
-        <div style={{ ...LABEL_STYLE, marginBottom: 10 }}>Ask FLOW</div>
-        <ConversationInput onSubmit={askBrain} isLoading={false} />
-      </div>
     </div>
   );
 }

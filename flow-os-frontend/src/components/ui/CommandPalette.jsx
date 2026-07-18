@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Search, Sparkles, X, ArrowUpRight, Pin, History, FlaskConical, TrendingUp, CheckSquare, Mail, FileText, Zap } from "lucide-react";
+import { Search, Sparkles, X, ArrowUpRight, Pin, History, FlaskConical, TrendingUp, CheckSquare, Mail, FileText, Zap, Users, Building2, GitBranch, Boxes } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useWebSocket } from "../../hooks/useWebSocket";
 import { useToast } from "./ToastProvider";
@@ -36,6 +36,28 @@ const NAV_COMMANDS = [
   { label: "Team",             route: "/settings/team",       keywords: ["team", "invite", "members", "colleagues"] },
   { label: "Help & Shortcuts", route: "/help",                keywords: ["help", "shortcuts", "keyboard", "getting started", "guide", "support"] },
 ];
+
+// ─── Slash commands (BP-11 §Slash Mode) ──────────────────────────────────────
+const SLASH_COMMANDS = [
+  { cmd: "/chief",    label: "Open Chief of Staff",         route: "/chief",                desc: "See your top priorities for today" },
+  { cmd: "/review",   label: "Open Weekly Review",           route: "/review",               desc: "Engineering velocity + execution summary" },
+  { cmd: "/inbox",    label: "Open Inbox",                   route: "/inbox",                desc: "Approvals, conflicts, and alerts" },
+  { cmd: "/brief",    label: "Go to Morning Briefing",       route: "/",                     desc: "Today's executive summary" },
+  { cmd: "/simulate", label: "Run a simulation",             route: "/simulation-workspace", desc: "What-if scenario analysis" },
+  { cmd: "/replay",   label: "Open Activity replay",         route: "/activity",             desc: "Replay workspace history" },
+  { cmd: "/snapshot", label: "Compare workspace snapshots",  route: "/activity",             desc: "Before/after diff view" },
+  { cmd: "/council",  label: "Ask the Executive Council",    route: "/council",              desc: "6 AI domain executives" },
+  { cmd: "/settings", label: "Go to Settings",               route: "/settings",             desc: "Workspace configuration" },
+  { cmd: "/sync",     label: "Sync all connectors",          action: "sync",                 desc: "Pull latest from all integrations" },
+];
+
+// Entity type → icon lookup
+const ENTITY_ICONS = { user: Users, person: Users, employee: Users, customer: Building2, repository: GitBranch, repo: GitBranch };
+function EntityIcon({ type }) {
+  const lo = (type || "").toLowerCase();
+  const Icon = ENTITY_ICONS[lo] || Boxes;
+  return <Icon style={{ width: 13, height: 13, color: "var(--t4)", flexShrink: 0 }} />;
+}
 
 /**
  * Verb-first executable commands — ⌘K is the OS, not just navigation (Phase 16).
@@ -102,6 +124,11 @@ export const CommandPalette = ({ isOpen, onClose }) => {
   // Keyboard navigation index
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
+  // Entity search state (BP-11 §Entity Search)
+  const [entityResults, setEntityResults] = useState([]);
+  const entityAbortRef = useRef(null);
+  const entityTimerRef = useRef(null);
+
   const inputRef = useRef(null);
   const debounceTimerRef = useRef(null);
 
@@ -123,19 +150,45 @@ export const CommandPalette = ({ isOpen, onClose }) => {
     "Find the Stripe API document."
   ];
 
-  // Auto-focus on open
+  // Reset on open
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => {
         setQueryText("");
         setResults([]);
         setSynthesisAnswer("");
+        setEntityResults([]);
         setFocusedIndex(-1);
         inputRef.current?.focus();
       }, 0);
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
+
+  // Debounced entity search (200ms, cancels stale requests)
+  const searchEntities = useCallback((q) => {
+    clearTimeout(entityTimerRef.current);
+    entityAbortRef.current?.abort();
+    if (!q || q.trim().length < 2) { setEntityResults([]); return; }
+    entityTimerRef.current = setTimeout(async () => {
+      const ctrl = new AbortController();
+      entityAbortRef.current = ctrl;
+      try {
+        const wsId = localStorage.getItem("flow_os_workspace_id") || "";
+        const token = localStorage.getItem("flow_os_token") || "";
+        const res = await fetch(
+          `/api/graph/search?q=${encodeURIComponent(q.trim())}&workspaceId=${encodeURIComponent(wsId)}&limit=5`,
+          { headers: { Authorization: `Bearer ${token}`, "workspace-id": wsId }, signal: ctrl.signal }
+        );
+        if (!res.ok) { setEntityResults([]); return; }
+        const data = await res.json();
+        setEntityResults((data.nodes || data.results || []).slice(0, 5));
+      } catch {
+        // AbortError or network fail — silently hidden per BP-11
+        setEntityResults([]);
+      }
+    }, 200);
+  }, []);
 
   // Debounced Search Dispatcher (300ms)
   const dispatchSearch = async (text) => {
@@ -204,13 +257,20 @@ export const CommandPalette = ({ isOpen, onClose }) => {
     const val = e.target.value;
     setQueryText(val);
 
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
+    clearTimeout(debounceTimerRef.current);
+
+    // In slash mode don't trigger the heavy RAG search
+    if (val.startsWith("/")) {
+      setResults([]); setSynthesisAnswer(""); setEntityResults([]);
+      return;
     }
 
     debounceTimerRef.current = setTimeout(() => {
       dispatchSearch(val);
     }, 300);
+
+    // Entity search (200ms debounce, independent)
+    searchEntities(val);
   };
 
   // Keyboard navigation triggers (ArrowUp, ArrowDown, Enter, Esc)
@@ -276,8 +336,14 @@ export const CommandPalette = ({ isOpen, onClose }) => {
     (r) => activeFilter === "all" || r.source === activeFilter
   );
 
+  // Slash mode: query starts with "/"
+  const isSlashMode = queryText.startsWith("/");
+  const slashMatched = isSlashMode
+    ? SLASH_COMMANDS.filter((c) => c.cmd.startsWith(queryText.toLowerCase()))
+    : [];
+
   const commandQuery = queryText.trim().toLowerCase().replace(/^(open|go to|show me|show|navigate to|navigate)\s+/i, "").trim();
-  const matchedCommands = queryText.trim() === ""
+  const matchedCommands = (queryText.trim() === "" || isSlashMode)
     ? []
     : NAV_COMMANDS.filter((c) =>
         c.label.toLowerCase().includes(commandQuery) ||
@@ -291,7 +357,7 @@ export const CommandPalette = ({ isOpen, onClose }) => {
 
   // Executable action layer — verb-first commands that RUN (Phase 16).
   const actionHelpers = {
-    ask:  (q) => { sessionStorage.setItem("flow_pending_ask", q); navigate("/brain"); onClose(); },
+    ask:  (q) => { window.dispatchEvent(new CustomEvent("flow:ask-brain", { detail: { question: q } })); onClose(); },
     fire: (name, detail) => { window.dispatchEvent(new CustomEvent(name, detail ? { detail } : undefined)); onClose(); },
     go:   (route) => { navigate(route); onClose(); },
   };
@@ -372,10 +438,35 @@ export const CommandPalette = ({ isOpen, onClose }) => {
 
               {/* Body */}
               <div style={{ flex: 1, overflowY: "auto", padding: "14px 16px", display: "flex", flexDirection: "column", gap: 14, maxHeight: "50vh" }}>
-                
+
+                {/* 0. Slash command mode (BP-11 §Slash Mode) */}
+                {isSlashMode && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    <span style={{ fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t5)", paddingLeft: 2 }}>Slash Commands</span>
+                    {(slashMatched.length ? slashMatched : SLASH_COMMANDS).map((sc) => (
+                      <button
+                        key={sc.cmd}
+                        onClick={() => { if (sc.route) { navigate(sc.route); onClose(); } else if (sc.action === "sync") { window.dispatchEvent(new CustomEvent("flow:sync-connectors")); onClose(); } }}
+                        style={{
+                          display: "flex", alignItems: "center", justifyContent: "space-between",
+                          padding: "9px 12px", borderRadius: 5, cursor: "pointer", textAlign: "left",
+                          background: "rgba(31,27,22,0.03)", border: "1px solid var(--line-1)", color: "var(--t1)",
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.background = "rgba(232,103,43,0.07)"; e.currentTarget.style.borderColor = "var(--accent-line)"; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = "rgba(31,27,22,0.03)"; e.currentTarget.style.borderColor = "var(--line-1)"; }}
+                      >
+                        <span style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
+                          <kbd style={{ fontFamily: "var(--font-data)", fontSize: 11, fontWeight: 500, color: "var(--accent)", background: "var(--accent-dim)", border: "1px solid var(--accent-line)", borderRadius: 3, padding: "1px 6px", flexShrink: 0 }}>{sc.cmd}</kbd>
+                          <span style={{ fontSize: 13, fontWeight: 400 }}>{sc.label}</span>
+                        </span>
+                        <span style={{ fontSize: 11, color: "var(--t4)", flexShrink: 0 }}>{sc.desc}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
                 {/* 1. Loading skeletons */}
-                {isLoading && (
-                  <div className="space-y-4 animate-pulse">
+                {!isSlashMode && isLoading && (<div className="space-y-4 animate-pulse">
                     <div className="bg-bg-secondary/40 border border-border-flow rounded-xl p-4 space-y-3">
                       <Skeleton className="w-24 h-4" />
                       <Skeleton className="w-full h-12" />
@@ -388,7 +479,7 @@ export const CommandPalette = ({ isOpen, onClose }) => {
                 )}
 
                 {/* 2. Empty query / history / FAQs suggestions */}
-                {!isLoading && queryText.trim() === "" && (
+                {!isSlashMode && !isLoading && queryText.trim() === "" && (
                   <div className="space-y-4 select-none">
                     
                     {/* Suggested / FAQs list */}
@@ -486,7 +577,7 @@ export const CommandPalette = ({ isOpen, onClose }) => {
                 )}
 
                 {/* 3. Search Results & AI Synthesis Answer */}
-                {!isLoading && queryText.trim() !== "" && (
+                {!isSlashMode && !isLoading && queryText.trim() !== "" && (
                   <div className="space-y-4">
 
                     {actionCommands.length > 0 && (
@@ -529,6 +620,33 @@ export const CommandPalette = ({ isOpen, onClose }) => {
                               <span className="truncate">{cmd.label}</span>
                             </div>
                             <span className="text-[10px] text-text-muted font-mono flex-shrink-0">{cmd.route}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Entity search results (BP-11 §Entity Search) */}
+                    {entityResults.length > 0 && (
+                      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                        <span style={{ fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--t5)", paddingLeft: 2 }}>Entities</span>
+                        {entityResults.map((entity) => (
+                          <button
+                            key={entity.id || entity.nodeId}
+                            onClick={() => { navigate(`/entity/${entity.id || entity.nodeId}`); onClose(); }}
+                            style={{
+                              display: "flex", alignItems: "center", gap: 10,
+                              padding: "8px 12px", borderRadius: 5, cursor: "pointer", textAlign: "left",
+                              background: "rgba(31,27,22,0.03)", border: "1px solid var(--line-1)",
+                            }}
+                            onMouseEnter={e => { e.currentTarget.style.background = "rgba(31,27,22,0.06)"; }}
+                            onMouseLeave={e => { e.currentTarget.style.background = "rgba(31,27,22,0.03)"; }}
+                          >
+                            <EntityIcon type={entity.type} />
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                              <div style={{ fontSize: 13, fontWeight: 400, color: "var(--t1)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{entity.name || entity.label || entity.id}</div>
+                              {entity.subtitle && <div style={{ fontSize: 11, color: "var(--t4)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{entity.subtitle}</div>}
+                            </div>
+                            <span style={{ fontSize: 10, color: "var(--t5)", flexShrink: 0, background: "rgba(31,27,22,0.05)", border: "1px solid var(--line-1)", borderRadius: 3, padding: "1px 5px" }}>{entity.type || "entity"}</span>
                           </button>
                         ))}
                       </div>

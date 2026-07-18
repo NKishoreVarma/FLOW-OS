@@ -10,6 +10,7 @@ import ToastProvider, { useToast } from "../ui/ToastProvider";
 import { ToastContainer, useFlowToasts } from "../ui/FlowToast";
 import { WifiOff, FileText, Send } from "lucide-react";
 import Breadcrumb from "../ui/Breadcrumb";
+import StickyCommandCenter from "../command/StickyCommandCenter";
 import { isIntegrationEvent, eventSource, eventTitle, isCriticalEvent } from "../../lib/liveEvents";
 
 const LayoutInner = ({ children }) => {
@@ -36,12 +37,19 @@ const LayoutInner = ({ children }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       const isMeta = e.metaKey || e.ctrlKey;
+      const target = e.target;
+      const inInput = target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable;
+
+      // "?" without modifier — Keyboard Shortcut reference (guard: not in input)
+      if (e.key === "?" && !isMeta && !inInput) { e.preventDefault(); setIsShortcutOpen(true); return; }
+
       if (!isMeta) return;
       if (e.key.toLowerCase() === "k")      { e.preventDefault(); setIsSearchOpen((p) => !p); }
       else if (e.key.toLowerCase() === "b") { e.preventDefault(); window.dispatchEvent(new CustomEvent("flow:toggle-sidebar")); }
       else if (e.key.toLowerCase() === "n") { e.preventDefault(); setIsNoteOpen(true); }
       else if (e.key.toLowerCase() === "e") { e.preventDefault(); setIsComposeOpen(true); }
-      else if (e.key === "/")               { e.preventDefault(); setIsShortcutOpen(true); }
+      else if (e.key === "/")               { e.preventDefault(); window.dispatchEvent(new CustomEvent("flow:focus-command-center")); }
+      else if (e.key === ".")               { e.preventDefault(); window.dispatchEvent(new CustomEvent("flow:cancel-ai")); }
       else if (e.key === "\\")              { e.preventDefault(); setPanelOpen((p) => !p); }
     };
     const openSearch  = () => setIsSearchOpen(true);
@@ -150,6 +158,7 @@ const LayoutInner = ({ children }) => {
         <main style={{ flex: 1, overflowY: "auto", background: "var(--bg-base)" }}>
           {children}
         </main>
+        <StickyCommandCenter />
       </div>
 
       {/* Column 3 — live feed panel */}
