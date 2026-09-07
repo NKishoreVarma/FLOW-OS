@@ -46,6 +46,7 @@ function emit(level, prefix, message, args) {
 
 export const logger = {
   info:     (msg, ...args) => emit('info',     'INFO',     msg, args),
+  debug:    (msg, ...args) => { if (process.env.LOG_LEVEL === 'debug' || process.env.NODE_ENV !== 'production') emit('info', 'DEBUG', msg, args); },
   warn:     (msg, ...args) => emit('warn',     'WARN',     msg, args),
   error:    (msg, ...args) => emit('error',    'ERROR',    msg, args),
   queue:    (msg, ...args) => emit('info',     'QUEUE',    msg, args),

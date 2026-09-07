@@ -236,11 +236,14 @@ model ExecutionRecord {
   approvalId       String?  @map("approval_id")
   timelineEventId  String?  @map("timeline_event_id")
   auditLogId       String?  @map("audit_log_id")
+  idempotencyKey   String?  @map("idempotency_key")        // Phase 9: dedupe real side effects
+  verificationResult String? @map("verification_result")   // Phase 9: provider read-back outcome
   createdAt        DateTime @default(now()) @map("created_at")
   updatedAt        DateTime @updatedAt @map("updated_at")
 
   @@index([workspaceId, createdAt])
   @@index([orgId, status])
+  @@index([workspaceId, idempotencyKey])
   @@map("execution_records")
 }
 
@@ -370,6 +373,32 @@ enum MemoryRecordType {
   KNOWLEDGE_UPDATE
   SIMULATION
   PREDICTION
+}
+
+// Phase 7 — People & Organization Memory. USER-CONFIRMED organizational relationships,
+// kept STRICTLY separate from dataset graph edges (graph_edges) and from conversation
+// memory. Only an explicit user confirmation may create a row here (never the LLM, never
+// a connector). Workspace + user scoped; every read/write filters on workspaceId.
+model OrgRelationshipFact {
+  id           String   @id @default(cuid())
+  workspaceId  String   @map("workspace_id")
+  userId       String   @map("user_id")          // the user who confirmed it (subject when "my")
+  subjectType  String   @map("subject_type")     // USER | PROJECT | TEAM ...
+  subjectId    String?  @map("subject_id")        // canonical node id (from EntityResolver) if any
+  subjectName  String   @map("subject_name")
+  relationship String                              // REPORTS_TO | MANAGES | WORKS_WITH | TEAM_MEMBER | TEAM_LEAD | RESPONSIBLE_FOR
+  objectType   String   @map("object_type")
+  objectId     String?  @map("object_id")
+  objectName   String   @map("object_name")
+  source       String   @default("USER_CONFIRMED")
+  confidence   String   @default("CONFIRMED")
+  status       String   @default("ACTIVE")        // ACTIVE | SUPERSEDED | REJECTED
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@index([workspaceId, userId, status])
+  @@index([workspaceId, relationship, status])
+  @@map("org_relationship_facts")
 }
 
 // ─── Persistent Operational Graph (Phase 7.0) ────────────────────────────────
