@@ -201,6 +201,11 @@ class WorkdayAdapter extends BaseAdapter {
       version: '1.0.0'
     });
 
+    // PREVIEW adapter — in-memory, not the real Workday API. The Execution Engine
+    // refuses side-effectful writes on simulated connectors so FLOW never reports a
+    // fabricated success. Remove when a live Workday integration is wired.
+    this.simulated = true;
+
     this.inMemoryEmployees = [...MOCK_EMPLOYEES];
     this.inMemoryTeams = [...MOCK_TEAMS];
     this.inMemorySkills = [...MOCK_SKILLS];

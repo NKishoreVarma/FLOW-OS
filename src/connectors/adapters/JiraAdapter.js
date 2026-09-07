@@ -219,6 +219,11 @@ class JiraAdapter extends BaseAdapter {
       version: '1.0.0'
     });
 
+    // This adapter is a PREVIEW: reads/writes are in-memory, not a real Jira API.
+    // The Execution Engine refuses side-effectful writes on simulated connectors so
+    // FLOW never reports a fabricated success. Remove when a live provider is wired.
+    this.simulated = true;
+
     // In-memory array to simulate DB changes during demo mode.
     this.inMemoryIssues = [...MOCK_ISSUES];
   }
@@ -282,17 +287,136 @@ class JiraAdapter extends BaseAdapter {
         return this._deleteIssue(workspaceId, payload.id || payload.key);
       case ActionType.SYNC:
         return this._sync(workspaceId, payload);
-      case ActionType.EXECUTE:
-        if (payload.resourceType === 'workflow') {
-          return this._transitionWorkflow(workspaceId, payload.key, payload.status);
-        }
-        if (payload.resourceType === 'link') {
-          return this._linkIssues(workspaceId, payload.sourceKey, payload.targetKey);
-        }
-        throw new AppError(`JiraAdapter: execute action not supported for ${payload.resourceType}`, 400);
+      case ActionType.EXECUTE: {
+        const rt = payload.resourceType;
+        if (rt === 'workflow')    return this._transitionWorkflow(workspaceId, payload.key, payload.status);
+        if (rt === 'link')        return this._linkIssues(workspaceId, payload.sourceKey, payload.targetKey);
+        if (rt === 'comment')     return this._addComment(workspaceId, payload.key, payload.comment, payload.visibility);
+        if (rt === 'sprint')      return this._createSprint(workspaceId, payload);
+        if (rt === 'close')       return this._closeIssue(workspaceId, payload.key, payload.resolution, payload.comment);
+        if (rt === 'backlog')     return this._prioritizeBacklog(workspaceId, payload.issues, payload.projectKey);
+        throw new AppError(`JiraAdapter: execute action not supported for "${rt}"`, 400);
+      }
+      case ActionType.READ:
+        if (payload.resourceType === 'report') return this._generateReport(workspaceId, payload);
+        return this._read(workspaceId, payload);
       default:
         throw new AppError(`JiraAdapter: unknown actionType "${actionType}"`, 400);
     }
+  }
+
+  // ── Extended execute sub-actions ──────────────────────────────────────────
+
+  async _addComment(workspaceId, key, comment, visibility = 'all') {
+    if (!key)     throw new ValidationError('key is required for comment');
+    if (!comment) throw new ValidationError('comment is required');
+
+    const idx = this.inMemoryIssues.findIndex(i => i.key === key || i.id === key);
+    if (idx === -1) throw new AppError(`Issue not found: ${key}`, 404);
+
+    const commentId = `comment-${Date.now()}`;
+    const issue = this.inMemoryIssues[idx];
+    if (!issue.comments) issue.comments = [];
+    issue.comments.push({ id: commentId, body: comment, visibility, createdAt: new Date().toISOString() });
+
+    return { commentId, key, status: 'commented' };
+  }
+
+  async _createSprint(workspaceId, { name, boardId, startDate, endDate, goal }) {
+    if (!name)      throw new ValidationError('name is required for create_sprint');
+    if (!boardId)   throw new ValidationError('boardId is required for create_sprint');
+    if (!startDate) throw new ValidationError('startDate is required');
+    if (!endDate)   throw new ValidationError('endDate is required');
+
+    const sprintId = String(Date.now());
+    return { sprintId, name, boardId, startDate, endDate, goal: goal || null, status: 'sprint_created' };
+  }
+
+  async _closeIssue(workspaceId, key, resolution = 'Fixed', comment) {
+    if (!key) throw new ValidationError('key is required for close_issue');
+
+    const result = await this._transitionWorkflow(workspaceId, key, 'Done');
+    if (comment) await this._addComment(workspaceId, key, comment);
+
+    return { ...result, resolution, status: 'Done' };
+  }
+
+  async _prioritizeBacklog(workspaceId, issues = [], projectKey) {
+    if (!Array.isArray(issues) || issues.length === 0) {
+      throw new ValidationError('issues array is required for prioritize_backlog');
+    }
+
+    let updated = 0;
+    let failed  = 0;
+    const results = [];
+
+    for (const { key, priority } of issues) {
+      try {
+        const updated_ = await this._updateIssue(workspaceId, key, { priority });
+        results.push({ key, priority, success: true, id: updated_.id });
+        updated++;
+      } catch (err) {
+        results.push({ key, priority, success: false, error: err.message });
+        failed++;
+      }
+    }
+
+    return { updated, failed, results };
+  }
+
+  async _generateReport(workspaceId, { projectKey, reportType, sprintId, label, dateFrom, dateTo }) {
+    if (!projectKey)  throw new ValidationError('projectKey is required for generate_report');
+    if (!reportType)  throw new ValidationError('reportType is required');
+
+    const projectIssues = this.inMemoryIssues.filter(i =>
+      i.projectKey === projectKey &&
+      (!label || (i.labels || []).includes(label))
+    );
+
+    let data = {};
+    let summary = '';
+
+    switch (reportType) {
+      case 'open_issues':
+      case 'bug_count': {
+        const open = projectIssues.filter(i => i.status !== 'Done' && i.status !== 'Closed');
+        const bugs  = open.filter(i => i.issueType === 'Bug' || i.priority === 'P0' || i.priority === 'Highest');
+        data    = { totalOpen: open.length, bugs: bugs.length, issues: open.map(i => ({ key: i.key, title: i.title, status: i.status })) };
+        summary = `${projectKey} has ${open.length} open issues, ${bugs.length} of which are bugs.`;
+        break;
+      }
+      case 'backlog_health': {
+        const unassigned = projectIssues.filter(i => !i.assignee);
+        const highPriority = projectIssues.filter(i => i.priority === 'P0' || i.priority === 'Highest');
+        data    = { total: projectIssues.length, unassigned: unassigned.length, highPriority: highPriority.length };
+        summary = `Backlog for ${projectKey}: ${projectIssues.length} total items, ${unassigned.length} unassigned, ${highPriority.length} high priority.`;
+        break;
+      }
+      case 'customer_issues': {
+        const customerIssues = projectIssues.filter(i =>
+          (i.labels || []).some(l => l.includes('customer')) ||
+          (i.title || '').toLowerCase().includes('customer')
+        );
+        data    = { count: customerIssues.length, issues: customerIssues.map(i => ({ key: i.key, title: i.title, assignee: i.assignee })) };
+        summary = `${customerIssues.length} customer-reported issues found in ${projectKey}.`;
+        break;
+      }
+      case 'sprint_velocity':
+      default: {
+        const done = projectIssues.filter(i => i.status === 'Done' || i.status === 'Closed');
+        data    = { completed: done.length, total: projectIssues.length, completionRate: projectIssues.length ? Math.round((done.length / projectIssues.length) * 100) : 0 };
+        summary = `Sprint velocity for ${projectKey}: ${done.length}/${projectIssues.length} issues completed (${data.completionRate}%).`;
+        break;
+      }
+    }
+
+    return {
+      reportType,
+      projectKey,
+      generatedAt: new Date().toISOString(),
+      data,
+      summary,
+    };
   }
 
   // ── SearchOrchestrator Integration ────────────────────────────────────────

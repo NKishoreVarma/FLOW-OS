@@ -216,6 +216,11 @@ class HubSpotAdapter extends BaseAdapter {
       version: '1.0.0'
     });
 
+    // PREVIEW adapter — in-memory, not the real HubSpot API. The Execution Engine
+    // refuses side-effectful writes on simulated connectors so FLOW never reports a
+    // fabricated success. Remove when a live HubSpot integration is wired.
+    this.simulated = true;
+
     this.inMemoryAccounts = [...MOCK_ACCOUNTS];
     this.inMemoryContacts = [...MOCK_CONTACTS];
     this.inMemoryOpps = [...MOCK_OPPORTUNITIES];

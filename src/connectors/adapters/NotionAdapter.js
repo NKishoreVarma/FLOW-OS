@@ -131,6 +131,11 @@ class NotionAdapter extends BaseAdapter {
       version: '1.0.0'
     });
 
+    // PREVIEW adapter — in-memory, not the real Notion API. The Execution Engine
+    // refuses side-effectful writes on simulated connectors so FLOW never reports a
+    // fabricated success. Remove when a live Notion integration is wired.
+    this.simulated = true;
+
     // In-memory document storage for demo mode
     this.inMemoryDocs = [...MOCK_DOCUMENTS];
   }

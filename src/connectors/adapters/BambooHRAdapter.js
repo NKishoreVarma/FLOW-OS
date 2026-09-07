@@ -24,6 +24,10 @@ class BambooHRAdapter extends BaseAdapter {
       ],
       version: '1.0.0'
     });
+
+    // Foundational skeleton — reads return empty, writes unsupported. Flagged so the
+    // UI labels it "Preview" instead of implying a live integration.
+    this.simulated = true;
   }
 
   async authenticate(workspaceId, { apiKey } = {}) {

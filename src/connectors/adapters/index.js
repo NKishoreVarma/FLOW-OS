@@ -19,6 +19,15 @@ import salesforceAdapter              from './SalesforceAdapter.js';
 import workdayAdapter                 from './WorkdayAdapter.js';
 import bambooHRAdapter                from './BambooHRAdapter.js';
 import slackAdapter                   from './SlackAdapter.js';
+// Infrastructure Operations Pack (Phase 10)
+import kubernetesAdapter              from './KubernetesAdapter.js';
+import awsAdapter                     from './AWSAdapter.js';
+import postgresAdapter                from './PostgreSQLAdapter.js';
+import redisInfraAdapter              from './RedisAdapter.js';
+import datadogAdapter                 from './DatadogAdapter.js';
+import pagerDutyAdapter               from './PagerDutyAdapter.js';
+// Governed sandbox execution provider (certification only, fail-closed)
+import sandboxAdapter                 from './SandboxAdapter.js';
 
 registerConnector(gmailAdapter);
 registerConnector(googleCalendarAdapter);
@@ -32,3 +41,13 @@ registerConnector(salesforceAdapter);
 registerConnector(workdayAdapter);
 registerConnector(bambooHRAdapter);
 registerConnector(slackAdapter);
+// Infrastructure Operations Pack
+registerConnector(kubernetesAdapter);
+registerConnector(awsAdapter);
+registerConnector(postgresAdapter);
+registerConnector(redisInfraAdapter);
+registerConnector(datadogAdapter);
+registerConnector(pagerDutyAdapter);
+// Sandbox provider — registered always, but execute() is fail-closed to the
+// certification workspace (never production, never a real-provider substitute).
+registerConnector(sandboxAdapter);

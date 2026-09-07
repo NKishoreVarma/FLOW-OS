@@ -13,10 +13,20 @@ import { google }                           from 'googleapis';
 import { BaseAdapter }                       from '../BaseAdapter.js';
 import { Capability, ActionType, AuthStrategy } from '../capabilities.js';
 import { createMeeting, createSearchResult } from '../normalizedTypes.js';
-import { loadTokens, saveTokens } from '../../services/google/GoogleTokenManager.js';
+import { loadTokens, saveTokens, clearTokens } from '../../services/google/GoogleTokenManager.js';
 import { getAuthUrl } from '../../services/google/GoogleOAuthService.js';
 import { AppError, ValidationError }         from '../../core/errors/index.js';
 import { EntityTypes, registerEntity, linkEntities } from '../../services/knowledgeGraphService.js';
+
+// ─── Structured error mapper for googleapis responses ─────────────────────────
+
+function mapCalendarError(err) {
+  const code = err.code || err.status;
+  if (code === 401 || code === 403) return new AppError('Google Calendar authentication expired. Reconnect required.', 401, 'CONNECTOR_AUTH_EXPIRED');
+  if (code === 429 || err.message?.includes('quota')) return new AppError('Google Calendar API rate limit exceeded.', 429, 'CONNECTOR_RATE_LIMITED');
+  if (err.message?.includes('DEADLINE_EXCEEDED') || err.message?.includes('timeout')) return new AppError('Google Calendar API request timed out.', 504, 'CONNECTOR_TIMEOUT');
+  return err;
+}
 
 const CALENDAR_SCOPES = [
   'https://www.googleapis.com/auth/calendar.events',
@@ -109,15 +119,19 @@ class GoogleCalendarAdapter extends BaseAdapter {
   // ── Execution Engine dispatch ──────────────────────────────────────────────
 
   async execute(workspaceId, actionType, payload = {}) {
-    switch (actionType) {
-      case ActionType.READ:   return this._read(workspaceId, payload);
-      case ActionType.SEARCH: return this._searchEvents(workspaceId, payload.query || '', { limit: payload.limit });
-      case ActionType.CREATE: return this._createEvent(workspaceId, payload);
-      case ActionType.UPDATE: return this._updateEvent(workspaceId, payload);
-      case ActionType.DELETE: return this._deleteEvent(workspaceId, payload);
-      case ActionType.SYNC:   return this._syncEvents(workspaceId, payload);
-      default:
-        throw new AppError(`GoogleCalendarAdapter: unknown action "${actionType}"`, 400);
+    try {
+      switch (actionType) {
+        case ActionType.READ:   return await this._read(workspaceId, payload);
+        case ActionType.SEARCH: return await this._searchEvents(workspaceId, payload.query || '', { limit: payload.limit });
+        case ActionType.CREATE: return await this._createEvent(workspaceId, payload);
+        case ActionType.UPDATE: return await this._updateEvent(workspaceId, payload);
+        case ActionType.DELETE: return await this._deleteEvent(workspaceId, payload);
+        case ActionType.SYNC:   return await this._syncEvents(workspaceId, payload);
+        default:
+          throw new AppError(`GoogleCalendarAdapter: unknown action "${actionType}"`, 400);
+      }
+    } catch (err) {
+      throw mapCalendarError(err);
     }
   }
 
@@ -180,13 +194,36 @@ class GoogleCalendarAdapter extends BaseAdapter {
     const tokens = await loadTokens(workspaceId);
     if (!tokens) {
       throw new AppError(
-        `Google Calendar not authenticated for workspace "${workspaceId}". Connect Google at /api/google/auth.`,
+        `Google Calendar not authenticated for workspace "${workspaceId}". Connect Google Calendar first.`,
         401,
-        'CONNECTOR_AUTH_ERROR'
+        'CONNECTOR_AUTH_EXPIRED',
       );
     }
+
     const oauth2Client = this._getOAuth2Client();
     oauth2Client.setCredentials(tokens);
+
+    // Proactively refresh if access token is expired or expires within 60s.
+    const isExpired = !tokens.access_token || (tokens.expiry_date && tokens.expiry_date < Date.now() + 60_000);
+    if (isExpired && tokens.refresh_token) {
+      try {
+        const { credentials } = await oauth2Client.refreshAccessToken();
+        const merged = { ...tokens, ...credentials };
+        await saveTokens(workspaceId, merged);
+        oauth2Client.setCredentials(merged);
+      } catch (refreshErr) {
+        await clearTokens(workspaceId).catch(() => {});
+        const msg = refreshErr.message || '';
+        if (msg.includes('invalid_client')) {
+          throw new AppError(
+            'Google OAuth credentials are misconfigured. Check GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in .env.',
+            503, 'OAUTH_CREDENTIALS_INVALID',
+          );
+        }
+        throw new AppError('Google Calendar authentication expired. Click Connect to re-authorize.', 401, 'CONNECTOR_AUTH_EXPIRED');
+      }
+    }
+
     oauth2Client.on('tokens', newTokens => {
       saveTokens(workspaceId, { ...tokens, ...newTokens }).catch(() => {});
     });
