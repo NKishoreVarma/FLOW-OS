@@ -4,6 +4,7 @@ import SourceBadge from "../ui/SourceBadge";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { EmptyState } from "../ui/EmptyState";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 /**
  * SecurityCenter — was a fully-static mock. Now the "Recent Security Events" feed
@@ -42,11 +43,17 @@ function relTime(ts) {
 
 const SecurityCenter = () => {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
   const [state, setState] = useState({ loading: true, events: [], demo: false });
 
   const load = useCallback(async () => {
     setState(s => ({ ...s, loading: true }));
-    if (!token || !workspaceId) { setState({ loading: false, events: DEMO_EVENTS, demo: true }); return; }
+    if (!token || !workspaceId) {
+      if (isDemoWorkspace) setState({ loading: false, events: DEMO_EVENTS, demo: true });
+      else setState({ loading: false, events: [], demo: false });
+      return;
+    }
     try {
       const res = await fetch("/api/connectors/audit?limit=50", {
         headers: { Authorization: `Bearer ${token}`, "workspace-id": workspaceId },
@@ -54,12 +61,15 @@ const SecurityCenter = () => {
       if (!res.ok) throw new Error();
       const data = await res.json();
       const events = data.events || [];
-      if (!events.length) setState({ loading: false, events: DEMO_EVENTS, demo: true });
-      else setState({ loading: false, events, demo: false });
+      if (!events.length) {
+        if (isDemoWorkspace) setState({ loading: false, events: DEMO_EVENTS, demo: true });
+        else setState({ loading: false, events: [], demo: false });
+      } else setState({ loading: false, events, demo: false });
     } catch {
-      setState({ loading: false, events: DEMO_EVENTS, demo: true });
+      if (isDemoWorkspace) setState({ loading: false, events: DEMO_EVENTS, demo: true });
+      else setState({ loading: false, events: [], demo: false });
     }
-  }, [token, workspaceId]);
+  }, [token, workspaceId, isDemoWorkspace]);
 
   useEffect(() => { if (!isAuthLoading) load(); }, [isAuthLoading, load]);
 

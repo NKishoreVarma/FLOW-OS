@@ -2,10 +2,11 @@ import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import {
   User, Shield, FileText, Box, Building, Briefcase,
   ShoppingCart, CheckCircle, Search, Network,
-  Cpu, Zap, X, ChevronRight, Eye, RefreshCw, ExternalLink
+  Cpu, Zap, X, ChevronRight, Eye, RefreshCw, ExternalLink, PlugZap
 } from "lucide-react";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 const NODES = [
   { id: "n1",  label: "Kishore Varma",          type: "PERSON",     x: 320, y: 160, importance: 0.95 },
@@ -78,6 +79,8 @@ function docToNode(doc, idx) {
 
 export const KnowledgeExplorer = () => {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
 
   const [extraNodes, setExtraNodes] = useState([]);
   const [isDemo, setIsDemo] = useState(false);
@@ -96,18 +99,19 @@ export const KnowledgeExplorer = () => {
   const animFrameRef = useRef(null);
   const offsetsRef = useRef({});
 
-  const allNodes = useMemo(() => [...NODES, ...extraNodes], [extraNodes]);
+  const baseNodes = isDemoWorkspace ? NODES : [];
+  const allNodes = useMemo(() => [...baseNodes, ...extraNodes], [extraNodes, isDemoWorkspace]); // eslint-disable-line react-hooks/exhaustive-deps
   const allNodesRef = useRef(allNodes);
   useEffect(() => { allNodesRef.current = allNodes; }, [allNodes]);
 
   const headers = useMemo(() => ({
     Authorization: `Bearer ${token}`,
-    'workspace-id': workspaceId || 'workspace_corp_alpha',
+    'workspace-id': workspaceId || '',
     'Content-Type': 'application/json',
   }), [token, workspaceId]);
 
   const loadDocuments = useCallback(async () => {
-    if (isAuthLoading || !token) { setIsDemo(true); return; }
+    if (isAuthLoading || !token) { setIsDemo(isDemoWorkspace); return; }
     try {
       const res = await fetch('/api/knowledge/documents?provider=notion', { headers });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -123,12 +127,12 @@ export const KnowledgeExplorer = () => {
           return next;
         });
       } else {
-        setIsDemo(true);
+        setIsDemo(isDemoWorkspace);
       }
     } catch {
-      setIsDemo(true);
+      setIsDemo(isDemoWorkspace);
     }
-  }, [isAuthLoading, token, headers]);
+  }, [isAuthLoading, token, headers, isDemoWorkspace]);
 
   useEffect(() => {
     if (!isAuthLoading) {
@@ -284,8 +288,20 @@ export const KnowledgeExplorer = () => {
           </div>
         </div>
 
+        {/* Real workspace empty state */}
+        {!isDemoWorkspace && allNodes.length === 0 && (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "60%", textAlign: "center" }}>
+            <PlugZap style={{ width: 32, height: 32, color: "var(--t5)", marginBottom: 14 }} />
+            <p style={{ fontSize: 14, fontWeight: 500, color: "var(--t2)", marginBottom: 6 }}>Connect Notion or Confluence to build your knowledge graph</p>
+            <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 18, maxWidth: 360 }}>FLOW will index your documents, wikis, and pages into an interactive entity graph.</p>
+            <a href="/integrations" style={{ display: "inline-block", fontSize: 12, fontWeight: 500, color: "var(--brand)", background: "rgba(232,103,43,0.08)", padding: "7px 16px", borderRadius: 4, textDecoration: "none" }}>
+              Connect knowledge tools →
+            </a>
+          </div>
+        )}
+
         {/* SVG Graph */}
-        <svg
+        {(isDemoWorkspace || allNodes.length > 0) && <svg
           ref={svgRef}
           style={{ width: "100%", height: "100%" }}
           viewBox="0 0 700 520"
@@ -386,7 +402,7 @@ export const KnowledgeExplorer = () => {
               </g>
             );
           })}
-        </svg>
+        </svg>}
 
         {/* Stats overlay */}
         <div style={{ position: "absolute", bottom: 14, left: 14, display: "flex", alignItems: "center", gap: 16 }}>
