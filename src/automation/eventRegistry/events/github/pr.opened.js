@@ -1,0 +1,22 @@
+export default {
+  id: 'github.pr.opened', version: '1.0.0',
+  connector: 'github', category: 'ENGINEERING', source: 'webhook',
+  displayName: 'Pull Request Opened', description: 'A GitHub pull request was opened or reopened.',
+  priority: 'NORMAL',
+  schema: {
+    'pr.number':              { type: 'number' },
+    'pr.title':               { type: 'string' },
+    'pr.draft':               { type: 'boolean' },
+    'pr.state':               { type: 'string', enum: ['open', 'closed'] },
+    'pr.base.ref':            { type: 'string' },
+    'pr.head.ref':            { type: 'string' },
+    'pr.html_url':            { type: 'string' },
+    'repository.name':        { type: 'string' },
+    'repository.owner.login': { type: 'string' },
+    'sender.login':           { type: 'string' },
+  },
+  deduplication: { enabled: true, keyFields: ['sourceEventId'], windowMs: 60_000 },
+  ordering:      { guaranteed: false },
+  retry:         { maxAttempts: 3, backoffMs: 1_000 },
+  security:      { signatureRequired: true, signatureHeader: 'x-hub-signature-256', algorithm: 'hmac-sha256' },
+};

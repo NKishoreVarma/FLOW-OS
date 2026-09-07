@@ -1,0 +1,20 @@
+export default {
+  id: 'github.issue.created', version: '1.0.0',
+  connector: 'github', category: 'ENGINEERING', source: 'webhook',
+  displayName: 'GitHub Issue Created', description: 'A new GitHub issue was opened.',
+  priority: 'NORMAL',
+  schema: {
+    'issue.number':           { type: 'number' },
+    'issue.title':            { type: 'string' },
+    'issue.body':             { type: 'string' },
+    'issue.state':            { type: 'string' },
+    'issue.html_url':         { type: 'string' },
+    'repository.name':        { type: 'string' },
+    'repository.owner.login': { type: 'string' },
+    'sender.login':           { type: 'string' },
+  },
+  deduplication: { enabled: true, keyFields: ['sourceEventId'], windowMs: 60_000 },
+  ordering:      { guaranteed: false },
+  retry:         { maxAttempts: 3, backoffMs: 1_000 },
+  security:      { signatureRequired: true, signatureHeader: 'x-hub-signature-256', algorithm: 'hmac-sha256' },
+};

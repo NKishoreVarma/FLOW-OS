@@ -1,0 +1,20 @@
+export default {
+  id: 'gmail.email.received', version: '1.0.0',
+  connector: 'gmail', category: 'COMMUNICATION', source: 'webhook',
+  displayName: 'Email Received', description: 'A new email arrived in the Gmail inbox.',
+  priority: 'NORMAL',
+  schema: {
+    'message.id':      { type: 'string' },
+    'message.threadId': { type: 'string' },
+    'from':            { type: 'string' },
+    'to':              { type: 'string' },
+    'subject':         { type: 'string' },
+    'snippet':         { type: 'string' },
+    'labelIds':        { type: 'array' },
+    'isUnread':        { type: 'boolean' },
+  },
+  deduplication: { enabled: true, keyFields: ['sourceEventId'], windowMs: 300_000 },
+  ordering:      { guaranteed: false },
+  retry:         { maxAttempts: 3, backoffMs: 2_000 },
+  security:      { signatureRequired: false },
+};
