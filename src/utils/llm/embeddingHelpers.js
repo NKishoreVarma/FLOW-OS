@@ -118,6 +118,24 @@ export class EmbeddingQueue {
 }
 
 /**
+ * Single canonical embedding function — routes through BrainRouter so all
+ * provider switching and fallback logic lives in one place. Both vectorStoreService
+ * and retrievalService import this instead of maintaining separate copies (TD-07).
+ *
+ * @param {string} text
+ * @returns {Promise<number[]>} 768-dim float array
+ */
+export async function generateEmbedding(text) {
+  const { embed: brainEmbed } = await import('../../ai/BrainRouter.js');
+  const result = await brainEmbed(text);
+  const values = result?.values;
+  if (!Array.isArray(values) || values.length === 0) {
+    throw new Error('[Embedding] Empty embedding returned from AI provider.');
+  }
+  return values;
+}
+
+/**
  * Counts estimated tokens for a string using a proxy calculation:
  * - English text average: 1 token ≈ 4 characters or 0.75 words.
  *

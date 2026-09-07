@@ -16,6 +16,7 @@ import { broadcastToWorkspace } from './socketService.js';
 import { extractEntitiesFromText, getRelatedContext } from './knowledgeGraphService.js';
 import { updateIngestionTrace, updateQueryTrace, liveMetrics } from './observabilityService.js';
 import { logger } from '../utils/logger.js';
+import { generateEmbedding } from '../utils/llm/embeddingHelpers.js';
 
 function getDbPool() {
   return pool;
@@ -61,15 +62,7 @@ function cosineSimilarity(a, b) {
  * @param {string} text
  * @returns {Promise<number[]>}
  */
-async function generateEmbedding(text) {
-  const { embed: brainEmbed } = await import('../ai/BrainRouter.js');
-  const result = await brainEmbed(text);
-  const values = result.values;
-  if (!Array.isArray(values) || values.length === 0) {
-    throw new Error('[Retrieval] Empty embedding returned from AI provider.');
-  }
-  return values;
-}
+// generateEmbedding imported from embeddingHelpers (shared canonical implementation — TD-07)
 
 // ── FALLBACK: Local vault filesystem scanner ───────────────────────────────────
 /**
