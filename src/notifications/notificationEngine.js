@@ -62,6 +62,12 @@ export async function createNotification({
     });
   } catch { /* WS best-effort */ }
 
+  // Deliver to Slack when connected — fire-and-forget, never blocks or breaks
+  // notification creation. No-op if Slack isn't connected for the workspace.
+  import('./slackNotifier.js')
+    .then(({ deliverToSlack }) => deliverToSlack(workspaceId, { type, priority: notification.priority, title, body, actions }))
+    .catch(() => {});
+
   return { notification, deduped: false };
 }
 

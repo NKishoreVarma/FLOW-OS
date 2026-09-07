@@ -42,8 +42,25 @@ const PRIORITY_COLOR = {
  *
  * @param {import('./EventNormalizer.js').CompanyEvent} event
  */
+// The live feed shows real human/business activity only. Plumbing events
+// (connector reads/actions, health, memory, automation) are dropped here — at the
+// broadcast source — so they never reach the panel even if a client filter misses.
+const _REAL_SOURCES = new Set(['github', 'slack', 'gmail', 'jira', 'google-calendar', 'calendar', 'notion', 'hubspot', 'linear', 'datadog']);
+const _NOISE_TITLE  = /read via|connector[_\s-]?action|action executed|health score|workspace health|cognitive routing|connection ack|prediction|bus_factor|org memory/i;
+
+function _isSystemNoise(event) {
+  const source = String(event.source || '').toLowerCase();
+  const title  = String(event.title || '');
+  if (source === 'connector_action' || source === 'ingestion_worker') return true;
+  if (source && !_REAL_SOURCES.has(source)) return true;   // unknown/internal source
+  if (_NOISE_TITLE.test(title)) return true;
+  return false;
+}
+
 export async function pushToFeed(event) {
   const wsId = String(event.workspaceId);
+  // Drop system noise at the source — never store or broadcast it to the live panel.
+  if (_isSystemNoise(event)) return;
   const item = _formatFeedItem(event);
 
   const key = FEED_KEY(wsId);
@@ -139,8 +156,8 @@ function _formatText(event, actor, entity) {
   switch (type) {
     case EventType.ENGINEERING:
       if (/merged/i.test(title))   return `${actor} merged PR${entity ? ': ' + entity : ''}`;
-      if (/opened/i.test(title))   return `${actor} opened a pull request${entity ? ': ' + entity : ''}`;
-      if (/commit|push/i.test(title)) return `${actor} pushed commits`;
+      if (/opened/i.test(title))   return `${actor} ${title.slice(0, 80)}`;
+      if (/commit|push/i.test(title)) return `${actor} ${title.slice(0, 80)}`;
       return `${actor}: ${title.slice(0, 80)}`;
 
     case EventType.DEPLOYMENT:
