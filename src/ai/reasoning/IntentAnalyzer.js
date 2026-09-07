@@ -48,7 +48,7 @@ export const Domain = Object.freeze({
  * @param {string} [opts.entityId]   - Focused entity
  * @returns {Promise<IntentResult>}
  */
-export async function analyzeIntent(question, { pageContext, entityId } = {}) {
+export async function analyzeIntent(question, { pageContext, entityId, fast = false } = {}) {
   const q = question.toLowerCase();
 
   // 1. Heuristic classification (instant, no LLM)
@@ -60,6 +60,20 @@ export async function analyzeIntent(question, { pageContext, entityId } = {}) {
   const executionHint= _detectExecutionHint(q);
 
   const base = { question, questionType, domain, timeframe, urgency, entities, executionHint, entityId };
+
+  // Fast path (chat): skip the LLM enrichment call — the heuristic intent is
+  // enough to plan capabilities, and it saves a full model round-trip.
+  if (fast) return { ...base, searchTerms: _buildSearchTerms(question), _enriched: false, _fastReason: 'fast' };
+
+  // P5 deterministic-first routing: when the heuristic is CONFIDENT — a specific
+  // question type AND a specific domain both matched (not the generic DISCOVERY/
+  // GENERAL fallbacks) — the LLM enrichment adds marginal value. Skip it and save a
+  // full CLASSIFY round-trip. Ambiguous queries still fall through to enrichment.
+  // Reversible: FAST_INTENT=false restores always-enrich.
+  const heuristicConfident = questionType !== QuestionType.DISCOVERY && domain !== Domain.GENERAL;
+  if (process.env.FAST_INTENT !== 'false' && heuristicConfident) {
+    return { ...base, searchTerms: _buildSearchTerms(question), _enriched: false, _fastReason: 'confident-heuristic' };
+  }
 
   // 2. LLM enrichment — extract named entities and refine classification
   try {
@@ -107,7 +121,9 @@ JSON fields:
 function _detectQuestionType(q) {
   if (/what happened|why did|why is|root cause|cause of|reason for/.test(q)) return QuestionType.DIAGNOSTIC;
   if (/what should|how do|recommend|suggest|fix|resolve|improve/.test(q))    return QuestionType.ACTION;
-  if (/who (is|are|did|owns|responsible|assigned)/.test(q))                  return QuestionType.ATTRIBUTION;
+  if (/who (is|are|did|owns?|owned|responsible|assigned|authored|wrote|created|reviewed|merged|leads?|led|manages?|reports?)/.test(q)) return QuestionType.ATTRIBUTION;
+  if (/\b(authored|written|created|reviewed|merged|assigned|owned)\s+by\b/.test(q)) return QuestionType.ATTRIBUTION;
+  if (/which (person|people|team|engineer|dev|developer|owner)/.test(q)) return QuestionType.ATTRIBUTION;
   if (/at risk|will fail|predict|forecast|likely/.test(q))                   return QuestionType.FORECAST;
   if (/compare|vs|versus|difference|better/.test(q))                         return QuestionType.COMPARATIVE;
   if (/how (does|do|is).*(relate|connect|linked)/.test(q))                   return QuestionType.RELATIONSHIP;

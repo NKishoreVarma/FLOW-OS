@@ -1,4 +1,4 @@
-import { ProviderName, TaskType } from './types.js';
+import { ProviderName, TaskType, RoutingStrategy } from './types.js';
 
 /**
  * Centralised AI configuration. Read once at import time from process.env.
@@ -27,6 +27,48 @@ export const AIConfig = Object.freeze({
     embedModel:  process.env.GEMINI_EMBED_MODEL   || 'gemini-embedding-2',
     embedDim:    Number(process.env.GEMINI_EMBED_DIM) || 768,
     timeoutMs:   Number(process.env.GEMINI_TIMEOUT_MS) || 30_000,
+  }),
+
+  // OpenAI / GPT
+  openai: Object.freeze({
+    apiKey:        process.env.OPENAI_API_KEY || '',
+    organization:  process.env.OPENAI_ORG    || '',
+    baseUrl:       process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
+    defaultModel:  process.env.OPENAI_MODEL       || 'gpt-4o',
+    lightModel:    process.env.OPENAI_LIGHT_MODEL  || 'gpt-4o-mini',
+    heavyModel:    process.env.OPENAI_HEAVY_MODEL  || 'o3-mini',
+    embedModel:    process.env.OPENAI_EMBED_MODEL  || 'text-embedding-3-small',
+    timeoutMs:     Number(process.env.OPENAI_TIMEOUT_MS) || 60_000,
+  }),
+
+  // Anthropic / Claude
+  anthropic: Object.freeze({
+    apiKey:       process.env.ANTHROPIC_API_KEY || '',
+    baseUrl:      process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com',
+    defaultModel: process.env.ANTHROPIC_MODEL       || 'claude-sonnet-4-6',
+    lightModel:   process.env.ANTHROPIC_LIGHT_MODEL  || 'claude-haiku-4-5-20251001',
+    heavyModel:   process.env.ANTHROPIC_HEAVY_MODEL  || 'claude-opus-4-8',
+    timeoutMs:    Number(process.env.ANTHROPIC_TIMEOUT_MS) || 90_000,
+  }),
+
+  // Global routing strategy (default BALANCED)
+  routingStrategy: (process.env.AI_ROUTING_STRATEGY || RoutingStrategy.BALANCED).toLowerCase(),
+
+  // Task type → complexity tier (LIGHT / STANDARD / HEAVY)
+  taskTier: Object.freeze({
+    [TaskType.CLASSIFY]:         'light',
+    [TaskType.SEARCH]:           'light',
+    [TaskType.EXTRACT_ENTITIES]: 'light',
+    [TaskType.SUMMARIZE]:        'light',
+    [TaskType.BRIEF]:            'standard',
+    [TaskType.CHAT]:             'standard',
+    [TaskType.MEETING_PREP]:     'standard',
+    [TaskType.REASON]:           'heavy',
+    [TaskType.PLAN]:             'heavy',
+    [TaskType.LONG_SYNTHESIS]:   'heavy',
+    [TaskType.ARCHITECTURE]:     'heavy',
+    [TaskType.EVAL]:             'heavy',
+    [TaskType.EMBED]:            'light',
   }),
 
   // Task → preferred provider routing table.

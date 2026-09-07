@@ -125,7 +125,23 @@ export function buildSummaryPrompt({ workspaceId, chunks, windowDays = 1 }) {
  * Returns a short JSON classification with routing decision.
  */
 export function buildClassifyPrompt({ text }) {
-  const prompt = `Classify the following message into ONE of these categories. Return valid JSON only — no markdown, no explanation.\n\nCategories:\n- OPERATIONAL_INTEL: business data, decisions, projects, incidents, metrics\n- SOCIAL_COORDINATION: scheduling, greetings, casual coordination\n- PRIVATE_PERSONAL: personal or sensitive information\n\nMessage: "${text.substring(0, 500)}"\n\nJSON format: {"category":"OPERATIONAL_INTEL","confidence":0.9,"reasoning":"brief reason"}`;
+  const prompt = `Classify the following workplace message into ONE of these categories. Return valid JSON only — no markdown, no explanation.
+
+CATEGORIES:
+- OPERATIONAL_INTEL: Any work-related signal that is useful for business decision-making. This includes: code deploys, database migrations, incidents, outages, security alerts, sprint results, project status updates, team velocity, blockers, escalations, customer issues, revenue signals, hiring news, deadlines, on-call alerts. When in doubt, use OPERATIONAL_INTEL.
+- SOCIAL_COORDINATION: Purely social or informal messages: greetings, lunch plans, weekend talk, casual jokes, congratulations without business context.
+- PRIVATE_PERSONAL: Personal credentials, passwords, social security numbers, personal banking data, health information. NOTE: security alerts about system logins or IP addresses are OPERATIONAL_INTEL, not PRIVATE_PERSONAL.
+
+Examples:
+- "API is down, investigating" → OPERATIONAL_INTEL
+- "Security alert: unusual login from 203.0.113.42" → OPERATIONAL_INTEL (system security event)
+- "Sprint velocity 94 points this week" → OPERATIONAL_INTEL
+- "Hey, want to grab coffee?" → SOCIAL_COORDINATION
+- "My SSN is 123-45-6789" → PRIVATE_PERSONAL
+
+Message: "${text.substring(0, 500)}"
+
+JSON: {"category":"OPERATIONAL_INTEL","confidence":0.9,"reasoning":"brief reason"}`;
 
   return { messages: [{ role: 'user', content: prompt }], prompt };
 }

@@ -156,3 +156,116 @@ async function _collectEntityGraph(workspaceId, intent) {
   }
   return results;
 }
+
+/**
+ * RC-1 — collect graph evidence for entities that have ALREADY been resolved to real
+ * node IDs by EntityResolver. Traverses by the actual node id (getNeighbors adds the
+ * workspace prefix), so "PR-247" → AUTHORED_BY → Jordan Lee is reached deterministically
+ * — instead of looking up a non-existent "workspace:Fatima" key. Returns high-authority
+ * evidence items plus a plain-language facts block for the synthesis prompt.
+ *
+ * @param {string} workspaceId
+ * @param {Array}  resolvedNodes  EntityResolver resolvedNodes (EXACT / EXACT_NAME)
+ * @returns {Promise<{ evidence: object[], factsBlock: string, relationships: object[] }>}
+ */
+// Cached roster of real workspace person names (lowercased) — used to prevent + detect
+// invented people in open-ended synthesis. 5-minute TTL; workspace-scoped.
+const _peopleCache = new Map(); // workspaceId → { at, names:Set, list:[] }
+export async function workspacePeople(workspaceId) {
+  const ws = String(workspaceId);
+  const hit = _peopleCache.get(ws);
+  if (hit && Date.now() - hit.at < 300000) return hit;
+  const rows = await prisma.graphNode.findMany({
+    where: { workspaceId: ws, type: { in: ['USER', 'EMPLOYEE'] } },
+    select: { name: true },
+  }).catch(() => []);
+  const list = [...new Set(rows.map(r => r.name).filter(Boolean))];
+  const entry = { at: Date.now(), names: new Set(list.map(n => n.toLowerCase())), list };
+  _peopleCache.set(ws, entry);
+  return entry;
+}
+
+export async function collectEntityGraphEvidence(workspaceId, resolvedNodes = [], relationIntent = null) {
+  const evidence = [];
+  const relationships = [];
+  const blockLines = [];
+  const patterns = relationIntent?.patterns || [];
+
+  for (const r of resolvedNodes.slice(0, 4)) {
+    const rawId = r.rawId || r.nodeId;
+    let neighbors = [];
+    try { neighbors = await getNeighbors(workspaceId, rawId); } catch { neighbors = []; }
+    for (const n of neighbors) {
+      relationships.push({ subject: r.name || rawId, subjectId: rawId, relation: n.relation, direction: n.direction, object: n.node?.name || n.node?.id || '?', objectType: n.node?.type || '' });
+    }
+
+    // ── WHO_CONNECTED: list only ACTUAL person neighbors of X (any edge/direction). If
+    // none, say so — never let the LLM invent execs as "connected". Verifier-gated.
+    if (relationIntent?.relIntent === 'WHO_CONNECTED') {
+      const people = neighbors.filter(n => /^(USER|EMPLOYEE)$/i.test(n.node?.type || '')).map(n => n.node?.name).filter(Boolean);
+      const uniq = [...new Set(people)];
+      if (uniq.length) {
+        blockLines.push(`- EXPLICIT: the people directly connected to ${r.name || rawId} in the workspace graph are: ${uniq.join(', ')}. Do NOT add anyone else.`);
+        evidence.push({ type: 'entity', content: `EXPLICIT — people connected to ${r.name || rawId}: ${uniq.join(', ')}`, score: 0.99, source: 'knowledge_graph', authority: 1.0, ts: null, metadata: { entity: r.name || rawId, relIntent: 'WHO_CONNECTED', evidenceState: 'EXPLICIT', people: uniq } });
+      } else {
+        blockLines.push(`- NO RECORDED RELATIONSHIP: no people are directly connected to ${r.name || rawId} in the workspace graph. Say that plainly — do NOT name any person.`);
+        evidence.push({ type: 'entity', content: `NO RECORD — no people connected to ${r.name || rawId}`, score: 0.98, source: 'knowledge_graph', authority: 1.0, ts: null, metadata: { entity: r.name || rawId, relIntent: 'WHO_CONNECTED', evidenceState: 'NO_RECORD' } });
+      }
+      continue;
+    }
+
+    // ── RC-2: DIRECTIONAL intent — answer with the SPECIFIC relationship + direction.
+    if (relationIntent?.relIntent && patterns.length) {
+      const matches = [];
+      for (const p of patterns) {
+        for (const n of neighbors) {
+          if (n.relation === p.rel && n.direction === p.dir) matches.push({ name: n.node?.name || n.node?.id, rel: n.relation });
+        }
+      }
+      const uniq = [...new Map(matches.map(m => [m.name, m])).values()];
+      const verb = _relVerb(relationIntent.relIntent);
+      if (uniq.length) {
+        const names = uniq.map(m => m.name).join(', ');
+        blockLines.push(`- EXPLICIT: ${verb.answer(r.name || rawId, names)} (from the workspace graph)`);
+        evidence.push({ type: 'entity', content: `EXPLICIT — ${verb.answer(r.name || rawId, names)}`, score: 0.99, source: 'knowledge_graph', authority: 1.0, ts: null, metadata: { entity: r.name || rawId, relIntent: relationIntent.relIntent, evidenceState: 'EXPLICIT' } });
+      } else {
+        // Resolved entity, but the SPECIFIC relationship is not recorded → honest no-record.
+        blockLines.push(`- NO RECORDED RELATIONSHIP: there is no ${verb.noun} recorded for ${r.name || rawId} in the workspace graph. Do NOT guess one.`);
+        evidence.push({ type: 'entity', content: `NO RECORD — no ${verb.noun} for ${r.name || rawId} in the graph`, score: 0.97, source: 'knowledge_graph', authority: 1.0, ts: null, metadata: { entity: r.name || rawId, relIntent: relationIntent.relIntent, evidenceState: 'NO_RECORD' } });
+      }
+      continue; // directional intent handled — don't also dump the generic neighbor list
+    }
+
+    // ── Non-directional: full neighbor context (RC-1 behavior). ──
+    if (!neighbors.length) {
+      blockLines.push(`- ${r.name || rawId} [${r.entityType}] exists (id ${rawId}) but has no recorded relationships in the graph.`);
+      continue;
+    }
+    const relStrs = neighbors.map(n => {
+      const other = n.node?.name || n.node?.id || '?';
+      const otherType = n.node?.type || '';
+      return n.direction === 'OUT'
+        ? `${n.relation} → ${other}${otherType ? ` [${otherType}]` : ''}`
+        : `${other}${otherType ? ` [${otherType}]` : ''} → ${n.relation}`;
+    });
+    blockLines.push(`- ${r.name || rawId} [${r.entityType}] (id ${rawId}) relationships: ${relStrs.join('; ')}`);
+    evidence.push({ type: 'entity', content: `${r.name || rawId} [${r.entityType}] — ${relStrs.join('; ')}`, score: 0.98, source: 'knowledge_graph', authority: 1.0, ts: null, metadata: { entity: r.name || rawId, nodeId: r.nodeId, resolution: r.resolution, neighbors: neighbors.length } });
+  }
+
+  const factsBlock = blockLines.length
+    ? `RESOLVED ENTITIES & RELATIONSHIPS (from the workspace graph — authoritative; EXPLICIT = recorded fact, NO RECORDED RELATIONSHIP = do not invent one):\n${blockLines.join('\n')}`
+    : '';
+  return { evidence, factsBlock, relationships };
+}
+
+// Natural verb/noun for each directional relationship intent.
+function _relVerb(relIntent) {
+  switch (relIntent) {
+    case 'WHO_IS_MANAGER':  return { noun: 'manager', answer: (t, m) => `${t} reports to ${m}` };
+    case 'WHO_REPORTS_TO':  return { noun: 'direct reports', answer: (t, m) => `${m} report(s) to ${t}` };
+    case 'WHO_AUTHORED':    return { noun: 'author', answer: (t, m) => `${t} was authored by ${m}` };
+    case 'WHO_IS_ASSIGNED': return { noun: 'assignee', answer: (t, m) => `${m} is assigned to ${t}` };
+    case 'WHO_IS_INVOLVED': return { noun: 'responsible owner', answer: (t, m) => `${t} is handled by ${m}` };
+    default:                return { noun: 'relationship', answer: (t, m) => `${t}: ${m}` };
+  }
+}

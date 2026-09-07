@@ -34,11 +34,11 @@ const BUSINESS_AREA_MAP = {
  * @param {import('./EvidenceRanker.js').RankedEvidence} ranked
  * @returns {Promise<BusinessImpact>}
  */
-export async function analyzeBusinessImpact(intent, reasoning, verification, ranked) {
+export async function analyzeBusinessImpact(intent, reasoning, verification, ranked, { fast = false } = {}) {
   const affectedAreas = BUSINESS_AREA_MAP[intent.domain] || ['operations'];
 
-  // Fast heuristic path for non-critical questions
-  if (intent.urgency === 'low' && verification.trustLevel !== 'high') {
+  // Fast path (chat) or low-urgency: heuristic impact only — no LLM round-trip.
+  if (fast || (intent.urgency === 'low' && verification.trustLevel !== 'high')) {
     return _heuristicImpact(intent, reasoning, affectedAreas, verification);
   }
 

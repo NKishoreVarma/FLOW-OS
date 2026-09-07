@@ -23,7 +23,10 @@ const EXECUTABLE_ACTION_TYPES = new Set([
  * @param {import('./EvidenceRanker.js').RankedEvidence} ranked
  * @returns {Promise<ActionPlan>}
  */
-export async function planActions(intent, reasoning, ranked) {
+export async function planActions(intent, reasoning, ranked, { fast = false } = {}) {
+  // Fast path (chat): heuristic actions only — no LLM round-trip.
+  if (fast) return _heuristicActionPlan(intent, reasoning);
+
   const prompt = `Based on this enterprise intelligence analysis, determine what actions should be taken.
 
 QUESTION: ${intent.question}

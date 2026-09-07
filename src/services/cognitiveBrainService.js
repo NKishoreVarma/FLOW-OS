@@ -52,12 +52,30 @@ export async function processIncomingIntel(workspaceId, channelName, rawInputTex
     // Check for social chatter patterns
     if (isSocialChatter(text)) return 'SOCIAL_COORDINATION';
 
-    // OPERATIONAL_INTEL signals: engineering, code, infrastructure updates
+    // OPERATIONAL_INTEL signals: engineering, security, project, product, and business operations
     const intelSignals = [
+      // Engineering / code
       'git', 'schema', 'database', 'function', 'code', 'migrate', 'migration',
       'deploy', 'backend', 'grpc', 'rest', 'api', 'endpoint', 'transport layer',
       'authentication', 'pgvector', 'index', 'configuration', 'update',
-      'critical update', 'infrastructure', 'commit', 'pull request'
+      'critical update', 'infrastructure', 'commit', 'pull request', 'pr #',
+      'release', 'build', 'pipeline', 'ci/cd', 'test failure', 'regression',
+      'bug', 'hotfix', 'patch', 'rollback', 'rollout', 'feature flag',
+      // Security / incidents
+      'security alert', 'security warning', 'detected', 'unusual', 'login attempt',
+      'unauthorized', 'breach', 'vulnerability', 'cve', 'exploit', 'malware',
+      'incident', 'outage', 'downtime', 'degraded', 'sla breach', 'p0', 'p1',
+      'critical alert', 'alert', 'pagerduty', 'on-call',
+      // Project / sprint / delivery
+      'sprint', 'velocity', 'story points', 'backlog', 'shipped', 'launched',
+      'blocked', 'blocker', 'deadline', 'milestone', 'roadmap', 'okr', 'kpi',
+      'review', 'retrospective', 'standup', 'status update', 'progress update',
+      'on track', 'at risk', 'delayed', 'completed', 'signed off',
+      // Business operations
+      'revenue', 'churn', 'renewal', 'customer', 'contract', 'deal', 'pipeline',
+      'quota', 'forecast', 'escalation', 'stakeholder', 'executive',
+      // People / workforce
+      'hired', 'joining', 'resignation', 'team expansion', 'headcount',
     ];
     if (intelSignals.some(kw => t.includes(kw))) return 'OPERATIONAL_INTEL';
 

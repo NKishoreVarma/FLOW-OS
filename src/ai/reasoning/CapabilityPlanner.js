@@ -10,6 +10,8 @@
  * Returns a CapabilityPlan: ordered list of required capabilities with params.
  */
 
+import { classifyIntent } from './IntentClassifier.js';
+
 export const Capability = Object.freeze({
   ENGINEERING:      'engineering',    // PRs, commits, deployments, repos, issues
   MEETINGS:         'meetings',       // Calendar events, meeting intel
@@ -48,99 +50,76 @@ export const CAPABILITY_MEMORY_TYPES = {
 };
 
 /**
+ * The immutable retrieval priority. Live connector data always wins; vector memory
+ * is the LAST evidence tier and can NEVER override a live connector (requirement 4).
+ * The dispatcher enforces this per-capability (live records supersede graph/memory);
+ * this constant travels with the plan so every downstream stage sees the same order.
+ */
+export const RETRIEVAL_PRIORITY = Object.freeze([
+  'live_connector',
+  'operational_db',
+  'knowledge_graph',
+  'vector_memory',
+  'llm',
+]);
+
+// Default per-capability record limits.
+const CAP_LIMIT = {
+  [Capability.ENGINEERING]:     20,
+  [Capability.MEETINGS]:        15,
+  [Capability.CUSTOMERS]:       15,
+  [Capability.INCIDENTS]:       20,
+  [Capability.KNOWLEDGE]:       10,
+  [Capability.COMMUNICATIONS]:  12,
+  [Capability.TIMELINE]:        20,
+  [Capability.MEMORY]:          10,
+  [Capability.RECOMMENDATIONS]: 10,
+  [Capability.HEALTH]:          1,
+  [Capability.PEOPLE]:          10,
+  [Capability.TRANSCRIPTS]:     5,
+};
+
+/**
  * Determines which capabilities are needed to answer a question.
+ *
+ * This is now a thin planner on top of the deterministic IntentClassifier. It does
+ * NOT decide relevance itself (that was the source of contamination — it used to
+ * OR-match loose keywords and always bolt on MEMORY + HEALTH). It takes the
+ * classifier's minimal capability set and turns it into an execution plan:
+ * allowed/forbidden connectors, retrieval priority, and an evidence budget.
  *
  * @param {string} question
  * @param {import('./IntentAnalyzer.js').IntentResult} intent
  * @returns {CapabilityPlan}
  */
 export function planCapabilities(question, intent) {
-  const q            = question.toLowerCase();
-  const capabilities = [];
+  const cls = classifyIntent(question, intent);
 
-  // Engineering signals
-  if (_matches(q, ['pr', 'pull request', 'merge', 'commit', 'deploy', 'deployment', 'branch', 'repo', 'code', 'build', 'pipeline', 'ci', 'review', 'diff', 'issue', 'jira', 'ticket', 'bug', 'feature', 'sprint', 'release', 'engineer'])) {
-    capabilities.push({ capability: Capability.ENGINEERING, priority: 1, limit: 20 });
-  }
+  const capabilities = cls.capabilities.map((capability, i) => ({
+    capability,
+    priority: i + 1,
+    limit: CAP_LIMIT[capability] ?? 10,
+  }));
 
-  // Meeting signals
-  if (_matches(q, ['meeting', 'standup', 'sync', 'call', 'calendar', 'agenda', 'schedule', 'upcoming', 'yesterday', 'today', 'tomorrow', 'this week', 'invite', 'attendee', 'conference', 'zoom', 'meet'])) {
-    capabilities.push({ capability: Capability.MEETINGS, priority: 1, limit: 15 });
-  }
-
-  // Customer / CRM signals
-  if (_matches(q, ['customer', 'client', 'account', 'deal', 'churn', 'arr', 'mrr', 'revenue', 'sales', 'pipeline', 'prospect', 'renewal', 'contract', 'nps', 'satisfaction', 'at risk', 'upsell'])) {
-    capabilities.push({ capability: Capability.CUSTOMERS, priority: 1, limit: 15 });
-  }
-
-  // Incident signals
-  if (_matches(q, ['incident', 'outage', 'down', 'sev', 'p0', 'p1', 'critical', 'alert', 'page', 'production', 'issue', 'broke', 'failed', 'error', 'breach', 'attack', 'vulnerability'])) {
-    capabilities.push({ capability: Capability.INCIDENTS, priority: 1, limit: 20 });
-  }
-
-  // Knowledge / document signals
-  if (_matches(q, ['document', 'doc', 'wiki', 'policy', 'procedure', 'guide', 'knowledge', 'confluence', 'notion', 'page', 'write', 'written', 'updated', 'changed', 'modified'])) {
-    capabilities.push({ capability: Capability.KNOWLEDGE, priority: 2, limit: 10 });
-  }
-
-  // Communication signals
-  if (_matches(q, ['email', 'message', 'thread', 'inbox', 'slack', 'sent', 'received', 'replied', 'forwarded', 'communication', 'mail'])) {
-    capabilities.push({ capability: Capability.COMMUNICATIONS, priority: 2, limit: 10 });
-  }
-
-  // Timeline / activity signals
-  if (_matches(q, ['what changed', 'what happened', 'recent', 'activity', 'timeline', 'today', 'yesterday', 'this week', 'lately', 'update', 'log', 'history'])) {
-    capabilities.push({ capability: Capability.TIMELINE, priority: 2, limit: 20 });
-  }
-
-  // Recommendation signals
-  if (_matches(q, ['recommend', 'suggest', 'what should', 'priorit', 'focus', 'work on', 'action', 'next step', 'improve', 'opportunity'])) {
-    capabilities.push({ capability: Capability.RECOMMENDATIONS, priority: 1, limit: 10 });
-  }
-
-  // People / team signals
-  if (_matches(q, ['who', 'team', 'employee', 'hire', 'headcount', 'people', 'org chart', 'manager', 'report', 'onboard', 'offboard', 'pto', 'capacity', 'workload'])) {
-    capabilities.push({ capability: Capability.PEOPLE, priority: 2, limit: 10 });
-  }
-
-  // Transcript signals
-  if (_matches(q, ['transcript', 'said', 'discussed', 'talked about', 'agreed', 'action item', 'follow up', 'notes from'])) {
-    capabilities.push({ capability: Capability.TRANSCRIPTS, priority: 2, limit: 5 });
-  }
-
-  // Health is always useful for status/diagnostic questions
-  if (_matches(q, ['health', 'status', 'score', 'overall', 'how are we', 'how is', 'performing', 'performance'])) {
-    capabilities.push({ capability: Capability.HEALTH, priority: 3, limit: 1 });
-  }
-
-  // Memory/decisions always enriches reasoning
-  capabilities.push({ capability: Capability.MEMORY, priority: 3, limit: 10 });
-
-  // If domain is known, add domain-specific capability if not already included
-  const domainCap = _domainToCapability(intent.domain);
-  if (domainCap && !capabilities.find(c => c.capability === domainCap)) {
-    capabilities.push({ capability: domainCap, priority: 2, limit: 15 });
-  }
-
-  // Always include health for broad questions
-  if (!capabilities.find(c => c.capability === Capability.HEALTH)) {
-    capabilities.push({ capability: Capability.HEALTH, priority: 4, limit: 1 });
-  }
-
-  // Deduplicate and sort by priority
-  const seen   = new Set();
-  const unique = capabilities.filter(c => {
-    if (seen.has(c.capability)) return false;
-    seen.add(c.capability);
-    return true;
-  });
-  unique.sort((a, b) => a.priority - b.priority);
+  // Evidence budget: focused questions read a tight window; broad/multi read wider.
+  const evidenceBudget = cls.focused ? 12 : cls.broad ? 40 : 24;
 
   return {
-    capabilities: unique,
-    capabilityNames: unique.map(c => c.capability),
-    primaryCapability: unique[0]?.capability || Capability.MEMORY,
-    requiresLiveConnector: unique.some(c => [Capability.ENGINEERING, Capability.MEETINGS, Capability.COMMUNICATIONS].includes(c.capability)),
+    capabilities,
+    capabilityNames: capabilities.map(c => c.capability),
+    primaryCapability: cls.primary,
+    focused: cls.focused,
+    broad: cls.broad,
+    allowedConnectors: cls.allowedConnectors,
+    forbiddenConnectors: cls.forbiddenConnectors,
+    retrievalPriority: RETRIEVAL_PRIORITY,
+    evidenceBudget,
+    // A focused, self-contained capability (recommendations/health/memory) needs no
+    // vector fallback — its data IS the answer. Live-backed capabilities may still
+    // use the graph/vector tiers as a fallback when the connector is unauthenticated.
+    allowVectorFallback: !cls.focused || cls.allowedConnectors.length > 0,
+    requiresLiveConnector: cls.allowedConnectors.length > 0,
+    classification: cls,
   };
 }
 
@@ -160,24 +139,13 @@ export function buildPlanForAll() {
     capabilities:          all,
     capabilityNames:       all.map(c => c.capability),
     primaryCapability:     Capability.MEMORY,
+    focused:               false,
+    broad:                 true,
+    allowedConnectors:     [],           // briefings read every source; nothing is forbidden
+    forbiddenConnectors:   [],
+    retrievalPriority:     RETRIEVAL_PRIORITY,
+    evidenceBudget:        60,
+    allowVectorFallback:   true,
     requiresLiveConnector: true,
   };
-}
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-function _matches(q, terms) {
-  return terms.some(t => q.includes(t));
-}
-
-function _domainToCapability(domain) {
-  const map = {
-    engineering: Capability.ENGINEERING,
-    customers:   Capability.CUSTOMERS,
-    incidents:   Capability.INCIDENTS,
-    meetings:    Capability.MEETINGS,
-    knowledge:   Capability.KNOWLEDGE,
-    people:      Capability.PEOPLE,
-  };
-  return map[domain] || null;
 }

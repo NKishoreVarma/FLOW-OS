@@ -69,8 +69,8 @@ export function buildContext(capabilityResults, intent) {
  */
 export function formatContextForPrompt(builtContext, intent) {
   const lines = [
-    `=== FLOW WORKSPACE DATA ===`,
-    `FLOW queried ${Object.keys(builtContext.counts).length} capability systems and found ${builtContext.totalRecords} records.`,
+    `=== YOUR WORKSPACE ===`,
+    `Here is what's currently happening across the connected tools and records.`,
     '',
   ];
 
@@ -81,14 +81,16 @@ export function formatContextForPrompt(builtContext, intent) {
   // Explicit empty-state statements — the LLM must use these instead of hedging
   if (builtContext.emptySections.length > 0) {
     lines.push('');
-    lines.push('=== EMPTY STATES (state as facts, do not hedge) ===');
+    lines.push('=== NOTHING FOUND (state as facts, do not hedge) ===');
     builtContext.emptySections.forEach(s => lines.push(`• ${s}`));
   }
 
   lines.push('');
-  lines.push('=== END FLOW DATA ===');
+  lines.push('=== END ===');
 
-  return lines.join('\n');
+  // Final safety net: strip internal system vocabulary so even a small local
+  // model cannot echo implementation jargon back to the user (RULE 1 / RULE 2).
+  return _sanitizeForLLM(lines.join('\n'));
 }
 
 // ── Section builders ──────────────────────────────────────────────────────────
@@ -147,20 +149,66 @@ function _buildCapabilitySection(capName, result, intent) {
   return lines.filter(Boolean).join('\n');
 }
 
+function _liveTag(r) { return r.liveSource ? ` [live from ${r.liveSource}]` : ''; }
+
+// Surface the real author + time so the model cites who did what — never a
+// placeholder. For commits/PRs the author lives in the record summary ("repo · author")
+// or metadata.author; the timestamp lives in ts.
+function _authorTime(r) {
+  let author = r.actor || r.author || r.metadata?.author
+    || (typeof r.summary === 'string' && r.summary.includes(' · ') ? r.summary.split(' · ').pop().trim() : null);
+  if (author && /^(unknown|null|undefined|author not shown)$/i.test(author)) author = null;
+  const when = r.ts ? _relTime(r.ts) : null;
+  // Include the repo so the model cites the right one — but only if the record's
+  // name doesn't already contain it (PR names embed "repo#number").
+  const repo = r.metadata?.repo
+    || (typeof r.summary === 'string' && r.summary.includes(' · ') ? r.summary.split(' · ')[0].trim() : null);
+  const showRepo = repo && !String(r.name || '').includes(repo);
+  const bits = [showRepo ? repo : null, author, when].filter(Boolean);
+  return bits.length ? ` — ${bits.join(', ')}` : '';
+}
+
+function _shortSha(r) {
+  const sha = r.sha || r.metadata?.sha || (typeof r.id === 'string' && /^[0-9a-f]{7,40}$/i.test(r.id) ? r.id : null);
+  return sha ? ` (${String(sha).slice(0, 7)})` : '';
+}
+
+function _relTime(ts) {
+  const ms = Date.now() - new Date(ts).getTime();
+  if (Number.isNaN(ms)) return null;
+  const h = Math.floor(ms / 3600000);
+  if (h < 1) return 'just now';
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
+}
+
 function _formatEngineeringRecords(records, result) {
   const byType = {};
-  records.forEach(r => { byType[r.type] = (byType[r.type] || []); byType[r.type].push(r); });
+  records.forEach(r => { byType[r.type] = byType[r.type] || []; byType[r.type].push(r); });
   const parts = [];
-  if (byType.PR?.length)     parts.push(`Pull Requests (${byType.PR.length}):\n` + byType.PR.slice(0, 5).map(r => `  • ${r.name}${r.status ? ` [${r.status}]` : ''}`).join('\n'));
-  if (byType.COMMIT?.length) parts.push(`Recent Commits (${byType.COMMIT.length}):\n` + byType.COMMIT.slice(0, 5).map(r => `  • ${r.name}`).join('\n'));
-  if (byType.ISSUE?.length)  parts.push(`Issues/Tickets (${byType.ISSUE.length}):\n` + byType.ISSUE.slice(0, 5).map(r => `  • ${r.name}${r.status ? ` [${r.status}]` : ''}`).join('\n'));
+  if (byType.REPOSITORY?.length) parts.push(
+    `Repositories (${byType.REPOSITORY.length}):\n` +
+    byType.REPOSITORY.slice(0, 10).map(r => `  • ${r.name}${r.status ? ` [${r.status}]` : ''}${r.summary ? ': ' + r.summary.slice(0, 100) : ''}${_liveTag(r)}`).join('\n')
+  );
+  if (byType.PR?.length)     parts.push(
+    `Pull Requests (${byType.PR.length}):\n` +
+    byType.PR.slice(0, 8).map(r => `  • ${r.name}${r.status ? ` [${r.status}]` : ''}${_authorTime(r)}${_liveTag(r)}`).join('\n')
+  );
+  if (byType.COMMIT?.length) parts.push(
+    `Recent Commits (${byType.COMMIT.length}, most recent first):\n` +
+    byType.COMMIT.slice(0, 5).map(r => `  • ${r.name}${_shortSha(r)}${_authorTime(r)}${_liveTag(r)}`).join('\n')
+  );
+  if (byType.ISSUE?.length)  parts.push(
+    `Issues/Tickets (${byType.ISSUE.length}):\n` +
+    byType.ISSUE.slice(0, 5).map(r => `  • ${r.name}${r.status ? ` [${r.status}]` : ''}${_liveTag(r)}`).join('\n')
+  );
   return parts.join('\n');
 }
 
 function _formatMeetingRecords(records, result) {
   return records.slice(0, 8).map(r => {
     const when = r.ts ? new Date(r.ts).toLocaleDateString() : 'date unknown';
-    return `  • ${r.name} (${when})${r.status ? ` — ${r.status}` : ''}`;
+    return `  • ${r.name} (${when})${r.status ? ` — ${r.status}` : ''}${_liveTag(r)}`;
   }).join('\n');
 }
 
@@ -183,14 +231,38 @@ function _formatIncidentRecords(records, result) {
 }
 
 function _formatKnowledgeRecords(records) {
-  return records.slice(0, 6).map(r => `  • ${r.name}${r.summary ? ': ' + r.summary.slice(0, 100) : ''}`).join('\n');
+  const byType = {};
+  records.forEach(r => { byType[r.type] = byType[r.type] || []; byType[r.type].push(r); });
+  const parts = [];
+  if (byType.ISSUE || byType.SPRINT) {
+    const jiraRecords = [...(byType.SPRINT || []), ...(byType.ISSUE || [])];
+    parts.push(
+      `Jira Issues/Sprints (${jiraRecords.length} live):\n` +
+      jiraRecords.slice(0, 8).map(r => `  • ${r.name}${r.status ? ` [${r.status}]` : ''}${r.summary ? ': ' + r.summary.slice(0, 100) : ''}${_liveTag(r)}`).join('\n')
+    );
+  }
+  const docs = records.filter(r => !r.liveSource);
+  if (docs.length) {
+    parts.push(docs.slice(0, 6).map(r => `  • ${r.name}${r.summary ? ': ' + r.summary.slice(0, 100) : ''}`).join('\n'));
+  }
+  return parts.join('\n') || records.slice(0, 6).map(r => `  • ${r.name}${r.summary ? ': ' + r.summary.slice(0, 100) : ''}${_liveTag(r)}`).join('\n');
 }
 
 function _formatCommunicationRecords(records) {
-  return records.slice(0, 6).map(r => {
-    const when = r.ts ? new Date(r.ts).toLocaleDateString() : '';
-    return `  • ${r.name}${when ? ` (${when})` : ''}`;
-  }).join('\n');
+  const bySource = {};
+  records.forEach(r => { const s = r.liveSource || 'memory'; bySource[s] = bySource[s] || []; bySource[s].push(r); });
+  const parts = [];
+  for (const [src, recs] of Object.entries(bySource)) {
+    const label = src === 'gmail' ? 'Gmail' : src === 'slack' ? 'Slack' : src === 'memory' ? 'Knowledge Graph' : src;
+    parts.push(
+      `${label} (${recs.length}):\n` +
+      recs.slice(0, 5).map(r => {
+        const when = r.ts ? new Date(r.ts).toLocaleDateString() : '';
+        return `  • ${r.name}${when ? ` (${when})` : ''}${r.status ? ` [${r.status}]` : ''}`;
+      }).join('\n')
+    );
+  }
+  return parts.join('\n') || records.slice(0, 6).map(r => `  • ${r.name}`).join('\n');
 }
 
 function _formatTimelineRecords(records) {
@@ -255,18 +327,46 @@ function _emptyStateStatement(cap, intent) {
   return stmts[cap] || `No data found for capability: ${cap}.`;
 }
 
+// Neutralize internal system vocabulary before any of it reaches the LLM. This is
+// the last line of defense: record names and labels sometimes carry engine terms
+// (e.g. a prediction literally named "…top: BUS_FACTOR"), and a small local model
+// will happily parrot them. Map each to plain, user-facing language.
+const _JARGON_MAP = [
+  [/\bbus[_\s-]?factor\b/gi,          'key-person dependency'],
+  [/\borg memory\b/gi,               'company records'],
+  [/\bworkspace health\b/gi,         'overall status'],
+  [/\bhealth score\b/gi,             'overall status'],
+  [/\bvector search\b/gi,            'search'],
+  [/\bknowledge graph\b/gi,          'related context'],
+  [/\bcapability (?:system|router)s?\b/gi, 'systems'],
+  [/\bpredictions?\s*:/gi,           'Outlook:'],
+  [/\bcomposite[_\s-]?score\b/gi,    'priority'],
+  [/\bfound \d+ record\(s\)/gi,      'here is what stands out'],
+  // Raw null/empty score artifacts must never reach the user as "null/100".
+  [/\b(?:null|undefined|nan)\s*\/\s*100\b/gi, 'not yet measured'],
+  [/\bscore is (?:null|undefined|nan)\b/gi,   'is not yet measured'],
+];
+
+export function sanitizeForLLM(text) {
+  let out = String(text || '');
+  for (const [re, repl] of _JARGON_MAP) out = out.replace(re, repl);
+  return out;
+}
+const _sanitizeForLLM = sanitizeForLLM;
+
 function _capabilityHeader(capName, result) {
+  const liveNote = result.liveCount > 0 ? `, ${result.liveCount} live from connector` : '';
   const labels = {
-    [Capability.ENGINEERING]:    `Engineering (${result.count} records — PRs, commits, issues)`,
-    [Capability.MEETINGS]:       `Meetings & Calendar (${result.count} events)`,
+    [Capability.ENGINEERING]:    `Engineering (${result.count} records${liveNote})`,
+    [Capability.MEETINGS]:       `Meetings & Calendar (${result.count} events${liveNote})`,
     [Capability.CUSTOMERS]:      `Customer Intelligence (${result.count} records)`,
     [Capability.INCIDENTS]:      `Incidents (${result.count} total${result.activeCount != null ? `, ${result.activeCount} active` : ''})`,
     [Capability.KNOWLEDGE]:      `Knowledge Base (${result.count} documents)`,
-    [Capability.COMMUNICATIONS]: `Communications (${result.count} messages)`,
+    [Capability.COMMUNICATIONS]: `Communications (${result.count} messages${liveNote})`,
     [Capability.TIMELINE]:       `Recent Activity (${result.count} events)`,
-    [Capability.MEMORY]:         `Org Memory (${result.count} records)`,
-    [Capability.RECOMMENDATIONS]:`Recommendations (${result.count} items)`,
-    [Capability.HEALTH]:         `Workspace Health`,
+    [Capability.MEMORY]:         `Company Records (${result.count})`,
+    [Capability.RECOMMENDATIONS]:`Suggested Focus (${result.count})`,
+    [Capability.HEALTH]:         `Overall Status`,
     [Capability.PEOPLE]:         `People & Teams (${result.count} members)`,
     [Capability.TRANSCRIPTS]:    `Meeting Transcripts (${result.count} records)`,
   };

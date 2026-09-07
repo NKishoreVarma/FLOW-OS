@@ -37,8 +37,27 @@ export const ProviderHint = Object.freeze({
 });
 
 export const ProviderName = Object.freeze({
-  OLLAMA: 'ollama',
-  GEMINI: 'gemini',
+  OLLAMA:    'ollama',
+  GEMINI:    'gemini',
+  OPENAI:    'openai',
+  ANTHROPIC: 'anthropic',
+});
+
+// How the orchestrator chooses among providers
+export const RoutingStrategy = Object.freeze({
+  QUALITY:   'quality',    // highest capability for the task tier
+  SPEED:     'speed',      // lowest measured latency
+  COST:      'cost',       // cheapest per token
+  BALANCED:  'balanced',   // quality/cost tradeoff (default)
+  WORKSPACE: 'workspace',  // workspace-configured preference
+  EVALUATE:  'evaluate',   // run all available providers, compare
+});
+
+// Task complexity tier — determines which model class to use
+export const TaskTier = Object.freeze({
+  LIGHT:    'light',     // classify, tag, route, short summary
+  STANDARD: 'standard',  // analysis, QA, extraction, search
+  HEAVY:    'heavy',     // executive reasoning, long synthesis, planning
 });
 
 /**

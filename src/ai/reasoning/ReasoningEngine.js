@@ -19,7 +19,11 @@ import { formatEvidenceForPrompt } from './EvidenceRanker.js';
  * @param {string} [capabilityContext] - Pre-built context block from ContextBuilder
  * @returns {Promise<ReasoningResult>}
  */
-export async function reason(intent, ranked, capabilityContext = '') {
+export async function reason(intent, ranked, capabilityContext = '', { fast = false } = {}) {
+  // Fast path (chat): skip the intermediate reasoning LLM call. The final
+  // synthesis call reasons over the same evidence directly — one round-trip, not two.
+  if (fast) return _heuristicReason(intent, ranked);
+
   const evidenceText = formatEvidenceForPrompt(ranked);
   const hasEvidence  = ranked.total > 0 || capabilityContext.length > 100;
 

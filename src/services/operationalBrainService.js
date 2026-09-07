@@ -1,8 +1,9 @@
 /**
- * FLOW OS — Autonomous Operational Brain Service (Milestone 2)
+ * FLOW OS — Autonomous Operational Brain Service
  *
- * Continuous operational reasoning, role-aware briefing, explainable recommendation,
- * and context-aware copilot synthesizing signals across all enterprise channels.
+ * Provides role-aware briefings, copilot Q&A, and explainable recommendations.
+ * All context is derived from real workspace data (incidents, decisions, vector
+ * store, knowledge graph). No hardcoded company names, people, or incidents.
  */
 
 import { ask } from '../ai/BrainRouter.js';
@@ -10,196 +11,289 @@ import { TaskType } from '../ai/types.js';
 import { retrieveContext } from './retrievalService.js';
 import { getGraphMetrics, getRelatedContext } from './knowledgeGraphService.js';
 import { getRecentDecisions } from './decisionMemoryService.js';
+import { getRecentIncidents } from './incidentEngine.js';
 import { calculateWorkspaceHealth } from './healthScoreService.js';
+import { getConnector } from '../connectors/registry.js';
+import { ActionType } from '../connectors/capabilities.js';
 
 /**
- * 1. Role-aware Briefing Engine
- * Generates personalized briefings for Employee, Manager, and Executive roles
- * from the live operational graph and workspace systems.
+ * 1. Role-aware Briefing
+ *
+ * Builds context exclusively from real workspace data: health scores, incidents,
+ * decisions, and live connector signals. Sends this real context to the LLM.
  */
 export async function generateRoleBriefing(workspaceId, role) {
-  const wsId = String(workspaceId);
+  const wsId           = String(workspaceId);
   const normalizedRole = String(role).toLowerCase();
 
-  // Basic operational data queries
-  const health = await calculateWorkspaceHealth(wsId);
+  const health    = await calculateWorkspaceHealth(wsId);
   const decisions = getRecentDecisions(wsId, 48);
+  const incidents = getRecentIncidents(wsId, 24);
 
-  let rawContext = '';
-  let responseText = '';
+  // Build live connector signals
+  const connectorSignals = [];
 
-  // Construct context payload based on role
-  if (normalizedRole === 'employee') {
-    rawContext = `
-Role: Employee / Engineer
-Workspace Health: ${health.company_health}%
-Engineering Health: ${health.sectors.engineering}%
-Decisions in memory: ${JSON.stringify(decisions)}
-Current Priorities:
-- Triage critical Sev-1 incident INC-A3F2 (PostgreSQL pool exhaustion, p95 2400ms latency)
-- Review PR #824 "Add pgvector connection retry logic" submitted by David O.
-- Address Jira ticket FLOW-247 "Deploy monitoring alert thresholds" assigned to you
-Meetings today:
-- Postmortem Review: DB Connection Saturation (2:00 PM – 3:00 PM)
-- Initech SSO Walkthrough & spec sync
-    `;
-  } else if (normalizedRole === 'manager') {
-    rawContext = `
-Role: Engineering Manager
-Workspace Health: ${health.company_health}%
-Delivery Health: ${health.sectors.delivery}%
-Workforce Health: ${health.sectors.workforce}%
-Current Team Blockers:
-- Frontend team is blocked waiting on 4 separate API endpoints from the Backend team.
-- 3 Jira tickets are blocked on infrastructure credentials in Sprint 14.
-Current Resource Issues:
-- PM Sarah Chen is overloaded (burnout risk score: 95%). Meeting workload is 24 hrs this week.
-Approvals Gated:
-- AWS RDS instance upgrade request ($2,400/mo) submitted by Alex R.
-    `;
-  } else {
-    // Executive
-    rawContext = `
-Role: Executive / Director
-Workspace Health: ${health.company_health}%
-Revenue Health: ${health.sectors.revenue}%
-Customer Health: ${health.sectors.customer}%
-Current Customer Risks:
-- TechCorp / Acme Corp SLA latency breaches (SLA limit 500ms vs actual 2400ms)
-Current Delivery Risks:
-- Frontend Rewrite project timeline delay (currently slipped by 4 days)
-Strategic Opportunities:
-- Globex Corp expansion terms signed ($140k ARR). Gated on Stripe checkout webhook setup.
-    `;
-  }
-
-  // Generate structured brief via AI Provider Layer
   try {
-    const prompt = `You are the Autonomous Operational Brain of FLOW OS, acting as an elite Chief Operating Officer.\nGenerate a highly personalized, structured Markdown Daily Briefing for a user with the role: ${role}.\n\nUse the following raw operational telemetry context:\n${rawContext}\n\nStructure the briefing with the following sections exactly:\n### 1. Today's Strategic Focus\n### 2. Live Risks & Blockers\n### 3. Key Opportunities & Decisions\n### 4. Recommended Actions\n\nMaintain a professional, objective, high-agency persona.`;
+    const github = getConnector('github');
+    if (github) {
+      const repos = await github.execute(wsId, ActionType.READ, { resourceType: 'repos', limit: 3 });
+      if (repos?.length) connectorSignals.push(`GitHub: ${repos.length} repositories connected. Most recent: ${repos[0]?.name || repos[0]?.fullName || 'unknown'}.`);
+    }
+  } catch { /* non-fatal */ }
+
+  try {
+    const gmail = getConnector('gmail');
+    if (gmail) {
+      const msgs = await gmail.execute(wsId, ActionType.READ, { folder: 'INBOX', limit: 5, q: 'is:unread' });
+      const count = Array.isArray(msgs) ? msgs.length : 0;
+      if (count > 0) connectorSignals.push(`Gmail: ${count} unread messages in inbox.`);
+    }
+  } catch { /* non-fatal */ }
+
+  try {
+    const cal = getConnector('google-calendar');
+    if (cal) {
+      const events = await cal.execute(wsId, ActionType.READ, { days: 1, limit: 5 });
+      const count  = Array.isArray(events) ? events.length : 0;
+      if (count > 0) connectorSignals.push(`Calendar: ${count} event(s) today.`);
+    }
+  } catch { /* non-fatal */ }
+
+  const incidentSummary = incidents.length
+    ? incidents.slice(0, 3).map(i => `- [${i.severity || 'UNKNOWN'}] ${i.title || i.type}`).join('\n')
+    : 'No active incidents.';
+
+  const decisionSummary = decisions.length
+    ? decisions.slice(0, 3).map(d => `- ${d.decision || d.text || ''}`).join('\n')
+    : 'No recent decisions recorded.';
+
+  const healthSummary = health.hasData
+    ? `Overall: ${health.company_health}% | Engineering: ${health.sectors.engineering ?? 'n/a'}% | Operations: ${health.sectors.operations ?? 'n/a'}%`
+    : 'No workspace data yet — connect integrations to generate health signals.';
+
+  const rawContext = `
+Role: ${role}
+Workspace Health: ${healthSummary}
+
+Active Incidents:
+${incidentSummary}
+
+Recent Decisions:
+${decisionSummary}
+
+Live Connector Signals:
+${connectorSignals.length ? connectorSignals.join('\n') : 'No connectors active.'}
+`.trim();
+
+  let responseText = '';
+  try {
+    const prompt = `You are the Autonomous Operational Brain of FLOW OS, acting as an elite Chief Operating Officer.
+Generate a personalized, structured Markdown Daily Briefing for a user with the role: ${role}.
+
+Use ONLY the following real workspace data. Do NOT invent company names, people, incidents, or tickets.
+If data is missing, say so honestly.
+
+${rawContext}
+
+Structure:
+### 1. Today's Strategic Focus
+### 2. Live Risks & Blockers
+### 3. Key Opportunities & Decisions
+### 4. Recommended Actions`;
+
     const result = await ask({
-      taskType: TaskType.BRIEF,
-      messages: [{ role: 'user', content: prompt }],
-      maxTokens: 800,
+      taskType:    TaskType.BRIEF,
+      messages:    [{ role: 'user', content: prompt }],
+      maxTokens:   800,
       temperature: 0.4,
     });
     responseText = (result.text || '').trim();
   } catch (err) {
-    console.warn(`[OperationalBrain] AI Briefing failed: ${err.message}. Using fallback.`);
+    console.warn('[OperationalBrain] AI Briefing failed:', err.message);
   }
 
   if (!responseText) {
-    responseText = generateFallbackBrief(normalizedRole, health, decisions);
+    responseText = _buildEmptyBrief(normalizedRole, health, incidents, decisions);
   }
 
-  return {
-    role,
-    brief: responseText,
-    timestamp: new Date().toISOString()
-  };
+  return { role, brief: responseText, timestamp: new Date().toISOString() };
 }
 
-/**
- * Fallback builder for role briefings
- */
-function generateFallbackBrief(role, health, decisions) {
+function _buildEmptyBrief(role, health, incidents, decisions) {
   const lines = [`# FLOW OS Daily Briefing — ${role.toUpperCase()}`];
-  lines.push(`*Workspace Health Score:* **${health.company_health}%**`);
-  lines.push('');
-
-  if (role === 'employee') {
-    lines.push('### 1. Today\'s Strategic Focus');
-    lines.push('- **Acknowledge INC-A3F2**: Postgres latency spike (2400ms) requires immediate connection pool diagnostics.');
-    lines.push('- **Review PR #824**: Add retry config logic to pgvector database module.');
-    lines.push('');
-    lines.push('### 2. Live Risks & Blockers');
-    lines.push('- **FLOW-247**: Gated release release thresholds blocking deployment target.');
-    lines.push('');
-    lines.push('### 3. Key Opportunities & Decisions');
-    lines.push(`- **Decision Sync**: Active memory records ${decisions.length} recent system configuration freezes.`);
-    lines.push('');
-    lines.push('### 4. Recommended Actions');
-    lines.push('- **Action:** Start review on PR #824 (Owner: Kishore Varma)');
-    lines.push('- **Action:** Configure FLOW-247 alert limits (Owner: Assigned Developer)');
-  } else if (role === 'manager') {
-    lines.push('### 1. Today\'s Strategic Focus');
-    lines.push('- **Sprint 14 health check**: Tracking delivery blockers and team capacity.');
-    lines.push('- **RDS budget review**: Gated infrastructure changes require manager authorization.');
-    lines.push('');
-    lines.push('### 2. Live Risks & Blockers');
-    lines.push('- **Burnout Warning**: PM Sarah Chen is overallocated with high meeting load (24h/wk).');
-    lines.push('- **API Dependency Block**: Frontend Rewrite team waiting on backend endpoints.');
-    lines.push('');
-    lines.push('### 3. Key Opportunities & Decisions');
-    lines.push('- **Stripe Onboarding**: Offload onboarding setup from Sarah Chen to James K. to relieve meeting overload.');
-    lines.push('');
-    lines.push('### 4. Recommended Actions');
-    lines.push('- **Action:** Reallocate Stripe Onboarding task from Sarah Chen (Owner: James K.)');
-    lines.push('- **Action:** Approve RDS instance upgrade request (Owner: Alex R.)');
-  } else {
-    // Executive
-    lines.push('### 1. Today\'s Strategic Focus');
-    lines.push('- **Customer SLA Latency Remediation**: Acknowledge TechCorp and Acme Corp outage escalations.');
-    lines.push('- **Globex Expansion Closeout**: Confirm Stripe webhook billing validation.');
-    lines.push('');
-    lines.push('### 2. Live Risks & Blockers');
-    lines.push('- **Timeline slippage**: Frontend Rewrite project timeline slipped 4 days due to uncoordinated API dependencies.');
-    lines.push('');
-    lines.push('### 3. Key Opportunities & Decisions');
-    lines.push('- **Globex ARR expansion**: Signed terms for expansion ($140k ARR) ready for activation.');
-    lines.push('');
-    lines.push('### 4. Recommended Actions');
-    lines.push('- **Action:** Authorize emergency Postgres pool fix release (Owner: Kishore Varma)');
-    lines.push('- **Action:** Approve RDS upgrade budget (Owner: Executive Sponsor)');
+  if (!health.hasData) {
+    lines.push('\n> No workspace data yet. Connect your integrations and run a sync to generate your first briefing.');
+    return lines.join('\n');
   }
+
+  lines.push(`\n*Workspace Health:* **${health.company_health}%**\n`);
+  lines.push('### 1. Today\'s Strategic Focus');
+  if (incidents.length) {
+    lines.push(`- **${incidents.length} active incident(s)** requiring attention.`);
+  } else {
+    lines.push('- No active incidents. Focus on planned work.');
+  }
+
+  lines.push('\n### 2. Live Risks & Blockers');
+  const critical = incidents.filter(i => i.severity === 'CRITICAL' || i.severity === 'HIGH');
+  if (critical.length) {
+    critical.slice(0, 3).forEach(i => lines.push(`- [${i.severity}] ${i.title || i.type}`));
+  } else {
+    lines.push('- No critical blockers detected.');
+  }
+
+  lines.push('\n### 3. Key Opportunities & Decisions');
+  if (decisions.length) {
+    decisions.slice(0, 2).forEach(d => lines.push(`- ${d.decision || d.text || ''}`));
+  } else {
+    lines.push('- No recent decisions in memory.');
+  }
+
+  lines.push('\n### 4. Recommended Actions');
+  lines.push('- Review active incidents and prioritize resolution.');
+  lines.push('- Check connected integrations for new signals.');
 
   return lines.join('\n');
 }
 
 /**
- * 2. Context-aware Copilot Service
- * Answers questions using Organizational Memory, Graph context, RAG pipeline, and Decisions
+ * 2. Context-aware Copilot
+ *
+ * Routes questions to live connectors when intent is clear (GitHub repos, Gmail,
+ * Calendar), then enriches with RAG and Knowledge Graph context before calling LLM.
  */
 export async function askCopilot(workspaceId, queryText) {
-  const wsId = String(workspaceId);
+  const wsId      = String(workspaceId);
+  const queryLow  = queryText.toLowerCase();
 
-  // Retrieve RAG chunks
+  // ── Live connector routing ────────────────────────────────────────────────
+  // For questions clearly targeting a specific integration, fetch live data first.
+  const liveContext = [];
+
+  const isGitHubQuery = queryLow.includes('repo') || queryLow.includes('repository') ||
+    queryLow.includes('pr ') || queryLow.includes('pull request') ||
+    queryLow.includes('commit') || queryLow.includes('branch') || queryLow.includes('github');
+
+  const isGmailQuery = queryLow.includes('email') || queryLow.includes('inbox') ||
+    queryLow.includes('mail') || queryLow.includes('gmail') || queryLow.includes('message');
+
+  const isCalendarQuery = queryLow.includes('meeting') || queryLow.includes('calendar') ||
+    queryLow.includes('event') || queryLow.includes('schedule') || queryLow.includes('today');
+
+  if (isGitHubQuery) {
+    try {
+      const github = getConnector('github');
+      if (github) {
+        const repos = await github.execute(wsId, ActionType.READ, { resourceType: 'repos', limit: 5 });
+        if (repos?.length) {
+          liveContext.push(`[GitHub] You have ${repos.length} repositor${repos.length === 1 ? 'y' : 'ies'}.`);
+          repos.slice(0, 5).forEach(r => {
+            liveContext.push(`  - ${r.fullName || r.name} (last updated: ${r.updatedAt ? new Date(r.updatedAt).toLocaleDateString() : 'unknown'})`);
+          });
+          // Try to get PRs for the most recent repo
+          const top = repos[0];
+          if (top?.owner && top?.name) {
+            const pulls = await github.execute(wsId, ActionType.READ, {
+              resourceType: 'pulls', owner: top.owner, repo: top.name, state: 'open', limit: 5,
+            });
+            if (pulls?.length) {
+              liveContext.push(`[GitHub] ${pulls.length} open PR(s) in ${top.name}:`);
+              pulls.slice(0, 3).forEach(p => liveContext.push(`  - PR #${p.number}: ${p.title} (${p.author || 'Unknown'}) — ${p.mergeReadinessScore ?? '?'}% ready`));
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[Copilot] GitHub live fetch failed:', err.message);
+    }
+  }
+
+  if (isGmailQuery) {
+    try {
+      const gmail = getConnector('gmail');
+      if (gmail) {
+        const msgs = await gmail.execute(wsId, ActionType.READ, { folder: 'INBOX', limit: 5, q: 'is:unread' });
+        if (Array.isArray(msgs) && msgs.length) {
+          liveContext.push(`[Gmail] ${msgs.length} unread message(s) in inbox:`);
+          msgs.slice(0, 3).forEach(m => liveContext.push(`  - From: ${m.from || 'Unknown'} | Subject: ${m.subject || '(no subject)'}`));
+        } else {
+          liveContext.push('[Gmail] Inbox is empty or no unread messages.');
+        }
+      }
+    } catch (err) {
+      console.warn('[Copilot] Gmail live fetch failed:', err.message);
+    }
+  }
+
+  if (isCalendarQuery) {
+    try {
+      const cal = getConnector('google-calendar');
+      if (cal) {
+        const events = await cal.execute(wsId, ActionType.READ, { days: 1, limit: 5 });
+        if (Array.isArray(events) && events.length) {
+          liveContext.push(`[Calendar] ${events.length} event(s) today/upcoming:`);
+          events.slice(0, 3).forEach(e => {
+            const time = e.startTime ? new Date(e.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'unknown';
+            liveContext.push(`  - ${e.title || e.summary || 'Untitled'} at ${time}`);
+          });
+        } else {
+          liveContext.push('[Calendar] No events found for today.');
+        }
+      }
+    } catch (err) {
+      console.warn('[Copilot] Calendar live fetch failed:', err.message);
+    }
+  }
+
+  // ── RAG retrieval ─────────────────────────────────────────────────────────
   let contextChunks = [];
   try {
     contextChunks = await retrieveContext(wsId, queryText);
   } catch (err) {
-    console.warn('[Copilot Service] RAG retrieval failed:', err.message);
+    console.warn('[Copilot] RAG retrieval failed:', err.message);
   }
 
-  // Traverse Knowledge Graph for any entities mentioned
+  // ── Knowledge Graph ───────────────────────────────────────────────────────
   const graphContext = [];
   try {
     const graphData = getGraphMetrics();
-    const queryLower = queryText.toLowerCase();
     for (const node of graphData.nodes) {
-      if (node.name.length > 3 && queryLower.includes(node.name.toLowerCase())) {
-        const related = getRelatedContext(node.id);
-        graphContext.push(...related);
+      if (node.name?.length > 3 && queryLow.includes(node.name.toLowerCase())) {
+        graphContext.push(...getRelatedContext(node.id));
       }
     }
-  } catch (err) {
-    console.warn('[Copilot Service] Graph traversal failed:', err.message);
-  }
+  } catch { /* non-fatal */ }
 
-  // Format combined evidence blocks
-  const evidenceLines = contextChunks.map(c => `[${c.source || 'RAG'}] ${c.content || c.markdown || c.text}`);
-  const systems = [...new Set(contextChunks.map(c => c.source || 'default'))];
+  const evidenceLines = contextChunks.map(c => `[${c.source || 'RAG'}] ${c.content || c.markdown || c.text || ''}`);
+  const systems       = [...new Set(contextChunks.map(c => c.source || 'default'))];
 
-  let answerText = '';
+  let answerText     = '';
   let reasoningTrace = '';
 
   try {
-    const prompt = `You are the Context-aware AI Copilot for FLOW OS. Answer the user question by correlating evidence across systems.\n\nUser Question: "${queryText}"\n\nCorporate Context:\n${evidenceLines.join('\n')}\n\nKnowledge Graph:\n${graphContext.join('\n')}\n\nReturn a JSON object with "answer" and "reasoningTrace" keys only.`;
+    const contextParts = [];
+    if (liveContext.length)   contextParts.push(`LIVE CONNECTOR DATA:\n${liveContext.join('\n')}`);
+    if (evidenceLines.length) contextParts.push(`WORKSPACE MEMORY:\n${evidenceLines.join('\n')}`);
+    if (graphContext.length)  contextParts.push(`KNOWLEDGE GRAPH:\n${graphContext.join('\n')}`);
+
+    const prompt = `You are the Context-aware AI Copilot for FLOW OS.
+Answer the user question using ONLY the real data provided below.
+Do NOT invent company names, people, incidents, or tickets not mentioned in the data.
+If the data is insufficient, say so honestly.
+
+User Question: "${queryText}"
+
+${contextParts.length ? contextParts.join('\n\n') : 'No data available for this workspace yet.'}
+
+Return a JSON object with "answer" and "reasoningTrace" keys only.`;
+
     const result = await ask({
-      taskType: TaskType.REASON,
-      messages: [{ role: 'user', content: prompt }],
-      maxTokens: 600,
+      taskType:    TaskType.REASON,
+      messages:    [{ role: 'user', content: prompt }],
+      maxTokens:   600,
       temperature: 0.3,
     });
+
     try {
       const clean  = (result.text || '').replace(/```json?|```/g, '').trim();
       const parsed = JSON.parse(clean);
@@ -210,63 +304,41 @@ export async function askCopilot(workspaceId, queryText) {
       reasoningTrace = `Provider: ${result.provider}/${result.model}`;
     }
   } catch (err) {
-    console.warn(`[Copilot Service] AI generation failed: ${err.message}. Using fallback.`);
+    console.warn('[Copilot] AI generation failed:', err.message);
   }
 
   if (!answerText) {
-    answerText = `I analyzed the workspace telemetry for "${queryText}". We detected matching context nodes across: ${systems.join(', ')}. Details:
-- Active incident INC-A3F2 (Postgres latency spike) is linked to PR #824 connection retry pool logic.
-- PM Sarah Chen is overallocated with high meeting load (24h/wk).`;
-    reasoningTrace = 'FALLBACK: Correlated RAG vector matches and knowledge graph entity adjacency patterns.';
+    if (liveContext.length) {
+      answerText = liveContext.join('\n');
+      reasoningTrace = 'Live connector data returned directly (LLM unavailable).';
+    } else if (contextChunks.length) {
+      answerText = `Based on workspace memory: ${evidenceLines.slice(0, 2).join(' | ')}`;
+      reasoningTrace = 'RAG retrieval — LLM unavailable.';
+    } else {
+      answerText = `No data found in this workspace for "${queryText}". Connect your integrations and run a sync to start building workspace intelligence.`;
+      reasoningTrace = 'No data available.';
+    }
   }
 
   return {
-    query: queryText,
-    answer: answerText,
-    evidence: evidenceLines.slice(0, 5),
+    query:          queryText,
+    answer:         answerText,
+    evidence:       evidenceLines.slice(0, 5),
     relatedSystems: systems,
     reasoningTrace,
-    graphReferences: graphContext.slice(0, 3)
+    graphReferences: graphContext.slice(0, 3),
   };
 }
 
 /**
- * 3. Cross-capability Reasoning & Explainable Recommendations
- * Generates proactive recommendations with explicit explainability traces.
+ * 3. Explainable Recommendations
+ *
+ * Returns recommendations derived from real prediction engine output only.
+ * Returns empty array when no real signals exist.
  */
 export function generateExplainableRecommendations(workspaceId) { // eslint-disable-line no-unused-vars
-  return [
-    {
-      id: 'REC-EX-01',
-      title: 'Approve Emergency Postgres Remediation Deployment',
-      summary: 'Authorize immediate release of PR #824 to fix database connection pool limits. Resolves active Sev-1 API outage and TechCorp SLA breach.',
-      evidence: [
-        'TechCorp reported API latency breaches at 9:22 AM (Source: Email/INC-B71C).',
-        'Postgres connection pool exhaustion logged (Source: Slack/#incidents/INC-A3F2).',
-        'PR #824 connection retry logic submitted by David O. (Source: GitHub).'
-      ],
-      relatedSystems: ['incidents', 'slack', 'gmail', 'github'],
-      confidence: 95,
-      businessImpact: 'Restores core backend performance to normal limits (<500ms) and prevents contractual SLA penalties.',
-      urgency: 'HIGH',
-      suggestedOwner: 'Kishore Varma',
-      reasoningTrace: 'Customer Latency Chain: Email complaint (INC-B71C) -> Incident declared (INC-A3F2) -> Code PR submitted (#824) -> Awaiting verification deploy -> Recommendation.'
-    },
-    {
-      id: 'REC-EX-02',
-      title: 'Reallocate Stripe Onboarding Ownership to James K.',
-      summary: 'Shift ownership of the Globex Corp webhook setup away from PM Sarah Chen. Relieves severe team workload bottlenecks.',
-      evidence: [
-        'Sarah Chen PM logged 24 hrs of meetings this week (Source: Workday/Availability).',
-        'Context switching score for Sarah Chen is at 95% (Source: Workforce Intelligence).',
-        'Globex Corp signed expansion terms ($140k ARR) are pending checkout setup (Source: HubSpot).'
-      ],
-      relatedSystems: ['workday', 'hubspot', 'jira'],
-      confidence: 90,
-      businessImpact: 'Prevents onboarding delays for Globex expansion and improves PM cognitive capacity.',
-      urgency: 'MEDIUM',
-      suggestedOwner: 'James K.',
-      reasoningTrace: 'Burnout Overload Chain: Employee meeting overload (Sarah Chen) -> Task context switching -> Gated HubSpot deal activation -> Onboarding milestone slippage -> Recommendation.'
-    }
-  ];
+  // Real recommendations are produced by the Phase 11.5 Prediction Engine and the
+  // Execution Engine. This endpoint returns [] until those engines have data.
+  // Do NOT add hardcoded recommendations here.
+  return [];
 }

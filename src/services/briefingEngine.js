@@ -112,11 +112,29 @@ export async function generateBriefing(workspaceId, orgId, role = ROLES.EMPLOYEE
   const validRole = Object.values(ROLES).includes(role.toUpperCase()) ? role.toUpperCase() : ROLES.EMPLOYEE;
 
   const [health, incidents, recs, decisions] = await Promise.all([
-    calculateWorkspaceHealth(wsIdStr).catch(() => ({ company_health: 75, sectors: {} })),
+    calculateWorkspaceHealth(wsIdStr).catch(() => ({ company_health: null, hasData: false, sectors: {} })),
     Promise.resolve(getRecentIncidents(wsIdStr, 24)),
     Promise.resolve(getProactiveRecommendations(wsIdStr)),
     queryMemory(wsIdStr, 'DECISION', { hours: 168, limit: 10 }).catch(() => [])
   ]);
+
+  // Return an honest "workspace not ready" brief when there is no real data.
+  if (health.hasData === false && incidents.length === 0 && decisions.length === 0) {
+    return {
+      role: validRole,
+      generatedAt: new Date().toISOString(),
+      workspaceNotReady: true,
+      aiNarrative: 'Your workspace is not yet connected. Connect at least 3 integrations and sync to generate your first Morning Brief.',
+      sections: [],
+      metadata: {
+        incidentCount: 0,
+        openIncidents: 0,
+        healthScore: null,
+        recommendationCount: 0,
+        sources: [],
+      },
+    };
+  }
 
   let sections;
   if (validRole === ROLES.EXECUTIVE) {

@@ -25,8 +25,9 @@
 
 import express from 'express';
 import { executeAction } from '../connectors/executionEngine.js';
-import { hasTokens } from '../services/google/GoogleTokenManager.js';
+import { hasTokens, getTokenMeta } from '../services/google/GoogleTokenManager.js';
 import { handleCallback } from '../services/google/GoogleOAuthService.js';
+import { storeOAuthTokens } from '../connectors/authManager.js';
 import { getConnector } from '../connectors/registry.js';
 import { ValidationError } from '../core/errors/index.js';
 
@@ -63,10 +64,34 @@ async function runAction(req, res, next, { actionType, payload }) {
       actor:       req.user,
       orgPlan:     req.govContext?.orgPlan ?? 'free',
     });
+    // Live connector returned nothing but the workspace has ingested email data →
+    // serve that with provenance (workspace-aware policy) instead of an empty inbox.
+    if (String(actionType).toLowerCase() === 'read' && Array.isArray(result) && result.length === 0) {
+      const ing = await _ingestedInboxFallback(req.workspaceId, payload);
+      if (ing) return res.json({ success: true, result: ing, sourceMode: 'certification' });
+    }
     res.json({ success: true, result, timelineEvent });
   } catch (err) {
+    // Gmail not authenticated → check ingested data before surfacing "connect Gmail".
+    // READs only; sends/replies still fail honestly.
+    if (String(actionType).toLowerCase() === 'read') {
+      try {
+        const ing = await _ingestedInboxFallback(req.workspaceId, payload);
+        if (ing) return res.json({ success: true, result: ing, sourceMode: 'certification' });
+      } catch { /* fall through to the real error */ }
+    }
     next(err);
   }
+}
+
+// Map a communication READ to ingested inbox data. Only the inbox listing has an
+// ingested equivalent; thread/message/label reads fall through to the honest error.
+async function _ingestedInboxFallback(workspaceId, payload) {
+  const rt = payload?.resourceType;
+  if (rt && rt !== 'messages' && rt !== 'inbox') return null;
+  if (payload?.threadId || payload?.messageId) return null;
+  const { ingestedInbox } = await import('../services/certification/ingestedReads.js');
+  return await ingestedInbox(workspaceId, { limit: payload?.limit || 25 });
 }
 
 // ── GET /api/communication/oauth/callback ─────────────────────────────────────
@@ -75,19 +100,40 @@ async function runAction(req, res, next, { actionType, payload }) {
 router.get('/oauth/callback', async (req, res) => {
   const { code, state, error } = req.query;
 
-  if (error) return res.status(400).send(`OAuth denied: ${error}`);
-  if (!code)  return res.status(400).send('Missing OAuth code');
-  if (!state) return res.status(400).send('Missing OAuth state');
+  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+
+  // Google sends error=access_denied when the user is not a Test User (app in Testing
+  // mode) or when the user explicitly cancels consent. Redirect to the setup page with
+  // a structured error param — never expose raw Google error strings to the user.
+  if (error) {
+    const params = new URLSearchParams({ oauth_error: error, provider: 'gmail' });
+    return res.redirect(`${frontendUrl}/setup?${params}`);
+  }
+  if (!code)  { return res.redirect(`${frontendUrl}/setup?oauth_error=no_code&provider=gmail`); }
+  if (!state) { return res.redirect(`${frontendUrl}/setup?oauth_error=no_state&provider=gmail`); }
 
   try {
-    const callbackUrl = `${req.protocol}://${req.get('host')}/api/communication/oauth/callback`;
-    await handleCallback(code, state, { redirectUri: callbackUrl });
+    // Must match exactly what was sent to Google during initiation.
+    // Use GOOGLE_REDIRECT_BASE so the URI is stable even when Vite proxy rewrites Host.
+    const base = process.env.GOOGLE_REDIRECT_BASE || `http://localhost:${process.env.PORT || 5001}`;
+    const callbackUrl = `${base}/api/communication/oauth/callback`;
 
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-    return res.redirect(`${frontendUrl}/platform/integrations?gmailConnected=true`);
+    console.log('[CommunicationRoutes/callback] [1] Exchanging authorization code for tokens');
+    const { workspaceId } = await handleCallback(code, state, { redirectUri: callbackUrl });
+    console.log('[CommunicationRoutes/callback] [2] Tokens stored in PostgreSQL for workspace:', workspaceId);
+
+    // Bridge: register in in-memory credentialStore so listConnectedConnectors() reflects the
+    // connection immediately. Both gmail and google-calendar share one Google OAuth token; both
+    // connectors become available once Google OAuth completes for the workspace.
+    storeOAuthTokens(workspaceId, 'gmail', { stored: true, provider: 'google' });
+    storeOAuthTokens(workspaceId, 'google-calendar', { stored: true, provider: 'google' });
+    console.log('[CommunicationRoutes/callback] [3] Registered gmail + google-calendar in connector store');
+
+    return res.redirect(`${frontendUrl}/setup?gmailConnected=true`);
   } catch (err) {
-    console.error('[CommunicationRoutes] OAuth callback failed:', err.message);
-    return res.status(500).send(`OAuth exchange failed: ${err.message}`);
+    console.error('[CommunicationRoutes/callback] OAuth callback failed at token exchange:', err.message);
+    const params = new URLSearchParams({ oauth_error: 'exchange_failed', provider: 'gmail' });
+    return res.redirect(`${frontendUrl}/setup?${params}`);
   }
 });
 
