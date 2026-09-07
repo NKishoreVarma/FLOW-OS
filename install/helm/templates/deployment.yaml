@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "flow-os.fullname" . }}
+  labels:
+    {{- include "flow-os.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "flow-os.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+      labels:
+        {{- include "flow-os.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 5001
+          env:
+            {{- range $k, $v := .Values.env }}
+            - name:  {{ $k }}
+              value: {{ $v | quote }}
+            {{- end }}
+            - name:  JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flow-os.fullname" . }}-secrets
+                  key:  jwtSecret
+            - name:  DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flow-os.fullname" . }}-secrets
+                  key:  databaseUrl
+            - name:  REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flow-os.fullname" . }}-secrets
+                  key:  redisUrl
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 5001
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 5001
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          {{- if .Values.persistence.vaults.enabled }}
+          volumeMounts:
+            - name:      vault-data
+              mountPath: /data/vaults
+            - name:      report-data
+              mountPath: /data/reports
+          {{- end }}
+      {{- if .Values.persistence.vaults.enabled }}
+      volumes:
+        - name: vault-data
+          persistentVolumeClaim:
+            claimName: {{ include "flow-os.fullname" . }}-vaults
+        - name: report-data
+          persistentVolumeClaim:
+            claimName: {{ include "flow-os.fullname" . }}-reports
+      {{- end }}
+{{- define "flow-os.fullname" -}}
+flow-os
+{{- end }}
+{{- define "flow-os.labels" -}}
+app: flow-os
+chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+{{- end }}
+{{- define "flow-os.selectorLabels" -}}
+app: flow-os
+component: api
+{{- end }}

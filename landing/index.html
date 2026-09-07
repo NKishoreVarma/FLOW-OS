@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FLOW OS — Open FLOW first.</title>
+<meta name="description" content="Connect your tools once. Instead of opening Gmail, Slack, Jira, GitHub, Notion and Calendar every morning, you open FLOW." />
+<meta property="og:title" content="FLOW OS — Open FLOW first." />
+<meta property="og:description" content="The operational brain of your company. One window, not eight." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --electric: #1414FF;
+    --black:    #080810;
+    --white:    #FFFFFF;
+    --grid:     #E8E8EE;
+    --muted:    #6B6B80;
+    --hero:  clamp(64px, 8vw, 120px);
+    --h1:    clamp(40px, 5vw, 72px);
+    --h2:    clamp(24px, 3vw, 40px);
+    --body:  18px;
+    --small: 13px;
+    --mono:  'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--black);
+    background: var(--white);
+    font-size: var(--body);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; }
+  .mono { font-family: var(--mono); }
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+  /* ── Buttons ───────────────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 24px; font-size: 14px; font-weight: 500;
+    border-radius: 0; transition: transform .12s ease, background .18s ease, color .18s ease;
+    border: 1px solid transparent; white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-dark   { background: var(--black); color: var(--white); }
+  .btn-dark:hover { background: var(--electric); }
+  .btn-blue   { background: var(--electric); color: var(--white); }
+  .btn-blue:hover { background: var(--black); }
+  .btn-ghost  { background: transparent; color: var(--black); border: 1px solid var(--grid); }
+  .btn-ghost:hover { border-color: var(--black); }
+
+  /* ── Section 1 — Nav ───────────────────────────────────── */
+  nav {
+    position: sticky; top: 0; z-index: 100; height: 60px;
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--grid);
+    display: flex; align-items: center;
+  }
+  nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-mark { width: 22px; height: 22px; background: var(--electric); border-radius: 0; }
+  .logo-text { font-weight: 500; font-size: 16px; letter-spacing: -0.02em; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a.link { font-weight: 400; font-size: 14px; color: var(--muted); transition: color .15s; }
+  .nav-links a.link:hover { color: var(--black); }
+
+  /* ── Section 2 — Hero ──────────────────────────────────── */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; }
+  .hero-grid {
+    flex: 1; display: grid; grid-template-columns: 60% 40%;
+    align-items: center; border-bottom: 1px solid var(--grid);
+  }
+  .hero-left { padding: 80px 40px; }
+  .hero-right { border-left: 1px solid var(--grid); align-self: stretch; display: flex; }
+  .hero-title {
+    font-size: var(--hero); font-weight: 600; letter-spacing: -0.04em;
+    line-height: 0.92; color: var(--black);
+  }
+  .hero-title .dot { color: var(--electric); }
+  .hero-sub {
+    margin-top: 32px; max-width: 520px; font-weight: 300; font-size: 20px;
+    line-height: 1.55; color: var(--muted);
+  }
+  .hero-ctas { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; width: 100%; }
+  .stat-cell { padding: 44px 36px; border-bottom: 1px solid var(--grid); }
+  .stat-cell:nth-child(odd) { border-right: 1px solid var(--grid); }
+  .stat-cell:nth-child(3), .stat-cell:nth-child(4) { border-bottom: none; }
+  .stat-num { font-size: 56px; font-weight: 600; color: var(--electric); letter-spacing: -0.03em; line-height: 1; }
+  .stat-label { margin-top: 12px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.04em; line-height: 1.4; }
+
+  .connector-strip {
+    height: 44px; background: var(--black); display: flex; align-items: center; overflow: hidden; white-space: nowrap;
+  }
+  .marquee-track { display: inline-flex; align-items: center; animation: marquee 24s linear infinite; }
+  .marquee-track span { font-family: var(--mono); font-size: 12px; color: var(--white); padding: 0 22px; letter-spacing: 0.06em; }
+  .marquee-track span.sep { color: var(--electric); }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── Section headers ───────────────────────────────────── */
+  .section-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 40px; border-bottom: 1px solid var(--grid);
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  }
+  .section-bar.on-blue { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
+
+  /* ── Section 3 — Problem ───────────────────────────────── */
+  .problem { background: var(--electric); color: var(--white); }
+  .problem-grid { display: grid; grid-template-columns: 33% 67%; }
+  .problem-left { padding: 90px 40px; border-right: 1px solid rgba(255,255,255,0.18); }
+  .problem-big { font-size: 140px; font-weight: 600; line-height: 0.9; letter-spacing: -0.04em; }
+  .problem-left .cap { margin-top: 20px; font-family: var(--mono); font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+  .problem-right { padding: 90px 40px; }
+  .problem-quote { font-size: 52px; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; }
+  .problem-body { margin-top: 28px; max-width: 620px; font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+  /* ── Section 4 — How it works ──────────────────────────── */
+  .how-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+  .how-col { padding: 56px 40px 80px; border-right: 1px solid var(--grid); position: relative; overflow: hidden; min-height: 380px; }
+  .how-col:last-child { border-right: none; }
+  .how-col.inverted { background: var(--electric); color: var(--white); }
+  .how-ghost { position: absolute; top: 28px; right: 32px; font-size: 80px; font-weight: 500; opacity: 0.08; line-height: 1; }
+  .how-col.inverted .how-ghost { opacity: 0.18; color: #fff; }
+  .how-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .how-col.inverted .how-kicker { color: rgba(255,255,255,0.7); }
+  .how-title { margin-top: 12px; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+  .how-text { margin-top: 20px; font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.6; max-width: 320px; }
+  .how-col.inverted .how-text { color: rgba(255,255,255,0.8); }
+
+  /* ── Section 5 — Features ──────────────────────────────── */
+  .features { background: #F8F8FC; }
+  .feature-row {
+    display: grid; grid-template-columns: 80px 300px 1fr 60px; align-items: center;
+    gap: 24px; padding: 34px 40px; border-bottom: 1px solid var(--grid);
+    transition: background .2s ease; cursor: default;
+  }
+  .feature-row:hover { background: var(--white); }
+  .feature-idx { font-family: var(--mono); font-size: 13px; color: var(--electric); }
+  .feature-name { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; }
+  .feature-desc { font-size: 14px; color: var(--muted); line-height: 1.55; max-width: 640px; }
+  .feature-arrow { font-size: 20px; color: var(--muted); text-align: right; transition: transform .2s ease, color .2s; }
+  .feature-row:hover .feature-arrow { color: var(--electric); transform: translateX(4px); }
+
+  /* ── Section 6 — Final CTA ─────────────────────────────── */
+  .final { background: var(--black); color: var(--white); min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 40px; }
+  .final-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+  .final-title { margin-top: 24px; font-size: clamp(64px, 8vw, 96px); font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
+  .final-sub { margin-top: 24px; font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.45); max-width: 480px; margin-left: auto; margin-right: auto; }
+  .final .form-wrap { margin-top: 40px; display: flex; justify-content: center; }
+
+  /* ── Waitlist form ─────────────────────────────────────── */
+  .waitlist { display: inline-flex; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
+  .waitlist input {
+    background: transparent; border: none; outline: none; color: #fff;
+    font-family: 'Inter', sans-serif; font-size: 15px; padding: 14px 18px; width: 260px;
+  }
+  .waitlist input::placeholder { color: rgba(255,255,255,0.4); }
+  .waitlist button { background: var(--electric); color: #fff; padding: 0 22px; font-size: 14px; font-weight: 500; }
+  .waitlist button:hover { background: #fff; color: var(--electric); }
+  .form-done { color: var(--electric); font-size: 15px; font-weight: 500; }
+
+  /* ── Section 7 — Footer ────────────────────────────────── */
+  footer { background: var(--black); color: rgba(255,255,255,0.5); border-top: 1px solid rgba(255,255,255,0.1); }
+  footer .container { min-height: 80px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; }
+  footer .logo-text { color: #fff; }
+
+  /* ── Fade-up on scroll ─────────────────────────────────── */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── Responsive ────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .container { padding: 0 20px; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-right { border-left: none; border-top: 1px solid var(--grid); }
+    .hero-left { padding: 56px 20px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .problem-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.18); padding: 56px 20px; }
+    .problem-right { padding: 56px 20px; }
+    .problem-big { font-size: 96px; }
+    .problem-quote { font-size: 34px; }
+    .how-cols { grid-template-columns: 1fr; }
+    .how-col { border-right: none; border-bottom: 1px solid var(--grid); min-height: auto; }
+    .feature-row { grid-template-columns: 44px 1fr; grid-template-areas: "idx name" "idx desc"; gap: 6px 16px; }
+    .feature-idx { grid-area: idx; align-self: start; }
+    .feature-name { grid-area: name; font-size: 20px; }
+    .feature-desc { grid-area: desc; }
+    .feature-arrow { display: none; }
+    .nav-links { gap: 16px; }
+    .nav-links .link { display: none; }
+    .stat-num { font-size: 40px; }
+    .waitlist input { width: 180px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ═══ Section 1 — Nav ═══ -->
+  <nav>
+    <div class="container">
+      <a href="#top" class="logo">
+        <span class="logo-mark"></span>
+        <span class="logo-text">FLOW OS</span>
+      </a>
+      <div class="nav-links">
+        <a href="#how" class="link">Product</a>
+        <a href="#features" class="link">Pricing</a>
+        <a href="#how" class="link">Docs</a>
+        <a href="#access" class="btn btn-dark">Request access →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ Section 2 — Hero ═══ -->
+  <header class="hero" id="top">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1 class="hero-title fade-up">OPEN FLOW<br />FIRST<span class="dot">.</span></h1>
+        <p class="hero-sub fade-up">Connect your tools once. Instead of opening Gmail, Slack, Jira, GitHub, Notion and Calendar every morning — you open FLOW.</p>
+        <div class="hero-ctas fade-up">
+          <a href="#access" class="btn btn-dark">Request early access →</a>
+          <a href="#how" class="btn btn-ghost">Watch 2-min demo</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="stat-grid">
+          <div class="stat-cell">
+            <div class="stat-num" data-count="9.4" data-decimals="1">0</div>
+            <div class="stat-label">tools opened<br />every morning</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num" data-count="4" data-prefix="&lt; " data-suffix="s">0</div>
+            <div class="stat-label">first insight</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num" data-count="45" data-suffix=" min">0</div>
+            <div class="stat-label">saved daily</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num" data-count="1">0</div>
+            <div class="stat-label">window<br />not 8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="connector-strip">
+      <div class="marquee-track" id="marquee"></div>
+    </div>
+  </header>
+
+  <!-- ═══ Section 3 — Problem ═══ -->
+  <section class="problem">
+    <div class="section-bar on-blue"><span>THE PROBLEM</span><span>01</span></div>
+    <div class="problem-grid">
+      <div class="problem-left">
+        <div class="problem-big fade-up">9.4</div>
+        <div class="cap fade-up">tools opened every morning<br />by the average knowledge worker</div>
+      </div>
+      <div class="problem-right">
+        <div class="problem-quote fade-up">People don't actually work in the morning. They switch tabs.</div>
+        <p class="problem-body fade-up">Gmail for email. Slack for chat. Jira for tasks. GitHub for code. Calendar for meetings. FLOW changes exactly one thing — you open it instead of all of them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 4 — How it works ═══ -->
+  <section id="how">
+    <div class="section-bar"><span>HOW IT WORKS</span><span>02</span></div>
+    <div class="how-cols">
+      <div class="how-col fade-up">
+        <div class="how-ghost">01</div>
+        <div class="how-kicker">Setup</div>
+        <div class="how-title">Connect once</div>
+        <p class="how-text">Link GitHub, Slack, Gmail, Jira, Notion, and Calendar in under 5 minutes.</p>
+      </div>
+      <div class="how-col inverted fade-up">
+        <div class="how-ghost">02</div>
+        <div class="how-kicker">Intelligence</div>
+        <div class="how-title">FLOW learns your company</div>
+        <p class="how-text">The brain reads every message, decision, and commit. It builds a memory of how your company works.</p>
+      </div>
+      <div class="how-col fade-up">
+        <div class="how-ghost">03</div>
+        <div class="how-kicker">Product</div>
+        <div class="how-title">Open FLOW first</div>
+        <p class="how-text">Every morning FLOW tells you exactly what happened, what needs your attention, and what to do next.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 5 — Features ═══ -->
+  <section class="features" id="features">
+    <div class="section-bar"><span>WHAT FLOW DOES</span><span>03</span></div>
+    <div class="feature-row fade-up">
+      <div class="feature-idx">01</div>
+      <div class="feature-name">Morning Workfeed</div>
+      <div class="feature-desc">Every morning FLOW shows exactly what happened, what needs attention, and what to do first — before you open a single other app.</div>
+      <div class="feature-arrow">→</div>
+    </div>
+    <div class="feature-row fade-up">
+      <div class="feature-idx">02</div>
+      <div class="feature-name">Universal Search</div>
+      <div class="feature-desc">Ask anything in plain language. FLOW searches Gmail, Slack, Jira, Notion, GitHub simultaneously. Cited answer in under 2 seconds.</div>
+      <div class="feature-arrow">→</div>
+    </div>
+    <div class="feature-row fade-up">
+      <div class="feature-idx">03</div>
+      <div class="feature-name">Meeting Intelligence</div>
+      <div class="feature-desc">Meeting ends. Summary, action items, and follow-up draft ready automatically. You review and approve.</div>
+      <div class="feature-arrow">→</div>
+    </div>
+    <div class="feature-row fade-up">
+      <div class="feature-idx">04</div>
+      <div class="feature-name">Consequence Engine</div>
+      <div class="feature-desc">FLOW connects signals across your tools to detect risks before they become problems. TechCorp renewal at risk before you knew to check.</div>
+      <div class="feature-arrow">→</div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 6 — Final CTA ═══ -->
+  <section class="final" id="access">
+    <div>
+      <div class="final-kicker">THE FUTURE OF WORK</div>
+      <h2 class="final-title fade-up">Open FLOW first.</h2>
+      <p class="final-sub fade-up">Join companies that replaced 8 morning tabs with one conversation.</p>
+      <div class="form-wrap fade-up">
+        <form class="waitlist" id="waitlist-form">
+          <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+          <button type="submit">Request early access →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 7 — Footer ═══ -->
+  <footer>
+    <div class="container">
+      <a href="#top" class="logo"><span class="logo-mark"></span><span class="logo-text">FLOW OS</span></a>
+      <span>© 2026 FLOW OS. The operational brain of your company.</span>
+    </div>
+  </footer>
+
+<script>
+  // ── Connector marquee (duplicated track for seamless loop) ──
+  (function () {
+    const items = ['GMAIL', 'SLACK', 'GITHUB', 'JIRA', 'NOTION', 'CALENDAR', 'HUBSPOT', 'LINEAR', '+ 12 MORE'];
+    const track = document.getElementById('marquee');
+    const build = () => items.map(x => `<span>${x}</span><span class="sep">·</span>`).join('');
+    track.innerHTML = build() + build(); // two copies → translateX(-50%) loops seamlessly
+  })();
+
+  // ── Fade-up on scroll ──
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  // ── Hero stat counters (count up on scroll into view) ──
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const prefix = el.dataset.prefix ? el.dataset.prefix.replace('&lt;', '<') : '';
+    const suffix = el.dataset.suffix || '';
+    const dur = 1500, t0 = performance.now();
+    function tick(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = (target * eased).toFixed(decimals);
+      el.textContent = prefix + val + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = prefix + target.toFixed(decimals) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countIO.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-num[data-count]').forEach(el => countIO.observe(el));
+
+  // ── Waitlist form → Formspree ──
+  // SETUP: replace YOUR_FORM_ID with your Formspree form id (formspree.io → new form).
+  const FORMSPREE_ID = 'YOUR_FORM_ID';
+  document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.querySelector('input').value;
+    const done = () => { form.outerHTML = '<p class="form-done">You\'re on the list. We\'ll be in touch.</p>'; };
+    if (FORMSPREE_ID === 'YOUR_FORM_ID') { done(); return; } // graceful until wired
+    try {
+      const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      if (res.ok) done();
+    } catch (_) { done(); }
+  });
+</script>
+</body>
+</html>

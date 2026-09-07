@@ -1,0 +1,117 @@
+# FLOW OS Helm Values — Override in values.production.yaml
+replicaCount: 3
+
+image:
+  repository: flow-os
+  tag:        latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled:          true
+  className:        nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - host: app.example.com
+      paths:
+        - path:     /
+          pathType: Prefix
+  tls:
+    - secretName: flow-os-tls
+      hosts:
+        - app.example.com
+
+resources:
+  requests:
+    cpu:    500m
+    memory: 512Mi
+  limits:
+    cpu:    2000m
+    memory: 2Gi
+
+autoscaling:
+  enabled:     true
+  minReplicas: 3
+  maxReplicas: 20
+  targetCPUUtilizationPercentage:    70
+  targetMemoryUtilizationPercentage: 80
+
+env:
+  NODE_ENV:         production
+  LOG_FORMAT:       json
+  LOG_SINK:         stdout
+  WS_AUTH_REQUIRED: "true"
+  QUEUE_SHARDS:     "4"
+  VAULT_ROOT:       /data/vaults
+  REPORT_ROOT:      /data/reports
+
+secrets:
+  # Set these in values.production.yaml or via --set
+  jwtSecret:      ""
+  databaseUrl:    ""
+  redisUrl:       ""
+  geminiApiKey:   ""
+  googleClientId: ""
+  googleClientSecret: ""
+
+persistence:
+  vaults:
+    enabled:      true
+    storageClass: nfs
+    size:         50Gi
+  reports:
+    enabled:      true
+    storageClass: nfs
+    size:         20Gi
+
+postgresql:
+  enabled:           true
+  auth:
+    username:  flow
+    password:  flowpass
+    database:  flowdb
+  image:
+    repository: pgvector/pgvector
+    tag:        pg16
+
+redis:
+  enabled: true
+  auth:
+    enabled: false
+  master:
+    persistence:
+      enabled: true
+      size:    10Gi
+
+worker:
+  enabled:      true
+  replicaCount: 2
+  resources:
+    requests:
+      cpu:    250m
+      memory: 256Mi
+    limits:
+      cpu:    1000m
+      memory: 1Gi
+
+podDisruptionBudget:
+  enabled:      true
+  minAvailable: 2
+
+serviceAccount:
+  create: true
+  name:   flow-os
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port:   "5001"
+  prometheus.io/path:   /metrics/infra
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser:    1001
+  fsGroup:      1001
