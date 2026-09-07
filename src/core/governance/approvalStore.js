@@ -135,8 +135,13 @@ export async function castApprovalVote(id, orgId, approverId) {
     await expireOne(id);
     throw new ValidationError('This approval has expired');
   }
-  if (approval.requesterId === approverId) {
-    throw new AuthorizationError('Self-approval is not permitted');
+  // Two-person rule for CRITICAL (requiredApprovals >= 2): the requester may never
+  // be one of the approvers. For HIGH (single-approver) actions, an OWNER/ADMIN may
+  // approve their own request — a solo operator can still complete routine
+  // high-risk ops (e.g. merge a PR, delete a feature branch).
+  const required = approval.requiredApprovals ?? 1;
+  if (approval.requesterId === approverId && required >= 2) {
+    throw new AuthorizationError('Self-approval is not permitted for critical (two-person) actions');
   }
 
   const votes = Array.isArray(approval.approvalVotes) ? [...approval.approvalVotes] : [];
@@ -145,7 +150,6 @@ export async function castApprovalVote(id, orgId, approverId) {
   }
   votes.push({ approverId, at: new Date().toISOString() });
 
-  const required  = approval.requiredApprovals ?? 1;
   const satisfied = votes.length >= required;
 
   const updated = await prisma.pendingApproval.update({
