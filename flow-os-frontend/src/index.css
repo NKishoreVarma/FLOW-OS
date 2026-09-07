@@ -1,6 +1,3 @@
-/* index.css — global baseline reset for Flow OS */
-/* All design tokens and component styles live in App.css */
-
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -8,12 +5,12 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
   margin: 0;
-  background: #050810;
+  background: var(--bg-0, #F7F2E9);
 }
 
 #root {
@@ -23,13 +20,46 @@ body {
   border: none;
   text-align: left;
   display: block;
+  position: relative;
+  z-index: 1;
 }
 
-/* Scrollbar global defaults */
+/* Slim scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #142834 transparent;
+  scrollbar-color: var(--line-strong, #D8D0C0) transparent;
 }
 *::-webkit-scrollbar       { width: 4px; height: 4px; }
 *::-webkit-scrollbar-track { background: transparent; }
-*::-webkit-scrollbar-thumb { background: #142834; border-radius: 2px; }
+*::-webkit-scrollbar-thumb { background: var(--line-strong, #D8D0C0); border-radius: 2px; }
+
+/* Live event slide-in */
+@keyframes event-slide-in {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Critical dot pulse */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+/* Toast progress bar */
+@keyframes shrink-x {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+
+.animate-event-in {
+  animation: event-slide-in 0.2s ease-out;
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+.line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.line-clamp-3 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }

@@ -10,19 +10,15 @@
 
 import fs   from 'fs/promises';
 import path from 'path';
-import pg   from 'pg';
+import os   from 'os';
+import { pool } from '../config/db.js';
 import { broadcastToWorkspace } from './socketService.js';
 import { extractEntitiesFromText, getRelatedContext } from './knowledgeGraphService.js';
+import { updateIngestionTrace, updateQueryTrace, liveMetrics } from './observabilityService.js';
+import { logger } from '../utils/logger.js';
 
-let dbPool = null;
 function getDbPool() {
-  if (!dbPool) {
-    const { Pool } = pg;
-    dbPool = new Pool({
-      connectionString: 'postgresql://localhost:5432/postgres'
-    });
-  }
-  return dbPool;
+  return pool;
 }
 
 // ── Authority Weight Matrix (OpenHuman specification) ──────────────────────────
@@ -38,8 +34,8 @@ const AUTHORITY_WEIGHTS = {
   default:  1.0
 };
 
-// Root path that vaultService.js writes into
-const VAULT_ROOT = '/Users/kishorevarma/Desktop/FLOW-OS-VAULTS';
+// Mirrors the path vaultService.js writes into — must use the same VAULT_ROOT.
+const VAULT_ROOT = process.env.VAULT_ROOT ?? path.join(os.homedir(), 'FLOW-OS-VAULTS');
 
 function resolveAuthorityWeight(platform) {
   if (!platform) return AUTHORITY_WEIGHTS.default;
@@ -66,24 +62,11 @@ function cosineSimilarity(a, b) {
  * @returns {Promise<number[]>}
  */
 async function generateEmbedding(text) {
-  if (!process.env.GEMINI_API_KEY) {
-    throw new Error('GEMINI_API_KEY not set — embedding generation unavailable.');
-  }
-  const { GoogleGenAI } = await import('@google/genai');
-  const aiOptions = { apiKey: process.env.GEMINI_API_KEY };
-  if (process.env.GEMINI_BASE_URL) {
-    aiOptions.httpOptions = { baseUrl: process.env.GEMINI_BASE_URL };
-  }
-  const ai = new GoogleGenAI(aiOptions);
-
-  const response = await ai.models.embedContent({
-    model:    'text-embedding-004',
-    contents: text
-  });
-
-  const values = response?.embedding?.values;
+  const { embed: brainEmbed } = await import('../ai/BrainRouter.js');
+  const result = await brainEmbed(text);
+  const values = result.values;
   if (!Array.isArray(values) || values.length === 0) {
-    throw new Error('[Retrieval] Empty embedding returned from Gemini API.');
+    throw new Error('[Retrieval] Empty embedding returned from AI provider.');
   }
   return values;
 }
@@ -173,10 +156,16 @@ export async function vaultFallbackScan(workspaceId, queryText) {
   }
 
   // Lower minimum token length to 2 to catch terms like "UI", "OS", "DB", "Go"
+  const stopwords = new Set([
+    'the', 'a', 'an', 'is', 'are', 'was', 'were', 'in', 'on', 'at', 'to',
+    'of', 'and', 'or', 'but', 'for', 'with', 'from', 'by', 'as', 'it',
+    'its', 'this', 'that', 'be', 'has', 'have', 'had', 'not', 'also', 'who', 'how', 'what', 'why', 'where', 'when'
+  ]);
+
   const queryTokens = (queryText || '')
     .toLowerCase()
     .split(/\W+/)
-    .filter(t => t.length >= 2);
+    .filter(t => t.length >= 2 && !stopwords.has(t));
 
   // Score each file by keyword hit ratio
   const scored = [];
@@ -361,12 +350,12 @@ export async function vaultFrontmatterScan(workspaceId, flags) {
   return matched;
 }
 
-export async function retrieveContext(workspaceId, queryText) {
+export async function retrieveContext(workspaceId, queryText, queryTraceId = null) {
   if (!workspaceId || !queryText) {
     throw new Error('[Retrieval Service] workspaceId and queryText are both required.');
   }
 
-  console.log(`\n🔍 [Retrieval] Starting Cognitive Synthesis Routing for Workspace: ${workspaceId}`);
+  logger.rag(`Starting Cognitive Synthesis Routing for Workspace: ${workspaceId}`);
 
   const flags = {};
   let semanticQuery = queryText;
@@ -384,15 +373,28 @@ export async function retrieveContext(workspaceId, queryText) {
   
   let vaultResults = [];
   if (Object.keys(flags).length > 0) {
-    console.log(`🧭 [Routing] Structural flags detected:`, flags);
+    logger.rag(`Structural flags detected: ${JSON.stringify(flags)}`);
     vaultResults = await vaultFrontmatterScan(workspaceId, flags);
   }
   
   let vectorResults = [];
   if (semanticQuery.length > 0) {
-    console.log(`🧭 [Routing] Semantic query detected: "${semanticQuery}"`);
+    logger.rag(`Semantic query detected: "${semanticQuery}"`);
     try {
+      if (queryTraceId) {
+        updateQueryTrace(queryTraceId, 'Embedding Query', 'START', { input: semanticQuery });
+      }
       const queryEmbedding = await generateEmbedding(semanticQuery);
+      if (queryTraceId) {
+        updateQueryTrace(queryTraceId, 'Embedding Query', 'SUCCESS', {
+          input: semanticQuery,
+          output: `Generated ${queryEmbedding.length}-dimension vector embedding`
+        });
+      }
+
+      if (queryTraceId) {
+        updateQueryTrace(queryTraceId, 'Vector Search', 'START', { input: semanticQuery });
+      }
       const pool = getDbPool();
       const { rows } = await pool.query(
         `SELECT id, workspace_id, channel_name, source_platform, authority_weight, raw_content, (1 - (embedding <=> $1)) AS base_cosine FROM workspace_intel_chunks WHERE workspace_id = $2 ORDER BY embedding <=> $1 LIMIT 20`,
@@ -408,9 +410,49 @@ export async function retrieveContext(workspaceId, queryText) {
         content: row.raw_content,
         source: 'vector_db'
       }));
+      if (queryTraceId) {
+        updateQueryTrace(queryTraceId, 'Vector Search', 'SUCCESS', {
+          input: semanticQuery,
+          output: vectorResults,
+          metadata: { count: vectorResults.length }
+        });
+      }
     } catch (e) {
-      console.warn(`⚠️ [Routing] Vector DB failed, attempting fallback: ${e.message}`);
-      if (vaultResults.length === 0) {
+      console.warn(`⚠️ [Routing] Vector embedding failed (${e.message?.slice(0,80)}), trying keyword fallback…`);
+      if (queryTraceId) {
+        updateQueryTrace(queryTraceId, 'Vector Search', 'FAILED', { input: semanticQuery, error: e.message });
+      }
+      // Keyword fallback: full-text search directly in pgvector table when embedding API is unavailable.
+      // Covers quota-exceeded and network errors so the system stays usable without live Gemini access.
+      try {
+        const pool = getDbPool();
+        const tokens = semanticQuery.split(/\s+/).filter(t => t.length > 2).slice(0, 8);
+        if (tokens.length > 0) {
+          const pattern = tokens.join('|');
+          const { rows: kwRows } = await pool.query(
+            `SELECT id, workspace_id, channel_name, source_platform, authority_weight, raw_content
+             FROM workspace_intel_chunks
+             WHERE workspace_id = $1 AND raw_content ~* $2
+             ORDER BY authority_weight DESC, created_at DESC
+             LIMIT 20`,
+            [String(workspaceId), pattern]
+          );
+          vectorResults = kwRows.map((row, i) => ({
+            id: row.id,
+            channel: row.channel_name,
+            platform: row.source_platform,
+            title: `${row.source_platform.toUpperCase()} Chunk (${row.channel_name})`,
+            authorityCoeff: parseFloat(row.authority_weight) || 1.0,
+            score: 0.5 - (i * 0.01),
+            content: row.raw_content,
+            source: 'keyword_fallback',
+          }));
+          console.log(`[Retrieval] Keyword fallback found ${vectorResults.length} results for "${semanticQuery}"`);
+        }
+      } catch (kwErr) {
+        console.warn('[Retrieval] Keyword fallback also failed:', kwErr.message);
+      }
+      if (vectorResults.length === 0 && vaultResults.length === 0) {
         vectorResults = await vaultFallbackScan(workspaceId, semanticQuery);
       }
     }
@@ -443,6 +485,10 @@ export async function retrieveContext(workspaceId, queryText) {
   applyRRF(vaultResults);
   applyRRF(vectorResults);
   
+  if (queryTraceId) {
+    updateQueryTrace(queryTraceId, 'Reranker', 'START', { input: Array.from(rrfMap.values()) });
+  }
+
   const merged = Array.from(rrfMap.values()).map(item => {
     const finalScore = item.rrfBase * item.authorityCoeff;
     return {
@@ -453,7 +499,14 @@ export async function retrieveContext(workspaceId, queryText) {
   
   const top5 = merged.sort((a, b) => b.weightedScore - a.weightedScore).slice(0, 5);
   
-  console.log(`🎯 [Cognitive Router] Merged top ${top5.length} chunks via RRF.`);
+  if (queryTraceId) {
+    updateQueryTrace(queryTraceId, 'Reranker', 'SUCCESS', {
+      input: Array.from(rrfMap.values()),
+      output: top5
+    });
+  }
+
+  logger.rag(`Merged top ${top5.length} chunks via RRF.`);
   
   broadcastToWorkspace(String(workspaceId), 'COGNITIVE_ROUTING_COMPLETE', {
     workspaceId,
@@ -461,8 +514,12 @@ export async function retrieveContext(workspaceId, queryText) {
     vaultCount: vaultResults.length,
     totalMerged: merged.length
   });
+
+  if (queryTraceId) {
+    updateQueryTrace(queryTraceId, 'Knowledge Graph Expansion', 'START', { input: top5 });
+  }
   
-  return top5.map((chunk, idx) => {
+  const formattedResults = top5.map((chunk, idx) => {
     let finalContent = chunk.content || chunk.markdown || "";
     
     const foundEntities = extractEntitiesFromText(finalContent);
@@ -491,20 +548,55 @@ export async function retrieveContext(workspaceId, queryText) {
       markdown: `## [${idx + 1}] ${chunk.title}\n> **Platform:** ${chunk.platform} | **Authority Coefficient:** ${chunk.authorityCoeff} | **Score:** ${chunk.weightedScore}\n\n${finalContent}\n`
     };
   });
+
+  if (queryTraceId) {
+    updateQueryTrace(queryTraceId, 'Knowledge Graph Expansion', 'SUCCESS', {
+      input: top5,
+      output: formattedResults
+    });
+  }
+
+  return formattedResults;
 }
 
-export async function upsertVector(workspaceId, text, channelName) {
-  console.log(`📥 [Retrieval Service] Ingesting intel chunk for Workspace ${workspaceId}, Channel ${channelName}...`);
+export async function upsertVector(workspaceId, text, channelName, metadata = {}) {
+  const traceId = metadata.traceId;
+  logger.rag(`Ingesting intel chunk for Workspace ${workspaceId}, Channel ${channelName}...`);
   try {
     let embedding;
+    if (traceId) {
+      updateIngestionTrace(traceId, 'Embedding', 'START', { input: text });
+    }
+
     try {
       embedding = await generateEmbedding(text);
+      if (traceId) {
+        updateIngestionTrace(traceId, 'Embedding', 'SUCCESS', {
+          input: text,
+          output: `Generated ${embedding.length}-dimension vector embedding`
+        });
+      }
     } catch (e) {
+      if (process.env.NODE_ENV === 'production') {
+        console.error(`❌ [Retrieval Service Ingest] Embedding generation failed in production:`, e.message);
+        throw e;
+      }
       console.warn(`⚠️ [Retrieval Service Ingest] Gemini embedding generation failed, using mock embedding:`, e.message);
       // Fallback mock embedding: 768 dimensions
       embedding = new Array(768).fill(0).map(() => Math.random());
       const magnitude = Math.sqrt(embedding.reduce((sum, val) => sum + val * val, 0));
       embedding = embedding.map(val => val / magnitude);
+      if (traceId) {
+        updateIngestionTrace(traceId, 'Embedding', 'SUCCESS', {
+          input: text,
+          output: 'Generated 768-dimension fallback mock embedding',
+          metadata: { error: e.message }
+        });
+      }
+    }
+
+    if (traceId) {
+      updateIngestionTrace(traceId, 'Vector Store', 'START', { input: text });
     }
 
     // Determine platform
@@ -531,8 +623,23 @@ export async function upsertVector(workspaceId, text, channelName) {
         `[${embedding.join(',')}]`
       ]
     );
-    console.log(`✅ [Retrieval Service Ingest] Successfully stored chunk in workspace_intel_chunks.`);
+    liveMetrics.totalChunks++;
+
+    if (traceId) {
+      updateIngestionTrace(traceId, 'Vector Store', 'SUCCESS', {
+        input: text,
+        output: 'Stored successfully in PostgreSQL workspace_intel_chunks',
+        metadata: { platform, weight }
+      });
+    }
+    logger.vector(`Successfully stored chunk in workspace_intel_chunks.`);
   } catch (err) {
-    console.error(`❌ [Retrieval Service Ingest] Failed to insert chunk:`, err.message);
+    if (traceId) {
+      updateIngestionTrace(traceId, 'Vector Store', 'FAILED', {
+        input: text,
+        error: err.message
+      });
+    }
+    logger.error(`Failed to insert chunk: ${err.message}`);
   }
 }

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "organization": {
+    "name": "Helios Software Inc.",
+    "slug": "helios",
+    "industry": "B2B Enterprise SaaS",
+    "size": 450
+  },
+  "datasets": [
+    {
+      "type": "company",
+      "file": "datasets/company.json"
+    },
+    {
+      "type": "summary",
+      "file": "datasets/summary.json"
+    },
+    {
+      "type": "departments",
+      "file": "datasets/departments.json"
+    },
+    {
+      "type": "employees",
+      "file": "datasets/employees.json"
+    },
+    {
+      "type": "customers",
+      "file": "datasets/customers.json"
+    },
+    {
+      "type": "repositories",
+      "file": "datasets/repositories.json"
+    },
+    {
+      "type": "commits",
+      "file": "datasets/commits.json"
+    },
+    {
+      "type": "pull_requests",
+      "file": "datasets/pull_requests.json"
+    },
+    {
+      "type": "jira_issues",
+      "file": "datasets/jira_issues.json"
+    },
+    {
+      "type": "emails",
+      "file": "datasets/emails.json"
+    },
+    {
+      "type": "slack_threads",
+      "file": "datasets/slack_threads.json"
+    },
+    {
+      "type": "calendar_events",
+      "file": "datasets/calendar_events.json"
+    },
+    {
+      "type": "meetings",
+      "file": "datasets/meetings.json"
+    },
+    {
+      "type": "meeting_transcripts",
+      "file": "datasets/meeting_transcripts.json"
+    },
+    {
+      "type": "incidents",
+      "file": "datasets/incidents.json"
+    },
+    {
+      "type": "documents",
+      "file": "datasets/documents.json"
+    },
+    {
+      "type": "timeline",
+      "file": "datasets/timeline.json"
+    },
+    {
+      "type": "memory",
+      "file": "datasets/memory.json"
+    },
+    {
+      "type": "executive_reports",
+      "file": "datasets/executive_reports.json"
+    },
+    {
+      "type": "knowledgeGraph",
+      "file": "datasets/knowledgeGraph.json"
+    },
+    {
+      "type": "permissions",
+      "file": "datasets/permissions.json"
+    }
+  ]
+}

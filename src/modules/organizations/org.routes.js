@@ -60,4 +60,56 @@ router.post('/workspaces', authorize('OWNER', 'ADMIN'), async (req, res, next) =
   }
 });
 
+/**
+ * DELETE /api/org/workspaces/:externalId
+ * Delete a workspace. OWNER/ADMIN only.
+ */
+router.delete('/workspaces/:externalId', authorize('OWNER', 'ADMIN'), async (req, res, next) => {
+  try {
+    const result = await orgService.deleteWorkspace(req.user.orgId, req.params.externalId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * POST /api/org/workspaces/:externalId/archive
+ * Archive a workspace. OWNER/ADMIN only.
+ */
+router.post('/workspaces/:externalId/archive', authorize('OWNER', 'ADMIN'), async (req, res, next) => {
+  try {
+    const result = await orgService.archiveWorkspace(req.user.orgId, req.params.externalId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * POST /api/org/workspaces/:externalId/clone
+ * Clone a workspace. OWNER/ADMIN only.
+ */
+router.post('/workspaces/:externalId/clone', authorize('OWNER', 'ADMIN'), async (req, res, next) => {
+  try {
+    const workspace = await orgService.cloneWorkspace(req.user.orgId, req.params.externalId, req.body);
+    res.json(workspace);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * GET /api/org/workspaces/:externalId/health
+ * Fetch workspace health diagnostics.
+ */
+router.get('/workspaces/:externalId/health', async (req, res, next) => {
+  try {
+    const health = await orgService.getWorkspaceHealth(req.user.orgId, req.params.externalId);
+    res.json(health);
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default { routes: router, prefix: '/api/org' };

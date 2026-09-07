@@ -25,7 +25,7 @@ router.post('/connect', initiateConnection);
  * @desc Receives raw webhook triggers from Composio (Slack/Gmail) and routes them through the cognitive privacy gate
  */
 router.post('/webhook', async (req, res) => {
-  const workspaceId = req.body?.workspaceId || "workspace_corp_alpha";
+  const workspaceId = req.body?.workspaceId || "";
 
   // Extract the sender, channel/subject, and the text message payload
   const sender = req.body.sender || req.body.user || req.body.from || 'System';
@@ -55,18 +55,14 @@ router.post('/webhook', async (req, res) => {
 
 // Quick direct simulation endpoint to force a dashboard print
 router.get('/test-trigger', async (req, res) => {
+    const workspaceId = req.query.workspaceId || req.headers['workspace-id'];
+    if (!workspaceId) return res.status(400).json({ error: 'workspace-id required' });
     try {
-        const workspaceId = "workspace_corp_alpha"; 
-        // Completely safe text to bypass the privacy filter and test RAG indexation
         const mockText = "Flow OS engineering architecture utilizes an event-driven control mesh. The backend runs on Node.js port 5001 and handles semantic chunking internally.";
         const source = "slack-test";
-
-        console.log("⚡ Forcing artificial Safe Slack trigger into pipeline...");
         const processingResult = await processStream(workspaceId, mockText, source);
-        
         return res.status(200).json({ status: "forced_success", processingResult });
     } catch (error) {
-        console.error("❌ Test route error:", error);
         return res.status(500).json({ error: error.message });
     }
 });
@@ -76,7 +72,8 @@ router.get('/test-trigger', async (req, res) => {
  * @desc Generate Google OAuth consent URL for Gmail read access
  */
 router.get('/gmail/auth', (req, res) => {
-  const workspaceId = req.query.workspaceId || 'workspace_corp_alpha';
+  const workspaceId = req.query.workspaceId || '';
+  if (!workspaceId) return res.status(400).json({ error: 'Missing workspace-id' });
   const url = generateAuthUrl(workspaceId);
   res.redirect(url);
 });
@@ -87,9 +84,10 @@ router.get('/gmail/auth', (req, res) => {
  */
 router.get('/gmail/callback', async (req, res) => {
   const code = req.query.code;
-  const workspaceId = req.query.state || 'workspace_corp_alpha';
-  
+  const workspaceId = req.query.state || '';
+
   if (!code) return res.status(400).send('Missing auth code');
+  if (!workspaceId) return res.status(400).send('Missing workspace state parameter');
   
   try {
     await handleCallback(code, workspaceId);
@@ -105,7 +103,7 @@ router.get('/gmail/callback', async (req, res) => {
  * @desc Manually trigger Gmail background poller for a workspace
  */
 router.post('/gmail/sync', async (req, res) => {
-  const workspaceId = req.body.workspaceId || 'workspace_corp_alpha';
+  const workspaceId = req.body.workspaceId || '';
   try {
     const result = await syncGmailInbox(workspaceId);
     res.json(result);
@@ -119,7 +117,7 @@ router.post('/gmail/sync', async (req, res) => {
  * @desc Manually trigger Calendar background poller for a workspace
  */
 router.post('/calendar/sync', async (req, res) => {
-  const workspaceId = req.body.workspaceId || 'workspace_corp_alpha';
+  const workspaceId = req.body.workspaceId || '';
   try {
     const result = await syncWorkspaceCalendar(workspaceId);
     res.json(result);
@@ -139,7 +137,7 @@ router.post('/calendar/sync', async (req, res) => {
  * @access Private (multi-tenant isolated by workspaceId)
  */
 router.post('/query', async (req, res) => {
-  const { query, workspaceId = 'workspace_corp_alpha' } = req.body;
+  const { query, workspaceId = '' } = req.body;
 
   // Guard: query string is mandatory
   if (!query || typeof query !== 'string' || query.trim() === '') {

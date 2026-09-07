@@ -13,7 +13,12 @@ export const EntityTypes = {
   INCIDENT: 'INCIDENT',
   DECISION: 'DECISION',
   TEAM: 'TEAM',
-  EVENT: 'EVENT'
+  EVENT: 'EVENT',
+  ISSUE: 'ISSUE',
+  PROJECT: 'PROJECT',
+  CUSTOMER: 'CUSTOMER',
+  DEPARTMENT: 'DEPARTMENT',
+  OPPORTUNITY: 'OPPORTUNITY'
 };
 
 export function registerEntity(id, type, name) {
@@ -101,4 +106,12 @@ export function extractEntitiesFromText(text) {
     }
   }
   return foundEntities;
+}
+
+export function getGraphMetrics() {
+  return {
+    nodesCount: nodes.size,
+    edgesCount: Array.from(adjacencyList.values()).reduce((sum, list) => sum + list.length, 0) / 2,
+    nodes: Array.from(nodes.values())
+  };
 }

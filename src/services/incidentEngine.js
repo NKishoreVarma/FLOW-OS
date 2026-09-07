@@ -1,5 +1,8 @@
 import { broadcastToWorkspace } from './socketService.js';
+import { eventBus } from '../core/events/eventBus.js';
 import crypto from 'crypto';
+import { saveMemory } from './orgMemoryService.js';
+import db from '../config/db.js';
 
 export const incidentDatabase = [];
 
@@ -39,6 +42,19 @@ export function detectIncidents(workspaceId, text, metadata) {
     };
     
     incidentDatabase.push(incident);
+    // Persist incident to durable store — fire and forget
+    db.query('SELECT org_id FROM workspaces WHERE external_id = $1 LIMIT 1', [String(workspaceId)])
+      .then(({ rows }) => {
+        if (rows[0]) {
+          return saveMemory(String(workspaceId), rows[0].org_id, 'INCIDENT', {
+            title: incident.title,
+            body: JSON.stringify(incident),
+            source: metadata?.platform || 'system',
+            importance: incident.severity === 'CRITICAL' ? 0.95 : 0.8
+          });
+        }
+      })
+      .catch(() => {});
     const eventType = isOutage ? 'INCIDENT_CREATED' : 'RISK_DETECTED';
     // Broadcast with both underscore and camelCase keys for downstream compatibility
     broadcastToWorkspace(String(workspaceId), eventType, {
@@ -46,7 +62,8 @@ export function detectIncidents(workspaceId, text, metadata) {
       incidentId: incident.incident_id,
       incidentName: incident.title
     });
-    
+    eventBus.emit(eventType, { workspaceId: String(workspaceId), incidentId: incident.incident_id, severity: incident.severity, title: incident.title, platform: metadata?.platform || 'system' });
+
     console.log(`🔥 [Incident Engine] ${severity} Incident Detected: ${incident_id}`);
     return incident;
   }

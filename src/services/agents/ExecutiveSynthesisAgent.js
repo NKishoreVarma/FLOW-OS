@@ -18,7 +18,8 @@
  *   }
  */
 
-import { GoogleGenAI } from '@google/genai';
+import { ask } from '../../ai/BrainRouter.js';
+import { TaskType } from '../../ai/types.js';
 
 // ── Prompt builders ───────────────────────────────────────────────────────────
 
@@ -152,39 +153,27 @@ export async function synthesize(queryText, validChunks, routerResult, criticSum
     };
   }
 
-  // ── Attempt Gemini synthesis ──────────────────────────────────────────────
-  if (process.env.GEMINI_API_KEY) {
-    try {
-      const prompt = buildPrompt(queryText, validChunks, routerResult, criticSummary);
-
-      const aiOptions = { apiKey: process.env.GEMINI_API_KEY };
-      if (process.env.GEMINI_BASE_URL) {
-        aiOptions.httpOptions = { baseUrl: process.env.GEMINI_BASE_URL };
-      }
-      const ai = new GoogleGenAI(aiOptions);
-      const response = await ai.models.generateContent({
-        model:    'gemini-2.5-flash',
-        contents: prompt,
-      });
-
-      const answer = (response.text || '').trim();
-
-      console.log(`✅ [ExecutiveSynthesisAgent] Gemini synthesis complete — ${answer.length} chars from ${activeChunks.length} node(s).`);
-
-      return {
-        answer,
-        modelUsed:      'gemini-2.5-flash',
-        tokensConsumed: answer.length,
-        synthesisNotes: (
-          `Synthesized from ${activeChunks.length} validated node(s) across domain [${routerResult.primaryDomain}]. ` +
-          `${validChunks.length - activeChunks.length} node(s) deprecated by CriticAgent.`
-        ),
-      };
-    } catch (geminiErr) {
-      console.warn(`⚠️ [ExecutiveSynthesisAgent] Gemini call failed: ${geminiErr.message}. Falling back to local brief.`);
-    }
-  } else {
-    console.warn(`⚠️ [ExecutiveSynthesisAgent] GEMINI_API_KEY not set — using local Markdown fallback.`);
+  // ── AI synthesis via provider layer (Ollama → Gemini fallback) ──────────
+  try {
+    const prompt = buildPrompt(queryText, validChunks, routerResult, criticSummary);
+    const result = await ask({
+      taskType: TaskType.LONG_SYNTHESIS,
+      messages: [{ role: 'user', content: prompt }],
+      maxTokens: 1024,
+      temperature: 0.3,
+    });
+    const answer = (result.text || '').trim();
+    return {
+      answer,
+      modelUsed:      `${result.provider}/${result.model}`,
+      tokensConsumed: answer.length,
+      synthesisNotes: (
+        `Synthesized from ${activeChunks.length} validated node(s) across domain [${routerResult.primaryDomain}]. ` +
+        `${validChunks.length - activeChunks.length} node(s) deprecated by CriticAgent.`
+      ),
+    };
+  } catch (synthErr) {
+    console.warn(`⚠️ [ExecutiveSynthesisAgent] AI synthesis failed: ${synthErr.message}. Using local fallback.`);
   }
 
   // ── Local structured fallback ─────────────────────────────────────────────

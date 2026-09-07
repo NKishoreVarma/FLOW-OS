@@ -1,5 +1,6 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { embed as brainEmbed } from '../ai/BrainRouter.js';
 import crypto from 'crypto';
+import { chunkText } from './parserService.js';
 
 // ── Module-level global vector database ──────────────────────────────────────
 export const vectorDatabase = [];
@@ -119,46 +120,17 @@ function resolveTopicCluster(workspaceId, vector, text) {
   return newCluster.topicId;
 }
 
-/**
- * Slices text into overlapping chunks of a specified maximum length.
- *
- * @param {string} text       - Input text content to slice
- * @param {number} maxLength  - Max characters per block
- * @param {number} overlap    - Overlapping character count
- * @returns {string[]} Array of text chunks
- */
-export function chunkText(text, maxLength = 500, overlap = 100) {
-  if (!text) return [];
-  if (text.length <= maxLength) return [text];
-
-  const chunks = [];
-  let start = 0;
-
-  while (start < text.length) {
-    chunks.push(text.slice(start, start + maxLength));
-    start += (maxLength - overlap);
-  }
-
-  return chunks;
-}
+export { chunkText };
 
 /**
- * Generates a vector embedding array using the GoogleGenerativeAI text-embedding-004 model.
+ * Generates a vector embedding array using the GoogleGenAI gemini-embedding-2 model.
  *
  * @param {string} text - Content to vectorize
  * @returns {Promise<number[]>} Float array of size 768
  */
 export async function generateEmbedding(text) {
-  if (!process.env.GEMINI_API_KEY) {
-    throw new Error('GEMINI_API_KEY is not defined in environment variables.');
-  }
-
-  const aiOptions = process.env.GEMINI_BASE_URL ? { baseUrl: process.env.GEMINI_BASE_URL } : {};
-  const genAI  = new GoogleGenerativeAI(process.env.GEMINI_API_KEY, aiOptions);
-  const model  = genAI.getGenerativeModel({ model: 'text-embedding-004' });
-  const result = await model.embedContent(text);
-
-  const values = result?.embedding?.values;
+  const response = await brainEmbed(text);
+  const values = response.values;
   if (!Array.isArray(values) || values.length === 0) {
     throw new Error('[Vector Store Service] Failed to retrieve valid embedding values.');
   }
@@ -185,6 +157,10 @@ export async function storeKnowledge(workspaceId, rawText, source) {
     try {
       vector = await generateEmbedding(chunk);
     } catch (error) {
+      if (process.env.NODE_ENV === 'production') {
+        console.error(`❌ [Vector Store] Embedding failed in production:`, error.message);
+        throw error;
+      }
       console.warn(`⚠️ [Vector Store] Embedding failed: ${error.message}. Using normalised random fallback.`);
       vector = new Array(768).fill(0).map(() => Math.random());
       const mag = Math.sqrt(vector.reduce((s, v) => s + v * v, 0));
@@ -226,6 +202,10 @@ export async function queryKnowledge(workspaceId, queryString, topK = 3) {
   try {
     queryVector = await generateEmbedding(queryString);
   } catch (error) {
+    if (process.env.NODE_ENV === 'production') {
+      console.error(`❌ [Vector Store] Query embedding failed in production:`, error.message);
+      throw error;
+    }
     console.warn(`⚠️ [Vector Store] Query embedding failed: ${error.message}. Using normalised random fallback.`);
     queryVector = new Array(768).fill(0).map(() => Math.random());
     const mag   = Math.sqrt(queryVector.reduce((s, v) => s + v * v, 0));

@@ -1,0 +1,70 @@
+/* Tailwind CSS Baseline */
+@import "tailwindcss";
+
+/* Custom Design System Tokens & Classes (Imports must appear first) */
+@import "./typography.css";
+@import "./colors.css";
+@import "./spacing.css";
+@import "./animations.css";
+@import "./tokens.css";
+
+/* ─── Base resets ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background:  var(--surface-0);
+  color:       var(--t1);
+  font-family: var(--font-ui);
+  font-size:   14px;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Radius clamp — nothing above 10px ───────────────────────────────────── */
+.rounded-xl  { border-radius: 8px !important; }
+.rounded-2xl { border-radius: 10px !important; }
+.rounded-3xl { border-radius: 10px !important; }
+.rounded-full { border-radius: 9999px !important; }
+
+/* ─── Slim scrollbars ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(31,27,22,0.14); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(31,27,22,0.26); }
+
+/* ─── Text selection ──────────────────────────────────────────────────────── */
+::selection { background: rgba(232,103,43,0.20); color: var(--t1); }
+
+/* ─── Focus ring ──────────────────────────────────────────────────────────── */
+:focus-visible { outline: 1.5px solid rgba(232,103,43,0.50); outline-offset: 2px; border-radius: 2px; }
+
+/* ─── Global keyframes ────────────────────────────────────────────────────── */
+@keyframes shimmer-sweep {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes event-slide-in {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ─── Reduced motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

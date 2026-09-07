@@ -1,5 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
+import os from 'os';
+
+const VAULT_ROOT = process.env.VAULT_ROOT ?? path.join(os.homedir(), 'FLOW-OS-VAULTS');
 
 /**
  * Saves filtered Markdown text files directly into workspace-sandboxed structures on the Desktop.
@@ -15,7 +18,7 @@ export async function saveToVault(workspaceId, channelName, content, metadata = 
     throw new Error('workspaceId is required to write to corporate vaults.');
   }
   const cleanChannel = String(channelName || 'general').replace(/[^a-zA-Z0-9_-]/g, '_');
-  const vaultDir = `/Users/kishorevarma/Desktop/FLOW-OS-VAULTS/workspace_${workspaceId}/${cleanChannel}`;
+  const vaultDir = path.join(VAULT_ROOT, `workspace_${workspaceId}`, cleanChannel);
 
   // Recursively create directory structure matching sandbox path
   await fs.mkdir(vaultDir, { recursive: true });

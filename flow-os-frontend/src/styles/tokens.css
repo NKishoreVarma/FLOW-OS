@@ -1,0 +1,145 @@
+@theme {
+  /* ─── Surface backgrounds ────────────────────────────────────────────── */
+  --color-bg-primary:   var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card:      var(--bg-card);
+  --color-bg-hover:     var(--bg-hover);
+  --color-bg-rail:      var(--bg-rail);
+  --color-bg-panel:     var(--bg-panel);
+  --color-bg-selected:  var(--bg-selected);
+  --color-bg-input:     var(--bg-input);
+
+  /* Raw layers */
+  --color-bg-0: var(--bg-0);
+  --color-bg-1: var(--bg-1);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-bg-4: var(--bg-4);
+
+  /* ─── Borders / grid lines ──────────────────────────────────────────── */
+  --color-border-flow:   var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-border-focus:  var(--border-focus);
+  --color-line:          var(--line);
+  --color-line-strong:   var(--line-strong);
+  --color-line-accent:   var(--line-accent);
+
+  /* ─── Typography ────────────────────────────────────────────────────── */
+  --color-text-primary:   var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted:     var(--text-muted);
+  --color-text-link:      var(--text-link);
+  --color-t1: var(--t1);
+  --color-t2: var(--t2);
+  --color-t3: var(--t3);
+  --color-t4: var(--t4);
+
+  /* ─── Brand ─────────────────────────────────────────────────────────── */
+  --color-flow-purple:     var(--color-flow-purple);
+  --color-flow-purple-dim: var(--color-flow-purple-dim);
+  --color-flow-purple-mid: var(--color-flow-purple-mid);
+  --color-brand:           var(--brand);
+  --color-brand-2:         var(--brand-2);
+  --color-brand-dim:       var(--brand-dim);
+  --color-brand-line:      var(--brand-line);
+
+  /* ─── Semantic status ───────────────────────────────────────────────── */
+  --color-critical:    var(--color-critical);
+  --color-warning:     var(--color-warning);
+  --color-success:     var(--color-success);
+  --color-info:        var(--color-info);
+
+  /* Priority system */
+  --color-p-critical:     var(--p-critical);
+  --color-p-critical-dim: var(--p-critical-dim);
+  --color-p-high:         var(--p-high);
+  --color-p-high-dim:     var(--p-high-dim);
+  --color-p-normal:       var(--p-normal);
+  --color-p-normal-dim:   var(--p-normal-dim);
+  --color-p-info:         var(--p-info);
+  --color-p-info-dim:     var(--p-info-dim);
+
+  /* ─── Source dot colors ─────────────────────────────────────────────── */
+  --color-source-github:   var(--source-github);
+  --color-source-gmail:    var(--source-gmail);
+  --color-source-calendar: var(--source-calendar);
+  --color-source-slack:    var(--source-slack);
+  --color-source-jira:     var(--source-jira);
+  --color-source-ai:       var(--source-ai);
+  --color-source-auto:     var(--source-auto);
+
+  /* ─── Spacing ────────────────────────────────────────────────────────── */
+  --spacing-1:  var(--space-xxs);
+  --spacing-2:  var(--space-xs);
+  --spacing-3:  var(--space-sm);
+  --spacing-4:  var(--space-md);
+  --spacing-6:  var(--space-lg);
+  --spacing-8:  var(--space-xl);
+  --spacing-12: var(--space-xxl);
+  --spacing-16: var(--space-xxxl);
+
+  /* ─── Radius ─────────────────────────────────────────────────────────── */
+  --radius-xs:   var(--radius-xs);
+  --radius-sm:   var(--radius-sm);
+  --radius-md:   var(--radius-md);
+  --radius-lg:   var(--radius-lg);
+  --radius-xl:   var(--radius-xl);
+
+  /* ─── Surface utility tokens ────────────────────────────────────────── */
+  --surface-subtle:   rgba(31,27,22,0.04);   /* button/chip background — barely visible tint */
+  --surface-ghost:    rgba(31,27,22,0.03);   /* skeleton placeholder background */
+  --surface-shine:    rgba(255,255,255,0.55);/* shimmer sweep highlight */
+  --surface-ghost-2:  rgba(31,27,22,0.03);   /* alias for surface-ghost */
+  --surface-ghost-3:  rgba(31,27,22,0.04);   /* alias for surface-subtle */
+  --surface-code:     rgba(31,27,22,0.05);   /* pre/code block background */
+
+  /* ─── Brand tint variants — burnt orange tints ───────────────────────── */
+  --brand-subtle:       rgba(232,103,43,0.10);  /* badge/pill background — between dim and glow */
+  --brand-glass:        rgba(232,103,43,0.06);  /* subtle accent-tinted surface */
+  --brand-glass-border: rgba(232,103,43,0.20);  /* border for accent glass surfaces */
+  --brand-line:         rgba(232,103,43,0.28);  /* accent divider / blockquote border */
+  --brand-hover-bg:     rgba(232,103,43,0.06);  /* chip / link hover background */
+  --brand-hover-border: rgba(232,103,43,0.35);  /* chip / link hover border */
+  --brand-muted:        rgba(232,103,43,0.04);  /* micro-delight / joke tinted bg */
+  --brand-muted-border: rgba(232,103,43,0.14);  /* muted accent border */
+
+  /* ─── Tone-aware avatar system ───────────────────────────────────────── */
+  --tone-celebratory-bg:     rgba(30, 127, 79, 0.10);
+  --tone-celebratory-border: rgba(30, 127, 79, 0.25);
+  --tone-serious-bg:         rgba(194, 58, 38, 0.08);
+  --tone-serious-border:     rgba(194, 58, 38, 0.22);
+  --tone-relaxed-bg:         rgba(232, 103, 43, 0.08);
+  --tone-relaxed-border:     rgba(232, 103, 43, 0.22);
+  --tone-energetic-bg:       rgba(169, 106, 11, 0.10);
+  --tone-energetic-border:   rgba(169, 106, 11, 0.25);
+  --tone-calm-bg:            rgba(42, 95, 168, 0.07);
+  --tone-calm-border:        rgba(42, 95, 168, 0.18);
+  --tone-normal-bg:          rgba(232, 103, 43, 0.08);
+  --tone-normal-border:      rgba(232, 103, 43, 0.22);
+
+  /* ─── Risk chip tokens (ActionCard RiskChip) ───────────────────────── */
+  --risk-low-bg:       var(--p-normal-dim);
+  --risk-low-border:   var(--p-normal-line);
+  --risk-low-text:     var(--p-normal-text);
+
+  --risk-medium-bg:    var(--p-info-dim);
+  --risk-medium-border:var(--p-info-line);
+  --risk-medium-text:  var(--p-info-text);
+
+  --risk-high-bg:      var(--p-high-dim);
+  --risk-high-border:  var(--p-high-line);
+  --risk-high-text:    var(--p-high-text);
+
+  --risk-critical-bg:      var(--p-critical-dim);
+  --risk-critical-border:  var(--p-critical-line);
+  --risk-critical-text:    var(--p-critical-text);
+
+  /* ─── Animations ─────────────────────────────────────────────────────── */
+  --animate-fade-in:     fade-in 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-up:    slide-up 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-scale-in:    scale-in 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-right: slide-right 0.3s ease-out;
+  --animate-glow-pulse:  glow-pulse 2s ease-in-out infinite;
+  --animate-shimmer:     shimmer 1.5s ease-in-out infinite;
+  --animate-float:       float 3s ease-in-out infinite;
+}

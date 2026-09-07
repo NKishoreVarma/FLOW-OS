@@ -1,0 +1,61 @@
+export default {
+  id: 'gmail.schedule_email',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'gmail',
+  category: 'communication',
+  displayName: 'Schedule Email',
+  description: 'Creates a Gmail draft and stores a scheduled send time in extended properties. The email is sent by a downstream step or external trigger at the specified time.',
+  icon: 'clock',
+  tags: ['email', 'gmail', 'schedule', 'draft', 'deferred', 'automation'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['https://www.googleapis.com/auth/gmail.compose'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 1500,
+  timeoutMs: 10000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 500, maxDelayMs: 4000,
+    jitterPercent: 10, retryOn: ['RATE_LIMIT', 'TIMEOUT'], noRetryOn: ['UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: true, type: 'COMPENSATING', compensatingActionId: 'gmail.archive_email',
+    description: 'Trash the draft to cancel the scheduled send.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.draftId != null' },
+  requiredInputs: [
+    { name: 'to',          type: 'string', description: 'Recipient email address(es)', example: 'customer@acme.corp' },
+    { name: 'subject',     type: 'string', maxLength: 998, description: 'Email subject' },
+    { name: 'body',        type: 'string', maxLength: 524288, description: 'Email body' },
+    { name: 'scheduledAt', type: 'string', description: 'ISO 8601 datetime to send at', example: '2026-08-01T09:00:00Z' },
+  ],
+  optionalInputs: [
+    { name: 'cc',       type: 'string', description: 'CC addresses' },
+    { name: 'bodyHtml', type: 'string', description: 'HTML version of body' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Scheduled draft confirmation',
+    properties: {
+      draftId:     { type: 'string', description: 'Gmail draft ID' },
+      scheduledAt: { type: 'string', description: 'Scheduled send time (ISO)' },
+      status:      { type: 'string', description: '"scheduled"' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'email_draft', resourceIdField: 'to', actionVerb: 'scheduled',
+    sensitivityLevel: 'CONFIDENTIAL', retainForDays: 90, complianceTags: [],
+  },
+  telemetryMetadata: {
+    eventName: 'action.gmail.schedule_email',
+    successMetric: 'flow.action.gmail.schedule_email.success',
+    failureMetric: 'flow.action.gmail.schedule_email.failure',
+    durationMetric: 'flow.action.gmail.schedule_email.duration_ms',
+    dimensions: ['connector', 'workspace_id'],
+  },
+  relatedActions: ['gmail.draft_email', 'gmail.send_email'],
+};

@@ -1,0 +1,61 @@
+export default {
+  id: 'jira.create_subtask',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'jira',
+  category: 'project',
+  displayName: 'Create Jira Subtask',
+  description: 'Creates a subtask under an existing Jira issue to break down work into smaller units.',
+  icon: 'git-branch',
+  tags: ['jira', 'subtask', 'child', 'breakdown', 'decompose', 'task'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['write:jira-work'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 2000,
+  timeoutMs: 15000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 1000, maxDelayMs: 8000,
+    jitterPercent: 10, retryOn: ['RATE_LIMIT', 'TIMEOUT'], noRetryOn: ['PARENT_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: true, type: 'COMPENSATING', compensatingActionId: 'jira.close_issue',
+    description: 'Close and delete the created subtask.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.id != null' },
+  requiredInputs: [
+    { name: 'projectKey', type: 'string', description: 'Jira project key', example: 'HPLT' },
+    { name: 'parent',     type: 'string', description: 'Parent issue key', example: 'HPLT-205' },
+    { name: 'title',      type: 'string', maxLength: 255, description: 'Subtask summary' },
+  ],
+  optionalInputs: [
+    { name: 'description', type: 'string', maxLength: 32767, description: 'Subtask description' },
+    { name: 'assignee',   type: 'string', description: 'Assignee' },
+    { name: 'priority',   type: 'enum', enum: ['Highest', 'High', 'Medium', 'Low', 'Lowest'], description: 'Priority' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Created subtask',
+    properties: {
+      id:     { type: 'string', description: 'Subtask ID' },
+      key:    { type: 'string', description: 'Subtask key' },
+      parent: { type: 'string', description: 'Parent issue key' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'jira_issue', resourceIdField: 'parent', actionVerb: 'subtask_created',
+    sensitivityLevel: 'INTERNAL', retainForDays: 365, complianceTags: [],
+  },
+  telemetryMetadata: {
+    eventName: 'action.jira.create_subtask',
+    successMetric: 'flow.action.jira.create_subtask.success',
+    failureMetric: 'flow.action.jira.create_subtask.failure',
+    durationMetric: 'flow.action.jira.create_subtask.duration_ms',
+    dimensions: ['connector', 'workspace_id'],
+  },
+  relatedActions: ['jira.create_issue', 'jira.assign_issue'],
+};

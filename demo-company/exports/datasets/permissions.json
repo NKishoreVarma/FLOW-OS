@@ -1,0 +1,8066 @@
+[
+  {
+    "id": "perm-0001",
+    "employeeId": "emp-001",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2019-09-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0002",
+    "employeeId": "emp-001",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2019-09-05",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0003",
+    "employeeId": "emp-001",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2019-09-05",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0004",
+    "employeeId": "emp-001",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2019-09-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0005",
+    "employeeId": "emp-001",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2019-09-05",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0006",
+    "employeeId": "emp-001",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2019-09-05",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0007",
+    "employeeId": "emp-001",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2019-09-05",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0008",
+    "employeeId": "emp-002",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-12-01",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0009",
+    "employeeId": "emp-002",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-12-01",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0010",
+    "employeeId": "emp-002",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-12-01",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0011",
+    "employeeId": "emp-003",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-12-08",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0012",
+    "employeeId": "emp-004",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-05-18",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0013",
+    "employeeId": "emp-005",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-01-31",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0014",
+    "employeeId": "emp-006",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-05-19",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0015",
+    "employeeId": "emp-006",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-05-19",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0016",
+    "employeeId": "emp-006",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-05-19",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0017",
+    "employeeId": "emp-007",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-06-15",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0018",
+    "employeeId": "emp-007",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-06-15",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0019",
+    "employeeId": "emp-008",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-01-25",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0020",
+    "employeeId": "emp-009",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2019-05-31",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0021",
+    "employeeId": "emp-009",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2019-05-31",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0022",
+    "employeeId": "emp-009",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2019-05-31",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0023",
+    "employeeId": "emp-009",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2019-05-31",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0024",
+    "employeeId": "emp-009",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2019-05-31",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0025",
+    "employeeId": "emp-009",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2019-05-31",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0026",
+    "employeeId": "emp-009",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2019-05-31",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0027",
+    "employeeId": "emp-010",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-12-03",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0028",
+    "employeeId": "emp-010",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-12-03",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0029",
+    "employeeId": "emp-011",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-07-22",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0030",
+    "employeeId": "emp-012",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-10-10",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0031",
+    "employeeId": "emp-013",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-10-30",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0032",
+    "employeeId": "emp-013",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-10-30",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0033",
+    "employeeId": "emp-013",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-10-30",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0034",
+    "employeeId": "emp-014",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-01-18",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0035",
+    "employeeId": "emp-014",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-01-18",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0036",
+    "employeeId": "emp-014",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-01-18",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0037",
+    "employeeId": "emp-015",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-10-01",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0038",
+    "employeeId": "emp-015",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-10-01",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0039",
+    "employeeId": "emp-015",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-10-01",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0040",
+    "employeeId": "emp-016",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-01-20",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0041",
+    "employeeId": "emp-016",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-01-20",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0042",
+    "employeeId": "emp-017",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-07-05",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0043",
+    "employeeId": "emp-018",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-12-03",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0044",
+    "employeeId": "emp-018",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-12-03",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0045",
+    "employeeId": "emp-019",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-01-09",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0046",
+    "employeeId": "emp-019",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-01-09",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0047",
+    "employeeId": "emp-019",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-01-09",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0048",
+    "employeeId": "emp-020",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-02-15",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0049",
+    "employeeId": "emp-020",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-02-15",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0050",
+    "employeeId": "emp-021",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-08-22",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0051",
+    "employeeId": "emp-022",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-07-21",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0052",
+    "employeeId": "emp-022",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-07-21",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0053",
+    "employeeId": "emp-022",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-07-21",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0054",
+    "employeeId": "emp-023",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-04-23",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0055",
+    "employeeId": "emp-023",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-04-23",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0056",
+    "employeeId": "emp-023",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-04-23",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0057",
+    "employeeId": "emp-024",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-10-30",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0058",
+    "employeeId": "emp-024",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-10-30",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0059",
+    "employeeId": "emp-025",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-06-23",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0060",
+    "employeeId": "emp-025",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-06-23",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0061",
+    "employeeId": "emp-026",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-08-20",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0062",
+    "employeeId": "emp-026",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-08-20",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0063",
+    "employeeId": "emp-026",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-08-20",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0064",
+    "employeeId": "emp-027",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-09-01",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0065",
+    "employeeId": "emp-027",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-09-01",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0066",
+    "employeeId": "emp-028",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-04-02",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0067",
+    "employeeId": "emp-029",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-05-03",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0068",
+    "employeeId": "emp-030",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-02-04",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0069",
+    "employeeId": "emp-030",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-02-04",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0070",
+    "employeeId": "emp-031",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-09-03",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0071",
+    "employeeId": "emp-031",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-09-03",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0072",
+    "employeeId": "emp-031",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-09-03",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0073",
+    "employeeId": "emp-032",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-12-06",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0074",
+    "employeeId": "emp-032",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-12-06",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0075",
+    "employeeId": "emp-032",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-12-06",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0076",
+    "employeeId": "emp-033",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-06-30",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0077",
+    "employeeId": "emp-033",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-06-30",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0078",
+    "employeeId": "emp-033",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-06-30",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0079",
+    "employeeId": "emp-034",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-03-16",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0080",
+    "employeeId": "emp-035",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-12-06",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0081",
+    "employeeId": "emp-035",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-12-06",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0082",
+    "employeeId": "emp-036",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-09-13",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0083",
+    "employeeId": "emp-036",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-09-13",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0084",
+    "employeeId": "emp-036",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-09-13",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0085",
+    "employeeId": "emp-037",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-12-31",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0086",
+    "employeeId": "emp-037",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-12-31",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0087",
+    "employeeId": "emp-037",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-12-31",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0088",
+    "employeeId": "emp-038",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-03-06",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0089",
+    "employeeId": "emp-038",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-03-06",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0090",
+    "employeeId": "emp-039",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-01-25",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0091",
+    "employeeId": "emp-040",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-08-21",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0092",
+    "employeeId": "emp-040",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-08-21",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0093",
+    "employeeId": "emp-041",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-12-13",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0094",
+    "employeeId": "emp-042",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-05-04",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0095",
+    "employeeId": "emp-042",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-05-04",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0096",
+    "employeeId": "emp-043",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-03-08",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0097",
+    "employeeId": "emp-043",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-03-08",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0098",
+    "employeeId": "emp-043",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-03-08",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0099",
+    "employeeId": "emp-044",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-12-14",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0100",
+    "employeeId": "emp-044",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-12-14",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0101",
+    "employeeId": "emp-044",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-12-14",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0102",
+    "employeeId": "emp-045",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-02-21",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0103",
+    "employeeId": "emp-045",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-02-21",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0104",
+    "employeeId": "emp-045",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-02-21",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0105",
+    "employeeId": "emp-046",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-03-24",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0106",
+    "employeeId": "emp-046",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-03-24",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0107",
+    "employeeId": "emp-047",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-02-14",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0108",
+    "employeeId": "emp-048",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-03-05",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0109",
+    "employeeId": "emp-048",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-03-05",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0110",
+    "employeeId": "emp-049",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-08-18",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0111",
+    "employeeId": "emp-050",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-07-20",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0112",
+    "employeeId": "emp-050",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-07-20",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0113",
+    "employeeId": "emp-051",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-10-13",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0114",
+    "employeeId": "emp-051",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-10-13",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0115",
+    "employeeId": "emp-051",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-10-13",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0116",
+    "employeeId": "emp-052",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-02-14",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0117",
+    "employeeId": "emp-052",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-02-14",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0118",
+    "employeeId": "emp-052",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-02-14",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0119",
+    "employeeId": "emp-053",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-07-02",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0120",
+    "employeeId": "emp-053",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-07-02",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0121",
+    "employeeId": "emp-053",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-07-02",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0122",
+    "employeeId": "emp-054",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-08-27",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0123",
+    "employeeId": "emp-054",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-08-27",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0124",
+    "employeeId": "emp-055",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-03-29",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0125",
+    "employeeId": "emp-056",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-01-11",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0126",
+    "employeeId": "emp-056",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2025-01-11",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0127",
+    "employeeId": "emp-057",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-03-13",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0128",
+    "employeeId": "emp-057",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-03-13",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0129",
+    "employeeId": "emp-057",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-03-13",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0130",
+    "employeeId": "emp-058",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-09-19",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0131",
+    "employeeId": "emp-059",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-12-30",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0132",
+    "employeeId": "emp-059",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-12-30",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0133",
+    "employeeId": "emp-059",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-12-30",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0134",
+    "employeeId": "emp-060",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-10-07",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0135",
+    "employeeId": "emp-060",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-10-07",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0136",
+    "employeeId": "emp-061",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-06-09",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0137",
+    "employeeId": "emp-061",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-06-09",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0138",
+    "employeeId": "emp-062",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-07-12",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0139",
+    "employeeId": "emp-062",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-07-12",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0140",
+    "employeeId": "emp-062",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-07-12",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0141",
+    "employeeId": "emp-063",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-07-11",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0142",
+    "employeeId": "emp-063",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-07-11",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0143",
+    "employeeId": "emp-063",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-07-11",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0144",
+    "employeeId": "emp-064",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-04-25",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0145",
+    "employeeId": "emp-064",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-04-25",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0146",
+    "employeeId": "emp-064",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-04-25",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0147",
+    "employeeId": "emp-065",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-05-25",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0148",
+    "employeeId": "emp-066",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-02-21",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0149",
+    "employeeId": "emp-066",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-02-21",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0150",
+    "employeeId": "emp-067",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-03-09",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0151",
+    "employeeId": "emp-067",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-03-09",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0152",
+    "employeeId": "emp-068",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-12-05",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0153",
+    "employeeId": "emp-068",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-12-05",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0154",
+    "employeeId": "emp-069",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-02-10",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0155",
+    "employeeId": "emp-069",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-02-10",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0156",
+    "employeeId": "emp-070",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-01-04",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0157",
+    "employeeId": "emp-070",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-01-04",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0158",
+    "employeeId": "emp-071",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-09-06",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0159",
+    "employeeId": "emp-071",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-09-06",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0160",
+    "employeeId": "emp-071",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-09-06",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0161",
+    "employeeId": "emp-072",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-05-02",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0162",
+    "employeeId": "emp-072",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-05-02",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0163",
+    "employeeId": "emp-073",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-03-01",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0164",
+    "employeeId": "emp-073",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-03-01",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0165",
+    "employeeId": "emp-073",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-03-01",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0166",
+    "employeeId": "emp-074",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-07-04",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0167",
+    "employeeId": "emp-074",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-07-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0168",
+    "employeeId": "emp-074",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-07-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0169",
+    "employeeId": "emp-075",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-07-02",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0170",
+    "employeeId": "emp-076",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-08-07",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0171",
+    "employeeId": "emp-077",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-06-05",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0172",
+    "employeeId": "emp-078",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-11-04",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0173",
+    "employeeId": "emp-078",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-11-04",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0174",
+    "employeeId": "emp-079",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-06-25",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0175",
+    "employeeId": "emp-080",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-12-25",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0176",
+    "employeeId": "emp-080",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-12-25",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0177",
+    "employeeId": "emp-080",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-12-25",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0178",
+    "employeeId": "emp-081",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-02-19",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0179",
+    "employeeId": "emp-081",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-02-19",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0180",
+    "employeeId": "emp-082",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-02-20",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0181",
+    "employeeId": "emp-083",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-11-08",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0182",
+    "employeeId": "emp-083",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-11-08",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0183",
+    "employeeId": "emp-083",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-11-08",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0184",
+    "employeeId": "emp-084",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-06-08",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0185",
+    "employeeId": "emp-084",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-06-08",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0186",
+    "employeeId": "emp-084",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-06-08",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0187",
+    "employeeId": "emp-085",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-06-16",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0188",
+    "employeeId": "emp-085",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-06-16",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0189",
+    "employeeId": "emp-085",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-06-16",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0190",
+    "employeeId": "emp-086",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-11-26",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0191",
+    "employeeId": "emp-086",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-11-26",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0192",
+    "employeeId": "emp-086",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-11-26",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0193",
+    "employeeId": "emp-087",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-03-27",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0194",
+    "employeeId": "emp-087",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-03-27",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0195",
+    "employeeId": "emp-088",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-10-01",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0196",
+    "employeeId": "emp-088",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-10-01",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0197",
+    "employeeId": "emp-089",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-03-20",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0198",
+    "employeeId": "emp-089",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-03-20",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0199",
+    "employeeId": "emp-090",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-07-25",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0200",
+    "employeeId": "emp-090",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-07-25",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0201",
+    "employeeId": "emp-090",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-07-25",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0202",
+    "employeeId": "emp-091",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-07-15",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0203",
+    "employeeId": "emp-091",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-07-15",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0204",
+    "employeeId": "emp-092",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-01-26",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0205",
+    "employeeId": "emp-093",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-08-10",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0206",
+    "employeeId": "emp-094",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2024-07-28",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0207",
+    "employeeId": "emp-094",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2024-07-28",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0208",
+    "employeeId": "emp-094",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2024-07-28",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0209",
+    "employeeId": "emp-094",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2024-07-28",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0210",
+    "employeeId": "emp-094",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2024-07-28",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0211",
+    "employeeId": "emp-094",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2024-07-28",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0212",
+    "employeeId": "emp-094",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2024-07-28",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0213",
+    "employeeId": "emp-095",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-12-26",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0214",
+    "employeeId": "emp-095",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-12-26",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0215",
+    "employeeId": "emp-095",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-12-26",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0216",
+    "employeeId": "emp-096",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-03-27",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0217",
+    "employeeId": "emp-096",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-03-27",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0218",
+    "employeeId": "emp-097",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-08-08",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0219",
+    "employeeId": "emp-097",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-08-08",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0220",
+    "employeeId": "emp-097",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-08-08",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0221",
+    "employeeId": "emp-098",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-12-17",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0222",
+    "employeeId": "emp-098",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-12-17",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0223",
+    "employeeId": "emp-098",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-12-17",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0224",
+    "employeeId": "emp-099",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-12-18",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0225",
+    "employeeId": "emp-099",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-12-18",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0226",
+    "employeeId": "emp-099",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-12-18",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0227",
+    "employeeId": "emp-100",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-02-20",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0228",
+    "employeeId": "emp-101",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-01-09",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0229",
+    "employeeId": "emp-102",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-07-12",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0230",
+    "employeeId": "emp-103",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-12-12",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0231",
+    "employeeId": "emp-103",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-12-12",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0232",
+    "employeeId": "emp-103",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-12-12",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0233",
+    "employeeId": "emp-104",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-01-28",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0234",
+    "employeeId": "emp-104",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-01-28",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0235",
+    "employeeId": "emp-105",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-06-07",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0236",
+    "employeeId": "emp-105",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-06-07",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0237",
+    "employeeId": "emp-106",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-01-21",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0238",
+    "employeeId": "emp-106",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-01-21",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0239",
+    "employeeId": "emp-107",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-06-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0240",
+    "employeeId": "emp-108",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-10-28",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0241",
+    "employeeId": "emp-108",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-10-28",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0242",
+    "employeeId": "emp-108",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-10-28",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0243",
+    "employeeId": "emp-109",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-10-04",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0244",
+    "employeeId": "emp-109",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-10-04",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0245",
+    "employeeId": "emp-109",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-10-04",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0246",
+    "employeeId": "emp-110",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-12-17",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0247",
+    "employeeId": "emp-110",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-12-17",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0248",
+    "employeeId": "emp-110",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-12-17",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0249",
+    "employeeId": "emp-111",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-07-17",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0250",
+    "employeeId": "emp-112",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-04-11",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0251",
+    "employeeId": "emp-112",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-04-11",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0252",
+    "employeeId": "emp-112",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-04-11",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0253",
+    "employeeId": "emp-113",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-02-28",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0254",
+    "employeeId": "emp-113",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-02-28",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0255",
+    "employeeId": "emp-114",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-12-08",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0256",
+    "employeeId": "emp-115",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-08-11",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0257",
+    "employeeId": "emp-116",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-09-02",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0258",
+    "employeeId": "emp-116",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-09-02",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0259",
+    "employeeId": "emp-117",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-08-26",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0260",
+    "employeeId": "emp-118",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-05-18",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0261",
+    "employeeId": "emp-118",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-05-18",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0262",
+    "employeeId": "emp-118",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-05-18",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0263",
+    "employeeId": "emp-119",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-04-18",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0264",
+    "employeeId": "emp-119",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2025-04-18",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0265",
+    "employeeId": "emp-119",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-04-18",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0266",
+    "employeeId": "emp-120",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-02-08",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0267",
+    "employeeId": "emp-120",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-02-08",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0268",
+    "employeeId": "emp-121",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-10-09",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0269",
+    "employeeId": "emp-121",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-10-09",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0270",
+    "employeeId": "emp-121",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-10-09",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0271",
+    "employeeId": "emp-122",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-03-01",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0272",
+    "employeeId": "emp-122",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-03-01",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0273",
+    "employeeId": "emp-122",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-03-01",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0274",
+    "employeeId": "emp-123",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-09-27",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0275",
+    "employeeId": "emp-124",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-10-03",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0276",
+    "employeeId": "emp-124",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-10-03",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0277",
+    "employeeId": "emp-124",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-10-03",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0278",
+    "employeeId": "emp-125",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-06-04",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0279",
+    "employeeId": "emp-126",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-06-11",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0280",
+    "employeeId": "emp-126",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-06-11",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0281",
+    "employeeId": "emp-126",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-06-11",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0282",
+    "employeeId": "emp-127",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-10-25",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0283",
+    "employeeId": "emp-127",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-10-25",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0284",
+    "employeeId": "emp-127",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-10-25",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0285",
+    "employeeId": "emp-128",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-11-01",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0286",
+    "employeeId": "emp-129",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-04-03",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0287",
+    "employeeId": "emp-129",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-04-03",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0288",
+    "employeeId": "emp-129",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-04-03",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0289",
+    "employeeId": "emp-130",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-05-20",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0290",
+    "employeeId": "emp-130",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-05-20",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0291",
+    "employeeId": "emp-131",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-11-16",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0292",
+    "employeeId": "emp-131",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-11-16",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0293",
+    "employeeId": "emp-132",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-10-29",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0294",
+    "employeeId": "emp-133",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-01-21",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0295",
+    "employeeId": "emp-133",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-01-21",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0296",
+    "employeeId": "emp-134",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-11-29",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0297",
+    "employeeId": "emp-134",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-11-29",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0298",
+    "employeeId": "emp-134",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-11-29",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0299",
+    "employeeId": "emp-135",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-10-25",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0300",
+    "employeeId": "emp-136",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-10-09",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0301",
+    "employeeId": "emp-137",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-12-17",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0302",
+    "employeeId": "emp-137",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-12-17",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0303",
+    "employeeId": "emp-138",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-12-15",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0304",
+    "employeeId": "emp-139",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-02-12",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0305",
+    "employeeId": "emp-140",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-09-22",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0306",
+    "employeeId": "emp-140",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-09-22",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0307",
+    "employeeId": "emp-141",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-05-25",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0308",
+    "employeeId": "emp-141",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-05-25",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0309",
+    "employeeId": "emp-141",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-05-25",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0310",
+    "employeeId": "emp-142",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-03-27",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0311",
+    "employeeId": "emp-142",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-03-27",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0312",
+    "employeeId": "emp-142",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-03-27",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0313",
+    "employeeId": "emp-143",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-08-14",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0314",
+    "employeeId": "emp-143",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-08-14",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0315",
+    "employeeId": "emp-143",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-08-14",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0316",
+    "employeeId": "emp-144",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-08-30",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0317",
+    "employeeId": "emp-145",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-12-21",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0318",
+    "employeeId": "emp-145",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-12-21",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0319",
+    "employeeId": "emp-145",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-12-21",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0320",
+    "employeeId": "emp-146",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-03-29",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0321",
+    "employeeId": "emp-146",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-03-29",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0322",
+    "employeeId": "emp-147",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-08-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0323",
+    "employeeId": "emp-147",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-08-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0324",
+    "employeeId": "emp-147",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-08-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0325",
+    "employeeId": "emp-148",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-07-15",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0326",
+    "employeeId": "emp-148",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-07-15",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0327",
+    "employeeId": "emp-149",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-07-01",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0328",
+    "employeeId": "emp-149",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-07-01",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0329",
+    "employeeId": "emp-149",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-07-01",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0330",
+    "employeeId": "emp-150",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-08-21",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0331",
+    "employeeId": "emp-151",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-08-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0332",
+    "employeeId": "emp-151",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-08-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0333",
+    "employeeId": "emp-151",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-08-04",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0334",
+    "employeeId": "emp-152",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-09-20",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0335",
+    "employeeId": "emp-152",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-09-20",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0336",
+    "employeeId": "emp-152",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-09-20",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0337",
+    "employeeId": "emp-153",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-04-14",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0338",
+    "employeeId": "emp-153",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-04-14",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0339",
+    "employeeId": "emp-154",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2024-06-02",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0340",
+    "employeeId": "emp-154",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2024-06-02",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0341",
+    "employeeId": "emp-154",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2024-06-02",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0342",
+    "employeeId": "emp-154",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2024-06-02",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0343",
+    "employeeId": "emp-154",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2024-06-02",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0344",
+    "employeeId": "emp-154",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2024-06-02",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0345",
+    "employeeId": "emp-154",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2024-06-02",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0346",
+    "employeeId": "emp-155",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-02-11",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0347",
+    "employeeId": "emp-155",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-02-11",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0348",
+    "employeeId": "emp-156",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-03-27",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0349",
+    "employeeId": "emp-156",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-03-27",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0350",
+    "employeeId": "emp-157",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-04-12",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0351",
+    "employeeId": "emp-158",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-04-22",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0352",
+    "employeeId": "emp-158",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-04-22",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0353",
+    "employeeId": "emp-158",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-04-22",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0354",
+    "employeeId": "emp-159",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-05-18",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0355",
+    "employeeId": "emp-160",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-02-16",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0356",
+    "employeeId": "emp-160",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2025-02-16",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0357",
+    "employeeId": "emp-160",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-02-16",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0358",
+    "employeeId": "emp-161",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-08-28",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0359",
+    "employeeId": "emp-161",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-08-28",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0360",
+    "employeeId": "emp-162",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-03-05",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0361",
+    "employeeId": "emp-162",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-03-05",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0362",
+    "employeeId": "emp-163",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-03-28",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0363",
+    "employeeId": "emp-164",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-01-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0364",
+    "employeeId": "emp-164",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-01-04",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0365",
+    "employeeId": "emp-164",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-01-04",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0366",
+    "employeeId": "emp-165",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-08-16",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0367",
+    "employeeId": "emp-165",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-08-16",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0368",
+    "employeeId": "emp-165",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-08-16",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0369",
+    "employeeId": "emp-166",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-03-18",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0370",
+    "employeeId": "emp-166",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-03-18",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0371",
+    "employeeId": "emp-166",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2025-03-18",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0372",
+    "employeeId": "emp-167",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-01-25",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0373",
+    "employeeId": "emp-167",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-01-25",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0374",
+    "employeeId": "emp-167",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-01-25",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0375",
+    "employeeId": "emp-168",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-07-16",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0376",
+    "employeeId": "emp-169",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-09-10",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0377",
+    "employeeId": "emp-169",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-09-10",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0378",
+    "employeeId": "emp-169",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-09-10",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0379",
+    "employeeId": "emp-170",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-06-10",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0380",
+    "employeeId": "emp-170",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-06-10",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0381",
+    "employeeId": "emp-171",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-07-12",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0382",
+    "employeeId": "emp-171",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-07-12",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0383",
+    "employeeId": "emp-171",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-07-12",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0384",
+    "employeeId": "emp-172",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-03-28",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0385",
+    "employeeId": "emp-172",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-03-28",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0386",
+    "employeeId": "emp-173",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-11-26",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0387",
+    "employeeId": "emp-173",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-11-26",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0388",
+    "employeeId": "emp-173",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-11-26",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0389",
+    "employeeId": "emp-174",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2025-05-08",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0390",
+    "employeeId": "emp-175",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-01-04",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0391",
+    "employeeId": "emp-175",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-01-04",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0392",
+    "employeeId": "emp-175",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-01-04",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0393",
+    "employeeId": "emp-176",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-08-11",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0394",
+    "employeeId": "emp-176",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-08-11",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0395",
+    "employeeId": "emp-177",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-02-25",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0396",
+    "employeeId": "emp-177",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-02-25",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0397",
+    "employeeId": "emp-178",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-10-29",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0398",
+    "employeeId": "emp-178",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-10-29",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0399",
+    "employeeId": "emp-178",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-10-29",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0400",
+    "employeeId": "emp-179",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-06-29",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0401",
+    "employeeId": "emp-180",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-10-16",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0402",
+    "employeeId": "emp-180",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-10-16",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0403",
+    "employeeId": "emp-181",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-04-30",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0404",
+    "employeeId": "emp-181",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-04-30",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0405",
+    "employeeId": "emp-182",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-10-25",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0406",
+    "employeeId": "emp-182",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-10-25",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0407",
+    "employeeId": "emp-182",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-10-25",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0408",
+    "employeeId": "emp-183",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-02-05",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0409",
+    "employeeId": "emp-183",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-02-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0410",
+    "employeeId": "emp-184",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-09-07",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0411",
+    "employeeId": "emp-185",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-01-25",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0412",
+    "employeeId": "emp-185",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-01-25",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0413",
+    "employeeId": "emp-186",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-12-05",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0414",
+    "employeeId": "emp-186",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-12-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0415",
+    "employeeId": "emp-186",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-12-05",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0416",
+    "employeeId": "emp-187",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-04-04",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0417",
+    "employeeId": "emp-187",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-04-04",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0418",
+    "employeeId": "emp-187",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-04-04",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0419",
+    "employeeId": "emp-188",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-01-23",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0420",
+    "employeeId": "emp-188",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-01-23",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0421",
+    "employeeId": "emp-188",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-01-23",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0422",
+    "employeeId": "emp-189",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-08-22",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0423",
+    "employeeId": "emp-189",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-08-22",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0424",
+    "employeeId": "emp-190",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-11-20",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0425",
+    "employeeId": "emp-191",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-06-12",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0426",
+    "employeeId": "emp-191",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-06-12",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0427",
+    "employeeId": "emp-191",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-06-12",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0428",
+    "employeeId": "emp-192",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-04-14",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0429",
+    "employeeId": "emp-193",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-09-25",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0430",
+    "employeeId": "emp-193",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-09-25",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0431",
+    "employeeId": "emp-193",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-09-25",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0432",
+    "employeeId": "emp-194",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-11-15",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0433",
+    "employeeId": "emp-194",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-11-15",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0434",
+    "employeeId": "emp-195",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-08-21",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0435",
+    "employeeId": "emp-195",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-08-21",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0436",
+    "employeeId": "emp-195",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-08-21",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0437",
+    "employeeId": "emp-196",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-08-05",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0438",
+    "employeeId": "emp-197",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-10-03",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0439",
+    "employeeId": "emp-197",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-10-03",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0440",
+    "employeeId": "emp-197",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-10-03",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0441",
+    "employeeId": "emp-198",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-04-09",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0442",
+    "employeeId": "emp-198",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-04-09",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0443",
+    "employeeId": "emp-199",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-08-12",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0444",
+    "employeeId": "emp-199",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-08-12",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0445",
+    "employeeId": "emp-200",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-07-16",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0446",
+    "employeeId": "emp-200",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-07-16",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0447",
+    "employeeId": "emp-200",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-07-16",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0448",
+    "employeeId": "emp-201",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-07-11",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0449",
+    "employeeId": "emp-201",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-07-11",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0450",
+    "employeeId": "emp-201",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-07-11",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0451",
+    "employeeId": "emp-202",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-08-30",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0452",
+    "employeeId": "emp-202",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-08-30",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0453",
+    "employeeId": "emp-202",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-08-30",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0454",
+    "employeeId": "emp-203",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-09-05",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0455",
+    "employeeId": "emp-203",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-09-05",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0456",
+    "employeeId": "emp-204",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-06-15",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0457",
+    "employeeId": "emp-205",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-09-03",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0458",
+    "employeeId": "emp-206",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2025-01-12",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0459",
+    "employeeId": "emp-206",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-01-12",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0460",
+    "employeeId": "emp-206",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-01-12",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0461",
+    "employeeId": "emp-207",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-11-03",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0462",
+    "employeeId": "emp-207",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-11-03",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0463",
+    "employeeId": "emp-207",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-11-03",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0464",
+    "employeeId": "emp-208",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-02-18",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0465",
+    "employeeId": "emp-208",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-02-18",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0466",
+    "employeeId": "emp-208",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-02-18",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0467",
+    "employeeId": "emp-209",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2020-12-07",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0468",
+    "employeeId": "emp-209",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2020-12-07",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0469",
+    "employeeId": "emp-209",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2020-12-07",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0470",
+    "employeeId": "emp-209",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2020-12-07",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0471",
+    "employeeId": "emp-209",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2020-12-07",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0472",
+    "employeeId": "emp-209",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2020-12-07",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0473",
+    "employeeId": "emp-209",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2020-12-07",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0474",
+    "employeeId": "emp-210",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-11-19",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0475",
+    "employeeId": "emp-210",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-11-19",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0476",
+    "employeeId": "emp-210",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-11-19",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0477",
+    "employeeId": "emp-211",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-04-13",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0478",
+    "employeeId": "emp-211",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-04-13",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0479",
+    "employeeId": "emp-211",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-04-13",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0480",
+    "employeeId": "emp-212",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-08-19",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0481",
+    "employeeId": "emp-212",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-08-19",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0482",
+    "employeeId": "emp-212",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-08-19",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0483",
+    "employeeId": "emp-213",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-01-31",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0484",
+    "employeeId": "emp-213",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-01-31",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0485",
+    "employeeId": "emp-214",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-02-04",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0486",
+    "employeeId": "emp-214",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-02-04",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0487",
+    "employeeId": "emp-215",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-05-29",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0488",
+    "employeeId": "emp-215",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-05-29",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0489",
+    "employeeId": "emp-216",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-04-03",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0490",
+    "employeeId": "emp-216",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-04-03",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0491",
+    "employeeId": "emp-217",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-02-21",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0492",
+    "employeeId": "emp-218",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-02-04",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0493",
+    "employeeId": "emp-218",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-02-04",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0494",
+    "employeeId": "emp-219",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-05-19",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0495",
+    "employeeId": "emp-219",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-05-19",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0496",
+    "employeeId": "emp-219",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-05-19",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0497",
+    "employeeId": "emp-220",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-01-22",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0498",
+    "employeeId": "emp-220",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-01-22",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0499",
+    "employeeId": "emp-221",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-06-18",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0500",
+    "employeeId": "emp-222",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-03-04",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0501",
+    "employeeId": "emp-222",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-03-04",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0502",
+    "employeeId": "emp-223",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-07-25",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0503",
+    "employeeId": "emp-223",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-07-25",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0504",
+    "employeeId": "emp-223",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-07-25",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0505",
+    "employeeId": "emp-224",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-01-26",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0506",
+    "employeeId": "emp-225",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-02-01",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0507",
+    "employeeId": "emp-225",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-02-01",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0508",
+    "employeeId": "emp-225",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-02-01",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0509",
+    "employeeId": "emp-226",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-05-22",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0510",
+    "employeeId": "emp-226",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-05-22",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0511",
+    "employeeId": "emp-226",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-05-22",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0512",
+    "employeeId": "emp-227",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-09-26",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0513",
+    "employeeId": "emp-227",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-09-26",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0514",
+    "employeeId": "emp-227",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-09-26",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0515",
+    "employeeId": "emp-228",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-09-19",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0516",
+    "employeeId": "emp-229",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-06-25",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0517",
+    "employeeId": "emp-229",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-06-25",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0518",
+    "employeeId": "emp-230",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-05-30",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0519",
+    "employeeId": "emp-230",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-05-30",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0520",
+    "employeeId": "emp-230",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-05-30",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0521",
+    "employeeId": "emp-231",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-12-30",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0522",
+    "employeeId": "emp-231",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-12-30",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0523",
+    "employeeId": "emp-232",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-04-09",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0524",
+    "employeeId": "emp-232",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-04-09",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0525",
+    "employeeId": "emp-233",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-09-23",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0526",
+    "employeeId": "emp-233",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-09-23",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0527",
+    "employeeId": "emp-234",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-09-03",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0528",
+    "employeeId": "emp-235",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-06-19",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0529",
+    "employeeId": "emp-235",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-06-19",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0530",
+    "employeeId": "emp-235",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-06-19",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0531",
+    "employeeId": "emp-236",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-01-03",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0532",
+    "employeeId": "emp-237",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-09-17",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0533",
+    "employeeId": "emp-237",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-09-17",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0534",
+    "employeeId": "emp-237",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-09-17",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0535",
+    "employeeId": "emp-238",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-10-25",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0536",
+    "employeeId": "emp-238",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-10-25",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0537",
+    "employeeId": "emp-238",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-10-25",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0538",
+    "employeeId": "emp-239",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-10-28",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0539",
+    "employeeId": "emp-239",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-10-28",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0540",
+    "employeeId": "emp-239",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-10-28",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0541",
+    "employeeId": "emp-240",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-05-28",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0542",
+    "employeeId": "emp-240",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-05-28",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0543",
+    "employeeId": "emp-240",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-05-28",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0544",
+    "employeeId": "emp-241",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-08-11",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0545",
+    "employeeId": "emp-241",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-08-11",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0546",
+    "employeeId": "emp-242",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-08-24",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0547",
+    "employeeId": "emp-243",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-09-04",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0548",
+    "employeeId": "emp-243",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-09-04",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0549",
+    "employeeId": "emp-243",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-09-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0550",
+    "employeeId": "emp-244",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-12-14",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0551",
+    "employeeId": "emp-245",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-05-28",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0552",
+    "employeeId": "emp-245",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-05-28",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0553",
+    "employeeId": "emp-246",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-08-05",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0554",
+    "employeeId": "emp-246",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-08-05",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0555",
+    "employeeId": "emp-246",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-08-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0556",
+    "employeeId": "emp-247",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-05-03",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0557",
+    "employeeId": "emp-248",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-11-19",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0558",
+    "employeeId": "emp-248",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-11-19",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0559",
+    "employeeId": "emp-248",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-11-19",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0560",
+    "employeeId": "emp-249",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0561",
+    "employeeId": "emp-249",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0562",
+    "employeeId": "emp-249",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0563",
+    "employeeId": "emp-249",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0564",
+    "employeeId": "emp-249",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0565",
+    "employeeId": "emp-249",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0566",
+    "employeeId": "emp-249",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0567",
+    "employeeId": "emp-250",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-09-28",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0568",
+    "employeeId": "emp-250",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-09-28",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0569",
+    "employeeId": "emp-250",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-09-28",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0570",
+    "employeeId": "emp-251",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-03-03",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0571",
+    "employeeId": "emp-251",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-03-03",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0572",
+    "employeeId": "emp-252",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-07-11",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0573",
+    "employeeId": "emp-253",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-12-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0574",
+    "employeeId": "emp-253",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-12-05",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0575",
+    "employeeId": "emp-253",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-12-05",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0576",
+    "employeeId": "emp-254",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-07-25",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0577",
+    "employeeId": "emp-255",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-02-04",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0578",
+    "employeeId": "emp-255",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-02-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0579",
+    "employeeId": "emp-255",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-02-04",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0580",
+    "employeeId": "emp-256",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-01-27",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0581",
+    "employeeId": "emp-256",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-01-27",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0582",
+    "employeeId": "emp-256",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-01-27",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0583",
+    "employeeId": "emp-257",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-11-09",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0584",
+    "employeeId": "emp-257",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-11-09",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0585",
+    "employeeId": "emp-257",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-11-09",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0586",
+    "employeeId": "emp-258",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-04-19",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0587",
+    "employeeId": "emp-258",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-04-19",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0588",
+    "employeeId": "emp-259",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-08-08",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0589",
+    "employeeId": "emp-259",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-08-08",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0590",
+    "employeeId": "emp-259",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-08-08",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0591",
+    "employeeId": "emp-260",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-11-09",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0592",
+    "employeeId": "emp-261",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-12-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0593",
+    "employeeId": "emp-261",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-12-04",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0594",
+    "employeeId": "emp-262",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-09-17",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0595",
+    "employeeId": "emp-262",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-09-17",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0596",
+    "employeeId": "emp-262",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-09-17",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0597",
+    "employeeId": "emp-263",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-11-23",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0598",
+    "employeeId": "emp-263",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-11-23",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0599",
+    "employeeId": "emp-264",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-03-09",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0600",
+    "employeeId": "emp-264",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-03-09",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0601",
+    "employeeId": "emp-264",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-03-09",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0602",
+    "employeeId": "emp-265",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-01-01",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0603",
+    "employeeId": "emp-265",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-01-01",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0604",
+    "employeeId": "emp-265",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-01-01",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0605",
+    "employeeId": "emp-266",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-08-20",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0606",
+    "employeeId": "emp-266",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-08-20",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0607",
+    "employeeId": "emp-266",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-08-20",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0608",
+    "employeeId": "emp-267",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-09-01",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0609",
+    "employeeId": "emp-267",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-09-01",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0610",
+    "employeeId": "emp-267",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-09-01",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0611",
+    "employeeId": "emp-268",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-09-05",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0612",
+    "employeeId": "emp-268",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-09-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0613",
+    "employeeId": "emp-269",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-11-04",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0614",
+    "employeeId": "emp-270",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-05-22",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0615",
+    "employeeId": "emp-271",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-02-06",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0616",
+    "employeeId": "emp-271",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-02-06",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0617",
+    "employeeId": "emp-272",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-07-29",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0618",
+    "employeeId": "emp-273",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-02-09",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0619",
+    "employeeId": "emp-273",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-02-09",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0620",
+    "employeeId": "emp-274",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-11-08",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0621",
+    "employeeId": "emp-274",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-11-08",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0622",
+    "employeeId": "emp-275",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-09-11",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0623",
+    "employeeId": "emp-275",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-09-11",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0624",
+    "employeeId": "emp-276",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-06-03",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0625",
+    "employeeId": "emp-276",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-06-03",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0626",
+    "employeeId": "emp-277",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2020-03-23",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0627",
+    "employeeId": "emp-277",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2020-03-23",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0628",
+    "employeeId": "emp-277",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2020-03-23",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0629",
+    "employeeId": "emp-277",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2020-03-23",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0630",
+    "employeeId": "emp-277",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2020-03-23",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0631",
+    "employeeId": "emp-277",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2020-03-23",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0632",
+    "employeeId": "emp-277",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2020-03-23",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0633",
+    "employeeId": "emp-278",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-01-14",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0634",
+    "employeeId": "emp-278",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-01-14",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0635",
+    "employeeId": "emp-279",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-04-09",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0636",
+    "employeeId": "emp-279",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-04-09",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0637",
+    "employeeId": "emp-279",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-04-09",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0638",
+    "employeeId": "emp-280",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-01-06",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0639",
+    "employeeId": "emp-280",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-01-06",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0640",
+    "employeeId": "emp-280",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-01-06",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0641",
+    "employeeId": "emp-281",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-11-26",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0642",
+    "employeeId": "emp-281",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-11-26",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0643",
+    "employeeId": "emp-281",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-11-26",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0644",
+    "employeeId": "emp-282",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-01-31",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0645",
+    "employeeId": "emp-282",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-01-31",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0646",
+    "employeeId": "emp-282",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-01-31",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0647",
+    "employeeId": "emp-283",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-07-31",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0648",
+    "employeeId": "emp-284",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-03-12",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0649",
+    "employeeId": "emp-284",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-03-12",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0650",
+    "employeeId": "emp-284",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-03-12",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0651",
+    "employeeId": "emp-285",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-06-02",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0652",
+    "employeeId": "emp-285",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-06-02",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0653",
+    "employeeId": "emp-285",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-06-02",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0654",
+    "employeeId": "emp-286",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-07-16",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0655",
+    "employeeId": "emp-287",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-05-26",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0656",
+    "employeeId": "emp-287",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-05-26",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0657",
+    "employeeId": "emp-287",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-05-26",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0658",
+    "employeeId": "emp-288",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-10-17",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0659",
+    "employeeId": "emp-288",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-10-17",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0660",
+    "employeeId": "emp-289",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-09-21",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0661",
+    "employeeId": "emp-289",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-09-21",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0662",
+    "employeeId": "emp-289",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-09-21",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0663",
+    "employeeId": "emp-290",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-11-27",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0664",
+    "employeeId": "emp-291",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-10-07",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0665",
+    "employeeId": "emp-292",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-04-15",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0666",
+    "employeeId": "emp-292",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-04-15",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0667",
+    "employeeId": "emp-293",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-01-17",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0668",
+    "employeeId": "emp-293",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-01-17",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0669",
+    "employeeId": "emp-294",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-01-21",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0670",
+    "employeeId": "emp-294",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-01-21",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0671",
+    "employeeId": "emp-294",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-01-21",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0672",
+    "employeeId": "emp-295",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2023-11-03",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0673",
+    "employeeId": "emp-295",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2023-11-03",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0674",
+    "employeeId": "emp-295",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2023-11-03",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0675",
+    "employeeId": "emp-295",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2023-11-03",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0676",
+    "employeeId": "emp-295",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2023-11-03",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0677",
+    "employeeId": "emp-295",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2023-11-03",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0678",
+    "employeeId": "emp-295",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2023-11-03",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0679",
+    "employeeId": "emp-296",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-08-10",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0680",
+    "employeeId": "emp-297",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-01-31",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0681",
+    "employeeId": "emp-298",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-11-24",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0682",
+    "employeeId": "emp-298",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-11-24",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0683",
+    "employeeId": "emp-299",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-10-18",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0684",
+    "employeeId": "emp-299",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-10-18",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0685",
+    "employeeId": "emp-299",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-10-18",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0686",
+    "employeeId": "emp-300",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-12-12",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0687",
+    "employeeId": "emp-300",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-12-12",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0688",
+    "employeeId": "emp-300",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-12-12",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0689",
+    "employeeId": "emp-301",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-03-17",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0690",
+    "employeeId": "emp-301",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-03-17",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0691",
+    "employeeId": "emp-302",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-12-09",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0692",
+    "employeeId": "emp-302",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-12-09",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0693",
+    "employeeId": "emp-303",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-11-22",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0694",
+    "employeeId": "emp-303",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-11-22",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0695",
+    "employeeId": "emp-304",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-07-17",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0696",
+    "employeeId": "emp-304",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-07-17",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0697",
+    "employeeId": "emp-305",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-01-11",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0698",
+    "employeeId": "emp-305",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-01-11",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0699",
+    "employeeId": "emp-305",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-01-11",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0700",
+    "employeeId": "emp-306",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-02-21",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0701",
+    "employeeId": "emp-306",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-02-21",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0702",
+    "employeeId": "emp-307",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-07-12",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0703",
+    "employeeId": "emp-308",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-05-09",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0704",
+    "employeeId": "emp-308",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-05-09",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0705",
+    "employeeId": "emp-308",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2025-05-09",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0706",
+    "employeeId": "emp-309",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-01-17",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0707",
+    "employeeId": "emp-309",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-01-17",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0708",
+    "employeeId": "emp-310",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-03-21",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0709",
+    "employeeId": "emp-310",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-03-21",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0710",
+    "employeeId": "emp-311",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-04-28",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0711",
+    "employeeId": "emp-312",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-10-12",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0712",
+    "employeeId": "emp-312",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-10-12",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0713",
+    "employeeId": "emp-313",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-09-20",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0714",
+    "employeeId": "emp-313",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-09-20",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0715",
+    "employeeId": "emp-314",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-04-29",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0716",
+    "employeeId": "emp-314",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-04-29",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0717",
+    "employeeId": "emp-314",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-04-29",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0718",
+    "employeeId": "emp-315",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-12-04",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0719",
+    "employeeId": "emp-316",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-11-06",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0720",
+    "employeeId": "emp-316",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-11-06",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0721",
+    "employeeId": "emp-316",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-11-06",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0722",
+    "employeeId": "emp-317",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2023-12-04",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0723",
+    "employeeId": "emp-317",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2023-12-04",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0724",
+    "employeeId": "emp-317",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2023-12-04",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0725",
+    "employeeId": "emp-317",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2023-12-04",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0726",
+    "employeeId": "emp-317",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2023-12-04",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0727",
+    "employeeId": "emp-317",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2023-12-04",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0728",
+    "employeeId": "emp-317",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2023-12-04",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0729",
+    "employeeId": "emp-318",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-03-16",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0730",
+    "employeeId": "emp-319",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-02-15",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0731",
+    "employeeId": "emp-319",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2025-02-15",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0732",
+    "employeeId": "emp-319",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-02-15",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0733",
+    "employeeId": "emp-320",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-08-15",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0734",
+    "employeeId": "emp-320",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-08-15",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0735",
+    "employeeId": "emp-321",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-07-17",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0736",
+    "employeeId": "emp-321",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-07-17",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0737",
+    "employeeId": "emp-321",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-07-17",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0738",
+    "employeeId": "emp-322",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-05-14",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0739",
+    "employeeId": "emp-322",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-05-14",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0740",
+    "employeeId": "emp-323",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-03-14",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0741",
+    "employeeId": "emp-323",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-03-14",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0742",
+    "employeeId": "emp-323",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-03-14",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0743",
+    "employeeId": "emp-324",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-12-24",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0744",
+    "employeeId": "emp-325",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-05-13",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0745",
+    "employeeId": "emp-326",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-06-12",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0746",
+    "employeeId": "emp-326",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-06-12",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0747",
+    "employeeId": "emp-326",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-06-12",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0748",
+    "employeeId": "emp-327",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-11-28",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0749",
+    "employeeId": "emp-327",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-11-28",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0750",
+    "employeeId": "emp-327",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-11-28",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0751",
+    "employeeId": "emp-328",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-09-27",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0752",
+    "employeeId": "emp-328",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-09-27",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0753",
+    "employeeId": "emp-329",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-03-24",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0754",
+    "employeeId": "emp-330",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-02-14",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0755",
+    "employeeId": "emp-330",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-02-14",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0756",
+    "employeeId": "emp-330",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-02-14",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0757",
+    "employeeId": "emp-331",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-03-14",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0758",
+    "employeeId": "emp-332",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-07-21",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0759",
+    "employeeId": "emp-333",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-07-21",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0760",
+    "employeeId": "emp-334",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-07-12",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0761",
+    "employeeId": "emp-334",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-07-12",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0762",
+    "employeeId": "emp-335",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-10-02",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0763",
+    "employeeId": "emp-335",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-10-02",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0764",
+    "employeeId": "emp-336",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-10-18",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0765",
+    "employeeId": "emp-337",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2025-01-30",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0766",
+    "employeeId": "emp-337",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2025-01-30",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0767",
+    "employeeId": "emp-337",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2025-01-30",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0768",
+    "employeeId": "emp-337",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2025-01-30",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0769",
+    "employeeId": "emp-337",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2025-01-30",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0770",
+    "employeeId": "emp-337",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2025-01-30",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0771",
+    "employeeId": "emp-337",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2025-01-30",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0772",
+    "employeeId": "emp-338",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-06-20",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0773",
+    "employeeId": "emp-339",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-01-31",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0774",
+    "employeeId": "emp-339",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2025-01-31",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0775",
+    "employeeId": "emp-340",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-03-30",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0776",
+    "employeeId": "emp-340",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-03-30",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0777",
+    "employeeId": "emp-341",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-10-08",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0778",
+    "employeeId": "emp-342",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-12-26",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0779",
+    "employeeId": "emp-342",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-12-26",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0780",
+    "employeeId": "emp-342",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-12-26",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0781",
+    "employeeId": "emp-343",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-11-24",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0782",
+    "employeeId": "emp-343",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-11-24",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0783",
+    "employeeId": "emp-344",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-11-07",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0784",
+    "employeeId": "emp-344",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-11-07",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0785",
+    "employeeId": "emp-344",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-11-07",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0786",
+    "employeeId": "emp-345",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-01-03",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0787",
+    "employeeId": "emp-346",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-11-03",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0788",
+    "employeeId": "emp-346",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-11-03",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0789",
+    "employeeId": "emp-347",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-12-18",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0790",
+    "employeeId": "emp-347",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-12-18",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0791",
+    "employeeId": "emp-347",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-12-18",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0792",
+    "employeeId": "emp-348",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-04-06",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0793",
+    "employeeId": "emp-348",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-04-06",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0794",
+    "employeeId": "emp-348",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-04-06",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0795",
+    "employeeId": "emp-349",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-10-18",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0796",
+    "employeeId": "emp-349",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-10-18",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0797",
+    "employeeId": "emp-349",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-10-18",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0798",
+    "employeeId": "emp-350",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-02-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0799",
+    "employeeId": "emp-350",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-02-04",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0800",
+    "employeeId": "emp-350",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-02-04",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0801",
+    "employeeId": "emp-351",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-05-15",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0802",
+    "employeeId": "emp-351",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-05-15",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0803",
+    "employeeId": "emp-352",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-11-07",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0804",
+    "employeeId": "emp-353",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-08-17",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0805",
+    "employeeId": "emp-353",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-08-17",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0806",
+    "employeeId": "emp-353",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-08-17",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0807",
+    "employeeId": "emp-354",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-06-24",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0808",
+    "employeeId": "emp-355",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-04-20",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0809",
+    "employeeId": "emp-356",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-11-07",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0810",
+    "employeeId": "emp-356",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-11-07",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0811",
+    "employeeId": "emp-357",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-12-20",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0812",
+    "employeeId": "emp-358",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-07-02",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0813",
+    "employeeId": "emp-358",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-07-02",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0814",
+    "employeeId": "emp-359",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2025-01-05",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0815",
+    "employeeId": "emp-360",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-07-13",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0816",
+    "employeeId": "emp-360",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-07-13",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0817",
+    "employeeId": "emp-360",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-07-13",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0818",
+    "employeeId": "emp-361",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-01-02",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0819",
+    "employeeId": "emp-361",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-01-02",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0820",
+    "employeeId": "emp-361",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-01-02",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0821",
+    "employeeId": "emp-362",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-07-21",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0822",
+    "employeeId": "emp-363",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-06-12",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0823",
+    "employeeId": "emp-363",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-06-12",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0824",
+    "employeeId": "emp-364",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-03-29",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0825",
+    "employeeId": "emp-364",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-03-29",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0826",
+    "employeeId": "emp-365",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-05-02",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0827",
+    "employeeId": "emp-365",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-05-02",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0828",
+    "employeeId": "emp-365",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-05-02",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0829",
+    "employeeId": "emp-366",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-07-12",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0830",
+    "employeeId": "emp-367",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-12-28",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0831",
+    "employeeId": "emp-367",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-12-28",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0832",
+    "employeeId": "emp-368",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-06-12",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0833",
+    "employeeId": "emp-368",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-06-12",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0834",
+    "employeeId": "emp-368",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-06-12",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0835",
+    "employeeId": "emp-369",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-11-16",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0836",
+    "employeeId": "emp-369",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-11-16",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0837",
+    "employeeId": "emp-369",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-11-16",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0838",
+    "employeeId": "emp-370",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-11-09",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0839",
+    "employeeId": "emp-370",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-11-09",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0840",
+    "employeeId": "emp-371",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2025-04-14",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0841",
+    "employeeId": "emp-371",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-04-14",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0842",
+    "employeeId": "emp-371",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2025-04-14",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0843",
+    "employeeId": "emp-372",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-09-12",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0844",
+    "employeeId": "emp-373",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-04-02",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0845",
+    "employeeId": "emp-373",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-04-02",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0846",
+    "employeeId": "emp-374",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-11-28",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0847",
+    "employeeId": "emp-374",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-11-28",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0848",
+    "employeeId": "emp-374",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-11-28",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0849",
+    "employeeId": "emp-375",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-03-01",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0850",
+    "employeeId": "emp-376",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-06-08",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0851",
+    "employeeId": "emp-376",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-06-08",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0852",
+    "employeeId": "emp-376",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-06-08",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0853",
+    "employeeId": "emp-377",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-04-19",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0854",
+    "employeeId": "emp-378",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-10-19",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0855",
+    "employeeId": "emp-378",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-10-19",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0856",
+    "employeeId": "emp-379",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-11-26",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0857",
+    "employeeId": "emp-380",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2023-03-15",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0858",
+    "employeeId": "emp-380",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-03-15",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0859",
+    "employeeId": "emp-381",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-07-16",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0860",
+    "employeeId": "emp-382",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2020-06-06",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0861",
+    "employeeId": "emp-382",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2020-06-06",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0862",
+    "employeeId": "emp-382",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2020-06-06",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0863",
+    "employeeId": "emp-382",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2020-06-06",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0864",
+    "employeeId": "emp-382",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2020-06-06",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0865",
+    "employeeId": "emp-382",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2020-06-06",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0866",
+    "employeeId": "emp-382",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2020-06-06",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0867",
+    "employeeId": "emp-383",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-06-14",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0868",
+    "employeeId": "emp-383",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-06-14",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0869",
+    "employeeId": "emp-383",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-06-14",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0870",
+    "employeeId": "emp-384",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-11-11",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0871",
+    "employeeId": "emp-384",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-11-11",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0872",
+    "employeeId": "emp-384",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-11-11",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0873",
+    "employeeId": "emp-385",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-07-21",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0874",
+    "employeeId": "emp-385",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-07-21",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0875",
+    "employeeId": "emp-386",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-04-30",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0876",
+    "employeeId": "emp-387",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-06-09",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0877",
+    "employeeId": "emp-387",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-06-09",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0878",
+    "employeeId": "emp-387",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-06-09",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0879",
+    "employeeId": "emp-388",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-01-23",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0880",
+    "employeeId": "emp-389",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-01-23",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0881",
+    "employeeId": "emp-390",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-12-05",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0882",
+    "employeeId": "emp-391",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-05-29",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0883",
+    "employeeId": "emp-392",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-11-23",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0884",
+    "employeeId": "emp-392",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-11-23",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0885",
+    "employeeId": "emp-393",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-01-26",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0886",
+    "employeeId": "emp-394",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-04-02",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0887",
+    "employeeId": "emp-395",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-03-16",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0888",
+    "employeeId": "emp-395",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-03-16",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0889",
+    "employeeId": "emp-395",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-03-16",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0890",
+    "employeeId": "emp-396",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-04-09",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0891",
+    "employeeId": "emp-397",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-10-19",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0892",
+    "employeeId": "emp-398",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-03-10",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0893",
+    "employeeId": "emp-398",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-03-10",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0894",
+    "employeeId": "emp-399",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-01-02",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0895",
+    "employeeId": "emp-400",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-12-26",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0896",
+    "employeeId": "emp-400",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-12-26",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0897",
+    "employeeId": "emp-401",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-08-08",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0898",
+    "employeeId": "emp-401",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-08-08",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0899",
+    "employeeId": "emp-401",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2018-08-08",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0900",
+    "employeeId": "emp-402",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-11-02",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0901",
+    "employeeId": "emp-402",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-11-02",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0902",
+    "employeeId": "emp-403",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2019-10-04",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0903",
+    "employeeId": "emp-403",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-10-04",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0904",
+    "employeeId": "emp-403",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-10-04",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0905",
+    "employeeId": "emp-404",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2018-11-21",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0906",
+    "employeeId": "emp-405",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-07-14",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0907",
+    "employeeId": "emp-406",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-05-06",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0908",
+    "employeeId": "emp-406",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-05-06",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0909",
+    "employeeId": "emp-406",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2020-05-06",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0910",
+    "employeeId": "emp-407",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-11-08",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0911",
+    "employeeId": "emp-407",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-11-08",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0912",
+    "employeeId": "emp-407",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-11-08",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0913",
+    "employeeId": "emp-408",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-06-22",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0914",
+    "employeeId": "emp-408",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-06-22",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0915",
+    "employeeId": "emp-409",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-04-18",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0916",
+    "employeeId": "emp-409",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2022-04-18",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0917",
+    "employeeId": "emp-409",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-04-18",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0918",
+    "employeeId": "emp-410",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-12-17",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0919",
+    "employeeId": "emp-410",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-12-17",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0920",
+    "employeeId": "emp-411",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-08-29",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0921",
+    "employeeId": "emp-411",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-08-29",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0922",
+    "employeeId": "emp-411",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-08-29",
+    "grantedBy": "emp-432"
+  },
+  {
+    "id": "perm-0923",
+    "employeeId": "emp-412",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-03-02",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0924",
+    "employeeId": "emp-412",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-03-02",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0925",
+    "employeeId": "emp-412",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-03-02",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0926",
+    "employeeId": "emp-413",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-11-18",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0927",
+    "employeeId": "emp-414",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2022-10-22",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0928",
+    "employeeId": "emp-414",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2022-10-22",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0929",
+    "employeeId": "emp-414",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2022-10-22",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0930",
+    "employeeId": "emp-415",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2022-06-23",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0931",
+    "employeeId": "emp-416",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-10-23",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0932",
+    "employeeId": "emp-416",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-10-23",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0933",
+    "employeeId": "emp-417",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-01-18",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0934",
+    "employeeId": "emp-417",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-01-18",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0935",
+    "employeeId": "emp-418",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-06-25",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0936",
+    "employeeId": "emp-419",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-02-13",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0937",
+    "employeeId": "emp-419",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-02-13",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0938",
+    "employeeId": "emp-420",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-12-06",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0939",
+    "employeeId": "emp-421",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-04-21",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0940",
+    "employeeId": "emp-421",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-04-21",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0941",
+    "employeeId": "emp-421",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-04-21",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0942",
+    "employeeId": "emp-422",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-10-25",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0943",
+    "employeeId": "emp-423",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-12-18",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0944",
+    "employeeId": "emp-423",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-12-18",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0945",
+    "employeeId": "emp-424",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2023-12-24",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0946",
+    "employeeId": "emp-425",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-04-05",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0947",
+    "employeeId": "emp-426",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-08-16",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0948",
+    "employeeId": "emp-426",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-08-16",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0949",
+    "employeeId": "emp-426",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-08-16",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0950",
+    "employeeId": "emp-427",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-01-17",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0951",
+    "employeeId": "emp-427",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-01-17",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0952",
+    "employeeId": "emp-428",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-08-02",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0953",
+    "employeeId": "emp-428",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-08-02",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0954",
+    "employeeId": "emp-429",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-12-13",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0955",
+    "employeeId": "emp-430",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-02-24",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0956",
+    "employeeId": "emp-430",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-02-24",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0957",
+    "employeeId": "emp-430",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-02-24",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0958",
+    "employeeId": "emp-431",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2018-12-12",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0959",
+    "employeeId": "emp-431",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2018-12-12",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0960",
+    "employeeId": "emp-431",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2018-12-12",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0961",
+    "employeeId": "emp-432",
+    "resource": "product:prod-platform",
+    "action": "admin",
+    "grantedAt": "2024-06-21",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0962",
+    "employeeId": "emp-432",
+    "resource": "product:prod-analytics",
+    "action": "admin",
+    "grantedAt": "2024-06-21",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0963",
+    "employeeId": "emp-432",
+    "resource": "product:prod-connect",
+    "action": "admin",
+    "grantedAt": "2024-06-21",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0964",
+    "employeeId": "emp-432",
+    "resource": "product:prod-guard",
+    "action": "admin",
+    "grantedAt": "2024-06-21",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0965",
+    "employeeId": "emp-432",
+    "resource": "admin:audit",
+    "action": "admin",
+    "grantedAt": "2024-06-21",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0966",
+    "employeeId": "emp-432",
+    "resource": "admin:settings",
+    "action": "admin",
+    "grantedAt": "2024-06-21",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0967",
+    "employeeId": "emp-432",
+    "resource": "data:export",
+    "action": "admin",
+    "grantedAt": "2024-06-21",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0968",
+    "employeeId": "emp-433",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-07-27",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-0969",
+    "employeeId": "emp-433",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-07-27",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0970",
+    "employeeId": "emp-433",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-07-27",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0971",
+    "employeeId": "emp-434",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-02-29",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0972",
+    "employeeId": "emp-434",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-02-29",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0973",
+    "employeeId": "emp-434",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-02-29",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0974",
+    "employeeId": "emp-435",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-01-22",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0975",
+    "employeeId": "emp-435",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2021-01-22",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0976",
+    "employeeId": "emp-436",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0977",
+    "employeeId": "emp-436",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0978",
+    "employeeId": "emp-436",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2019-11-01",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0979",
+    "employeeId": "emp-437",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2025-04-14",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0980",
+    "employeeId": "emp-438",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2019-04-09",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0981",
+    "employeeId": "emp-438",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2019-04-09",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0982",
+    "employeeId": "emp-439",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-06-23",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0983",
+    "employeeId": "emp-439",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-06-23",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-0984",
+    "employeeId": "emp-439",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-06-23",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0985",
+    "employeeId": "emp-440",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2021-03-31",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0986",
+    "employeeId": "emp-440",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-03-31",
+    "grantedBy": "emp-001"
+  },
+  {
+    "id": "perm-0987",
+    "employeeId": "emp-440",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-03-31",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-0988",
+    "employeeId": "emp-441",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2020-08-19",
+    "grantedBy": "emp-295"
+  },
+  {
+    "id": "perm-0989",
+    "employeeId": "emp-441",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-08-19",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0990",
+    "employeeId": "emp-441",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-08-19",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0991",
+    "employeeId": "emp-442",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2020-06-15",
+    "grantedBy": "emp-382"
+  },
+  {
+    "id": "perm-0992",
+    "employeeId": "emp-443",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-07-11",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0993",
+    "employeeId": "emp-444",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-12-11",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0994",
+    "employeeId": "emp-444",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2020-12-11",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-0995",
+    "employeeId": "emp-445",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2024-05-11",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-0996",
+    "employeeId": "emp-446",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2024-08-26",
+    "grantedBy": "emp-094"
+  },
+  {
+    "id": "perm-0997",
+    "employeeId": "emp-446",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-08-26",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-0998",
+    "employeeId": "emp-446",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-08-26",
+    "grantedBy": "emp-249"
+  },
+  {
+    "id": "perm-0999",
+    "employeeId": "emp-447",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2023-09-15",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-1000",
+    "employeeId": "emp-447",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2023-09-15",
+    "grantedBy": "emp-317"
+  },
+  {
+    "id": "perm-1001",
+    "employeeId": "emp-447",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2023-09-15",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-1002",
+    "employeeId": "emp-448",
+    "resource": "product:prod-analytics",
+    "action": "read",
+    "grantedAt": "2021-08-23",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-1003",
+    "employeeId": "emp-448",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2021-08-23",
+    "grantedBy": "emp-209"
+  },
+  {
+    "id": "perm-1004",
+    "employeeId": "emp-448",
+    "resource": "product:prod-guard",
+    "action": "read",
+    "grantedAt": "2021-08-23",
+    "grantedBy": "emp-009"
+  },
+  {
+    "id": "perm-1005",
+    "employeeId": "emp-449",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2020-03-29",
+    "grantedBy": "emp-337"
+  },
+  {
+    "id": "perm-1006",
+    "employeeId": "emp-450",
+    "resource": "product:prod-connect",
+    "action": "read",
+    "grantedAt": "2024-10-18",
+    "grantedBy": "emp-154"
+  },
+  {
+    "id": "perm-1007",
+    "employeeId": "emp-450",
+    "resource": "data:export",
+    "action": "read",
+    "grantedAt": "2024-10-18",
+    "grantedBy": "emp-277"
+  },
+  {
+    "id": "perm-1008",
+    "employeeId": "emp-450",
+    "resource": "product:prod-platform",
+    "action": "read",
+    "grantedAt": "2024-10-18",
+    "grantedBy": "emp-009"
+  }
+]

@@ -1,0 +1,63 @@
+export default {
+  id: 'pagerduty.create_incident',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'pagerduty',
+  category: 'incident',
+  displayName: 'Create PagerDuty Incident',
+  description: 'Creates a new PagerDuty incident and notifies the on-call responder. Used as the escalation step in the Production Incident Response workflow.',
+  icon: 'alert-triangle',
+  tags: ['pagerduty', 'incident', 'oncall', 'escalate', 'ops'],
+  riskLevel: 'MEDIUM',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['ADMIN'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['ADMIN'],
+  requiredScopes: ['incidents:write'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 3000,
+  timeoutMs: 20000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 2000, maxDelayMs: 15000,
+    jitterPercent: 15, retryOn: ['TIMEOUT', 'RATE_LIMIT'], noRetryOn: ['UNAUTHORIZED', 'SERVICE_NOT_FOUND'],
+  },
+  rollbackStrategy: {
+    supported: true, type: 'COMPENSATING', compensatingActionId: 'pagerduty.resolve_incident',
+    description: 'Resolve the created incident.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.incidentId != null' },
+  requiredInputs: [
+    { name: 'title',     type: 'string', description: 'Incident title', example: 'Production API down — P0' },
+    { name: 'serviceId', type: 'string', description: 'PagerDuty service ID', example: 'P3ZWX7Y' },
+  ],
+  optionalInputs: [
+    { name: 'urgency',   type: 'enum', enum: ['high', 'low'], description: 'Incident urgency' },
+    { name: 'details',   type: 'string', description: 'Incident body / details' },
+    { name: 'fromEmail', type: 'string', description: 'From email for PagerDuty API (defaults to PD_FROM_EMAIL env)' },
+  ],
+  outputSchema: {
+    type: 'object',
+    properties: {
+      incidentId:     { type: 'string' },
+      incidentNumber: { type: 'number' },
+      status:         { type: 'string' },
+      urgency:        { type: 'string' },
+      title:          { type: 'string' },
+      htmlUrl:        { type: 'string' },
+      createdAt:      { type: 'string' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'pagerduty_incident', resourceIdField: 'incidentId', actionVerb: 'created',
+    sensitivityLevel: 'CONFIDENTIAL', retainForDays: 730, complianceTags: ['SOC2', 'INCIDENT'],
+  },
+  telemetryMetadata: {
+    eventName: 'action.pagerduty.create_incident',
+    successMetric: 'flow.action.pagerduty.create_incident.success',
+    failureMetric: 'flow.action.pagerduty.create_incident.failure',
+    durationMetric: 'flow.action.pagerduty.create_incident.duration_ms',
+    dimensions: ['connector', 'workspace_id', 'urgency'],
+  },
+  relatedActions: ['pagerduty.resolve_incident', 'pagerduty.acknowledge_incident', 'pagerduty.add_note'],
+};

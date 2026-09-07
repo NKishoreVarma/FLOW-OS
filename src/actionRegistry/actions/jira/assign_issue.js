@@ -1,0 +1,56 @@
+export default {
+  id: 'jira.assign_issue',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'jira',
+  category: 'project',
+  displayName: 'Assign Jira Issue',
+  description: 'Sets the assignee on a Jira issue, routing ownership to the specified team member.',
+  icon: 'user-check',
+  tags: ['jira', 'issue', 'assign', 'owner', 'delegate', 'responsibility'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['write:jira-work'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 1000,
+  timeoutMs: 10000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 500, maxDelayMs: 4000,
+    jitterPercent: 10, retryOn: ['RATE_LIMIT', 'TIMEOUT'], noRetryOn: ['ISSUE_NOT_FOUND', 'USER_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: true, type: 'COMPENSATING', compensatingActionId: 'jira.assign_issue',
+    description: 'Reassign to the previous assignee to undo.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.assignee != null' },
+  requiredInputs: [
+    { name: 'key',      type: 'string', description: 'Jira issue key to assign', example: 'HPLT-205' },
+    { name: 'assignee', type: 'string', description: 'Assignee name or account ID', example: 'Rahul Singh' },
+  ],
+  optionalInputs: [],
+  outputSchema: {
+    type: 'object',
+    description: 'Updated issue with new assignee',
+    properties: {
+      key:      { type: 'string', description: 'Issue key' },
+      assignee: { type: 'string', description: 'New assignee' },
+      status:   { type: 'string', description: 'Current status' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'jira_issue', resourceIdField: 'key', actionVerb: 'assigned',
+    sensitivityLevel: 'INTERNAL', retainForDays: 365, complianceTags: [],
+  },
+  telemetryMetadata: {
+    eventName: 'action.jira.assign_issue',
+    successMetric: 'flow.action.jira.assign_issue.success',
+    failureMetric: 'flow.action.jira.assign_issue.failure',
+    durationMetric: 'flow.action.jira.assign_issue.duration_ms',
+    dimensions: ['connector', 'workspace_id'],
+  },
+  relatedActions: ['jira.create_issue', 'jira.transition_issue'],
+};

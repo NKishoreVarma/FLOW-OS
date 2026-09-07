@@ -1,5 +1,26 @@
 node_modules
 # Keep environment variables out of version control
 .env
+.env.*
 
 /src/generated/prisma
+
+# macOS metadata
+.DS_Store
+*/.DS_Store
+*.DS_Store
+
+# Scratch & temporary files
+scratch/
+
+# Local AI agent tooling & skills
+.agents/
+.claude/
+.codex/
+skills-lock.json
+
+# Build & runtime artifacts
+dist/
+coverage/
+*.log
+

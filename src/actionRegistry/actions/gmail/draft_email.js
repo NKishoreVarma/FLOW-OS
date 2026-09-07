@@ -1,0 +1,61 @@
+export default {
+  id: 'gmail.draft_email',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'gmail',
+  category: 'communication',
+  displayName: 'Create Email Draft',
+  description: 'Creates a Gmail draft that can be reviewed and sent later, without delivering it immediately.',
+  icon: 'file-text',
+  tags: ['email', 'gmail', 'draft', 'compose', 'save', 'review'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['https://www.googleapis.com/auth/gmail.compose'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 1500,
+  timeoutMs: 10000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 500, maxDelayMs: 4000,
+    jitterPercent: 10, retryOn: ['RATE_LIMIT', 'TIMEOUT'], noRetryOn: ['UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: true, type: 'COMPENSATING', compensatingActionId: 'gmail.archive_email',
+    description: 'Trash the draft if it was created in error.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.draftId != null' },
+  requiredInputs: [
+    { name: 'to',      type: 'string', description: 'Recipient email address(es)', example: 'customer@acme.corp' },
+    { name: 'subject', type: 'string', maxLength: 998, description: 'Email subject' },
+    { name: 'body',    type: 'string', maxLength: 524288, description: 'Email body' },
+  ],
+  optionalInputs: [
+    { name: 'cc',       type: 'string', description: 'CC addresses' },
+    { name: 'bodyHtml', type: 'string', description: 'HTML version of body' },
+    { name: 'threadId', type: 'string', description: 'Thread ID to attach draft to' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Created draft',
+    properties: {
+      draftId:   { type: 'string', description: 'Gmail draft ID' },
+      messageId: { type: 'string', description: 'Draft message ID' },
+      status:    { type: 'string', description: '"draft_created"' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'email_draft', resourceIdField: 'to', actionVerb: 'drafted',
+    sensitivityLevel: 'CONFIDENTIAL', retainForDays: 90, complianceTags: [],
+  },
+  telemetryMetadata: {
+    eventName: 'action.gmail.draft_email',
+    successMetric: 'flow.action.gmail.draft_email.success',
+    failureMetric: 'flow.action.gmail.draft_email.failure',
+    durationMetric: 'flow.action.gmail.draft_email.duration_ms',
+    dimensions: ['connector', 'workspace_id'],
+  },
+  relatedActions: ['gmail.send_email', 'gmail.schedule_email'],
+};

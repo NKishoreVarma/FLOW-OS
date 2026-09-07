@@ -5,7 +5,23 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node --test"
+    "dev": "node --watch src/server.js",
+    "worker": "echo \"[INFO] Workers are embedded inside the main server process. Running the server starts the workers. Run 'npm run start' or 'npm run dev' to start.\"",
+    "verify": "node scripts/verify.js",
+    "validate": "node scripts/validationSuite.js",
+    "trace": "node scripts/trace.js",
+    "metrics": "node scripts/metrics.js",
+    "brain": "node scripts/brain.js",
+    "replay": "node scripts/replay.js",
+    "test": "node --test --test-force-exit 'tests/unit/**/*.test.js'",
+    "test:unit": "node --test --test-force-exit 'tests/unit/**/*.test.js'",
+    "test:integration": "node --test --test-force-exit 'tests/integration/**/*.test.js'",
+    "test:validation": "node --test --test-force-exit 'tests/validation/**/*.test.js'",
+    "test:all": "node --test --test-force-exit 'tests/**/*.test.js'",
+    "test:conversation": "node src/testing/conversation/run-qa.js",
+    "test:security": "node src/testing/conversation/run-qa.js --security",
+    "test:smoke": "node src/testing/conversation/run-qa.js --smoke",
+    "test:qa-stats": "node src/testing/conversation/run-qa.js --stats"
   },
   "keywords": [],
   "author": "",
@@ -14,11 +30,11 @@
   "dependencies": {
     "@composio/core": "^0.4.0",
     "@google/genai": "^2.7.0",
-    "@google/generative-ai": "^0.24.1",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "bcryptjs": "^3.0.3",
     "bullmq": "^5.78.0",
+    "compression": "^1.8.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
@@ -28,5 +44,8 @@
     "pg": "^8.21.0",
     "prisma": "^7.8.0",
     "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.2.2"
   }
 }

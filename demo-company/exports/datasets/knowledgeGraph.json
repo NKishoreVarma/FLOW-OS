@@ -1,0 +1,4002 @@
+[
+  {
+    "nodes": [
+      {
+        "id": "emp-001",
+        "type": "employee",
+        "name": "Toby Deckow",
+        "properties": {
+          "title": "CEO",
+          "department": "dept-executive"
+        }
+      },
+      {
+        "id": "emp-002",
+        "type": "employee",
+        "name": "Violet Rohan",
+        "properties": {
+          "title": "CTO",
+          "department": "dept-executive"
+        }
+      },
+      {
+        "id": "emp-003",
+        "type": "employee",
+        "name": "Addison Gusikowski",
+        "properties": {
+          "title": "CPO",
+          "department": "dept-executive"
+        }
+      },
+      {
+        "id": "emp-004",
+        "type": "employee",
+        "name": "Violet Nitzsche",
+        "properties": {
+          "title": "CFO",
+          "department": "dept-executive"
+        }
+      },
+      {
+        "id": "emp-005",
+        "type": "employee",
+        "name": "Idella Ziemann",
+        "properties": {
+          "title": "VP Sales",
+          "department": "dept-executive"
+        }
+      },
+      {
+        "id": "emp-006",
+        "type": "employee",
+        "name": "Alejandra Turner",
+        "properties": {
+          "title": "VP Marketing",
+          "department": "dept-executive"
+        }
+      },
+      {
+        "id": "emp-007",
+        "type": "employee",
+        "name": "Lauryn Tremblay",
+        "properties": {
+          "title": "VP Customer Success",
+          "department": "dept-executive"
+        }
+      },
+      {
+        "id": "emp-008",
+        "type": "employee",
+        "name": "Ramiro Erdman",
+        "properties": {
+          "title": "General Counsel",
+          "department": "dept-executive"
+        }
+      },
+      {
+        "id": "emp-009",
+        "type": "employee",
+        "name": "Melyna Lemke",
+        "properties": {
+          "title": "VP Engineering",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-010",
+        "type": "employee",
+        "name": "Leonardo Kuhn",
+        "properties": {
+          "title": "Senior Engineering Manager",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-011",
+        "type": "employee",
+        "name": "Gerard Mante",
+        "properties": {
+          "title": "Engineering Manager",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-012",
+        "type": "employee",
+        "name": "Piper Wiza",
+        "properties": {
+          "title": "Staff Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-013",
+        "type": "employee",
+        "name": "Felipa Labadie",
+        "properties": {
+          "title": "Senior Software Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-014",
+        "type": "employee",
+        "name": "Jerod West",
+        "properties": {
+          "title": "Software Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-015",
+        "type": "employee",
+        "name": "Fredrick Farrell",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-016",
+        "type": "employee",
+        "name": "Odessa Stehr",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-017",
+        "type": "employee",
+        "name": "Ethan Treutel",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-018",
+        "type": "employee",
+        "name": "Liza Conroy",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-019",
+        "type": "employee",
+        "name": "Luz Rath",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-020",
+        "type": "employee",
+        "name": "Akeem O'Keefe-Langworth",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-021",
+        "type": "employee",
+        "name": "Jorge Mante",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-022",
+        "type": "employee",
+        "name": "Diego Kuhic",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-023",
+        "type": "employee",
+        "name": "Mikayla Jerde",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-024",
+        "type": "employee",
+        "name": "Casper Monahan",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-025",
+        "type": "employee",
+        "name": "Sanford McDermott",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-026",
+        "type": "employee",
+        "name": "Matilda Bergnaum",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-027",
+        "type": "employee",
+        "name": "Vena McClure",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-028",
+        "type": "employee",
+        "name": "Harry Osinski",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-029",
+        "type": "employee",
+        "name": "Percival Gislason",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-030",
+        "type": "employee",
+        "name": "Fiona Stroman",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-031",
+        "type": "employee",
+        "name": "Emanuel Cormier-Cummings",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-032",
+        "type": "employee",
+        "name": "Janelle Ryan",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-033",
+        "type": "employee",
+        "name": "Nona Gislason",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-034",
+        "type": "employee",
+        "name": "Roselyn Kemmer",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-035",
+        "type": "employee",
+        "name": "Kayla Reinger",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-036",
+        "type": "employee",
+        "name": "Kelsie Koepp",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-037",
+        "type": "employee",
+        "name": "Georgiana Goldner",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-038",
+        "type": "employee",
+        "name": "Derick Ondricka",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-039",
+        "type": "employee",
+        "name": "Elmer Fadel",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-040",
+        "type": "employee",
+        "name": "Daren Muller",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-041",
+        "type": "employee",
+        "name": "Elta Dietrich",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-042",
+        "type": "employee",
+        "name": "Fausto Braun",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-043",
+        "type": "employee",
+        "name": "Ericka Kunze",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-044",
+        "type": "employee",
+        "name": "Leif Schmeler",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-045",
+        "type": "employee",
+        "name": "Miracle Kerluke",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-046",
+        "type": "employee",
+        "name": "Aiyana Heidenreich",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-047",
+        "type": "employee",
+        "name": "Sincere Schmeler",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-048",
+        "type": "employee",
+        "name": "Nichole Harber",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-049",
+        "type": "employee",
+        "name": "Marjolaine Hyatt",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-050",
+        "type": "employee",
+        "name": "Zora Kunde",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-051",
+        "type": "employee",
+        "name": "Eleanora Goodwin",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-052",
+        "type": "employee",
+        "name": "Ubaldo Herzog",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-053",
+        "type": "employee",
+        "name": "Bailey Wolf",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-054",
+        "type": "employee",
+        "name": "Ashleigh Monahan",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-055",
+        "type": "employee",
+        "name": "Marilyne Gibson",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-056",
+        "type": "employee",
+        "name": "Roman Harris",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-057",
+        "type": "employee",
+        "name": "Alejandrin Heidenreich",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-058",
+        "type": "employee",
+        "name": "Annamarie Bauch",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-059",
+        "type": "employee",
+        "name": "Crystal Gleichner-Parisian",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-060",
+        "type": "employee",
+        "name": "Briana Conn",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-061",
+        "type": "employee",
+        "name": "Litzy Nitzsche",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-062",
+        "type": "employee",
+        "name": "Leonie Corwin",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-063",
+        "type": "employee",
+        "name": "Timothy Little",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-064",
+        "type": "employee",
+        "name": "Moriah Hilpert-Rau",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-065",
+        "type": "employee",
+        "name": "Carlotta Luettgen",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-066",
+        "type": "employee",
+        "name": "Jeffry Murray",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-067",
+        "type": "employee",
+        "name": "Tess Bernier",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-068",
+        "type": "employee",
+        "name": "Keegan Emmerich",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-069",
+        "type": "employee",
+        "name": "Rose Schmidt",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-070",
+        "type": "employee",
+        "name": "Mavis Stark",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-071",
+        "type": "employee",
+        "name": "Dante Conn",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-072",
+        "type": "employee",
+        "name": "Manley Olson",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-073",
+        "type": "employee",
+        "name": "Cale Bartoletti",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-074",
+        "type": "employee",
+        "name": "Lewis Greenfelder-Pfannerstill",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-075",
+        "type": "employee",
+        "name": "Hulda Harris",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-076",
+        "type": "employee",
+        "name": "Helene Ritchie",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-077",
+        "type": "employee",
+        "name": "Abbey Bauch",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-078",
+        "type": "employee",
+        "name": "Toy Grady",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-079",
+        "type": "employee",
+        "name": "Alford McKenzie",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-080",
+        "type": "employee",
+        "name": "Jettie Hoppe",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-081",
+        "type": "employee",
+        "name": "Freida Heidenreich",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-082",
+        "type": "employee",
+        "name": "Wilton Rowe",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-083",
+        "type": "employee",
+        "name": "Yessenia Wolf",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-084",
+        "type": "employee",
+        "name": "Justine Hagenes",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-085",
+        "type": "employee",
+        "name": "Curtis Green",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-086",
+        "type": "employee",
+        "name": "Hosea Marquardt",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-087",
+        "type": "employee",
+        "name": "Glen Schroeder",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-088",
+        "type": "employee",
+        "name": "Jaylen Maggio-Shields",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-089",
+        "type": "employee",
+        "name": "Susana Turcotte",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-090",
+        "type": "employee",
+        "name": "Trycia Bechtelar",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-091",
+        "type": "employee",
+        "name": "Norris Lockman",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-092",
+        "type": "employee",
+        "name": "Brigitte Terry",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-093",
+        "type": "employee",
+        "name": "Ada Jerde",
+        "properties": {
+          "title": "Junior Engineer",
+          "department": "dept-eng-platform"
+        }
+      },
+      {
+        "id": "emp-094",
+        "type": "employee",
+        "name": "Era Boyer",
+        "properties": {
+          "title": "VP Engineering",
+          "department": "dept-eng-analytics"
+        }
+      },
+      {
+        "id": "emp-095",
+        "type": "employee",
+        "name": "Sean Schmidt",
+        "properties": {
+          "title": "Engineering Manager",
+          "department": "dept-eng-analytics"
+        }
+      },
+      {
+        "id": "emp-096",
+        "type": "employee",
+        "name": "Lela Rutherford",
+        "properties": {
+          "title": "Staff Engineer",
+          "department": "dept-eng-analytics"
+        }
+      },
+      {
+        "id": "emp-097",
+        "type": "employee",
+        "name": "Kevon McGlynn",
+        "properties": {
+          "title": "Senior Software Engineer",
+          "department": "dept-eng-analytics"
+        }
+      },
+      {
+        "id": "emp-098",
+        "type": "employee",
+        "name": "Elaina Lesch",
+        "properties": {
+          "title": "Software Engineer",
+          "department": "dept-eng-analytics"
+        }
+      },
+      {
+        "id": "emp-099",
+        "type": "employee",
+        "name": "Remington Schmeler",
+        "properties": {
+          "title": "Software Engineer",
+          "department": "dept-eng-analytics"
+        }
+      },
+      {
+        "id": "emp-100",
+        "type": "employee",
+        "name": "Jammie Vandervort",
+        "properties": {
+          "title": "Software Engineer",
+          "department": "dept-eng-analytics"
+        }
+      },
+      {
+        "id": "cust-bartell-welch-1",
+        "type": "customer",
+        "name": "Bartell - Welch",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-hoppe-inc-2",
+        "type": "customer",
+        "name": "Hoppe Inc",
+        "properties": {
+          "tier": "enterprise",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-cartwright-torphy-3",
+        "type": "customer",
+        "name": "Cartwright - Torphy",
+        "properties": {
+          "tier": "enterprise",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-kuhlman-lakin-and-stamm-4",
+        "type": "customer",
+        "name": "Kuhlman, Lakin and Stamm",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-hagenes-llc-5",
+        "type": "customer",
+        "name": "Hagenes LLC",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-toy-jenkins-and-spencer-6",
+        "type": "customer",
+        "name": "Toy, Jenkins and Spencer",
+        "properties": {
+          "tier": "smb",
+          "health": "churned"
+        }
+      },
+      {
+        "id": "cust-lubowitz-group-7",
+        "type": "customer",
+        "name": "Lubowitz Group",
+        "properties": {
+          "tier": "enterprise",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-murphy-corkery-and-o-reilly-8",
+        "type": "customer",
+        "name": "Murphy, Corkery and O'Reilly",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-ratke-group-9",
+        "type": "customer",
+        "name": "Ratke Group",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-sipes-group-10",
+        "type": "customer",
+        "name": "Sipes Group",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-lehner-upton-and-bode-11",
+        "type": "customer",
+        "name": "Lehner, Upton and Bode",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-stark-bergnaum-and-emmerich-12",
+        "type": "customer",
+        "name": "Stark, Bergnaum and Emmerich",
+        "properties": {
+          "tier": "smb",
+          "health": "churned"
+        }
+      },
+      {
+        "id": "cust-sawayn-group-13",
+        "type": "customer",
+        "name": "Sawayn Group",
+        "properties": {
+          "tier": "enterprise",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-wehner-blick-and-jacobs-14",
+        "type": "customer",
+        "name": "Wehner, Blick and Jacobs",
+        "properties": {
+          "tier": "enterprise",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-price-hammes-15",
+        "type": "customer",
+        "name": "Price - Hammes",
+        "properties": {
+          "tier": "mid-market",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-cormier-inc-16",
+        "type": "customer",
+        "name": "Cormier Inc",
+        "properties": {
+          "tier": "enterprise",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-rempel-hand-17",
+        "type": "customer",
+        "name": "Rempel - Hand",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-williamson-wehner-and-cummings-18",
+        "type": "customer",
+        "name": "Williamson, Wehner and Cummings",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-cronin-grimes-and-boyer-19",
+        "type": "customer",
+        "name": "Cronin, Grimes and Boyer",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-yundt-gerhold-and-quitzon-20",
+        "type": "customer",
+        "name": "Yundt, Gerhold and Quitzon",
+        "properties": {
+          "tier": "mid-market",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-stehr-schmidt-21",
+        "type": "customer",
+        "name": "Stehr - Schmidt",
+        "properties": {
+          "tier": "smb",
+          "health": "churned"
+        }
+      },
+      {
+        "id": "cust-bashirian-o-reilly-22",
+        "type": "customer",
+        "name": "Bashirian - O'Reilly",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-kunde-llc-23",
+        "type": "customer",
+        "name": "Kunde LLC",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-barrows-inc-24",
+        "type": "customer",
+        "name": "Barrows Inc",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-ebert-treutel-and-kris-25",
+        "type": "customer",
+        "name": "Ebert, Treutel and Kris",
+        "properties": {
+          "tier": "mid-market",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-quigley-feeney-26",
+        "type": "customer",
+        "name": "Quigley - Feeney",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-schaden-kunze-27",
+        "type": "customer",
+        "name": "Schaden - Kunze",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-altenwerth-berge-28",
+        "type": "customer",
+        "name": "Altenwerth - Berge",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-cole-bernier-and-ferry-29",
+        "type": "customer",
+        "name": "Cole, Bernier and Ferry",
+        "properties": {
+          "tier": "enterprise",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-kiehn-kuphal-30",
+        "type": "customer",
+        "name": "Kiehn - Kuphal",
+        "properties": {
+          "tier": "mid-market",
+          "health": "churned"
+        }
+      },
+      {
+        "id": "cust-sawayn-rau-31",
+        "type": "customer",
+        "name": "Sawayn - Rau",
+        "properties": {
+          "tier": "mid-market",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-jenkins-quitzon-and-hayes-32",
+        "type": "customer",
+        "name": "Jenkins, Quitzon and Hayes",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-o-conner-nicolas-and-adams-33",
+        "type": "customer",
+        "name": "O'Conner, Nicolas and Adams",
+        "properties": {
+          "tier": "smb",
+          "health": "churned"
+        }
+      },
+      {
+        "id": "cust-hermann-kulas-34",
+        "type": "customer",
+        "name": "Hermann - Kulas",
+        "properties": {
+          "tier": "mid-market",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-okuneva-marquardt-and-muller-35",
+        "type": "customer",
+        "name": "Okuneva, Marquardt and Muller",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-block-renner-36",
+        "type": "customer",
+        "name": "Block - Renner",
+        "properties": {
+          "tier": "smb",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-franecki-roberts-and-koss-37",
+        "type": "customer",
+        "name": "Franecki, Roberts and Koss",
+        "properties": {
+          "tier": "smb",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-runolfsdottir-harvey-and-lynch-38",
+        "type": "customer",
+        "name": "Runolfsdottir, Harvey and Lynch",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-erdman-gislason-39",
+        "type": "customer",
+        "name": "Erdman - Gislason",
+        "properties": {
+          "tier": "enterprise",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-sanford-inc-40",
+        "type": "customer",
+        "name": "Sanford Inc",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-douglas-haag-41",
+        "type": "customer",
+        "name": "Douglas - Haag",
+        "properties": {
+          "tier": "smb",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-toy-and-sons-42",
+        "type": "customer",
+        "name": "Toy and Sons",
+        "properties": {
+          "tier": "mid-market",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-keebler-haley-and-lowe-43",
+        "type": "customer",
+        "name": "Keebler, Haley and Lowe",
+        "properties": {
+          "tier": "mid-market",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-satterfield-konopelski-44",
+        "type": "customer",
+        "name": "Satterfield - Konopelski",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-kunze-jakubowski-45",
+        "type": "customer",
+        "name": "Kunze - Jakubowski",
+        "properties": {
+          "tier": "smb",
+          "health": "churned"
+        }
+      },
+      {
+        "id": "cust-kshlerin-fadel-46",
+        "type": "customer",
+        "name": "Kshlerin - Fadel",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-boyer-inc-47",
+        "type": "customer",
+        "name": "Boyer Inc",
+        "properties": {
+          "tier": "mid-market",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-runolfsdottir-hansen-and-kirli-48",
+        "type": "customer",
+        "name": "Runolfsdottir, Hansen and Kirlin",
+        "properties": {
+          "tier": "smb",
+          "health": "healthy"
+        }
+      },
+      {
+        "id": "cust-stiedemann-llc-49",
+        "type": "customer",
+        "name": "Stiedemann LLC",
+        "properties": {
+          "tier": "enterprise",
+          "health": "at-risk"
+        }
+      },
+      {
+        "id": "cust-lubowitz-llc-50",
+        "type": "customer",
+        "name": "Lubowitz LLC",
+        "properties": {
+          "tier": "smb",
+          "health": "churned"
+        }
+      },
+      {
+        "id": "prod-platform",
+        "type": "product",
+        "name": "Helios Platform",
+        "properties": {
+          "description": "Core enterprise workflow and automation engine"
+        }
+      },
+      {
+        "id": "prod-analytics",
+        "type": "product",
+        "name": "Helios Analytics",
+        "properties": {
+          "description": "Real-time business intelligence and reporting"
+        }
+      },
+      {
+        "id": "prod-connect",
+        "type": "product",
+        "name": "Helios Connect",
+        "properties": {
+          "description": "API integration hub and connector marketplace"
+        }
+      },
+      {
+        "id": "prod-guard",
+        "type": "product",
+        "name": "Helios Guard",
+        "properties": {
+          "description": "Security, compliance, and access control platform"
+        }
+      },
+      {
+        "id": "repo-platform-api",
+        "type": "repository",
+        "name": "helios-platform-api",
+        "properties": {
+          "language": "TypeScript"
+        }
+      },
+      {
+        "id": "repo-platform-worker",
+        "type": "repository",
+        "name": "helios-platform-worker",
+        "properties": {
+          "language": "TypeScript"
+        }
+      },
+      {
+        "id": "repo-platform-sdk",
+        "type": "repository",
+        "name": "helios-platform-sdk",
+        "properties": {
+          "language": "TypeScript"
+        }
+      },
+      {
+        "id": "repo-platform-ui",
+        "type": "repository",
+        "name": "helios-platform-ui",
+        "properties": {
+          "language": "TypeScript"
+        }
+      },
+      {
+        "id": "repo-platform-infra",
+        "type": "repository",
+        "name": "helios-platform-infra",
+        "properties": {
+          "language": "TypeScript"
+        }
+      },
+      {
+        "id": "repo-analytics-engine",
+        "type": "repository",
+        "name": "helios-analytics-engine",
+        "properties": {
+          "language": "Python"
+        }
+      },
+      {
+        "id": "repo-analytics-ui",
+        "type": "repository",
+        "name": "helios-analytics-ui",
+        "properties": {
+          "language": "Python"
+        }
+      },
+      {
+        "id": "repo-analytics-pipeline",
+        "type": "repository",
+        "name": "helios-analytics-pipeline",
+        "properties": {
+          "language": "Python"
+        }
+      },
+      {
+        "id": "repo-analytics-sdk",
+        "type": "repository",
+        "name": "helios-analytics-sdk",
+        "properties": {
+          "language": "Python"
+        }
+      },
+      {
+        "id": "repo-connect-core",
+        "type": "repository",
+        "name": "helios-connect-core",
+        "properties": {
+          "language": "Go"
+        }
+      },
+      {
+        "id": "repo-connect-adapters",
+        "type": "repository",
+        "name": "helios-connect-adapters",
+        "properties": {
+          "language": "Go"
+        }
+      },
+      {
+        "id": "repo-connect-ui",
+        "type": "repository",
+        "name": "helios-connect-ui",
+        "properties": {
+          "language": "Go"
+        }
+      },
+      {
+        "id": "repo-connect-marketplace",
+        "type": "repository",
+        "name": "helios-connect-marketplace",
+        "properties": {
+          "language": "Go"
+        }
+      },
+      {
+        "id": "repo-guard-core",
+        "type": "repository",
+        "name": "helios-guard-core",
+        "properties": {
+          "language": "Rust"
+        }
+      },
+      {
+        "id": "repo-guard-policy-engine",
+        "type": "repository",
+        "name": "helios-guard-policy-engine",
+        "properties": {
+          "language": "Rust"
+        }
+      },
+      {
+        "id": "repo-guard-ui",
+        "type": "repository",
+        "name": "helios-guard-ui",
+        "properties": {
+          "language": "Rust"
+        }
+      },
+      {
+        "id": "inc-001",
+        "type": "incident",
+        "name": "Memory leak in Platform worker",
+        "properties": {
+          "severity": "P2",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-002",
+        "type": "incident",
+        "name": "SSL certificate expiration on Connect endpoints",
+        "properties": {
+          "severity": "P3",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-003",
+        "type": "incident",
+        "name": "SSL certificate expiration on Connect endpoints",
+        "properties": {
+          "severity": "P2",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-004",
+        "type": "incident",
+        "name": "Database replication lag exceeding 60 seconds",
+        "properties": {
+          "severity": "P3",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-005",
+        "type": "incident",
+        "name": "SSL certificate expiration on Connect endpoints",
+        "properties": {
+          "severity": "P3",
+          "status": "investigating"
+        }
+      },
+      {
+        "id": "inc-006",
+        "type": "incident",
+        "name": "Platform API returning 502 errors for all enterprise customers",
+        "properties": {
+          "severity": "P3",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-007",
+        "type": "incident",
+        "name": "Connect adapter outage — webhooks failing",
+        "properties": {
+          "severity": "P3",
+          "status": "mitigated"
+        }
+      },
+      {
+        "id": "inc-008",
+        "type": "incident",
+        "name": "Platform API returning 502 errors for all enterprise customers",
+        "properties": {
+          "severity": "P1",
+          "status": "investigating"
+        }
+      },
+      {
+        "id": "inc-009",
+        "type": "incident",
+        "name": "Memory leak in Platform worker",
+        "properties": {
+          "severity": "P1",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-010",
+        "type": "incident",
+        "name": "Platform API returning 502 errors for all enterprise customers",
+        "properties": {
+          "severity": "P3",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-011",
+        "type": "incident",
+        "name": "Database replication lag exceeding 60 seconds",
+        "properties": {
+          "severity": "P3",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-012",
+        "type": "incident",
+        "name": "Auth service timeout — users unable to log in",
+        "properties": {
+          "severity": "P1",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-013",
+        "type": "incident",
+        "name": "Auth service timeout — users unable to log in",
+        "properties": {
+          "severity": "P2",
+          "status": "mitigated"
+        }
+      },
+      {
+        "id": "inc-014",
+        "type": "incident",
+        "name": "Guard policy engine returning incorrect decisions",
+        "properties": {
+          "severity": "P2",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-015",
+        "type": "incident",
+        "name": "DDoS-like traffic spike on API gateway",
+        "properties": {
+          "severity": "P2",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-016",
+        "type": "incident",
+        "name": "DDoS-like traffic spike on API gateway",
+        "properties": {
+          "severity": "P1",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-017",
+        "type": "incident",
+        "name": "DDoS-like traffic spike on API gateway",
+        "properties": {
+          "severity": "P2",
+          "status": "mitigated"
+        }
+      },
+      {
+        "id": "inc-018",
+        "type": "incident",
+        "name": "Connect adapter outage — webhooks failing",
+        "properties": {
+          "severity": "P2",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-019",
+        "type": "incident",
+        "name": "Data loss incident in analytics stream",
+        "properties": {
+          "severity": "P0",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-020",
+        "type": "incident",
+        "name": "Platform API returning 502 errors for all enterprise customers",
+        "properties": {
+          "severity": "P1",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-021",
+        "type": "incident",
+        "name": "Memory leak in Platform worker",
+        "properties": {
+          "severity": "P3",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-022",
+        "type": "incident",
+        "name": "Guard policy engine returning incorrect decisions",
+        "properties": {
+          "severity": "P2",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-023",
+        "type": "incident",
+        "name": "DDoS-like traffic spike on API gateway",
+        "properties": {
+          "severity": "P1",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-024",
+        "type": "incident",
+        "name": "SSL certificate expiration on Connect endpoints",
+        "properties": {
+          "severity": "P2",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-025",
+        "type": "incident",
+        "name": "Platform API returning 502 errors for all enterprise customers",
+        "properties": {
+          "severity": "P1",
+          "status": "mitigated"
+        }
+      },
+      {
+        "id": "inc-026",
+        "type": "incident",
+        "name": "Guard policy engine returning incorrect decisions",
+        "properties": {
+          "severity": "P2",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-027",
+        "type": "incident",
+        "name": "Data loss incident in analytics stream",
+        "properties": {
+          "severity": "P2",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-028",
+        "type": "incident",
+        "name": "Memory leak in Platform worker",
+        "properties": {
+          "severity": "P3",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-029",
+        "type": "incident",
+        "name": "Data loss incident in analytics stream",
+        "properties": {
+          "severity": "P3",
+          "status": "resolved"
+        }
+      },
+      {
+        "id": "inc-030",
+        "type": "incident",
+        "name": "Connect adapter outage — webhooks failing",
+        "properties": {
+          "severity": "P3",
+          "status": "resolved"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "emp-001",
+        "target": "emp-002",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-001",
+        "target": "emp-003",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-001",
+        "target": "emp-004",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-003",
+        "target": "emp-005",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-002",
+        "target": "emp-006",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-001",
+        "target": "emp-007",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-002",
+        "target": "emp-008",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-001",
+        "target": "emp-009",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-010",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-011",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-012",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-013",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-014",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-015",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-016",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-017",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-018",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-019",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-020",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-021",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-022",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-023",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-024",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-025",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-026",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-027",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-028",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-029",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-030",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-031",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-032",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-033",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-034",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-035",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-036",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-037",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-038",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-039",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-040",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-041",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-042",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-043",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-044",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-045",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-046",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-047",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-048",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-049",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-050",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-051",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-052",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-053",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-054",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-055",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-056",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-057",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-058",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-059",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-060",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-061",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-062",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-063",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-064",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-065",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-066",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-067",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-068",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-069",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-070",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-071",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-072",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-073",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-074",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-075",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-076",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-077",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-078",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-079",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-080",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-081",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-082",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-083",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-084",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-085",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-086",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-087",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-088",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-089",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-090",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-010",
+        "target": "emp-091",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "emp-092",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-011",
+        "target": "emp-093",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-001",
+        "target": "emp-094",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-094",
+        "target": "emp-095",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-094",
+        "target": "emp-096",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-094",
+        "target": "emp-097",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-096",
+        "target": "emp-098",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-096",
+        "target": "emp-099",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-094",
+        "target": "emp-100",
+        "relation": "manages",
+        "weight": 1
+      },
+      {
+        "source": "emp-009",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-010",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-011",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-012",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-013",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-014",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-015",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-016",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-017",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-018",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-019",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-020",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-021",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-022",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-023",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-024",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-025",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-026",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-027",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-028",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-029",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-030",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-031",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-032",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-033",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-034",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-035",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-036",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-037",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-038",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-039",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-040",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-041",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-042",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-043",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-044",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-045",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-046",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-047",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-048",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-049",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-050",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-051",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-052",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-053",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-054",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-055",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-056",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-057",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-058",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-059",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-060",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-061",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-062",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-063",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-064",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-065",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-066",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-067",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-068",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-069",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-070",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-071",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-072",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-073",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-074",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-075",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-076",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-077",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-078",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-079",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-080",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-081",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-082",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-083",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-084",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-085",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-086",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-087",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-088",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-089",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-090",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-091",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-092",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-093",
+        "target": "prod-platform",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-094",
+        "target": "prod-analytics",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-095",
+        "target": "prod-analytics",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-096",
+        "target": "prod-analytics",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-097",
+        "target": "prod-analytics",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-098",
+        "target": "prod-analytics",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-099",
+        "target": "prod-analytics",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "emp-100",
+        "target": "prod-analytics",
+        "relation": "works_on",
+        "weight": 0.8
+      },
+      {
+        "source": "cust-bartell-welch-1",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-bartell-welch-1",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-hoppe-inc-2",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-hoppe-inc-2",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-cartwright-torphy-3",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kuhlman-lakin-and-stamm-4",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kuhlman-lakin-and-stamm-4",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kuhlman-lakin-and-stamm-4",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kuhlman-lakin-and-stamm-4",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-hagenes-llc-5",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-hagenes-llc-5",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-hagenes-llc-5",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-toy-jenkins-and-spencer-6",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-toy-jenkins-and-spencer-6",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lubowitz-group-7",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lubowitz-group-7",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lubowitz-group-7",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-murphy-corkery-and-o-reilly-8",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-murphy-corkery-and-o-reilly-8",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-murphy-corkery-and-o-reilly-8",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-murphy-corkery-and-o-reilly-8",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-ratke-group-9",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-ratke-group-9",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-ratke-group-9",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-sipes-group-10",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-sipes-group-10",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lehner-upton-and-bode-11",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lehner-upton-and-bode-11",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lehner-upton-and-bode-11",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lehner-upton-and-bode-11",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stark-bergnaum-and-emmerich-12",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stark-bergnaum-and-emmerich-12",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-sawayn-group-13",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-sawayn-group-13",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-wehner-blick-and-jacobs-14",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-wehner-blick-and-jacobs-14",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-price-hammes-15",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-price-hammes-15",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-price-hammes-15",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-cormier-inc-16",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-cormier-inc-16",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-rempel-hand-17",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-rempel-hand-17",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-rempel-hand-17",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-rempel-hand-17",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-williamson-wehner-and-cummings-18",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-williamson-wehner-and-cummings-18",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-williamson-wehner-and-cummings-18",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-cronin-grimes-and-boyer-19",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-yundt-gerhold-and-quitzon-20",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-yundt-gerhold-and-quitzon-20",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-yundt-gerhold-and-quitzon-20",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stehr-schmidt-21",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stehr-schmidt-21",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stehr-schmidt-21",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stehr-schmidt-21",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-bashirian-o-reilly-22",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-bashirian-o-reilly-22",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-bashirian-o-reilly-22",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kunde-llc-23",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kunde-llc-23",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kunde-llc-23",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kunde-llc-23",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-barrows-inc-24",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-barrows-inc-24",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-barrows-inc-24",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-ebert-treutel-and-kris-25",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-ebert-treutel-and-kris-25",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-ebert-treutel-and-kris-25",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-ebert-treutel-and-kris-25",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-quigley-feeney-26",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-schaden-kunze-27",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-schaden-kunze-27",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-schaden-kunze-27",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-schaden-kunze-27",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-altenwerth-berge-28",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-cole-bernier-and-ferry-29",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-cole-bernier-and-ferry-29",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kiehn-kuphal-30",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-sawayn-rau-31",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-jenkins-quitzon-and-hayes-32",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-jenkins-quitzon-and-hayes-32",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-o-conner-nicolas-and-adams-33",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-hermann-kulas-34",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-hermann-kulas-34",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-hermann-kulas-34",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-okuneva-marquardt-and-muller-35",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-okuneva-marquardt-and-muller-35",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-okuneva-marquardt-and-muller-35",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-block-renner-36",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-block-renner-36",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-block-renner-36",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-franecki-roberts-and-koss-37",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-franecki-roberts-and-koss-37",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-franecki-roberts-and-koss-37",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-runolfsdottir-harvey-and-lynch-38",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-runolfsdottir-harvey-and-lynch-38",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-runolfsdottir-harvey-and-lynch-38",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-runolfsdottir-harvey-and-lynch-38",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-erdman-gislason-39",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-erdman-gislason-39",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-erdman-gislason-39",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-sanford-inc-40",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-douglas-haag-41",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-douglas-haag-41",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-toy-and-sons-42",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-toy-and-sons-42",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-toy-and-sons-42",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-toy-and-sons-42",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-keebler-haley-and-lowe-43",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-keebler-haley-and-lowe-43",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-keebler-haley-and-lowe-43",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-satterfield-konopelski-44",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-satterfield-konopelski-44",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-satterfield-konopelski-44",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kunze-jakubowski-45",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kunze-jakubowski-45",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kunze-jakubowski-45",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-kshlerin-fadel-46",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-boyer-inc-47",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-boyer-inc-47",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-boyer-inc-47",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-boyer-inc-47",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-runolfsdottir-hansen-and-kirli-48",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stiedemann-llc-49",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stiedemann-llc-49",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stiedemann-llc-49",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-stiedemann-llc-49",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lubowitz-llc-50",
+        "target": "prod-analytics",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lubowitz-llc-50",
+        "target": "prod-connect",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lubowitz-llc-50",
+        "target": "prod-platform",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "cust-lubowitz-llc-50",
+        "target": "prod-guard",
+        "relation": "uses",
+        "weight": 0.9
+      },
+      {
+        "source": "repo-platform-api",
+        "target": "prod-platform",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-platform-worker",
+        "target": "prod-platform",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-platform-sdk",
+        "target": "prod-platform",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-platform-ui",
+        "target": "prod-platform",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-platform-infra",
+        "target": "prod-platform",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-analytics-engine",
+        "target": "prod-analytics",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-analytics-ui",
+        "target": "prod-analytics",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-analytics-pipeline",
+        "target": "prod-analytics",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-analytics-sdk",
+        "target": "prod-analytics",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-connect-core",
+        "target": "prod-connect",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-connect-adapters",
+        "target": "prod-connect",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-connect-ui",
+        "target": "prod-connect",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-connect-marketplace",
+        "target": "prod-connect",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-guard-core",
+        "target": "prod-guard",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-guard-policy-engine",
+        "target": "prod-guard",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "repo-guard-ui",
+        "target": "prod-guard",
+        "relation": "belongs_to",
+        "weight": 1
+      },
+      {
+        "source": "inc-001",
+        "target": "prod-analytics",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-002",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-003",
+        "target": "prod-platform",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-004",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-005",
+        "target": "prod-analytics",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-006",
+        "target": "prod-analytics",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-007",
+        "target": "prod-guard",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-008",
+        "target": "prod-analytics",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-009",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-010",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-011",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-012",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-013",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-014",
+        "target": "prod-analytics",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-015",
+        "target": "prod-guard",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-016",
+        "target": "prod-platform",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-017",
+        "target": "prod-analytics",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-018",
+        "target": "prod-platform",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-019",
+        "target": "prod-guard",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-020",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-021",
+        "target": "prod-platform",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-022",
+        "target": "prod-guard",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-023",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-024",
+        "target": "prod-platform",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-025",
+        "target": "prod-platform",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-026",
+        "target": "prod-guard",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-027",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-028",
+        "target": "prod-analytics",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-029",
+        "target": "prod-platform",
+        "relation": "affected",
+        "weight": 0.9
+      },
+      {
+        "source": "inc-030",
+        "target": "prod-connect",
+        "relation": "affected",
+        "weight": 0.9
+      }
+    ]
+  }
+]

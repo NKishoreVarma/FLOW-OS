@@ -1,0 +1,60 @@
+export default {
+  id: 'gmail.reply_email',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'gmail',
+  category: 'communication',
+  displayName: 'Reply to Email',
+  description: 'Sends a threaded reply to an existing Gmail message, preserving the conversation.',
+  icon: 'reply',
+  tags: ['email', 'gmail', 'reply', 'thread', 'respond', 'communication'],
+  riskLevel: 'MEDIUM',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['https://www.googleapis.com/auth/gmail.send'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 2500,
+  timeoutMs: 15000,
+  retryStrategy: {
+    maxAttempts: 2, backoffType: 'FIXED', initialDelayMs: 2000, maxDelayMs: 2000,
+    jitterPercent: 0, retryOn: ['TIMEOUT', 'RATE_LIMIT'], noRetryOn: ['MESSAGE_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: false, type: 'NONE', description: 'Replies cannot be unsent after delivery.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.messageId != null' },
+  requiredInputs: [
+    { name: 'inReplyTo', type: 'string', description: 'Gmail message ID of the original message to reply to' },
+    { name: 'body',      type: 'string', maxLength: 524288, description: 'Reply body text' },
+  ],
+  optionalInputs: [
+    { name: 'to',       type: 'string', description: 'Override reply-to address (defaults to original sender)' },
+    { name: 'cc',       type: 'string', description: 'CC addresses' },
+    { name: 'replyAll', type: 'boolean', description: 'Reply to all original recipients', example: false },
+    { name: 'bodyHtml', type: 'string', description: 'HTML version of body' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Sent reply confirmation',
+    properties: {
+      messageId: { type: 'string', description: 'Gmail message ID of the sent reply' },
+      threadId:  { type: 'string', description: 'Thread ID the reply was added to' },
+      status:    { type: 'string', description: '"reply_sent" or "reply_all_sent"' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'email', resourceIdField: 'inReplyTo', actionVerb: 'replied',
+    sensitivityLevel: 'CONFIDENTIAL', retainForDays: 365, complianceTags: ['SOC2'],
+  },
+  telemetryMetadata: {
+    eventName: 'action.gmail.reply_email',
+    successMetric: 'flow.action.gmail.reply_email.success',
+    failureMetric: 'flow.action.gmail.reply_email.failure',
+    durationMetric: 'flow.action.gmail.reply_email.duration_ms',
+    dimensions: ['connector', 'workspace_id', 'replyAll'],
+  },
+  relatedActions: ['gmail.read_email', 'gmail.send_email', 'gmail.forward_email'],
+};

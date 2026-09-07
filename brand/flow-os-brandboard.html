@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FLOW OS — Brand System</title>
+<style>
+  :root{
+    --bg:#0B0B0F; --panel:#111114; --panel2:#0E0E12; --line:#23232B; --line2:#2E2E38;
+    --t1:#E9E9EE; --t2:#B4B4BE; --t4:#7C7C86; --t5:#55555F;
+    --brand:#7C6EFF; --brand-lite:#A78BFF; --brand-dim:rgba(124,110,255,.10); --brand-line:rgba(124,110,255,.28);
+    --green:#4CAF82; --amber:#F5A742; --red:#FF5757;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:'Inter','Helvetica Neue',Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#050507;color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;padding:40px}
+  .deck{max-width:1240px;margin:0 auto}
+  .deckhead{display:flex;justify-content:space-between;align-items:baseline;margin:0 4px 18px;color:var(--t5);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;min-height:230px;position:relative;overflow:hidden}
+  .plabel{position:absolute;top:14px;left:16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t5)}
+  .pnum{position:absolute;top:14px;right:16px;font-family:var(--mono);font-size:9.5px;color:var(--t5)}
+  .center{display:flex;align-items:center;justify-content:center;height:100%}
+
+  /* mark */
+  .mark{display:inline-block}
+  .tile{width:78px;height:78px;border-radius:19px;background:#141418;border:1px solid var(--line2);position:relative;flex:0 0 auto}
+  .spine,.s1,.s2{position:absolute;background:var(--brand);border-radius:5px}
+  .spine{left:21px;top:17px;width:9px;height:44px}
+  .s1{left:21px;top:17px;width:37px;height:9px}
+  .s2{left:29px;top:32px;width:25px;height:9px}
+  .node{position:absolute;left:56px;top:15px;width:12px;height:12px;border-radius:50%;background:var(--brand-lite)}
+
+  .word{font-weight:700;letter-spacing:-.03em}
+  .word .os{font-weight:300;color:var(--t4);letter-spacing:.06em;margin-left:.12em}
+
+  /* cover */
+  .cover{gap:20px;flex-direction:column}
+  .cover .lock{display:flex;align-items:center;gap:18px}
+  .cover .word{font-size:40px}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.34em;color:var(--brand);text-transform:uppercase}
+
+  /* construction */
+  .construct{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
+  .cgrid{position:absolute;inset:26px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:22px 22px;opacity:.5;border-radius:6px}
+  .cbox{position:relative;width:120px;height:120px}
+  .cbox .tile{width:120px;height:120px;border-radius:28px;background:transparent;border:1px dashed var(--brand-line)}
+  .cbox .spine{left:33px;top:26px;width:13px;height:68px}
+  .cbox .s1{left:33px;top:26px;width:56px;height:13px}
+  .cbox .s2{left:45px;top:49px;width:38px;height:13px}
+  .cbox .node{left:86px;top:23px;width:18px;height:18px;box-shadow:0 0 0 6px var(--brand-dim)}
+  .cring{position:absolute;left:79px;top:16px;width:32px;height:32px;border:1px solid var(--brand-line);border-radius:50%}
+
+  /* browser mock */
+  .browser{border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:var(--panel2);margin-top:26px}
+  .bbar{display:flex;align-items:center;gap:7px;padding:9px 12px;border-bottom:1px solid var(--line);background:#0c0c10}
+  .dot{width:9px;height:9px;border-radius:50%}
+  .url{margin-left:8px;flex:1;background:#151519;border:1px solid var(--line);border-radius:6px;padding:4px 10px;font-family:var(--mono);font-size:10.5px;color:var(--t4)}
+  .bbody{padding:16px;display:flex;flex-direction:column;gap:10px}
+  .prompt{display:flex;align-items:center;gap:9px;background:#151519;border:1px solid var(--brand-line);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--t2)}
+  .rowchips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-family:var(--mono);font-size:10px;color:var(--t2);background:#17171c;border:1px solid var(--line2);border-radius:6px;padding:3px 8px}
+  .chip.a{color:var(--brand-lite);border-color:var(--brand-line);background:var(--brand-dim)}
+
+  /* essence */
+  .essence{flex-direction:column;gap:14px;text-align:left;align-items:flex-start}
+  .essence h2{font-size:30px;line-height:1.12;font-weight:600;margin:0;letter-spacing:-.02em}
+  .essence h2 em{font-style:normal;color:var(--brand)}
+  .essence p{margin:0;color:var(--t4);font-size:12.5px;max-width:280px;line-height:1.6}
+
+  /* color */
+  .swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
+  .sw{border-radius:9px;height:64px;border:1px solid var(--line);position:relative}
+  .sw span{position:absolute;left:9px;bottom:7px;font-family:var(--mono);font-size:9px;letter-spacing:.04em}
+  .strip{height:14px;border-radius:7px;margin-top:12px;background:linear-gradient(90deg,#0B0B0F,#7C6EFF 60%,#A78BFF)}
+
+  /* type */
+  .type{margin-top:22px}
+  .spec{font-size:58px;font-weight:700;letter-spacing:-.04em;line-height:1}
+  .spec .lite{font-weight:300;color:var(--t4)}
+  .alpha{font-family:var(--mono);font-size:12px;color:var(--t4);letter-spacing:.18em;margin-top:16px;word-spacing:2px}
+  .typmeta{display:flex;gap:18px;margin-top:14px;font-size:11px;color:var(--t5)}
+  .typmeta b{color:var(--t2);font-weight:600}
+
+  /* card */
+  .card{width:230px;height:132px;border-radius:12px;background:linear-gradient(160deg,#151519,#0d0d11);border:1px solid var(--line2);padding:16px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  .card .who{font-size:13px;font-weight:600}
+  .card .role{font-size:10px;color:var(--t4);font-family:var(--mono);letter-spacing:.06em;margin-top:2px}
+  .card .foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:9px;color:var(--t5)}
+
+  /* atmosphere */
+  .atmos{background:radial-gradient(120% 120% at 20% 0%,#1a1636 0%,#0b0b12 45%,#08080c 100%);position:relative}
+  .flowlines{position:absolute;inset:0;overflow:hidden}
+  .fl{position:absolute;height:1.5px;background:linear-gradient(90deg,transparent,var(--brand),transparent);opacity:.55;border-radius:2px}
+  .orb{position:absolute;right:34px;bottom:30px;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--brand-lite),var(--brand) 55%,#3a2f8a 100%);box-shadow:0 0 40px rgba(124,110,255,.5)}
+
+  /* system detail */
+  .sys{margin-top:24px;display:flex;flex-direction:column;gap:9px}
+  .cmd{display:flex;align-items:center;gap:8px;background:#0c0c10;border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-family:var(--mono);font-size:11px;color:var(--t2)}
+  .cmd .car{color:var(--brand)}
+  .statusrow{display:flex;gap:7px}
+  .badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9.5px;padding:3px 8px;border-radius:5px;border:1px solid}
+  .badge.ok{color:var(--green);border-color:rgba(76,175,130,.3);background:rgba(76,175,130,.08)}
+  .badge.warn{color:var(--amber);border-color:rgba(245,167,66,.3);background:rgba(245,167,66,.08)}
+  .badge.crit{color:var(--red);border-color:rgba(255,87,87,.3);background:rgba(255,87,87,.08)}
+  .b-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+</style>
+</head>
+<body>
+<div class="deck">
+  <div class="deckhead"><span>FLOW OS — Brand System</span><span>v1 · 2026</span></div>
+  <div class="grid">
+
+    <!-- 1 · Cover -->
+    <div class="panel">
+      <span class="plabel">Logo</span><span class="pnum">01</span>
+      <div class="center cover">
+        <div class="lock">
+          <div class="tile"><div class="spine"></div><div class="s1"></div><div class="s2"></div><div class="node"></div></div>
+          <div class="word" style="font-size:36px">FLOW<span class="os">OS</span></div>
+        </div>
+        <div class="tag">Intelligence in motion</div>
+      </div>
+    </div>
+
+    <!-- 2 · Construction -->
+    <div class="panel">
+      <span class="plabel">Construction</span><span class="pnum">02</span>
+      <div class="construct">
+        <div class="cgrid"></div>
+        <div class="cbox">
+          <div class="tile"></div><div class="spine"></div><div class="s1"></div><div class="s2"></div>
+          <div class="cring"></div><div class="node"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · Digital application -->
+    <div class="panel">
+      <span class="plabel">Digital</span><span class="pnum">03</span>
+      <div class="browser">
+        <div class="bbar"><span class="dot" style="background:#ff5f57"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span><span class="url">app.flow-os.ai / morning</span></div>
+        <div class="bbody">
+          <div class="prompt"><span style="color:var(--brand)">✦</span> What would you like to accomplish today?</div>
+          <div class="rowchips"><span class="chip a">Engineering · Healthy</span><span class="chip">Sales · 1 at risk</span><span class="chip">Ops · 2 flagged</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · Essence -->
+    <div class="panel">
+      <span class="plabel">Essence</span><span class="pnum">04</span>
+      <div class="center essence">
+        <h2>Understand.<br>Decide.<br><em>Execute.</em></h2>
+        <p>The operating system that turns your company's signal into governed action — nothing falls through.</p>
+      </div>
+    </div>
+
+    <!-- 5 · Color -->
+    <div class="panel">
+      <span class="plabel">Color</span><span class="pnum">05</span>
+      <div class="swatches">
+        <div class="sw" style="background:#0B0B0F"><span style="color:#8A8A93">#0B0B0F</span></div>
+        <div class="sw" style="background:#7C6EFF"><span style="color:#0B0B0F">#7C6EFF</span></div>
+        <div class="sw" style="background:#A78BFF"><span style="color:#0B0B0F">#A78BFF</span></div>
+        <div class="sw" style="background:#4CAF82"><span style="color:#06110b">#4CAF82</span></div>
+        <div class="sw" style="background:#F5A742"><span style="color:#1a0f00">#F5A742</span></div>
+        <div class="sw" style="background:#E9E9EE"><span style="color:#0B0B0F">#E9E9EE</span></div>
+      </div>
+      <div class="strip"></div>
+    </div>
+
+    <!-- 6 · Typography -->
+    <div class="panel">
+      <span class="plabel">Type</span><span class="pnum">06</span>
+      <div class="type">
+        <div class="spec">Aa<span class="lite">Aa</span></div>
+        <div class="alpha">ABCDEFGHIJKLM · 0123456789</div>
+        <div class="typmeta typmeta"><span><b>Inter</b> — interface</span><span><b>JetBrains&nbsp;Mono</b> — signal</span></div>
+      </div>
+    </div>
+
+    <!-- 7 · Physical -->
+    <div class="panel">
+      <span class="plabel">Physical</span><span class="pnum">07</span>
+      <div class="center">
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="tile" style="width:34px;height:34px;border-radius:9px"><div class="spine" style="left:9px;top:7px;width:4px;height:19px"></div><div class="s1" style="left:9px;top:7px;width:16px;height:4px"></div><div class="s2" style="left:13px;top:14px;width:11px;height:4px"></div><div class="node" style="left:24px;top:6px;width:6px;height:6px"></div></div>
+            <div class="word" style="font-size:15px">FLOW<span class="os">OS</span></div>
+          </div>
+          <div><div class="who">Kishore Varma</div><div class="role">LEAD ENGINEER</div></div>
+          <div class="foot"><span>flow-os.ai</span><span>INTELLIGENCE IN MOTION</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 · Atmosphere -->
+    <div class="panel atmos">
+      <span class="plabel">Image</span><span class="pnum">08</span>
+      <div class="flowlines">
+        <div class="fl" style="top:34%;left:-10%;width:80%"></div>
+        <div class="fl" style="top:46%;left:6%;width:70%;opacity:.4"></div>
+        <div class="fl" style="top:58%;left:-4%;width:88%;opacity:.3"></div>
+        <div class="orb"></div>
+      </div>
+    </div>
+
+    <!-- 9 · System detail -->
+    <div class="panel">
+      <span class="plabel">System</span><span class="pnum">09</span>
+      <div class="sys">
+        <div class="cmd"><span class="car">$</span> flow ask "is the payments launch safe?"</div>
+        <div class="statusrow">
+          <span class="badge ok"><span class="b-dot"></span>APPROVED</span>
+          <span class="badge warn"><span class="b-dot"></span>REVIEW</span>
+          <span class="badge crit"><span class="b-dot"></span>CONFLICT</span>
+        </div>
+        <div class="rowchips"><span class="chip a">Approve</span><span class="chip">Review</span><span class="chip">Reply</span><span class="chip">Schedule</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

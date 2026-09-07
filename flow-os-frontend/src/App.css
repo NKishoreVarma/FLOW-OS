@@ -34,8 +34,8 @@
   --glow-green:    0 0 12px rgba(0, 255, 170, 0.35);
   --glow-teal:     0 0 8px  rgba(0, 180, 168, 0.3);
 
-  --font-ui:   'Space Grotesk', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Cascadia Code', ui-monospace, monospace;
+  --font-ui:   'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Cascadia Code', ui-monospace, monospace;
 
   --radius-sm: 4px;
   --radius-md: 8px;

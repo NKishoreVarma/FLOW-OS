@@ -2,21 +2,26 @@ const privacySignals = [
   'medical', 'salary', 'personal', 'dm', 'password', 'ssn', 'secret', 'private', 
   'confidential', 'account number', 'routing', 'payroll', 'clearance', 'credit card',
   'social security', 'dob', 'date of birth', 'passport', 'pin code',
-  'security code', 'bank account', 'api key', 'access token'
+  'security code', 'bank account', 'api key', 'access token', 'aadhaar', 'pan card', 'pan number', '₹', 'package'
 ];
 
 export function evaluateScores(sender, channel, text) {
   const lowerText = (text || '').toLowerCase();
   const senderStr = (sender || '').toLowerCase();
 
-  console.log('=== COGNITIVE ENGINE INGESTION TRACE ===');
-  console.log('Raw text length:', lowerText ? lowerText.length : 0);
-  console.log('Evaluating text content:', JSON.stringify(lowerText));
 
   // 1. Privacy Score
   let privacyHits = 0;
   for (const kw of privacySignals) {
     if (lowerText.includes(kw)) privacyHits++;
+  }
+  const hasAadhaar = /\b\d{4}\s\d{4}\s\d{4}\b|\b\d{12}\b/.test(lowerText);
+  const hasPan = /\b[a-z]{5}\d{4}[a-z]\b/.test(lowerText);
+  const hasCreditCard = /\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}\b/.test(lowerText);
+  const hasSalaryPattern = /\b\d+\s*(?:lpa|l|cr|lakhs|pkg|package)\b|₹\d+/i.test(lowerText);
+
+  if (privacyHits > 0 || hasAadhaar || hasPan || hasCreditCard || hasSalaryPattern) {
+    privacyHits = Math.max(privacyHits, 3);
   }
   const privacy_score = Math.min(privacyHits * 0.35, 1.0);
 
@@ -55,7 +60,7 @@ export function evaluateScores(sender, channel, text) {
   let importance_score = 0.3;
 
   if (
-    ['ceo', 'cto', 'director', 'vp', 'executive', 'founder'].includes(senderStr) || 
+    ['ceo', 'cto', 'director', 'vp', 'executive', 'founder', 'manager'].includes(senderStr) || 
     lowerText.includes('critical') || 
     lowerText.includes('announcement') || 
     lowerText.includes('architecture') ||

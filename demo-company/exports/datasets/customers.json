@@ -1,0 +1,5556 @@
+[
+  {
+    "id": "cust-bartell-welch-1",
+    "name": "Bartell - Welch",
+    "slug": "bartell-welch-1",
+    "industry": "Technology",
+    "tier": "smb",
+    "arr": 18490,
+    "csm": "emp-341",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Louise Ritchie DDS",
+        "email": "Chad43@bartell-welch.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Dr. Erma Gerhold",
+        "email": "Palma.MacGyver@bartell-welch.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-hoppe-inc-2",
+    "name": "Hoppe Inc",
+    "slug": "hoppe-inc-2",
+    "industry": "Education",
+    "tier": "enterprise",
+    "arr": 359188,
+    "csm": "emp-379",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Vicky Schoen",
+        "email": "Penelope43@hoppe-inc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Stephanie Hagenes",
+        "email": "Fatima_Schulist63@hoppe-inc.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-cartwright-torphy-3",
+    "name": "Cartwright - Torphy",
+    "slug": "cartwright-torphy-3",
+    "industry": "Retail",
+    "tier": "enterprise",
+    "arr": 117014,
+    "csm": "emp-353",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Wilbert Conroy-Bailey DVM",
+        "email": "Houston.Crist48@cartwright-torphy.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Claude Stroman",
+        "email": "Hortense26@cartwright-torphy.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Joseph Mante",
+        "email": "Jaclyn52@cartwright-torphy.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-kuhlman-lakin-and-stamm-4",
+    "name": "Kuhlman, Lakin and Stamm",
+    "slug": "kuhlman-lakin-and-stamm-4",
+    "industry": "Logistics",
+    "tier": "mid-market",
+    "arr": 70197,
+    "csm": "emp-361",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Marcus Gibson",
+        "email": "Claire_Schaefer@kuhlman-lakin-and-stamm.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "James Aufderhar",
+        "email": "Lucile_Sporer@kuhlman-lakin-and-stamm.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Donnie Runolfsson III",
+        "email": "Rebeca.Gorczany-Mueller@kuhlman-lakin-and-stamm.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-hagenes-llc-5",
+    "name": "Hagenes LLC",
+    "slug": "hagenes-llc-5",
+    "industry": "Financial Services",
+    "tier": "mid-market",
+    "arr": 26299,
+    "csm": "emp-363",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Bradford Kuhlman-VonRueden",
+        "email": "Gussie_Simonis@hagenes-llc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-toy-jenkins-and-spencer-6",
+    "name": "Toy, Jenkins and Spencer",
+    "slug": "toy-jenkins-and-spencer-6",
+    "industry": "Education",
+    "tier": "smb",
+    "arr": 9526,
+    "csm": "emp-357",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Sophie Reynolds IV",
+        "email": "Thelma_Rice61@toy-jenkins-and-spencer.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Mark Kunde",
+        "email": "Lemuel.Kulas@toy-jenkins-and-spencer.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Robin Harvey",
+        "email": "Asia90@toy-jenkins-and-spencer.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-lubowitz-group-7",
+    "name": "Lubowitz Group",
+    "slug": "lubowitz-group-7",
+    "industry": "Healthcare",
+    "tier": "enterprise",
+    "arr": 172389,
+    "csm": "emp-373",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Dr. Desiree Bergstrom",
+        "email": "Alfredo41@lubowitz-group.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-murphy-corkery-and-o-reilly-8",
+    "name": "Murphy, Corkery and O'Reilly",
+    "slug": "murphy-corkery-and-o-reilly-8",
+    "industry": "Retail",
+    "tier": "mid-market",
+    "arr": 36376,
+    "csm": "emp-378",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Natalie Rodriguez",
+        "email": "Yasmeen_Bechtelar25@murphy-corkery-and-o-reilly.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect",
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-ratke-group-9",
+    "name": "Ratke Group",
+    "slug": "ratke-group-9",
+    "industry": "Energy",
+    "tier": "smb",
+    "arr": 12441,
+    "csm": "emp-370",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Dr. Clara Hahn Sr.",
+        "email": "Noemy_Bernhard@ratke-group.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Mr. Irvin Hills",
+        "email": "Bart.Schumm66@ratke-group.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-sipes-group-10",
+    "name": "Sipes Group",
+    "slug": "sipes-group-10",
+    "industry": "Media",
+    "tier": "smb",
+    "arr": 6660,
+    "csm": "emp-372",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Kelli O'Hara",
+        "email": "River_McGlynn83@sipes-group.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Rickey Bernier",
+        "email": "Maribel79@sipes-group.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-lehner-upton-and-bode-11",
+    "name": "Lehner, Upton and Bode",
+    "slug": "lehner-upton-and-bode-11",
+    "industry": "Technology",
+    "tier": "smb",
+    "arr": 6545,
+    "csm": "emp-343",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Clark Dicki",
+        "email": "Damon.Abbott64@lehner-upton-and-bode.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Bobbie Haley",
+        "email": "Ronny.Bahringer@lehner-upton-and-bode.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-stark-bergnaum-and-emmerich-12",
+    "name": "Stark, Bergnaum and Emmerich",
+    "slug": "stark-bergnaum-and-emmerich-12",
+    "industry": "Retail",
+    "tier": "smb",
+    "arr": 11787,
+    "csm": "emp-343",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Herman Hirthe",
+        "email": "Flavio_Pacocha78@stark-bergnaum-and-emmerich.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Jacob Senger",
+        "email": "Reagan26@stark-bergnaum-and-emmerich.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Mr. Austin Rohan-Mann",
+        "email": "Missouri81@stark-bergnaum-and-emmerich.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-sawayn-group-13",
+    "name": "Sawayn Group",
+    "slug": "sawayn-group-13",
+    "industry": "Logistics",
+    "tier": "enterprise",
+    "arr": 492862,
+    "csm": "emp-375",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Mary Dare III",
+        "email": "Shawn.Donnelly95@sawayn-group.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-wehner-blick-and-jacobs-14",
+    "name": "Wehner, Blick and Jacobs",
+    "slug": "wehner-blick-and-jacobs-14",
+    "industry": "Manufacturing",
+    "tier": "enterprise",
+    "arr": 338070,
+    "csm": "emp-354",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Terence Konopelski-Hodkiewicz",
+        "email": "Maggie15@wehner-blick-and-jacobs.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-price-hammes-15",
+    "name": "Price - Hammes",
+    "slug": "price-hammes-15",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 65864,
+    "csm": "emp-373",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Evelyn Osinski",
+        "email": "Laron.Prosacco-Satterfield@price-hammes.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Sophia Cassin",
+        "email": "Gregoria_Weber@price-hammes.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-cormier-inc-16",
+    "name": "Cormier Inc",
+    "slug": "cormier-inc-16",
+    "industry": "Healthcare",
+    "tier": "enterprise",
+    "arr": 421599,
+    "csm": "emp-378",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Rosa Larkin",
+        "email": "Donato_Stehr@cormier-inc.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-rempel-hand-17",
+    "name": "Rempel - Hand",
+    "slug": "rempel-hand-17",
+    "industry": "Financial Services",
+    "tier": "smb",
+    "arr": 15549,
+    "csm": "emp-352",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Brad Jenkins I",
+        "email": "Eveline_Wolf@rempel-hand.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-williamson-wehner-and-cummings-18",
+    "name": "Williamson, Wehner and Cummings",
+    "slug": "williamson-wehner-and-cummings-18",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 21613,
+    "csm": "emp-346",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Jason Steuber",
+        "email": "Weldon.Bauch6@williamson-wehner-and-cummings.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-cronin-grimes-and-boyer-19",
+    "name": "Cronin, Grimes and Boyer",
+    "slug": "cronin-grimes-and-boyer-19",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 24567,
+    "csm": "emp-360",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Lowell Bechtelar",
+        "email": "Arvilla_Franecki@cronin-grimes-and-boyer.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Lewis Dicki",
+        "email": "Arvilla68@cronin-grimes-and-boyer.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Van Kuphal",
+        "email": "Coralie.Williamson@cronin-grimes-and-boyer.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-yundt-gerhold-and-quitzon-20",
+    "name": "Yundt, Gerhold and Quitzon",
+    "slug": "yundt-gerhold-and-quitzon-20",
+    "industry": "Healthcare",
+    "tier": "mid-market",
+    "arr": 51230,
+    "csm": "emp-358",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Erick Price",
+        "email": "Matilde.Jacobson@yundt-gerhold-and-quitzon.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Kristine Heaney",
+        "email": "Alejandra.Cassin16@yundt-gerhold-and-quitzon.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Dr. Luther Bode",
+        "email": "Gaston.Stamm@yundt-gerhold-and-quitzon.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-stehr-schmidt-21",
+    "name": "Stehr - Schmidt",
+    "slug": "stehr-schmidt-21",
+    "industry": "Logistics",
+    "tier": "smb",
+    "arr": 18917,
+    "csm": "emp-375",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Julius Brekke",
+        "email": "Christiana_Roob57@stehr-schmidt.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-bashirian-o-reilly-22",
+    "name": "Bashirian - O'Reilly",
+    "slug": "bashirian-o-reilly-22",
+    "industry": "Retail",
+    "tier": "mid-market",
+    "arr": 89050,
+    "csm": "emp-351",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Bill Grimes",
+        "email": "Dahlia85@bashirian-o-reilly.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Dora Prohaska",
+        "email": "Sidney77@bashirian-o-reilly.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Dolores Ortiz",
+        "email": "Shaina_Mertz@bashirian-o-reilly.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-kunde-llc-23",
+    "name": "Kunde LLC",
+    "slug": "kunde-llc-23",
+    "industry": "Financial Services",
+    "tier": "mid-market",
+    "arr": 62627,
+    "csm": "emp-353",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Mathew Daniel",
+        "email": "Annamarie74@kunde-llc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Bryant Howell",
+        "email": "Glennie_Bednar54@kunde-llc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-barrows-inc-24",
+    "name": "Barrows Inc",
+    "slug": "barrows-inc-24",
+    "industry": "Government",
+    "tier": "smb",
+    "arr": 22226,
+    "csm": "emp-381",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Devin Schimmel",
+        "email": "Mohammed18@barrows-inc.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-ebert-treutel-and-kris-25",
+    "name": "Ebert, Treutel and Kris",
+    "slug": "ebert-treutel-and-kris-25",
+    "industry": "Healthcare",
+    "tier": "mid-market",
+    "arr": 65645,
+    "csm": "emp-372",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Dr. Clayton Runolfsdottir",
+        "email": "Jamie95@ebert-treutel-and-kris.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Dallas Smitham",
+        "email": "Hertha58@ebert-treutel-and-kris.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Josephine Koch",
+        "email": "Nolan_Huels@ebert-treutel-and-kris.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform",
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-quigley-feeney-26",
+    "name": "Quigley - Feeney",
+    "slug": "quigley-feeney-26",
+    "industry": "Financial Services",
+    "tier": "mid-market",
+    "arr": 90772,
+    "csm": "emp-354",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Beth Reichert",
+        "email": "Esmeralda.Mayert@quigley-feeney.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-schaden-kunze-27",
+    "name": "Schaden - Kunze",
+    "slug": "schaden-kunze-27",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 16160,
+    "csm": "emp-374",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Bradford Fahey PhD",
+        "email": "Adrien.Mraz@schaden-kunze.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect",
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-altenwerth-berge-28",
+    "name": "Altenwerth - Berge",
+    "slug": "altenwerth-berge-28",
+    "industry": "Financial Services",
+    "tier": "mid-market",
+    "arr": 26670,
+    "csm": "emp-352",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Darren Little",
+        "email": "Florencio46@altenwerth-berge.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Mrs. Sara Goodwin",
+        "email": "Jeremie.Grimes94@altenwerth-berge.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Vincent Kihn",
+        "email": "Thelma_Kuhlman@altenwerth-berge.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-cole-bernier-and-ferry-29",
+    "name": "Cole, Bernier and Ferry",
+    "slug": "cole-bernier-and-ferry-29",
+    "industry": "Logistics",
+    "tier": "enterprise",
+    "arr": 313650,
+    "csm": "emp-360",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Beth Streich MD",
+        "email": "Kenna_Denesik@cole-bernier-and-ferry.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-kiehn-kuphal-30",
+    "name": "Kiehn - Kuphal",
+    "slug": "kiehn-kuphal-30",
+    "industry": "Retail",
+    "tier": "mid-market",
+    "arr": 48979,
+    "csm": "emp-359",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Harry Hammes",
+        "email": "Brandt19@kiehn-kuphal.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-sawayn-rau-31",
+    "name": "Sawayn - Rau",
+    "slug": "sawayn-rau-31",
+    "industry": "Government",
+    "tier": "mid-market",
+    "arr": 77057,
+    "csm": "emp-349",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Jacob Dicki-Bartoletti",
+        "email": "Cecil27@sawayn-rau.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-jenkins-quitzon-and-hayes-32",
+    "name": "Jenkins, Quitzon and Hayes",
+    "slug": "jenkins-quitzon-and-hayes-32",
+    "industry": "Education",
+    "tier": "smb",
+    "arr": 22640,
+    "csm": "emp-343",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Kristin Ankunding",
+        "email": "Lilliana_Blick@jenkins-quitzon-and-hayes.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-o-conner-nicolas-and-adams-33",
+    "name": "O'Conner, Nicolas and Adams",
+    "slug": "o-conner-nicolas-and-adams-33",
+    "industry": "Education",
+    "tier": "smb",
+    "arr": 17617,
+    "csm": "emp-348",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Pat Terry",
+        "email": "Judd_Reynolds@o-conner-nicolas-and-adams.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Sue Considine",
+        "email": "Filiberto.Witting@o-conner-nicolas-and-adams.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Miriam Stanton",
+        "email": "Greg.Gottlieb51@o-conner-nicolas-and-adams.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-hermann-kulas-34",
+    "name": "Hermann - Kulas",
+    "slug": "hermann-kulas-34",
+    "industry": "Energy",
+    "tier": "mid-market",
+    "arr": 91320,
+    "csm": "emp-363",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Mr. Byron Kuhlman",
+        "email": "Jazmyn_Weimann@hermann-kulas.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-okuneva-marquardt-and-muller-35",
+    "name": "Okuneva, Marquardt and Muller",
+    "slug": "okuneva-marquardt-and-muller-35",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 7966,
+    "csm": "emp-381",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Alberta Lueilwitz",
+        "email": "Maud.Roberts@okuneva-marquardt-and-muller.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-block-renner-36",
+    "name": "Block - Renner",
+    "slug": "block-renner-36",
+    "industry": "Government",
+    "tier": "smb",
+    "arr": 15802,
+    "csm": "emp-366",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Abraham Christiansen",
+        "email": "Davonte8@block-renner.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Francis White",
+        "email": "Hattie66@block-renner.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-franecki-roberts-and-koss-37",
+    "name": "Franecki, Roberts and Koss",
+    "slug": "franecki-roberts-and-koss-37",
+    "industry": "Energy",
+    "tier": "smb",
+    "arr": 9739,
+    "csm": "emp-356",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Victor Considine",
+        "email": "Zaria43@franecki-roberts-and-koss.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-runolfsdottir-harvey-and-lynch-38",
+    "name": "Runolfsdottir, Harvey and Lynch",
+    "slug": "runolfsdottir-harvey-and-lynch-38",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 6179,
+    "csm": "emp-356",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Andrea Stanton",
+        "email": "Ezra_Anderson-Hodkiewicz49@runolfsdottir-harvey-and-lynch.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-erdman-gislason-39",
+    "name": "Erdman - Gislason",
+    "slug": "erdman-gislason-39",
+    "industry": "Financial Services",
+    "tier": "enterprise",
+    "arr": 196441,
+    "csm": "emp-360",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Vivian Quigley",
+        "email": "Marguerite.Gleason@erdman-gislason.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Kerry Littel",
+        "email": "Jodie21@erdman-gislason.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-sanford-inc-40",
+    "name": "Sanford Inc",
+    "slug": "sanford-inc-40",
+    "industry": "Technology",
+    "tier": "mid-market",
+    "arr": 69633,
+    "csm": "emp-340",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Desiree Bernhard",
+        "email": "Rene47@sanford-inc.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Guillermo Littel",
+        "email": "Jeramy.Marvin24@sanford-inc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Lucia Kuvalis",
+        "email": "Raina14@sanford-inc.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-douglas-haag-41",
+    "name": "Douglas - Haag",
+    "slug": "douglas-haag-41",
+    "industry": "Media",
+    "tier": "smb",
+    "arr": 18354,
+    "csm": "emp-362",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Joy Prohaska",
+        "email": "Maurine_Rempel32@douglas-haag.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Elijah Emard DDS",
+        "email": "Cody45@douglas-haag.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-toy-and-sons-42",
+    "name": "Toy and Sons",
+    "slug": "toy-and-sons-42",
+    "industry": "Government",
+    "tier": "mid-market",
+    "arr": 44241,
+    "csm": "emp-359",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Marc Jakubowski-Lowe",
+        "email": "Adrianna.Rowe85@toy-and-sons.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Faye Champlin",
+        "email": "Brice_Kerluke29@toy-and-sons.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-keebler-haley-and-lowe-43",
+    "name": "Keebler, Haley and Lowe",
+    "slug": "keebler-haley-and-lowe-43",
+    "industry": "Healthcare",
+    "tier": "mid-market",
+    "arr": 28296,
+    "csm": "emp-350",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Elsa Sipes",
+        "email": "Sandy_Ratke14@keebler-haley-and-lowe.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-satterfield-konopelski-44",
+    "name": "Satterfield - Konopelski",
+    "slug": "satterfield-konopelski-44",
+    "industry": "Government",
+    "tier": "mid-market",
+    "arr": 62207,
+    "csm": "emp-343",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Miss Regina Abbott",
+        "email": "Sylvester8@satterfield-konopelski.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Luther Larson",
+        "email": "Kailyn19@satterfield-konopelski.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Jeanne Streich PhD",
+        "email": "Terrill32@satterfield-konopelski.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-kunze-jakubowski-45",
+    "name": "Kunze - Jakubowski",
+    "slug": "kunze-jakubowski-45",
+    "industry": "Retail",
+    "tier": "smb",
+    "arr": 8668,
+    "csm": "emp-369",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Christian Harber",
+        "email": "Adrien_Keebler10@kunze-jakubowski.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Lydia Harber Jr.",
+        "email": "Maximillia_Will@kunze-jakubowski.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Carrie Brown",
+        "email": "Eliseo.Hilpert@kunze-jakubowski.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-kshlerin-fadel-46",
+    "name": "Kshlerin - Fadel",
+    "slug": "kshlerin-fadel-46",
+    "industry": "Retail",
+    "tier": "smb",
+    "arr": 22738,
+    "csm": "emp-368",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Lamar Farrell",
+        "email": "Martin.Casper50@kshlerin-fadel.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Raquel Lockman",
+        "email": "Rosalia.Johns@kshlerin-fadel.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-boyer-inc-47",
+    "name": "Boyer Inc",
+    "slug": "boyer-inc-47",
+    "industry": "Energy",
+    "tier": "mid-market",
+    "arr": 37137,
+    "csm": "emp-337",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Connie Greenholt DVM",
+        "email": "Cary_Monahan@boyer-inc.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect",
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-runolfsdottir-hansen-and-kirli-48",
+    "name": "Runolfsdottir, Hansen and Kirlin",
+    "slug": "runolfsdottir-hansen-and-kirli-48",
+    "industry": "Energy",
+    "tier": "smb",
+    "arr": 6460,
+    "csm": "emp-372",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Kenneth Stoltenberg-Ullrich",
+        "email": "Sibyl_Mertz23@runolfsdottir-hansen-and-kirli.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-stiedemann-llc-49",
+    "name": "Stiedemann LLC",
+    "slug": "stiedemann-llc-49",
+    "industry": "Technology",
+    "tier": "enterprise",
+    "arr": 131075,
+    "csm": "emp-348",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Ruby Christiansen",
+        "email": "Kenyatta_Cronin@stiedemann-llc.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Mr. Elijah Jenkins",
+        "email": "Santino48@stiedemann-llc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform",
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-lubowitz-llc-50",
+    "name": "Lubowitz LLC",
+    "slug": "lubowitz-llc-50",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 23457,
+    "csm": "emp-376",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Charlie Wyman",
+        "email": "Alverta53@lubowitz-llc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-macgyver-senger-51",
+    "name": "MacGyver - Senger",
+    "slug": "macgyver-senger-51",
+    "industry": "Energy",
+    "tier": "smb",
+    "arr": 18883,
+    "csm": "emp-357",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Dan Mayert",
+        "email": "Abbie.Robel@macgyver-senger.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Herbert Denesik",
+        "email": "Max45@macgyver-senger.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-shields-moen-52",
+    "name": "Shields - Moen",
+    "slug": "shields-moen-52",
+    "industry": "Government",
+    "tier": "smb",
+    "arr": 10746,
+    "csm": "emp-374",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Rosa Schowalter",
+        "email": "Russell2@shields-moen.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Alexander Hirthe DVM",
+        "email": "Keven_Wuckert42@shields-moen.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-wisoky-nolan-53",
+    "name": "Wisoky - Nolan",
+    "slug": "wisoky-nolan-53",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 18810,
+    "csm": "emp-352",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Bradley Abshire III",
+        "email": "Macie.Lemke48@wisoky-nolan.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Suzanne Bode Jr.",
+        "email": "Burdette_Christiansen@wisoky-nolan.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Phil Rogahn",
+        "email": "Dorcas87@wisoky-nolan.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-powlowski-cartwright-and-abern-54",
+    "name": "Powlowski, Cartwright and Abernathy",
+    "slug": "powlowski-cartwright-and-abern-54",
+    "industry": "Healthcare",
+    "tier": "mid-market",
+    "arr": 58684,
+    "csm": "emp-379",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Pat Hudson",
+        "email": "Clovis40@powlowski-cartwright-and-abern.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-larson-group-55",
+    "name": "Larson Group",
+    "slug": "larson-group-55",
+    "industry": "Technology",
+    "tier": "mid-market",
+    "arr": 93074,
+    "csm": "emp-373",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Miss Arlene Reynolds DDS",
+        "email": "Devon_Larson18@larson-group.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Manuel Bruen",
+        "email": "Veronica38@larson-group.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Everett Marks",
+        "email": "Erick_Steuber@larson-group.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-anderson-dubuque-and-wiza-56",
+    "name": "Anderson, DuBuque and Wiza",
+    "slug": "anderson-dubuque-and-wiza-56",
+    "industry": "Manufacturing",
+    "tier": "mid-market",
+    "arr": 52695,
+    "csm": "emp-349",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Ms. Joanne Herzog Sr.",
+        "email": "Fermin92@anderson-dubuque-and-wiza.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Mrs. Ernestine Hilpert",
+        "email": "Mike87@anderson-dubuque-and-wiza.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-moore-and-sons-57",
+    "name": "Moore and Sons",
+    "slug": "moore-and-sons-57",
+    "industry": "Government",
+    "tier": "mid-market",
+    "arr": 98819,
+    "csm": "emp-367",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Heather Gulgowski",
+        "email": "Ardella_King92@moore-and-sons.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect",
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-friesen-inc-58",
+    "name": "Friesen Inc",
+    "slug": "friesen-inc-58",
+    "industry": "Manufacturing",
+    "tier": "mid-market",
+    "arr": 63186,
+    "csm": "emp-345",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Antonio Durgan",
+        "email": "Roxane.Schulist@friesen-inc.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-koss-bergstrom-and-ondricka-59",
+    "name": "Koss, Bergstrom and Ondricka",
+    "slug": "koss-bergstrom-and-ondricka-59",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 32474,
+    "csm": "emp-379",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Abel Blick",
+        "email": "Joy.Smith@koss-bergstrom-and-ondricka.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Terri Reichel",
+        "email": "Lorenzo38@koss-bergstrom-and-ondricka.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-lowe-corkery-and-gerlach-60",
+    "name": "Lowe, Corkery and Gerlach",
+    "slug": "lowe-corkery-and-gerlach-60",
+    "industry": "Government",
+    "tier": "enterprise",
+    "arr": 341163,
+    "csm": "emp-338",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Larry Pfannerstill",
+        "email": "Porter23@lowe-corkery-and-gerlach.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Dr. Lee Renner",
+        "email": "Margarita_Conroy@lowe-corkery-and-gerlach.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-tromp-cassin-61",
+    "name": "Tromp - Cassin",
+    "slug": "tromp-cassin-61",
+    "industry": "Healthcare",
+    "tier": "mid-market",
+    "arr": 50680,
+    "csm": "emp-341",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Erika Hodkiewicz",
+        "email": "Dewayne.Roberts@tromp-cassin.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Wanda Casper",
+        "email": "Estevan.Bartoletti50@tromp-cassin.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-hahn-group-62",
+    "name": "Hahn Group",
+    "slug": "hahn-group-62",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 11389,
+    "csm": "emp-341",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Cathy Langworth-Wiza",
+        "email": "Nichole_Olson@hahn-group.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-nolan-inc-63",
+    "name": "Nolan Inc",
+    "slug": "nolan-inc-63",
+    "industry": "Financial Services",
+    "tier": "mid-market",
+    "arr": 28302,
+    "csm": "emp-372",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Gary Dooley",
+        "email": "Summer_Kozey@nolan-inc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Matthew Skiles",
+        "email": "Josiane59@nolan-inc.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-rath-schuster-and-metz-64",
+    "name": "Rath, Schuster and Metz",
+    "slug": "rath-schuster-and-metz-64",
+    "industry": "Media",
+    "tier": "smb",
+    "arr": 21915,
+    "csm": "emp-362",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Richard Keebler",
+        "email": "Laverne_Hintz62@rath-schuster-and-metz.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Dr. Frankie Hyatt",
+        "email": "Charley_Bednar13@rath-schuster-and-metz.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Ashley Crona-Becker",
+        "email": "Cecil70@rath-schuster-and-metz.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-rice-stroman-and-o-kon-65",
+    "name": "Rice, Stroman and O'Kon",
+    "slug": "rice-stroman-and-o-kon-65",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 36210,
+    "csm": "emp-359",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Miss Gina Lebsack V",
+        "email": "Sheila50@rice-stroman-and-o-kon.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Anna Ratke",
+        "email": "Giuseppe97@rice-stroman-and-o-kon.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-toy-gutmann-66",
+    "name": "Toy - Gutmann",
+    "slug": "toy-gutmann-66",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 18014,
+    "csm": "emp-379",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Roger Goodwin DVM",
+        "email": "Dave_Ankunding69@toy-gutmann.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Allen Jacobson",
+        "email": "Isom_Bauch@toy-gutmann.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-schmitt-kertzmann-67",
+    "name": "Schmitt - Kertzmann",
+    "slug": "schmitt-kertzmann-67",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 10221,
+    "csm": "emp-376",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Jeremy Kertzmann I",
+        "email": "Madilyn_Weissnat32@schmitt-kertzmann.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-runte-o-reilly-68",
+    "name": "Runte - O'Reilly",
+    "slug": "runte-o-reilly-68",
+    "industry": "Retail",
+    "tier": "enterprise",
+    "arr": 400429,
+    "csm": "emp-339",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Ellis Beier",
+        "email": "Vinnie_Crooks@runte-o-reilly.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Renee Sanford",
+        "email": "Audreanne.VonRueden@runte-o-reilly.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-boyer-wilkinson-69",
+    "name": "Boyer - Wilkinson",
+    "slug": "boyer-wilkinson-69",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 13116,
+    "csm": "emp-353",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Penny Gleason",
+        "email": "Cristian.Dare51@boyer-wilkinson.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-smitham-group-70",
+    "name": "Smitham Group",
+    "slug": "smitham-group-70",
+    "industry": "Logistics",
+    "tier": "smb",
+    "arr": 22449,
+    "csm": "emp-343",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Kelley Thompson",
+        "email": "Barbara.Kerluke39@smitham-group.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-howe-morar-71",
+    "name": "Howe - Morar",
+    "slug": "howe-morar-71",
+    "industry": "Retail",
+    "tier": "enterprise",
+    "arr": 379140,
+    "csm": "emp-357",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Roderick Hane",
+        "email": "Hillard17@howe-morar.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Rachel Hoppe-Walker",
+        "email": "Alphonso38@howe-morar.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-zieme-spinka-and-kohler-72",
+    "name": "Zieme, Spinka and Kohler",
+    "slug": "zieme-spinka-and-kohler-72",
+    "industry": "Energy",
+    "tier": "enterprise",
+    "arr": 245099,
+    "csm": "emp-361",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "George Witting",
+        "email": "Gino_Keeling@zieme-spinka-and-kohler.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Glen Harber DDS",
+        "email": "Raleigh_Thompson53@zieme-spinka-and-kohler.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Stephanie Welch Jr.",
+        "email": "Kathryn20@zieme-spinka-and-kohler.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-kunde-shields-73",
+    "name": "Kunde - Shields",
+    "slug": "kunde-shields-73",
+    "industry": "Healthcare",
+    "tier": "mid-market",
+    "arr": 49358,
+    "csm": "emp-360",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Kevin Cremin",
+        "email": "Shany.Schumm65@kunde-shields.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Scott Vandervort",
+        "email": "Daron_Christiansen@kunde-shields.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-cartwright-and-sons-74",
+    "name": "Cartwright and Sons",
+    "slug": "cartwright-and-sons-74",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 6059,
+    "csm": "emp-339",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Katrina Reichel",
+        "email": "Adonis.Sanford80@cartwright-and-sons.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Wm Schinner",
+        "email": "Leone.Conroy@cartwright-and-sons.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-heller-group-75",
+    "name": "Heller Group",
+    "slug": "heller-group-75",
+    "industry": "Logistics",
+    "tier": "smb",
+    "arr": 21501,
+    "csm": "emp-341",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Felipe Senger",
+        "email": "Reymundo5@heller-group.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Ethel Gorczany",
+        "email": "Winifred_Kertzmann74@heller-group.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-turner-borer-76",
+    "name": "Turner - Borer",
+    "slug": "turner-borer-76",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 23099,
+    "csm": "emp-367",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Debra Howe",
+        "email": "Bailee_Rice@turner-borer.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "John Will V",
+        "email": "Brandy_Lesch@turner-borer.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Duane Koss",
+        "email": "Antonette.Effertz@turner-borer.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-kutch-bruen-77",
+    "name": "Kutch - Bruen",
+    "slug": "kutch-bruen-77",
+    "industry": "Logistics",
+    "tier": "mid-market",
+    "arr": 24463,
+    "csm": "emp-370",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Susan Lindgren",
+        "email": "Darby.McGlynn@kutch-bruen.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Dr. Felipe Goyette",
+        "email": "Jakob.Labadie@kutch-bruen.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Vincent Hamill-Denesik",
+        "email": "Ara_Gerhold38@kutch-bruen.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-willms-west-and-steuber-78",
+    "name": "Willms, West and Steuber",
+    "slug": "willms-west-and-steuber-78",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 15345,
+    "csm": "emp-343",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Joshua Kunze",
+        "email": "Freeman82@willms-west-and-steuber.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Mabel Beier",
+        "email": "Lucinda55@willms-west-and-steuber.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-herman-bradtke-79",
+    "name": "Herman - Bradtke",
+    "slug": "herman-bradtke-79",
+    "industry": "Media",
+    "tier": "enterprise",
+    "arr": 240868,
+    "csm": "emp-354",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Brenda Stamm",
+        "email": "Rollin.Gusikowski-Hilpert@herman-bradtke.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Randy Kerluke",
+        "email": "Lucienne.Frami@herman-bradtke.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-prohaska-group-80",
+    "name": "Prohaska Group",
+    "slug": "prohaska-group-80",
+    "industry": "Logistics",
+    "tier": "smb",
+    "arr": 11256,
+    "csm": "emp-379",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Benjamin Turcotte I",
+        "email": "Rosanna7@prohaska-group.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-swift-schuppe-and-considine-81",
+    "name": "Swift, Schuppe and Considine",
+    "slug": "swift-schuppe-and-considine-81",
+    "industry": "Education",
+    "tier": "mid-market",
+    "arr": 72020,
+    "csm": "emp-370",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Lydia Schmidt",
+        "email": "Clair.Cruickshank@swift-schuppe-and-considine.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Louise Kassulke",
+        "email": "Maria22@swift-schuppe-and-considine.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Kim MacGyver",
+        "email": "Nicklaus98@swift-schuppe-and-considine.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-crist-llc-82",
+    "name": "Crist LLC",
+    "slug": "crist-llc-82",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 15613,
+    "csm": "emp-380",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Florence Turcotte",
+        "email": "Gwen.Effertz@crist-llc.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Mr. Roger Gutkowski",
+        "email": "Jamison.VonRueden43@crist-llc.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Devin Krajcik",
+        "email": "Antoinette_Collier47@crist-llc.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-gutkowski-rice-83",
+    "name": "Gutkowski - Rice",
+    "slug": "gutkowski-rice-83",
+    "industry": "Education",
+    "tier": "mid-market",
+    "arr": 52763,
+    "csm": "emp-355",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Randal Lind",
+        "email": "Leilani51@gutkowski-rice.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-boehm-greenfelder-84",
+    "name": "Boehm - Greenfelder",
+    "slug": "boehm-greenfelder-84",
+    "industry": "Energy",
+    "tier": "smb",
+    "arr": 22763,
+    "csm": "emp-348",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Julie Adams",
+        "email": "Dahlia.Lehner@boehm-greenfelder.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Sammy Schowalter II",
+        "email": "Charley90@boehm-greenfelder.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-robel-hickle-and-kertzmann-85",
+    "name": "Robel, Hickle and Kertzmann",
+    "slug": "robel-hickle-and-kertzmann-85",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 21301,
+    "csm": "emp-354",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Oscar Crona",
+        "email": "Brandyn_Gleason@robel-hickle-and-kertzmann.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Jackie Dibbert",
+        "email": "Kathryn96@robel-hickle-and-kertzmann.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Courtney Ankunding",
+        "email": "Myrtis_Willms40@robel-hickle-and-kertzmann.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-kling-goyette-86",
+    "name": "Kling - Goyette",
+    "slug": "kling-goyette-86",
+    "industry": "Energy",
+    "tier": "enterprise",
+    "arr": 299596,
+    "csm": "emp-358",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Julius Gleichner III",
+        "email": "Guiseppe.Pagac@kling-goyette.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Dr. Marta Spencer",
+        "email": "Mae_Waters@kling-goyette.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Bill Gleason",
+        "email": "Arden_Runolfsson67@kling-goyette.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-harris-and-sons-87",
+    "name": "Harris and Sons",
+    "slug": "harris-and-sons-87",
+    "industry": "Energy",
+    "tier": "smb",
+    "arr": 13518,
+    "csm": "emp-381",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Dr. Delbert Cartwright",
+        "email": "Elta33@harris-and-sons.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-schowalter-mraz-and-steuber-88",
+    "name": "Schowalter, Mraz and Steuber",
+    "slug": "schowalter-mraz-and-steuber-88",
+    "industry": "Technology",
+    "tier": "mid-market",
+    "arr": 75433,
+    "csm": "emp-373",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Irvin Mayert",
+        "email": "Reymundo.Mante@schowalter-mraz-and-steuber.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Betty Corwin",
+        "email": "Emie_Brakus@schowalter-mraz-and-steuber.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Alberto Stroman",
+        "email": "Bobby12@schowalter-mraz-and-steuber.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-morissette-pfeffer-89",
+    "name": "Morissette - Pfeffer",
+    "slug": "morissette-pfeffer-89",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 21054,
+    "csm": "emp-338",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Kyle Cummerata",
+        "email": "Angelita70@morissette-pfeffer.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Bryan Moen",
+        "email": "Beau53@morissette-pfeffer.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-tromp-inc-90",
+    "name": "Tromp Inc",
+    "slug": "tromp-inc-90",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 12005,
+    "csm": "emp-360",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Sally Heidenreich IV",
+        "email": "Faye_Bartoletti@tromp-inc.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Janet Wunsch",
+        "email": "Dayton_Kshlerin@tromp-inc.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-keebler-inc-91",
+    "name": "Keebler Inc",
+    "slug": "keebler-inc-91",
+    "industry": "Retail",
+    "tier": "enterprise",
+    "arr": 121735,
+    "csm": "emp-355",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Mrs. Dora Spinka",
+        "email": "Maverick_Rogahn32@keebler-inc.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Casey Lakin",
+        "email": "Lucius34@keebler-inc.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Allen Hamill",
+        "email": "Nicholaus65@keebler-inc.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-donnelly-zulauf-92",
+    "name": "Donnelly - Zulauf",
+    "slug": "donnelly-zulauf-92",
+    "industry": "Technology",
+    "tier": "smb",
+    "arr": 17983,
+    "csm": "emp-372",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Mr. Antonio Kertzmann",
+        "email": "Darion_Hauck@donnelly-zulauf.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Marion Senger",
+        "email": "Brando_Daugherty39@donnelly-zulauf.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Ellis Macejkovic",
+        "email": "Dallas.Klein@donnelly-zulauf.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-mante-gutkowski-and-little-93",
+    "name": "Mante, Gutkowski and Little",
+    "slug": "mante-gutkowski-and-little-93",
+    "industry": "Retail",
+    "tier": "smb",
+    "arr": 6967,
+    "csm": "emp-345",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Dr. Julio Little",
+        "email": "Dandre_Quitzon@mante-gutkowski-and-little.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Dr. Celia Pollich",
+        "email": "Zack22@mante-gutkowski-and-little.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Dr. Maurice Daugherty",
+        "email": "Stanford16@mante-gutkowski-and-little.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-o-keefe-llc-94",
+    "name": "O'Keefe LLC",
+    "slug": "o-keefe-llc-94",
+    "industry": "Technology",
+    "tier": "enterprise",
+    "arr": 137554,
+    "csm": "emp-370",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Kari Bogan",
+        "email": "Emanuel_Emmerich@o-keefe-llc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Kelvin Ratke",
+        "email": "Carmine.Pouros68@o-keefe-llc.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-kshlerin-harber-and-kihn-95",
+    "name": "Kshlerin, Harber and Kihn",
+    "slug": "kshlerin-harber-and-kihn-95",
+    "industry": "Media",
+    "tier": "enterprise",
+    "arr": 461481,
+    "csm": "emp-364",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Claire Armstrong",
+        "email": "Bret77@kshlerin-harber-and-kihn.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Dr. Elijah Dietrich",
+        "email": "Oran19@kshlerin-harber-and-kihn.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Seth Rempel",
+        "email": "Georgianna_Gusikowski@kshlerin-harber-and-kihn.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-schmeler-bartoletti-96",
+    "name": "Schmeler - Bartoletti",
+    "slug": "schmeler-bartoletti-96",
+    "industry": "Retail",
+    "tier": "mid-market",
+    "arr": 65035,
+    "csm": "emp-375",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Joshua Aufderhar",
+        "email": "Reinhold9@schmeler-bartoletti.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Alexandra Cartwright",
+        "email": "Dayana.Carter-Jacobs35@schmeler-bartoletti.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Yolanda Pfeffer",
+        "email": "Collin_Stroman@schmeler-bartoletti.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-vandervort-nikolaus-and-robel-97",
+    "name": "Vandervort, Nikolaus and Robel",
+    "slug": "vandervort-nikolaus-and-robel-97",
+    "industry": "Technology",
+    "tier": "enterprise",
+    "arr": 302579,
+    "csm": "emp-374",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Hattie Padberg DVM",
+        "email": "Sam.Shields@vandervort-nikolaus-and-robel.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-homenick-kulas-and-mohr-98",
+    "name": "Homenick, Kulas and Mohr",
+    "slug": "homenick-kulas-and-mohr-98",
+    "industry": "Education",
+    "tier": "enterprise",
+    "arr": 250999,
+    "csm": "emp-345",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Jeremiah Wintheiser",
+        "email": "Willard95@homenick-kulas-and-mohr.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-hoppe-ferry-and-oberbrunner-99",
+    "name": "Hoppe, Ferry and Oberbrunner",
+    "slug": "hoppe-ferry-and-oberbrunner-99",
+    "industry": "Government",
+    "tier": "smb",
+    "arr": 18844,
+    "csm": "emp-362",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Micheal Nitzsche",
+        "email": "Summer14@hoppe-ferry-and-oberbrunner.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Greg Ullrich",
+        "email": "Sienna.MacGyver@hoppe-ferry-and-oberbrunner.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-schuster-stroman-100",
+    "name": "Schuster - Stroman",
+    "slug": "schuster-stroman-100",
+    "industry": "Technology",
+    "tier": "mid-market",
+    "arr": 93465,
+    "csm": "emp-377",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Alexander Schroeder MD",
+        "email": "Lucile.Fadel83@schuster-stroman.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Tonya Torp",
+        "email": "Jamarcus88@schuster-stroman.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Thomas Hettinger",
+        "email": "Alexandrea_Brown@schuster-stroman.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-fadel-o-keefe-and-conroy-101",
+    "name": "Fadel, O'Keefe and Conroy",
+    "slug": "fadel-o-keefe-and-conroy-101",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 87409,
+    "csm": "emp-375",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Marlon Ziemann",
+        "email": "Easton.Schimmel-Macejkovic53@fadel-o-keefe-and-conroy.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Clark Parker",
+        "email": "Jeff99@fadel-o-keefe-and-conroy.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Stanley D'Amore",
+        "email": "Amie.McKenzie33@fadel-o-keefe-and-conroy.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-hayes-group-102",
+    "name": "Hayes Group",
+    "slug": "hayes-group-102",
+    "industry": "Government",
+    "tier": "smb",
+    "arr": 23836,
+    "csm": "emp-373",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Alvin Kemmer",
+        "email": "Mitchel42@hayes-group.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-boehm-group-103",
+    "name": "Boehm Group",
+    "slug": "boehm-group-103",
+    "industry": "Energy",
+    "tier": "mid-market",
+    "arr": 99340,
+    "csm": "emp-352",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Cedric Lehner",
+        "email": "Anita61@boehm-group.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform",
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-kiehn-and-sons-104",
+    "name": "Kiehn and Sons",
+    "slug": "kiehn-and-sons-104",
+    "industry": "Logistics",
+    "tier": "mid-market",
+    "arr": 81472,
+    "csm": "emp-358",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Ms. Julie Blanda-Lynch",
+        "email": "Bethel_Dicki@kiehn-and-sons.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Sonja Daugherty",
+        "email": "Zoie11@kiehn-and-sons.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Kara Marquardt Sr.",
+        "email": "Fern_Schaden91@kiehn-and-sons.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-zieme-hackett-and-renner-105",
+    "name": "Zieme, Hackett and Renner",
+    "slug": "zieme-hackett-and-renner-105",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 22953,
+    "csm": "emp-377",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Verna Schowalter",
+        "email": "Elena.Parisian4@zieme-hackett-and-renner.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Michele Swift",
+        "email": "Kayden83@zieme-hackett-and-renner.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-streich-lynch-and-rowe-106",
+    "name": "Streich, Lynch and Rowe",
+    "slug": "streich-lynch-and-rowe-106",
+    "industry": "Energy",
+    "tier": "mid-market",
+    "arr": 32926,
+    "csm": "emp-379",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Vicki Metz",
+        "email": "Rose90@streich-lynch-and-rowe.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Zachary Considine",
+        "email": "Sydney_Hilll-Johns76@streich-lynch-and-rowe.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-jacobi-sauer-107",
+    "name": "Jacobi - Sauer",
+    "slug": "jacobi-sauer-107",
+    "industry": "Technology",
+    "tier": "mid-market",
+    "arr": 71343,
+    "csm": "emp-340",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Neil Lind-Batz",
+        "email": "Wade_Jacobson@jacobi-sauer.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform",
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-hills-wehner-and-gerhold-108",
+    "name": "Hills, Wehner and Gerhold",
+    "slug": "hills-wehner-and-gerhold-108",
+    "industry": "Technology",
+    "tier": "enterprise",
+    "arr": 382267,
+    "csm": "emp-340",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Trevor Stamm DDS",
+        "email": "Lindsay.Dach9@hills-wehner-and-gerhold.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Kerry Fritsch",
+        "email": "Skyla_Gibson25@hills-wehner-and-gerhold.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-feeney-deckow-109",
+    "name": "Feeney - Deckow",
+    "slug": "feeney-deckow-109",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 74245,
+    "csm": "emp-362",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Carla Greenfelder",
+        "email": "Violet4@feeney-deckow.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-frami-inc-110",
+    "name": "Frami Inc",
+    "slug": "frami-inc-110",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 58222,
+    "csm": "emp-363",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Angel Beier",
+        "email": "Darian73@frami-inc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Sophia Rath",
+        "email": "Kody60@frami-inc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Monica Beatty",
+        "email": "Emmie_Kihn@frami-inc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform",
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-block-streich-111",
+    "name": "Block - Streich",
+    "slug": "block-streich-111",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 12787,
+    "csm": "emp-342",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Dawn Kemmer",
+        "email": "Liliane.Mertz@block-streich.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Mr. Theodore Schulist",
+        "email": "Jalen_Donnelly70@block-streich.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-flatley-fritsch-and-klocko-112",
+    "name": "Flatley, Fritsch and Klocko",
+    "slug": "flatley-fritsch-and-klocko-112",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 23674,
+    "csm": "emp-347",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Teresa Abshire II",
+        "email": "Winston.Schuppe28@flatley-fritsch-and-klocko.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-kovacek-group-113",
+    "name": "Kovacek Group",
+    "slug": "kovacek-group-113",
+    "industry": "Manufacturing",
+    "tier": "enterprise",
+    "arr": 180242,
+    "csm": "emp-353",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Ismael Wyman",
+        "email": "Damion23@kovacek-group.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-krajcik-and-sons-114",
+    "name": "Krajcik and Sons",
+    "slug": "krajcik-and-sons-114",
+    "industry": "Education",
+    "tier": "mid-market",
+    "arr": 65667,
+    "csm": "emp-349",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Joseph Pfeffer",
+        "email": "Leon.Rodriguez@krajcik-and-sons.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Hugo Ritchie",
+        "email": "Allene59@krajcik-and-sons.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Wendy Green",
+        "email": "Lizeth.Williamson@krajcik-and-sons.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-sanford-toy-115",
+    "name": "Sanford - Toy",
+    "slug": "sanford-toy-115",
+    "industry": "Healthcare",
+    "tier": "enterprise",
+    "arr": 450466,
+    "csm": "emp-377",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Natasha Sporer",
+        "email": "Kenton.Gerlach15@sanford-toy.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-ratke-inc-116",
+    "name": "Ratke Inc",
+    "slug": "ratke-inc-116",
+    "industry": "Education",
+    "tier": "smb",
+    "arr": 10865,
+    "csm": "emp-340",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Maxine Hamill",
+        "email": "Bertha60@ratke-inc.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Dave Grady",
+        "email": "Javonte93@ratke-inc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Conrad Rohan",
+        "email": "Christine61@ratke-inc.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-moore-bosco-117",
+    "name": "Moore - Bosco",
+    "slug": "moore-bosco-117",
+    "industry": "Retail",
+    "tier": "enterprise",
+    "arr": 127500,
+    "csm": "emp-357",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Colleen Jacobson",
+        "email": "Rodrick.Huel-Stanton54@moore-bosco.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-white-welch-and-huel-118",
+    "name": "White, Welch and Huel",
+    "slug": "white-welch-and-huel-118",
+    "industry": "Logistics",
+    "tier": "enterprise",
+    "arr": 426691,
+    "csm": "emp-362",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "George Hickle Sr.",
+        "email": "Otha.Hoeger@white-welch-and-huel.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Lillian Abernathy",
+        "email": "King_Cummerata@white-welch-and-huel.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-kerluke-inc-119",
+    "name": "Kerluke Inc",
+    "slug": "kerluke-inc-119",
+    "industry": "Education",
+    "tier": "mid-market",
+    "arr": 54183,
+    "csm": "emp-381",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Doug White",
+        "email": "Monica39@kerluke-inc.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Verna Macejkovic DVM",
+        "email": "Bonnie_Kerluke77@kerluke-inc.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-hills-hilpert-120",
+    "name": "Hills - Hilpert",
+    "slug": "hills-hilpert-120",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 13910,
+    "csm": "emp-349",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Neal Harvey",
+        "email": "Marley_Brown@hills-hilpert.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Philip Deckow",
+        "email": "Tito_Franey41@hills-hilpert.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-swaniawski-schneider-and-stied-121",
+    "name": "Swaniawski, Schneider and Stiedemann",
+    "slug": "swaniawski-schneider-and-stied-121",
+    "industry": "Technology",
+    "tier": "enterprise",
+    "arr": 148726,
+    "csm": "emp-359",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Hector Metz",
+        "email": "Cathy42@swaniawski-schneider-and-stied.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-gusikowski-inc-122",
+    "name": "Gusikowski Inc",
+    "slug": "gusikowski-inc-122",
+    "industry": "Retail",
+    "tier": "enterprise",
+    "arr": 460555,
+    "csm": "emp-381",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Gretchen Cole-Rohan",
+        "email": "Kali92@gusikowski-inc.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-donnelly-llc-123",
+    "name": "Donnelly LLC",
+    "slug": "donnelly-llc-123",
+    "industry": "Media",
+    "tier": "smb",
+    "arr": 11956,
+    "csm": "emp-361",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Dr. Muriel Yundt",
+        "email": "Dannie.Armstrong@donnelly-llc.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Hubert Glover",
+        "email": "Miles_Hartmann-Fritsch@donnelly-llc.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Alton McDermott",
+        "email": "Lois_Miller@donnelly-llc.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-maggio-zieme-124",
+    "name": "Maggio - Zieme",
+    "slug": "maggio-zieme-124",
+    "industry": "Manufacturing",
+    "tier": "enterprise",
+    "arr": 355218,
+    "csm": "emp-375",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Nadine Rippin",
+        "email": "Bobbie58@maggio-zieme.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Tracy Lubowitz",
+        "email": "Cortez_Davis12@maggio-zieme.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Miss Mable Lehner",
+        "email": "Mittie5@maggio-zieme.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-ortiz-inc-125",
+    "name": "Ortiz Inc",
+    "slug": "ortiz-inc-125",
+    "industry": "Retail",
+    "tier": "enterprise",
+    "arr": 233172,
+    "csm": "emp-353",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Peggy Bradtke I",
+        "email": "Modesto55@ortiz-inc.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-keeling-orn-and-koss-126",
+    "name": "Keeling, Orn and Koss",
+    "slug": "keeling-orn-and-koss-126",
+    "industry": "Financial Services",
+    "tier": "enterprise",
+    "arr": 383089,
+    "csm": "emp-365",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Homer Konopelski",
+        "email": "Wilford.Beatty10@keeling-orn-and-koss.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Wilson Nolan",
+        "email": "Lafayette.Bailey24@keeling-orn-and-koss.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Emmett Lueilwitz",
+        "email": "Maybell67@keeling-orn-and-koss.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-hermiston-wuckert-and-yost-127",
+    "name": "Hermiston, Wuckert and Yost",
+    "slug": "hermiston-wuckert-and-yost-127",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 23965,
+    "csm": "emp-369",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Ms. Melba Rosenbaum",
+        "email": "Jennyfer_Terry@hermiston-wuckert-and-yost.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform",
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-o-kon-kemmer-and-feil-128",
+    "name": "O'Kon, Kemmer and Feil",
+    "slug": "o-kon-kemmer-and-feil-128",
+    "industry": "Manufacturing",
+    "tier": "mid-market",
+    "arr": 99211,
+    "csm": "emp-344",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Nora Pollich",
+        "email": "Georgiana_Krajcik94@o-kon-kemmer-and-feil.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Rufus Altenwerth",
+        "email": "Angie.Schroeder@o-kon-kemmer-and-feil.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-hudson-group-129",
+    "name": "Hudson Group",
+    "slug": "hudson-group-129",
+    "industry": "Technology",
+    "tier": "mid-market",
+    "arr": 99604,
+    "csm": "emp-377",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Roger Schamberger-Wyman",
+        "email": "Diego_Funk@hudson-group.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Alfredo Yundt-Graham III",
+        "email": "Carolanne82@hudson-group.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-schroeder-mills-and-donnelly-130",
+    "name": "Schroeder, Mills and Donnelly",
+    "slug": "schroeder-mills-and-donnelly-130",
+    "industry": "Financial Services",
+    "tier": "enterprise",
+    "arr": 268970,
+    "csm": "emp-377",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Nick Langworth",
+        "email": "Camren.Stracke45@schroeder-mills-and-donnelly.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Lowell Osinski",
+        "email": "Geovany_Wolff7@schroeder-mills-and-donnelly.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-jacobson-walter-131",
+    "name": "Jacobson - Walter",
+    "slug": "jacobson-walter-131",
+    "industry": "Retail",
+    "tier": "mid-market",
+    "arr": 95290,
+    "csm": "emp-374",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Velma Cassin",
+        "email": "Zoila.Williamson@jacobson-walter.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Willis Ankunding III",
+        "email": "Harrison.Parisian@jacobson-walter.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-blanda-turner-132",
+    "name": "Blanda - Turner",
+    "slug": "blanda-turner-132",
+    "industry": "Education",
+    "tier": "enterprise",
+    "arr": 425292,
+    "csm": "emp-379",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Miss Deanna Wilderman",
+        "email": "Audreanne_Towne@blanda-turner.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Timothy Stanton",
+        "email": "Dakota42@blanda-turner.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Rosie Orn",
+        "email": "Caleb.Bogisich@blanda-turner.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-tromp-inc-133",
+    "name": "Tromp Inc",
+    "slug": "tromp-inc-133",
+    "industry": "Logistics",
+    "tier": "smb",
+    "arr": 12753,
+    "csm": "emp-376",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Jerome Hermiston",
+        "email": "Gerard.Schumm@tromp-inc.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-keebler-brown-134",
+    "name": "Keebler - Brown",
+    "slug": "keebler-brown-134",
+    "industry": "Logistics",
+    "tier": "mid-market",
+    "arr": 58651,
+    "csm": "emp-360",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Isabel Breitenberg",
+        "email": "Magdalen86@keebler-brown.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Cheryl Cormier",
+        "email": "Wilfred_Moore@keebler-brown.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-nader-bernhard-and-bauch-135",
+    "name": "Nader, Bernhard and Bauch",
+    "slug": "nader-bernhard-and-bauch-135",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 7253,
+    "csm": "emp-371",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Malcolm Wehner II",
+        "email": "Madisen.Price79@nader-bernhard-and-bauch.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Nicholas Kertzmann",
+        "email": "Blanche21@nader-bernhard-and-bauch.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Raul Turcotte",
+        "email": "Stone.Littel@nader-bernhard-and-bauch.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-bergnaum-lemke-136",
+    "name": "Bergnaum - Lemke",
+    "slug": "bergnaum-lemke-136",
+    "industry": "Government",
+    "tier": "smb",
+    "arr": 16084,
+    "csm": "emp-357",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Boyd Boyer",
+        "email": "Stone69@bergnaum-lemke.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Lloyd Emmerich",
+        "email": "Elody_Ziemann@bergnaum-lemke.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect",
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-gleichner-heller-137",
+    "name": "Gleichner - Heller",
+    "slug": "gleichner-heller-137",
+    "industry": "Education",
+    "tier": "mid-market",
+    "arr": 58830,
+    "csm": "emp-348",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Roosevelt Reinger",
+        "email": "Abbigail65@gleichner-heller.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Eleanor Collins",
+        "email": "Adriana_Sauer@gleichner-heller.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-koelpin-altenwerth-138",
+    "name": "Koelpin - Altenwerth",
+    "slug": "koelpin-altenwerth-138",
+    "industry": "Education",
+    "tier": "smb",
+    "arr": 8314,
+    "csm": "emp-358",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Van Schuppe-Quitzon",
+        "email": "Otilia.Mueller@koelpin-altenwerth.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Dora Zieme",
+        "email": "Xzavier_Dooley@koelpin-altenwerth.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Perry Quitzon",
+        "email": "Elta.Shanahan@koelpin-altenwerth.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-jakubowski-west-and-moen-139",
+    "name": "Jakubowski, West and Moen",
+    "slug": "jakubowski-west-and-moen-139",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 35539,
+    "csm": "emp-342",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Deborah Dicki",
+        "email": "Elnora66@jakubowski-west-and-moen.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-dibbert-inc-140",
+    "name": "Dibbert Inc",
+    "slug": "dibbert-inc-140",
+    "industry": "Healthcare",
+    "tier": "mid-market",
+    "arr": 45685,
+    "csm": "emp-360",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Oscar Cruickshank",
+        "email": "Leda_Russel6@dibbert-inc.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-walker-wyman-and-prohaska-141",
+    "name": "Walker, Wyman and Prohaska",
+    "slug": "walker-wyman-and-prohaska-141",
+    "industry": "Energy",
+    "tier": "mid-market",
+    "arr": 67883,
+    "csm": "emp-371",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Tracey Larson",
+        "email": "Cristal.Prosacco30@walker-wyman-and-prohaska.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-boehm-llc-142",
+    "name": "Boehm LLC",
+    "slug": "boehm-llc-142",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 11796,
+    "csm": "emp-362",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Toby Durgan",
+        "email": "Alycia.Beier54@boehm-llc.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Harriet Dietrich",
+        "email": "Haley_Metz6@boehm-llc.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-jacobs-inc-143",
+    "name": "Jacobs Inc",
+    "slug": "jacobs-inc-143",
+    "industry": "Manufacturing",
+    "tier": "enterprise",
+    "arr": 161706,
+    "csm": "emp-347",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Tony Olson",
+        "email": "Tobin.Heidenreich@jacobs-inc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Rosalie Cruickshank",
+        "email": "Herminio_Weimann@jacobs-inc.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Conrad Hayes",
+        "email": "Francis.Wunsch@jacobs-inc.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-nienow-llc-144",
+    "name": "Nienow LLC",
+    "slug": "nienow-llc-144",
+    "industry": "Retail",
+    "tier": "enterprise",
+    "arr": 350819,
+    "csm": "emp-365",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Kristine Runolfsson",
+        "email": "Stephen92@nienow-llc.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Geneva Tillman",
+        "email": "Aiyana88@nienow-llc.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-block-lemke-and-morissette-145",
+    "name": "Block, Lemke and Morissette",
+    "slug": "block-lemke-and-morissette-145",
+    "industry": "Financial Services",
+    "tier": "smb",
+    "arr": 9008,
+    "csm": "emp-374",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Tina Goldner",
+        "email": "Hassie_Keebler@block-lemke-and-morissette.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-reinger-inc-146",
+    "name": "Reinger Inc",
+    "slug": "reinger-inc-146",
+    "industry": "Technology",
+    "tier": "enterprise",
+    "arr": 355229,
+    "csm": "emp-379",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Micheal Abshire",
+        "email": "Oran92@reinger-inc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-hahn-emmerich-and-fritsch-147",
+    "name": "Hahn, Emmerich and Fritsch",
+    "slug": "hahn-emmerich-and-fritsch-147",
+    "industry": "Financial Services",
+    "tier": "enterprise",
+    "arr": 367234,
+    "csm": "emp-360",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Amelia Prohaska",
+        "email": "Katheryn59@hahn-emmerich-and-fritsch.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Marilyn Hessel",
+        "email": "Cory.Torphy67@hahn-emmerich-and-fritsch.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-shields-ankunding-148",
+    "name": "Shields - Ankunding",
+    "slug": "shields-ankunding-148",
+    "industry": "Media",
+    "tier": "enterprise",
+    "arr": 436725,
+    "csm": "emp-351",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Jody Wehner",
+        "email": "Wendy57@shields-ankunding.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Saul Waters",
+        "email": "Darion49@shields-ankunding.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Dewey Mraz",
+        "email": "Nicholaus_Thompson85@shields-ankunding.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-heathcote-stroman-and-jacobs-149",
+    "name": "Heathcote, Stroman and Jacobs",
+    "slug": "heathcote-stroman-and-jacobs-149",
+    "industry": "Media",
+    "tier": "enterprise",
+    "arr": 418250,
+    "csm": "emp-377",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Stacy Spencer",
+        "email": "Immanuel_Streich@heathcote-stroman-and-jacobs.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Glen Waters MD",
+        "email": "Loy82@heathcote-stroman-and-jacobs.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-labadie-inc-150",
+    "name": "Labadie Inc",
+    "slug": "labadie-inc-150",
+    "industry": "Energy",
+    "tier": "enterprise",
+    "arr": 288274,
+    "csm": "emp-341",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Ken Cole",
+        "email": "Meta.Kovacek49@labadie-inc.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Lena Kerluke",
+        "email": "Sharon58@labadie-inc.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Carroll McLaughlin",
+        "email": "Novella42@labadie-inc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-abbott-stanton-151",
+    "name": "Abbott - Stanton",
+    "slug": "abbott-stanton-151",
+    "industry": "Technology",
+    "tier": "smb",
+    "arr": 13277,
+    "csm": "emp-369",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Tricia Abernathy",
+        "email": "Brycen_Olson47@abbott-stanton.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Brett Armstrong DVM",
+        "email": "Lonie.Lebsack@abbott-stanton.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-jakubowski-purdy-and-dietrich-152",
+    "name": "Jakubowski, Purdy and Dietrich",
+    "slug": "jakubowski-purdy-and-dietrich-152",
+    "industry": "Financial Services",
+    "tier": "smb",
+    "arr": 16371,
+    "csm": "emp-373",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Armando Cremin DDS",
+        "email": "Dereck_Windler85@jakubowski-purdy-and-dietrich.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-miller-vandervort-153",
+    "name": "Miller - Vandervort",
+    "slug": "miller-vandervort-153",
+    "industry": "Financial Services",
+    "tier": "mid-market",
+    "arr": 58643,
+    "csm": "emp-363",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Tricia Stiedemann",
+        "email": "Thelma.Tremblay@miller-vandervort.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Paula Stoltenberg",
+        "email": "Janelle.Volkman@miller-vandervort.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Vickie Pfannerstill",
+        "email": "Unique_Veum@miller-vandervort.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-torphy-group-154",
+    "name": "Torphy Group",
+    "slug": "torphy-group-154",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 28401,
+    "csm": "emp-359",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Jessie Collier",
+        "email": "Nikko_Klein@torphy-group.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Barry Brekke",
+        "email": "Ivy.Koelpin@torphy-group.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Levi Krajcik Jr.",
+        "email": "Sasha36@torphy-group.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-satterfield-haley-and-romaguer-155",
+    "name": "Satterfield, Haley and Romaguera",
+    "slug": "satterfield-haley-and-romaguer-155",
+    "industry": "Energy",
+    "tier": "enterprise",
+    "arr": 321514,
+    "csm": "emp-368",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Chris Rowe",
+        "email": "Ora_Gerhold@satterfield-haley-and-romaguer.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Melvin O'Hara",
+        "email": "Alia_Gorczany81@satterfield-haley-and-romaguer.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Audrey Brekke",
+        "email": "Brayan81@satterfield-haley-and-romaguer.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-nienow-and-sons-156",
+    "name": "Nienow and Sons",
+    "slug": "nienow-and-sons-156",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 10651,
+    "csm": "emp-356",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Nelson Graham",
+        "email": "Layne69@nienow-and-sons.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "John Bosco",
+        "email": "Grayson81@nienow-and-sons.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-fay-larson-and-greenfelder-157",
+    "name": "Fay, Larson and Greenfelder",
+    "slug": "fay-larson-and-greenfelder-157",
+    "industry": "Government",
+    "tier": "mid-market",
+    "arr": 97711,
+    "csm": "emp-360",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Blake Kris",
+        "email": "Clyde.Pacocha14@fay-larson-and-greenfelder.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Wilson Jacobson",
+        "email": "Misty.Haley@fay-larson-and-greenfelder.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-casper-bernhard-158",
+    "name": "Casper - Bernhard",
+    "slug": "casper-bernhard-158",
+    "industry": "Education",
+    "tier": "mid-market",
+    "arr": 96361,
+    "csm": "emp-366",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Diana Hauck",
+        "email": "Emanuel_Schuster@casper-bernhard.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Stacy Cormier",
+        "email": "Adam_Schowalter22@casper-bernhard.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Janice Wisoky",
+        "email": "Timothy_Dibbert44@casper-bernhard.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-kassulke-mann-159",
+    "name": "Kassulke - Mann",
+    "slug": "kassulke-mann-159",
+    "industry": "Financial Services",
+    "tier": "smb",
+    "arr": 9200,
+    "csm": "emp-338",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Sherry Jacobi Jr.",
+        "email": "Stephania50@kassulke-mann.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Ms. Cynthia Crooks V",
+        "email": "Andrew.Dach78@kassulke-mann.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Lora Nitzsche",
+        "email": "Jared.Feil28@kassulke-mann.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-upton-lubowitz-160",
+    "name": "Upton - Lubowitz",
+    "slug": "upton-lubowitz-160",
+    "industry": "Media",
+    "tier": "mid-market",
+    "arr": 74219,
+    "csm": "emp-345",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Clyde Tillman",
+        "email": "Nona.Conroy36@upton-lubowitz.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Jared Fisher DDS",
+        "email": "Geoffrey_Bins35@upton-lubowitz.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-donnelly-group-161",
+    "name": "Donnelly Group",
+    "slug": "donnelly-group-161",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 13561,
+    "csm": "emp-367",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Vincent Morar",
+        "email": "Chanelle.Pollich90@donnelly-group.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Tina Beer",
+        "email": "Alfred_Rath45@donnelly-group.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Israel Considine",
+        "email": "Giovanni.Becker-Stanton31@donnelly-group.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-balistreri-inc-162",
+    "name": "Balistreri Inc",
+    "slug": "balistreri-inc-162",
+    "industry": "Technology",
+    "tier": "mid-market",
+    "arr": 91520,
+    "csm": "emp-351",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Micheal Erdman",
+        "email": "Stefanie_Olson@balistreri-inc.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Spencer Halvorson",
+        "email": "Janet75@balistreri-inc.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Amelia Dibbert",
+        "email": "Allen54@balistreri-inc.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-kuphal-rice-and-breitenberg-163",
+    "name": "Kuphal, Rice and Breitenberg",
+    "slug": "kuphal-rice-and-breitenberg-163",
+    "industry": "Financial Services",
+    "tier": "smb",
+    "arr": 12370,
+    "csm": "emp-377",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Gayle Botsford",
+        "email": "Kassandra_Robel32@kuphal-rice-and-breitenberg.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Emanuel Kuhlman",
+        "email": "Lilly53@kuphal-rice-and-breitenberg.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Alan Gulgowski",
+        "email": "Gianni.Satterfield25@kuphal-rice-and-breitenberg.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-johnston-hettinger-164",
+    "name": "Johnston - Hettinger",
+    "slug": "johnston-hettinger-164",
+    "industry": "Technology",
+    "tier": "enterprise",
+    "arr": 499086,
+    "csm": "emp-377",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Dr. Jeff Gerhold",
+        "email": "Kelsie44@johnston-hettinger.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Dr. Lonnie Jast",
+        "email": "Bonita_Sipes57@johnston-hettinger.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-klein-gulgowski-and-volkman-165",
+    "name": "Klein, Gulgowski and Volkman",
+    "slug": "klein-gulgowski-and-volkman-165",
+    "industry": "Logistics",
+    "tier": "mid-market",
+    "arr": 52336,
+    "csm": "emp-350",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Candice Heathcote",
+        "email": "Lucile_Corwin28@klein-gulgowski-and-volkman.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-corkery-spencer-166",
+    "name": "Corkery - Spencer",
+    "slug": "corkery-spencer-166",
+    "industry": "Energy",
+    "tier": "mid-market",
+    "arr": 48345,
+    "csm": "emp-370",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Annette O'Keefe MD",
+        "email": "Nicholas_Botsford@corkery-spencer.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Annie Prosacco",
+        "email": "Yoshiko.Schowalter@corkery-spencer.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-bednar-inc-167",
+    "name": "Bednar Inc",
+    "slug": "bednar-inc-167",
+    "industry": "Government",
+    "tier": "smb",
+    "arr": 18037,
+    "csm": "emp-353",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Donnie Hegmann",
+        "email": "Wilma_Cormier@bednar-inc.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Trevor Fisher",
+        "email": "Orie85@bednar-inc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Merle Pacocha",
+        "email": "Marisa34@bednar-inc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard",
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-nitzsche-nolan-and-kuhlman-168",
+    "name": "Nitzsche, Nolan and Kuhlman",
+    "slug": "nitzsche-nolan-and-kuhlman-168",
+    "industry": "Energy",
+    "tier": "smb",
+    "arr": 20370,
+    "csm": "emp-337",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Cynthia Breitenberg",
+        "email": "Laisha.Champlin46@nitzsche-nolan-and-kuhlman.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Lisa Hirthe",
+        "email": "Kiel73@nitzsche-nolan-and-kuhlman.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Domingo Cole",
+        "email": "Marquise.Koss@nitzsche-nolan-and-kuhlman.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-franecki-and-sons-169",
+    "name": "Franecki and Sons",
+    "slug": "franecki-and-sons-169",
+    "industry": "Media",
+    "tier": "smb",
+    "arr": 9963,
+    "csm": "emp-350",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Emilio Hyatt",
+        "email": "Princess48@franecki-and-sons.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics",
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-jaskolski-stamm-and-schmidt-170",
+    "name": "Jaskolski, Stamm and Schmidt",
+    "slug": "jaskolski-stamm-and-schmidt-170",
+    "industry": "Financial Services",
+    "tier": "smb",
+    "arr": 12550,
+    "csm": "emp-363",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Miss Tracy Hettinger IV",
+        "email": "Destiney_Jacobson@jaskolski-stamm-and-schmidt.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect",
+      "prod-analytics",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-sanford-lakin-and-goyette-171",
+    "name": "Sanford, Lakin and Goyette",
+    "slug": "sanford-lakin-and-goyette-171",
+    "industry": "Government",
+    "tier": "mid-market",
+    "arr": 91231,
+    "csm": "emp-337",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Dr. Lee Roberts",
+        "email": "Kylee_Smitham@sanford-lakin-and-goyette.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Victoria Green",
+        "email": "Mireille_Wisozk@sanford-lakin-and-goyette.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Dr. Randall Glover I",
+        "email": "Leonie59@sanford-lakin-and-goyette.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-shields-mcglynn-and-swaniawski-172",
+    "name": "Shields, McGlynn and Swaniawski",
+    "slug": "shields-mcglynn-and-swaniawski-172",
+    "industry": "Retail",
+    "tier": "enterprise",
+    "arr": 361182,
+    "csm": "emp-358",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "George Bailey",
+        "email": "Toney_Beahan82@shields-mcglynn-and-swaniawski.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-jacobi-kautzer-173",
+    "name": "Jacobi - Kautzer",
+    "slug": "jacobi-kautzer-173",
+    "industry": "Financial Services",
+    "tier": "smb",
+    "arr": 16387,
+    "csm": "emp-352",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Roxanne Haley",
+        "email": "Amie58@jacobi-kautzer.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics",
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-hoppe-gerhold-and-wehner-174",
+    "name": "Hoppe, Gerhold and Wehner",
+    "slug": "hoppe-gerhold-and-wehner-174",
+    "industry": "Retail",
+    "tier": "smb",
+    "arr": 22749,
+    "csm": "emp-354",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Candace Marquardt",
+        "email": "Golden83@hoppe-gerhold-and-wehner.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Jean Roob",
+        "email": "Rowland.Jacobs@hoppe-gerhold-and-wehner.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-kreiger-inc-175",
+    "name": "Kreiger Inc",
+    "slug": "kreiger-inc-175",
+    "industry": "Government",
+    "tier": "mid-market",
+    "arr": 91453,
+    "csm": "emp-369",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Michele Turner",
+        "email": "Mireya.Muller76@kreiger-inc.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-prohaska-and-sons-176",
+    "name": "Prohaska and Sons",
+    "slug": "prohaska-and-sons-176",
+    "industry": "Logistics",
+    "tier": "mid-market",
+    "arr": 27487,
+    "csm": "emp-356",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Mrs. Sylvia Sanford",
+        "email": "Velva24@prohaska-and-sons.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Antonia Ruecker",
+        "email": "Kris.Boyle36@prohaska-and-sons.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Manuel Parker",
+        "email": "Mose.Aufderhar@prohaska-and-sons.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-lynch-schmitt-177",
+    "name": "Lynch - Schmitt",
+    "slug": "lynch-schmitt-177",
+    "industry": "Retail",
+    "tier": "smb",
+    "arr": 19225,
+    "csm": "emp-355",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Lee Mitchell",
+        "email": "Taya_Hammes79@lynch-schmitt.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Clarence Haley",
+        "email": "Eleanora94@lynch-schmitt.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-prohaska-group-178",
+    "name": "Prohaska Group",
+    "slug": "prohaska-group-178",
+    "industry": "Media",
+    "tier": "enterprise",
+    "arr": 292531,
+    "csm": "emp-363",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Lucia Stracke",
+        "email": "Arely81@prohaska-group.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Olga McGlynn DVM",
+        "email": "Lexus_Buckridge@prohaska-group.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-goldner-group-179",
+    "name": "Goldner Group",
+    "slug": "goldner-group-179",
+    "industry": "Healthcare",
+    "tier": "mid-market",
+    "arr": 43512,
+    "csm": "emp-369",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Mrs. Nora O'Keefe",
+        "email": "Royal66@goldner-group.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-kerluke-inc-180",
+    "name": "Kerluke Inc",
+    "slug": "kerluke-inc-180",
+    "industry": "Government",
+    "tier": "enterprise",
+    "arr": 168244,
+    "csm": "emp-364",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Andy Balistreri",
+        "email": "Retha16@kerluke-inc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect",
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-smith-kunze-181",
+    "name": "Smith - Kunze",
+    "slug": "smith-kunze-181",
+    "industry": "Energy",
+    "tier": "mid-market",
+    "arr": 98299,
+    "csm": "emp-350",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Casey Beahan",
+        "email": "Amely19@smith-kunze.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Mrs. Jody Homenick",
+        "email": "Claudia.Feeney4@smith-kunze.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-stroman-zboncak-and-goldner-182",
+    "name": "Stroman, Zboncak and Goldner",
+    "slug": "stroman-zboncak-and-goldner-182",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 10900,
+    "csm": "emp-364",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Jordan Windler",
+        "email": "Nina88@stroman-zboncak-and-goldner.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Leona Barton Jr.",
+        "email": "Stewart_Kuhlman66@stroman-zboncak-and-goldner.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Dr. Jack Cormier",
+        "email": "Jasmin_Vandervort@stroman-zboncak-and-goldner.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-white-nienow-183",
+    "name": "White - Nienow",
+    "slug": "white-nienow-183",
+    "industry": "Government",
+    "tier": "enterprise",
+    "arr": 322253,
+    "csm": "emp-380",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Jesse Stracke",
+        "email": "Phoebe41@white-nienow.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Theresa Grady",
+        "email": "Brannon.Keeling@white-nienow.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-quigley-hettinger-184",
+    "name": "Quigley - Hettinger",
+    "slug": "quigley-hettinger-184",
+    "industry": "Retail",
+    "tier": "smb",
+    "arr": 13464,
+    "csm": "emp-365",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Dr. Dewey Kassulke",
+        "email": "Domenico.Steuber@quigley-hettinger.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Dianne Yundt",
+        "email": "Fausto62@quigley-hettinger.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Julie Stracke V",
+        "email": "Alyce.Walter@quigley-hettinger.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-schumm-llc-185",
+    "name": "Schumm LLC",
+    "slug": "schumm-llc-185",
+    "industry": "Healthcare",
+    "tier": "smb",
+    "arr": 13183,
+    "csm": "emp-353",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Jeffrey O'Connell",
+        "email": "Lorenzo8@schumm-llc.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Mr. Kent Kassulke",
+        "email": "Brant_Larson@schumm-llc.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Denise Block",
+        "email": "Zella.Kassulke@schumm-llc.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-stark-d-amore-and-hilpert-186",
+    "name": "Stark, D'Amore and Hilpert",
+    "slug": "stark-d-amore-and-hilpert-186",
+    "industry": "Healthcare",
+    "tier": "mid-market",
+    "arr": 89331,
+    "csm": "emp-363",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Nicholas Sipes",
+        "email": "William84@stark-d-amore-and-hilpert.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Nicolas Christiansen III",
+        "email": "Chanelle77@stark-d-amore-and-hilpert.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-kuvalis-nitzsche-187",
+    "name": "Kuvalis - Nitzsche",
+    "slug": "kuvalis-nitzsche-187",
+    "industry": "Logistics",
+    "tier": "smb",
+    "arr": 10349,
+    "csm": "emp-356",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Evan Konopelski II",
+        "email": "Keeley.Kessler73@kuvalis-nitzsche.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Ellen Davis",
+        "email": "Jo71@kuvalis-nitzsche.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-hodkiewicz-schmitt-and-miller-188",
+    "name": "Hodkiewicz, Schmitt and Miller",
+    "slug": "hodkiewicz-schmitt-and-miller-188",
+    "industry": "Retail",
+    "tier": "mid-market",
+    "arr": 67174,
+    "csm": "emp-367",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Gerald Gulgowski",
+        "email": "Adelia.Roberts46@hodkiewicz-schmitt-and-miller.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-schneider-kozey-and-dare-189",
+    "name": "Schneider, Kozey and Dare",
+    "slug": "schneider-kozey-and-dare-189",
+    "industry": "Financial Services",
+    "tier": "mid-market",
+    "arr": 32916,
+    "csm": "emp-339",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Jaime Paucek",
+        "email": "Mertie.Brekke@schneider-kozey-and-dare.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Benny Davis",
+        "email": "Beverly59@schneider-kozey-and-dare.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Winifred Dooley",
+        "email": "Martine87@schneider-kozey-and-dare.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-trantow-cronin-190",
+    "name": "Trantow - Cronin",
+    "slug": "trantow-cronin-190",
+    "industry": "Media",
+    "tier": "enterprise",
+    "arr": 227525,
+    "csm": "emp-353",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Leah Krajcik",
+        "email": "Trever.Kirlin60@trantow-cronin.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Mr. Ronnie Larson",
+        "email": "Nathaniel_Lockman@trantow-cronin.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-d-amore-jerde-191",
+    "name": "D'Amore - Jerde",
+    "slug": "d-amore-jerde-191",
+    "industry": "Logistics",
+    "tier": "smb",
+    "arr": 15538,
+    "csm": "emp-361",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Glenda Hyatt",
+        "email": "Kristopher98@d-amore-jerde.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Terry Sipes",
+        "email": "Alisa72@d-amore-jerde.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-connect",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-wehner-haag-192",
+    "name": "Wehner - Haag",
+    "slug": "wehner-haag-192",
+    "industry": "Financial Services",
+    "tier": "mid-market",
+    "arr": 36190,
+    "csm": "emp-373",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Brett Beatty",
+        "email": "Destinee34@wehner-haag.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Mr. Cedric Kemmer",
+        "email": "Elsa.Smith-Bernhard@wehner-haag.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Mr. Rogelio Thompson",
+        "email": "Katrine.Kovacek16@wehner-haag.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-connect",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-roob-inc-193",
+    "name": "Roob Inc",
+    "slug": "roob-inc-193",
+    "industry": "Energy",
+    "tier": "smb",
+    "arr": 10814,
+    "csm": "emp-360",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Wilfred O'Reilly",
+        "email": "Maegan.Stiedemann@roob-inc.com",
+        "role": "VP Engineering"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-waters-heller-and-thompson-194",
+    "name": "Waters, Heller and Thompson",
+    "slug": "waters-heller-and-thompson-194",
+    "industry": "Education",
+    "tier": "mid-market",
+    "arr": 90463,
+    "csm": "emp-345",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Travis Howe-Marvin",
+        "email": "Leanne_Cole@waters-heller-and-thompson.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-macejkovic-kerluke-195",
+    "name": "Macejkovic - Kerluke",
+    "slug": "macejkovic-kerluke-195",
+    "industry": "Education",
+    "tier": "smb",
+    "arr": 9729,
+    "csm": "emp-381",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Maxine Williamson DVM",
+        "email": "Eleanore6@macejkovic-kerluke.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Patrick Gleason",
+        "email": "Dusty89@macejkovic-kerluke.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-jast-murazik-196",
+    "name": "Jast - Murazik",
+    "slug": "jast-murazik-196",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 15492,
+    "csm": "emp-377",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Paula Jakubowski",
+        "email": "Michaela.Shields@jast-murazik.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Joel Sauer",
+        "email": "Webster_Hackett-Kiehn96@jast-murazik.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Mr. Jeremy Murphy",
+        "email": "Federico_Kuvalis43@jast-murazik.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-guard",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-kunze-mclaughlin-and-rowe-197",
+    "name": "Kunze, McLaughlin and Rowe",
+    "slug": "kunze-mclaughlin-and-rowe-197",
+    "industry": "Technology",
+    "tier": "smb",
+    "arr": 12542,
+    "csm": "emp-349",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Miss Kayla Bruen",
+        "email": "Rasheed_Roberts76@kunze-mclaughlin-and-rowe.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Beverly Crona",
+        "email": "Jakayla_Auer23@kunze-mclaughlin-and-rowe.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-ledner-jast-198",
+    "name": "Ledner - Jast",
+    "slug": "ledner-jast-198",
+    "industry": "Manufacturing",
+    "tier": "smb",
+    "arr": 22601,
+    "csm": "emp-348",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Lynn Koepp",
+        "email": "Paula2@ledner-jast.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Jeffery Christiansen",
+        "email": "Francisco.OKeefe77@ledner-jast.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Miss Sheryl Rowe",
+        "email": "Triston.Johns@ledner-jast.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-mosciski-and-sons-199",
+    "name": "Mosciski and Sons",
+    "slug": "mosciski-and-sons-199",
+    "industry": "Logistics",
+    "tier": "smb",
+    "arr": 17234,
+    "csm": "emp-378",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Samantha Labadie",
+        "email": "Constantin49@mosciski-and-sons.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Al Collier",
+        "email": "Marcelino_Glover@mosciski-and-sons.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-hammes-lynch-200",
+    "name": "Hammes - Lynch",
+    "slug": "hammes-lynch-200",
+    "industry": "Education",
+    "tier": "mid-market",
+    "arr": 57420,
+    "csm": "emp-355",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Darryl Gerhold",
+        "email": "Libbie.Frami69@hammes-lynch.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Miss Verna Lesch",
+        "email": "Carter77@hammes-lynch.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Wilbert Graham",
+        "email": "Margaretta_Howe@hammes-lynch.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-bergnaum-konopelski-and-gerlac-201",
+    "name": "Bergnaum, Konopelski and Gerlach",
+    "slug": "bergnaum-konopelski-and-gerlac-201",
+    "industry": "Manufacturing",
+    "tier": "mid-market",
+    "arr": 36170,
+    "csm": "emp-372",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Neil Adams",
+        "email": "Elise.Howe99@bergnaum-konopelski-and-gerlac.com",
+        "role": "Head of Operations"
+      },
+      {
+        "name": "Theresa Hilll",
+        "email": "Rubye_Becker-Koepp67@bergnaum-konopelski-and-gerlac.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect",
+      "prod-platform",
+      "prod-guard"
+    ]
+  },
+  {
+    "id": "cust-dicki-llc-202",
+    "name": "Dicki LLC",
+    "slug": "dicki-llc-202",
+    "industry": "Financial Services",
+    "tier": "mid-market",
+    "arr": 66804,
+    "csm": "emp-376",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Stella Muller-Hammes",
+        "email": "Alberto74@dicki-llc.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-howell-and-sons-203",
+    "name": "Howell and Sons",
+    "slug": "howell-and-sons-203",
+    "industry": "Education",
+    "tier": "enterprise",
+    "arr": 423740,
+    "csm": "emp-339",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Hector Heidenreich",
+        "email": "Raoul.Haag@howell-and-sons.com",
+        "role": "Director of IT"
+      },
+      {
+        "name": "Terrence Macejkovic",
+        "email": "Zachery.Koepp9@howell-and-sons.com",
+        "role": "Head of Operations"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-farrell-and-sons-204",
+    "name": "Farrell and Sons",
+    "slug": "farrell-and-sons-204",
+    "industry": "Manufacturing",
+    "tier": "mid-market",
+    "arr": 80774,
+    "csm": "emp-339",
+    "health": "churned",
+    "contacts": [
+      {
+        "name": "Arnold Steuber",
+        "email": "Dangelo46@farrell-and-sons.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Sammy Willms",
+        "email": "Andre_Goodwin@farrell-and-sons.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-mckenzie-armstrong-and-johnsto-205",
+    "name": "McKenzie, Armstrong and Johnston",
+    "slug": "mckenzie-armstrong-and-johnsto-205",
+    "industry": "Manufacturing",
+    "tier": "enterprise",
+    "arr": 122124,
+    "csm": "emp-379",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Leslie Lindgren",
+        "email": "Kelly52@mckenzie-armstrong-and-johnsto.com",
+        "role": "VP Engineering"
+      },
+      {
+        "name": "Marie Auer",
+        "email": "Domenica16@mckenzie-armstrong-and-johnsto.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-guard",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-mante-stracke-206",
+    "name": "Mante - Stracke",
+    "slug": "mante-stracke-206",
+    "industry": "Logistics",
+    "tier": "enterprise",
+    "arr": 239964,
+    "csm": "emp-359",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Irma Jacobson",
+        "email": "Tevin_King@mante-stracke.com",
+        "role": "CEO"
+      }
+    ],
+    "products": [
+      "prod-platform",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-friesen-llc-207",
+    "name": "Friesen LLC",
+    "slug": "friesen-llc-207",
+    "industry": "Education",
+    "tier": "enterprise",
+    "arr": 184861,
+    "csm": "emp-371",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Norma Crooks",
+        "email": "Creola47@friesen-llc.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics"
+    ]
+  },
+  {
+    "id": "cust-kreiger-lind-208",
+    "name": "Kreiger - Lind",
+    "slug": "kreiger-lind-208",
+    "industry": "Energy",
+    "tier": "mid-market",
+    "arr": 91959,
+    "csm": "emp-346",
+    "health": "at-risk",
+    "contacts": [
+      {
+        "name": "Mrs. Kayla White Sr.",
+        "email": "Brown23@kreiger-lind.com",
+        "role": "CTO"
+      },
+      {
+        "name": "Blake Miller",
+        "email": "Ryan30@kreiger-lind.com",
+        "role": "CTO"
+      }
+    ],
+    "products": [
+      "prod-guard",
+      "prod-analytics",
+      "prod-platform"
+    ]
+  },
+  {
+    "id": "cust-collier-group-209",
+    "name": "Collier Group",
+    "slug": "collier-group-209",
+    "industry": "Logistics",
+    "tier": "enterprise",
+    "arr": 451082,
+    "csm": "emp-374",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Katrina Dietrich",
+        "email": "Kathlyn2@collier-group.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-analytics",
+      "prod-connect"
+    ]
+  },
+  {
+    "id": "cust-schultz-bergstrom-210",
+    "name": "Schultz - Bergstrom",
+    "slug": "schultz-bergstrom-210",
+    "industry": "Education",
+    "tier": "smb",
+    "arr": 12029,
+    "csm": "emp-376",
+    "health": "healthy",
+    "contacts": [
+      {
+        "name": "Mable Hyatt",
+        "email": "Erica.Mraz@schultz-bergstrom.com",
+        "role": "CEO"
+      },
+      {
+        "name": "Mathew Parisian",
+        "email": "Gabe.Zboncak45@schultz-bergstrom.com",
+        "role": "Director of IT"
+      }
+    ],
+    "products": [
+      "prod-connect",
+      "prod-guard"
+    ]
+  }
+]

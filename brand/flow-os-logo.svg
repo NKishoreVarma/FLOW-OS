@@ -1,0 +1,23 @@
+<svg width="420" height="120" viewBox="0 0 420 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FLOW OS">
+  <!-- ── Mark: an "F" built from three offset flow-streams + an intelligence node ── -->
+  <g transform="translate(8,20)">
+    <!-- rounded tile (app-icon container) -->
+    <rect x="0" y="0" width="80" height="80" rx="20" fill="#111114"/>
+    <rect x="0.75" y="0.75" width="78.5" height="78.5" rx="19.25" fill="none" stroke="#2A2A31" stroke-width="1.5"/>
+    <!-- F spine -->
+    <rect x="22" y="18" width="9" height="46" rx="4.5" fill="#7C6EFF"/>
+    <!-- top stream (longest) -->
+    <rect x="22" y="18" width="38" height="9" rx="4.5" fill="#7C6EFF"/>
+    <!-- middle stream (offset right = motion / flow) -->
+    <rect x="30" y="34" width="26" height="9" rx="4.5" fill="#7C6EFF"/>
+    <!-- intelligence node -->
+    <circle cx="63.5" cy="22.5" r="6" fill="#A78BFF"/>
+  </g>
+
+  <!-- ── Wordmark ── -->
+  <g transform="translate(108,0)" fill="#E7E7EA" font-family="'Inter','Helvetica Neue',Arial,sans-serif">
+    <text x="0" y="72" font-size="52" font-weight="700" letter-spacing="-1.5">FLOW</text>
+    <text x="196" y="72" font-size="52" font-weight="300" letter-spacing="2" fill="#8A8A93">OS</text>
+    <text x="2" y="96" font-size="12.5" font-weight="500" letter-spacing="3.5" fill="#7C6EFF" font-family="'JetBrains Mono',ui-monospace,monospace">INTELLIGENCE IN MOTION</text>
+  </g>
+</svg>

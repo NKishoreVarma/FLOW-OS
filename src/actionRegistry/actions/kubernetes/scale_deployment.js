@@ -1,0 +1,57 @@
+export default {
+  id: 'kubernetes.scale_deployment',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'kubernetes',
+  category: 'infrastructure',
+  displayName: 'Scale Kubernetes Deployment',
+  description: 'Sets the desired replica count for a Deployment. Used for capacity scaling during traffic spikes or incidents.',
+  icon: 'layers',
+  tags: ['kubernetes', 'deployment', 'scale', 'replicas', 'ops'],
+  riskLevel: 'HIGH',
+  approvalPolicy: {
+    required: true, minimumApprovers: 1, eligibleRoles: ['ADMIN', 'OWNER'],
+    timeoutHours: 2, selfApprovalAllowed: false, notifyOnCreate: true, notifyOnResolve: true,
+  },
+  requiredPermissions: ['ADMIN'],
+  requiredScopes: ['deployments:patch'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 5000,
+  timeoutMs: 60000,
+  retryStrategy: {
+    maxAttempts: 2, backoffType: 'EXPONENTIAL', initialDelayMs: 2000, maxDelayMs: 10000,
+    jitterPercent: 10, retryOn: ['TIMEOUT', 'RATE_LIMIT'], noRetryOn: ['DEPLOYMENT_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: true, type: 'COMPENSATING', compensatingActionId: 'kubernetes.scale_deployment',
+    description: 'Re-run with the previous replica count.', requiresApproval: true,
+  },
+  verificationStrategy: { type: 'POLLING', pollIntervalMs: 5000, maxPollAttempts: 12, successCondition: '$.replicas != null' },
+  requiredInputs: [
+    { name: 'namespace',  type: 'string', description: 'Kubernetes namespace' },
+    { name: 'deployment', type: 'string', description: 'Deployment name' },
+    { name: 'replicas',   type: 'number', description: 'Desired replica count (0–100)', example: 3 },
+  ],
+  optionalInputs: [],
+  outputSchema: {
+    type: 'object',
+    properties: {
+      deployment:  { type: 'string' },
+      namespace:   { type: 'string' },
+      replicas:    { type: 'number' },
+      scaledAt:    { type: 'string' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'kubernetes_deployment', resourceIdField: 'deployment', actionVerb: 'scaled',
+    sensitivityLevel: 'CONFIDENTIAL', retainForDays: 730, complianceTags: ['SOC2', 'CHANGE_MGMT'],
+  },
+  telemetryMetadata: {
+    eventName: 'action.kubernetes.scale_deployment',
+    successMetric: 'flow.action.kubernetes.scale_deployment.success',
+    failureMetric: 'flow.action.kubernetes.scale_deployment.failure',
+    durationMetric: 'flow.action.kubernetes.scale_deployment.duration_ms',
+    dimensions: ['connector', 'workspace_id', 'namespace'],
+  },
+  relatedActions: ['kubernetes.get_deployment_status', 'kubernetes.rollback_deployment'],
+};

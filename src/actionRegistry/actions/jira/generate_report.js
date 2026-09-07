@@ -1,0 +1,62 @@
+export default {
+  id: 'jira.generate_report',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'jira',
+  category: 'project',
+  displayName: 'Generate Jira Report',
+  description: 'Generates a project-level report (sprint velocity, bug count, backlog health, or customer-issues summary) from Jira data.',
+  icon: 'bar-chart-2',
+  tags: ['jira', 'report', 'metrics', 'velocity', 'summary', 'analytics', 'sprint'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['read:jira-work'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 3000,
+  timeoutMs: 30000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 1000, maxDelayMs: 8000,
+    jitterPercent: 10, retryOn: ['RATE_LIMIT', 'TIMEOUT'], noRetryOn: ['PROJECT_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: false, type: 'NONE', description: 'Reports are read-only.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.reportType != null' },
+  requiredInputs: [
+    { name: 'projectKey',  type: 'string', description: 'Jira project key to report on', example: 'HPLT' },
+    { name: 'reportType',  type: 'enum', enum: ['sprint_velocity', 'bug_count', 'backlog_health', 'customer_issues', 'open_issues'], description: 'Report type to generate' },
+  ],
+  optionalInputs: [
+    { name: 'sprintId',    type: 'string', description: 'Scope to specific sprint ID' },
+    { name: 'dateFrom',    type: 'string', description: 'Start of date range (ISO)', example: '2026-07-01' },
+    { name: 'dateTo',      type: 'string', description: 'End of date range (ISO)', example: '2026-07-31' },
+    { name: 'label',       type: 'string', description: 'Filter by label (e.g. "customer-reported")', example: 'customer-reported' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Generated report',
+    properties: {
+      reportType:  { type: 'string', description: 'Report type' },
+      projectKey:  { type: 'string', description: 'Project key' },
+      generatedAt: { type: 'string', description: 'ISO timestamp' },
+      data:        { type: 'object', description: 'Report data (shape varies by reportType)' },
+      summary:     { type: 'string', description: 'Human-readable summary paragraph' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'jira_report', resourceIdField: 'projectKey', actionVerb: 'generated',
+    sensitivityLevel: 'INTERNAL', retainForDays: 90, complianceTags: [],
+  },
+  telemetryMetadata: {
+    eventName: 'action.jira.generate_report',
+    successMetric: 'flow.action.jira.generate_report.success',
+    failureMetric: 'flow.action.jira.generate_report.failure',
+    durationMetric: 'flow.action.jira.generate_report.duration_ms',
+    dimensions: ['connector', 'workspace_id', 'reportType'],
+  },
+  relatedActions: ['jira.create_sprint', 'jira.prioritize_backlog'],
+};

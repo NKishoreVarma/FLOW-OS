@@ -1,0 +1,55 @@
+body {
+  font-family: var(--font-ui, 'Instrument Sans', system-ui, sans-serif);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+pre, code, .font-mono {
+  font-family: var(--font-data, 'IBM Plex Mono', monospace);
+  font-weight: 400;
+}
+
+/* Serif display for hero moments — greetings, page titles */
+.font-display {
+  font-family: var(--font-display, 'Cormorant Garamond', serif);
+}
+
+/* Restrained weights. 600/700 never ship — clamp legacy utilities. */
+b, strong { font-weight: 500; }
+.font-bold, .font-semibold, .font-extrabold, .font-black { font-weight: 500 !important; }
+
+/* Readable size hierarchies — wide tracking on small, tight on large */
+.text-ui-xs {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.text-ui-sm {
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+.text-ui-base {
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.text-ui-md {
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.text-ui-lg {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.text-ui-xl {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
