@@ -37,6 +37,14 @@ import {
   getTaxonomy,
 } from '../core/governance/integrationPermissions/index.js';
 import { hasCredentials } from '../services/integrations/ConnectorCredentialStore.js';
+import { getConnector as _getAdapter, isRegistered as _isReg } from '../connectors/registry.js';
+
+// Is this a preview (in-memory) connector? Reads are simulated; writes are refused by
+// the Execution Engine. Surfaced so the permissions UI can label it honestly.
+function _isSimulated(connectorId) {
+  try { return _isReg(connectorId) && _getAdapter(connectorId).simulated === true; }
+  catch { return false; }
+}
 
 const router = express.Router();
 
@@ -105,6 +113,7 @@ router.get('/', async (req, res, next) => {
           category:  taxonomy.category,
           available: true,
           connected,
+          simulated: _isSimulated(connector),
           ...summary,
           // A connector that was syncing before permissions shipped is not yet
           // governed: it keeps reading everything until discovery runs once.

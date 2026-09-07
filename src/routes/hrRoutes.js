@@ -33,6 +33,13 @@ function resolveProvider(req) {
 
 // ── executeAction wrapper ─────────────────────────────────────────────────────
 async function runAction(req, res, next, { actionType, payload }) {
+  if (String(actionType).toLowerCase() === 'read') {
+    try {
+      const { ingestedEmployees } = await import('../services/certification/ingestedReads.js');
+      const ing = await ingestedEmployees(req.workspaceId, { limit: payload?.limit || 60 });
+      if (ing) return res.json({ success: true, result: ing, sourceMode: 'certification' });
+    } catch { /* fall through to the preview provider */ }
+  }
   try {
     const { result, timelineEvent } = await executeAction({
       workspaceId: req.workspaceId,

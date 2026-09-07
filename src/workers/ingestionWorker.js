@@ -14,18 +14,27 @@ const connection = new Redis(process.env.REDIS_URL || 'redis://127.0.0.1:6379', 
   maxRetriesPerRequest: null,
 });
 
-import { 
-  generateTraceId, 
-  startIngestionTrace, 
+import {
+  generateTraceId,
+  startIngestionTrace,
   updateIngestionTrace,
   liveMetrics
 } from '../services/observabilityService.js';
+import { traceStage as safeTrace, STAGES as ST } from '../observability/ingestionTrace.js';
 
 export const ingestionWorker = new Worker('ingestion-queue', async (job) => {
   const traceId = job.data.traceId || generateTraceId();
   const { workspaceId, sender, channel: ch, channelId, text, platform } = job.data;
   const channel = ch || channelId || 'general';
   const plat = platform || 'slack';
+
+  // Safe per-item observability context (metadata only, no content). Populated by
+  // SyncEngine when the item came through the real connector sync path.
+  const _md = job.data.metadata || {};
+  const _st = _md._traceEventId
+    ? { workspaceId, eventId: _md._traceEventId, provider: _md._traceProvider, providerObjectId: _md._traceProviderObjectId, eventType: _md._traceResourceType }
+    : null;
+  const emitSafe = (stage, extra = {}) => { if (_st) safeTrace(stage, { ..._st, ...extra }); };
 
   // Initialize pipeline trace
   startIngestionTrace(traceId, {
@@ -65,6 +74,7 @@ export const ingestionWorker = new Worker('ingestion-queue', async (job) => {
       output: parsedText,
       metadata: taskExtraction
     });
+    emitSafe(ST.NORMALIZED, { status: 'ok' });
 
     // 2. Operational Scoring / Importance Stage
     updateIngestionTrace(traceId, 'Importance', 'START', { input: parsedText });
@@ -159,6 +169,7 @@ export const ingestionWorker = new Worker('ingestion-queue', async (job) => {
       input: parsedText,
       output: entities
     });
+    emitSafe(ST.ENTITY_EXTRACTED, { status: 'ok', count: entities.length });
 
     // 8. Knowledge Graph Node Sync
     updateIngestionTrace(traceId, 'Knowledge Graph', 'START', { input: entities });
@@ -184,6 +195,18 @@ export const ingestionWorker = new Worker('ingestion-queue', async (job) => {
       output: result
     });
 
+    // Safe trace: only OPERATIONAL_INTEL is embedded + indexed into the vector
+    // store and thereby made retrievable. Other routes (social/private/discard)
+    // are terminal and honestly recorded as not-indexed.
+    const _indexed = result?.scope === 'OPERATIONAL_INTEL' || result?.status === 'STORED' || result?.status === 'PROCESSED';
+    if (result?.status !== 'DISCARDED' && _indexed) {
+      emitSafe(ST.EMBEDDED,  { status: 'ok' });
+      emitSafe(ST.INDEXED,   { status: 'ok' });
+      emitSafe(ST.AVAILABLE_FOR_RETRIEVAL, { status: 'ok' });
+    } else {
+      emitSafe(ST.EMBEDDED, { status: 'skipped', errorCode: result?.scope || result?.status || 'NOT_OPERATIONAL' });
+    }
+
     // 10. Publish to the unified Event Platform (non-blocking side-effect).
     // origin:'ingestion' prevents the brain subscriber from re-enqueuing this
     // event back into ingestion (loop-prevention invariant).
@@ -195,7 +218,7 @@ export const ingestionWorker = new Worker('ingestion-queue', async (job) => {
           return publish(platform || 'ingestion_worker', isIncident ? 'incident' : 'message', {
             text, sender, channel, platform,
             traceId: job.data.metadata?.traceId, ...job.data.metadata,
-          }, { workspaceId, metadata: { origin: 'ingestion' } });
+          }, { workspaceId, metadata: { origin: 'ingestion', _traceEventId: job.data.metadata?._traceEventId } });
         })
         .catch(() => {});
     }

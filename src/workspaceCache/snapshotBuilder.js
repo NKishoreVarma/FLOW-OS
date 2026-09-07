@@ -71,7 +71,10 @@ export async function buildSnapshot(workspaceId) {
 
   const [healthR, predR, graphR, apprR, notifR, execR, timelineR] = await Promise.allSettled([
     calculateWorkspaceHealth(workspaceId),
-    predict(workspaceId),
+    // WIC is a read/serving cache — it must not persist prediction history on every
+    // 5-min warm (that job belongs to predictionWorker). persist:false avoids the
+    // write amplification and, notably, stops background mutation of any workspace.
+    predict(workspaceId, { persist: false }),
     graphMetrics(workspaceId),
     prisma.pendingApproval.count({ where: { workspaceId, status: 'PENDING' } }),
     prisma.notification.count({ where: { workspaceId } }),

@@ -64,7 +64,7 @@ export async function warmActiveWorkspaces(limit = 25) {
   try {
     const rows = await prisma.$queryRawUnsafe(
       `SELECT DISTINCT workspace_id FROM (
-         SELECT workspace_id FROM notifications ORDER BY created_at DESC LIMIT 200
+         (SELECT workspace_id FROM notifications ORDER BY created_at DESC LIMIT 200)
          UNION SELECT workspace_id FROM pending_approvals
          UNION SELECT workspace_id FROM execution_records
        ) s LIMIT ${Math.min(limit, 100)}`,

@@ -34,6 +34,8 @@ import express from 'express';
 import { executeAction }      from '../connectors/executionEngine.js';
 import { getCredentials }     from '../connectors/authManager.js';
 import { getConnector }       from '../connectors/registry.js';
+import { autoRegisterWebhooks } from '../services/integrations/WebhookAutoRegistrar.js';
+import { orchestratePR }        from '../engineering/prOrchestrator.js';
 import { ActionType }         from '../connectors/capabilities.js';
 import { ValidationError }    from '../core/errors/index.js';
 
@@ -67,10 +69,34 @@ async function runAction(req, res, next, { actionType, payload }) {
       actor:       req.user,
       orgPlan:     req.govContext?.orgPlan ?? 'free',
     });
+    // Live connector returned nothing but the workspace has ingested engineering data
+    // (certification / imported world) → serve that with provenance instead of empty.
+    if (actionType === ActionType.READ && Array.isArray(result) && result.length === 0) {
+      const ing = await _ingestedEngineeringFallback(req.workspaceId, payload);
+      if (ing) return res.json({ success: true, result: ing, sourceMode: 'certification' });
+    }
     res.json({ success: true, result, timelineEvent });
   } catch (err) {
+    // The live connector isn't authenticated. Before surfacing "connect GitHub", check
+    // for ingested workspace data and serve it (honest provenance) — the same
+    // workspace-aware policy the Brain uses. Only for READs; writes still fail honestly.
+    if (actionType === ActionType.READ) {
+      try {
+        const ing = await _ingestedEngineeringFallback(req.workspaceId, payload);
+        if (ing) return res.json({ success: true, result: ing, sourceMode: 'certification' });
+      } catch { /* fall through to the real error */ }
+    }
     next(err);
   }
+}
+
+// Map an engineering READ to ingested graph data. Returns null when there's nothing
+// ingested (so the caller surfaces the honest "connect" state).
+async function _ingestedEngineeringFallback(workspaceId, payload) {
+  const { ingestedRepos } = await import('../services/certification/ingestedReads.js');
+  const rt = payload?.resourceType;
+  if (rt === 'repos') return await ingestedRepos(workspaceId, { limit: payload?.limit || 30 });
+  return null;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -103,6 +129,55 @@ router.post('/auth', async (req, res, next) => {
 
     const adapter = getConnector(resolveProvider(req));
     const result  = await adapter.authenticate(req.workspaceId, { token });
+
+    // Set up real-time webhooks now that GitHub is connected (best-effort; needs
+    // WEBHOOK_BASE_URL to be a public url — otherwise the poller stays the source).
+    autoRegisterWebhooks(req.workspaceId, resolveProvider(req))
+      .catch(err => console.warn('[engineering/auth] webhook auto-register:', err.message));
+
+    res.json({ success: true, ...result });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Manually (re)register real-time webhooks for an already-connected workspace.
+// Use this after setting WEBHOOK_BASE_URL (e.g. an ngrok url) without reconnecting.
+router.post('/webhooks/register', async (req, res, next) => {
+  try {
+    const result = await autoRegisterWebhooks(req.workspaceId, resolveProvider(req));
+    res.json({ success: true, ...result });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// AI code review of a diff (base…head), optionally posted to a PR.
+// Body: { owner, repo, head, base?, prNumber? }
+router.post('/review', async (req, res, next) => {
+  const { owner, repo, head, base, prNumber } = req.body;
+  if (!owner || !repo || !head) return res.status(400).json({ error: 'owner, repo, and head are required' });
+  try {
+    const { reviewCode, postReview } = await import('../engineering/codeReviewService.js');
+    const review = await reviewCode(req.workspaceId, { owner, repo, head, base: base || 'main' });
+    let posted = null;
+    if (prNumber) posted = await postReview(req.workspaceId, { owner, repo, number: prNumber, review, actor: req.user || {}, orgId: req.workspace?.orgId || req.user?.orgId, orgPlan: req.workspace?.org?.plan || 'pro' });
+    res.json({ success: true, review, posted });
+  } catch (err) { next(err); }
+});
+
+// Autonomous PR pipeline: analyze diff → AI review → draft PR → suggest reviewers →
+// open PR → notify → publish. Stops at merge (human-approved per governance).
+// Body: { owner, repo, head, base? }
+router.post('/orchestrate-pr', async (req, res, next) => {
+  const { owner, repo, head, base } = req.body;
+  if (!owner || !repo || !head) return res.status(400).json({ error: 'owner, repo, and head are required' });
+  try {
+    const result = await orchestratePR(req.workspaceId, {
+      owner, repo, head, base: base || 'main',
+      actor: req.user || {}, orgId: req.workspace?.orgId || req.user?.orgId,
+      orgPlan: req.workspace?.org?.plan || 'pro',
+    });
     res.json({ success: true, ...result });
   } catch (err) {
     next(err);
@@ -288,17 +363,36 @@ router.post('/repos/:owner/:repo/pulls/:number/approve', (req, res, next) => run
 }));
 
 // POST /api/engineering/repos/:owner/:repo/pulls/:number/merge
-router.post('/repos/:owner/:repo/pulls/:number/merge', (req, res, next) => runAction(req, res, next, {
-  actionType: ActionType.EXECUTE,
-  payload: {
-    owner:         req.params.owner,
-    repo:          req.params.repo,
-    number:        Number(req.params.number),
-    mergeMethod:   req.body.mergeMethod   || 'squash',
-    commitTitle:   req.body.commitTitle   || null,
-    commitMessage: req.body.commitMessage || null,
-  },
-}));
+// Merges through the governed engine, then FLOW watches CI/deploy on the target
+// branch and reports success/failure to the team + dashboard.
+router.post('/repos/:owner/:repo/pulls/:number/merge', async (req, res, next) => {
+  const { owner, repo } = req.params;
+  const number = Number(req.params.number);
+  try {
+    const adapter = getConnector('github');
+    // Resolve the PR's target branch so the CI watcher polls the right one.
+    let baseBranch = 'main';
+    try {
+      const prs = await adapter.read(req.workspaceId, { resourceType: 'pulls', owner, repo, number });
+      baseBranch = (Array.isArray(prs) ? prs[0] : prs)?.metadata?.baseBranch || 'main';
+    } catch { /* default main */ }
+
+    const { result, timelineEvent } = await executeAction({
+      workspaceId: req.workspaceId, connectorId: 'github', actionType: ActionType.EXECUTE,
+      payload: { owner, repo, number, mergeMethod: req.body.mergeMethod || 'squash', commitTitle: req.body.commitTitle || null, commitMessage: req.body.commitMessage || null },
+      actor: req.user || {}, orgPlan: req.workspace?.org?.plan || 'pro', approvedBy: req.user?.id,
+    });
+
+    // On a successful merge, start the (bounded, non-blocking) CI/deploy watcher.
+    if (result?.result?.merged || result?.merged) {
+      const { watchDeploy } = await import('../engineering/ciWatcher.js');
+      watchDeploy(req.workspaceId, { owner, repo, branch: baseBranch, orgId: req.workspace?.orgId || req.user?.orgId, prNumber: number });
+    }
+    res.json({ success: true, result, timelineEvent });
+  } catch (err) {
+    next(err);
+  }
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Deployments

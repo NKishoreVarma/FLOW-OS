@@ -157,7 +157,7 @@ router.get('/:connectorId/auth', async (req, res, next) => {
 async function _oauthCallback(connectorId, req, res) {
   const { code, state, error } = req.query;
   const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-  const dest        = `/platform/integrations`;
+  const dest        = `/settings/integrations`;
 
   if (error) return res.redirect(`${frontendUrl}${dest}?error=${encodeURIComponent(error)}&connector=${connectorId}`);
   if (!code || !state) return res.status(400).send('Missing code or state');
@@ -181,11 +181,17 @@ router.get('/jira/callback',    (req, res) => _oauthCallback('jira',    req, res
 router.post('/github/pat', async (req, res, next) => {
   try {
     const { token } = req.body || {};
+    const workspaceId = req.workspaceId || req.headers['workspace-id'];
+    console.log(`[GitHub PAT route] POST /github/pat  workspaceId=${workspaceId}  tokenPresent=${!!token}  tokenLen=${token?.length ?? 0}`);
     if (!token) throw new ValidationError('token is required');
     const { storePAT } = await import('../services/integrations/GitHubOAuthService.js');
-    const result = await storePAT(req.workspaceId, token);
+    const result = await storePAT(workspaceId, token);
+    console.log(`[GitHub PAT route] success  login=${result.login}`);
     res.json({ success: true, ...result });
-  } catch (err) { next(err); }
+  } catch (err) {
+    console.error(`[GitHub PAT route] error:`, err.message, err.code ?? '', err.statusCode ?? '');
+    next(err);
+  }
 });
 
 // ── POST /api/integrations-hub/notion/token ──────────────────────────────────

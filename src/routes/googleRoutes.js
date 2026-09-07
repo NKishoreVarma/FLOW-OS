@@ -17,6 +17,7 @@ import express          from 'express';
 import { getAuthUrl, handleCallback, getStatus, disconnect, reconnect, validateCredentials } from '../services/google/GoogleOAuthService.js';
 import { healthCheck }  from '../services/google/GoogleServiceLayer.js';
 import { hasTokens }    from '../services/google/GoogleTokenManager.js';
+import { backfillOnConnect } from '../services/sync/backfillOnConnect.js';
 import { AppError }     from '../core/errors/index.js';
 
 const router = express.Router();
@@ -59,25 +60,36 @@ router.get('/auth', (req, res, next) => {
 router.get('/callback', async (req, res) => {
   const { code, state, error } = req.query;
 
+  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+  const dest = '/settings/integrations';
+
+  console.log(`↩ [GoogleOAuth] callback HIT — hasCode=${!!code} hasState=${!!state} error=${error || 'none'}`);
   if (error) {
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-    return res.redirect(`${frontendUrl}/platform/integrations?error=${encodeURIComponent(error)}`);
+    console.error(`❌ [GoogleOAuth] Google returned error: ${error}`);
+    return res.redirect(`${frontendUrl}${dest}?error=${encodeURIComponent(error)}&connector=google`);
   }
 
   if (!code || !state) {
+    console.error('❌ [GoogleOAuth] callback missing code/state');
     return res.status(400).send('Missing code or state parameter');
   }
 
   try {
     const redirectUri = process.env.GOOGLE_REDIRECT_URI || `http://localhost:5001/api/google/callback`;
     const { workspaceId, email } = await handleCallback(code, state, { redirectUri });
+    console.log(`✅ [GoogleOAuth] TOKEN STORED — workspace=${workspaceId} email=${email}`);
 
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-    const dest = `${frontendUrl}/platform/integrations?googleConnected=true&email=${encodeURIComponent(email || '')}`;
-    return res.redirect(dest);
+    // P1 (gap A1): fire the initial backfill so a freshly connected workspace pulls
+    // its first data instead of waiting for the next scheduled tick. Best-effort +
+    // flag-gated (SYNC_ON_CONNECT); respects the deny-by-default permission gate.
+    backfillOnConnect(workspaceId, 'google')
+      .then(r => r.enqueued?.length && console.log(`↻ [GoogleOAuth] initial backfill enqueued — ${r.enqueued.join(', ')}`))
+      .catch(err => console.error(`[GoogleOAuth] backfill enqueue failed (non-fatal) — ${err.message}`));
+
+    return res.redirect(`${frontendUrl}${dest}?connected=google&workspace=${encodeURIComponent(workspaceId || '')}&email=${encodeURIComponent(email || '')}`);
   } catch (err) {
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-    return res.redirect(`${frontendUrl}/platform/integrations?error=${encodeURIComponent(err.message)}`);
+    console.error(`❌ [GoogleOAuth] CALLBACK FAILED — ${err.message}`);
+    return res.redirect(`${frontendUrl}${dest}?error=${encodeURIComponent(err.message)}&connector=google`);
   }
 });
 

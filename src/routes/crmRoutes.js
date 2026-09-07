@@ -34,6 +34,17 @@ function resolveProvider(req) {
 
 // ── executeAction wrapper ─────────────────────────────────────────────────────
 async function runAction(req, res, next, { actionType, payload }) {
+  // Certification workspace: serve the REAL ingested Helios customers, not the
+  // preview provider's generic sample rows. `ingestedCustomers` returns null for any
+  // non-certification workspace, so dev/prod keep the labeled preview behavior below.
+  // READ only — writes still go through the governed pipeline (preview → refused).
+  if (String(actionType).toLowerCase() === 'read') {
+    try {
+      const { ingestedCustomers } = await import('../services/certification/ingestedReads.js');
+      const ing = await ingestedCustomers(req.workspaceId, { limit: payload?.limit || 50 });
+      if (ing) return res.json({ success: true, result: ing, sourceMode: 'certification' });
+    } catch { /* fall through to the preview provider */ }
+  }
   try {
     const { result, timelineEvent } = await executeAction({
       workspaceId: req.workspaceId,

@@ -8,6 +8,7 @@
  */
 
 import { registerWicSubscriber, warmActiveWorkspaces } from './refreshCoordinator.js';
+import { startConnectorPoller, stopConnectorPoller } from './connectorPoller.js';
 import { logger } from '../utils/logger.js';
 
 let interval = null;
@@ -23,11 +24,16 @@ export function startWorkspaceCache() {
   interval = setInterval(() => { warmActiveWorkspaces().catch(() => {}); }, everyMs);
   if (interval.unref) interval.unref();
 
+  // Poll live connectors for new activity → publishes onto the event platform,
+  // which lights up the live panel, timeline, memory, and this cache.
+  startConnectorPoller();
+
   logger.rag?.(`[WIC] Workspace Intelligence Cache started (refresh every ${Math.round(everyMs / 1000)}s)`);
 }
 
 export function stopWorkspaceCache() {
   if (interval) { clearInterval(interval); interval = null; }
+  stopConnectorPoller();
 }
 
 export { buildSnapshot } from './snapshotBuilder.js';

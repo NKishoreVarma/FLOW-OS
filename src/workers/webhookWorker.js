@@ -30,7 +30,9 @@ const connection = new Redis(process.env.REDIS_URL || 'redis://127.0.0.1:6379', 
 export const webhookWorker = new Worker(
   'webhook-processing',
   async (job) => {
-    const { event } = job.data;
+    // enqueueWebhookEvent stores { eventRecord, rawPayload } — accept either key.
+    const event = job.data.eventRecord || job.data.event;
+    if (!event) throw new Error('webhook job missing eventRecord');
     const { workspaceId, connectorId, deliveryId } = event;
 
     logger.queue(

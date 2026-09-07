@@ -36,6 +36,7 @@ import {
   reportCompleted,
   reportFailed,
 }                                    from './ProgressReporter.js';
+import { traceStage, makeEventId, STAGES } from '../../observability/ingestionTrace.js';
 
 // ── Connector adapter registry ────────────────────────────────────────────────
 
@@ -115,6 +116,21 @@ export async function runSync(workspaceId, connectorId, resourceType, opts = {})
     const items = gated.allowed;
     itemsBlocked = gated.blocked.length;
 
+    // OBSERVABILITY (safe metadata only) — every provider item is EVENT_RECEIVED,
+    // then VALIDATED as allowed or blocked by the permission gate.
+    for (const it of result.items || []) {
+      const eventId = makeEventId({ connectorId, resourceType, externalId: it.externalId });
+      traceStage(STAGES.EVENT_RECEIVED, { workspaceId, provider: connectorId, providerObjectId: it.externalId, eventId, eventType: resourceType, status: 'received' });
+    }
+    for (const it of items) {
+      const eventId = makeEventId({ connectorId, resourceType, externalId: it.externalId });
+      traceStage(STAGES.VALIDATED, { workspaceId, provider: connectorId, providerObjectId: it.externalId, eventId, eventType: resourceType, status: 'allowed' });
+    }
+    for (const it of gated.blocked || []) {
+      const eventId = makeEventId({ connectorId, resourceType, externalId: it.externalId });
+      traceStage(STAGES.VALIDATED, { workspaceId, provider: connectorId, providerObjectId: it.externalId, eventId, eventType: resourceType, status: 'blocked', errorCode: 'RESOURCE_NOT_PERMITTED' });
+    }
+
     // Surface which allowed resources actually produced data ("synced 2m ago").
     if (gated.allowedResourceIds.length) {
       await markSynced(workspaceId, connectorId, gated.allowedResourceIds);
@@ -132,6 +148,9 @@ export async function runSync(workspaceId, connectorId, resourceType, opts = {})
         );
 
         seenItems.push({ externalId: item.externalId, etag: item.etag ?? null });
+
+        const eventId = makeEventId({ connectorId, resourceType, externalId: item.externalId });
+        traceStage(STAGES.DEDUPED, { workspaceId, provider: connectorId, providerObjectId: item.externalId, eventId, eventType: resourceType, status: isDup ? 'duplicate' : 'new' });
 
         if (isDup) {
           itemsSkipped++;
@@ -159,10 +178,21 @@ export async function runSync(workspaceId, connectorId, resourceType, opts = {})
           sender:   item.sender,
           channel:  item.channel,
           text:     item.text,
-          metadata: item.metadata || {},
+          // Safe correlation fields only — NEVER content. Lets the ingestion worker
+          // and graph subscriber continue the same per-item trace downstream.
+          metadata: {
+            ...(item.metadata || {}),
+            _traceEventId:        eventId,
+            _traceProvider:       connectorId,
+            _traceProviderObjectId: item.externalId,
+            _traceResourceType:   resourceType,
+          },
         }, {
-          // Deduplicate in BullMQ as well (same external ID won't create 2 pending jobs)
-          jobId: `ingest:${workspaceId}:${connectorId}:${item.externalId}`,
+          // Deduplicate in BullMQ as well (same external ID won't create 2 pending jobs).
+          // NOTE: BullMQ forbids ':' in a custom jobId ("Custom Id cannot contain :"),
+          // so the separator is '__' and any ':' inside externalId is sanitized. Using
+          // ':' here silently threw per-item → items never reached the ingestion worker.
+          jobId: `ingest__${workspaceId}__${connectorId}__${item.externalId}`.replace(/:/g, '_'),
         });
 
         itemsNew++;
