@@ -33,14 +33,15 @@ const READ_ACTIONS = new Set(['read', 'search', 'health', 'audit', 'list', 'get'
 // Low-impact writes: safe to let the user just confirm.
 const LOW_WRITE = new Set(['draft', 'label', 'comment', 'note', 'addNote']);
 
-// High-impact / externally-visible / hard-to-undo writes.
+// High-impact / externally-visible / hard-to-undo writes. A single delete of a
+// routine, recoverable object (e.g. a feature branch) sits here — one approver.
 const HIGH_WRITE = new Set([
   'merge', 'send', 'reply', 'replyAll', 'forward', 'requestChanges',
-  'assign', 'cancel', 'transition', 'close',
+  'assign', 'cancel', 'transition', 'close', 'delete',
 ]);
 
-// Always the top tier — irreversible or bulk/destructive.
-const CRITICAL_WRITE = new Set(['delete', 'purge', 'bulkDelete', 'lockdown']);
+// Always the top tier — irreversible or bulk/destructive (two-person integrity).
+const CRITICAL_WRITE = new Set(['purge', 'bulkDelete', 'lockdown']);
 
 /**
  * Classify a single action step.
@@ -50,9 +51,16 @@ const CRITICAL_WRITE = new Set(['delete', 'purge', 'bulkDelete', 'lockdown']);
  */
 export function classifyAction(step = {}, opts = {}) {
   const action  = String(step.actionType || '').trim();
-  const base    = action.split(/[._:]/)[0].toLowerCase(); // "merge.pr" → "merge"
   const payload = step.payload || {};
   const reasons = [];
+
+  // A PR merge is dispatched as actionType 'execute' with a mergeMethod payload —
+  // normalize it to 'merge' so it gets HIGH + the protected-branch CRITICAL rule,
+  // never the default MEDIUM. (Security: merging to main must not be under-gated.)
+  let base = action.split(/[._:]/)[0].toLowerCase(); // "merge.pr" → "merge"
+  if (base === 'execute' && (payload.mergeMethod || payload.merge_method || payload.mergeStrategy)) {
+    base = 'merge';
+  }
 
   let level = RiskLevel.MEDIUM; // default for unrecognized writes
 
@@ -72,14 +80,25 @@ export function classifyAction(step = {}, opts = {}) {
     level = RiskLevel.MEDIUM;
     reasons.push('Creates a new item — reversible, so user confirmation suffices.');
   } else if (base === 'update') {
-    level = RiskLevel.HIGH;
-    reasons.push('Updates existing state.');
+    // Editing an existing item (issue title/labels/assignees/state, PR body) is
+    // reversible — requester confirmation suffices, same as create. Genuinely
+    // dangerous mutations (merge/send/delete) are handled by HIGH/CRITICAL sets above.
+    level = RiskLevel.MEDIUM;
+    reasons.push('Edits an existing item — reversible, so user confirmation suffices.');
   }
 
   // ── Context escalations ──────────────────────────────────────────────────────
   if (base === 'merge' && (payload.base === 'main' || payload.base === 'master' || payload.protected)) {
     level = maxRisk(level, RiskLevel.CRITICAL);
     reasons.push('Merge targets a protected branch.');
+  }
+  // Deleting a default/protected branch is destructive and hard to recover → CRITICAL.
+  if (base === 'delete') {
+    const b = payload.branchName || payload.branch || '';
+    if (payload.protected || b === 'main' || b === 'master' || b === payload.defaultBranch) {
+      level = maxRisk(level, RiskLevel.CRITICAL);
+      reasons.push('Deletes a default or protected branch.');
+    }
   }
   if (base === 'send' && isExternalRecipient(payload)) {
     level = maxRisk(level, RiskLevel.HIGH);
