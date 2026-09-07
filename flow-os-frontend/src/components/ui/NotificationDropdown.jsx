@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Bell, Zap, AlertTriangle, CheckCircle, Info, Plug, Brain } from "lucide-react";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 const TABS = ["All", "Action Required", "Incidents", "AI Insights"];
 
@@ -39,6 +40,8 @@ function relativeTime(date) {
 export const NotificationDropdown = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const { token, workspaceId, events } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
 
   const [notifications, setNotifications] = useState([]);
   const [readIds, setReadIds]             = useState(new Set());
@@ -94,7 +97,7 @@ export const NotificationDropdown = ({ isOpen, onClose }) => {
           loadedAny = true;
         });
       }
-      if (!loadedAny) DEMO_NOTIFICATIONS.forEach(n => addNotification(n));
+      if (!loadedAny && isDemoWorkspace) DEMO_NOTIFICATIONS.forEach(n => addNotification(n));
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addNotification]);

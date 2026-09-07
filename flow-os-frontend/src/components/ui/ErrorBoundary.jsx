@@ -6,6 +6,7 @@ const CONTEXT_COPY = {
   inbox:           { title: "Inbox couldn't load",         hint: "Your connection may have timed out. Refresh to try again." },
   meetings:        { title: "Meetings couldn't load",      hint: "Refresh to reconnect to your calendar." },
   council:         { title: "Council response failed",     hint: "The reasoning engine hit an error. Try your question again." },
+  "session-expired": { title: "Your session has expired", hint: "Please sign in again to continue. Your work is saved." },
   default:         { title: "Something went wrong on this view", hint: "The rest of FLOW is still running. Try reloading this view." },
 };
 

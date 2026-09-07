@@ -4,8 +4,10 @@
 
 const DENY = [
   "health", "cognitive", "routing", "trace", "query", "memory", "ingestion",
-  "synthesis", "summary", "lifecycle", "ack", "stage", "executed", "automation",
+  "synthesis", "summary", "lifecycle", "connection_ack", "stage", "executed", "automation",
   "snapshot", "vector", "graph_", "replay",
+  // System/plumbing events that must never reach the live panel.
+  "connector", "prediction", "bus_factor", "workspace_health",
 ];
 
 const ALLOW = [
@@ -19,12 +21,36 @@ const ALLOW = [
 
 const KNOWN_SOURCES = ["slack", "gmail", "github", "jira", "calendar", "notion", "hubspot", "datadog"];
 
+// Titles produced by internal machinery — never a real human message.
+const DENY_TITLE = [
+  /read via/i, /connector[_ ]?action/i, /action executed/i, /health score/i,
+  /workspace health/i, /cognitive routing/i, /prediction/i, /bus_factor/i,
+  /org memory/i, /\bembedding\b/i, /\bvector\b/i, /\bchunk\b/i, /\bingestion\b/i,
+  /connection ack/i, /snapshot/i,
+];
+
+// Canonical plumbing event types that must NEVER reach the live panel, matched
+// exactly (a "notion" source in read_via_notion would otherwise pass the fallback).
+const EXACT_DENY = new Set([
+  "connector_action", "health_score_updated", "action_executed",
+  "cognitive_routing_complete", "connection_ack", "read_via_notion",
+]);
+
 export function isIntegrationEvent(event) {
   const type = String(event?.type || "").toLowerCase();
   const source = String(event?.data?.source || event?.payload?.source || "").toLowerCase();
+  const title = String(event?.data?.text || event?.data?.title || event?.payload?.text || event?.payload?.title || "");
+
+  // 0. Exact plumbing types are hard-blocked before any allow rule can rescue them.
+  if (EXACT_DENY.has(type)) return false;
+  // 1. System-noise titles are always rejected — even from a known source.
+  if (title && DENY_TITLE.some((p) => p.test(title))) return false;
+  // 2. Type-level deny (plumbing) wins over everything else.
   if (DENY.some((d) => type.includes(d))) return false;
+  // 3. Explicit business/integration event types are allowed.
   if (ALLOW.some((a) => type.includes(a))) return true;
-  return KNOWN_SOURCES.some((s) => source.includes(s));
+  // 4. Fallback: only a known integration source with real title text qualifies.
+  return KNOWN_SOURCES.some((s) => source.includes(s)) && title.trim().length >= 3;
 }
 
 const SOURCE_LABELS = {

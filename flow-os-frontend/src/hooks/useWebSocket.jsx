@@ -24,14 +24,51 @@ export const WebSocketProvider = ({ children }) => {
 
   const wsRef = useRef(null);
   const reconnectTimerRef = useRef(null);
+  // Persistent per-session dedup of live-feed items by stable business id (SHA / PR /
+  // message id). Survives window eviction and reconnects, so nothing shows twice.
+  const broadcastHistoryRef = useRef(new Set());
 
   // Silent Auto-Auth Flow
   useEffect(() => {
     async function performAuth() {
+      // ── Dev-only certification entry (inert unless both env vars are set) ──────
+      // When VITE_CERT_TOKEN + VITE_CERT_WORKSPACE are present (flow-os-frontend/.env.local,
+      // git-ignored, never in a production build), use that real minted JWT + workspace and
+      // skip the default corp-alpha silent auth entirely. Tenant isolation still applies on
+      // the backend — this only chooses which legitimate identity the dev session uses.
+      const certToken     = import.meta.env.VITE_CERT_TOKEN;
+      const certWorkspace = import.meta.env.VITE_CERT_WORKSPACE;
+      if (certToken && certWorkspace) {
+        // Validate cert token before accepting — it may have expired between sessions.
+        try {
+          const certRes = await fetch('/api/org/workspaces', {
+            headers: { 'Authorization': `Bearer ${certToken}`, 'workspace-id': 'verify' },
+          });
+          if (certRes.ok) {
+            localStorage.setItem('flow_os_token', certToken);
+            localStorage.setItem('flow_os_workspace_id', certWorkspace);
+            setToken(certToken);
+            setWorkspaceId(certWorkspace);
+            setIsAuthLoading(false);
+            return;
+          }
+          // Cert token expired — fall through to stored-token / login redirect
+          console.warn('[auth] VITE_CERT_TOKEN expired, falling through to stored token / login');
+        } catch {
+          console.warn('[auth] VITE_CERT_TOKEN verification failed, falling through');
+        }
+      }
+
       const storedToken = localStorage.getItem('flow_os_token');
       const storedWorkspaceId = localStorage.getItem('flow_os_workspace_id');
 
-      if (storedToken && storedWorkspaceId) {
+      // Already on the login page — do not redirect, just signal not loading
+      if (window.location.pathname === '/login') {
+        setIsAuthLoading(false);
+        return;
+      }
+
+      if (storedToken) {
         try {
           const res = await fetch('/api/org/workspaces', {
             headers: {
@@ -43,7 +80,7 @@ export const WebSocketProvider = ({ children }) => {
             const data = await res.json();
             if (Array.isArray(data) && data.length > 0) {
               setWorkspaces(data);
-              const match = data.find(w => w.externalId === storedWorkspaceId);
+              const match = storedWorkspaceId ? data.find(w => w.externalId === storedWorkspaceId) : null;
               const activeId = match ? match.externalId : data[0].externalId;
               localStorage.setItem('flow_os_workspace_id', activeId);
               setToken(storedToken);
@@ -52,80 +89,22 @@ export const WebSocketProvider = ({ children }) => {
               return;
             }
           }
+          // Token is invalid / expired — redirect to login
+          localStorage.removeItem('flow_os_token');
+          localStorage.removeItem('flow_os_workspace_id');
+          window.location.href = '/login';
+          return;
         } catch (err) {
-          console.warn('Stored token verification failed, re-authenticating...', err);
+          console.warn('Stored token verification failed:', err);
+          localStorage.removeItem('flow_os_token');
+          localStorage.removeItem('flow_os_workspace_id');
+          window.location.href = '/login';
+          return;
         }
       }
 
-      const credentials = {
-        email: 'dev@flow-os.local',
-        password: 'FlowOSDev123!'
-      };
-
-      try {
-        let authData;
-        const loginRes = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(credentials)
-        });
-
-        if (loginRes.ok) {
-          authData = await loginRes.json();
-        } else {
-          const signupRes = await fetch('/api/auth/signup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              ...credentials,
-              fullName: 'Kishore Varma',
-              orgName: 'Corp Alpha'
-            })
-          });
-
-          if (signupRes.ok) {
-            authData = await signupRes.json();
-          } else {
-            throw new Error(`Auth failed: login status ${loginRes.status}, signup status ${signupRes.status}`);
-          }
-        }
-
-        const jwtToken = authData.token;
-        localStorage.setItem('flow_os_token', jwtToken);
-        setToken(jwtToken);
-
-        const workspacesRes = await fetch('/api/org/workspaces', {
-          headers: {
-            'Authorization': `Bearer ${jwtToken}`,
-            'workspace-id': 'temp_initialization'
-          }
-        });
-
-        if (workspacesRes.ok) {
-          const wsList = await workspacesRes.json();
-          if (Array.isArray(wsList) && wsList.length > 0) {
-            setWorkspaces(wsList);
-            const storedId = localStorage.getItem('flow_os_workspace_id');
-            const match = wsList.find(w => w.externalId === storedId);
-            const activeWorkspaceId = match ? match.externalId : wsList[0].externalId;
-            localStorage.setItem('flow_os_workspace_id', activeWorkspaceId);
-            setWorkspaceId(activeWorkspaceId);
-          } else {
-            const fallbackWorkspaceId = 'workspace_corp_alpha';
-            localStorage.setItem('flow_os_workspace_id', fallbackWorkspaceId);
-            setWorkspaceId(fallbackWorkspaceId);
-          }
-        } else {
-          const fallbackWorkspaceId = 'workspace_corp_alpha';
-          localStorage.setItem('flow_os_workspace_id', fallbackWorkspaceId);
-          setWorkspaceId(fallbackWorkspaceId);
-        }
-      } catch (err) {
-        console.error('Silent auto-auth critical error:', err);
-        setConnectionStatus('ERROR');
-      } finally {
-        setIsAuthLoading(false);
-      }
+      // No stored token — redirect to login page
+      window.location.href = '/login';
     }
 
     performAuth();
@@ -168,12 +147,37 @@ export const WebSocketProvider = ({ children }) => {
         try {
           const msg = JSON.parse(evt.data);
           const eventName = msg.eventType || msg.type || msg.event || 'EVENT';
+          const payload = msg.payload || msg;
+
+          // Dedup: the poller re-fetches the same commits/PRs/emails every cycle, so
+          // the SAME underlying item arrives repeatedly. We fingerprint by its stable
+          // business id (SHA / PR number / message id / sourceEventId) and keep a
+          // persistent broadcastHistory Set for the whole session — so an item that
+          // scrolled out of the visible window can never reappear as a "new" event.
+          const bizId = payload?.sourceEventId
+            || payload?.metadata?.sha || payload?.metadata?.number || payload?.metadata?.messageId
+            || payload?.text || payload?.id;
+          const fp = `${eventName}:${payload?.source || ''}:${bizId || ''}`;
+
+          if (bizId && broadcastHistoryRef.current.has(fp)) return; // already surfaced this session
+          if (bizId) {
+            broadcastHistoryRef.current.add(fp);
+            // Bound the set so a long-lived session can't grow it without limit.
+            if (broadcastHistoryRef.current.size > 2000) {
+              broadcastHistoryRef.current = new Set([...broadcastHistoryRef.current].slice(-1000));
+            }
+          }
 
           setEvents((prev) => {
+            // Real source time (commit author date, calendar start, etc.) drives the
+            // panel's ordering; the receipt time is only a last-resort fallback.
+            const realTs = payload?.ts || payload?.timestamp || null;
             const entry = {
               id: Date.now() + Math.random(),
+              _fp: fp,
               type: eventName,
-              payload: msg.payload || msg,
+              payload,
+              realTs,
               timestamp: new Date().toLocaleTimeString(),
             };
             return [entry, ...prev].slice(0, 40);
