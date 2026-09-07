@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   CheckCircle2, AlertTriangle, RefreshCw, Unplug, ExternalLink,
   History, ChevronDown, ChevronRight, Zap, ShieldCheck, Loader2,
-  Webhook, Clock, Activity, XCircle, Link2
+  Webhook, Clock, Activity, XCircle, Link2, CheckCircle
 } from "lucide-react";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
@@ -241,6 +242,7 @@ function ConnectorCard({ connector, status, headers, onRefresh }) {
   const [formMode,   setFormMode]   = useState(null);  // 'pat' | 'apikey' | null
   const [formVals,   setFormVals]   = useState({});
   const [formErr,    setFormErr]    = useState(null);
+  const [oauthError, setOAuthError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [syncing,    setSyncing]    = useState(false);
 
@@ -249,13 +251,44 @@ function ConnectorCard({ connector, status, headers, onRefresh }) {
   const stats        = status?.syncStats;
 
   const handleOAuth = async () => {
-    if (connector.googleUnified) {
-      const res = await fetch("/api/google/auth", { headers });
-      if (res.ok) { const d = await res.json(); if (d.authUrl) window.open(d.authUrl, "_blank", "noopener"); }
-      return;
+    setOAuthError(null);
+    try {
+      if (connector.googleUnified) {
+        const res = await fetch("/api/google/auth", { headers });
+        if (res.ok) {
+          const d = await res.json();
+          if (d.authUrl) window.open(d.authUrl, "_blank", "noopener");
+        } else {
+          const d = await res.json().catch(() => ({}));
+          setOAuthError(d.message || `Google OAuth failed (${res.status})`);
+        }
+        return;
+      }
+
+      const res = await fetch(`/api/integrations-hub/${connector.id}/auth`, { headers });
+      if (res.ok) {
+        const d = await res.json();
+        if (d.authUrl) window.open(d.authUrl, "_blank", "noopener");
+        else setOAuthError("No auth URL returned from server.");
+      } else {
+        const d = await res.json().catch(() => ({}));
+        // OAuth App not configured — fall back to PAT/API key form automatically
+        const isUnconfigured = res.status === 503 || d.code === "GITHUB_OAUTH_NOT_CONFIGURED"
+          || /not configured/i.test(d.message || "");
+
+        if (isUnconfigured && connector.authModes.includes("pat")) {
+          setFormMode("pat");
+          setOAuthError("OAuth App is not configured on this server. Enter a Personal Access Token instead.");
+        } else if (isUnconfigured && connector.authModes.includes("apikey")) {
+          setFormMode("apikey");
+          setOAuthError("OAuth App is not configured on this server. Enter API credentials instead.");
+        } else {
+          setOAuthError(d.message || `OAuth initiation failed (${res.status}). Check server configuration.`);
+        }
+      }
+    } catch (err) {
+      setOAuthError(`Network error: ${err.message}`);
     }
-    const res = await fetch(`/api/integrations-hub/${connector.id}/auth`, { headers });
-    if (res.ok) { const d = await res.json(); if (d.authUrl) window.open(d.authUrl, "_blank", "noopener"); }
   };
 
   const handleFormSubmit = async () => {
@@ -267,7 +300,7 @@ function ConnectorCard({ connector, status, headers, onRefresh }) {
     try {
       const res = await fetch(ep, { method: "POST", headers, body: JSON.stringify(formVals) });
       if (res.ok) { setFormMode(null); setFormVals({}); onRefresh(); }
-      else { const d = await res.json().catch(() => ({})); setFormErr(d.message || "Connection failed"); }
+      else { const d = await res.json().catch(() => ({})); setFormErr(d.error?.message || d.message || `Connection failed (${res.status})`); }
     } catch { setFormErr("Network error — check your credentials"); }
     finally { setSubmitting(false); }
   };
@@ -376,9 +409,18 @@ function ConnectorCard({ connector, status, headers, onRefresh }) {
             )}
           </div>
 
+          {/* OAuth error banner */}
+          {oauthError && !formMode && (
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 8, padding: "8px 12px", marginBottom: 8, borderRadius: 7, background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.18)", fontSize: 11, color: "#f87171" }}>
+              <XCircle size={13} style={{ flexShrink: 0, marginTop: 1 }} />
+              <span>{oauthError}</span>
+            </div>
+          )}
+
           {/* Inline credential form */}
           {formMode && (
             <div style={{ padding: 12, background: "rgba(31,27,22,0.025)", borderRadius: 8, border: "1px solid var(--border, rgba(31,27,22,0.08))", marginBottom: 10 }}>
+              {oauthError && <div style={{ display: "flex", alignItems: "flex-start", gap: 7, fontSize: 11, color: "#fbbf24", marginBottom: 8, padding: "6px 8px", background: "rgba(251,191,36,0.07)", borderRadius: 5, border: "1px solid rgba(251,191,36,0.2)" }}><AlertTriangle size={12} style={{ flexShrink: 0, marginTop: 1 }} />{oauthError}</div>}
               {formErr && <div style={{ fontSize: 11, color: "#ef4444", marginBottom: 8 }}>{formErr}</div>}
               {formMode === "pat" && (
                 <div style={{ marginBottom: 8 }}>
@@ -404,7 +446,7 @@ function ConnectorCard({ connector, status, headers, onRefresh }) {
                 <button onClick={handleFormSubmit} disabled={submitting} style={{ fontSize: 11, padding: "5px 14px", borderRadius: 6, background: "var(--brand, #6366f1)", color: "#fff", border: "none", cursor: "pointer", fontWeight: 500 }}>
                   {submitting ? "Connecting…" : "Connect"}
                 </button>
-                <button onClick={() => { setFormMode(null); setFormErr(null); }} style={{ fontSize: 11, padding: "5px 12px", borderRadius: 6, background: "none", color: "var(--t4)", border: "1px solid var(--border, rgba(31,27,22,0.08))", cursor: "pointer" }}>Cancel</button>
+                <button onClick={() => { setFormMode(null); setFormErr(null); setOAuthError(null); }} style={{ fontSize: 11, padding: "5px 12px", borderRadius: 6, background: "none", color: "var(--t4)", border: "1px solid var(--border, rgba(31,27,22,0.08))", cursor: "pointer" }}>Cancel</button>
               </div>
             </div>
           )}
@@ -428,13 +470,15 @@ function ConnectorCard({ connector, status, headers, onRefresh }) {
 
 export default function IntegrationHub() {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [statuses,    setStatuses]    = useState({});
   const [loading,     setLoading]     = useState(true);
   const [lastRefresh, setLastRefresh] = useState(null);
   const [refreshing,  setRefreshing]  = useState(false);
+  const [callbackBanner, setCallbackBanner] = useState(null); // { type: 'success'|'error', connector, message }
 
   const headers = token
-    ? { Authorization: `Bearer ${token}`, "workspace-id": workspaceId || "workspace_corp_alpha", "Content-Type": "application/json" }
+    ? { Authorization: `Bearer ${token}`, "workspace-id": workspaceId || "", "Content-Type": "application/json" }
     : {};
 
   const fetchStatuses = useCallback(async (quiet = false) => {
@@ -454,6 +498,21 @@ export default function IntegrationHub() {
   useEffect(() => {
     if (!isAuthLoading) fetchStatuses(true);
   }, [isAuthLoading, token, workspaceId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Handle OAuth callback query params: ?connected=github or ?error=...&connector=github
+  useEffect(() => {
+    const connected = searchParams.get("connected");
+    const error     = searchParams.get("error");
+    const connector = searchParams.get("connector");
+    if (connected) {
+      setCallbackBanner({ type: "success", connector: connected, message: `${connected} connected successfully.` });
+      fetchStatuses(true);
+      setSearchParams({}, { replace: true }); // clean URL
+    } else if (error) {
+      setCallbackBanner({ type: "error", connector, message: decodeURIComponent(error) });
+      setSearchParams({}, { replace: true });
+    }
+  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const connectedCount = Object.values(statuses).filter(s => s?.connected).length;
   const degradedCount  = Object.values(statuses).filter(s => s?.connected && s?.healthStatus === "degraded").length;
@@ -526,6 +585,27 @@ export default function IntegrationHub() {
           Integration Permissions →
         </span>
       </a>
+
+      {/* OAuth callback banner */}
+      {callbackBanner && (
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          gap: 10, padding: "10px 14px", marginBottom: 12, borderRadius: 8,
+          background: callbackBanner.type === "success" ? "rgba(34,197,94,0.07)" : "rgba(239,68,68,0.07)",
+          border: `1px solid ${callbackBanner.type === "success" ? "rgba(34,197,94,0.22)" : "rgba(239,68,68,0.22)"}`,
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12 }}>
+            {callbackBanner.type === "success"
+              ? <CheckCircle size={14} color="#22c55e" />
+              : <XCircle size={14} color="#ef4444" />
+            }
+            <span style={{ color: callbackBanner.type === "success" ? "#22c55e" : "#f87171" }}>
+              {callbackBanner.message}
+            </span>
+          </div>
+          <button onClick={() => setCallbackBanner(null)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--t4)", fontSize: 16, lineHeight: 1, padding: 0 }}>×</button>
+        </div>
+      )}
 
       {/* Connector cards */}
       {loading ? (

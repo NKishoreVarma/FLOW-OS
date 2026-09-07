@@ -46,7 +46,29 @@ export function registerBuiltinSubscribers() {
   // ── Recommendations: nudge on high-importance events (canonical form) ──────
   subscribe('recommendation', { predicate: (e) => (e.importance ?? 0) >= 0.70 }, _recommendationSubscriber, { priority: 5 });
 
-  logger.rag('[events] built-in subscribers registered (timeline, feed, memory, notify, flowNotify, brain, recommendation)');
+  // ── Engineering: on a real GitHub push, auto-analyze/review (real-time pipeline) ─
+  subscribe('pushPipeline', { predicate: _isPush }, _pushSubscriber, { priority: 6 });
+
+  logger.rag('[events] built-in subscribers registered (timeline, feed, memory, notify, flowNotify, brain, recommendation, pushPipeline)');
+}
+
+// Cheap inline predicate (no import) — only real GitHub pushes reach the handler.
+// A webhook push is normalized to eventType 'engineering' but keeps the original
+// type in metadata.webhookEventType and a refs/heads ref in metadata.ref.
+function _isPush(event) {
+  if (!event) return false;
+  const connector = (event.connector || event.source || '').toLowerCase();
+  if (connector !== 'github') return false;
+  const md = event.metadata || {};
+  if (md.orchestrated || md.origin === 'ingestion' || md.replayed) return false;
+  const t = event.eventType || event.rawType || '';
+  const wt = md.webhookEventType || '';
+  return /commit\.pushed|push/i.test(t) || /commit\.pushed|push/i.test(wt)
+    || md.kind === 'commit' || /^refs\/heads\//.test(md.ref || '');
+}
+async function _pushSubscriber(event) {
+  const { handlePush } = await import('../engineering/pushPipeline.js');
+  return handlePush(event);
 }
 
 // ── Subscriber implementations ──────────────────────────────────────────────

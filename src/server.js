@@ -4,6 +4,7 @@ import compression from 'compression';
 import crypto from 'crypto';
 import { createServer } from 'http';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -56,10 +57,18 @@ import communicationRoutes  from './routes/communicationRoutes.js';
 import meetingRoutes        from './routes/meetingRoutes.js';
 import engineeringRoutes    from './routes/engineeringRoutes.js';
 import brainRoutes from './routes/brainRoutes.js';
+import brainAgentRoutes from './routes/brainAgentRoutes.js';
+import { startCognitiveBrain } from './brain/index.js';
+import executiveRoutes from './routes/executiveRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
 import autonomousRoutes from './routes/autonomousRoutes.js';
 import phase19Routes from './routes/phase19Routes.js';
 import { startAutonomousScheduler } from './services/autonomous/BackgroundAnalysisScheduler.js';
+import autonomyRoutes from './routes/autonomyRoutes.js';
+import { startAutonomyEngine } from './autonomy/index.js';
+import adminEnterpriseRoutes from './routes/adminEnterpriseRoutes.js';
+import trustRoutes            from './routes/trustRoutes.js';
+import { startHA }            from './ha/index.js';
 import eventRoutes             from './routes/eventRoutes.js';
 import googleRoutes            from './routes/googleRoutes.js';
 import webhookRoutes           from './routes/webhookRoutes.js';
@@ -76,6 +85,11 @@ import workRoutes           from './routes/workRoutes.js';
 import knowledgeRoutes      from './routes/knowledgeRoutes.js';
 import crmRoutes            from './routes/crmRoutes.js';
 import hrRoutes             from './routes/hrRoutes.js';
+import workflowRoutes       from './routes/workflowRoutes.js';
+import runtimeRoutes        from './routes/runtimeRoutes.js';
+import { workflowInstanceRouter, callbackRouter } from './routes/workflowInstanceRoutes.js';
+import { startWorkflowRuntime } from './runtime/index.js';
+import { loadRegistry }         from './actionRegistry/index.js';
 
 // ── Legacy Routes (Backward Compatible — Phase 2 will migrate these) ─────────
 import integrationRoutes from './routes/integrationRoutes.js';
@@ -124,12 +138,24 @@ app.use((req, res, next) => {
 // multi-agent council is excluded too: it fans a question out to several agents, each
 // of which runs the full (inherently slow) Operational Brain, so it legitimately runs
 // longer than a normal request. It has its own per-agent time-isolation internally.
+//
+// The single-shot Brain reasoning routes (`/api/brain/copilot`, `/api/brain/reason`)
+// run one full Operational Brain pass, which on local inference (Ollama) takes
+// ~28–30s — right at the default 30s ceiling, so legitimate requests were 503'ing.
+// They get their own longer ceiling (still bounded, so a genuinely hung request is
+// still cut off). The handler runs exactly once; the timeout only sends the 503 —
+// it never cancels or re-invokes the Brain, and `!res.headersSent` prevents a late
+// double-write, so there is no duplicate Brain execution.
 const REQUEST_TIMEOUT_MS = Number(process.env.REQUEST_TIMEOUT_MS ?? 30_000);
 const COUNCIL_TIMEOUT_MS = Number(process.env.COUNCIL_REQUEST_TIMEOUT_MS ?? 360_000);
+const BRAIN_TIMEOUT_MS   = Number(process.env.BRAIN_REQUEST_TIMEOUT_MS ?? 120_000);
+const SLOW_BRAIN_PATHS = new Set(['/api/brain/copilot', '/api/brain/reason']);
 app.use((req, res, next) => {
   if (req.path.endsWith('/stream')) { next(); return; }
-  const isCouncil = req.path.startsWith('/api/council');
-  res.setTimeout(isCouncil ? COUNCIL_TIMEOUT_MS : REQUEST_TIMEOUT_MS, () => {
+  const ms = req.path.startsWith('/api/council') ? COUNCIL_TIMEOUT_MS
+    : SLOW_BRAIN_PATHS.has(req.path) ? BRAIN_TIMEOUT_MS
+    : REQUEST_TIMEOUT_MS;
+  res.setTimeout(ms, () => {
     if (!res.headersSent) res.status(503).json({ error: { code: 'REQUEST_TIMEOUT', message: 'Request exceeded server time limit.', requestId: req.id } });
   });
   next();
@@ -138,8 +164,12 @@ app.use((req, res, next) => {
 // Structured per-request logging (correlation id, method/path/status/duration).
 app.use(requestLogger);
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Capture the raw request bytes on parse so webhook signature verification (HMAC
+// over the exact payload) works even though the global JSON parser runs first.
+// The parsed body is still available on req.body; the raw buffer on req.rawBody.
+const rawBodySaver = (req, _res, buf) => { if (buf?.length) req.rawBody = buf; };
+app.use(express.json({ verify: rawBodySaver }));
+app.use(express.urlencoded({ extended: true, verify: rawBodySaver }));
 app.use(rateLimiter({ max: 200, windowSec: 60 }));
 
 /**
@@ -309,6 +339,11 @@ app.get('/metrics/infra', async (_req, res) => {
 app.use(authModule.prefix, authModule.routes);
 console.log(`📦 Public Module mounted: ${authModule.prefix}`);
 
+// Webhook Gateway — mounted before auth middleware (signature-verified per-provider)
+import { webhookRouter as _webhookRouter } from './automation/webhookGateway/WebhookGateway.js';
+app.use('/webhooks', _webhookRouter);
+console.log('🪝  Webhook Gateway mounted at /webhooks/{github,slack,stripe,jira,google,custom/:connector}');
+
 // Developer Verification Dashboard (Development Only, bypasses auth)
 import devDashboardRoutes from './routes/devDashboard.js';
 app.use('/dev-dashboard', devDashboardRoutes);
@@ -450,9 +485,22 @@ console.log('🔔 Workspace Notification Engine mounted at /api/notifications');
 app.use('/api/council', councilRoutes);
 console.log('🏛️  Multi-Agent Executive Council mounted at /api/council');
 
+app.use('/api/autonomy', autonomyRoutes);
+console.log('🤖 Autonomous Enterprise Engine mounted at /api/autonomy');
+
+app.use('/api/admin', adminEnterpriseRoutes);
+console.log('🏢 Enterprise Admin Console mounted at /api/admin');
+
+app.use('/api/trust', trustRoutes);
+console.log('🔍 Trust Center mounted at /api/trust');
+
 app.use('/api/workspace', workspaceRoutes);
 console.log('⚡ Workspace Intelligence Cache mounted at /api/workspace');
 startWorkspaceCache();
+
+import ingestionTraceRoutes from './routes/ingestionTraceRoutes.js';
+app.use('/api/observability/ingestion-trace', ingestionTraceRoutes);
+console.log('🔎 Safe ingestion trace mounted at /api/observability/ingestion-trace (JWT + workspace-id)');
 
 app.use('/api/workday', workdayRoutes);
 console.log('🧭 Adaptive Workday Engine mounted at /api/workday');
@@ -464,6 +512,14 @@ console.log('🚀 Onboarding (Pilot Experience) mounted at /api/onboarding');
 import successRoutes from './routes/successRoutes.js';
 app.use('/api/success', successRoutes);
 console.log('📊 Success / Value Dashboard mounted at /api/success');
+
+import roiRoutes from './routes/roiRoutes.js';
+app.use('/api/roi', roiRoutes);
+console.log('💰 ROI Engine mounted at /api/roi');
+
+import partnerRoutes from './routes/partnerRoutes.js';
+app.use('/api/partners', partnerRoutes);
+console.log('🤝 Design Partner routes mounted at /api/partners');
 
 import analyticsRoutes from './routes/analyticsRoutes.js';
 import feedbackRoutes  from './routes/feedbackRoutes.js';
@@ -513,6 +569,14 @@ console.log('📅 Meeting Capability routes mounted at /api/meetings');
 app.use('/api/engineering', engineeringRoutes);
 console.log('⚙️  Engineering Capability routes mounted at /api/engineering');
 
+// Multi-Agent Cognitive Brain — agents sub-router MUST be mounted before /api/brain
+// so Express matches /api/brain/agents/* before the general /api/brain prefix.
+app.use('/api/brain/agents', brainAgentRoutes);
+console.log('🧠 Multi-Agent Cognitive Brain routes mounted at /api/brain/agents');
+
+app.use('/api/executive', executiveRoutes);
+console.log('🎯 Executive Operations Intelligence routes mounted at /api/executive');
+
 app.use('/api/brain', brainRoutes);
 console.log('🧠 Autonomous Brain routes mounted at /api/brain');
 
@@ -548,6 +612,10 @@ import predictionRoutes from './routes/predictionRoutes.js';
 app.use('/api/predictions', predictionRoutes);
 console.log('📈 Predictive Workspace Intelligence routes mounted at /api/predictions');
 
+import consequenceRoutes from './routes/consequenceRoutes.js';
+app.use('/api/consequences', consequenceRoutes);
+console.log('🔗 Consequence Engine (cross-tool) mounted at /api/consequences');
+
 app.use('/api/google', googleRoutes);
 console.log('🔑 Google OAuth routes mounted at /api/google');
 
@@ -559,6 +627,51 @@ console.log('🔄 Sync Management routes mounted at /api/sync');
 
 app.use('/api/webhooks/manage', webhookManagementRoutes);
 console.log('🪝 Webhook Management routes mounted at /api/webhooks/manage');
+
+app.use('/api/workflows', workflowRoutes);
+console.log('🔀 Workflow routes mounted at /api/workflows');
+
+// Universal Workflow Runtime:
+//   POST   /api/workflow-executions                  — launch any registered workflow
+//   GET    /api/workflow-executions                  — list executions
+//   GET    /api/workflow-executions/:id              — single execution
+//   POST   /api/workflow-executions/:id/pause|resume|cancel
+//   GET    /api/workflow-executions/:id/stream       — SSE
+//   GET    /api/workflow-executions/definitions      — registered workflow definitions
+//   GET    /api/workflow-executions/definitions/:id  — single definition
+app.use('/api/workflow-executions', runtimeRoutes);
+console.log('🔀 Runtime routes mounted at /api/workflow-executions');
+
+// Phase 9 — Long-running workflow instance management + external callbacks
+app.use('/api/workflow-instances', workflowInstanceRouter);
+app.use('/webhook/workflow-callback', callbackRouter);
+console.log('⏳ Workflow Instance routes mounted at /api/workflow-instances');
+console.log('🔗 Workflow callback webhook mounted at /webhook/workflow-callback/:token');
+
+import registryRoutes from './routes/registryRoutes.js';
+app.use('/api/registry', registryRoutes);
+console.log('📋 Action Registry routes mounted at /api/registry');
+
+import automationRoutes from './routes/automationRoutes.js';
+app.use('/api/automation', automationRoutes);
+console.log('⚡ Automation Platform routes mounted at /api/automation');
+
+import extensionRoutes from './routes/extensionRoutes.js';
+import { configureExtensionApi, startExtensionSystem } from './extensions/index.js';
+app.use('/api/extensions', extensionRoutes);
+console.log('🧩 Extension Marketplace routes mounted at /api/extensions');
+
+import kgRoutes from './routes/knowledgeGraphRoutes.js';
+app.use('/api/kg', kgRoutes);
+console.log('🕸️  Enterprise Knowledge Graph routes mounted at /api/kg');
+
+import fvepRoutes from './routes/fvepRoutes.js';
+app.use('/api/fvep', fvepRoutes);
+console.log('🧪 FVEP Validation & Evaluation Platform mounted at /api/fvep');
+
+import certificationRoutes from './routes/certificationRoutes.js';
+app.use('/api/connectors/certification', certificationRoutes);
+console.log('✅ Connector Certification Engine mounted at /api/connectors/certification');
 
 // ── Error Handler (must be last) ────────────────────────────────────────────
 app.use(errorHandler);
@@ -575,6 +688,17 @@ export function createApp() {
 
 // ── Boot (only when this file is run directly) ───────────────────────────────
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  httpServer.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`⚠️  Port ${PORT} in use — killing occupant and retrying in 1 s…`);
+      try { execSync(`lsof -ti :${PORT} | xargs kill -9`); } catch (_) {}
+      setTimeout(() => httpServer.listen(PORT, '0.0.0.0'), 1000);
+    } else {
+      console.error('HTTP server error:', err);
+      process.exit(1);
+    }
+  });
+
   httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`\n=================================================`);
     console.log(`⚡ FLOW OS Platform Engine v2.0`);
@@ -583,10 +707,66 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     console.log(`=================================================`);
 
     initSocketServer(httpServer);
+    loadRegistry().catch(err => console.error('[ActionRegistry] boot load error (non-fatal):', err.message));
+    startWorkflowRuntime().catch(err => console.error('[WorkflowRuntime] boot error:', err.message));
+    import('./automation/index.js').then(({ startAutomationPlatform }) =>
+      startAutomationPlatform().catch(err => console.error('[AutomationPlatform] boot error (non-fatal):', err.message))
+    ).catch(() => {});
+    startCognitiveBrain();
     startAutonomousScheduler();
+    startAutonomyEngine().catch(err => console.error('[AutonomyEngine] boot error (non-fatal):', err.message));
+    startHA().catch(err => console.error('[HA] boot error (non-fatal):', err.message));
     scheduleDigestCron();
+    import('./knowledge/index.js').then(({ startKnowledgeGraph }) =>
+      startKnowledgeGraph().catch(err => console.error('[KnowledgeGraph] boot error (non-fatal):', err.message))
+    ).catch(() => {});
     registerGracefulShutdown(httpServer);
     console.log('🛡️  Graceful shutdown + probes armed (/health/live, /health/ready, /metrics/infra)');
     maybeStartSimulator();
+
+    // Phase 14 — Extension System: configure the scoped API surface and start.
+    // Non-fatal: an extension load error should never crash the host server.
+    configureExtensionApi({
+      events:      { query: () => Promise.resolve([]), publish: () => Promise.resolve() },
+      graph:       {},
+      memory:      {},
+      executions:  {},
+      connectors:  {
+        register:   (id, adapter) => {
+          const { registry } = require('./connectors/registry.js');
+          if (registry?.register) registry.register(id, adapter);
+        },
+        unregister: () => {},
+        health:     async (id) => ({ status: 'HEALTHY', connectorId: id }),
+      },
+      agents:      {
+        register:   (def) => { try { const { registerAgent } = require('./brain/registry/AgentRegistry.js'); registerAgent(def); } catch {} },
+        unregister: () => {},
+      },
+      workflows:   {
+        register:   (def, fn) => { try { const { WorkflowLoader } = require('./runtime/WorkflowLoader.js'); WorkflowLoader.getInstance()?.registerWorkflow(def, fn); } catch {} },
+        unregister: (id) => { try { const { WorkflowLoader } = require('./runtime/WorkflowLoader.js'); WorkflowLoader.getInstance()?.unregisterWorkflow(id); } catch {} },
+      },
+      actions:     {},
+      routes:      { mount: (path, router) => app.use(path, router) },
+      widgets:     { register: () => {}, unregister: () => {} },
+      executive:   {},
+      predictions: {},
+      kpis:        {},
+    });
+    startExtensionSystem().catch(err =>
+      console.error('[Extensions] boot error (non-fatal):', err.message),
+    );
+
+    // AI provider warmup — pre-establish the TCP/TLS connection to Ollama so the
+    // first user query doesn't pay a cold-start penalty. Failures are non-fatal.
+    _warmupAIProviders();
   });
+}
+
+function _warmupAIProviders() {
+  const ollamaUrl = process.env.OLLAMA_URL || 'http://localhost:11434';
+  fetch(`${ollamaUrl}/api/tags`, { method: 'GET', signal: AbortSignal.timeout(5000) })
+    .then(() => console.log('[Warmup] Ollama connection pre-established'))
+    .catch(() => { /* Ollama may not be running — non-fatal */ });
 }

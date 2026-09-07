@@ -1,12 +1,17 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import LayoutShell from "./components/layout/LayoutShell";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
 import PageSkeleton from "./components/ui/PageSkeleton";
-import FirstRunGate from "./components/onboarding/FirstRunGate";
+import { useWorkspaceState } from "./hooks/useWorkspaceState";
 
-// ─── First-time experience (Phase 17) ─────────────────────────────────────────
-const FirstRunFlow = lazy(() => import('./components/onboarding/FirstRunFlow'));
+// ─── Auth ─────────────────────────────────────────────────────────────────────
+const LoginPage      = lazy(() => import('./components/auth/LoginPage'));
+
+// ─── First-time experience ─────────────────────────────────────────────────────
+const SetupWizard    = lazy(() => import('./components/onboarding/SetupWizard'));
+const WorkspaceSetup = lazy(() => import('./components/onboarding/WorkspaceSetup'));
 
 // ─── Daily workflow ───────────────────────────────────────────────────────────
 const OperationalInbox   = lazy(() => import('./components/inbox/OperationalInbox'));
@@ -17,6 +22,9 @@ const MeetingSummary     = lazy(() => import('./components/meetings/MeetingCompl
 
 // ─── Intelligence surfaces ────────────────────────────────────────────────────
 const ProjectIntelligence   = lazy(() => import('./components/projects/ProjectIntelligence'));
+const EngineeringDashboard  = lazy(() => import('./components/projects/EngineeringDashboard'));
+const ExecutiveDashboard    = lazy(() => import('./components/company/ExecutiveDashboard'));
+const SupportDashboard      = lazy(() => import('./components/workspace/SupportDashboard'));
 const KnowledgeExplorer     = lazy(() => import('./components/knowledge/KnowledgeExplorer'));
 const CustomerIntelligence  = lazy(() => import('./components/company/CustomerIntelligence'));
 const WorkforceIntelligence = lazy(() => import('./components/company/WorkforceIntelligence'));
@@ -39,6 +47,7 @@ const ImportDashboard    = lazy(() => import('./components/platform/ImportDashbo
 const OnboardingWizard   = lazy(() => import('./components/platform/OnboardingWizard'));
 const WorkspaceHealth    = lazy(() => import('./components/platform/WorkspaceHealth'));
 const EvaluationPlatform = lazy(() => import('./components/platform/EvaluationPlatform'));
+const ModelOrchestrator  = lazy(() => import('./components/platform/ModelOrchestrator'));
 
 // ─── Dev tools ────────────────────────────────────────────────────────────────
 const PilotDashboard   = lazy(() => import('./components/pilot/PilotDashboard'));
@@ -52,17 +61,60 @@ const SuccessDashboard = lazy(() => import('./components/success/SuccessDashboar
 const TeamInvite       = lazy(() => import('./components/onboarding/TeamInvite'));
 const ChiefOfStaff     = lazy(() => import('./components/autonomous/ChiefOfStaff'));
 const WeeklyReview     = lazy(() => import('./components/autonomous/WeeklyReview'));
+const TrustCenter        = lazy(() => import('./components/trust/TrustCenter'));
+const TrustCenterDashboard = lazy(() => import('./components/trust/TrustCenterDashboard'));
+const LaunchPortal       = lazy(() => import('./components/launch/LaunchPortal'));
+const SalesDemoPlatform  = lazy(() => import('./components/launch/SalesDemoPlatform'));
+const ReleaseNotes            = lazy(() => import('./components/platform/ReleaseNotes'));
+const ProductReadinessReport  = lazy(() => import('./components/platform/ProductReadinessReport'));
+const ConnectorCertification  = lazy(() => import('./components/connectors/ConnectorCertification'));
+
+/**
+ * WorkspaceStateGate — enforces workspace readiness before ANY dashboard access.
+ *
+ * The dashboard is a privilege unlocked only after ≥ 3 integrations are connected.
+ * Redirects to /setup for all non-READY states.
+ * ONLY /setup and /auth/* are accessible before READY.
+ */
+function WorkspaceStateGate() {
+  const location = useLocation();
+  const navigate  = useNavigate();
+  const ws        = useWorkspaceState();
+
+  useEffect(() => {
+    // Never trap auth or login flows
+    if (location.pathname.startsWith('/auth')) return;
+    if (location.pathname === '/login') return;
+    // Wait for server response
+    if (ws.loading) return;
+    // Already on setup page — let it render
+    if (location.pathname === '/setup') return;
+
+    // STRICT: if not READY, redirect to setup. No localStorage bypass.
+    if (ws.workspacePhase !== 'READY') {
+      navigate('/setup', { replace: true });
+    }
+  }, [ws.loading, ws.workspacePhase, location.pathname, navigate]);
+
+  return null;
+}
 
 function App() {
   return (
     <BrowserRouter>
       <LayoutShell>
         <ErrorBoundary>
-          <FirstRunGate />
+          <WorkspaceStateGate />
           <Suspense fallback={<PageSkeleton />}>
             <Routes>
-              {/* ── First-run experience (Phase 17) — overlays the shell full-screen ── */}
-              <Route path="/welcome" element={<FirstRunFlow />} />
+              {/* ── Auth ──────────────────────────────────────────────────── */}
+              <Route path="/login" element={<LoginPage />} />
+
+              {/* ── Workspace setup gateway (≥3 integrations required) ───── */}
+              <Route path="/setup" element={<WorkspaceSetup />} />
+
+              {/* ── Legacy first-run path — redirect to new setup gate ──── */}
+              <Route path="/welcome" element={<Navigate to="/setup" replace />} />
 
               {/* ── OS home — Morning Briefing is the landing page (Phase 16) ── */}
               <Route path="/" element={<MorningBriefing />} />
@@ -75,6 +127,9 @@ function App() {
               <Route path="/meetings/:id/summary" element={<MeetingSummary />} />
 
               {/* ── Intelligence surfaces ─────────────────────────────────── */}
+              <Route path="/dashboard"  element={<ExecutiveDashboard />} />
+              <Route path="/engineering" element={<EngineeringDashboard />} />
+              <Route path="/support"    element={<SupportDashboard />} />
               <Route path="/projects"  element={<ProjectIntelligence />} />
               <Route path="/knowledge" element={<KnowledgeExplorer />} />
               <Route path="/people"    element={<WorkforceIntelligence />} />
@@ -84,7 +139,10 @@ function App() {
               <Route path="/council" element={<ExecutiveCouncil />} />
 
               {/* ── Trust Center — deny-by-default integration permissions ── */}
-              <Route path="/integrations" element={<IntegrationPermissions />} />
+              <Route path="/integrations"  element={<TrustCenter />} />
+
+              {/* ── Trust Center Dashboard — full explainability platform ───── */}
+              <Route path="/settings/trust" element={<TrustCenterDashboard />} />
 
               {/* ── Pilot Experience (Phase 17) — value + team ────────────── */}
               <Route path="/success"       element={<SuccessDashboard />} />
@@ -113,6 +171,10 @@ function App() {
               <Route path="/settings/onboarding"   element={<OnboardingWizard />} />
               <Route path="/settings/health"       element={<WorkspaceHealth />} />
               <Route path="/settings/evaluation"   element={<EvaluationPlatform />} />
+              <Route path="/settings/ai"           element={<ModelOrchestrator />} />
+              <Route path="/settings/releases"         element={<ReleaseNotes />} />
+              <Route path="/settings/readiness"        element={<ProductReadinessReport />} />
+              <Route path="/settings/certification"    element={<ConnectorCertification />} />
 
               {/* ── Preserve old /platform/* paths (permanent redirects) ──── */}
               <Route path="/platform"                  element={<Navigate to="/settings" replace />} />
@@ -128,6 +190,7 @@ function App() {
               <Route path="/platform/onboarding"       element={<Navigate to="/settings/onboarding" replace />} />
               <Route path="/platform/health"           element={<Navigate to="/settings/health" replace />} />
               <Route path="/platform/evaluation"       element={<Navigate to="/settings/evaluation" replace />} />
+              <Route path="/platform/ai"              element={<Navigate to="/settings/ai" replace />} />
 
               {/* ── Dev tools (hidden from nav) ───────────────────────────── */}
               <Route path="/pilot" element={<PilotDashboard />} />
@@ -137,6 +200,10 @@ function App() {
               {/* ── Activity ─────────────────────────────────────────────── */}
               <Route path="/activity" element={<ActivityFeed />} />
 
+              {/* ── Launch & Sales (v1.0 commercial) ─────────────────────── */}
+              <Route path="/launch" element={<LaunchPortal />} />
+              <Route path="/demo"   element={<SalesDemoPlatform />} />
+
               {/* ── Legacy redirects ──────────────────────────────────────── */}
               <Route path="/morning"   element={<Navigate to="/" replace />} />
               <Route path="/brain"     element={<Navigate to="/" replace />} />
@@ -144,11 +211,9 @@ function App() {
               <Route path="/workfeed"  element={<Navigate to="/" replace />} />
               <Route path="/assistant" element={<Navigate to="/" replace />} />
               <Route path="/briefing"  element={<Navigate to="/" replace />} />
-              <Route path="/dashboard" element={<Navigate to="/" replace />} />
               <Route path="/timeline"  element={<Navigate to="/activity" replace />} />
               <Route path="/search"    element={<Navigate to="/" replace />} />
               <Route path="/security"  element={<Navigate to="/settings/security" replace />} />
-              <Route path="/engineering" element={<Navigate to="/projects" replace />} />
               <Route path="/company/*" element={<Navigate to="/" replace />} />
               <Route path="/admin/*"   element={<Navigate to="/" replace />} />
 

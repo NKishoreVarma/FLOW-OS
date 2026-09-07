@@ -56,6 +56,33 @@ const RECOVERY_MAP = {
     recoverySteps: ['Refresh the page', 'If this keeps happening, use "Report this" to notify us'],
     selfServeAction: null,
   },
+  OAUTH_CREDENTIALS_INVALID: {
+    userMessage: 'Google OAuth credentials are misconfigured. Check GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in your .env file.',
+    recoverySteps: [
+      'Go to https://console.cloud.google.com/apis/credentials',
+      'Find your OAuth 2.0 Client ID and copy the current Client Secret',
+      'Update GOOGLE_CLIENT_SECRET in your .env file and restart the server',
+    ],
+    selfServeAction: { label: 'Open Google Console', href: 'https://console.cloud.google.com/apis/credentials' },
+  },
+  TOKEN_REVOKED: {
+    userMessage: 'GitHub token rejected. Generate a new token with repo and read:user scopes.',
+    recoverySteps: [
+      'Go to GitHub → Settings → Developer settings → Personal access tokens',
+      'Generate a new token with "repo" and "read:user" scopes',
+      'Paste the new token in the connection dialog',
+    ],
+    selfServeAction: { label: 'Open GitHub token settings', href: 'https://github.com/settings/tokens/new?scopes=repo,read:user&description=FLOW+OS' },
+  },
+  GITHUB_NOT_CONFIGURED: {
+    userMessage: 'Enter a GitHub Personal Access Token to connect.',
+    recoverySteps: [
+      'Go to GitHub → Settings → Developer settings → Personal access tokens',
+      'Generate a token with "repo" and "read:user" scopes',
+      'Paste the token in the connection dialog',
+    ],
+    selfServeAction: { label: 'Open GitHub token settings', href: 'https://github.com/settings/tokens/new?scopes=repo,read:user&description=FLOW+OS' },
+  },
 };
 
 export function getRecovery(code) {

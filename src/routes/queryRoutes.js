@@ -3,13 +3,15 @@ import { retrieveContext } from '../services/retrievalService.js';
 import { evaluateContext } from '../services/agents/CriticAgent.js';
 import { synthesize } from '../services/agents/ExecutiveSynthesisAgent.js';
 import { broadcastToWorkspace } from '../services/socketService.js';
-import { 
-  generateQueryTraceId, 
-  startQueryTrace, 
-  updateQueryTrace, 
-  liveMetrics 
+import {
+  generateQueryTraceId,
+  startQueryTrace,
+  updateQueryTrace,
+  liveMetrics
 } from '../services/observabilityService.js';
 import { routeQuery } from '../services/agents/RouterAgent.js';
+import { listConnectedConnectors } from '../connectors/authManager.js';
+import { getState } from '../onboarding/onboardingState.js';
 
 const router = express.Router();
 
@@ -42,6 +44,25 @@ router.post('/', async (req, res) => {
     return res.status(400).json({
       error: 'Missing required field: queryText must be a non-empty string.'
     });
+  }
+
+  // Workspace readiness guard — refuse to answer from empty memory.
+  // A workspace needs ≥ 3 connected integrations before AI queries are meaningful.
+  const connected = listConnectedConnectors(workspaceId);
+  if (connected.length < 3) {
+    const onboardingState = await getState(workspaceId).catch(() => null);
+    const isDemoMode = onboardingState?.mode === 'demo';
+    if (!isDemoMode) {
+      const readinessPercent = Math.min(100, Math.round((connected.length / 3) * 100));
+      return res.status(428).json({
+        workspaceNotReady: true,
+        connectedCount: connected.length,
+        required: 3,
+        readinessPercent,
+        message: `Workspace not ready. ${connected.length}/3 integrations connected (${readinessPercent}% ready). Connect ${3 - connected.length} more integration(s) to unlock AI queries.`,
+        query: queryText,
+      });
+    }
   }
 
   // Initialize Query trace

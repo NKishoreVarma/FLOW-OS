@@ -62,15 +62,22 @@ export default function InlinePRCard({ pr, onAction }) {
     const token = localStorage.getItem("flow_os_token") || localStorage.getItem("flow_token");
     const wsId  = localStorage.getItem("flow_os_workspace_id");
     try {
-      if (pr.owner && pr.repo && pr.number) {
-        await fetch(`/api/engineering/repos/${pr.owner}/${pr.repo}/pulls/${pr.number}/merge`, {
-          method:  "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, "workspace-id": wsId || "" },
-          body: JSON.stringify({ mergeMethod: "squash" }),
-        });
+      if (!(pr.owner && pr.repo && pr.number)) {
+        onAction?.("merge_failed", pr, "Missing repository or PR number.");
+        return;
       }
-      onAction?.("merged", pr);
-    } catch { onAction?.("merge_failed", pr); }
+      const res = await fetch(`/api/engineering/repos/${pr.owner}/${pr.repo}/pulls/${pr.number}/merge`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, "workspace-id": wsId || "" },
+        body: JSON.stringify({ mergeMethod: "squash" }),
+      });
+      const data = await res.json().catch(() => ({}));
+      // Only claim success when the connector confirms it. fetch() resolves on 4xx/5xx,
+      // so we MUST check res.ok + the merge result — never assume success.
+      const confirmed = res.ok && data?.merged !== false && !data?.error;
+      if (confirmed) onAction?.("merged", pr, data?.sha || data?.result?.sha || null);
+      else onAction?.("merge_failed", pr, data?.error?.message || data?.message || `Merge was not completed (HTTP ${res.status}).`);
+    } catch (e) { onAction?.("merge_failed", pr, e.message || "Network error during merge."); }
     finally { setMerging(false); }
   }
 

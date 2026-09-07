@@ -1,0 +1,90 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flow-os-ingress
+  namespace: flow-os
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect:       "true"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-body-size:    "50m"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header X-Frame-Options DENY;
+      add_header X-Content-Type-Options nosniff;
+      add_header X-XSS-Protection "1; mode=block";
+      add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - app.example.com
+      secretName: flow-os-tls
+  rules:
+    - host: app.example.com
+      http:
+        paths:
+          - path:     /
+            pathType: Prefix
+            backend:
+              service:
+                name: flow-os
+                port:
+                  number: 80
+---
+# ConfigMap for environment variables
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flow-os-config
+  namespace: flow-os
+data:
+  NODE_ENV:           production
+  PORT:               "5001"
+  LOG_FORMAT:         json
+  LOG_SINK:           stdout
+  WS_AUTH_REQUIRED:   "true"
+  QUEUE_SHARDS:       "4"
+  MIN_REPLICAS:       "3"
+  MAX_REPLICAS:       "20"
+  VAULT_ROOT:         /data/vaults
+  REPORT_ROOT:        /data/reports
+---
+# Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: flow-os
+  labels:
+    name: flow-os
+---
+# ServiceAccount
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: flow-os
+  namespace: flow-os
+---
+# PersistentVolumeClaims
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: flow-os-vaults
+  namespace: flow-os
+spec:
+  accessModes: [ReadWriteMany]
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: nfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: flow-os-reports
+  namespace: flow-os
+spec:
+  accessModes: [ReadWriteMany]
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: nfs

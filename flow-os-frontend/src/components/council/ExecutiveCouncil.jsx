@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import { Landmark, RefreshCw, Send, Users, AlertTriangle, TrendingUp, ArrowRight, Scale, Loader2, Gauge } from "lucide-react";
+import { Landmark, RefreshCw, Send, Users, AlertTriangle, TrendingUp, ArrowRight, Scale, Loader2, Gauge, PlugZap } from "lucide-react";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { EmptyState } from "../ui/EmptyState";
 import councilApi from "../../lib/councilApi";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 /**
  * ExecutiveCouncil (/council) — the executive leadership team view. Six domain health
@@ -32,6 +33,8 @@ const DEMO_CARDS = [
 
 export default function ExecutiveCouncil() {
   const { isAuthLoading } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
   const [dash, setDash] = useState({ loading: true, cards: [], demo: false });
   const [question, setQuestion] = useState("");
   const [asking, setAsking] = useState(false);
@@ -42,9 +45,11 @@ export default function ExecutiveCouncil() {
     try {
       const data = await councilApi.dashboard();
       const cards = (data.cards || []).filter((c) => c.status);
-      setDash({ loading: false, cards: cards.length ? cards : DEMO_CARDS, demo: !cards.length, overall: data.overall });
+      const fallback = isDemoWorkspace ? DEMO_CARDS : [];
+      setDash({ loading: false, cards: cards.length ? cards : fallback, demo: !cards.length && isDemoWorkspace, overall: data.overall });
     } catch {
-      setDash({ loading: false, cards: DEMO_CARDS, demo: true });
+      if (isDemoWorkspace) setDash({ loading: false, cards: DEMO_CARDS, demo: true });
+      else setDash({ loading: false, cards: [], demo: false });
     }
   }, []);
 
@@ -142,7 +147,16 @@ export default function ExecutiveCouncil() {
           ))}
         </div>
       ) : dash.cards.length === 0 ? (
-        <EmptyState variant="activity" message="No council data yet" />
+        <div style={{ textAlign: "center", padding: "48px 24px", borderRadius: 8, border: "1px solid var(--border)", background: "var(--bg-card)" }}>
+          <PlugZap style={{ width: 28, height: 28, color: "var(--t5)", margin: "0 auto 12px" }} />
+          <p style={{ fontSize: 14, fontWeight: 500, color: "var(--t2)", marginBottom: 6 }}>Connect your tools to activate the Executive Council</p>
+          <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 16, maxWidth: 380, margin: "0 auto 16px" }}>
+            Six AI executives — Engineering, Operations, Sales, HR, Security, and Finance — will analyze your connected workspace and surface real insights.
+          </p>
+          <a href="/integrations" style={{ display: "inline-block", fontSize: 12, fontWeight: 500, color: "var(--brand)", background: "rgba(232,103,43,0.08)", padding: "7px 16px", borderRadius: 4, textDecoration: "none" }}>
+            Connect your tools →
+          </a>
+        </div>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 14 }}>
           {dash.cards.map((c) => <HealthCard key={c.agent} card={c} />)}

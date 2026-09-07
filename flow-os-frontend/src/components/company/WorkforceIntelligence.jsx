@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import {
   Users, Search, Activity, RefreshCw, Briefcase, Clock,
-  ShieldAlert, ChevronRight, TrendingUp, Calendar, Award, GitPullRequest, X
+  ShieldAlert, ChevronRight, TrendingUp, Calendar, Award, GitPullRequest, X, PlugZap
 } from "lucide-react";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 const DEMO_EMPLOYEES = [
   {
@@ -79,6 +80,8 @@ const SectionLabel = ({ children, icon: Icon }) => (
 
 export const WorkforceIntelligence = () => {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
 
   const [searchQuery, setSearchQuery] = useState("");
   const [employees, setEmployees]     = useState([]);
@@ -106,12 +109,21 @@ export const WorkforceIntelligence = () => {
               const detailRes = await fetch(`/api/hr/employees/${e.id}`, { headers });
               return detailRes.ok ? (await detailRes.json()).result || e : e;
             }));
-            if (!cancelled) { setEmployees(enriched.length > 0 ? enriched : DEMO_EMPLOYEES); setIsDemo(enriched.length === 0); setLoading(false); }
+            if (!cancelled) {
+              if (enriched.length > 0) { setEmployees(enriched); setIsDemo(false); }
+              else if (isDemoWorkspace) { setEmployees(DEMO_EMPLOYEES); setIsDemo(true); }
+              else { setEmployees([]); setIsDemo(false); }
+              setLoading(false);
+            }
             return;
           }
         } catch {}
       }
-      if (!cancelled) { setEmployees(DEMO_EMPLOYEES); setIsDemo(true); setLoading(false); }
+      if (!cancelled) {
+        if (isDemoWorkspace) { setEmployees(DEMO_EMPLOYEES); setIsDemo(true); }
+        else { setEmployees([]); setIsDemo(false); }
+        setLoading(false);
+      }
     }
     fetchRef.current = load;
     load();
@@ -213,6 +225,16 @@ export const WorkforceIntelligence = () => {
             />
           </div>
         </div>
+        {employees.length === 0 && !loading ? (
+          <div style={{ textAlign: "center", padding: "64px 24px", border: "1px solid var(--border)", borderRadius: 6, background: "var(--bg-card)" }}>
+            <PlugZap style={{ width: 28, height: 28, color: "var(--t5)", margin: "0 auto 12px" }} />
+            <p style={{ fontSize: 14, fontWeight: 500, color: "var(--t2)", marginBottom: 6 }}>Connect Workday or BambooHR to see your team</p>
+            <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 16 }}>FLOW will analyze workload, context switching, and burnout risk across your organization.</p>
+            <a href="/integrations" style={{ display: "inline-block", fontSize: 12, fontWeight: 500, color: "var(--brand)", background: "rgba(232,103,43,0.08)", padding: "7px 16px", borderRadius: 4, textDecoration: "none" }}>
+              Connect HR system →
+            </a>
+          </div>
+        ) : (
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", fontSize: 12, borderCollapse: "collapse" }}>
             <thead>
@@ -251,6 +273,7 @@ export const WorkforceIntelligence = () => {
             </tbody>
           </table>
         </div>
+        )}
       </div>
 
       {/* Employee detail drawer */}

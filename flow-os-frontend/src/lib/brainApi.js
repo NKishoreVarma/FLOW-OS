@@ -1,6 +1,6 @@
 function authHeaders() {
   const token = localStorage.getItem('flow_os_token') || '';
-  const workspaceId = localStorage.getItem('flow_os_workspace_id') || 'workspace_corp_alpha';
+  const workspaceId = localStorage.getItem('flow_os_workspace_id') || '';
   return {
     'Content-Type': 'application/json',
     'workspace-id': workspaceId,

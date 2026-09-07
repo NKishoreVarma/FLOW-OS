@@ -1,0 +1,132 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-os-app
+  namespace: flow-os
+  labels:
+    app: flow-os
+    component: api
+    version: "1.0.0"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: flow-os
+      component: api
+  template:
+    metadata:
+      labels:
+        app: flow-os
+        component: api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port:   "5001"
+        prometheus.io/path:   "/metrics/infra"
+    spec:
+      serviceAccountName: flow-os
+      securityContext:
+        runAsNonRoot: true
+        runAsUser:    1001
+        fsGroup:      1001
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: flow-os
+          image: "flow-os:latest"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001
+              name: http
+          envFrom:
+            - secretRef:
+                name: flow-os-secrets
+            - configMapRef:
+                name: flow-os-config
+          resources:
+            requests:
+              cpu:    "500m"
+              memory: "512Mi"
+            limits:
+              cpu:    "2000m"
+              memory: "2Gi"
+          readinessProbe:
+            httpGet:
+              path:   /health/ready
+              port:   5001
+            initialDelaySeconds: 15
+            periodSeconds:       10
+            failureThreshold:    3
+          livenessProbe:
+            httpGet:
+              path:   /health/live
+              port:   5001
+            initialDelaySeconds: 30
+            periodSeconds:       30
+            failureThreshold:    3
+          volumeMounts:
+            - name:      vault-data
+              mountPath: /data/vaults
+            - name:      report-data
+              mountPath: /data/reports
+      volumes:
+        - name: vault-data
+          persistentVolumeClaim:
+            claimName: flow-os-vaults
+        - name: report-data
+          persistentVolumeClaim:
+            claimName: flow-os-reports
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-os-worker
+  namespace: flow-os
+  labels:
+    app: flow-os
+    component: worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flow-os
+      component: worker
+  template:
+    metadata:
+      labels:
+        app: flow-os
+        component: worker
+    spec:
+      serviceAccountName: flow-os
+      securityContext:
+        runAsNonRoot: true
+        runAsUser:    1001
+      containers:
+        - name: flow-os-worker
+          image: "flow-os:latest"
+          command: ["node", "src/workers/workerEntry.js"]
+          envFrom:
+            - secretRef:
+                name: flow-os-secrets
+            - configMapRef:
+                name: flow-os-config
+          env:
+            - name:  WORKER_ONLY
+              value: "true"
+          resources:
+            requests:
+              cpu:    "250m"
+              memory: "256Mi"
+            limits:
+              cpu:    "1000m"
+              memory: "1Gi"
+          volumeMounts:
+            - name:      vault-data
+              mountPath: /data/vaults
+      volumes:
+        - name: vault-data
+          persistentVolumeClaim:
+            claimName: flow-os-vaults

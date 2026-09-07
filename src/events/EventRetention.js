@@ -38,14 +38,20 @@ export async function prune({ batchSize = 5000, dryRun = false } = {}) {
   let totalDeleted = 0;
   const perType = {};
 
+  // Never prune events belonging to a frozen certification fixture — retention must
+  // not erode the golden regression dataset (this closes a real erosion vector that
+  // dropped Helios flow_events over multiple days).
+  const { getFrozenWorkspaces } = await import('../core/governance/frozenWorkspaces.js');
+  const frozen = getFrozenWorkspaces();
+
   for (const [type, days] of Object.entries(RETENTION_DAYS)) {
     if (type === 'default' || days == null) continue;
     const cutoff = new Date(Date.now() - days * 86_400_000).toISOString();
 
     if (dryRun) {
       const { rows } = await db.query(
-        `SELECT count(*)::int AS c FROM flow_events WHERE event_type = $1 AND ts < $2`,
-        [type, cutoff],
+        `SELECT count(*)::int AS c FROM flow_events WHERE event_type = $1 AND ts < $2 AND NOT (workspace_id = ANY($3))`,
+        [type, cutoff, frozen],
       );
       perType[type] = rows[0].c;
       totalDeleted += rows[0].c;
@@ -58,9 +64,9 @@ export async function prune({ batchSize = 5000, dryRun = false } = {}) {
         `DELETE FROM flow_events
           WHERE event_id IN (
             SELECT event_id FROM flow_events
-             WHERE event_type = $1 AND ts < $2
+             WHERE event_type = $1 AND ts < $2 AND NOT (workspace_id = ANY($4))
              LIMIT $3)`,
-        [type, cutoff, batchSize],
+        [type, cutoff, batchSize, frozen],
       );
       deleted = rowCount;
       totalDeleted += rowCount;

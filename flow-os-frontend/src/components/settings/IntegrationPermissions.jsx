@@ -144,7 +144,8 @@ function ConnectorCard({ c, onOpen }) {
           <div style={{ fontSize: 11, color: "var(--t4, #6b7280)", marginTop: 1 }}>{c.category}</div>
         </div>
 
-        {disabled      ? <Pill tone="muted">No connector</Pill>
+        {disabled       ? <Pill tone="muted">No connector</Pill>
+         : c.simulated  ? <Pill tone="warn">Preview</Pill>
          : c.ungoverned ? <Pill tone="warn">Ungoverned</Pill>
          : c.connected  ? <Pill tone="ok">Connected</Pill>
          :                <Pill tone="muted">Not connected</Pill>}

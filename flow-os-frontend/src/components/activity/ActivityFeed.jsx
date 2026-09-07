@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import { Activity, RefreshCw, Brain, Zap, Plug, GitCommit } from "lucide-react";
+import { Activity, RefreshCw, Brain, Zap, Plug, GitCommit, PlugZap } from "lucide-react";
 import SourceBadge from "../ui/SourceBadge";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { EmptyState } from "../ui/EmptyState";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 /**
  * ActivityFeed — the real `/activity` page (was a redirect to home). Reads the
@@ -48,13 +49,16 @@ function dayKey(ts) {
 
 export default function ActivityFeed() {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
   const [state, setState] = useState({ loading: true, items: [], demo: false, error: false });
   const [filter, setFilter] = useState("ALL");
 
   const load = useCallback(async () => {
     setState(s => ({ ...s, loading: true }));
     if (!token || !workspaceId) {
-      setState({ loading: false, items: DEMO_TIMELINE, demo: true, error: false });
+      if (isDemoWorkspace) setState({ loading: false, items: DEMO_TIMELINE, demo: true, error: false });
+      else setState({ loading: false, items: [], demo: false, error: false });
       return;
     }
     try {
@@ -64,12 +68,15 @@ export default function ActivityFeed() {
       if (!res.ok) throw new Error(`status ${res.status}`);
       const data = await res.json();
       const items = data.timeline || data.result || [];
-      if (!items.length) setState({ loading: false, items: DEMO_TIMELINE, demo: true, error: false });
-      else setState({ loading: false, items, demo: false, error: false });
+      if (!items.length) {
+        if (isDemoWorkspace) setState({ loading: false, items: DEMO_TIMELINE, demo: true, error: false });
+        else setState({ loading: false, items: [], demo: false, error: false });
+      } else setState({ loading: false, items, demo: false, error: false });
     } catch {
-      setState({ loading: false, items: DEMO_TIMELINE, demo: true, error: false });
+      if (isDemoWorkspace) setState({ loading: false, items: DEMO_TIMELINE, demo: true, error: false });
+      else setState({ loading: false, items: [], demo: false, error: false });
     }
-  }, [token, workspaceId]);
+  }, [token, workspaceId, isDemoWorkspace]);
 
   useEffect(() => { if (!isAuthLoading) load(); }, [isAuthLoading, load]);
 
@@ -129,7 +136,18 @@ export default function ActivityFeed() {
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <EmptyState variant="activity" />
+        !isDemoWorkspace && state.items.length === 0 ? (
+          <div style={{ textAlign: "center", padding: "64px 24px" }}>
+            <PlugZap style={{ width: 28, height: 28, color: "var(--t5)", margin: "0 auto 12px" }} />
+            <p style={{ fontSize: 14, fontWeight: 500, color: "var(--t2)", marginBottom: 6 }}>No activity yet</p>
+            <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 16 }}>Connect your tools and FLOW will build a living timeline of everything happening across your company.</p>
+            <a href="/integrations" style={{ display: "inline-block", fontSize: 12, fontWeight: 500, color: "var(--brand)", background: "rgba(232,103,43,0.08)", padding: "7px 16px", borderRadius: 4, textDecoration: "none" }}>
+              Connect tools →
+            </a>
+          </div>
+        ) : (
+          <EmptyState variant="activity" />
+        )
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
           {groups.map(group => (

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { Folder, Search, Activity, Box, RefreshCw, BarChart2, CheckSquare } from "lucide-react";
+import { Folder, Search, Activity, Box, RefreshCw, BarChart2, CheckSquare, PlugZap } from "lucide-react";
 import ProjectOverview from "./ProjectOverview";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 // ── Demo data (shown when API unavailable) ────────────────────────────────────
 const DEMO_PROJECTS = [
@@ -135,7 +136,7 @@ function repoStatus(repo, prs) {
 function normalizeRepoToProject(repo, prs, commits) {
   const openPRs = prs.filter(pr => pr.status === "open" || pr.status === "draft");
 
-  const tasks = openPRs.slice(0, 3).map(pr => `PR #${pr.metadata?.number}: ${pr.title}`);
+  const tasks = openPRs.slice(0, 3).map(pr => pr.metadata?.number ? `PR #${pr.metadata.number}: ${pr.title}` : pr.title);
   if (repo.metadata?.openIssues > 0) {
     tasks.push(`${repo.metadata.openIssues} open issue${repo.metadata.openIssues !== 1 ? "s" : ""}`);
   }
@@ -154,10 +155,11 @@ function normalizeRepoToProject(repo, prs, commits) {
   if (!risks.length) risks.push("No critical risks detected");
 
   const topPR = openPRs[0];
+  const prRef = topPR?.metadata?.number ? `PR #${topPR.metadata.number}` : topPR?.title || "PR";
   const aiRecommendation = topPR
     ? topPR.metadata?.mergeReadinessScore >= 70
-      ? `PR #${topPR.metadata?.number} "${topPR.title}" is ready to merge (score ${topPR.metadata?.mergeReadinessScore}/100).`
-      : `Review PR #${topPR.metadata?.number} — merge readiness is ${topPR.metadata?.mergeReadinessScore}/100. Address review comments before merging.`
+      ? `${prRef} "${topPR.title}" is ready to merge (score ${topPR.metadata?.mergeReadinessScore}/100).`
+      : `Review ${prRef} — merge readiness is ${topPR.metadata?.mergeReadinessScore}/100. Address review comments before merging.`
     : `No open pull requests. Repo ${repo.title} is in a stable state.`;
 
   const normalizedCommits = commits.slice(0, 3).map(c => ({
@@ -196,6 +198,8 @@ function normalizeRepoToProject(repo, prs, commits) {
 
 export const ProjectIntelligence = () => {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
 
   const [activeTab, setActiveTab]     = useState("jira"); // "jira" or "github"
   const [searchQuery, setSearchQuery] = useState("");
@@ -296,7 +300,7 @@ export const ProjectIntelligence = () => {
               if (activeJira.length > 0) {
                 setJiraProjects(activeJira);
               } else {
-                setJiraProjects(DEMO_JIRA_PROJECTS);
+                setJiraProjects(isDemoWorkspace ? DEMO_JIRA_PROJECTS : []);
               }
               setIsDemo(false);
               setLoading(false);
@@ -309,9 +313,15 @@ export const ProjectIntelligence = () => {
       }
 
       if (!cancelled) {
-        setProjects(DEMO_PROJECTS);
-        setJiraProjects(DEMO_JIRA_PROJECTS);
-        setIsDemo(true);
+        if (isDemoWorkspace) {
+          setProjects(DEMO_PROJECTS);
+          setJiraProjects(DEMO_JIRA_PROJECTS);
+          setIsDemo(true);
+        } else {
+          setProjects([]);
+          setJiraProjects([]);
+          setIsDemo(false);
+        }
         setLoading(false);
       }
     }
@@ -443,7 +453,22 @@ export const ProjectIntelligence = () => {
 
       {/* List */}
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {currentDisplayList.length === 0 ? (
+        {currentDisplayList.length === 0 && !searchQuery && !loading && !isDemoWorkspace ? (
+          <div style={{ textAlign: "center", padding: "64px 24px", border: "1px solid var(--border)", borderRadius: 6, background: "var(--bg-card)" }}>
+            <PlugZap style={{ width: 28, height: 28, color: "var(--t5)", margin: "0 auto 12px" }} />
+            <p style={{ fontSize: 14, fontWeight: 500, color: "var(--t2)", marginBottom: 6 }}>
+              {activeTab === "jira" ? "Connect Jira to see your sprint boards" : "Connect GitHub to see your repositories"}
+            </p>
+            <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 16 }}>
+              {activeTab === "jira"
+                ? "FLOW will surface blockers, sprint velocity, and AI-recommended actions."
+                : "FLOW will score PR merge readiness, deployment risk, and code ownership."}
+            </p>
+            <a href="/integrations" style={{ display: "inline-block", fontSize: 12, fontWeight: 500, color: "var(--brand)", background: "rgba(232,103,43,0.08)", padding: "7px 16px", borderRadius: 4, textDecoration: "none" }}>
+              Connect {activeTab === "jira" ? "Jira" : "GitHub"} →
+            </a>
+          </div>
+        ) : currentDisplayList.length === 0 ? (
           <div style={{ textAlign: "center", color: "var(--t4)", fontSize: 13, padding: "48px 0" }}>
             No items match your search.
           </div>

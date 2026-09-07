@@ -16,6 +16,7 @@ import { generatePreventiveActions } from './RecommendationGenerator.js';
 import { report } from './PredictionReporter.js';
 import { saveMemory, queryMemory } from '../services/orgMemoryService.js';
 import { resolveOrgId } from '../events/orgResolver.js';
+import { isFrozenWorkspace } from '../core/governance/frozenWorkspaces.js';
 import { logger } from '../utils/logger.js';
 
 /**
@@ -71,6 +72,12 @@ export { allTypes, DOMAINS, modelsByDomain };
 
 async function persist(workspaceId, result) {
   try {
+    // Never let a proactive prediction run mutate a frozen certification fixture.
+    // Reads/compute are fine; only the history WRITE is suppressed.
+    if (isFrozenWorkspace(workspaceId)) {
+      logger.rag(`[predict] history persist skipped for frozen workspace ${workspaceId}`);
+      return;
+    }
     const orgId = await resolveOrgId(workspaceId);
     if (!orgId) return;
     const top = result.topRisks[0];

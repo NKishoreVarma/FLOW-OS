@@ -4,6 +4,7 @@ import SourceBadge from "../ui/SourceBadge";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { EmptyState } from "../ui/EmptyState";
 import { useEscapeKey } from "../../hooks/useEscapeKey";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 /**
  * SlackThreadPanel — read a full Slack thread inline (participants, replies,
@@ -46,6 +47,8 @@ function timeOf(ts) {
 }
 
 export default function SlackThreadPanel({ channelId, threadTs, title, onClose }) {
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
   const [state, setState] = useState({ loading: true, messages: [], channelName: "", demo: false, error: false });
   const [reply, setReply] = useState("");
   const [sending, setSending] = useState(false);
@@ -77,7 +80,10 @@ export default function SlackThreadPanel({ channelId, threadTs, title, onClose }
     let cancelled = false;
     (async () => {
       if (!channelId || !threadTs) {
-        if (!cancelled) setState({ loading: false, messages: DEMO_THREAD.messages, channelName: DEMO_THREAD.channelName, demo: true, error: false });
+        if (!cancelled) {
+          if (isDemoWorkspace) setState({ loading: false, messages: DEMO_THREAD.messages, channelName: DEMO_THREAD.channelName, demo: true, error: false });
+          else setState({ loading: false, messages: [], channelName: "", demo: false, error: false });
+        }
         return;
       }
       const token = localStorage.getItem("flow_os_token") || "";
@@ -94,12 +100,16 @@ export default function SlackThreadPanel({ channelId, threadTs, title, onClose }
         const messages = result.messages || [];
         if (cancelled) return;
         if (!messages.length) {
-          setState({ loading: false, messages: DEMO_THREAD.messages, channelName: DEMO_THREAD.channelName, demo: true, error: false });
+          if (isDemoWorkspace) setState({ loading: false, messages: DEMO_THREAD.messages, channelName: DEMO_THREAD.channelName, demo: true, error: false });
+          else setState({ loading: false, messages: [], channelName: "", demo: false, error: false });
         } else {
           setState({ loading: false, messages, channelName: messages[0]?.metadata?.channelName || "", demo: false, error: false });
         }
       } catch {
-        if (!cancelled) setState({ loading: false, messages: DEMO_THREAD.messages, channelName: DEMO_THREAD.channelName, demo: true, error: false });
+        if (!cancelled) {
+          if (isDemoWorkspace) setState({ loading: false, messages: DEMO_THREAD.messages, channelName: DEMO_THREAD.channelName, demo: true, error: false });
+          else setState({ loading: false, messages: [], channelName: "", demo: false, error: false });
+        }
       }
     })();
     return () => { cancelled = true; };

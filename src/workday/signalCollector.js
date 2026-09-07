@@ -165,6 +165,71 @@ export async function collect(workspaceId, { extraItems = [] } = {}) {
     }
   } catch { /* best-effort */ }
 
+  // ── Live signals: stale PRs + upcoming meetings (Phase 5 — proactive surfacing) ──
+  try {
+    const { fetchLiveEngineering, fetchLiveMeetings } = await import('../ai/reasoning/LiveConnectorLayer.js');
+
+    const [prRecords, meetRecords] = await Promise.all([
+      fetchLiveEngineering(workspaceId, 'open pull requests review').catch(() => null),
+      fetchLiveMeetings(workspaceId, 'upcoming meetings today').catch(() => null),
+    ]);
+
+    // Stale PR signal — PRs open > 2 days without merge
+    if (prRecords) {
+      const twoDaysAgo = Date.now() - 2 * 86_400_000;
+      const stalePRs = prRecords
+        .filter(r => r.type === 'PR' && r.status === 'open' && r.ts && new Date(r.ts).getTime() < twoDaysAgo)
+        .slice(0, 3);
+      for (const pr of stalePRs) {
+        const ageMs   = Date.now() - new Date(pr.ts).getTime();
+        const ageDays = Math.round(ageMs / 86_400_000);
+        items.push({
+          id: `stale-${pr.id}`, type: 'stale_pr', source: 'github',
+          title: pr.name,
+          subtitle: `Open for ${ageDays} day${ageDays !== 1 ? 's' : ''} — awaiting review`,
+          owners: pr.metadata?.author ? [pr.metadata.author] : [], participants: [],
+          blocking: 1, businessImpact: ageDays > 5 ? 'high' : 'medium',
+          department: 'engineering', actionRoute: '/projects', actionLabel: 'Review PR',
+          suggestedActions: [
+            { label: 'Open in GitHub', workflowId: 'navigate', risk: 'LOW', params: { url: pr.metadata?.url, route: '/projects' } },
+          ],
+          estimatedImpact: `Unblocks PR open ${ageDays}d`,
+          raw: pr,
+        });
+      }
+    }
+
+    // Upcoming meeting signal — meetings in < 30 min
+    if (meetRecords) {
+      const thirtyMin = Date.now() + 30 * 60_000;
+      const soon = meetRecords.filter(r => {
+        const ts = r.ts || r.metadata?.startTime;
+        if (!ts) return false;
+        const start = new Date(ts).getTime();
+        return start > Date.now() && start < thirtyMin;
+      }).slice(0, 2);
+      for (const meet of soon) {
+        const ts      = meet.ts || meet.metadata?.startTime;
+        const minsOut = Math.round((new Date(ts).getTime() - Date.now()) / 60_000);
+        items.push({
+          id: `meet-${meet.id}`, type: 'meeting', source: 'google-calendar',
+          title: `${meet.name || 'Meeting'} starts in ${minsOut} min`,
+          subtitle: meet.summary || (meet.metadata?.attendees?.length ? `${meet.metadata.attendees.length} attendees` : ''),
+          owners: [], participants: meet.metadata?.attendees || [],
+          blocking: 0, businessImpact: 'medium',
+          department: 'operations', actionRoute: '/meetings', actionLabel: 'Join',
+          suggestedActions: [
+            meet.metadata?.hangoutLink
+              ? { label: 'Join Meet', workflowId: 'navigate', risk: 'LOW', params: { url: meet.metadata.hangoutLink, route: '/meetings' } }
+              : { label: 'Open Calendar', workflowId: 'navigate', risk: 'LOW', params: { route: '/meetings' } },
+          ],
+          estimatedImpact: 'Prepare for upcoming meeting',
+          raw: meet,
+        });
+      }
+    }
+  } catch { /* live signal failure is always non-fatal */ }
+
   return [...items, ...extraItems];
 }
 

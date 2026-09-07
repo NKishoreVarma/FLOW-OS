@@ -1,0 +1,20 @@
+export default {
+  id: 'github.pr.merged', version: '1.0.0',
+  connector: 'github', category: 'ENGINEERING', source: 'webhook',
+  displayName: 'Pull Request Merged', description: 'A GitHub pull request was merged.',
+  priority: 'HIGH',
+  schema: {
+    'pr.number':              { type: 'number' },
+    'pr.title':               { type: 'string' },
+    'pr.merge_commit_sha':    { type: 'string' },
+    'pr.base.ref':            { type: 'string' },
+    'pr.head.ref':            { type: 'string' },
+    'repository.name':        { type: 'string' },
+    'repository.owner.login': { type: 'string' },
+    'sender.login':           { type: 'string' },
+  },
+  deduplication: { enabled: true, keyFields: ['sourceEventId'], windowMs: 60_000 },
+  ordering:      { guaranteed: false },
+  retry:         { maxAttempts: 3, backoffMs: 1_000 },
+  security:      { signatureRequired: true, signatureHeader: 'x-hub-signature-256', algorithm: 'hmac-sha256' },
+};

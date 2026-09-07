@@ -11,6 +11,7 @@ import { ToastContainer, useFlowToasts } from "../ui/FlowToast";
 import { WifiOff, FileText, Send } from "lucide-react";
 import Breadcrumb from "../ui/Breadcrumb";
 import StickyCommandCenter from "../command/StickyCommandCenter";
+import ExecutionDrawer from "../execution/ExecutionDrawer";
 import { isIntegrationEvent, eventSource, eventTitle, isCriticalEvent } from "../../lib/liveEvents";
 
 const LayoutInner = ({ children }) => {
@@ -114,10 +115,16 @@ const LayoutInner = ({ children }) => {
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, "workspace-id": wsId },
         body: JSON.stringify({ to: emailTo.trim(), subject: emailSubject.trim(), body: emailBody }),
       });
-      if (res.ok) showToast("Email sent from FLOW.", "success");
-      else showToast("Saved as draft — connect Gmail to send from your account.", "info");
+      const d = await res.json().catch(() => ({}));
+      // "Sent" only when Gmail returns a real messageId — never on a bare 200.
+      const messageId = d?.result?.result?.messageId || d?.result?.messageId || d?.messageId || null;
+      if (res.ok && messageId) showToast(`Email sent — Gmail message ${String(messageId).slice(0, 12)}`, "success");
+      else {
+        const reason = d?.error?.userMessage || d?.error?.message || (res.status === 401 ? "Gmail authentication expired — reconnect in Settings." : "Email was not sent.");
+        showToast(reason, "error");
+      }
     } catch {
-      showToast("Saved as draft — connect Gmail to send from your account.", "info");
+      showToast("Couldn't reach the server — email was not sent.", "error");
     }
     setEmailTo(""); setEmailSubject(""); setEmailBody(""); setIsComposeOpen(false);
   };
@@ -168,6 +175,7 @@ const LayoutInner = ({ children }) => {
       <CommandPalette isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       <ShortcutModal isOpen={isShortcutOpen} onClose={() => setIsShortcutOpen(false)} />
       <EntityContextPanel />
+      <ExecutionDrawer />
       {jiraDraft && (
         <CreateJiraModal
           initial={jiraDraft}
@@ -217,12 +225,18 @@ const LayoutInner = ({ children }) => {
   );
 };
 
-export const LayoutShell = ({ children }) => (
-  <WebSocketProvider>
-    <ToastProvider>
-      <LayoutInner>{children}</LayoutInner>
-    </ToastProvider>
-  </WebSocketProvider>
-);
+export const LayoutShell = ({ children }) => {
+  // Login page renders without the shell (no sidebar, no WS)
+  if (window.location.pathname === '/login') {
+    return children;
+  }
+  return (
+    <WebSocketProvider>
+      <ToastProvider>
+        <LayoutInner>{children}</LayoutInner>
+      </ToastProvider>
+    </WebSocketProvider>
+  );
+};
 
 export default LayoutShell;

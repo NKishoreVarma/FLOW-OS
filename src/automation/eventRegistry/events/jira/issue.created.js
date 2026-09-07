@@ -1,0 +1,21 @@
+export default {
+  id: 'jira.issue.created', version: '1.0.0',
+  connector: 'jira', category: 'WORK_MANAGEMENT', source: 'webhook',
+  displayName: 'Jira Issue Created', description: 'A new Jira issue was created.',
+  priority: 'NORMAL',
+  schema: {
+    'issue.id':             { type: 'string' },
+    'issue.key':            { type: 'string' },
+    'issue.fields.summary': { type: 'string' },
+    'issue.fields.status.name':    { type: 'string' },
+    'issue.fields.issuetype.name': { type: 'string' },
+    'issue.fields.priority.name':  { type: 'string' },
+    'issue.fields.project.key':    { type: 'string' },
+    'issue.fields.assignee':       { type: 'object' },
+    'user.displayName':            { type: 'string' },
+  },
+  deduplication: { enabled: true, keyFields: ['sourceEventId'], windowMs: 60_000 },
+  ordering:      { guaranteed: false },
+  retry:         { maxAttempts: 3, backoffMs: 1_000 },
+  security:      { signatureRequired: true, signatureHeader: 'x-hub-signature', algorithm: 'hmac-sha256' },
+};

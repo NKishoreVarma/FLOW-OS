@@ -10,12 +10,27 @@
 import { subscribe } from '../events/EventSubscriber.js';
 import { applyEvent } from './GraphEngine.js';
 import { logger } from '../utils/logger.js';
+import { traceStage, STAGES } from '../observability/ingestionTrace.js';
 
 let _registered = false;
+
+async function _graphHandler(event) {
+  const res = await applyEvent(event);
+  // Safe per-item trace continuation: relationships are extracted here (the single
+  // graph writer). Only fires for items carrying a sync correlation id.
+  const eventId = event?.metadata?._traceEventId;
+  if (eventId && event?.workspaceId) {
+    traceStage(STAGES.RELATIONSHIP_EXTRACTED, {
+      workspaceId: event.workspaceId, eventId,
+      status: 'ok', count: res?.edges ?? 0,
+    });
+  }
+  return res;
+}
 
 export function registerGraphSubscriber() {
   if (_registered) return;
   _registered = true;
-  subscribe('graph', {}, (event) => applyEvent(event), { priority: 6, durable: true, retries: 2 });
+  subscribe('graph', {}, _graphHandler, { priority: 6, durable: true, retries: 2 });
   logger.rag('[graph] operational graph subscriber registered (single writer)');
 }

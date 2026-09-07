@@ -1,6 +1,6 @@
-import { embed as brainEmbed } from '../ai/BrainRouter.js';
 import crypto from 'crypto';
 import { chunkText } from './parserService.js';
+import { generateEmbedding } from '../utils/llm/embeddingHelpers.js';
 
 // ── Module-level global vector database ──────────────────────────────────────
 export const vectorDatabase = [];
@@ -128,15 +128,8 @@ export { chunkText };
  * @param {string} text - Content to vectorize
  * @returns {Promise<number[]>} Float array of size 768
  */
-export async function generateEmbedding(text) {
-  const response = await brainEmbed(text);
-  const values = response.values;
-  if (!Array.isArray(values) || values.length === 0) {
-    throw new Error('[Vector Store Service] Failed to retrieve valid embedding values.');
-  }
-
-  return values;
-}
+// generateEmbedding is re-exported from embeddingHelpers (shared canonical implementation)
+export { generateEmbedding };
 
 /**
  * Chunks raw text, vectorizes each chunk, runs the Synapse Engine cluster resolver,

@@ -1,0 +1,20 @@
+export default {
+  id: 'github.deployment.created', version: '1.0.0',
+  connector: 'github', category: 'ENGINEERING', source: 'webhook',
+  displayName: 'GitHub Deployment Created', description: 'A deployment was created on GitHub.',
+  priority: 'HIGH',
+  schema: {
+    'deployment.id':          { type: 'number' },
+    'deployment.ref':         { type: 'string' },
+    'deployment.sha':         { type: 'string' },
+    'deployment.environment': { type: 'string' },
+    'deployment.task':        { type: 'string' },
+    'repository.name':        { type: 'string' },
+    'repository.owner.login': { type: 'string' },
+    'sender.login':           { type: 'string' },
+  },
+  deduplication: { enabled: true, keyFields: ['sourceEventId'], windowMs: 60_000 },
+  ordering:      { guaranteed: false },
+  retry:         { maxAttempts: 3, backoffMs: 1_000 },
+  security:      { signatureRequired: true, signatureHeader: 'x-hub-signature-256', algorithm: 'hmac-sha256' },
+};

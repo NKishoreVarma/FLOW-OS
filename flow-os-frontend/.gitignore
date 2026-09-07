@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# dev-only certification entry (contains a JWT — never commit)
+.env.local

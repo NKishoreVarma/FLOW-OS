@@ -1,49 +1,55 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
-  Home, Inbox, GitMerge, Calendar, BookOpen,
+  Home, Inbox, Calendar, BookOpen,
   BrainCircuit, BarChart2, Users, Building2, Crown,
   Plug, Activity, TrendingUp, ChevronDown, ChevronRight,
   Shield, FileText, Heart, CreditCard, UserPlus, Settings,
-  Search,
+  Search, LayoutDashboard, Code2, HeadphonesIcon, Zap, Play, Cpu,
 } from "lucide-react";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 // ─── Navigation architecture (spec: BP-11, §Navigation Architecture) ──────────
 const PRIMARY = [
-  { label: "Home",        path: "/",          icon: Home,      exact: true },
-  { label: "Inbox",       path: "/inbox",     icon: Inbox,     badge: "approvals" },
-  { label: "Engineering", path: "/projects",  icon: GitMerge },
-  { label: "Meetings",    path: "/meetings",  icon: Calendar },
-  { label: "Knowledge",   path: "/knowledge", icon: BookOpen },
+  { label: "Home",        path: "/",         icon: Home,     exact: true },
+  { label: "Inbox",       path: "/inbox",    icon: Inbox,    badge: "approvals" },
+  { label: "Meetings",    path: "/meetings", icon: Calendar },
+  { label: "Knowledge",   path: "/knowledge",icon: BookOpen },
 ];
 
 const INTELLIGENCE = [
+  { label: "Executive",         path: "/dashboard", icon: LayoutDashboard },
+  { label: "Engineering",       path: "/engineering", icon: Code2 },
+  { label: "Support",           path: "/support",   icon: HeadphonesIcon },
   { label: "Chief of Staff",    path: "/chief",     icon: BrainCircuit },
-  { label: "Weekly Review",     path: "/review",    icon: BarChart2 },
-  { label: "People",            path: "/people",    icon: Users },
   { label: "Customers",         path: "/customers", icon: Building2 },
-  { label: "Executive Council", path: "/council",   icon: Crown },
+  { label: "People",            path: "/people",    icon: Users },
 ];
 
-// Top-level platform items + expandable Settings sub-group
+// Top-level platform items + expandable Settings sub-group.
+// (Executive Council, Weekly Review, Launch Portal, Sales Demo, Value routes still
+// exist and are reachable by URL — removed from the nav to reduce clutter.)
 const PLATFORM_TOP = [
   { label: "Integrations", path: "/integrations", icon: Plug },
   { label: "Activity",     path: "/activity",     icon: Activity },
-  { label: "Value",        path: "/success",      icon: TrendingUp },
 ];
 
 const SETTINGS_ITEMS = [
-  { label: "IAM",        path: "/settings/iam",        icon: Shield },
-  { label: "Governance", path: "/settings/governance", icon: Shield },
-  { label: "Audit",      path: "/settings/audit",      icon: FileText },
-  { label: "Security",   path: "/settings/security",   icon: Shield },
-  { label: "Health",     path: "/settings/health",     icon: Heart },
-  { label: "Billing",    path: "/settings/billing",    icon: CreditCard },
-  { label: "Team",       path: "/settings/team",       icon: UserPlus },
+  { label: "IAM",               path: "/settings/iam",         icon: Shield },
+  { label: "Governance",        path: "/settings/governance",  icon: Shield },
+  { label: "Audit",             path: "/settings/audit",       icon: FileText },
+  { label: "Security",          path: "/settings/security",    icon: Shield },
+  { label: "Health",            path: "/settings/health",      icon: Heart },
+  { label: "Billing",           path: "/settings/billing",     icon: CreditCard },
+  { label: "Team",              path: "/settings/team",        icon: UserPlus },
+  { label: "AI Orchestrator",   path: "/settings/ai",          icon: Cpu },
+  { label: "Release Notes",     path: "/settings/releases",       icon: FileText },
+  { label: "Pilot Readiness",   path: "/settings/readiness",      icon: Shield },
+  { label: "Connectors",        path: "/settings/certification",   icon: Shield },
 ];
 
-const SETTINGS_PATHS = new Set(SETTINGS_ITEMS.map((i) => i.path).concat(["/settings"]));
+const SETTINGS_PATHS = new Set(SETTINGS_ITEMS.map((i) => i.path).concat(["/settings", "/settings/ai", "/settings/releases", "/settings/readiness", "/settings/certification"]));
 
 // ─── NavItem ──────────────────────────────────────────────────────────────────
 function NavItem({ item, currentPath, onNavigate, badge = 0, indent = false }) {
@@ -153,6 +159,8 @@ export const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { workspaceId } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isReady = wsState.workspacePhase === 'READY';
   const [hidden, setHidden] = useState(false);
   const [trayHover, setTrayHover] = useState(false);
   const [pendingApprovals, setPendingApprovals] = useState(0);
@@ -250,48 +258,82 @@ export const Sidebar = () => {
 
       {/* Navigation */}
       <nav style={{ flex: 1, overflowY: "auto", paddingBottom: 8 }}>
+        {isReady ? (
+          <>
+            {/* PRIMARY */}
+            <GroupLabel label="Primary" />
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              {PRIMARY.map((item) => (
+                <NavItem
+                  key={item.path}
+                  item={item}
+                  currentPath={currentPath}
+                  onNavigate={handleNavigate}
+                  badge={item.badge === "approvals" ? pendingApprovals : 0}
+                />
+              ))}
+            </ul>
 
-        {/* PRIMARY */}
-        <GroupLabel label="Primary" />
-        <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-          {PRIMARY.map((item) => (
-            <NavItem
-              key={item.path}
-              item={item}
-              currentPath={currentPath}
-              onNavigate={handleNavigate}
-              badge={item.badge === "approvals" ? pendingApprovals : 0}
-            />
-          ))}
-        </ul>
+            {/* INTELLIGENCE */}
+            <GroupLabel label="Intelligence" />
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              {INTELLIGENCE.map((item) => (
+                <NavItem
+                  key={item.path}
+                  item={item}
+                  currentPath={currentPath}
+                  onNavigate={handleNavigate}
+                />
+              ))}
+            </ul>
 
-        {/* INTELLIGENCE */}
-        <GroupLabel label="Intelligence" />
-        <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-          {INTELLIGENCE.map((item) => (
-            <NavItem
-              key={item.path}
-              item={item}
-              currentPath={currentPath}
-              onNavigate={handleNavigate}
-            />
-          ))}
-        </ul>
+            {/* PLATFORM */}
+            <GroupLabel label="Platform" />
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              {PLATFORM_TOP.map((item) => (
+                <NavItem
+                  key={item.path}
+                  item={item}
+                  currentPath={currentPath}
+                  onNavigate={handleNavigate}
+                />
+              ))}
+              <SettingsGroup currentPath={currentPath} onNavigate={handleNavigate} />
+            </ul>
+          </>
+        ) : (
+          <>
+            {/* SETUP — minimal nav before workspace is ready */}
+            <GroupLabel label="Setup" />
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              <NavItem item={{ label: "Workspace Setup", path: "/setup", icon: Zap, exact: true }} currentPath={currentPath} onNavigate={handleNavigate} />
+              <NavItem item={{ label: "Integrations", path: "/integrations", icon: Plug }} currentPath={currentPath} onNavigate={handleNavigate} />
+              <NavItem item={{ label: "Help", path: "/help", icon: HeadphonesIcon }} currentPath={currentPath} onNavigate={handleNavigate} />
+            </ul>
 
-        {/* PLATFORM */}
-        <GroupLabel label="Platform" />
-        <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-          {PLATFORM_TOP.map((item) => (
-            <NavItem
-              key={item.path}
-              item={item}
-              currentPath={currentPath}
-              onNavigate={handleNavigate}
-            />
-          ))}
-          <SettingsGroup currentPath={currentPath} onNavigate={handleNavigate} />
-        </ul>
-
+            {/* Readiness meter */}
+            {!wsState.loading && (
+              <div style={{ padding: "16px 16px 8px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+                  <span style={{ fontFamily: "var(--font-data)", fontSize: 10, color: "var(--t4)" }}>
+                    {wsState.connectedCount}/{wsState.minConnectorsRequired || 3} integrations
+                  </span>
+                  <span style={{ fontFamily: "var(--font-data)", fontSize: 10, color: "var(--accent)", fontWeight: 500 }}>
+                    {wsState.readinessPercent || 0}%
+                  </span>
+                </div>
+                <div style={{ height: 3, background: "var(--line-1)", borderRadius: 2 }}>
+                  <div style={{
+                    height: "100%", borderRadius: 2,
+                    background: "var(--accent)",
+                    width: `${wsState.readinessPercent || 0}%`,
+                    transition: "width 600ms ease",
+                  }} />
+                </div>
+              </div>
+            )}
+          </>
+        )}
       </nav>
 
       {/* ⌘K hint */}
