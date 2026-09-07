@@ -75,6 +75,77 @@ export async function getWeeklyReview(workspaceId, { days = 7 } = {}) {
     reason: item.reasons?.[0] || item.subtitle || '',
   }));
 
+  // Phase 7 — Workspace pattern recognition
+  const patterns = [];
+
+  try {
+    // Stale PRs — PRs older than 3 days (graph nodes with type PR and old createdAt)
+    const stalePRs = await prisma.graphNode.findMany({
+      where: {
+        workspaceId,
+        type: 'PR',
+        createdAt: { lt: new Date(Date.now() - 3 * 86_400_000) },
+      },
+      orderBy: { createdAt: 'asc' },
+      take: 10,
+      select: { name: true, createdAt: true, metadata: true },
+    });
+    if (stalePRs.length > 0) {
+      const oldest = stalePRs[0];
+      const ageDays = Math.round((Date.now() - new Date(oldest.createdAt).getTime()) / 86_400_000);
+      patterns.push({
+        type: 'stale_prs',
+        title: `${stalePRs.length} PRs open 3+ days`,
+        detail: `Oldest: "${oldest.name}" (${ageDays}d). Code review bottleneck may be slowing delivery.`,
+        severity: stalePRs.length > 5 ? 'high' : 'medium',
+        evidenceSource: 'knowledge_graph',
+      });
+    }
+
+    // Recurring incidents — same incident type appearing 2+ times
+    const recentIncidents = await prisma.orgMemoryRecord.findMany({
+      where: { workspaceId, type: 'INCIDENT', createdAt: { gte: since } },
+      select: { title: true, tags: true, createdAt: true },
+      take: 20,
+    });
+    if (recentIncidents.length >= 2) {
+      const tagFreq = {};
+      recentIncidents.forEach(i => {
+        (i.tags || []).forEach(t => { tagFreq[t] = (tagFreq[t] || 0) + 1; });
+      });
+      const recurring = Object.entries(tagFreq).filter(([, c]) => c >= 2).map(([t]) => t);
+      if (recurring.length > 0) {
+        patterns.push({
+          type: 'recurring_incidents',
+          title: `Recurring incidents: ${recurring.slice(0, 3).join(', ')}`,
+          detail: `${recentIncidents.length} incidents in ${days}d. Tags appear repeatedly — consider a root cause review.`,
+          severity: 'high',
+          evidenceSource: 'org_memory',
+        });
+      }
+    }
+
+    // Skipped meetings — notification MEETING type not acted on (best-effort using notifications)
+    const meetingNotifs = await prisma.notification.findMany({
+      where: {
+        workspaceId,
+        type: { contains: 'MEETING', mode: 'insensitive' },
+        createdAt: { gte: since },
+      },
+      select: { title: true, body: true, createdAt: true },
+      take: 20,
+    }).catch(() => []);
+    if (meetingNotifs.length >= 3) {
+      patterns.push({
+        type: 'meeting_load',
+        title: `${meetingNotifs.length} meeting notifications this week`,
+        detail: 'High meeting volume detected. Consider blocking focus time or delegating recurring syncs.',
+        severity: meetingNotifs.length > 8 ? 'high' : 'medium',
+        evidenceSource: 'notifications',
+      });
+    }
+  } catch { /* pattern analysis is best-effort */ }
+
   return {
     window: { days, since: since.toISOString() },
     generatedAt: new Date().toISOString(),
@@ -93,5 +164,6 @@ export async function getWeeklyReview(workspaceId, { days = 7 } = {}) {
     },
     operationalRisks,
     recommendedPriorities,
+    patterns,
   };
 }

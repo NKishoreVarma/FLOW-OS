@@ -238,7 +238,6 @@ export async function triggerAnalysis(workspaceId, orgId) {
 async function _getActiveWorkspaces() {
   try {
     const ws = await prisma.workspace.findMany({
-      where:  { deletedAt: null },
       select: { id: true, orgId: true },
       take:   100,
     });

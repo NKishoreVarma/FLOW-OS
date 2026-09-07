@@ -166,7 +166,12 @@ export async function stageGenerateGraphs(ctx) {
   ctx.emit('stageGenerateGraphs', 'started', 'Writing nodes and edges to operational and in-memory graphs');
   try {
     const skippedEdges = [];
+    const allEdges = [];
 
+    // PASS 1 — write EVERY node across EVERY type first. An edge can point to a node
+    // in a different dataset type (PR → USER, USER → DEPARTMENT); writing nodes and
+    // edges interleaved per-type meant an edge could hit a not-yet-written endpoint
+    // and violate the FK, aborting the whole import. Write all nodes, collect edges.
     for (const type of Object.keys(ctx.normalized)) {
       const handler = getDatasetHandler(type);
       if (!handler) continue;
@@ -178,27 +183,25 @@ export async function stageGenerateGraphs(ctx) {
         registerEntity(node.id, node.type, node.name);
         ctx.graphMetrics.nodes++;
       }
+      for (const edge of edges) allEdges.push(edge);
+    }
+    // Pre-resolved cross-dataset edges from stageResolveRelationships.
+    for (const edge of (ctx.resolvedEdges ?? [])) allEdges.push(edge);
 
-      for (const edge of edges) {
-        if (!ctx.globalIdMap.has(String(edge.sourceId)) || !ctx.globalIdMap.has(String(edge.targetId))) {
-          skippedEdges.push({ sourceId: edge.sourceId, targetId: edge.targetId, reason: 'missing endpoint' });
-          continue;
-        }
+    // PASS 2 — now that all nodes exist, write edges. Skip any whose endpoint isn't a
+    // known node; a stray FK on one edge must NOT abort the whole import (fault-isolated).
+    for (const edge of allEdges) {
+      if (!ctx.globalIdMap.has(String(edge.sourceId)) || !ctx.globalIdMap.has(String(edge.targetId))) {
+        skippedEdges.push({ sourceId: edge.sourceId, targetId: edge.targetId, reason: 'missing endpoint' });
+        continue;
+      }
+      try {
         await upsertEdge(ctx.workspaceId, ctx.orgId, edge.sourceId, edge.targetId, edge.type, edge.weight ?? 1);
         linkEntities(edge.sourceId, edge.targetId, edge.type);
         ctx.graphMetrics.edges++;
+      } catch (edgeErr) {
+        skippedEdges.push({ sourceId: edge.sourceId, targetId: edge.targetId, reason: `write failed: ${edgeErr.message?.slice(0, 60)}` });
       }
-    }
-
-    // Pre-resolved cross-dataset edges from stageResolveRelationships — persist them with full context
-    for (const edge of (ctx.resolvedEdges ?? [])) {
-      if (!ctx.globalIdMap.has(String(edge.sourceId)) || !ctx.globalIdMap.has(String(edge.targetId))) {
-        skippedEdges.push({ sourceId: edge.sourceId, targetId: edge.targetId, reason: 'missing endpoint in resolved edges' });
-        continue;
-      }
-      await upsertEdge(ctx.workspaceId, ctx.orgId, edge.sourceId, edge.targetId, edge.type, edge.weight ?? 1);
-      linkEntities(edge.sourceId, edge.targetId, edge.type);
-      ctx.graphMetrics.edges++;
     }
 
     ctx.emit('stageGenerateGraphs', 'completed', 'Graph generation complete', {

@@ -22,13 +22,18 @@ export const summaryWorker = new Worker('summary-queue', async (job) => {
   }
 }, { connection });
 
-// Schedule repeatable daily rollup job for default workspace (workspace_corp_alpha)
-summaryQueue.add('daily-rollup', { workspaceId: 'workspace_corp_alpha', hours: 24 }, {
-  repeat: {
-    pattern: '0 0 * * *' // Every day at midnight
-  }
-}).then(() => {
-  console.log('⏰ [Summary Worker] Repeatable daily summary rollup scheduled successfully.');
-}).catch(err => {
-  console.warn('⚠️ [Summary Worker] Failed to schedule repeatable rollup:', err.message);
-});
+// Schedule repeatable daily rollup job — workspace controlled by DEFAULT_SUMMARY_WORKSPACE env var
+const defaultWs = process.env.DEFAULT_SUMMARY_WORKSPACE || '';
+if (!defaultWs) {
+  console.warn('⚠️ [Summary Worker] DEFAULT_SUMMARY_WORKSPACE not set — skipping daily summary cron');
+} else {
+  summaryQueue.add('daily-rollup', { workspaceId: defaultWs, hours: 24 }, {
+    repeat: {
+      pattern: '0 0 * * *' // Every day at midnight
+    }
+  }).then(() => {
+    console.log('⏰ [Summary Worker] Repeatable daily summary rollup scheduled successfully.');
+  }).catch(err => {
+    console.warn('⚠️ [Summary Worker] Failed to schedule repeatable rollup:', err.message);
+  });
+}

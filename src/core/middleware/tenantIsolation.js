@@ -30,6 +30,11 @@ const EXCLUDED_PATHS = [
   '/api/webhook/ingest',
   '/api/ai/providers',  // infrastructure health — no workspace scoping needed
   '/api/analytics/live', // SSE endpoint — EventSource cannot send custom headers; handler re-verifies via query params
+  // OAuth callbacks arrive from Google's redirect — no workspace-id header possible.
+  // workspaceId is recovered from the HMAC-signed state param inside the route handler.
+  '/api/communication/oauth/callback',
+  '/api/meetings/oauth/callback',
+  '/api/google/callback',
 ];
 
 export async function tenantIsolation(req, res, next) {

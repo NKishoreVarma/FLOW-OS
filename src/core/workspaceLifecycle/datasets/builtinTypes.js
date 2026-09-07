@@ -33,6 +33,26 @@ export function makeVectorizer(type, vectorFields) {
   };
 }
 
+// A node's display name: prefer a human field, and include commit MESSAGE so a commit
+// node reads "fix: …" rather than its bare id.
+export function nodeName(rec) {
+  return rec.name ?? rec.title ?? rec.subject ?? rec.message ?? String(rec.id);
+}
+
+// Grounding metadata carried onto every node so the Brain can cite REAL fields
+// (author, message, status, repo…) instead of inventing them. Only a curated set of
+// short scalar fields — never the whole record.
+const _META_FIELDS = ['id', 'author', 'created_by', 'message', 'status', 'state', 'priority',
+  'assignee', 'repo', 'sha', 'from', 'to', 'subject', 'severity', 'client', 'health',
+  'renewal_date', 'role', 'department', 'reviewers_requested', 'merge_readiness',
+  // RC-3 temporal + responsibility grounding: real scalar fields when present.
+  'start_time', 'end_time', 'organizer', 'reports_to', 'assigned_to', 'incident_commander'];
+export function nodeMeta(rec) {
+  const m = {};
+  for (const f of _META_FIELDS) if (rec[f] != null) m[f] = rec[f];
+  return m;
+}
+
 export function makeResolver(entityType, edgeBuilders) {
   return function resolve(records, _globalIdMap) {
     const nodes = [];
@@ -41,8 +61,8 @@ export function makeResolver(entityType, edgeBuilders) {
       nodes.push({
         id: String(rec.id),
         type: entityType,
-        name: rec.name ?? rec.title ?? rec.subject ?? String(rec.id),
-        metadata: { id: rec.id },
+        name: nodeName(rec),
+        metadata: nodeMeta(rec),
       });
       for (const buildEdge of edgeBuilders) {
         const edge = buildEdge(rec);
@@ -73,11 +93,26 @@ registerDatasetType({
   graphBuilder: noGraph,
 });
 
-// employees
-const employeesResolver = makeResolver('USER', [
-  rec => rec.departmentId ? { sourceId: String(rec.id), targetId: String(rec.departmentId), type: 'MEMBER_OF' } : null,
-  rec => rec.teamId ? { sourceId: String(rec.id), targetId: String(rec.teamId), type: 'MEMBER_OF' } : null,
-]);
+// employees — includes RC-3 reporting structure (REPORTS_TO / MANAGES). MANAGES is an
+// array, so this resolver is custom (makeResolver's edge builders emit one edge each).
+function employeesResolver(records, _globalIdMap) {
+  const nodes = [];
+  const edges = [];
+  for (const rec of (records ?? [])) {
+    nodes.push({ id: String(rec.id), type: 'USER', name: nodeName(rec), metadata: nodeMeta(rec) });
+    if (rec.departmentId) edges.push({ sourceId: String(rec.id), targetId: String(rec.departmentId), type: 'MEMBER_OF' });
+    if (rec.teamId) edges.push({ sourceId: String(rec.id), targetId: String(rec.teamId), type: 'MEMBER_OF' });
+    // REPORTS_TO: employee → their manager (explicit reports_to field).
+    if (rec.managerId) edges.push({ sourceId: String(rec.id), targetId: String(rec.managerId), type: 'REPORTS_TO' });
+    // MANAGES: employee → each direct report (explicit manages[] array).
+    if (Array.isArray(rec.manages)) {
+      for (const reportId of rec.manages) {
+        if (reportId) edges.push({ sourceId: String(rec.id), targetId: String(reportId), type: 'MANAGES' });
+      }
+    }
+  }
+  return { nodes, edges };
+}
 registerDatasetType({
   type: 'employees',
   validator: makeValidator(['id', 'name']),
@@ -187,7 +222,7 @@ function pullRequestsResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'PR',
       name: rec.title ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
     if (rec.repositoryId) edges.push({ sourceId: String(rec.id), targetId: String(rec.repositoryId), type: 'PART_OF' });
     if (rec.authorId) edges.push({ sourceId: String(rec.id), targetId: String(rec.authorId), type: 'AUTHORED_BY' });
@@ -212,7 +247,7 @@ function jiraIssuesResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'ISSUE',
       name: rec.title ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
     if (rec.projectId) edges.push({ sourceId: String(rec.id), targetId: String(rec.projectId), type: 'PART_OF' });
     if (rec.assigneeId) edges.push({ sourceId: String(rec.id), targetId: String(rec.assigneeId), type: 'ASSIGNED_TO' });
@@ -237,7 +272,7 @@ function emailsResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'EMAIL',
       name: rec.subject ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
   }
   return { nodes, edges };
@@ -260,7 +295,7 @@ function slackThreadsResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'COMMUNICATION',
       name: rec.channel ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
   }
   return { nodes, edges };
@@ -301,7 +336,7 @@ function meetingsResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'MEETING',
       name: rec.title ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
     if (rec.projectId) edges.push({ sourceId: String(rec.id), targetId: String(rec.projectId), type: 'RELATES_TO' });
   }
@@ -326,7 +361,7 @@ function meetingTranscriptsResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'TRANSCRIPT',
       name: rec.title ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
     if (rec.meetingId) edges.push({ sourceId: String(rec.id), targetId: String(rec.meetingId), type: 'TRANSCRIPT_OF' });
   }
@@ -351,10 +386,13 @@ function incidentsResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'INCIDENT',
       name: rec.title ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
     if (rec.repositoryId) edges.push({ sourceId: String(rec.id), targetId: String(rec.repositoryId), type: 'AFFECTS' });
     if (rec.projectId) edges.push({ sourceId: String(rec.id), targetId: String(rec.projectId), type: 'AFFECTS' });
+    // RC-3 incident responsibility (explicit fields): who owns it, who commands it.
+    if (rec.assigneeId) edges.push({ sourceId: String(rec.id), targetId: String(rec.assigneeId), type: 'ASSIGNED_TO' });
+    if (rec.commanderId) edges.push({ sourceId: String(rec.id), targetId: String(rec.commanderId), type: 'COMMANDER' });
   }
   return { nodes, edges };
 }
@@ -377,7 +415,7 @@ function documentsResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'DOCUMENT',
       name: rec.title ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
   }
   return { nodes, edges };
@@ -401,7 +439,7 @@ function timelineResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'EVENT',
       name: rec.title ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
     if (rec.entityId) edges.push({ sourceId: String(rec.id), targetId: String(rec.entityId), type: 'RELATES_TO' });
   }
@@ -435,7 +473,7 @@ function executiveReportsResolve(records, _globalIdMap) {
       id: String(rec.id),
       type: 'DOCUMENT',
       name: rec.title ?? String(rec.id),
-      metadata: { id: rec.id },
+      metadata: nodeMeta(rec),
     });
   }
   return { nodes, edges };

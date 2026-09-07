@@ -9,7 +9,19 @@ import { AuthenticationError } from '../errors/index.js';
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export function authenticate(req, res, next) {
-  const publicPaths = ['/api/health', '/api/auth/signup', '/api/auth/login', '/api/auth/refresh', '/api/analytics/live'];
+  const publicPaths = [
+    '/api/health',
+    '/api/auth/signup',
+    '/api/auth/login',
+    '/api/auth/refresh',
+    '/api/analytics/live',
+    // OAuth callbacks arrive from Google's redirect — they carry a signed state param
+    // (HMAC-SHA256 via GoogleOAuthService.verifyState) instead of a JWT.
+    // No Authorization header is possible on an external redirect.
+    '/api/communication/oauth/callback',
+    '/api/meetings/oauth/callback',
+    '/api/google/callback',
+  ];
   if (publicPaths.some(p => req.path.startsWith(p))) {
     return next();
   }

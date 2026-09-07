@@ -40,4 +40,14 @@ export async function reset(workspaceId) {
   return defaultState();
 }
 
-export default { STEPS, getState, setState, markComplete, reset };
+/**
+ * Derive the workspace data mode from onboarding state.
+ * 'demo' when the user picked the demo path during onboarding; 'real' otherwise.
+ */
+export async function getWorkspaceMode(workspaceId) {
+  const state = await getState(workspaceId);
+  const workspaceMode = state.mode === 'demo' ? 'demo' : 'real';
+  return { workspaceMode, onboardingMode: state.mode };
+}
+
+export default { STEPS, getState, setState, markComplete, reset, getWorkspaceMode };

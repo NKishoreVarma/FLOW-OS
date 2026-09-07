@@ -15,6 +15,7 @@ import Redis from 'ioredis';
 import db from '../config/db.js';
 import { predict } from '../predictions/index.js';
 import { broadcastToWorkspace } from '../services/socketService.js';
+import { isFrozenWorkspace } from '../core/governance/frozenWorkspaces.js';
 import { logger } from '../utils/logger.js';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -31,7 +32,8 @@ async function activeWorkspaces() {
     `SELECT workspace_id, count(*)::int c FROM flow_events
       WHERE ts > NOW() - INTERVAL '7 days'
       GROUP BY workspace_id ORDER BY c DESC LIMIT $1`, [MAX_WORKSPACES]).catch(() => ({ rows: [] }));
-  return rows.map(r => r.workspace_id);
+  // Never proactively scan a frozen certification fixture (keeps its rows stable).
+  return rows.map(r => r.workspace_id).filter(ws => !isFrozenWorkspace(ws));
 }
 
 export const predictionWorker = new Worker('prediction-queue', async () => {
