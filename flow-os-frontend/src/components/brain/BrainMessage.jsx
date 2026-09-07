@@ -306,28 +306,36 @@ export default function BrainMessage({ message, isLatest, onAction, onFollowUp, 
           </div>
         )}
 
-        {/* Nav action links */}
+        {/* Nav / ask action chips */}
         {message.actions?.length > 0 && streamDone && (
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 }}>
-            {message.actions.map((action, i) => (
-              <a
-                key={i}
-                href={action.href || "#"}
-                style={{
-                  padding:     "5px 12px",
-                  borderRadius: 4,
-                  border:      "1px solid var(--border-strong)",
-                  fontSize:     12,
-                  color:       "var(--t3)",
-                  textDecoration: "none",
-                  transition:  "all 100ms",
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--brand-hover-border)"; e.currentTarget.style.color = "var(--t1)"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border-strong)"; e.currentTarget.style.color = "var(--t3)"; }}
-              >
-                {action.label}
-              </a>
-            ))}
+            {message.actions.map((action, i) => {
+              const handleClick = (e) => {
+                if (action.ask)   { e.preventDefault(); onFollowUp?.(action.ask); }
+                else if (action.route) { e.preventDefault(); onNavigate?.(action.route); }
+              };
+              return (
+                <a
+                  key={i}
+                  href={action.href || action.route || "#"}
+                  onClick={handleClick}
+                  style={{
+                    padding:        "5px 12px",
+                    borderRadius:    4,
+                    border:         "1px solid var(--border-strong)",
+                    fontSize:        12,
+                    color:          "var(--t3)",
+                    textDecoration:  "none",
+                    cursor:          "pointer",
+                    transition:     "all 100ms",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--brand-hover-border)"; e.currentTarget.style.color = "var(--t1)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border-strong)"; e.currentTarget.style.color = "var(--t3)"; }}
+                >
+                  {action.label}
+                </a>
+              );
+            })}
           </div>
         )}
 

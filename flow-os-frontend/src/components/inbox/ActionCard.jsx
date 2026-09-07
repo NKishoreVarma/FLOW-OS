@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Zap, ChevronDown, Check, AlertTriangle, Clock, Loader2, ShieldCheck } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Zap, ChevronDown, Check, AlertTriangle, Clock, Loader2, ShieldCheck, ExternalLink } from "lucide-react";
 import executionApi from "../../lib/executionApi";
 
 function trackPilot(event, props = {}) {
@@ -59,6 +59,8 @@ export default function ActionCard({ card = {}, onExecute, onDismiss }) {
   const [activeMsg, setActiveMsg] = useState(null);
   const [expanded, setExpanded] = useState(false);
   const [pendingAction, setPendingAction] = useState(null);
+
+  useEffect(() => { trackPilot("action.displayed", { type: card.type, title: card.title }); }, []);
 
   const actions = card.actions || [];
   const primary = actions[0];
@@ -212,6 +214,16 @@ export default function ActionCard({ card = {}, onExecute, onDismiss }) {
           ))}
         </div>
       )}
+
+      {/* View details link */}
+      <div style={{ padding: "0 14px 10px", display: "flex", justifyContent: "flex-end" }}>
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent("flow:open-execution-drawer", { detail: { card } }))}
+          style={{ background: "none", border: "none", cursor: "pointer", color: "var(--t5)", fontSize: 10, display: "flex", alignItems: "center", gap: 3, padding: 0 }}
+        >
+          <ExternalLink style={{ width: 9, height: 9 }} /> View details
+        </button>
+      </div>
     </div>
   );
 }

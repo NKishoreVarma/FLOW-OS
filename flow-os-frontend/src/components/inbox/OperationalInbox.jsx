@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 import {
   Inbox as InboxIcon, RefreshCw, GitMerge, ShieldAlert, Lightbulb, Calendar, Bell,
   CheckCircle2,
@@ -23,7 +24,7 @@ import { buildActionCard } from "../../lib/actionCardAdapter";
  */
 function authHeaders() {
   const token = localStorage.getItem("flow_os_token") || "";
-  const workspaceId = localStorage.getItem("flow_os_workspace_id") || "workspace_corp_alpha";
+  const workspaceId = localStorage.getItem("flow_os_workspace_id") || "";
   return { Authorization: `Bearer ${token}`, "workspace-id": workspaceId, "Content-Type": "application/json" };
 }
 async function getJSON(p) { const r = await fetch(p, { headers: authHeaders() }); if (!r.ok) throw new Error(String(r.status)); return r.json(); }
@@ -57,6 +58,7 @@ function priorityBand(p) { return p >= 80 ? "critical" : p >= 60 ? "high" : "nor
 
 export default function OperationalInbox() {
   const { isAuthLoading, events } = useWebSocket();
+  const wsState = useWorkspaceState();
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -148,9 +150,16 @@ export default function OperationalInbox() {
     }
 
     out.sort((a, b) => b.priority - a.priority || b.time - a.time);
-    if (out.length) { setItems(out); setDemo(false); } else { setItems(DEMO); setDemo(true); }
+    if (out.length) {
+      setItems(out); setDemo(false);
+    } else if (wsState.workspaceMode === 'demo') {
+      // Only show fictional personas (Rahul, Acme, etc.) in explicit demo mode.
+      setItems(DEMO); setDemo(true);
+    } else {
+      setItems([]); setDemo(false);
+    }
     setLoading(false);
-  }, []);
+  }, [wsState.workspaceMode]);
 
   useEffect(() => { if (!isAuthLoading) load(); }, [isAuthLoading, load]);
 

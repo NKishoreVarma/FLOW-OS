@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { X, Calendar, Sparkles, ExternalLink, MessageCircleQuestion } from "lucide-react";
 import { useEscapeKey } from "../../hooks/useEscapeKey";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 /**
  * InlineMeetingPrep (Phase 16) — prep for a meeting without leaving the Inbox. Fetches
@@ -19,11 +20,17 @@ const DEMO = {
 };
 
 export default function InlineMeetingPrep({ eventId, title, videoUrl, onClose, onAsk }) {
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
   const [state, setState] = useState({ loading: true, brief: null, questions: [], demo: false });
   useEscapeKey(onClose);
 
   useEffect(() => {
-    if (!eventId) { setState({ loading: false, ...DEMO, questions: DEMO.suggestedQuestions, demo: true }); return; }
+    if (!eventId) {
+      if (isDemoWorkspace) setState({ loading: false, ...DEMO, questions: DEMO.suggestedQuestions, demo: true });
+      else setState({ loading: false, brief: null, questions: [], demo: false });
+      return;
+    }
     let cancelled = false;
     (async () => {
       const token = localStorage.getItem("flow_os_token") || "";
@@ -38,14 +45,19 @@ export default function InlineMeetingPrep({ eventId, title, videoUrl, onClose, o
         const brief = ctx.brief || ctx.aiBrief || ctx.summary;
         const questions = ctx.suggestedQuestions || ctx.questions || [];
         if (cancelled) return;
-        if (!brief && !questions.length) setState({ loading: false, ...DEMO, questions: DEMO.suggestedQuestions, demo: true });
-        else setState({ loading: false, brief, questions, demo: false });
+        if (!brief && !questions.length) {
+          if (isDemoWorkspace) setState({ loading: false, ...DEMO, questions: DEMO.suggestedQuestions, demo: true });
+          else setState({ loading: false, brief: null, questions: [], demo: false });
+        } else setState({ loading: false, brief, questions, demo: false });
       } catch {
-        if (!cancelled) setState({ loading: false, ...DEMO, questions: DEMO.suggestedQuestions, demo: true });
+        if (!cancelled) {
+          if (isDemoWorkspace) setState({ loading: false, ...DEMO, questions: DEMO.suggestedQuestions, demo: true });
+          else setState({ loading: false, brief: null, questions: [], demo: false });
+        }
       }
     })();
     return () => { cancelled = true; };
-  }, [eventId]);
+  }, [eventId, isDemoWorkspace]);
 
   return (
     <div onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}

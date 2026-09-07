@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, CornerUpLeft, X, RefreshCw, Zap } from "lucide-react";
+import { Mail, CornerUpLeft, X, RefreshCw, Zap, PlugZap } from "lucide-react";
 import SourceBadge from "../ui/SourceBadge";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 // ─── Demo data ────────────────────────────────────────────────────────────────
 
@@ -120,6 +121,8 @@ function EmailRow({ email, selected, onClick }) {
 
 export const AIInbox = () => {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
   const [messages, setMessages]           = useState([]);
   const [loading, setLoading]             = useState(true);
   const [isDemo, setIsDemo]               = useState(false);
@@ -131,7 +134,7 @@ export const AIInbox = () => {
 
   const headers = {
     Authorization: `Bearer ${token}`,
-    "workspace-id": workspaceId || "workspace_corp_alpha",
+    "workspace-id": workspaceId || "",
     "Content-Type": "application/json",
   };
 
@@ -140,15 +143,26 @@ export const AIInbox = () => {
     setLoading(true);
     try {
       const res = await fetch("/api/communication/inbox?limit=20&provider=gmail", { headers });
+      if (res.status === 401) {
+        if (isDemoWorkspace) { setMessages(DEMO_INBOX); setIsDemo(true); }
+        else { setMessages([]); setIsDemo(false); }
+        return;
+      }
+      if (res.status === 429) {
+        if (isDemoWorkspace) { setMessages(DEMO_INBOX); setIsDemo(true); }
+        else { setMessages([]); setIsDemo(false); }
+        return;
+      }
       if (!res.ok) throw new Error();
       const data = await res.json();
       const raw  = data.result?.messages || data.result || [];
       const msgs = Array.isArray(raw) ? raw.map(normalizeMessage) : [];
       if (msgs.length > 0) { setMessages(msgs); setIsDemo(false); }
-      else { setMessages(DEMO_INBOX); setIsDemo(true); }
+      else if (isDemoWorkspace) { setMessages(DEMO_INBOX); setIsDemo(true); }
+      else { setMessages([]); setIsDemo(false); }
     } catch {
-      setMessages(DEMO_INBOX);
-      setIsDemo(true);
+      if (isDemoWorkspace) { setMessages(DEMO_INBOX); setIsDemo(true); }
+      else { setMessages([]); setIsDemo(false); }
     } finally {
       setLoading(false);
     }
@@ -165,6 +179,8 @@ export const AIInbox = () => {
         method: "POST", headers,
         body: JSON.stringify({ body: draftText, provider: "gmail" }),
       });
+      if (res.status === 401) { alert("Your session has expired. Please refresh."); return; }
+      if (res.status === 429) { alert("FLOW is making too many requests. Please wait a moment."); return; }
       if (!res.ok) throw new Error();
       setDraftText("");
     } catch { alert("Failed to send reply."); } finally { setSending(false); }
@@ -262,8 +278,19 @@ export const AIInbox = () => {
               </div>
             ))
           ) : filteredMessages.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "48px 0", color: "var(--t4)", fontSize: 13 }}>
-              No messages in this folder.
+            <div style={{ textAlign: "center", padding: "48px 16px" }}>
+              {!isDemoWorkspace && messages.length === 0 ? (
+                <>
+                  <PlugZap style={{ width: 28, height: 28, color: "var(--t5)", margin: "0 auto 12px" }} />
+                  <p style={{ fontSize: 13, fontWeight: 500, color: "var(--t2)", marginBottom: 4 }}>Connect Gmail to see your inbox</p>
+                  <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 16 }}>FLOW will prioritize, summarize, and draft replies for you.</p>
+                  <a href="/integrations" style={{ display: "inline-block", fontSize: 12, fontWeight: 500, color: "var(--brand)", background: "rgba(232,103,43,0.08)", padding: "6px 14px", borderRadius: 4, textDecoration: "none" }}>
+                    Connect Gmail →
+                  </a>
+                </>
+              ) : (
+                <p style={{ fontSize: 13, color: "var(--t4)" }}>No messages in this folder.</p>
+              )}
             </div>
           ) : (
             filteredMessages.map(email => (

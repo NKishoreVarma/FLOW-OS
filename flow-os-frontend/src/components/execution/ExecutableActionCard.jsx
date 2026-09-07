@@ -45,7 +45,14 @@ export default function ExecutableActionCard({ card = {} }) {
     try {
       const out = await executionApi.execute(recommendation, { confirmed });
       const step = out.results?.[0] || {};
-      if (step.status === "EXECUTED" || out.completed) setState({ phase: "done", message: "Executed." });
+      if (step.status === "EXECUTED" || out.completed) {
+        // Receipt: surface the connector-confirmed id/link so success is verifiable,
+        // never a bare checkmark. If the connector returned no id, say so honestly.
+        const r = step.result?.result || step.result || {};
+        const id = r.id || r.number || r.key || r.messageId || r.message_id || r.ts || r.eventId || r.sha || null;
+        const url = r.html_url || r.htmlUrl || r.url || r.permalink || r.webLink || r.htmlLink || null;
+        setState({ phase: "done", message: id ? `Confirmed by ${recommendation.connector} — ${id}` : "Executed (no receipt id returned).", receiptUrl: url });
+      }
       else if (step.status === "CONFIRM_REQUIRED") setState({ phase: "confirm", message: step.reason });
       else if (step.status === "APPROVAL_REQUIRED") setState({ phase: "approval", message: `Sent for approval — ${step.requiredApprovals || 1} approval(s) required.` });
       else if (step.status === "DENIED") setState({ phase: "error", message: step.error || "Denied by governance." });
@@ -56,7 +63,15 @@ export default function ExecutableActionCard({ card = {} }) {
   }
 
   const StatusBanner = () => {
-    if (state.phase === "done") return <Banner icon={Check} color="var(--p-normal-text)" text={state.message} />;
+    if (state.phase === "done") return (
+      <Banner icon={Check} color="var(--p-normal-text)" text={state.message}>
+        {state.receiptUrl && (
+          <a href={state.receiptUrl} target="_blank" rel="noreferrer" style={{ marginLeft: 6, color: "var(--brand)", textDecoration: "underline", fontSize: 11 }}>
+            Open in {recommendation.connector}
+          </a>
+        )}
+      </Banner>
+    );
     if (state.phase === "approval") return <Banner icon={Clock} color="var(--p-high-text)" text={state.message} />;
     if (state.phase === "error") return <Banner icon={AlertTriangle} color="var(--p-critical-text)" text={state.message} />;
     return null;
@@ -112,10 +127,10 @@ export default function ExecutableActionCard({ card = {} }) {
   );
 }
 
-function Banner({ icon: Icon, color, text }) {
+function Banner({ icon: Icon, color, text, children }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color, background: "rgba(31,27,22,0.045)", border: "1px solid var(--border)", borderRadius: 4, padding: "8px 10px" }}>
-      <Icon style={{ width: 12, height: 12, flexShrink: 0 }} /> {text}
+      <Icon style={{ width: 12, height: 12, flexShrink: 0 }} /> {text}{children}
     </div>
   );
 }

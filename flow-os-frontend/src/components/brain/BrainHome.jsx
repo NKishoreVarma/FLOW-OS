@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap } from "lucide-react";
+import { Zap, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import BrainMessage from "./BrainMessage";
 import ConversationInput from "./ConversationInput";
 import SlackThreadPanel from "../slack/SlackThreadPanel";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 // ─── Cache ────────────────────────────────────────────────────────────────────
 
@@ -31,34 +32,7 @@ function saveMessages(msgs) {
   try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(msgs.slice(-30))); } catch {}
 }
 
-// ─── Demo data ────────────────────────────────────────────────────────────────
-
-const DEMO_BRIEF = {
-  overview: "Two deployments completed without issues yesterday. Sales closed one enterprise account. One customer renewal may need your attention today.",
-  highlights: [
-    {
-      label: "Action needed",
-      title: "Payment gateway PR #447 is blocking the 2pm release",
-      body: "Rahul has been waiting for your review since yesterday. Merge readiness 78%.",
-      priority: "high",
-      source: "GitHub · #engineering",
-    },
-    {
-      label: "Meetings",
-      title: "2 meetings today, starting in 47 minutes",
-      body: "Standup at 10:00 AM · 1:1 with Rahul at 2:00 PM",
-      priority: "medium",
-      source: "Google Calendar",
-    },
-    {
-      label: "Inbox",
-      title: "TechCorp replied to your proposal — marked urgent",
-      body: "3 threads need reply. Escalated by their VP of Engineering.",
-      priority: "low",
-      source: "Gmail",
-    },
-  ],
-};
+// No demo brief — brief is always derived from live connector data or left null.
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -81,9 +55,62 @@ function formatDate() {
 
 // ─── Build the proactive FLOW opening message ─────────────────────────────────
 
+function readFirstEntryStats() {
+  try {
+    const raw = sessionStorage.getItem("flow_first_entry_stats");
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    // Only use within 15 minutes of workspace entry
+    if (Date.now() - data.ts > 15 * 60 * 1000) { sessionStorage.removeItem("flow_first_entry_stats"); return null; }
+    sessionStorage.removeItem("flow_first_entry_stats");
+    return data;
+  } catch { return null; }
+}
+
 function buildOpeningMessage(brief) {
   const firstName = getFirstName();
   const lines = [`${getGreeting()}, ${firstName}.`];
+
+  // First-time entry: personalized welcome with real workspace counts
+  const firstStats = readFirstEntryStats();
+  if (firstStats && (firstStats.repos > 0 || firstStats.emails > 0 || firstStats.events > 0)) {
+    lines.push("Welcome to FLOW. I've analyzed your workspace. Here's what I found:");
+    const discoveries = [];
+    if (firstStats.repos  > 0) discoveries.push(`${firstStats.repos} repositor${firstStats.repos === 1 ? "y" : "ies"} with code history`);
+    if (firstStats.emails > 0) discoveries.push(`${firstStats.emails}+ email conversations`);
+    if (firstStats.events > 0) discoveries.push(`${firstStats.events} calendar events`);
+    lines.push(discoveries.join(" · ") + ".");
+    lines.push("I'm already building context across your systems. Ask me anything about your work — what to focus on, who's blocking what, or what's at risk.");
+    return {
+      id: "flow-opening",
+      role: "assistant",
+      content: lines.join("\n\n"),
+      isOpening: true,
+      streaming: false,
+      streamed: false,
+      status: null,
+      actions: [
+        { label: "What should I do today?", ask: "What are the most important things I should work on today?" },
+        { label: "What's at risk?",          ask: "What's at risk in my projects right now?" },
+      ],
+    };
+  }
+
+  if (!brief) {
+    // Real workspace with no briefing data yet
+    lines.push("Your workspace is ready. Connect your first tool to get proactive insights, priority items, and your Morning Brief.");
+    lines.push("Ask me anything about your team, projects, or what to work on — or head to Settings to connect GitHub, Gmail, or Calendar.");
+    return {
+      id: "flow-opening",
+      role: "assistant",
+      content: lines.join("\n\n"),
+      isOpening: true,
+      streaming: false,
+      streamed: false,
+      status: null,
+      actions: [{ label: "Connect a tool", route: "/settings/integrations" }],
+    };
+  }
 
   if (brief?.overview) {
     lines.push(brief.overview);
@@ -232,9 +259,41 @@ function OpeningSkeleton() {
   );
 }
 
+// ─── Indexing guard — shown while workspace is still syncing ──────────────────
+
+function IndexingGuard({ phase, connectedCount = 0, minRequired = 3, readinessPercent = 0 }) {
+  const navigate = useNavigate();
+  const remaining = Math.max(0, minRequired - connectedCount);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flex: 1, padding: "48px 24px", textAlign: "center", fontFamily: "var(--font-ui)" }}>
+      <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(232,103,43,0.1)", border: "1px solid rgba(232,103,43,0.25)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+        <Loader2 size={24} color="var(--brand)" style={{ animation: "spin 1s linear infinite" }} />
+      </div>
+      <h2 style={{ fontSize: 20, fontWeight: 500, color: "var(--t1)", margin: "0 0 10px", letterSpacing: "-0.01em" }}>
+        {phase === "UNINITIALIZED" ? "Workspace not set up" : "Preparing your workspace"}
+      </h2>
+      <p style={{ fontSize: 13, fontWeight: 300, color: "var(--t3)", maxWidth: 400, lineHeight: 1.65, margin: "0 0 6px" }}>
+        {phase === "INDEXING"
+          ? "FLOW is indexing your connected tools and building the Knowledge Graph. The AI will be ready in a moment."
+          : `Connect your tools first — FLOW needs context before it can answer your questions accurately.`
+        }
+      </p>
+      <p style={{ fontSize: 12, fontWeight: 300, color: "var(--t4)", maxWidth: 400, lineHeight: 1.65, margin: "0 0 24px" }}>
+        {connectedCount}/{minRequired} integrations connected · Workspace readiness: {readinessPercent}%
+        {remaining > 0 && ` · Connect ${remaining} more integration${remaining === 1 ? '' : 's'} to unlock FLOW`}
+      </p>
+      <button onClick={() => navigate("/setup")} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--brand)", color: "#fff", border: "none", borderRadius: 8, padding: "10px 18px", fontSize: 13, fontWeight: 500, cursor: "pointer" }}>
+        {phase === "INDEXING" ? "View progress" : "Set up FLOW"}
+      </button>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 export default function BrainHome() {
+  const wsState                         = useWorkspaceState();
   const [brief, setBrief]               = useState(null);
   const [briefLoading, setBriefLoading] = useState(true);
   const [messages, setMessages]         = useState(loadMessages);
@@ -261,20 +320,94 @@ export default function BrainHome() {
     }
   }, [openEntity]);
 
-  // Fetch brief
+  // Fetch brief — brain brief + live connector data merged together (Phase 4)
   useEffect(() => {
     const cached = loadBriefCache();
     if (cached) { setBrief(cached); setBriefLoading(false); return; }
-    const token = localStorage.getItem("flow_os_token") || localStorage.getItem("flow_token");
-    const wsId  = localStorage.getItem("flow_os_workspace_id");
-    fetch("/api/brain/briefing", {
-      headers: { Authorization: `Bearer ${token}`, "workspace-id": wsId || "" },
-    })
-      .then(r => r.ok ? r.json() : null)
-      .then(data => { const b = normalizeBrief(data); setBrief(b); saveBriefCache(b); })
-      .catch(() => setBrief(DEMO_BRIEF))
-      .finally(() => setBriefLoading(false));
-  }, []);
+    const token  = localStorage.getItem("flow_os_token") || localStorage.getItem("flow_token");
+    const wsId   = localStorage.getItem("flow_os_workspace_id");
+    const hdrs   = { Authorization: `Bearer ${token}`, "workspace-id": wsId || "" };
+
+    Promise.allSettled([
+      fetch("/api/brain/briefing",              { headers: hdrs }).then(r => r.ok ? r.json() : null),
+      fetch("/api/autonomous/chief-of-staff",   { headers: hdrs }).then(r => r.ok ? r.json() : null),
+      fetch("/api/meetings/upcoming?days=1&limit=5", { headers: hdrs }).then(r => r.ok ? r.json() : null),
+      fetch("/api/workspace/snapshot",          { headers: hdrs }).then(r => r.ok ? r.json() : null),
+    ]).then(([briefR, cosR, meetR, snapR]) => {
+      const briefData = briefR.status === "fulfilled" ? briefR.value : null;
+      const cosData   = cosR.status   === "fulfilled" ? cosR.value   : null;
+      const meetData  = meetR.status  === "fulfilled" ? meetR.value  : null;
+      const snapData  = snapR.status  === "fulfilled" ? snapR.value  : null;
+
+      const base = normalizeBrief(briefData);
+
+      // Enrich with live calendar data
+      const liveHighlights = [];
+      const meetings = meetData?.events || meetData?.items || [];
+      if (meetings.length > 0) {
+        const nextMeet = meetings[0];
+        const start    = nextMeet.start?.dateTime || nextMeet.startTime;
+        const title    = nextMeet.summary || nextMeet.title || "Meeting";
+        let timeStr    = "";
+        let minsUntil  = Infinity;
+        if (start) {
+          const d = new Date(start);
+          const diffMs = d - Date.now();
+          minsUntil = Math.round(diffMs / 60000);
+          timeStr = minsUntil <= 0 ? " — happening now" :
+                    minsUntil < 60 ? ` — in ${minsUntil} min` :
+                    ` at ${d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+        }
+        liveHighlights.push({
+          label:    "Calendar",
+          title:    `${meetings.length} meeting${meetings.length !== 1 ? "s" : ""} today — next: ${title}${timeStr}`,
+          body:     meetings.slice(1, 3).map(m => m.summary || m.title || "Meeting").join(", ") || "",
+          priority: minsUntil < 30 ? "high" : "medium",
+          source:   "Google Calendar · live",
+        });
+      }
+
+      // Enrich with Chief of Staff priority items
+      const nowItems = cosData?.now || cosData?.topItems || [];
+      nowItems.slice(0, 2).forEach(item => {
+        if (!item.title) return;
+        liveHighlights.push({
+          label: item.type || "Action needed",
+          title: item.title,
+          body:  item.subtitle || item.body || item.reasons?.[0] || "",
+          priority: item.priority || "high",
+          source: item.source || null,
+        });
+      });
+
+      // Workspace snapshot health signal
+      if (snapData?.overall?.topActions?.length) {
+        const topAction = snapData.overall.topActions[0];
+        liveHighlights.push({
+          label: "Workspace signal",
+          title: topAction.title || topAction,
+          body: topAction.description || "",
+          priority: "medium",
+          source: "FLOW AI · live",
+        });
+      }
+
+      const enriched = {
+        overview:   base?.overview || snapData?.overall?.summary || null,
+        highlights: [...liveHighlights, ...(base?.highlights || [])].slice(0, 5),
+      };
+
+      // Only show real data — never fall back to demo content
+      if (!enriched.overview && !enriched.highlights.length) {
+        setBrief(null);
+      } else {
+        setBrief(enriched);
+        saveBriefCache(enriched);
+      }
+    }).catch(() => {
+      setBrief(null);
+    }).finally(() => setBriefLoading(false));
+  }, []); // eslint-disable-line
 
   // Inject proactive opening message once brief loads and no conversation exists
   useEffect(() => {
@@ -347,7 +480,10 @@ export default function BrainHome() {
           else if (evt.type === "actions")  patch((m) => ({ streamActions: m.streamActions?.length ? m.streamActions : (evt.actions || []) }));
           else if (evt.type === "evidence") patch((m) => ({ streamEvidence: m.streamEvidence?.length ? m.streamEvidence : (evt.evidence || []) }));
           else if (evt.type === "token")  { gotToken = true; patch((m) => ({ content: (m.content || "") + evt.delta, status: null })); }
-          else if (evt.type === "done")   patch((m) => ({ content: evt.answer || m.content || "Request processed.", explanation: evt.explanation || m.explanation || null, streaming: false, status: null }));
+          // A reviewable draft (email / slack / jira / calendar) → render the governed
+          // execute card from its recommendation. Nothing runs until the user approves.
+          else if (evt.type === "draft")  patch(() => ({ plan: evt.draft?.recommendation || null, draft: evt.draft || null }));
+          else if (evt.type === "done")   patch((m) => ({ content: evt.answer || m.content || "Request processed.", explanation: evt.explanation || m.explanation || null, plan: evt.draft?.recommendation || m.plan || null, draft: evt.draft || m.draft || null, streaming: false, status: null }));
           else if (evt.type === "error")  patch((m) => ({ content: m.content || "Something went wrong reasoning over your workspace.", streaming: false, status: null }));
         }
       }
@@ -389,14 +525,35 @@ export default function BrainHome() {
     };
   }, [sendMessage]);
 
-  const handleCardAction = useCallback((type, data) => {
-    if (type === "summarize")    sendMessage(`Summarize PR #${data.number || ""}: ${data.title}`);
-    else if (type === "merged")       setMessages(p => [...p, { id: Date.now() + Math.random(), role: "assistant", content: `PR #${data.number} merged successfully.` }]);
-    else if (type === "merge_failed") setMessages(p => [...p, { id: Date.now() + Math.random(), role: "assistant", content: `Merge failed for PR #${data.number}. Check for conflicts.` }]);
+  const handleCardAction = useCallback((type, data, extra) => {
+    const prLabel = data.number ? `PR #${data.number}` : data.title || "PR";
+    if (type === "summarize")    sendMessage(`Summarize ${prLabel}: ${data.title}`);
+    // "merged" only arrives after the connector confirmed the merge (InlinePRCard checks
+    // res.ok). Cite the commit SHA as the receipt when GitHub returned one.
+    else if (type === "merged")       setMessages(p => [...p, { id: Date.now() + Math.random(), role: "assistant", content: `${prLabel} merged${extra ? ` — commit ${String(extra).slice(0, 7)}` : ""}.` }]);
+    else if (type === "merge_failed") setMessages(p => [...p, { id: Date.now() + Math.random(), role: "assistant", content: `${prLabel} was not merged. ${extra || "Check for conflicts or reconnect GitHub."}` }]);
   }, [sendMessage]);
 
   // Greeting header only shows before the user has replied
   const conversationStarted = messages.some(m => m.role === "user");
+
+  // Gate: AI is only available when the workspace is READY (≥3 integrations connected)
+  const phase = wsState.workspacePhase;
+  if (!wsState.loading && wsState.workspacePhase !== 'READY') {
+    const connectedCount = wsState.connectedCount || 0;
+    const minRequired = wsState.minConnectorsRequired || 3;
+    const readinessPercent = wsState.readinessPercent || 0;
+    return (
+      <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-base)" }}>
+        <IndexingGuard
+          phase={phase}
+          connectedCount={connectedCount}
+          minRequired={minRequired}
+          readinessPercent={readinessPercent}
+        />
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "var(--bg-base)" }}>
@@ -482,15 +639,15 @@ export default function BrainHome() {
 }
 
 function normalizeBrief(data) {
-  if (!data) return DEMO_BRIEF;
+  if (!data) return null;
   return {
-    overview: data.overview || data.brief || data.summary || DEMO_BRIEF.overview,
+    overview: data.overview || data.brief || data.summary || null,
     highlights: data.highlights?.map(h => ({
       label:    h.label || h.type || "Update",
       title:    h.title || h.headline || "",
       body:     h.body || h.description || h.content || "",
       priority: h.priority || "medium",
       source:   h.source || null,
-    })) || DEMO_BRIEF.highlights,
+    })) || [],
   };
 }
