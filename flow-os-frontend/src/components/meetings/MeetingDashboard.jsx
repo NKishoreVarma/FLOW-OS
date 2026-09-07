@@ -2,11 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import {
   Calendar, Search, FileText, CheckSquare,
   Clock, Video, Brain, Shield,
-  ChevronRight, AlertTriangle, Star, RefreshCw, Zap
+  ChevronRight, AlertTriangle, Star, RefreshCw, Zap, PlugZap
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 
 // ── Demo data ─────────────────────────────────────────────────────────────────
 
@@ -285,12 +286,14 @@ function StatPill({ label, value }) {
 export const MeetingDashboard = () => {
   const navigate = useNavigate();
   const { token, workspaceId, isAuthLoading } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
 
-  const [upcoming, setUpcoming]       = useState(DEMO_UPCOMING);
-  const [past, setPast]               = useState(DEMO_PAST);
+  const [upcoming, setUpcoming]       = useState([]);
+  const [past, setPast]               = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading]         = useState(false);
-  const [isDemo, setIsDemo]           = useState(true);
+  const [isDemo, setIsDemo]           = useState(false);
   const [focusedSearch, setFocusedSearch] = useState(false);
 
   const fetchRef = useRef(null);
@@ -312,12 +315,18 @@ export const MeetingDashboard = () => {
           const upEvents   = (upData.result   || []).map(normalizeUpcomingEvent);
           const pastEvents = (pastData.result || []).map(normalizePastEvent);
           if (upEvents.length > 0 || pastEvents.length > 0) {
-            setUpcoming(upEvents.length   > 0 ? upEvents   : DEMO_UPCOMING);
-            setPast(pastEvents.length     > 0 ? pastEvents : DEMO_PAST);
-            setIsDemo(false);
+            setUpcoming(upEvents.length > 0 ? upEvents : (isDemoWorkspace ? DEMO_UPCOMING : []));
+            setPast(pastEvents.length > 0 ? pastEvents : (isDemoWorkspace ? DEMO_PAST : []));
+            setIsDemo(upEvents.length === 0 && pastEvents.length === 0 && isDemoWorkspace);
+          } else if (isDemoWorkspace) {
+            setUpcoming(DEMO_UPCOMING);
+            setPast(DEMO_PAST);
+            setIsDemo(true);
           }
         }
-      } catch { /* stay on demo data */ } finally {
+      } catch {
+        if (isDemoWorkspace) { setUpcoming(DEMO_UPCOMING); setPast(DEMO_PAST); setIsDemo(true); }
+      } finally {
         if (!cancelled) setLoading(false);
       }
     }
@@ -411,7 +420,14 @@ export const MeetingDashboard = () => {
             <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {upcoming.map(m => (
+            {upcoming.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "32px 16px", border: "1px solid var(--border)", borderRadius: 6, background: "var(--bg-card)" }}>
+                <PlugZap style={{ width: 22, height: 22, color: "var(--t5)", margin: "0 auto 10px" }} />
+                <p style={{ fontSize: 13, fontWeight: 500, color: "var(--t2)", marginBottom: 4 }}>Connect Google Calendar</p>
+                <p style={{ fontSize: 11, color: "var(--t4)", marginBottom: 12 }}>See upcoming meetings with AI prep context.</p>
+                <a href="/integrations" style={{ fontSize: 11, fontWeight: 500, color: "var(--brand)", textDecoration: "none" }}>Connect →</a>
+              </div>
+            ) : upcoming.map(m => (
               <UpcomingCard key={m.id} meeting={m} onPrepare={id => navigate(`/meetings/${id}/prep`)} />
             ))}
           </div>

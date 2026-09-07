@@ -18,7 +18,7 @@ import { EmptyState } from "../ui/EmptyState";
  */
 function authHeaders() {
   const token = localStorage.getItem("flow_os_token") || "";
-  const workspaceId = localStorage.getItem("flow_os_workspace_id") || "workspace_corp_alpha";
+  const workspaceId = localStorage.getItem("flow_os_workspace_id") || "";
   return { Authorization: `Bearer ${token}`, "workspace-id": workspaceId, "Content-Type": "application/json" };
 }
 

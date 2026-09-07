@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
 import { isIntegrationEvent, eventSource, eventTitle, sourceDotColor, isCriticalEvent } from "../../lib/liveEvents";
 
 function timeSince(ts) {
   const d = Date.now() - ts;
   if (d < 60000)    return "just now";
-  if (d < 3600000)  return `${Math.floor(d / 60000)}m`;
-  if (d < 86400000) return `${Math.floor(d / 3600000)}h`;
-  return `${Math.floor(d / 86400000)}d`;
+  if (d < 3600000)  return `${Math.floor(d / 60000)}m ago`;
+  if (d < 86400000) return `${Math.floor(d / 3600000)}h ago`;
+  if (d < 604800000) return `${Math.floor(d / 86400000)}d ago`;
+  return `${Math.floor(d / 604800000)}w ago`;
 }
 
 // The live panel shows ONE category: real messages from real integrations.
@@ -19,10 +21,14 @@ function timeSince(ts) {
 function FeedEvent({ event, prominent = false }) {
   const [hovered, setHovered] = useState(false);
   const navigate = useNavigate();
-  const ts       = Math.floor(event.id);
+  // Real event time (commit author date, calendar start, etc.), not when FLOW
+  // received it. Normalized once in the WS hook as realTs; payload is the fallback.
+  const realTs   = event.realTs || event.payload?.ts || event.payload?.timestamp;
+  const ts       = realTs && !Number.isNaN(new Date(realTs).getTime()) ? new Date(realTs).getTime() : Math.floor(event.id);
   const source   = eventSource(event);
   const critical = isCriticalEvent(event);
   const title    = eventTitle(event);
+  const subtitle = event.payload?.detail || event.payload?.subtitle || "";
 
   function ask() {
     const q = `Tell me more about: ${title}`;
@@ -70,6 +76,14 @@ function FeedEvent({ event, prominent = false }) {
         }}>
           {title}
         </div>
+        {subtitle && subtitle !== title && (
+          <div style={{
+            fontSize: 10.5, fontWeight: 300, color: "var(--t4)", lineHeight: 1.4, marginBottom: 3,
+            overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
+          }}>
+            “{subtitle}”
+          </div>
+        )}
         <div style={{ fontFamily: "var(--font-data)", fontSize: 10, fontWeight: 300, color: "var(--t4)" }}>
           {source} · {timeSince(ts)}
         </div>
@@ -104,20 +118,30 @@ const DEMO = [
 
 export default function LiveFeedPanel({ isOpen, onToggle }) {
   const { events: wsEvents } = useWebSocket();
+  const wsState = useWorkspaceState();
   const now = Date.now();
 
   const allEvents = useMemo(() => {
     const real = wsEvents.filter(isIntegrationEvent);
-    return real.length > 0 ? [...real].reverse().slice(0, 40) : DEMO;
-  }, [wsEvents]);
+    if (real.length > 0) return [...real].reverse().slice(0, 40);
+    // Only show demo personas in demo mode — never for real workspaces.
+    return wsState.workspaceMode === 'demo' ? DEMO : [];
+  }, [wsEvents, wsState.workspaceMode]);
+
+  // Real event time (from the source, e.g. commit date) — falls back to receipt time.
+  const evMs = (e) => {
+    const ts = e.realTs || e.payload?.ts || e.payload?.timestamp;
+    const t = ts ? new Date(ts).getTime() : NaN;
+    return Number.isNaN(t) ? Math.floor(e.id) : t;
+  };
 
   const grouped = useMemo(() => {
-    const fiveMin = now - 5 * 60 * 1000;
+    const oneHour = now - 60 * 60 * 1000;
     const oneDay  = now - 24 * 60 * 60 * 1000;
     return {
-      live:    allEvents.filter(e => Math.floor(e.id) > fiveMin),
-      earlier: allEvents.filter(e => Math.floor(e.id) <= fiveMin && Math.floor(e.id) > oneDay),
-      older:   allEvents.filter(e => Math.floor(e.id) <= oneDay),
+      live:    allEvents.filter(e => evMs(e) > oneHour),
+      earlier: allEvents.filter(e => evMs(e) <= oneHour && evMs(e) > oneDay),
+      older:   allEvents.filter(e => evMs(e) <= oneDay),
     };
   }, [allEvents, now]);
 
@@ -201,7 +225,10 @@ export default function LiveFeedPanel({ isOpen, onToggle }) {
             {allEvents.length === 0 && (
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 120, padding: "0 20px" }}>
                 <p style={{ fontSize: 12, fontWeight: 300, color: "var(--t3)", textAlign: "center", lineHeight: 1.6 }}>
-                  Quiet right now. Messages from Slack, Gmail, GitHub and Jira appear here as they arrive.
+                  {wsState.workspacePhase !== 'READY'
+                    ? "Connect your tools first — live activity from GitHub, Gmail, and Jira will appear here."
+                    : "Quiet right now. Messages from GitHub, Gmail, and Jira appear here as they arrive."
+                  }
                 </p>
               </div>
             )}
