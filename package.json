@@ -21,7 +21,17 @@
     "test:conversation": "node src/testing/conversation/run-qa.js",
     "test:security": "node src/testing/conversation/run-qa.js --security",
     "test:smoke": "node src/testing/conversation/run-qa.js --smoke",
-    "test:qa-stats": "node src/testing/conversation/run-qa.js --stats"
+    "test:qa-stats": "node src/testing/conversation/run-qa.js --stats",
+    "demo:reset": "node scripts/seedDemoCompany.js workspace_demo",
+    "demo:check": "node scripts/demo-dryrun.js workspace_demo",
+    "demo:stress": "node scripts/brain-stress-test.js workspace_demo",
+    "demo:runbook": "cat docs/DEMO_RUNBOOK.md",
+    "dataset:manifest": "node scripts/certification/dataset.js manifest",
+    "dataset:import": "node scripts/certification/dataset.js import",
+    "dataset:verify": "node scripts/certification/dataset.js verify",
+    "dataset:reset": "node scripts/certification/dataset.js reset",
+    "certification": "node scripts/certification/runner.js",
+    "certification:full": "node scripts/certification/certify.js"
   },
   "keywords": [],
   "author": "",
