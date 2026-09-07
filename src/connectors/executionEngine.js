@@ -42,6 +42,31 @@ function appendTimeline(workspaceId, event) {
   timeline.set(workspaceId, arr);
 }
 
+// Is this connector authenticated for the workspace? Checks the in-memory
+// credential store first, then durable OAuth (GitHub PAT/OAuth, Google tokens),
+// so OAuth-connected connectors aren't wrongly blocked from write actions.
+async function _isAuthenticated(workspaceId, connectorId) {
+  // The governed sandbox needs no external credentials. It is "authenticated" only
+  // when sandbox execution is allowed for this workspace (certification, fail-closed)
+  // — so sandbox writes can complete there, and nowhere else.
+  if (connectorId === 'sandbox') {
+    const { sandboxExecutionAllowed } = await import('../config/flowEnv.js');
+    return sandboxExecutionAllowed(workspaceId);
+  }
+  if (hasCredentials(workspaceId, connectorId)) return true;
+  try {
+    if (connectorId === 'github') {
+      const { getAccessToken } = await import('../services/integrations/GitHubOAuthService.js');
+      return !!(await getAccessToken(workspaceId));
+    }
+    if (connectorId === 'gmail' || connectorId === 'google-calendar') {
+      const { hasTokens } = await import('../services/google/GoogleTokenManager.js');
+      return await hasTokens(workspaceId);
+    }
+  } catch { /* not connected */ }
+  return false;
+}
+
 /**
  * Execute a connector action through the full governance-aware pipeline.
  *
@@ -162,9 +187,26 @@ export async function executeAction({
     );
   }
 
-  // ── 5. Credential check ───────────────────────────────────────────────────────
   const SIDE_EFFECTFUL = ['send', 'create', 'update', 'delete', 'execute', 'approve', 'reject'];
-  if (!hasCredentials(workspaceId, connectorId) && SIDE_EFFECTFUL.includes(actionType)) {
+
+  // ── 4b. Simulated-connector guard (TRUST INVARIANT) ───────────────────────────
+  // Preview adapters (Jira / Notion / HubSpot / Workday) operate on in-memory data
+  // and would otherwise return a FABRICATED success (a made-up issue key / page id)
+  // for a write that never reached a real system. FLOW is an OS — it must never claim
+  // something happened when it did not. Refuse the write honestly instead.
+  if (SIDE_EFFECTFUL.includes(actionType) && adapter.simulated) {
+    throw new AppError(
+      `The ${connectorId} connector is in preview — real ${actionType} isn't wired to a live ${connectorId} account yet, so FLOW won't report a success that didn't happen. Connect a live ${connectorId} integration to enable this action.`,
+      501,
+      'CONNECTOR_SIMULATED',
+    );
+  }
+
+  // ── 5. Credential check ───────────────────────────────────────────────────────
+  // Recognizes both the in-memory credential store AND durable OAuth connections
+  // (GitHub / Google) — otherwise OAuth-connected connectors are wrongly treated
+  // as unauthenticated for writes even though reads work.
+  if (SIDE_EFFECTFUL.includes(actionType) && !(await _isAuthenticated(workspaceId, connectorId))) {
     throw new AuthorizationError(
       `Connector "${connectorId}" is not authenticated for workspace "${workspaceId}". ` +
       'Complete OAuth or provide an API key before executing write actions.'
@@ -172,7 +214,12 @@ export async function executeAction({
   }
 
   // ── 6. Scope validation ───────────────────────────────────────────────────────
-  if (adapter.scopes?.length && hasCredentials(workspaceId, connectorId)) {
+  // Only meaningful for connectors whose scopes live in the in-memory authManager
+  // (API-key connectors). OAuth-backed connectors (gmail / google-calendar / github)
+  // keep their granted scopes in the durable OAuth store — validating them against the
+  // in-memory store wrongly reports "missing scopes" for a fully-authorized account.
+  const OAUTH_BACKED = new Set(['gmail', 'google-calendar', 'github']);
+  if (adapter.scopes?.length && !OAUTH_BACKED.has(connectorId) && hasCredentials(workspaceId, connectorId)) {
     const { valid, missing } = validateScopes(workspaceId, connectorId, adapter.scopes);
     if (!valid) {
       throw new AuthorizationError(
@@ -184,7 +231,18 @@ export async function executeAction({
   // ── 7. Execute via adapter ────────────────────────────────────────────────────
   let result;
   try {
-    result = await adapter.execute(workspaceId, actionType, payload, approvedBy);
+    const raw = await adapter.execute(workspaceId, actionType, payload, approvedBy);
+    // Phase 9: a REAL provider execution is wrapped in the standardized LIVE receipt
+    // envelope (external:true, verified:false until read-back). SANDBOX results already
+    // carry their own honest labels and are returned unchanged — the two can never be
+    // confused. `verified` NEVER becomes true here (only post-execution verification sets it).
+    const SIDE_EFFECT = ['send', 'create', 'update', 'delete', 'execute', 'approve', 'reject'];
+    if (SIDE_EFFECT.includes(actionType) && !(raw && raw.executionMode === 'SANDBOX')) {
+      const { buildLiveReceipt } = await import('../execution/writeSafety.js');
+      result = buildLiveReceipt({ connectorId, actionType, rawResult: raw, workspaceId, approvalId });
+    } else {
+      result = raw;
+    }
   } catch (err) {
     const latencyMs = Date.now() - startMs;
     await persistConnectorAudit({
@@ -202,6 +260,16 @@ export async function executeAction({
       policyId,
     });
     if (err.isOperational) throw err;
+    // Auth failures (expired/revoked OAuth, invalid_grant, 401/403) are NOT server
+    // errors — surface them as a clean "reconnect" 401 so the UI shows an honest
+    // "reconnect X" message instead of "something went wrong on our end".
+    if (/invalid_grant|invalid_token|token has been expired|token has been revoked|unauthorized|401|403|reconnect|CONNECTOR_AUTH/i.test(err.message || '')) {
+      throw new AppError(
+        `${connectorId} needs to be reconnected — its access has expired.`,
+        401,
+        'CONNECTOR_AUTH_EXPIRED',
+      );
+    }
     throw new AppError(`Connector "${connectorId}" execution failed: ${err.message}`, 500);
   }
 

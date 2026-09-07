@@ -145,10 +145,26 @@ export function refreshOAuthTokens(workspaceId, connectorId, newTokens) {
 export function listConnectedConnectors(workspaceId) {
   const connected = [];
   for (const [key] of credentialStore) {
-    const [wid, cid] = key.split(':');
+    const idx = key.lastIndexOf(':');
+    if (idx === -1) continue;
+    const wid = key.slice(0, idx);
+    const cid = key.slice(idx + 1);
     if (wid === workspaceId) connected.push(cid);
   }
   return connected;
+}
+
+/**
+ * Enumerate every workspace that currently has at least one stored credential.
+ * Used by the connector poller to know which workspaces to watch for live activity.
+ */
+export function listWorkspacesWithConnectors() {
+  const set = new Set();
+  for (const [key] of credentialStore) {
+    const idx = key.lastIndexOf(':');
+    if (idx > 0) set.add(key.slice(0, idx));
+  }
+  return [...set];
 }
 
 /**

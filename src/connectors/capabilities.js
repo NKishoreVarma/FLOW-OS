@@ -61,8 +61,8 @@ export const CapabilityActions = Object.freeze({
   ],
   [Capability.ENGINEERING]: [
     ActionType.READ, ActionType.SEARCH, ActionType.CREATE,
-    ActionType.UPDATE, ActionType.APPROVE, ActionType.EXECUTE,
-    ActionType.SYNC, ActionType.WEBHOOK,
+    ActionType.UPDATE, ActionType.DELETE, ActionType.APPROVE,
+    ActionType.EXECUTE, ActionType.SYNC, ActionType.WEBHOOK,
   ],
   [Capability.KNOWLEDGE]: [
     ActionType.READ, ActionType.SEARCH, ActionType.CREATE,
@@ -85,7 +85,8 @@ export const CapabilityActions = Object.freeze({
   ],
   [Capability.OPERATIONS]: [
     ActionType.READ, ActionType.SEARCH, ActionType.CREATE,
-    ActionType.UPDATE, ActionType.EXECUTE, ActionType.WEBHOOK, ActionType.AUDIT,
+    ActionType.UPDATE, ActionType.DELETE, ActionType.EXECUTE,
+    ActionType.WEBHOOK, ActionType.HEALTH, ActionType.AUDIT,
   ],
   [Capability.SALES]: [
     ActionType.READ, ActionType.SEARCH, ActionType.CREATE,

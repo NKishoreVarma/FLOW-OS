@@ -216,6 +216,9 @@ export class BaseAdapter {
       supportedActions: this.supportedActions,
       version:          this.version,
       scopes:           this.scopes,
+      // Preview adapters run on in-memory data (reads are simulated; writes are refused
+      // by the Execution Engine). Surfaced so the UI can honestly label them "Preview".
+      simulated:        this.simulated === true,
     };
   }
 }
