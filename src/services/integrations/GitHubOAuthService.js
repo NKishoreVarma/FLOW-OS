@@ -57,7 +57,11 @@ function _cfg() {
 // ── GitHub API fetch ──────────────────────────────────────────────────────────
 
 async function _ghFetch(path, token) {
-  const res = await fetch(`${GITHUB_API}${path}`, {
+  const url = `${GITHUB_API}${path}`;
+  const tokenPreview = token ? `${token.slice(0, 8)}…` : '(none)';
+  console.log(`[GitHub PAT] → GET ${url}  token=${tokenPreview}`);
+
+  const res = await fetch(url, {
     headers: {
       Authorization:          `Bearer ${token}`,
       Accept:                 'application/vnd.github+json',
@@ -66,12 +70,17 @@ async function _ghFetch(path, token) {
     },
   });
 
+  console.log(`[GitHub PAT] ← HTTP ${res.status} ${res.statusText}  path=${path}`);
+
   if (res.status === 401) {
-    throw new AppError('GitHub token is invalid or has been revoked', 401, 'TOKEN_REVOKED');
+    const body = await res.json().catch(() => ({}));
+    console.error(`[GitHub PAT] 401 body:`, JSON.stringify(body));
+    throw new AppError('GitHub token is invalid or has been revoked. Ensure the token has the "repo" and "read:user" scopes and has not expired.', 401, 'TOKEN_REVOKED');
   }
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new AppError(body.message || `GitHub API ${res.status}`, res.status >= 500 ? 502 : res.status, 'GITHUB_API_ERROR');
+    console.error(`[GitHub PAT] ${res.status} body:`, JSON.stringify(body));
+    throw new AppError(body.message || `GitHub API returned ${res.status}`, res.status >= 500 ? 502 : res.status, 'GITHUB_API_ERROR');
   }
   return res.json();
 }
@@ -170,13 +179,31 @@ export async function handleCallback(code, stateStr) {
  * @returns {{ login: string, email: string|null, name: string|null }}
  */
 export async function storePAT(workspaceId, token) {
-  const user = await _ghFetch('/user', token);
-  await saveCredentials(workspaceId, CONNECTOR_ID, { accessToken: token }, {
-    authStrategy: 'pat',
-    accountLabel: user.login,
-    accountEmail: user.email,
-  });
+  console.log(`[GitHub PAT] storePAT called  workspaceId=${workspaceId}  tokenLen=${token?.length ?? 0}`);
+
+  let user;
+  try {
+    user = await _ghFetch('/user', token);
+    console.log(`[GitHub PAT] /user OK  login=${user.login}  email=${user.email}`);
+  } catch (err) {
+    console.error(`[GitHub PAT] /user validation failed:`, err.message, `code=${err.code}`);
+    throw err;
+  }
+
+  try {
+    await saveCredentials(workspaceId, CONNECTOR_ID, { accessToken: token }, {
+      authStrategy: 'pat',
+      accountLabel: user.login,
+      accountEmail: user.email,
+    });
+    console.log(`[GitHub PAT] credentials saved for workspaceId=${workspaceId}`);
+  } catch (err) {
+    console.error(`[GitHub PAT] saveCredentials failed:`, err.message);
+    throw err;
+  }
+
   await updateHealthStatus(workspaceId, CONNECTOR_ID, 'healthy');
+  console.log(`[GitHub PAT] storePAT complete  login=${user.login}`);
   return { login: user.login, email: user.email, name: user.name };
 }
 
@@ -185,9 +212,18 @@ export async function storePAT(workspaceId, token) {
  * DB-stored credentials take precedence; GITHUB_TOKEN env var is the workspace fallback.
  */
 export async function getAccessToken(workspaceId) {
+  // DB-stored, workspace-scoped credentials always take precedence.
   const cred = await loadCredentials(workspaceId, CONNECTOR_ID);
   if (cred?.accessToken) return cred.accessToken;
-  return process.env.GITHUB_TOKEN || null;
+  // Phase 9 — tenant hardening: the global GITHUB_TOKEN env fallback must NOT silently
+  // execute for an arbitrary workspace. It is honored ONLY for the workspace explicitly
+  // named in GITHUB_TOKEN_WORKSPACE — any other workspace gets no token (honest
+  // CREDENTIAL_NOT_FOUND upstream), never another tenant's/global credential.
+  const allowedWs = process.env.GITHUB_TOKEN_WORKSPACE;
+  if (process.env.GITHUB_TOKEN && allowedWs && String(workspaceId) === String(allowedWs)) {
+    return process.env.GITHUB_TOKEN;
+  }
+  return null;
 }
 
 /**

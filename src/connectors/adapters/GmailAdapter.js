@@ -16,9 +16,19 @@ import { google } from 'googleapis';
 import { BaseAdapter, ConnectorAuthError } from '../BaseAdapter.js';
 import { Capability, ActionType, AuthStrategy } from '../capabilities.js';
 import { createCommunicationItem, createSearchResult } from '../normalizedTypes.js';
-import { loadTokens, saveTokens } from '../../services/google/GoogleTokenManager.js';
+import { loadTokens, saveTokens, clearTokens } from '../../services/google/GoogleTokenManager.js';
 import { getAuthUrl } from '../../services/google/GoogleOAuthService.js';
 import { AppError, ValidationError } from '../../core/errors/index.js';
+
+// ─── Structured error mapper for googleapis responses ─────────────────────────
+
+function mapGmailError(err) {
+  const code = err.code || err.status;
+  if (code === 401 || code === 403) return new AppError('Gmail authentication expired. Reconnect required.', 401, 'CONNECTOR_AUTH_EXPIRED');
+  if (code === 429 || err.message?.includes('quota')) return new AppError('Gmail API rate limit exceeded.', 429, 'CONNECTOR_RATE_LIMITED');
+  if (err.message?.includes('DEADLINE_EXCEEDED') || err.message?.includes('timeout')) return new AppError('Gmail API request timed out.', 504, 'CONNECTOR_TIMEOUT');
+  return err;
+}
 
 // Gmail OAuth scopes — modify covers read + label changes; send for outbound
 const GMAIL_SCOPES = [
@@ -274,22 +284,76 @@ export class GmailAdapter extends BaseAdapter {
   // ── Execution dispatch (called by ExecutionEngine) ─────────────────────────
 
   async execute(workspaceId, actionType, payload = {}, approvedBy) {
-    switch (actionType) {
-      case ActionType.READ:
-        return this._read(workspaceId, payload);
-      case ActionType.SEARCH:
-        return this._searchMessages(workspaceId, payload.query || '', payload);
-      case ActionType.SEND:
-        return this._send(workspaceId, payload, approvedBy);
-      case ActionType.CREATE:
-        return this._createDraft(workspaceId, payload);
-      case ActionType.UPDATE:
-        return this._update(workspaceId, payload);
-      case ActionType.SYNC:
-        return this._syncInbox(workspaceId, payload);
-      default:
-        throw new AppError(`Gmail adapter does not support action "${actionType}"`, 501, 'UNSUPPORTED_ACTION');
+    try {
+      switch (actionType) {
+        case ActionType.READ:
+          return await this._read(workspaceId, payload);
+        case ActionType.SEARCH:
+          return await this._searchMessages(workspaceId, payload.query || '', payload);
+        case ActionType.SEND:
+          return await this._send(workspaceId, payload, approvedBy);
+        case ActionType.CREATE:
+          return await this._createDraft(workspaceId, payload);
+        case ActionType.UPDATE:
+          return await this._update(workspaceId, payload);
+        case ActionType.SYNC:
+          return await this._syncInbox(workspaceId, payload);
+        case ActionType.EXECUTE:
+          return await this._execute(workspaceId, payload);
+        default:
+          throw new AppError(`Gmail adapter does not support action "${actionType}"`, 501, 'UNSUPPORTED_ACTION');
+      }
+    } catch (err) {
+      throw mapGmailError(err);
     }
+  }
+
+  // ── EXECUTE sub-actions (schedule_email, follow_up) ───────────────────────
+
+  async _execute(workspaceId, payload) {
+    switch (payload.action) {
+      case 'schedule_email': return this._scheduleEmail(workspaceId, payload);
+      case 'follow_up':      return this._setFollowUp(workspaceId, payload);
+      default:
+        throw new AppError(`GmailAdapter: unknown execute action "${payload.action}"`, 400, 'UNSUPPORTED_EXECUTE_ACTION');
+    }
+  }
+
+  async _scheduleEmail(workspaceId, payload) {
+    if (!payload.scheduledAt) throw new ValidationError('scheduledAt is required for schedule_email');
+
+    // Create draft — actual delivery at scheduledAt is handled externally (BullMQ delay or Calendar trigger)
+    const draft = await this._createDraft(workspaceId, payload);
+    return {
+      ...draft,
+      scheduledAt: payload.scheduledAt,
+      status: 'scheduled',
+    };
+  }
+
+  async _setFollowUp(workspaceId, payload) {
+    if (!payload.messageId) throw new ValidationError('messageId is required for follow_up');
+    const { gmail } = await this._getClient(workspaceId);
+
+    const addLabelIds = ['STARRED'];
+    // Best-effort: look up or create a "Follow-Up" user label
+    try {
+      const labelsRes = await gmail.users.labels.list({ userId: 'me' });
+      const followUpLabel = (labelsRes.data.labels || []).find(
+        l => l.name === (payload.followUpLabel || 'Follow-Up')
+      );
+      if (followUpLabel) addLabelIds.push(followUpLabel.id);
+    } catch {
+      // Non-fatal — STARRED alone is enough
+    }
+
+    await gmail.users.messages.modify({
+      userId:      'me',
+      id:          payload.messageId,
+      requestBody: { addLabelIds },
+    });
+
+    return { messageId: payload.messageId, addLabelIds, status: 'follow_up_set' };
   }
 
   // ── Universal search interface (called by SearchOrchestrator) ─────────────
@@ -697,7 +761,7 @@ export class GmailAdapter extends BaseAdapter {
     const redirect     = redirectUri
       || process.env.GOOGLE_REDIRECT_URI
       || process.env.GMAIL_REDIRECT_URI
-      || 'http://localhost:5000/api/communication/oauth/callback';
+      || `${process.env.GOOGLE_REDIRECT_BASE || `http://localhost:${process.env.PORT || 5001}`}/api/communication/oauth/callback`;
 
     if (!clientId || !clientSecret) {
       throw new AppError(
@@ -713,13 +777,35 @@ export class GmailAdapter extends BaseAdapter {
   async _getClient(workspaceId) {
     const tokens = await loadTokens(workspaceId);
     if (!tokens) {
-      throw new ConnectorAuthError(this.id, `No OAuth tokens found for workspace "${workspaceId}". Connect Gmail first via /api/google/auth.`);
+      throw new ConnectorAuthError(this.id, `No OAuth tokens found for workspace "${workspaceId}". Connect Gmail first.`);
     }
 
     const oauth2Client = this._getOAuth2Client();
     oauth2Client.setCredentials(tokens);
 
-    // Auto-refresh: when googleapis silently refreshes, persist the new tokens
+    // Proactively refresh if access token is expired or will expire in the next 60s.
+    const isExpired = !tokens.access_token || (tokens.expiry_date && tokens.expiry_date < Date.now() + 60_000);
+    if (isExpired && tokens.refresh_token) {
+      try {
+        const { credentials } = await oauth2Client.refreshAccessToken();
+        const merged = { ...tokens, ...credentials };
+        await saveTokens(workspaceId, merged);
+        oauth2Client.setCredentials(merged);
+      } catch (refreshErr) {
+        // Clear broken tokens so workspace-state shows "disconnected" and user sees Connect button
+        await clearTokens(workspaceId).catch(() => {});
+        const msg = refreshErr.message || '';
+        if (msg.includes('invalid_client')) {
+          throw new AppError(
+            'Google OAuth credentials are misconfigured. Check GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in .env.',
+            503, 'OAUTH_CREDENTIALS_INVALID',
+          );
+        }
+        throw new AppError('Gmail authentication expired. Click Connect to re-authorize.', 401, 'CONNECTOR_AUTH_EXPIRED');
+      }
+    }
+
+    // Auto-refresh: when googleapis silently gets new tokens mid-request, persist them
     oauth2Client.on('tokens', newTokens => {
       saveTokens(workspaceId, { ...tokens, ...newTokens }).catch(() => {});
     });
