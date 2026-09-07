@@ -32,6 +32,10 @@
       "file": "datasets/repositories.json"
     },
     {
+      "type": "projects",
+      "file": "datasets/projects.json"
+    },
+    {
       "type": "commits",
       "file": "datasets/commits.json"
     },
