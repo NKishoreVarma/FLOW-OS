@@ -1,0 +1,62 @@
+export default {
+  id: 'aws.update_ecs_service',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'aws',
+  category: 'infrastructure',
+  displayName: 'Update ECS Service',
+  description: 'Updates an ECS service desired count or task definition. Used in blue-green deployments and auto-scaling events.',
+  icon: 'cloud',
+  tags: ['aws', 'ecs', 'service', 'deploy', 'blue-green', 'ops'],
+  riskLevel: 'HIGH',
+  approvalPolicy: {
+    required: true, minimumApprovers: 1, eligibleRoles: ['ADMIN', 'OWNER'],
+    timeoutHours: 2, selfApprovalAllowed: false, notifyOnCreate: true, notifyOnResolve: true,
+  },
+  requiredPermissions: ['ADMIN'],
+  requiredScopes: ['ecs:UpdateService'],
+  executionMode: 'ASYNC',
+  estimatedDurationMs: 15000,
+  timeoutMs: 300000,
+  retryStrategy: {
+    maxAttempts: 2, backoffType: 'EXPONENTIAL', initialDelayMs: 3000, maxDelayMs: 15000,
+    jitterPercent: 15, retryOn: ['TIMEOUT', 'RATE_LIMIT'], noRetryOn: ['SERVICE_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: true, type: 'COMPENSATING', compensatingActionId: 'aws.update_ecs_service',
+    description: 'Re-run with the previous task definition ARN and desired count.', requiresApproval: true,
+  },
+  verificationStrategy: { type: 'POLLING', pollIntervalMs: 10000, maxPollAttempts: 18, successCondition: '$.status != null' },
+  requiredInputs: [
+    { name: 'cluster', type: 'string', description: 'ECS cluster name or ARN', example: 'production' },
+    { name: 'service', type: 'string', description: 'ECS service name', example: 'api-server' },
+  ],
+  optionalInputs: [
+    { name: 'desiredCount',    type: 'number', description: 'New desired task count' },
+    { name: 'taskDefinition', type: 'string', description: 'Task definition ARN or family:revision' },
+  ],
+  outputSchema: {
+    type: 'object',
+    properties: {
+      cluster:        { type: 'string' },
+      service:        { type: 'string' },
+      status:         { type: 'string' },
+      desiredCount:   { type: 'number' },
+      runningCount:   { type: 'number' },
+      pendingCount:   { type: 'number' },
+      taskDefinition: { type: 'string' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'aws_ecs_service', resourceIdField: 'service', actionVerb: 'updated',
+    sensitivityLevel: 'CONFIDENTIAL', retainForDays: 730, complianceTags: ['SOC2', 'CHANGE_MGMT'],
+  },
+  telemetryMetadata: {
+    eventName: 'action.aws.update_ecs_service',
+    successMetric: 'flow.action.aws.update_ecs_service.success',
+    failureMetric: 'flow.action.aws.update_ecs_service.failure',
+    durationMetric: 'flow.action.aws.update_ecs_service.duration_ms',
+    dimensions: ['connector', 'workspace_id', 'cluster'],
+  },
+  relatedActions: ['aws.get_instance_health', 'kubernetes.rollback_deployment'],
+};

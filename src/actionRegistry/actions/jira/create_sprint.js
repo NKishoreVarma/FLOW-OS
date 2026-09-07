@@ -1,0 +1,62 @@
+export default {
+  id: 'jira.create_sprint',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'jira',
+  category: 'project',
+  displayName: 'Create Jira Sprint',
+  description: 'Creates a new sprint on a Jira board with defined start and end dates.',
+  icon: 'zap',
+  tags: ['jira', 'sprint', 'agile', 'scrum', 'board', 'iteration', 'planning'],
+  riskLevel: 'MEDIUM',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['write:jira-work', 'manage:jira-project'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 2000,
+  timeoutMs: 15000,
+  retryStrategy: {
+    maxAttempts: 2, backoffType: 'FIXED', initialDelayMs: 2000, maxDelayMs: 2000,
+    jitterPercent: 0, retryOn: ['RATE_LIMIT', 'TIMEOUT'], noRetryOn: ['BOARD_NOT_FOUND', 'SPRINT_EXISTS', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: false, type: 'MANUAL',
+    description: 'Delete the sprint from the board via Jira admin.', requiresApproval: true,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.sprintId != null' },
+  requiredInputs: [
+    { name: 'name',      type: 'string', maxLength: 255, description: 'Sprint name', example: 'Sprint 23 — Auth Hardening' },
+    { name: 'boardId',   type: 'string', description: 'Jira board ID', example: '1' },
+    { name: 'startDate', type: 'string', description: 'Sprint start date (ISO)', example: '2026-08-01' },
+    { name: 'endDate',   type: 'string', description: 'Sprint end date (ISO)', example: '2026-08-14' },
+  ],
+  optionalInputs: [
+    { name: 'goal', type: 'string', maxLength: 1024, description: 'Sprint goal statement' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Created sprint',
+    properties: {
+      sprintId:   { type: 'string', description: 'Sprint ID' },
+      name:       { type: 'string', description: 'Sprint name' },
+      startDate:  { type: 'string', description: 'Start date' },
+      endDate:    { type: 'string', description: 'End date' },
+      status:     { type: 'string', description: '"sprint_created"' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'jira_sprint', resourceIdField: 'name', actionVerb: 'created',
+    sensitivityLevel: 'INTERNAL', retainForDays: 365, complianceTags: [],
+  },
+  telemetryMetadata: {
+    eventName: 'action.jira.create_sprint',
+    successMetric: 'flow.action.jira.create_sprint.success',
+    failureMetric: 'flow.action.jira.create_sprint.failure',
+    durationMetric: 'flow.action.jira.create_sprint.duration_ms',
+    dimensions: ['connector', 'workspace_id'],
+  },
+  relatedActions: ['jira.create_issue', 'jira.prioritize_backlog'],
+};

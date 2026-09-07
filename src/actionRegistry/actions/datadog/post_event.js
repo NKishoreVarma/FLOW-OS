@@ -1,0 +1,56 @@
+export default {
+  id: 'datadog.post_event',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'datadog',
+  category: 'observability',
+  displayName: 'Post Datadog Event',
+  description: 'Posts an event to the Datadog event stream. Used to annotate deployment timelines, incident milestones, and workflow execution markers on your monitoring dashboards.',
+  icon: 'flag',
+  tags: ['datadog', 'event', 'annotation', 'deployment', 'incident'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['events:write'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 1500,
+  timeoutMs: 10000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 1000, maxDelayMs: 8000,
+    jitterPercent: 10, retryOn: ['TIMEOUT', 'RATE_LIMIT'], noRetryOn: ['UNAUTHORIZED'],
+  },
+  rollbackStrategy: { supported: false, type: 'NONE', description: 'Datadog events cannot be deleted via API.', requiresApproval: false },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.eventId != null' },
+  requiredInputs: [
+    { name: 'title', type: 'string', description: 'Event title', example: 'FLOW: Deployment v2.3.1 started' },
+  ],
+  optionalInputs: [
+    { name: 'text',      type: 'string', description: 'Event body text' },
+    { name: 'alertType', type: 'enum', enum: ['info', 'warning', 'error', 'success'], description: 'Event severity level' },
+    { name: 'priority',  type: 'enum', enum: ['normal', 'low'], description: 'Event priority' },
+    { name: 'tags',      type: 'array', items: { name: 'tag', type: 'string', description: 'Tag string' }, description: 'Event tags' },
+  ],
+  outputSchema: {
+    type: 'object',
+    properties: {
+      eventId:  { type: 'string' },
+      title:    { type: 'string' },
+      postedAt: { type: 'string' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'datadog_event', resourceIdField: 'eventId', actionVerb: 'created',
+    sensitivityLevel: 'INTERNAL', retainForDays: 90, complianceTags: ['SOC2'],
+  },
+  telemetryMetadata: {
+    eventName: 'action.datadog.post_event',
+    successMetric: 'flow.action.datadog.post_event.success',
+    failureMetric: 'flow.action.datadog.post_event.failure',
+    durationMetric: 'flow.action.datadog.post_event.duration_ms',
+    dimensions: ['connector', 'workspace_id', 'alertType'],
+  },
+  relatedActions: ['datadog.get_alert_details', 'pagerduty.resolve_incident'],
+};

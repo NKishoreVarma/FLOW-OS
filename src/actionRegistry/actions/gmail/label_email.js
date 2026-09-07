@@ -1,0 +1,61 @@
+export default {
+  id: 'gmail.label_email',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'gmail',
+  category: 'communication',
+  displayName: 'Label Email',
+  description: 'Adds or removes Gmail labels on a message or thread for classification.',
+  icon: 'tag',
+  tags: ['email', 'gmail', 'label', 'tag', 'organize', 'classify'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['https://www.googleapis.com/auth/gmail.modify'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 600,
+  timeoutMs: 8000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 300, maxDelayMs: 3000,
+    jitterPercent: 10, retryOn: ['RATE_LIMIT', 'TIMEOUT'], noRetryOn: ['MESSAGE_NOT_FOUND', 'LABEL_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: true, type: 'COMPENSATING', compensatingActionId: 'gmail.label_email',
+    description: 'Reverse the add/remove label operation.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.status === "updated"' },
+  requiredInputs: [
+    { name: 'messageId', type: 'string', description: 'Gmail message ID to label (or use threadId)' },
+  ],
+  optionalInputs: [
+    { name: 'threadId',      type: 'string', description: 'Apply to entire thread' },
+    { name: 'addLabels',     type: 'array',  description: 'Label IDs to add', items: { name: 'labelId', type: 'string', description: 'Gmail label ID or name' } },
+    { name: 'removeLabels',  type: 'array',  description: 'Label IDs to remove', items: { name: 'labelId', type: 'string', description: 'Gmail label ID or name' } },
+    { name: 'action',        type: 'enum', enum: ['markRead', 'markUnread', 'star', 'unstar', 'archive'], description: 'Shortcut label action' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Label operation result',
+    properties: {
+      messageId:    { type: 'string', description: 'Message ID' },
+      addLabelIds:  { type: 'array',  description: 'Labels added' },
+      removeLabelIds: { type: 'array', description: 'Labels removed' },
+      status:       { type: 'string', description: '"updated"' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'email', resourceIdField: 'messageId', actionVerb: 'labeled',
+    sensitivityLevel: 'INTERNAL', retainForDays: 90, complianceTags: [],
+  },
+  telemetryMetadata: {
+    eventName: 'action.gmail.label_email',
+    successMetric: 'flow.action.gmail.label_email.success',
+    failureMetric: 'flow.action.gmail.label_email.failure',
+    durationMetric: 'flow.action.gmail.label_email.duration_ms',
+    dimensions: ['connector', 'workspace_id', 'action'],
+  },
+  relatedActions: ['gmail.archive_email', 'gmail.read_email'],
+};

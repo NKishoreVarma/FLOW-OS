@@ -1,0 +1,61 @@
+export default {
+  id: 'gmail.send_email',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'gmail',
+  category: 'communication',
+  displayName: 'Send Email',
+  description: 'Composes and sends a new email from the authenticated Gmail account.',
+  icon: 'send',
+  tags: ['email', 'gmail', 'send', 'outbound', 'compose', 'communication'],
+  riskLevel: 'MEDIUM',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['https://www.googleapis.com/auth/gmail.send'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 2000,
+  timeoutMs: 15000,
+  retryStrategy: {
+    maxAttempts: 2, backoffType: 'FIXED', initialDelayMs: 2000, maxDelayMs: 2000,
+    jitterPercent: 0, retryOn: ['TIMEOUT', 'RATE_LIMIT'], noRetryOn: ['INVALID_RECIPIENT', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: false, type: 'NONE', description: 'Emails cannot be unsent after delivery.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.messageId != null' },
+  requiredInputs: [
+    { name: 'to',      type: 'string', description: 'Recipient email address(es), comma-separated', example: 'customer@acme.corp' },
+    { name: 'subject', type: 'string', maxLength: 998, description: 'Email subject', example: 'Re: Support Request #SR-0421' },
+    { name: 'body',    type: 'string', maxLength: 524288, description: 'Email body (plain text or HTML)' },
+  ],
+  optionalInputs: [
+    { name: 'cc',      type: 'string', description: 'CC addresses, comma-separated' },
+    { name: 'bcc',     type: 'string', description: 'BCC addresses, comma-separated', sensitive: true },
+    { name: 'bodyHtml', type: 'string', description: 'HTML version of body (multipart/alternative)' },
+    { name: 'replyTo', type: 'string', description: 'Reply-To override address' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Sent message confirmation',
+    properties: {
+      messageId: { type: 'string', description: 'Gmail message ID' },
+      threadId:  { type: 'string', description: 'Gmail thread ID' },
+      status:    { type: 'string', description: '"sent"' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'email', resourceIdField: 'to', actionVerb: 'sent',
+    sensitivityLevel: 'CONFIDENTIAL', retainForDays: 365, complianceTags: ['SOC2'],
+  },
+  telemetryMetadata: {
+    eventName: 'action.gmail.send_email',
+    successMetric: 'flow.action.gmail.send_email.success',
+    failureMetric: 'flow.action.gmail.send_email.failure',
+    durationMetric: 'flow.action.gmail.send_email.duration_ms',
+    dimensions: ['connector', 'workspace_id'],
+  },
+  relatedActions: ['gmail.draft_email', 'gmail.reply_email'],
+};

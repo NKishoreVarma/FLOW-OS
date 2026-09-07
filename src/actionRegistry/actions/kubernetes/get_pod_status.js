@@ -1,0 +1,53 @@
+export default {
+  id: 'kubernetes.get_pod_status',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'kubernetes',
+  category: 'infrastructure',
+  displayName: 'Get Pod Status',
+  description: 'Retrieves current phase, container statuses, and conditions for a specific Kubernetes pod.',
+  icon: 'activity',
+  tags: ['kubernetes', 'pod', 'status', 'monitoring', 'ops'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['pods:get'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 1000,
+  timeoutMs: 10000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 500, maxDelayMs: 4000,
+    jitterPercent: 10, retryOn: ['TIMEOUT', 'RATE_LIMIT'], noRetryOn: ['POD_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: { supported: false, type: 'NONE', description: 'Read-only — no rollback needed.', requiresApproval: false },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.phase != null' },
+  requiredInputs: [
+    { name: 'namespace', type: 'string', description: 'Kubernetes namespace' },
+    { name: 'podName',   type: 'string', description: 'Pod name' },
+  ],
+  optionalInputs: [],
+  outputSchema: {
+    type: 'object',
+    properties: {
+      phase:            { type: 'string', description: 'Pod phase (Running, Pending, Failed, Succeeded)' },
+      conditions:       { type: 'array' },
+      containerStatuses: { type: 'array' },
+      startTime:        { type: 'string' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'kubernetes_pod', resourceIdField: 'podName', actionVerb: 'read',
+    sensitivityLevel: 'INTERNAL', retainForDays: 90, complianceTags: ['SOC2'],
+  },
+  telemetryMetadata: {
+    eventName: 'action.kubernetes.get_pod_status',
+    successMetric: 'flow.action.kubernetes.get_pod_status.success',
+    failureMetric: 'flow.action.kubernetes.get_pod_status.failure',
+    durationMetric: 'flow.action.kubernetes.get_pod_status.duration_ms',
+    dimensions: ['connector', 'workspace_id', 'namespace'],
+  },
+  relatedActions: ['kubernetes.restart_pod', 'kubernetes.get_pod_logs'],
+};

@@ -1,0 +1,56 @@
+export default {
+  id: 'redis.flush_cache',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'redis-infra',
+  category: 'infrastructure',
+  displayName: 'Flush Redis Cache',
+  description: 'Flushes a Redis database or all databases. Critical — removes all cached data. Used when stale cache data causes application errors.',
+  icon: 'trash',
+  tags: ['redis', 'cache', 'flush', 'ops', 'incident'],
+  riskLevel: 'CRITICAL',
+  approvalPolicy: {
+    required: true, minimumApprovers: 2, eligibleRoles: ['ADMIN', 'OWNER'],
+    timeoutHours: 1, selfApprovalAllowed: false, notifyOnCreate: true, notifyOnResolve: true,
+  },
+  requiredPermissions: ['ADMIN'],
+  requiredScopes: ['redis:flushdb'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 2000,
+  timeoutMs: 30000,
+  retryStrategy: {
+    maxAttempts: 1, backoffType: 'NONE', initialDelayMs: 0, maxDelayMs: 0,
+    jitterPercent: 0, retryOn: [], noRetryOn: ['UNAUTHORIZED', 'CONNECTION_FAILED'],
+  },
+  rollbackStrategy: {
+    supported: false, type: 'NONE',
+    description: 'Cache flush is irreversible. Application will rebuild the cache on subsequent requests.',
+    requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.flushed == true' },
+  requiredInputs: [],
+  optionalInputs: [
+    { name: 'database', type: 'number', description: 'Redis DB index to flush (default: 0)' },
+    { name: 'flushall', type: 'boolean', description: 'Flush ALL databases (dangerous — requires explicit true)' },
+  ],
+  outputSchema: {
+    type: 'object',
+    properties: {
+      flushed:   { type: 'boolean' },
+      scope:     { type: 'string' },
+      flushedAt: { type: 'string' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'redis_database', resourceIdField: 'database', actionVerb: 'flushed',
+    sensitivityLevel: 'RESTRICTED', retainForDays: 2190, complianceTags: ['SOC2', 'INCIDENT'],
+  },
+  telemetryMetadata: {
+    eventName: 'action.redis.flush_cache',
+    successMetric: 'flow.action.redis.flush_cache.success',
+    failureMetric: 'flow.action.redis.flush_cache.failure',
+    durationMetric: 'flow.action.redis.flush_cache.duration_ms',
+    dimensions: ['connector', 'workspace_id'],
+  },
+  relatedActions: ['redis.get_memory_info', 'pagerduty.create_incident'],
+};

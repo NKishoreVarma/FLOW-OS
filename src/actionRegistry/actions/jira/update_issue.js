@@ -1,0 +1,61 @@
+export default {
+  id: 'jira.update_issue',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'jira',
+  category: 'project',
+  displayName: 'Update Jira Issue',
+  description: 'Updates fields (title, description, priority, labels, due date) on an existing Jira issue.',
+  icon: 'edit',
+  tags: ['jira', 'issue', 'update', 'edit', 'patch', 'modify'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['write:jira-work'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 1500,
+  timeoutMs: 12000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 500, maxDelayMs: 4000,
+    jitterPercent: 10, retryOn: ['RATE_LIMIT', 'TIMEOUT'], noRetryOn: ['ISSUE_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: false, type: 'MANUAL',
+    description: 'Re-apply previous field values to revert the update.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.id != null' },
+  requiredInputs: [
+    { name: 'key', type: 'string', description: 'Jira issue key', example: 'HPLT-205' },
+  ],
+  optionalInputs: [
+    { name: 'title',       type: 'string', maxLength: 255, description: 'New issue title' },
+    { name: 'description', type: 'string', maxLength: 32767, description: 'New description' },
+    { name: 'priority',    type: 'enum', enum: ['Highest', 'High', 'Medium', 'Low', 'Lowest'], description: 'New priority' },
+    { name: 'labels',      type: 'array', description: 'Replace labels', items: { name: 'label', type: 'string', description: 'Label text' } },
+    { name: 'dueDate',     type: 'string', description: 'Due date (YYYY-MM-DD)' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Updated Jira issue',
+    properties: {
+      id:     { type: 'string', description: 'Issue ID' },
+      key:    { type: 'string', description: 'Issue key' },
+      status: { type: 'string', description: 'Current status' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'jira_issue', resourceIdField: 'key', actionVerb: 'updated',
+    sensitivityLevel: 'INTERNAL', retainForDays: 365, complianceTags: [],
+  },
+  telemetryMetadata: {
+    eventName: 'action.jira.update_issue',
+    successMetric: 'flow.action.jira.update_issue.success',
+    failureMetric: 'flow.action.jira.update_issue.failure',
+    durationMetric: 'flow.action.jira.update_issue.duration_ms',
+    dimensions: ['connector', 'workspace_id'],
+  },
+  relatedActions: ['jira.assign_issue', 'jira.transition_issue'],
+};

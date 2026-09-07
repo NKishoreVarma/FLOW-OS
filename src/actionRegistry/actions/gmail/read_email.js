@@ -1,0 +1,60 @@
+export default {
+  id: 'gmail.read_email',
+  version: '1.0.0',
+  lifecycle: 'ACTIVE',
+  connector: 'gmail',
+  category: 'communication',
+  displayName: 'Read Email',
+  description: 'Fetches a single email message or thread by ID from Gmail.',
+  icon: 'mail-open',
+  tags: ['email', 'gmail', 'read', 'fetch', 'message', 'thread'],
+  riskLevel: 'LOW',
+  approvalPolicy: {
+    required: false, minimumApprovers: 0, eligibleRoles: ['MEMBER'],
+    timeoutHours: 0, selfApprovalAllowed: true, notifyOnCreate: false, notifyOnResolve: false,
+  },
+  requiredPermissions: ['MEMBER'],
+  requiredScopes: ['https://www.googleapis.com/auth/gmail.readonly'],
+  executionMode: 'SYNC',
+  estimatedDurationMs: 800,
+  timeoutMs: 10000,
+  retryStrategy: {
+    maxAttempts: 3, backoffType: 'EXPONENTIAL', initialDelayMs: 500, maxDelayMs: 4000,
+    jitterPercent: 10, retryOn: ['RATE_LIMIT', 'TIMEOUT'], noRetryOn: ['MESSAGE_NOT_FOUND', 'UNAUTHORIZED'],
+  },
+  rollbackStrategy: {
+    supported: false, type: 'NONE', description: 'Read operations are idempotent.', requiresApproval: false,
+  },
+  verificationStrategy: { type: 'IMMEDIATE', successCondition: '$.id != null' },
+  requiredInputs: [
+    { name: 'messageId', type: 'string', description: 'Gmail message ID', example: '18c2e98f1ba3cd04' },
+  ],
+  optionalInputs: [
+    { name: 'threadId', type: 'string', description: 'Fetch full thread instead of single message' },
+    { name: 'format', type: 'enum', enum: ['full', 'metadata', 'minimal'], description: 'Message format', example: 'full' },
+  ],
+  outputSchema: {
+    type: 'object',
+    description: 'Normalized email message or thread',
+    properties: {
+      id:        { type: 'string', description: 'Message ID' },
+      threadId:  { type: 'string', description: 'Thread ID' },
+      subject:   { type: 'string', description: 'Email subject' },
+      sender:    { type: 'string', description: 'From address' },
+      body:      { type: 'string', description: 'Decoded message body' },
+      timestamp: { type: 'string', description: 'ISO sent timestamp' },
+    },
+  },
+  auditMetadata: {
+    resourceType: 'email', resourceIdField: 'messageId', actionVerb: 'read',
+    sensitivityLevel: 'CONFIDENTIAL', retainForDays: 90, complianceTags: ['SOC2'],
+  },
+  telemetryMetadata: {
+    eventName: 'action.gmail.read_email',
+    successMetric: 'flow.action.gmail.read_email.success',
+    failureMetric: 'flow.action.gmail.read_email.failure',
+    durationMetric: 'flow.action.gmail.read_email.duration_ms',
+    dimensions: ['connector', 'workspace_id'],
+  },
+  relatedActions: ['gmail.reply_email', 'gmail.forward_email', 'gmail.archive_email'],
+};
