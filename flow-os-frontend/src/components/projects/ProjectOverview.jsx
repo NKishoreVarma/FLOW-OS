@@ -3,6 +3,7 @@ import { Activity, GitCommit, CheckSquare, Calendar, ShieldCheck, AlertTriangle,
 import { useWebSocket } from "../../hooks/useWebSocket";
 import { useEscapeKey } from "../../hooks/useEscapeKey";
 import DiffViewer from "./DiffViewer";
+import { buildEngineeringCard } from "../../lib/actionBuilders";
 
 // ── Expandable commit row: click to see the real diff inline (no trip to GitHub) ──
 function CommitRow({ commit, repoFullName }) {
@@ -398,13 +399,28 @@ export const ProjectOverview = ({ project: initialProject }) => {
             </ul>
           </div>
           {project.aiRecommendation && (
-            <div style={{ background: "rgba(232,103,43,0.06)", border: "1px solid var(--brand-line)", borderLeft: "2px solid var(--brand)", borderRadius: 4, padding: "10px 12px" }}>
-              <span style={{ fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--brand-text)", display: "block", marginBottom: 5 }}>
-                AI Recommendation
-              </span>
-              <p style={{ fontSize: 11, color: "var(--t2)", lineHeight: 1.6, fontStyle: "italic" }}>
-                "{project.aiRecommendation}"
-              </p>
+            <div>
+              <div style={{ background: "rgba(232,103,43,0.06)", border: "1px solid var(--brand-line)", borderLeft: "2px solid var(--brand)", borderRadius: 4, padding: "10px 12px", marginBottom: 8 }}>
+                <span style={{ fontSize: 9, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--brand-text)", display: "block", marginBottom: 5 }}>
+                  AI Recommendation
+                </span>
+                <p style={{ fontSize: 11, color: "var(--t2)", lineHeight: 1.6, fontStyle: "italic" }}>
+                  "{project.aiRecommendation}"
+                </p>
+              </div>
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("flow:open-execution-drawer", {
+                  detail: { card: buildEngineeringCard({ recommendation: project.aiRecommendation, risks: project.risks }) },
+                }))}
+                style={{
+                  width: "100%", padding: "7px 12px", borderRadius: 4,
+                  background: "rgba(232,103,43,0.08)", border: "1px solid var(--brand-line)",
+                  color: "var(--brand-text)", fontSize: 12, fontWeight: 500,
+                  cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
+                }}
+              >
+                <Zap style={{ width: 11, height: 11 }} /> Take Action
+              </button>
             </div>
           )}
         </div>

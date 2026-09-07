@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import {
   Users, Search, Activity, DollarSign, RefreshCw, Mail, Phone,
-  FileText, ShieldAlert, CheckSquare, ChevronRight, TrendingUp, AlertTriangle, User, Calendar, X
+  FileText, ShieldAlert, CheckSquare, ChevronRight, TrendingUp, AlertTriangle, User, Calendar, X, PlugZap
 } from "lucide-react";
 import DataSourceBadge from "../ui/DataSourceBadge";
 import { useWebSocket } from "../../hooks/useWebSocket";
+import { useWorkspaceState } from "../../hooks/useWorkspaceState";
+import ActionCard from "../inbox/ActionCard";
+import { buildCustomerCard } from "../../lib/actionBuilders";
 
 const DEMO_ACCOUNTS = [
   {
@@ -47,6 +50,8 @@ const MetricCard = ({ icon: Icon, iconBg, value, label }) => (
 
 export const CustomerIntelligence = () => {
   const { token, workspaceId, isAuthLoading } = useWebSocket();
+  const wsState = useWorkspaceState();
+  const isDemoWorkspace = wsState.workspaceMode === 'demo';
 
   const [searchQuery, setSearchQuery] = useState("");
   const [accounts, setAccounts]       = useState([]);
@@ -74,12 +79,21 @@ export const CustomerIntelligence = () => {
               const detailRes = await fetch(`/api/crm/accounts/${a.id}`, { headers });
               return detailRes.ok ? (await detailRes.json()).result || a : a;
             }));
-            if (!cancelled) { setAccounts(enriched.length > 0 ? enriched : DEMO_ACCOUNTS); setIsDemo(enriched.length === 0); setLoading(false); }
+            if (!cancelled) {
+              if (enriched.length > 0) { setAccounts(enriched); setIsDemo(false); }
+              else if (isDemoWorkspace) { setAccounts(DEMO_ACCOUNTS); setIsDemo(true); }
+              else { setAccounts([]); setIsDemo(false); }
+              setLoading(false);
+            }
             return;
           }
         } catch {}
       }
-      if (!cancelled) { setAccounts(DEMO_ACCOUNTS); setIsDemo(true); setLoading(false); }
+      if (!cancelled) {
+        if (isDemoWorkspace) { setAccounts(DEMO_ACCOUNTS); setIsDemo(true); }
+        else { setAccounts([]); setIsDemo(false); }
+        setLoading(false);
+      }
     }
     fetchRef.current = load;
     load();
@@ -186,6 +200,16 @@ export const CustomerIntelligence = () => {
           </div>
         </div>
 
+        {accounts.length === 0 && !loading ? (
+          <div style={{ textAlign: "center", padding: "64px 24px", border: "1px solid var(--border)", borderRadius: 6, background: "var(--bg-card)" }}>
+            <PlugZap style={{ width: 28, height: 28, color: "var(--t5)", margin: "0 auto 12px" }} />
+            <p style={{ fontSize: 14, fontWeight: 500, color: "var(--t2)", marginBottom: 6 }}>Connect HubSpot or Salesforce to see your customers</p>
+            <p style={{ fontSize: 12, color: "var(--t4)", marginBottom: 16 }}>FLOW will map your pipeline, track health, and surface churn signals automatically.</p>
+            <a href="/integrations" style={{ display: "inline-block", fontSize: 12, fontWeight: 500, color: "var(--brand)", background: "rgba(232,103,43,0.08)", padding: "7px 16px", borderRadius: 4, textDecoration: "none" }}>
+              Connect CRM →
+            </a>
+          </div>
+        ) : (
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", fontSize: 12, borderCollapse: "collapse" }}>
             <thead>
@@ -223,6 +247,7 @@ export const CustomerIntelligence = () => {
             </tbody>
           </table>
         </div>
+        )}
       </div>
 
       {/* Account detail drawer */}
@@ -277,10 +302,18 @@ export const CustomerIntelligence = () => {
                     </ul>
                   </div>
                 )}
-                <div style={{ background: "rgba(232,103,43,0.08)", border: "1px solid rgba(232,103,43,0.22)", borderRadius: 4, padding: "8px 12px" }}>
+                <div style={{ background: "rgba(232,103,43,0.08)", border: "1px solid rgba(232,103,43,0.22)", borderRadius: 4, padding: "8px 12px", marginBottom: 12 }}>
                   <span style={{ display: "block", fontSize: 8, fontWeight: 500, color: "var(--brand-text)", textTransform: "uppercase", letterSpacing: "0.10em", marginBottom: 4 }}>Suggested Next Action</span>
                   <span style={{ fontSize: 12, fontWeight: 500, color: "var(--t1)" }}>{selectedAcc.aiIntelligence?.suggestedNextActions}</span>
                 </div>
+                {selectedAcc.aiIntelligence?.suggestedNextActions && (
+                  <ActionCard
+                    card={buildCustomerCard({
+                      account: selectedAcc,
+                      suggestedAction: selectedAcc.aiIntelligence.suggestedNextActions,
+                    })}
+                  />
+                )}
               </div>
 
               {/* Opportunities */}
