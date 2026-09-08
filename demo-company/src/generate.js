@@ -20,6 +20,7 @@ import { generateMemory } from './generators/memory.js';
 import { generateExecutiveReports } from './generators/executiveReports.js';
 import { generateKnowledgeGraph } from './generators/knowledgeGraph.js';
 import { generatePermissions } from './generators/permissions.js';
+import { generateProjects } from './generators/projects.js';
 import { generateSummary } from './generators/summary.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -53,6 +54,7 @@ const memory         = generateMemory(incidents, jiraIssues, documents, calendar
 const execReports    = generateExecutiveReports(employees);
 const knowledgeGraph = generateKnowledgeGraph(employees, customers, incidents, repositories);
 const permissions    = generatePermissions(employees);
+const projects       = generateProjects();
 const summary        = generateSummary(employees, customers, repositories);
 const company        = [{ id: COMPANY.slug, ...COMPANY }];
 
@@ -76,10 +78,11 @@ write('memory.json', memory);
 write('executive_reports.json', execReports);
 write('knowledgeGraph.json', knowledgeGraph);
 write('permissions.json', permissions);
+write('projects.json', projects);
 write('summary.json', summary);
 write('company.json', company);
 
-const datasetTypes = ['company','summary','departments','employees','customers','repositories','commits','pull_requests','jira_issues','emails','slack_threads','calendar_events','meetings','meeting_transcripts','incidents','documents','timeline','memory','executive_reports','knowledgeGraph','permissions'];
+const datasetTypes = ['company','summary','departments','employees','customers','repositories','projects','commits','pull_requests','jira_issues','emails','slack_threads','calendar_events','meetings','meeting_transcripts','incidents','documents','timeline','memory','executive_reports','knowledgeGraph','permissions'];
 const manifest = {
   schemaVersion: '1.0',
   organization: { name: COMPANY.name, slug: COMPANY.slug, industry: COMPANY.industry, size: COMPANY.headcount },
@@ -88,5 +91,5 @@ const manifest = {
 fs.writeFileSync(path.join(__dirname, '..', 'exports', 'manifest.json'), JSON.stringify(manifest, null, 2));
 console.log(`\n✓ manifest.json — ${datasetTypes.length} dataset types`);
 
-const total = [departments,employees,customers,repositories,commits,pullRequests,jiraIssues,emails,slackThreads,calendarEvents,meetingTranscripts,incidents,documents,timeline,memory,execReports,knowledgeGraph,permissions,summary,company].reduce((s,a)=>s+(Array.isArray(a)?a.length:1),0);
+const total = [departments,employees,customers,repositories,projects,commits,pullRequests,jiraIssues,emails,slackThreads,calendarEvents,meetingTranscripts,incidents,documents,timeline,memory,execReports,knowledgeGraph,permissions,summary,company].reduce((s,a)=>s+(Array.isArray(a)?a.length:1),0);
 console.log(`\n✅ Done in ${((Date.now()-start)/1000).toFixed(1)}s — ${total.toLocaleString()} total records`);
